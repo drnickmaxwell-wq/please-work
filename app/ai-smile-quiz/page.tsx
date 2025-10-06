@@ -1,12 +1,12 @@
-import AISmileQuiz from '@/components/ai/ai-smile-quiz';
+import AISmileAnalysis from '@/components/ai/ai-smile-analysis';
 
 export const metadata = {
-  title: 'AI Smile Quiz | St Mary\'s House Dental Care',
-  description: 'Take our AI-powered smile assessment to discover your perfect treatment plan. Get personalized recommendations from our advanced dental technology.',
-  keywords: 'AI smile quiz, dental assessment, smile analysis, treatment recommendations, digital dentistry, Shoreham dentist',
+  title: 'AI Smile Analysis | St Mary\'s House Dental Care',
+  description: 'Upload your photo for advanced AI smile analysis. Get personalized treatment recommendations using cutting-edge dental technology in Shoreham-by-Sea.',
+  keywords: 'AI smile analysis, photo upload, dental assessment, smile evaluation, treatment recommendations, digital dentistry, Shoreham dentist',
 };
 
 export default function AISmileQuizPage() {
-  return <AISmileQuiz />;
+  return <AISmileAnalysis />;
 }
 

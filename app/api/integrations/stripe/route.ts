@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { 
           error: 'Validation failed',
-          details: error.errors.map(err => ({
+          details: error.issues.map(err => ({
             field: err.path.join('.'),
             message: err.message
           }))
@@ -171,7 +171,7 @@ export async function PUT(request: NextRequest) {
 }
 
 // Webhook handler for Stripe events (separate endpoint would be better)
-export async function handleStripeWebhook(request: NextRequest) {
+async function handleStripeWebhook(request: NextRequest) {
   const sig = request.headers.get('stripe-signature');
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 

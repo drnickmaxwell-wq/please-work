@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import InteractiveToothModel from '@/components/3d/interactive-tooth-model';
 import { 
   Circle, 
   Shield, 
@@ -135,10 +136,82 @@ const candidateFactors = [
 
 export default function ImplantsPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-green-50">
-      {/* Hero Section */}
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100">
+      {/* Hero Section with Wave Background */}
       <section className="relative py-20 px-6 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-green-600/10 to-emerald-600/10" />
+        {/* Wave Background */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            backgroundImage: 'url(/waves-bg-2560.jpg)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
+        />
+        
+        {/* Brand Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-pink-500/20 via-teal-500/20 to-yellow-500/20" />
+        
+        {/* Micro-Bubble Animations */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(20)].map((_, i) => (
+            <motion.div
+              key={i}
+              className={`absolute w-2 h-2 rounded-full ${
+                i % 3 === 0 ? 'bg-pink-400/30' : 
+                i % 3 === 1 ? 'bg-teal-400/30' : 'bg-yellow-400/30'
+              }`}
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -20, 0],
+                x: [0, Math.random() * 10 - 5, 0],
+                scale: [1, 1.5, 1],
+                opacity: [0.2, 0.6, 0.2],
+              }}
+              transition={{
+                duration: 4 + Math.random() * 3,
+                repeat: Infinity,
+                delay: Math.random() * 3,
+                ease: "easeInOut"
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Flowing Wave Lines */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1200 800">
+            <defs>
+              <linearGradient id="waveGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#C2185B" stopOpacity="0.3" />
+                <stop offset="50%" stopColor="#40C4B4" stopOpacity="0.3" />
+                <stop offset="100%" stopColor="#D4AF37" stopOpacity="0.3" />
+              </linearGradient>
+            </defs>
+            <motion.path
+              d="M0,400 Q300,200 600,400 T1200,400"
+              stroke="url(#waveGradient2)"
+              strokeWidth="2"
+              fill="none"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <motion.path
+              d="M0,450 Q400,250 800,450 T1200,450"
+              stroke="url(#waveGradient2)"
+              strokeWidth="1.5"
+              fill="none"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            />
+          </svg>
+        </div>
+        
         <div className="relative max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -146,16 +219,49 @@ export default function ImplantsPage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-12"
           >
-            <div className="inline-flex p-4 rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 mb-6">
+            <div className="inline-flex p-4 rounded-xl bg-gradient-to-br from-pink-500 to-teal-500 mb-6">
               <Circle className="w-12 h-12 text-white" />
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-pink-600 via-teal-600 to-yellow-600 bg-clip-text text-transparent" style={{ fontFamily: 'Montserrat, sans-serif' }}>
               Dental Implants
             </h1>
-            <p className="text-xl md:text-2xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl text-slate-600 max-w-4xl mx-auto leading-relaxed" style={{ fontFamily: 'Lora, serif' }}>
               Restore your smile with the gold standard in tooth replacement. 
               Our advanced implant treatments provide permanent, natural-looking solutions that last a lifetime.
             </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 3D Interactive Model Section */}
+      <section className="py-16 px-6">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mb-12 text-center"
+          >
+            <h2 className="text-4xl font-bold text-slate-800 mb-4" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+              Interactive 3D Implant Preview
+            </h2>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto" style={{ fontFamily: 'Lora, serif' }}>
+              Explore how dental implants replace missing teeth. See the titanium implant, abutment, and crown in stunning 3D detail.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <InteractiveToothModel
+              treatmentType="implant"
+              title="Complete Dental Implant System"
+              description="See how titanium implants integrate with bone to create a permanent tooth replacement"
+              beforeColor="#F5F5DC"
+              afterColor="#FFFFFF"
+            />
           </motion.div>
         </div>
       </section>

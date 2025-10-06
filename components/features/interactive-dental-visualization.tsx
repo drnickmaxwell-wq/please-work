@@ -32,12 +32,104 @@ const InteractiveDentalVisualization = () => {
   ];
 
   return (
-    <section className="relative py-20 px-6 bg-gradient-to-br from-slate-50 via-white to-pink-50 overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-pink-400/20 to-teal-400/20 rounded-full blur-xl" />
-        <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-br from-yellow-400/20 to-pink-400/20 rounded-full blur-xl" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-gradient-to-br from-teal-400/10 to-yellow-400/10 rounded-full blur-2xl" />
+    <section className="relative py-20 px-6 overflow-hidden">
+      {/* Wave Background - Brand Consistent */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: 'url(/waves-bg-2560.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      />
+      
+      {/* Brand Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-pink-600/20 via-teal-500/15 to-yellow-500/20" />
+
+      {/* Micro-Bubble Animations - Brand Consistent */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Floating Micro Bubbles */}
+        {[...Array(30)].map((_, i) => (
+          <motion.div
+            key={i}
+            className={`absolute w-2 h-2 rounded-full ${
+              i % 3 === 0 ? 'bg-pink-400/40' : 
+              i % 3 === 1 ? 'bg-teal-400/40' : 'bg-yellow-400/40'
+            }`}
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -20, 0],
+              x: [0, Math.random() * 10 - 5, 0],
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.7, 0.3],
+            }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+              ease: "easeInOut"
+            }}
+          />
+        ))}
+        
+        {/* Larger Floating Elements */}
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={`large-${i}`}
+            className={`absolute w-4 h-4 rounded-full ${
+              i % 3 === 0 ? 'bg-pink-300/30' : 
+              i % 3 === 1 ? 'bg-teal-300/30' : 'bg-yellow-300/30'
+            }`}
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -30, 0],
+              x: [0, Math.random() * 20 - 10, 0],
+              rotate: [0, 360],
+              scale: [1, 1.5, 1],
+            }}
+            transition={{
+              duration: 8 + Math.random() * 4,
+              repeat: Infinity,
+              delay: Math.random() * 3,
+              ease: "easeInOut"
+            }}
+          />
+        ))}
+
+        {/* Flowing Wave Lines - Brand Colors */}
+        <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 1920 1080">
+          <defs>
+            <linearGradient id="waveGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#C2185B" stopOpacity="0.6" />
+              <stop offset="50%" stopColor="#40C4B4" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#D4AF37" stopOpacity="0.3" />
+            </linearGradient>
+          </defs>
+          <motion.path
+            d="M0,300 Q480,200 960,300 T1920,300"
+            stroke="url(#waveGradient1)"
+            strokeWidth="2"
+            fill="none"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.path
+            d="M0,500 Q480,600 960,500 T1920,500"
+            stroke="url(#waveGradient1)"
+            strokeWidth="1.5"
+            fill="none"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 5, delay: 1, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </svg>
       </div>
 
       <div className="relative max-w-7xl mx-auto">

@@ -222,7 +222,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { 
           error: 'Validation failed',
-          details: error.errors.map(err => ({
+          details: error.issues.map(err => ({
             field: err.path.join('.'),
             message: err.message
           }))
@@ -281,7 +281,7 @@ async function sendEmail(emailData: {
 }
 
 // Bulk email sending for newsletters
-export async function sendBulkEmail(recipients: string[], templateType: string, templateData: Record<string, any>) {
+async function sendBulkEmail(recipients: string[], templateType: string, templateData: Record<string, any>) {
   const results = [];
 
   for (const recipient of recipients) {

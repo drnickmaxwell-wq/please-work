@@ -1,36 +1,12 @@
-import { Metadata } from 'next';
+'use client';
+
 import JsonLd from '@/components/seo/json-ld';
-import OriginalHeroSection from '@/components/hero/original-hero-section';
+import CinematicHeroVideo from '@/components/video/cinematic-hero-video';
 import InteractiveDentalVisualization from '@/components/features/interactive-dental-visualization';
 import LuxuryChatbot from '@/components/ai/luxury-chatbot';
 import { FloatingGeometry } from '@/components/effects/micro-interactions';
-
-export const metadata: Metadata = {
-  title: "St Mary's House Dental Care | Luxury Coastal Dentistry in Shoreham-by-Sea",
-  description: "Experience luxury coastal dental care at St Mary's House in Shoreham-by-Sea. We specialize in 3D digital dentistry, porcelain veneers, dental implants, and anxiety-free treatments.",
-  keywords: ["dentist Shoreham-by-Sea", "luxury dentistry", "3D dentistry", "dental implants", "porcelain veneers", "emergency dentist", "anxiety-free dentistry"],
-  openGraph: {
-    title: "St Mary's House Dental Care | Luxury Coastal Dentistry",
-    description: "Discover a new standard of dental care in our luxury coastal practice.",
-    url: "https://www.stmaryshousedental.co.uk",
-    siteName: "St Mary's House Dental Care",
-    images: [
-      {
-        url: 'https://www.stmaryshousedental.co.uk/og-image.jpg',
-        width: 1200,
-        height: 630,
-      },
-    ],
-    locale: 'en_GB',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: "St Mary's House Dental Care | Luxury Coastal Dentistry",
-    description: "Experience advanced, anxiety-free dentistry in a stunning coastal setting.",
-    images: ['https://www.stmaryshousedental.co.uk/twitter-image.jpg'],
-  },
-};
+import { ScrollReveal, StaggeredReveal } from '@/components/effects/enhanced-scroll-animations';
+import { MagneticButton, LiquidButton, FloatingCard } from '@/components/effects/advanced-hover-effects';
 
 export default function Home() {
   const organizationSchema = {
@@ -131,14 +107,29 @@ export default function Home() {
         />
       </div>
       
-      {/* Original Hero Section with Flowing Waves */}
-      <OriginalHeroSection />
+      {/* Cinematic Hero Video - Brand Consistent */}
+      <CinematicHeroVideo
+        videoSrc="/videos/dental-hero-4k.mp4"
+        posterSrc="/hero-poster.jpg"
+        title="Your Perfect Smile is Just One Click Away"
+        subtitle="Experience the future of dentistry with our AI-powered 3D treatments, luxury coastal setting, and award-winning patient care."
+        description="Book your consultation today and discover why we're 'Going the Extra Smile.'"
+        ctaText="Book Free Consultation"
+        ctaAction={() => window.location.href = '/contact'}
+        autoplay={true}
+        muted={true}
+        loop={true}
+      />
       
       {/* Interactive Dental Visualization Section */}
-      <InteractiveDentalVisualization />
+      <ScrollReveal direction="up" delay={0.2}>
+        <InteractiveDentalVisualization />
+      </ScrollReveal>
       
       {/* Luxury AI Chatbot */}
-      <LuxuryChatbot />
+      <ScrollReveal direction="scale" delay={0.4}>
+        <LuxuryChatbot />
+      </ScrollReveal>
     </main>
   );
 }
