@@ -1,4 +1,4 @@
-// v4.2 placeholder (grad'use client';
+'use client';
 import React from 'react';
 
 function BrandGradient({ className='' }:{ className?: string }){
@@ -44,4 +44,3 @@ export default function Page(){
     </main>
   );
 }
-ient fallback + wave under hero wired in)
