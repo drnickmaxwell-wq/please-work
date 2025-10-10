@@ -91,8 +91,8 @@ export default function ThreeDDentistryPage() {
               3D Digital Dentistry
             </h1>
             <p className="text-xl md:text-2xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
-              Experience the future of dental care with our revolutionary 3D technology. 
-              From digital impressions to same-day restorations, we're redefining what's possible in modern dentistry.
+              Experience the future of dental care with our revolutionary 3D technology.
+              From digital impressions to same-day restorations, we’re redefining what’s possible in modern dentistry.
             </p>
           </motion.div>
         </div>

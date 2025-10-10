@@ -1,7 +1,13 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion';
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+  useReducedMotion,
+} from 'framer-motion';
 
 interface HoverCard3DProps {
   children: React.ReactNode;
@@ -19,6 +25,7 @@ const HoverCard3D: React.FC<HoverCard3DProps> = ({
   rotateOnHover = true,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
   const [isHovered, setIsHovered] = useState(false);
 
   const x = useMotionValue(0);
@@ -66,20 +73,20 @@ const HoverCard3D: React.FC<HoverCard3DProps> = ({
       ref={ref}
       className={`relative ${className}`}
       style={{
-        rotateX: rotateOnHover ? rotateX : 0,
-        rotateY: rotateOnHover ? rotateY : 0,
+        rotateX: prefersReducedMotion || !rotateOnHover ? undefined : rotateX,
+        rotateY: prefersReducedMotion || !rotateOnHover ? undefined : rotateY,
         transformStyle: 'preserve-3d',
       }}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseMove={prefersReducedMotion ? undefined : handleMouseMove}
+      onMouseEnter={() => !prefersReducedMotion && setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
-      whileHover={{ scale: config.scale }}
+      whileHover={prefersReducedMotion ? undefined : { scale: config.scale }}
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
     >
       {children}
 
       {/* Glow effect */}
-      {glowEffect && isHovered && (
+      {glowEffect && isHovered && !prefersReducedMotion && (
         <motion.div
           className="absolute inset-0 bg-gradient-to-r from-pink-500/20 via-teal-500/20 to-yellow-500/20 rounded-inherit blur-xl -z-10"
           initial={{ opacity: 0 }}
@@ -105,30 +112,68 @@ const ParallaxElement: React.FC<ParallaxElementProps> = ({
   direction = 'up',
   className = '',
 }) => {
-  const [scrollY, setScrollY] = useState(0);
+  const prefersReducedMotion = useReducedMotion();
+  const elementRef = useRef<HTMLDivElement>(null);
+  const frameRef = useRef<number>();
+  const lastKnownScroll = useRef(0);
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const getTransform = () => {
-    const offset = scrollY * speed;
-    switch (direction) {
-      case 'up': return `translateY(-${offset}px)`;
-      case 'down': return `translateY(${offset}px)`;
-      case 'left': return `translateX(-${offset}px)`;
-      case 'right': return `translateX(${offset}px)`;
-      default: return `translateY(-${offset}px)`;
+    if (prefersReducedMotion) {
+      if (elementRef.current) {
+        elementRef.current.style.transform = 'none';
+      }
+      return;
     }
-  };
+
+    const element = elementRef.current;
+    if (!element) return;
+
+    const applyTransform = () => {
+      const offset = lastKnownScroll.current * speed;
+      let transform: string;
+
+      switch (direction) {
+        case 'down':
+          transform = `translateY(${offset}px)`;
+          break;
+        case 'left':
+          transform = `translateX(-${offset}px)`;
+          break;
+        case 'right':
+          transform = `translateX(${offset}px)`;
+          break;
+        case 'up':
+        default:
+          transform = `translateY(-${offset}px)`;
+          break;
+      }
+
+      element.style.transform = transform;
+      frameRef.current = undefined;
+    };
+
+    const handleScroll = () => {
+      lastKnownScroll.current = window.scrollY;
+
+      if (frameRef.current !== undefined) return;
+
+      frameRef.current = requestAnimationFrame(applyTransform);
+    };
+
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (frameRef.current !== undefined) {
+        cancelAnimationFrame(frameRef.current);
+      }
+    };
+  }, [direction, speed, prefersReducedMotion]);
 
   return (
-    <div
-      className={className}
-      style={{ transform: getTransform() }}
-    >
+    <div ref={elementRef} className={className}>
       {children}
     </div>
   );
@@ -147,8 +192,12 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({
   className = '',
   onClick,
 }) => {
+  const prefersReducedMotion = useReducedMotion();
   const ref = useRef<HTMLButtonElement>(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const springX = useSpring(x, { stiffness: 220, damping: 20, mass: 0.5 });
+  const springY = useSpring(y, { stiffness: 220, damping: 20, mass: 0.5 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!ref.current) return;
@@ -160,21 +209,26 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({
     const deltaX = (e.clientX - centerX) * strength;
     const deltaY = (e.clientY - centerY) * strength;
 
-    setPosition({ x: deltaX, y: deltaY });
+    x.set(deltaX);
+    y.set(deltaY);
   };
 
   const handleMouseLeave = () => {
-    setPosition({ x: 0, y: 0 });
+    x.set(0);
+    y.set(0);
   };
 
   return (
     <motion.button
       ref={ref}
       className={`relative ${className}`}
-      style={{ fontFamily: 'Montserrat, sans-serif' }}
-      animate={{ x: position.x, y: position.y }}
+      style={{
+        fontFamily: 'Montserrat, sans-serif',
+        x: prefersReducedMotion ? 0 : springX,
+        y: prefersReducedMotion ? 0 : springY,
+      }}
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-      onMouseMove={handleMouseMove}
+      onMouseMove={prefersReducedMotion ? undefined : handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
       whileTap={{ scale: 0.95 }}

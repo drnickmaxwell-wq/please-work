@@ -5,6 +5,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { MobileHeader, MobileNavigation } from './mobile-navigation';
 import { PullToRefresh, TouchButton } from './touch-interactions';
 
+interface BeforeInstallPromptEvent extends Event {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: 'accepted' | 'dismissed'; platform: string }>;
+}
+
 interface MobileLayoutProps {
   children: React.ReactNode;
   currentPath?: string;
@@ -21,13 +26,14 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isOnline, setIsOnline] = useState(true);
   const [showInstallPrompt, setShowInstallPrompt] = useState(false);
-  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
 
   // Handle PWA install prompt
   useEffect(() => {
     const handleBeforeInstallPrompt = (e: Event) => {
+      const promptEvent = e as BeforeInstallPromptEvent;
       e.preventDefault();
-      setDeferredPrompt(e);
+      setDeferredPrompt(promptEvent);
       setShowInstallPrompt(true);
     };
 
@@ -119,7 +125,7 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
               </svg>
               <span className="text-sm font-medium" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                You're offline. Some features may be limited.
+                You’re offline. Some features may be limited.
               </span>
             </div>
           </motion.div>

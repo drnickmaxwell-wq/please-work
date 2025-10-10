@@ -7,7 +7,7 @@ export interface SEOConfig {
   keywords: string[];
   canonicalUrl: string;
   ogImage?: string;
-  structuredData?: any;
+  structuredData?: Record<string, unknown>;
   localBusiness?: LocalBusinessData;
 }
 

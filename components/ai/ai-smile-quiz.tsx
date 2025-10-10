@@ -33,9 +33,12 @@ interface QuizResult {
   confidence: number;
 }
 
+type QuizAnswer = string | number | boolean | string[];
+type AnswerMap = Record<number, QuizAnswer>;
+
 const AISmileQuiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setAnswers] = useState<Record<number, any>>({});
+  const [answers, setAnswers] = useState<AnswerMap>({});
   const [isCompleted, setIsCompleted] = useState(false);
   const [result, setResult] = useState<QuizResult | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -123,7 +126,7 @@ const AISmileQuiz = () => {
     }
   ];
 
-  const handleAnswer = (questionId: number, answer: any) => {
+  const handleAnswer = (questionId: number, answer: QuizAnswer) => {
     setAnswers(prev => ({ ...prev, [questionId]: answer }));
   };
 
@@ -148,14 +151,13 @@ const AISmileQuiz = () => {
     await new Promise(resolve => setTimeout(resolve, 3000));
     
     // Calculate result based on answers
-    const confidenceScore = answers[1] || 5;
     const anxietyLevel = answers[4] === "Yes, I'm very anxious about dental visits" ? "high" : "low";
     const comfortImportance = answers[6] || 5;
-    
+
     let category = "Cosmetic Enhancement";
     let score = 75;
-    let recommendations = [];
-    let treatments = [];
+    const recommendations: string[] = [];
+    const treatments: string[] = [];
     
     // Analyze answers to determine recommendations
     if (answers[2]?.includes("Tooth color/staining")) {

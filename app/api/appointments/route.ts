@@ -16,6 +16,16 @@ const appointmentSchema = z.object({
   isNewPatient: z.boolean().default(true),
 });
 
+type AppointmentRequest = z.infer<typeof appointmentSchema>;
+
+interface AppointmentRecord extends AppointmentRequest {
+  id: string;
+  status: 'pending_confirmation';
+  createdAt: string;
+  estimatedDuration: number;
+  priority: 'high' | 'normal';
+}
+
 // Available appointment slots (in a real app, this would come from a calendar system)
 const availableSlots = {
   'monday': ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00'],
@@ -69,7 +79,7 @@ export async function POST(request: NextRequest) {
     // 5. Send SMS confirmations
 
     // Simulate appointment booking
-    const appointment = {
+    const appointment: AppointmentRecord = {
       id: appointmentId,
       ...validatedData,
       status: 'pending_confirmation',
@@ -188,7 +198,7 @@ function getEstimatedDuration(treatmentType: string): number {
 }
 
 // Simulated email confirmation
-async function sendAppointmentConfirmation(appointment: any) {
+async function sendAppointmentConfirmation(appointment: AppointmentRecord) {
   // In a real app, integrate with email service (SendGrid, Mailgun, etc.)
   console.log('Sending appointment confirmation email:', {
     to: appointment.email,
@@ -201,7 +211,7 @@ async function sendAppointmentConfirmation(appointment: any) {
 }
 
 // Simulated emergency notification
-async function sendEmergencyNotification(appointment: any) {
+async function sendEmergencyNotification(appointment: AppointmentRecord) {
   // In a real app, this would:
   // 1. Send SMS to practice emergency number
   // 2. Send email to on-call dentist

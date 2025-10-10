@@ -330,25 +330,42 @@ export {
   GlowText,
 };
 
-// Utility function to apply text effects to existing components
-export const withTextEffect = (
-  Component: React.ComponentType<any>,
-  effect: 'shimmer' | 'gradient' | 'glow' | 'float',
-  options: any = {}
-) => {
-  return React.forwardRef<any, any>((props, ref) => {
-    const EffectComponent = {
-      shimmer: ShimmerText,
-      gradient: GradientText,
-      glow: GlowText,
-      float: FloatingText,
-    }[effect];
+type TextEffect = 'shimmer' | 'gradient' | 'glow' | 'float';
 
-    return (
-      <EffectComponent {...options}>
-        <Component {...props} ref={ref} />
-      </EffectComponent>
-    );
-  });
+type EffectPropsMap = {
+  shimmer: ShimmerTextProps;
+  gradient: GradientTextProps;
+  glow: GlowTextProps;
+  float: FloatingTextProps;
+};
+
+type WithoutChildren<T> = T extends { children?: React.ReactNode }
+  ? Omit<T, 'children'>
+  : T;
+
+const effectComponents = {
+  shimmer: ShimmerText,
+  gradient: GradientText,
+  glow: GlowText,
+  float: FloatingText,
+} as const satisfies Record<TextEffect, React.ComponentType<EffectPropsMap[TextEffect]>>;
+
+// Utility function to apply text effects to existing components
+export const withTextEffect = <Effect extends TextEffect, Props>(
+  Component: React.ComponentType<Props>,
+  effect: Effect,
+  options: Partial<WithoutChildren<EffectPropsMap[Effect]>> = {}
+) => {
+  const EffectComponent = effectComponents[effect] as React.ComponentType<EffectPropsMap[Effect]>;
+
+  const WrappedComponent = React.forwardRef<unknown, Props>((props, ref) => (
+    <EffectComponent {...(options as EffectPropsMap[Effect])}>
+      {React.createElement(Component, { ...props, ref } as Props & { ref: React.Ref<unknown> })}
+    </EffectComponent>
+  ));
+
+  WrappedComponent.displayName = `WithTextEffect(${Component.displayName ?? Component.name ?? 'Component'})`;
+
+  return WrappedComponent;
 };
 

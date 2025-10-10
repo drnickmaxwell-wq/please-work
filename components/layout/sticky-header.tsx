@@ -123,7 +123,7 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
                 </div>
                 <div className="hidden sm:block">
                   <h1 className="text-lg font-bold text-slate-800" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                    St Mary's House
+                    St Mary’s House
                   </h1>
                   <p className="text-sm text-slate-600" style={{ fontFamily: 'Lora, serif' }}>
                     Dental Care

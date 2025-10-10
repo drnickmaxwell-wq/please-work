@@ -156,7 +156,7 @@ const InteractiveDentalVisualization = () => {
           
           <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
             Explore interactive demos of our cutting-edge dental technology. 
-            See how we're revolutionizing dental care with AI, 3D scanning, and advanced visualization.
+            See how we’re revolutionizing dental care with AI, 3D scanning, and advanced visualization.
           </p>
         </motion.div>
 

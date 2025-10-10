@@ -25,6 +25,19 @@ interface ChatResponse {
   urgency?: 'low' | 'medium' | 'high';
 }
 
+interface TreatmentPlan {
+  treatments: Array<{
+    name: string;
+    description: string;
+    duration: string;
+    priority: number;
+    benefits: string[];
+  }>;
+  totalEstimate: string;
+  timeline: string;
+  nextSteps: string[];
+}
+
 class OpenAIAdapter {
   private client: OpenAI;
   private isConfigured: boolean;
@@ -269,7 +282,7 @@ class OpenAIAdapter {
     };
   }
 
-  private parseTreatmentPlan(plan: string): any {
+  private parseTreatmentPlan(plan: string): TreatmentPlan {
     return {
       treatments: [
         {
@@ -338,7 +351,7 @@ class OpenAIAdapter {
     };
   }
 
-  private getMockTreatmentPlan(): any {
+  private getMockTreatmentPlan(): TreatmentPlan {
     return {
       treatments: [
         {

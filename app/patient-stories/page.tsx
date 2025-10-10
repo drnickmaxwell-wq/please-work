@@ -210,7 +210,7 @@ const PatientStoriesPage = () => {
                   <div className="flex items-start mb-6">
                     <Quote className="w-8 h-8 text-pink-500 mr-4 flex-shrink-0 mt-1" />
                     <p className="text-xl text-slate-700 leading-relaxed italic">
-                      "{testimonials[activeTestimonial].quote}"
+                      “{testimonials[activeTestimonial].quote}”
                     </p>
                   </div>
 

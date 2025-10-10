@@ -3,6 +3,7 @@
 import React, { Suspense, useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame, useLoader } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera, Environment, ContactShadows, Text, Html } from '@react-three/drei';
+import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Play, Pause, RotateCcw, ZoomIn, ZoomOut, Info, Sparkles } from 'lucide-react';
 import * as THREE from 'three';
@@ -153,7 +154,7 @@ export default function InteractiveToothModel({
   const [showAfter, setShowAfter] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
-  const controlsRef = useRef<any>();
+  const controlsRef = useRef<OrbitControlsImpl | null>(null);
 
   useEffect(() => {
     // Simulate loading delay for optimization
