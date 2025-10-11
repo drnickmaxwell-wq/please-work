@@ -8,7 +8,7 @@ type Props = { preview?: boolean };
 
 export default function TreatmentsButtonMenu({ preview = false }: Props) {
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState<MenuGroup | null>(null);
+  const [active, setActive] = useState<MenuGroup | null>(treatmentGroups[0] ?? null);
   const menuRef = useRef<HTMLDivElement | null>(null);
 
   // Close on outside click / Esc
@@ -30,7 +30,7 @@ export default function TreatmentsButtonMenu({ preview = false }: Props) {
 
   return (
     <div className="relative" ref={menuRef}>
-      {/* Gradient hamburger button (your original style) */}
+      {/* Gradient hamburger button */}
       <button
         onClick={() => setOpen(o => !o)}
         aria-expanded={open}
@@ -48,16 +48,16 @@ export default function TreatmentsButtonMenu({ preview = false }: Props) {
         <span>Treatments</span>
       </button>
 
-      {/* Dropdown panel */}
+      {/* Dropdown aligned under button (never full-page) */}
       {open && (
         <div
-          className="absolute right-0 mt-3 w-[min(92vw,960px)] rounded-2xl border border-black/5
+          className="absolute right-0 mt-3 w-[min(92vw,860px)] rounded-2xl border border-black/5
                      bg-white/95 backdrop-blur shadow-2xl z-50"
           role="dialog"
         >
-          <div className="grid gap-0 md:grid-cols-[260px_1fr]">
-            {/* Left column: group names only */}
-            <div className="p-4 border-b md:border-b-0 md:border-r border-black/5">
+          <div className="grid md:grid-cols-[240px_1fr]">
+            {/* Left: group names only */}
+            <div className="p-4 border-b md:border-b-0 md:border-r border-black/5 max-h-[52vh] overflow-auto">
               <ul className="space-y-1">
                 {treatmentGroups.map(group => (
                   <li key={group.title}>
@@ -66,12 +66,10 @@ export default function TreatmentsButtonMenu({ preview = false }: Props) {
                       className="w-full text-left px-3 py-2 rounded-md flex items-center justify-between
                                  hover:bg-slate-50 transition group"
                     >
-                      {/* Gradient text with luxurious gold flash on hover */}
                       <span className="relative inline-block font-semibold
                                        bg-gradient-to-r from-[#C2185B] via-[#40C4B4] to-[#D4AF37]
                                        bg-clip-text text-transparent">
                         {group.title}
-                        {/* gold flash accent */}
                         <span className="absolute inset-0 pointer-events-none overflow-hidden">
                           <span className="block h-full w-10 -translate-x-10 skew-x-12
                                            bg-gradient-to-r from-transparent via-[#D4AF37]/40 to-transparent
@@ -86,14 +84,12 @@ export default function TreatmentsButtonMenu({ preview = false }: Props) {
               </ul>
             </div>
 
-            {/* Right column: second-level submenu for the active group */}
-            <div className="p-4 min-h-[220px]">
+            {/* Right: submenu for active group */}
+            <div className="p-4 max-h-[52vh] overflow-auto">
               {!active ? (
-                <div className="text-slate-500 text-sm px-3 py-2">
-                  Select a group to view pages.
-                </div>
+                <div className="text-slate-500 text-sm px-3 py-2">Select a group to view pages.</div>
               ) : (
-                <div>
+                <>
                   <div className="text-xs uppercase tracking-wide text-slate-500 mb-2 px-2">
                     {active.title}
                   </div>
@@ -108,7 +104,6 @@ export default function TreatmentsButtonMenu({ preview = false }: Props) {
                                        hover:bg-slate-50 hover:text-slate-900 transition"
                             onClick={() => setOpen(false)}
                           >
-                            {/* Gradient label + gold flash on hover */}
                             <span className="relative inline-block bg-gradient-to-r
                                              from-[#C2185B] via-[#40C4B4] to-[#D4AF37]
                                              bg-clip-text text-transparent font-medium">
@@ -125,43 +120,9 @@ export default function TreatmentsButtonMenu({ preview = false }: Props) {
                       );
                     })}
                   </ul>
-                </div>
+                </>
               )}
             </div>
-          </div>
-
-          {/* Mobile accordion view */}
-          <div className="md:hidden border-t border-black/5 p-3">
-            <details className="rounded-lg">
-              <summary className="px-3 py-2 cursor-pointer font-semibold
-                                  bg-gradient-to-r from-[#C2185B] via-[#40C4B4] to-[#D4AF37]
-                                  bg-clip-text text-transparent">
-                All groups
-              </summary>
-              <div className="mt-2 space-y-4">
-                {treatmentGroups.map(g => (
-                  <div key={g.title}>
-                    <div className="px-2 py-1 text-xs uppercase tracking-wide text-slate-500">{g.title}</div>
-                    <ul className="mt-1">
-                      {g.items.map(it => {
-                        const href = preview ? ('/preview/lux' + it.href) : it.href;
-                        return (
-                          <li key={href}>
-                            <Link
-                              href={href}
-                              onClick={()=>setOpen(false)}
-                              className="block px-3 py-2 rounded-md text-slate-700 hover:bg-slate-50"
-                            >
-                              {it.label}
-                            </Link>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </details>
           </div>
         </div>
       )}
