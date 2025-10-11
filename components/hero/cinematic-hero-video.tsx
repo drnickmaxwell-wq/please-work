@@ -188,9 +188,9 @@ export default function CinematicHeroVideo() {
           poster="/hero-poster.jpg"
           style={{ aspectRatio: '21/9' }}
         >
-          <source src="/videos/coastal-dental-hero-4k.mp4" type="video/mp4" />
-          <source src="/videos/coastal-dental-hero-1080p.webm" type="video/webm" />
-          <source src="/videos/coastal-dental-hero-720p.mp4" type="video/mp4" />
+          <source src="/public/videos/dental-hero-4k.mp4" type="video/mp4" />
+          <source src="/public/videos/dental-hero-1080p.webm" type="video/webm" />
+          <source src="/public/videos/dental-hero-720p.mp4" type="video/mp4" />
         </video>
         
         {/* Video Overlay */}
