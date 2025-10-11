@@ -1,6 +1,7 @@
 'use client';
+import React from 'react';
 
-import TreatmentsButtonMenu from '@/components/nav/TreatmentsButtonMenu';
+// Section imports
 import HeroBand from '@/components/layout/sections/HeroBand';
 import TreatmentsGridExact from '@/components/layout/sections/TreatmentsGridExact';
 import TestimonialsExact from '@/components/layout/sections/TestimonialsExact';
@@ -12,10 +13,6 @@ import BlogPreviewExact from '@/components/layout/sections/BlogPreviewExact';
 export default function Page() {
   return (
     <main className="min-h-screen bg-white text-slate-900">
-
-    
-      </div>
-
       <HeroBand />
       <TreatmentsGridExact />
       <TestimonialsExact />
