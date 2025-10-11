@@ -17,18 +17,16 @@ export default function StickyHeader() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // helper
   const isActive = (href: string) =>
     pathname === href || (href !== '/' && pathname?.startsWith(href));
 
   return (
     <header
-      className={
-        'sticky top-0 z-40 transition ' +
-        (scrolled
+      className={`sticky top-0 z-40 transition ${
+        scrolled
           ? 'backdrop-blur bg-white/90 border-b border-black/5 shadow-sm'
-          : 'bg-white/70')
-      }
+          : 'bg-white/70'
+      }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand */}
@@ -41,20 +39,22 @@ export default function StickyHeader() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-6 text-sm">
+        <nav className="hidden md:flex items-center gap-6 text-sm relative">
           <HeaderLink href="/" active={isActive('/')}>Home</HeaderLink>
           <HeaderLink href="/about" active={isActive('/about')}>About</HeaderLink>
 
-          {/* Treatments: gradient hamburger + two-level dropdown */}
+          {/* Gradient Treatments dropdown */}
           <TreatmentsButtonMenu />
 
           <HeaderLink href="/team" active={isActive('/team')}>Team</HeaderLink>
-          <HeaderLink href="/patient-stories" active={isActive('/patient-stories')}>Patient Stories</HeaderLink>
+          <HeaderLink href="/patient-stories" active={isActive('/patient-stories')}>
+            Patient Stories
+          </HeaderLink>
           <HeaderLink href="/blog" active={isActive('/blog')}>Blog</HeaderLink>
           <HeaderLink href="/contact" active={isActive('/contact')}>Contact</HeaderLink>
         </nav>
 
-        {/* CTAs (desktop) */}
+        {/* CTAs */}
         <div className="hidden md:flex items-center gap-3">
           <Link
             href="tel:01273453109"
@@ -64,7 +64,7 @@ export default function StickyHeader() {
           </Link>
           <Link
             href="/contact"
-            className="rounded-full px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-[#C2185B] via-[#40C4B4] to-[#D4AF37]"
+            className="rounded-full px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-[#C2185B] via-[#40C4B4] to-[#D4AF37] hover:brightness-110"
           >
             Book Free Consultation
           </Link>
@@ -77,7 +77,6 @@ export default function StickyHeader() {
           aria-expanded={mobileOpen}
           aria-label="Open menu"
         >
-          <span className="sr-only">Open menu</span>
           <span className="flex flex-col gap-[3px]">
             <span className="block w-5 h-[2px] bg-slate-800 rounded" />
             <span className="block w-5 h-[2px] bg-slate-800 rounded" />
@@ -93,7 +92,6 @@ export default function StickyHeader() {
             <MobileLink href="/" onClick={() => setMobileOpen(false)} active={isActive('/')}>Home</MobileLink>
             <MobileLink href="/about" onClick={() => setMobileOpen(false)} active={isActive('/about')}>About</MobileLink>
 
-            {/* Treatments mobile group */}
             <details className="rounded-lg border border-black/5">
               <summary className="px-3 py-2 cursor-pointer font-semibold
                                   bg-gradient-to-r from-[#C2185B] via-[#40C4B4] to-[#D4AF37]
@@ -112,7 +110,9 @@ export default function StickyHeader() {
             </details>
 
             <MobileLink href="/team" onClick={() => setMobileOpen(false)} active={isActive('/team')}>Team</MobileLink>
-            <MobileLink href="/patient-stories" onClick={() => setMobileOpen(false)} active={isActive('/patient-stories')}>Patient Stories</MobileLink>
+            <MobileLink href="/patient-stories" onClick={() => setMobileOpen(false)} active={isActive('/patient-stories')}>
+              Patient Stories
+            </MobileLink>
             <MobileLink href="/blog" onClick={() => setMobileOpen(false)} active={isActive('/blog')}>Blog</MobileLink>
             <MobileLink href="/contact" onClick={() => setMobileOpen(false)} active={isActive('/contact')}>Contact</MobileLink>
             <div className="pt-3 flex gap-3">
@@ -132,16 +132,37 @@ export default function StickyHeader() {
 
 /* ---------- subcomponents ---------- */
 
-function HeaderLink({ href, active, children }:{ href: string; active?: boolean; children: React.ReactNode }) {
+function HeaderLink({
+  href,
+  active,
+  children,
+}: {
+  href: string;
+  active?: boolean;
+  children: React.ReactNode;
+}) {
   return (
     <Link
       href={href}
-      className={
-        'relative py-1 text-slate-700 hover:text-slate-900 transition ' +
-        (active ? 'text-slate-900' : '')
-      }
+      className={`relative py-1 text-slate-700 hover:text-slate-900 transition group ${
+        active ? 'text-slate-900' : ''
+      }`}
     >
-      {children}
+      <span
+        className="relative inline-block bg-gradient-to-r from-[#C2185B] via-[#40C4B4] to-[#D4AF37]
+                   bg-clip-text text-transparent font-medium"
+      >
+        {children}
+        {/* Gold shimmer flash on hover */}
+        <span className="absolute inset-0 overflow-hidden pointer-events-none">
+          <span
+            className="block h-full w-8 -translate-x-8 skew-x-12
+                       bg-gradient-to-r from-transparent via-[#D4AF37]/50 to-transparent
+                       opacity-0 group-hover:opacity-100
+                       transition-transform duration-500 group-hover:translate-x-[120%]"
+          />
+        </span>
+      </span>
       {active && (
         <span className="absolute -bottom-1 left-0 right-0 h-0.5 rounded-full bg-gradient-to-r from-[#C2185B] via-[#40C4B4] to-[#D4AF37]" />
       )}
@@ -149,17 +170,26 @@ function HeaderLink({ href, active, children }:{ href: string; active?: boolean;
   );
 }
 
-function MobileLink({ href, active, children, onClick }:{
-  href: string; active?: boolean; children: React.ReactNode; onClick?: () => void;
+function MobileLink({
+  href,
+  active,
+  children,
+  onClick,
+}: {
+  href: string;
+  active?: boolean;
+  children: React.ReactNode;
+  onClick?: () => void;
 }) {
   return (
     <Link
       href={href}
       onClick={onClick}
-      className={
-        'block px-3 py-2 rounded-md text-sm ' +
-        (active ? 'bg-slate-100 text-slate-900' : 'text-slate-700 hover:bg-slate-50')
-      }
+      className={`block px-3 py-2 rounded-md text-sm ${
+        active
+          ? 'bg-slate-100 text-slate-900'
+          : 'text-slate-700 hover:bg-slate-50'
+      }`}
     >
       {children}
     </Link>
