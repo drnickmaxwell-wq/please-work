@@ -13,9 +13,7 @@ export default function Page() {
   return (
     <main className="min-h-screen bg-white text-slate-900">
 
-      {/* TEMP: Preview-only Treatments dropdown */}
-      <div className="fixed top-16 left-1/2 -translate-x-1/2 z-50 hidden md:block">
-        <TreatmentsButtonMenu preview={true} />
+    
       </div>
 
       <HeroBand />
