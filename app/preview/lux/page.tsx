@@ -1,6 +1,5 @@
 'use client';
 
-import TreatmentsMenu from '@/components/nav/TreatmentsMenu';
 import TreatmentsButtonMenu from '@/components/nav/TreatmentsButtonMenu';
 import HeroBand from '@/components/layout/sections/HeroBand';
 import TreatmentsGridExact from '@/components/layout/sections/TreatmentsGridExact';
@@ -13,11 +12,11 @@ import BlogPreviewExact from '@/components/layout/sections/BlogPreviewExact';
 export default function Page() {
   return (
     <main className="min-h-screen bg-white text-slate-900">
-      {/* TEMP preview-only mount of the Treatments dropdown (remove once integrated into header) */}
+
+      {/* TEMP: Preview-only Treatments dropdown */}
       <div className="fixed top-16 left-1/2 -translate-x-1/2 z-50 hidden md:block">
-        <TreatmentsMenu preview />
-      </div>className="fixed top-16 left-1/2 -translate-x-1/2 z-50 hidden md:block">
-  <TreatmentsButtonMenu preview />
+        <TreatmentsButtonMenu preview={true} />
+      </div>
 
       <HeroBand />
       <TreatmentsGridExact />
