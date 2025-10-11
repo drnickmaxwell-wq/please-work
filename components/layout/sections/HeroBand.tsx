@@ -24,10 +24,10 @@ export default function HeroBand() {
   }, []);
 
   return (
-    <section className="relative w-full h-[min(100svh,100vh)] overflow-hidden">
-      {/* Deep fallback gradient + subtle wave image at the very back */}
+    <section className="relative w-full h-[min(100svh,100vh)] overflow-hidden bg-black">
+      {/* Deep gradient + wave image (behind everything) */}
       <div
-        className="absolute inset-0 -z-30"
+        className="absolute inset-0 z-0"
         style={{
           background:
             'radial-gradient(1200px circle at 20% 20%, rgba(194,24,91,0.60), transparent 60%),' +
@@ -37,7 +37,7 @@ export default function HeroBand() {
         aria-hidden="true"
       />
       <div
-        className="absolute inset-0 -z-30 opacity-35"
+        className="absolute inset-0 z-0 opacity-35"
         style={{
           backgroundImage: 'url(/brand/waves/waves-bg.webp)',
           backgroundSize: 'cover',
@@ -46,9 +46,9 @@ export default function HeroBand() {
         aria-hidden="true"
       />
 
-      {/* Video sits below the overlay effects so effects are VISIBLE */}
+      {/* Video (keep above background, below FX) */}
       <video
-        className="absolute inset-0 -z-20 w-full h-full object-cover"
+        className="absolute inset-0 z-10 w-full h-full object-cover"
         poster="/hero-poster.jpg"
         autoPlay
         muted
@@ -58,15 +58,19 @@ export default function HeroBand() {
         <source src="/videos/dental-hero-4k.mp4" type="video/mp4" />
       </video>
 
-      {/* Overlay FX ABOVE the video */}
+      {/* FX overlay ABOVE video so you can see them */}
       {useWebGL ? (
-        <WebGLWaves className="absolute inset-0 z-0 opacity-35 pointer-events-none" />
+        <WebGLWaves className="absolute inset-0 z-20 opacity-35 pointer-events-none mix-blend-soft-light" />
       ) : null}
-      <CoastalWaves className="absolute inset-0 z-0 opacity-30 mix-blend-soft-light pointer-events-none" />
-      <CoastalParticles count={18} className="absolute inset-0 z-10 pointer-events-none" />
+
+      {/* Lightweight CSS/SVG waves, always on (very cheap) */}
+      <CoastalWaves className="absolute inset-0 z-20 opacity-25 pointer-events-none mix-blend-soft-light" />
+
+      {/* Subtle shimmer dots */}
+      <CoastalParticles count={18} className="absolute inset-0 z-30 pointer-events-none opacity-50" />
 
       {/* Copy always on top */}
-      <div className="relative z-20 h-full flex items-center justify-center text-center px-6">
+      <div className="relative z-40 h-full flex items-center justify-center text-center px-6">
         <div className="max-w-3xl">
           <h1
             className="text-4xl sm:text-6xl lg:text-7xl font-bold leading-tight"
