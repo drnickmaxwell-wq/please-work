@@ -5,23 +5,19 @@ import dynamic from 'next/dynamic';
 import CoastalWaves from '@/components/effects/coastal-waves';
 import CoastalParticles from '@/components/effects/CoastalParticles';
 
-// Lazy-load WebGL (client-only)
 const WebGLWaves = dynamic(() => import('@/components/effects/WebGLWaves'), { ssr: false });
 
 function supportsWebGL(): boolean {
   try {
-    const canvas = document.createElement('canvas');
-    return !!(canvas.getContext('webgl') || canvas.getContext('experimental-webgl'));
-  } catch {
-    return false;
-  }
+    const c = document.createElement('canvas');
+    return !!(c.getContext('webgl') || c.getContext('experimental-webgl'));
+  } catch { return false; }
 }
 
 export default function HeroBand() {
   const [useWebGL, setUseWebGL] = useState(false);
 
   useEffect(() => {
-    // Desktop-ish pointer + not reduced-motion + WebGL available
     const finePointer = window.matchMedia?.('(pointer:fine)').matches;
     const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     setUseWebGL(!!finePointer && !reduceMotion && supportsWebGL());
@@ -29,7 +25,7 @@ export default function HeroBand() {
 
   return (
     <section className="relative w-full h-[min(100svh,100vh)] overflow-hidden">
-      {/* Built-in gradient + optional wave image as the deepest fallback */}
+      {/* Deep fallback gradient + subtle wave image at the very back */}
       <div
         className="absolute inset-0 -z-30"
         style={{
@@ -41,7 +37,7 @@ export default function HeroBand() {
         aria-hidden="true"
       />
       <div
-        className="absolute inset-0 -z-20 opacity-35"
+        className="absolute inset-0 -z-30 opacity-35"
         style={{
           backgroundImage: 'url(/brand/waves/waves-bg.webp)',
           backgroundSize: 'cover',
@@ -50,14 +46,9 @@ export default function HeroBand() {
         aria-hidden="true"
       />
 
-      {/* Background FX: CoastalWaves always (light), WebGLWaves on capable desktop */}
-      {/* CoastalWaves is cheap and safe, sits under video */}
-      <CoastalWaves className="-z-10" />
-      {useWebGL && <WebGLWaves className="-z-10" />}
-
-      {/* 4K hero video; if blocked or missing, gradient/wave remains visible */}
+      {/* Video sits below the overlay effects so effects are VISIBLE */}
       <video
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 -z-20 w-full h-full object-cover"
         poster="/hero-poster.jpg"
         autoPlay
         muted
@@ -67,11 +58,15 @@ export default function HeroBand() {
         <source src="/videos/dental-hero-4k.mp4" type="video/mp4" />
       </video>
 
-      {/* Subtle particle shimmer above everything */}
-      <CoastalParticles count={18} className="z-0" />
+      {/* Overlay FX ABOVE the video */}
+      {useWebGL ? (
+        <WebGLWaves className="absolute inset-0 z-0 opacity-35 pointer-events-none" />
+      ) : null}
+      <CoastalWaves className="absolute inset-0 z-0 opacity-30 mix-blend-soft-light pointer-events-none" />
+      <CoastalParticles count={18} className="absolute inset-0 z-10 pointer-events-none" />
 
-      {/* Copy */}
-      <div className="relative z-10 h-full flex items-center justify-center text-center px-6">
+      {/* Copy always on top */}
+      <div className="relative z-20 h-full flex items-center justify-center text-center px-6">
         <div className="max-w-3xl">
           <h1
             className="text-4xl sm:text-6xl lg:text-7xl font-bold leading-tight"
