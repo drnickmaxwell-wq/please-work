@@ -89,7 +89,7 @@ export default function EmergencyDentistPage() {
               Emergency Dentist
             </h1>
             <p className="text-xl md:text-2xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
-              When dental emergencies strike, we're here to help. Our experienced emergency team 
+              When dental emergencies strike, we’re here to help. Our experienced emergency team
               provides immediate pain relief and same-day treatment in our comfortable Shoreham-by-Sea practice.
             </p>
           </motion.div>
@@ -196,7 +196,7 @@ export default function EmergencyDentistPage() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Don't Wait - Get Help Now
+              Don’t Wait - Get Help Now
             </h2>
             <p className="text-xl text-white/90 mb-8 leading-relaxed">
               Dental emergencies require immediate attention. Our experienced team is ready to 

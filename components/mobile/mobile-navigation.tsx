@@ -189,7 +189,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
                   </div>
                   <div>
                     <h2 className="text-lg font-bold text-slate-800" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                      St Mary's House
+                      St Mary’s House
                     </h2>
                     <p className="text-sm text-slate-600" style={{ fontFamily: 'Lora, serif' }}>
                       Dental Care
@@ -400,7 +400,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
           </div>
           <div className="hidden sm:block">
             <h1 className="text-lg font-bold text-slate-800" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-              St Mary's House
+              St Mary’s House
             </h1>
           </div>
         </Link>

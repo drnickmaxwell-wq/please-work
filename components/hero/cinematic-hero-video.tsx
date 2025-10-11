@@ -1,24 +1,55 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Play, Pause, Volume2, VolumeX, Maximize2, Sparkles } from 'lucide-react';
 
 // Floating Particle Component
-function FloatingParticle({ delay = 0, color = '#D4AF37' }: { delay?: number; color?: string }) {
+interface FloatingParticleProps {
+  delay?: number;
+  color?: string;
+  startX: number;
+  startY: number;
+  driftX: number;
+  driftY: number;
+  prefersReducedMotion: boolean;
+}
+
+function FloatingParticle({
+  delay = 0,
+  color = '#D4AF37',
+  startX,
+  startY,
+  driftX,
+  driftY,
+  prefersReducedMotion,
+}: FloatingParticleProps) {
+  if (prefersReducedMotion) {
+    return (
+      <div
+        className="absolute w-1 h-1 rounded-full"
+        style={{
+          backgroundColor: color,
+          boxShadow: `0 0 6px ${color}`,
+          transform: `translate3d(${startX}px, ${startY}px, 0)`,
+        }}
+      />
+    );
+  }
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 100, x: Math.random() * 100 - 50 }}
+      initial={{ opacity: 0, x: startX, y: startY }}
       animate={{
         opacity: [0, 1, 0],
-        y: -100,
-        x: Math.random() * 200 - 100,
+        x: startX + driftX,
+        y: startY - driftY,
       }}
       transition={{
         duration: 8,
         delay,
         repeat: Infinity,
-        ease: "easeOut"
+        ease: "easeOut",
       }}
       className="absolute w-1 h-1 rounded-full"
       style={{ backgroundColor: color, boxShadow: `0 0 6px ${color}` }}
@@ -46,8 +77,20 @@ export default function CinematicHeroVideo() {
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
-  const [progress, setProgress] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const prefersReducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    const updateIsMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    updateIsMobile();
+    window.addEventListener('resize', updateIsMobile);
+
+    return () => window.removeEventListener('resize', updateIsMobile);
+  }, []);
 
   useEffect(() => {
     // Simulate loading
@@ -75,6 +118,34 @@ export default function CinematicHeroVideo() {
       setIsMuted(!isMuted);
     }
   };
+
+  const particleCount = prefersReducedMotion ? 0 : isMobile ? 12 : 20;
+
+  const particles = useMemo(() => {
+    const colors = ['#D4AF37', '#40C4B4', '#C2185B'];
+    const randomFromSeed = (seed: number) => {
+      const x = Math.sin(seed) * 10000;
+      return x - Math.floor(x);
+    };
+
+    const randomInRange = (seed: number, min: number, max: number) => {
+      return min + randomFromSeed(seed) * (max - min);
+    };
+
+    return Array.from({ length: particleCount }, (_, index) => {
+      const seed = index + 1;
+
+      return {
+        id: index,
+        startX: randomInRange(seed, -80, 80),
+        startY: randomInRange(seed + 100, 60, 140),
+        driftX: randomInRange(seed + 200, -40, 40),
+        driftY: randomInRange(seed + 300, 80, 160),
+        delay: index * 0.35,
+        color: colors[index % colors.length],
+      };
+    });
+  }, [particleCount]);
 
   return (
     <div className="relative w-full h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-teal-900">
@@ -117,9 +188,9 @@ export default function CinematicHeroVideo() {
           poster="/hero-poster.jpg"
           style={{ aspectRatio: '21/9' }}
         >
-          <source src="/videos/coastal-dental-hero-4k.mp4" type="video/mp4" />
-          <source src="/videos/coastal-dental-hero-1080p.webm" type="video/webm" />
-          <source src="/videos/coastal-dental-hero-720p.mp4" type="video/mp4" />
+          <source src="/public/videos/dental-hero-4k.mp4" type="video/mp4" />
+          <source src="/public/videos/dental-hero-1080p.webm" type="video/webm" />
+          <source src="/public/videos/dental-hero-720p.mp4" type="video/mp4" />
         </video>
         
         {/* Video Overlay */}
@@ -129,11 +200,16 @@ export default function CinematicHeroVideo() {
 
       {/* Floating Particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {Array.from({ length: 20 }).map((_, i) => (
+        {particles.map((particle) => (
           <FloatingParticle
-            key={i}
-            delay={i * 0.5}
-            color={i % 3 === 0 ? '#D4AF37' : i % 3 === 1 ? '#40C4B4' : '#C2185B'}
+            key={particle.id}
+            delay={particle.delay}
+            color={particle.color}
+            startX={particle.startX}
+            startY={particle.startY}
+            driftX={particle.driftX}
+            driftY={particle.driftY}
+            prefersReducedMotion={Boolean(prefersReducedMotion)}
           />
         ))}
       </div>
@@ -230,7 +306,7 @@ export default function CinematicHeroVideo() {
             className="mt-12"
           >
             <p className="text-white/60 text-lg font-light italic">
-              "Going the Extra Smile" 🌊✨
+              “Going the Extra Smile” 🌊✨
             </p>
           </motion.div>
         </div>
@@ -315,27 +391,4 @@ export default function CinematicHeroVideo() {
     </div>
   );
 }
-
-// CSS Animations (add to globals.css)
-const styles = `
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-@keyframes caustics {
-  0%, 100% { 
-    transform: scale(1) rotate(0deg);
-    opacity: 0.3;
-  }
-  50% { 
-    transform: scale(1.1) rotate(5deg);
-    opacity: 0.5;
-  }
-}
-
-.animate-shimmer {
-  animation: shimmer 3s ease-in-out infinite;
-}
-`;
 

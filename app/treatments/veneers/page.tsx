@@ -197,8 +197,8 @@ export default function VeneersPage() {
             </h1>
             
             <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed" style={{ fontFamily: 'Lora, serif' }}>
-              Transform your smile with ultra-thin, custom-crafted porcelain veneers. 
-              Achieve the perfect smile you've always dreamed of with our advanced 3D design technology.
+              Transform your smile with ultra-thin, custom-crafted porcelain veneers.
+              Achieve the perfect smile you’ve always dreamed of with our advanced 3D design technology.
             </p>
           </motion.div>
         </div>
@@ -404,8 +404,8 @@ export default function VeneersPage() {
               Are You a Candidate?
             </h2>
             <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-              Most people are excellent candidates for porcelain veneers. 
-              Here's what we look for during your consultation.
+              Most people are excellent candidates for porcelain veneers.
+              Here’s what we look for during your consultation.
             </p>
           </motion.div>
 

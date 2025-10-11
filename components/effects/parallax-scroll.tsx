@@ -1,7 +1,13 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import {
+  MotionValue,
+  motion,
+  useScroll,
+  useTransform,
+  useSpring,
+} from 'framer-motion';
 
 // Brand Colors: Magenta #C2185B, Turquoise #40C4B4, Gold #D4AF37
 // Fonts: Montserrat headings, Lora body text
@@ -76,7 +82,7 @@ interface ParallaxHeroProps {
   overlay?: boolean;
 }
 
-export function ParallaxHero({ 
+export function ParallaxHero({
   backgroundImage = '/waves-bg-2560.jpg',
   children,
   height = '100vh',
@@ -85,9 +91,26 @@ export function ParallaxHero({
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 1000], [0, 500]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const particles = useMemo(
+    () =>
+      Array.from({ length: 15 }, (_, index) => ({
+        index,
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+        delay: Math.random() * 3,
+        duration: 4 + Math.random() * 3,
+        colorClass:
+          index % 3 === 0
+            ? 'bg-pink-400/30'
+            : index % 3 === 1
+            ? 'bg-teal-400/30'
+            : 'bg-yellow-400/30',
+      })),
+    []
+  );
 
   return (
-    <div 
+    <div
       className="relative overflow-hidden"
       style={{ height }}
     >
@@ -113,28 +136,11 @@ export function ParallaxHero({
 
       {/* Floating Particles with Parallax */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(15)].map((_, i) => (
-          <motion.div
-            key={i}
-            className={`absolute w-2 h-2 rounded-full ${
-              i % 3 === 0 ? 'bg-pink-400/30' : 
-              i % 3 === 1 ? 'bg-teal-400/30' : 'bg-yellow-400/30'
-            }`}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              y: useTransform(scrollY, [0, 1000], [0, (i + 1) * 50]),
-            }}
-            animate={{
-              scale: [1, 1.5, 1],
-              opacity: [0.2, 0.6, 0.2],
-            }}
-            transition={{
-              duration: 4 + Math.random() * 3,
-              repeat: Infinity,
-              delay: Math.random() * 3,
-              ease: "easeInOut"
-            }}
+        {particles.map(config => (
+          <ParallaxParticle
+            key={config.index}
+            scrollY={scrollY}
+            config={config}
           />
         ))}
       </div>
@@ -147,6 +153,46 @@ export function ParallaxHero({
         {children}
       </motion.div>
     </div>
+  );
+}
+
+interface ParticleConfig {
+  index: number;
+  left: number;
+  top: number;
+  delay: number;
+  duration: number;
+  colorClass: string;
+}
+
+interface ParallaxParticleProps {
+  scrollY: MotionValue<number>;
+  config: ParticleConfig;
+}
+
+function ParallaxParticle({ scrollY, config }: ParallaxParticleProps) {
+  const { index, left, top, delay, duration, colorClass } = config;
+  const y = useTransform(scrollY, [0, 1000], [0, (index + 1) * 50]);
+
+  return (
+    <motion.div
+      className={`absolute w-2 h-2 rounded-full ${colorClass}`}
+      style={{
+        left: `${left}%`,
+        top: `${top}%`,
+        y,
+      }}
+      animate={{
+        scale: [1, 1.5, 1],
+        opacity: [0.2, 0.6, 0.2],
+      }}
+      transition={{
+        duration,
+        repeat: Infinity,
+        delay,
+        ease: 'easeInOut',
+      }}
+    />
   );
 }
 

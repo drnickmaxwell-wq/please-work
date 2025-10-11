@@ -2,10 +2,11 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  MessageCircle, 
-  X, 
-  Send, 
+import type { LucideIcon } from 'lucide-react';
+import {
+  MessageCircle,
+  X,
+  Send,
   Mic, 
   MicOff, 
   Volume2, 
@@ -123,15 +124,15 @@ function MessageBubble({ message, isUser }: { message: ChatMessage; isUser: bool
 }
 
 // Quick Action Button Component
-function QuickActionButton({ 
-  icon: Icon, 
-  label, 
-  onClick, 
-  color = 'teal' 
-}: { 
-  icon: any; 
-  label: string; 
-  onClick: () => void; 
+function QuickActionButton({
+  icon: Icon,
+  label,
+  onClick,
+  color = 'teal'
+}: {
+  icon: LucideIcon;
+  label: string;
+  onClick: () => void;
   color?: string;
 }) {
   const colorClasses = {

@@ -112,7 +112,7 @@ export default function Footer() {
                 className="text-2xl font-bold bg-gradient-to-r from-pink-400 to-teal-400 bg-clip-text text-transparent mb-4"
                 style={{ fontFamily: 'Montserrat, sans-serif' }}
               >
-                St Mary's House Dental Care
+                St Mary’s House Dental Care
               </h3>
               <p 
                 className="text-slate-300 leading-relaxed"
@@ -265,7 +265,7 @@ export default function Footer() {
             className="text-slate-400 text-sm"
             style={{ fontFamily: 'Lora, serif' }}
           >
-            © {currentYear} St Mary's House Dental Care. All rights reserved.
+            © {currentYear} St Mary’s House Dental Care. All rights reserved.
           </div>
           
           <div className="flex space-x-6 text-sm">

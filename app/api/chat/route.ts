@@ -46,9 +46,24 @@ BOOKING ASSISTANCE:
 
 Remember: You represent a premium dental practice that prioritizes patient comfort, advanced technology, and beautiful coastal surroundings.`;
 
+type ChatRole = 'system' | 'user' | 'assistant';
+
+interface IncomingChatMessage {
+  role: ChatRole;
+  content: string;
+}
+
+interface EmotionPayload {
+  dominant: string;
+  confidence: number;
+}
+
 export async function POST(request: NextRequest) {
   try {
-    const { messages, userEmotion } = await request.json();
+    const { messages, userEmotion } = (await request.json()) as {
+      messages: IncomingChatMessage[];
+      userEmotion?: EmotionPayload;
+    };
 
     if (!messages || !Array.isArray(messages)) {
       return NextResponse.json(
@@ -71,7 +86,7 @@ Please adjust your response tone accordingly:
     // Prepare messages for OpenAI
     const openaiMessages = [
       { role: 'system', content: systemPrompt },
-      ...messages.map((msg: any) => ({
+      ...messages.map(msg => ({
         role: msg.role,
         content: msg.content
       }))

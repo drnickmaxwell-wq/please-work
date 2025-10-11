@@ -351,11 +351,11 @@ export default function DrSarahMitchellPage() {
                 >
                   Patient Stories
                 </h2>
-                <p 
+                <p
                   className="text-xl text-slate-600"
                   style={{ fontFamily: 'Lora, serif' }}
                 >
-                  Hear from patients who have experienced Dr. Mitchell's exceptional care
+                  Hear from patients who have experienced Dr. Mitchell’s exceptional care
                 </p>
               </motion.div>
 
@@ -374,11 +374,11 @@ export default function DrSarahMitchellPage() {
                         <Star key={i} className="w-5 h-5 text-yellow-500 fill-current" />
                       ))}
                     </div>
-                    <p 
+                    <p
                       className="text-slate-600 mb-6 leading-relaxed italic"
                       style={{ fontFamily: 'Lora, serif' }}
                     >
-                      "{testimonial.text}"
+                      “{testimonial.text}”
                     </p>
                     <div className="flex items-center">
                       <div className="w-12 h-12 bg-gradient-to-br from-pink-400 to-teal-400 rounded-full flex items-center justify-center mr-4">

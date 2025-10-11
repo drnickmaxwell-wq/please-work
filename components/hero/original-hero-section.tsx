@@ -199,7 +199,7 @@ const OriginalHeroSection = () => {
               <span className="text-white font-bold text-lg">SMH</span>
             </div>
             <div>
-              <h1 className="text-xl font-bold text-slate-800">St Mary's House</h1>
+              <h1 className="text-xl font-bold text-slate-800">St Mary’s House</h1>
               <p className="text-sm text-slate-600">Dental Care</p>
             </div>
           </div>
@@ -274,7 +274,7 @@ const OriginalHeroSection = () => {
           <p className="text-xl text-slate-700 max-w-4xl mx-auto leading-relaxed">
             Experience the future of dentistry with our AI-powered 3D treatments, 
             luxury coastal setting, and award-winning patient care. 
-            Book your consultation today and discover why we're "Going the Extra Smile."
+            Book your consultation today and discover why we’re “Going the Extra Smile.”
           </p>
         </motion.div>
 

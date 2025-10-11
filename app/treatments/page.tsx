@@ -204,8 +204,8 @@ export default function TreatmentsPage() {
               Ready to Transform Your Smile?
             </h2>
             <p className="text-xl text-white/90 mb-8 leading-relaxed">
-              Book a consultation today and discover how our advanced treatments 
-              can give you the smile you've always dreamed of.
+              Book a consultation today and discover how our advanced treatments
+              can give you the smile you’ve always dreamed of.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">

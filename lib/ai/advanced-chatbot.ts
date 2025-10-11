@@ -177,7 +177,7 @@ Remember: You're not just booking appointments - you're creating a luxury experi
     message: string,
     emotion: EmotionAnalysis,
     sessionHistory: ChatMessage[] = [],
-    patientProfile?: any
+    patientProfile?: ChatSession['patientProfile']
   ): Promise<string> {
     try {
       // Build context from session history

@@ -1,0 +1,1 @@
+// Smile-AI preview page placeholder

@@ -37,7 +37,10 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({
     setIsDragging(true);
   };
 
-  const handleDragEnd = (event: any, info: PanInfo) => {
+  const handleDragEnd = (
+    event: MouseEvent | TouchEvent | PointerEvent,
+    info: PanInfo,
+  ) => {
     setIsDragging(false);
     
     if (disabled) return;
@@ -213,7 +216,10 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
   const [pullDistance, setPullDistance] = useState(0);
   const y = useMotionValue(0);
 
-  const handleDrag = (event: any, info: PanInfo) => {
+  const handleDrag = (
+    event: MouseEvent | TouchEvent | PointerEvent,
+    info: PanInfo,
+  ) => {
     if (info.offset.y > 0 && window.scrollY === 0) {
       const distance = Math.min(info.offset.y, threshold * 1.5);
       setPullDistance(distance);
@@ -221,7 +227,10 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
     }
   };
 
-  const handleDragEnd = async (event: any, info: PanInfo) => {
+  const handleDragEnd = async (
+    event: MouseEvent | TouchEvent | PointerEvent,
+    info: PanInfo,
+  ) => {
     if (info.offset.y > threshold && window.scrollY === 0 && !isRefreshing) {
       setIsRefreshing(true);
       try {

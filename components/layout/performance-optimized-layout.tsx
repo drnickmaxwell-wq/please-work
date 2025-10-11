@@ -57,7 +57,7 @@ function BrandErrorFallback({ error }: { error: Error }) {
           Something went wrong
         </h2>
         <p className="text-slate-600 mb-4" style={{ fontFamily: 'Lora, serif' }}>
-          We're experiencing a temporary issue. Please refresh the page or contact us directly.
+          We’re experiencing a temporary issue. Please refresh the page or contact us directly.
         </p>
         <div className="space-y-2">
           <button

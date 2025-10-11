@@ -48,13 +48,39 @@ export interface PersonalizationRule {
 export interface PersonalizationAction {
   type: 'content' | 'layout' | 'cta' | 'recommendation' | 'styling';
   target: string;
-  modification: any;
+  modification: PersonalizationModification;
   brandColors?: {
     primary: string;
     secondary: string;
     accent: string;
   };
 }
+
+interface PersonalizationModification {
+  brandColors?: {
+    primary: string;
+    secondary: string;
+    accent: string;
+  };
+  [key: string]: unknown;
+}
+
+interface RecommendationStyling {
+  gradient: string;
+  textColor: string;
+  font: string;
+}
+
+interface PersonalizedRecommendation {
+  type: 'treatment' | 'service' | 'emergency';
+  title: string;
+  description: string;
+  cta: string;
+  priority: 'urgent' | 'high' | 'medium' | 'low';
+  brandStyling: RecommendationStyling;
+}
+
+type InteractionValue = string | number | boolean | string[] | Record<string, unknown> | undefined;
 
 // Brand-consistent personalization rules
 export const PERSONALIZATION_RULES: PersonalizationRule[] = [
@@ -237,9 +263,12 @@ export class PersonalizationEngine {
     return this.applyBrandConsistentModification(primaryRule.action.modification);
   }
 
-  private applyBrandConsistentModification(modification: any) {
+  private applyBrandConsistentModification(modification: PersonalizationModification) {
     // Ensure all modifications maintain brand consistency
-    const brandConsistentModification = {
+    const brandConsistentModification: PersonalizationModification & {
+      fonts: { heading: string; body: string };
+      waveBackground: string;
+    } = {
       ...modification,
       brandColors: modification.brandColors || {
         primary: '#C2185B',
@@ -257,7 +286,7 @@ export class PersonalizationEngine {
   }
 
   private getDefaultContent(target: string) {
-    const defaultContent: { [key: string]: any } = {
+    const defaultContent: Record<string, PersonalizationModification> = {
       'hero-message': {
         title: 'Your Perfect Smile is Just One Click Away',
         subtitle: 'Experience the future of dentistry with our AI-powered 3D treatments, luxury coastal setting, and award-winning patient care.',
@@ -284,7 +313,7 @@ export class PersonalizationEngine {
   }
 
   generatePersonalizedRecommendations() {
-    const recommendations: any[] = [];
+    const recommendations: PersonalizedRecommendation[] = [];
 
     // Treatment recommendations based on interests and history
     if (this.userProfile.preferences.treatmentInterests.includes('cosmetic')) {
@@ -337,7 +366,7 @@ export class PersonalizationEngine {
 
     return recommendations.sort((a, b) => {
       const priorityOrder = { urgent: 3, high: 2, medium: 1, low: 0 };
-      return priorityOrder[b.priority as keyof typeof priorityOrder] - 
+      return priorityOrder[b.priority as keyof typeof priorityOrder] -
              priorityOrder[a.priority as keyof typeof priorityOrder];
     });
   }
@@ -387,7 +416,7 @@ export class PersonalizationEngine {
   trackUserInteraction(interaction: {
     type: string;
     target: string;
-    value?: any;
+    value?: InteractionValue;
     timestamp: Date;
   }) {
     // Update user profile based on interactions
@@ -398,7 +427,7 @@ export class PersonalizationEngine {
     }
 
     if (interaction.type === 'treatment_interest') {
-      if (!this.userProfile.preferences.treatmentInterests.includes(interaction.value)) {
+      if (typeof interaction.value === 'string' && !this.userProfile.preferences.treatmentInterests.includes(interaction.value)) {
         this.userProfile.preferences.treatmentInterests.push(interaction.value);
       }
     }

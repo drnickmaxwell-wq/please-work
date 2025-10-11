@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { 
   Video, 
@@ -93,7 +94,7 @@ export default function VideoConsultationPage() {
               </div>
               <div>
                 <div className="font-bold text-slate-800" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                  St Mary's House
+                  St Mary’s House
                 </div>
                 <div className="text-sm text-slate-600" style={{ fontFamily: 'Lora, serif' }}>
                   Dental Care
@@ -102,11 +103,11 @@ export default function VideoConsultationPage() {
             </div>
             
             <div className="hidden md:flex items-center space-x-8">
-              <a href="/" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'Lora, serif' }}>Home</a>
-              <a href="/about" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'Lora, serif' }}>About</a>
-              <a href="/treatments" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'Lora, serif' }}>Treatments</a>
-              <a href="/team" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'Lora, serif' }}>Team</a>
-              <a href="/contact" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'Lora, serif' }}>Contact</a>
+              <Link href="/" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'Lora, serif' }}>Home</Link>
+              <Link href="/about" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'Lora, serif' }}>About</Link>
+              <Link href="/treatments" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'Lora, serif' }}>Treatments</Link>
+              <Link href="/team" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'Lora, serif' }}>Team</Link>
+              <Link href="/contact" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'Lora, serif' }}>Contact</Link>
             </div>
 
             <div className="flex items-center space-x-4">

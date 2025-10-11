@@ -333,8 +333,8 @@ export default function TeamPage() {
                 className="text-xl text-slate-600 mb-8"
                 style={{ fontFamily: 'Lora, serif' }}
               >
-                Book a consultation with any of our expert dentists and discover 
-                why we're the leading dental practice in Shoreham-by-Sea.
+                Book a consultation with any of our expert dentists and discover
+                why we’re the leading dental practice in Shoreham-by-Sea.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

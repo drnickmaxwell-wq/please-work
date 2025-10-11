@@ -56,7 +56,7 @@ export default function AnxietyDentistryPage() {
               Take the First Step
             </h2>
             <p className="text-xl text-white/90 mb-8 leading-relaxed">
-              Don't let dental anxiety prevent you from getting the care you need. 
+              Don’t let dental anxiety prevent you from getting the care you need.
               Schedule a gentle consultation and discover how comfortable dental care can be.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
