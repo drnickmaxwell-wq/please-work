@@ -44,3 +44,8 @@
   translate:-120% 0; transition: translate .6s ease;
 }
 .btn-shimmer:hover:after, .btn-shimmer:focus-visible:after{ translate:120% 0 }
+
+.btn-champagne{
+  background:linear-gradient(135deg,#C2185B 0%,#40C4B4 60%,#D4AF37 100%);
+  color:#fff;
+}
