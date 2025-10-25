@@ -43,7 +43,7 @@ export default function TechnologyHero() {
   }, []);
 
   return (
-    <section ref={heroRef} className="technology-hero">
+    <section ref={heroRef} className="technology-hero tech-hero">
       {/* Gradient Background */}
       <div className="hero-gradient"></div>
       
