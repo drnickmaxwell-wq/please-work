@@ -1,5 +1,17 @@
 /* SMH Champagne Design Tokens (v2.0) */
 :root{
+  /* Placeholder values pending design director sign-off */
+  --brand-magenta:#C2185B;
+  --brand-teal:#40C4B4;
+  --brand-gold:#D4AF37;
+  --surface-0:#F8F4EE;
+  --radius:16px;
+  --shadow-soft:0 10px 30px rgba(0,0,0,0.08);
+  --champagne-grad:linear-gradient(45deg,var(--brand-magenta),var(--brand-teal),var(--brand-gold));
+  --brand-particles-gold:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%221%22%20height%3D%221%22%3E%3Crect%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23D4AF37%22%20fill-opacity%3D%220.32%22/%3E%3C/svg%3E");
+  --brand-particles-teal:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%221%22%20height%3D%221%22%3E%3Crect%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2340C4B4%22%20fill-opacity%3D%220.28%22/%3E%3C/svg%3E");
+  --brand-particles-magenta:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%221%22%20height%3D%221%22%3E%3Crect%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23C2185B%22%20fill-opacity%3D%220.3%22/%3E%3C/svg%3E");
+
   --smh-primary-magenta:#C2185B;--smh-primary-teal:#40C4B4;--smh-accent-gold:#D4AF37;
   --smh-champagne:#F9E8C3;--smh-sand:#F8F4EE;
   --smh-bg:#FFFFFF;--smh-text:#1A1A1A;--smh-text-muted:#4C4C4C;
@@ -23,9 +35,9 @@ html{color:var(--smh-text);background:var(--smh-bg);font-family:var(--font-body)
 .smh-gradient-bg{background-image:var(--smh-gradient);background-size:200% 200%;animation:smhHueDrift 15s var(--motion-ease) infinite alternate}
 .smh-gold-border{border:1px solid color-mix(in oklab,var(--smh-accent-gold) 70%,transparent);box-shadow:var(--glow-gold)}
 .smh-film-grain{pointer-events:none;background-image:url("/textures/film-grain-desktop.webp");background-size:cover;opacity:var(--film-grain-opacity);mix-blend-mode:overlay}
-.smh-particles-gold{pointer-events:none;background-image:url("/textures/particles-gold.webp");background-size:cover;opacity:var(--particles-opacity)}
-.smh-particles-teal{pointer-events:none;background-image:url("/textures/particles-teal.webp");background-size:cover;opacity:var(--particles-opacity)}
-.smh-particles-magenta{pointer-events:none;background-image:url("/textures/particles-magenta.webp");background-size:cover;opacity:var(--particles-opacity)}
+.smh-particles-gold{pointer-events:none;background-image:var(--brand-particles-gold);background-size:cover;opacity:var(--particles-opacity)}
+.smh-particles-teal{pointer-events:none;background-image:var(--brand-particles-teal);background-size:cover;opacity:var(--particles-opacity)}
+.smh-particles-magenta{pointer-events:none;background-image:var(--brand-particles-magenta);background-size:cover;opacity:var(--particles-opacity)}
 .smh-wave-mask{-webkit-mask-image:url("/waves/smh-wave-mask.svg");mask-image:url("/waves/smh-wave-mask.svg");-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-size:cover;mask-size:cover;-webkit-mask-position:top center;mask-position:top center}
 .smh-btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.875rem 1.25rem;border-radius:999px;color:#fff;background-image:var(--smh-gradient);border:1px solid color-mix(in oklab,var(--smh-accent-gold) 50%,transparent);box-shadow:var(--glow-gold);transition:transform 180ms var(--motion-ease),box-shadow 240ms var(--motion-ease),filter 240ms var(--motion-ease)}
 .smh-btn:hover{transform:scale(var(--motion-hover-scale));filter:brightness(1.05) saturate(1.02);box-shadow:0 0 0 2px color-mix(in oklab,var(--smh-accent-gold) 35%,transparent),var(--glow-gold)}
