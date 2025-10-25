@@ -208,13 +208,13 @@ export default function Footer() {
             <div className="space-y-2">
               {quickLinks.map((link) => (
                 <motion.a
-                  key={link.name}
-                  href={link.href}
+                  key={link.label}
+                  href={link.path}
                   className="block text-slate-300 hover:text-white transition-colors duration-200"
                   style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                   whileHover={{ x: 5 }}
                 >
-                  {link.name}
+                  {link.label}
                 </motion.a>
               ))}
             </div>
@@ -232,17 +232,17 @@ export default function Footer() {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {treatments.map((treatment) => (
               <motion.a
-                key={treatment.name}
-                href={treatment.href}
+                key={treatment.label}
+                href={treatment.path}
                 className="text-center p-3 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 hover:bg-white/10 transition-all duration-200"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <span 
+                <span
                   className="text-sm text-slate-300 hover:text-white"
                   style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                 >
-                  {treatment.name}
+                  {treatment.label}
                 </span>
               </motion.a>
             ))}
