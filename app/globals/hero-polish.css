@@ -1,0 +1,205 @@
+.brand-hero-shell {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: color-mix(in oklab, var(--surface-0) 92%, transparent);
+  width: 100%;
+}
+
+.brand-hero-shell::after {
+  content: "";
+  position: absolute;
+  inset: -8% -12% -12% -8%;
+  background: radial-gradient(120% 120% at 10% 20%, color-mix(in oklab, var(--brand-magenta) 65%, transparent) 0%, transparent 60%),
+    radial-gradient(120% 140% at 90% 10%, color-mix(in oklab, var(--brand-teal) 70%, transparent) 0%, transparent 65%);
+  opacity: 0.28;
+  filter: blur(64px);
+  z-index: -1;
+}
+
+.brand-hero-layers {
+  position: absolute;
+  inset: -12%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.brand-hero-layer {
+  position: absolute;
+  inset: 0;
+  will-change: transform, filter, opacity;
+}
+
+.brand-hero-shell.brand-hero-clip-top .brand-hero-layers,
+.brand-hero-shell.brand-hero-clip-bottom .brand-hero-layers {
+  -webkit-mask-image: url("/waves/smh-wave-mask.svg");
+  mask-image: url("/waves/smh-wave-mask.svg");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: cover;
+  mask-size: cover;
+}
+
+.brand-hero-shell.brand-hero-clip-top .brand-hero-layers {
+  -webkit-mask-position: top center;
+  mask-position: top center;
+}
+
+.brand-hero-shell.brand-hero-clip-bottom .brand-hero-layers {
+  -webkit-mask-position: bottom center;
+  mask-position: bottom center;
+}
+
+.brand-hero-layer--base {
+  background:
+    radial-gradient(160% 140% at 12% 18%, color-mix(in oklab, var(--brand-magenta) 82%, var(--surface-0) 18%) 0%, transparent 70%),
+    radial-gradient(140% 120% at 82% 12%, color-mix(in oklab, var(--brand-teal) 86%, var(--surface-0) 14%) 0%, transparent 68%),
+    linear-gradient(125deg, color-mix(in oklab, var(--surface-0) 78%, var(--brand-gold) 22%) 0%, color-mix(in oklab, var(--surface-0) 60%, var(--brand-magenta) 40%) 48%, color-mix(in oklab, var(--surface-0) 72%, var(--brand-gold) 28%) 100%);
+  background-size: 100% 100%, 100% 100%, 200% 200%;
+  animation: gradientDrift 18s ease-in-out infinite;
+  opacity: 0.55;
+  mix-blend-mode: screen;
+}
+
+.brand-hero-layer--accent {
+  background:
+    radial-gradient(180% 140% at 0% 100%, color-mix(in oklab, var(--brand-magenta) 68%, transparent) 0%, transparent 70%),
+    radial-gradient(160% 160% at 110% -10%, color-mix(in oklab, var(--brand-gold) 58%, transparent) 0%, transparent 72%);
+  background-size: 100% 100%, 100% 100%;
+  mix-blend-mode: lighten;
+  opacity: 0.42;
+  filter: blur(20px) saturate(1.05);
+}
+
+.brand-hero-layer--highlight {
+  background:
+    linear-gradient(120deg, color-mix(in oklab, var(--brand-gold) 35%, transparent) 0%, transparent 45%, color-mix(in oklab, var(--brand-magenta) 28%, transparent) 82%),
+    radial-gradient(140% 140% at 50% 25%, color-mix(in oklab, var(--surface-0) 84%, var(--brand-gold) 16%) 0%, transparent 70%);
+  background-repeat: no-repeat;
+  background-size: 200% 200%, 120% 120%;
+  mix-blend-mode: screen;
+  opacity: 0.6;
+}
+
+.brand-hero-layer--wave {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  mix-blend-mode: soft-light;
+}
+
+.brand-hero-layer--glass {
+  background-repeat: no-repeat;
+  background-position: 50% 30%;
+  background-size: 90% auto;
+  mix-blend-mode: screen;
+  opacity: 0.3;
+  filter: saturate(1.1);
+}
+
+.brand-hero-layer--grain {
+  background-size: cover;
+  mix-blend-mode: overlay;
+  opacity: 0.08;
+}
+
+.brand-hero-layer--shimmer {
+  overflow: hidden;
+}
+
+.brand-hero-layer--shimmer::before {
+  content: "";
+  position: absolute;
+  inset: -40% -10% -30% -10%;
+  background: linear-gradient(135deg, transparent 0%, color-mix(in oklab, var(--brand-gold) 32%, transparent) 45%, color-mix(in oklab, var(--surface-0) 75%, transparent) 55%, transparent 100%);
+  opacity: 0;
+  animation: goldShimmer 9s linear infinite;
+  transform: translate3d(-30%, -10%, 0) rotate(8deg);
+}
+
+.brand-hero-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 6;
+  mix-blend-mode: screen;
+}
+
+.brand-hero-particle {
+  position: absolute;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--brand-gold) 55%, transparent);
+  box-shadow: 0 0 18px color-mix(in oklab, var(--brand-gold) 32%, transparent);
+  transform-origin: center;
+  animation: particleFloat 24s ease-in-out infinite alternate;
+}
+
+.brand-hero-motion {
+  position: relative;
+  z-index: 7;
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+}
+
+.brand-hero-motion[data-ready="true"] {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: opacity 480ms var(--motion-ease, cubic-bezier(0.4, 0, 0.2, 1)), transform 600ms var(--motion-ease, cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+.brand-hero-motion :where(h1, h2, h3, h4, h5, h6, p, a, button) {
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.18);
+}
+
+@keyframes gradientDrift {
+  0% {
+    filter: hue-rotate(-1.6deg);
+    background-position: 0% 0%, 100% 0%, 50% 50%;
+  }
+  50% {
+    filter: hue-rotate(0deg);
+    background-position: 4% 3%, 96% 4%, 60% 60%;
+  }
+  100% {
+    filter: hue-rotate(1.6deg);
+    background-position: 2% 2%, 98% 6%, 40% 55%;
+  }
+}
+
+@keyframes goldShimmer {
+  0% {
+    opacity: 0;
+    transform: translate3d(-30%, -10%, 0) rotate(8deg);
+  }
+  45% {
+    opacity: 0.22;
+    transform: translate3d(20%, 30%, 0) rotate(12deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(80%, 80%, 0) rotate(16deg);
+  }
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translate3d(0, -10px, 0) rotate(-1deg);
+  }
+  100% {
+    transform: translate3d(0, 10px, 0) rotate(1.6deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-hero-layer,
+  .brand-hero-layer--shimmer::before,
+  .brand-hero-particle,
+  .brand-hero-motion {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+  .brand-hero-motion {
+    opacity: 1 !important;
+  }
+}
