@@ -4,6 +4,8 @@ import "./styles/smh-tokens.css";
 import "./globals.css";
 import PerformanceOptimizedLayout from '@/components/layout/performance-optimized-layout';
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL ?? 'https://www.stmaryshousedental.co.uk';
+
 const rootFontStyle = {
   '--font-inter': 'Inter, system-ui, Arial',
   '--font-playfair': 'Playfair Display, Georgia, serif',
@@ -21,7 +23,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://www.stmaryshousedental.co.uk'),
+  metadataBase: new URL(siteUrl),
   alternates: {
     canonical: '/',
     languages: {
@@ -31,11 +33,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "St Mary's House Dental Care | Luxury Coastal Dentistry",
     description: "Discover a new standard of dental care in our luxury coastal practice.",
-    url: "https://www.stmaryshousedental.co.uk",
+    url: siteUrl,
     siteName: "St Mary's House Dental Care",
     images: [
       {
-        url: '/og-image.jpg',
+        url: `${siteUrl}/og-image.jpg`,
         width: 1200,
         height: 630,
         alt: "St Mary's House Dental Care - Luxury Coastal Dentistry",
@@ -48,7 +50,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "St Mary's House Dental Care | Luxury Coastal Dentistry",
     description: "Experience advanced, anxiety-free dentistry in a stunning coastal setting.",
-    images: ['/twitter-image.jpg'],
+    images: [`${siteUrl}/twitter-image.jpg`],
     creator: '@stmaryshousedental',
   },
   robots: {
