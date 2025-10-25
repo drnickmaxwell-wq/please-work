@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "lint:fix": "eslint . --fix",
-    "audit:champagne": "tsx tools/audit-champagne.ts"
+    "audit:champagne": "tsx tools/audit-champagne.ts",
+    "guard:preflight": "tsx tools/guard/preflight.ts"
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.24",
