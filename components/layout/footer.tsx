@@ -206,15 +206,15 @@ export default function Footer() {
               Quick Links
             </h4>
             <div className="space-y-2">
-              {quickLinks.map((link) => (
+              {quickLinks.map(({ label, path }) => (
                 <motion.a
-                  key={link.label}
-                  href={link.path}
+                  key={label}
+                  href={path}
                   className="block text-slate-300 hover:text-white transition-colors duration-200"
                   style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                   whileHover={{ x: 5 }}
                 >
-                  {link.label}
+                  {label}
                 </motion.a>
               ))}
             </div>
@@ -230,10 +230,10 @@ export default function Footer() {
             Our Treatments
           </h4>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {treatments.map((treatment) => (
+            {treatments.map(({ label, path }) => (
               <motion.a
-                key={treatment.label}
-                href={treatment.path}
+                key={label}
+                href={path}
                 className="text-center p-3 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 hover:bg-white/10 transition-all duration-200"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -242,7 +242,7 @@ export default function Footer() {
                   className="text-sm text-slate-300 hover:text-white"
                   style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                 >
-                  {treatment.label}
+                  {label}
                 </span>
               </motion.a>
             ))}
@@ -259,14 +259,14 @@ export default function Footer() {
           </div>
           
           <div className="flex space-x-6 text-sm">
-            {legalLinks.map((link) => (
+            {legalLinks.map(({ label, path }) => (
               <a
-                key={link.path}
-                href={link.path}
+                key={label}
+                href={path}
                 className="text-slate-400 hover:text-white transition-colors duration-200"
                 style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
               >
-                {link.label}
+                {label}
               </a>
             ))}
           </div>
