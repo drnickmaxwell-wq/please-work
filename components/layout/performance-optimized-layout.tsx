@@ -38,7 +38,7 @@ function BrandLoadingSpinner() {
       />
       <span 
         className="ml-3 text-slate-600"
-        style={{ fontFamily: 'Montserrat, sans-serif' }}
+        style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
       >
         Loading...
       </span>

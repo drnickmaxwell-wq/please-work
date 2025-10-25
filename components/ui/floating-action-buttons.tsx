@@ -86,7 +86,7 @@ export default function FloatingActionButtons({ className = '' }: FloatingAction
               >
                 <span 
                   className="text-sm font-medium text-slate-700 whitespace-nowrap"
-                  style={{ fontFamily: 'Montserrat, sans-serif' }}
+                  style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                 >
                   {button.label}
                 </span>
@@ -118,7 +118,7 @@ export default function FloatingActionButtons({ className = '' }: FloatingAction
             >
               <span 
                 className="text-sm font-medium text-slate-700 whitespace-nowrap"
-                style={{ fontFamily: 'Montserrat, sans-serif' }}
+                style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
               >
                 Emergency: 01273 453109
               </span>
@@ -156,7 +156,7 @@ export default function FloatingActionButtons({ className = '' }: FloatingAction
             >
               <span 
                 className="text-sm font-medium text-slate-700 whitespace-nowrap"
-                style={{ fontFamily: 'Montserrat, sans-serif' }}
+                style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
               >
                 Quick Actions
               </span>
@@ -218,7 +218,7 @@ export default function FloatingActionButtons({ className = '' }: FloatingAction
             >
               <span 
                 className="text-sm font-medium text-slate-700 whitespace-nowrap"
-                style={{ fontFamily: 'Montserrat, sans-serif' }}
+                style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
               >
                 Back to Top
               </span>
@@ -247,7 +247,7 @@ export default function FloatingActionButtons({ className = '' }: FloatingAction
           <Clock className="w-4 h-4 text-green-500" />
           <span 
             className="text-xs font-medium text-slate-700"
-            style={{ fontFamily: 'Lora, serif' }}
+            style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
           >
             Open Today 9AM-5PM
           </span>

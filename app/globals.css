@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Lora:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -6,6 +5,9 @@
   --magenta: #C2185B;
   --turquoise: #40C4B4;
   --gold: #D4AF37;
+
+  --font-body: var(--font-inter), system-ui, Arial;
+  --font-heading: var(--font-playfair), Georgia, serif;
   
   /* Neutral Colors */
   --background: #F7F7F9;
@@ -25,7 +27,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: 'Montserrat', sans-serif;
+  --font-sans: var(--font-body);
   --font-mono: var(--font-geist-mono);
 }
 
@@ -41,14 +43,19 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Lora', serif;
+  font-family: var(--font-body);
   scroll-behavior: smooth;
   max-width: 100vw;
   overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Montserrat', sans-serif;
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+h4, h5, h6 {
+  font-family: var(--font-body);
   font-weight: 600;
 }
 

@@ -117,7 +117,7 @@ export function generateBrandSVGPlaceholder(
       
       <!-- Loading text -->
       <text x="${width/2}" y="${height/2 + 20}" text-anchor="middle" 
-            font-family="Montserrat, sans-serif" font-size="14" font-weight="600" 
+            font-family="var(--font-inter), system-ui, Arial" font-size="14" font-weight="600" 
             fill="${BRAND_COLORS.slate[600]}">${text}</text>
       
       <!-- Decorative elements -->

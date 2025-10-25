@@ -107,18 +107,25 @@ export default function Home() {
       </div>
       
       {/* Cinematic Hero Video - Brand Consistent */}
-      <CinematicHeroVideo
-        videoSrc="/videos/dental-hero-4k.mp4"
-        posterSrc="/hero-poster.jpg"
-        title="Your Perfect Smile is Just One Click Away"
-        subtitle="Experience the future of dentistry with our AI-powered 3D treatments, luxury coastal setting, and award-winning patient care."
-        description="Book your consultation today and discover why we're 'Going the Extra Smile.'"
-        ctaText="Book Free Consultation"
-        ctaAction={() => window.location.href = '/contact'}
-        autoplay={true}
-        muted={true}
-        loop={true}
-      />
+      <section className="relative overflow-hidden">
+        <div
+          className="absolute inset-0 -z-10 smh-wave-mask"
+          style={{ background: 'var(--smh-gradient)' }}
+        />
+        <div className="absolute inset-0 smh-filmgrain" />
+        <CinematicHeroVideo
+          videoSrc="/videos/dental-hero-4k.mp4"
+          posterSrc="/hero-poster.jpg"
+          title="Your Perfect Smile is Just One Click Away"
+          subtitle="Experience the future of dentistry with our AI-powered 3D treatments, luxury coastal setting, and award-winning patient care."
+          description="Book your consultation today and discover why we're 'Going the Extra Smile.'"
+          ctaText="Book Free Consultation"
+          ctaAction={() => window.location.href = '/contact'}
+          autoplay={true}
+          muted={true}
+          loop={true}
+        />
+      </section>
       
       {/* Interactive Dental Visualization Section */}
       <ScrollReveal direction="up" delay={0.2}>

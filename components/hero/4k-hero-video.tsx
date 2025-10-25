@@ -205,7 +205,7 @@ export default function FourKHeroVideo({
         <div className="max-w-4xl mx-auto">
           <motion.h1
             className="text-4xl sm:text-6xl lg:text-7xl font-bold text-white mb-6"
-            style={{ fontFamily: 'Montserrat, sans-serif' }}
+            style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
@@ -217,7 +217,7 @@ export default function FourKHeroVideo({
 
           <motion.p
             className="text-xl sm:text-2xl lg:text-3xl text-white/90 mb-8 leading-relaxed"
-            style={{ fontFamily: 'Lora, serif' }}
+            style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.8 }}
@@ -234,7 +234,7 @@ export default function FourKHeroVideo({
             <button
               onClick={onCtaClick}
               className="group relative px-8 py-4 bg-gradient-to-r from-pink-600 via-teal-500 to-yellow-500 text-white font-semibold rounded-full text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl"
-              style={{ fontFamily: 'Montserrat, sans-serif' }}
+              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
             >
               <span className="relative z-10">{ctaText}</span>
               <div className="absolute inset-0 bg-gradient-to-r from-pink-700 via-teal-600 to-yellow-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -243,7 +243,7 @@ export default function FourKHeroVideo({
             <button
               onClick={() => {/* AI Smile Quiz */}}
               className="group relative px-8 py-4 bg-white/20 backdrop-blur-md text-white font-semibold rounded-full text-lg border-2 border-white/30 transition-all duration-300 hover:bg-white/30 hover:scale-105"
-              style={{ fontFamily: 'Montserrat, sans-serif' }}
+              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
             >
               Try AI Smile Quiz
             </button>
@@ -310,7 +310,7 @@ export default function FourKHeroVideo({
               animate={{ rotate: 360 }}
               transition={{ duration: 1, repeat: Infinity, ease: linearEase }}
             />
-            <p className="text-lg font-semibold" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+            <p className="text-lg font-semibold" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
               Loading Luxury Experience...
             </p>
           </div>
@@ -349,7 +349,7 @@ export default function FourKHeroVideo({
         animate={{ y: 0 }}
         transition={{ duration: 0.5, delay: 2 }}
       >
-        <p className="text-sm font-semibold" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+        <p className="text-sm font-semibold" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
           🚨 Emergency Dental Care Available 24/7 - Call 01273 453109 🚨
         </p>
       </motion.div>
@@ -376,10 +376,10 @@ export default function FourKHeroVideo({
               transition={{ duration: 0.5, delay: 1.7 + index * 0.1 }}
             >
               <div className="text-2xl mb-1">{stat.icon}</div>
-              <div className="text-xs font-semibold" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+              <div className="text-xs font-semibold" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                 {stat.label}
               </div>
-              <div className="text-xs opacity-90" style={{ fontFamily: 'Lora, serif' }}>
+              <div className="text-xs opacity-90" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                 {stat.value}
               </div>
             </motion.div>

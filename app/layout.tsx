@@ -1,6 +1,34 @@
 import type { Metadata, Viewport } from "next";
+import "./styles/smh-tokens.css";
 import "./globals.css";
+import localFont from 'next/font/local';
 import PerformanceOptimizedLayout from '@/components/layout/performance-optimized-layout';
+
+const inter = localFont({
+  src: [
+    {
+      path: '../node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2',
+      style: 'normal',
+      weight: '100 900',
+    },
+  ],
+  display: 'swap',
+  fallback: ['system-ui', 'Arial'],
+  variable: '--font-inter',
+});
+
+const playfair = localFont({
+  src: [
+    {
+      path: '../node_modules/@fontsource-variable/playfair-display/files/playfair-display-latin-wght-normal.woff2',
+      style: 'normal',
+      weight: '400 900',
+    },
+  ],
+  display: 'swap',
+  fallback: ['Georgia', 'serif'],
+  variable: '--font-playfair',
+});
 
 export const metadata: Metadata = {
   title: "St Mary's House Dental Care | Luxury Coastal Dentistry in Shoreham-by-Sea",
@@ -84,7 +112,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-GB">
+    <html lang="en-GB" className={`${inter.variable} ${playfair.variable}`}>
       <head>
         {/* PWA Manifest */}
         <link rel="manifest" href="/manifest.json" />
@@ -115,10 +143,6 @@ export default function RootLayout({
         <meta name="msapplication-TileImage" content="/icons/icon-144x144.png" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
         
-        {/* Preconnect to external domains */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
         {/* DNS Prefetch */}
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
         <link rel="dns-prefetch" href="//www.googletagmanager.com" />
@@ -148,7 +172,6 @@ export default function RootLayout({
       <body
         className="antialiased bg-white text-slate-900 overflow-x-hidden"
         style={{
-          fontFamily: 'Lora, serif',
           WebkitFontSmoothing: 'antialiased',
           MozOsxFontSmoothing: 'grayscale',
         }}

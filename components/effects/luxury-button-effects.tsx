@@ -125,7 +125,7 @@ const LuxuryButton: React.FC<LuxuryButtonProps> = ({
         ${loading ? 'cursor-wait' : ''}
         ${className}
       `}
-      style={{ fontFamily: 'Montserrat, sans-serif' }}
+      style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
       onClick={handleClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -308,7 +308,7 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
               ${position.includes('right') ? 'right-full mr-3' : 'left-full ml-3'}
               ${position.includes('bottom') ? 'bottom-0' : 'top-0'}
             `}
-            style={{ fontFamily: 'Lora, serif' }}
+            style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
           >
             {tooltip}
             <div
@@ -417,7 +417,7 @@ const IconButton: React.FC<IconButtonProps> = ({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 5 }}
             className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-slate-800 text-white text-xs rounded whitespace-nowrap pointer-events-none z-10"
-            style={{ fontFamily: 'Lora, serif' }}
+            style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
           >
             {tooltip}
             <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-2 h-2 bg-slate-800 rotate-45" />

@@ -183,15 +183,15 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
                 <div className="flex items-center space-x-3">
                   {/* SMH Logo */}
                   <div className="w-12 h-12 bg-gradient-to-r from-pink-500 to-teal-500 rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold text-sm" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                    <span className="text-white font-bold text-sm" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                       SMH
                     </span>
                   </div>
                   <div>
-                    <h2 className="text-lg font-bold text-slate-800" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                    <h2 className="text-lg font-bold text-slate-800" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
                       St Mary’s House
                     </h2>
-                    <p className="text-sm text-slate-600" style={{ fontFamily: 'Lora, serif' }}>
+                    <p className="text-sm text-slate-600" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                       Dental Care
                     </p>
                   </div>
@@ -212,7 +212,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
 
               {/* Emergency Actions */}
               <div className="mb-8">
-                <h3 className="text-sm font-semibold text-slate-700 mb-4 uppercase tracking-wide" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                <h3 className="text-sm font-semibold text-slate-700 mb-4 uppercase tracking-wide" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
                   Quick Actions
                 </h3>
                 <div className="space-y-3">
@@ -235,7 +235,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
 
               {/* Navigation Items */}
               <div className="mb-8">
-                <h3 className="text-sm font-semibold text-slate-700 mb-4 uppercase tracking-wide" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                <h3 className="text-sm font-semibold text-slate-700 mb-4 uppercase tracking-wide" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
                   Navigation
                 </h3>
                 <nav className="space-y-2">
@@ -271,7 +271,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
                           <span className={`
                             font-medium
                             ${currentPath === item.href ? 'text-pink-600' : 'text-slate-700'}
-                          `} style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                          `} style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                             {item.label}
                           </span>
                         </Link>
@@ -313,7 +313,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
                                     }
                                   `}
                                 >
-                                  <span className="text-sm" style={{ fontFamily: 'Lora, serif' }}>
+                                  <span className="text-sm" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                                     {subItem.label}
                                   </span>
                                 </Link>
@@ -329,10 +329,10 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
 
               {/* Contact Information */}
               <div className="border-t border-slate-200 pt-6">
-                <h3 className="text-sm font-semibold text-slate-700 mb-4 uppercase tracking-wide" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                <h3 className="text-sm font-semibold text-slate-700 mb-4 uppercase tracking-wide" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
                   Contact Info
                 </h3>
-                <div className="space-y-3 text-sm" style={{ fontFamily: 'Lora, serif' }}>
+                <div className="space-y-3 text-sm" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                   <div className="flex items-center space-x-3 text-slate-600">
                     <svg className="w-4 h-4 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -394,12 +394,12 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-2">
           <div className="w-10 h-10 bg-gradient-to-r from-pink-500 to-teal-500 rounded-full flex items-center justify-center">
-            <span className="text-white font-bold text-xs" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+            <span className="text-white font-bold text-xs" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
               SMH
             </span>
           </div>
           <div className="hidden sm:block">
-            <h1 className="text-lg font-bold text-slate-800" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+            <h1 className="text-lg font-bold text-slate-800" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
               St Mary’s House
             </h1>
           </div>

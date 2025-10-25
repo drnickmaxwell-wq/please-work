@@ -248,16 +248,14 @@ function getOfflineHTML() {
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Offline - St Mary's House Dental Care</title>
       <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Lora:wght@300;400;500;600;700&display=swap');
-        
         * {
           margin: 0;
           padding: 0;
           box-sizing: border-box;
         }
-        
+
         body {
-          font-family: 'Lora', serif;
+          font-family: 'Inter', system-ui, Arial, sans-serif;
           background: linear-gradient(135deg, #f8fafc 0%, #fdf2f8 50%, #f0fdfa 100%);
           min-height: 100vh;
           display: flex;
@@ -292,13 +290,13 @@ function getOfflineHTML() {
         .logo::before {
           content: 'SMH';
           color: white;
-          font-family: 'Montserrat', sans-serif;
+          font-family: 'Inter', system-ui, Arial, sans-serif;
           font-weight: 700;
           font-size: 1.2rem;
         }
-        
+
         h1 {
-          font-family: 'Montserrat', sans-serif;
+          font-family: 'Playfair Display', Georgia, serif;
           font-size: 2rem;
           font-weight: 700;
           background: linear-gradient(135deg, #C2185B, #40C4B4, #D4AF37);
@@ -343,7 +341,7 @@ function getOfflineHTML() {
         }
         
         .feature h3 {
-          font-family: 'Montserrat', sans-serif;
+          font-family: 'var(--font-inter), system-ui, Arial';
           font-size: 0.9rem;
           font-weight: 600;
           margin-bottom: 0.25rem;
@@ -361,7 +359,7 @@ function getOfflineHTML() {
           border: none;
           padding: 12px 24px;
           border-radius: 12px;
-          font-family: 'Montserrat', sans-serif;
+          font-family: 'var(--font-inter), system-ui, Arial';
           font-weight: 600;
           cursor: pointer;
           transition: transform 0.2s;
@@ -463,10 +461,10 @@ function getOfflineImageSVG() {
       </defs>
       <rect width="100%" height="100%" fill="url(#bg)" />
       <circle cx="200" cy="120" r="30" fill="url(#icon)" opacity="0.8" />
-      <text x="200" y="180" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="16" font-weight="600" fill="#64748b">
+      <text x="200" y="180" text-anchor="middle" font-family="var(--font-inter), system-ui, Arial" font-size="16" font-weight="600" fill="#64748b">
         Image Offline
       </text>
-      <text x="200" y="200" text-anchor="middle" font-family="Lora, serif" font-size="12" fill="#94a3b8">
+      <text x="200" y="200" text-anchor="middle" font-family="var(--font-inter), system-ui, Arial" font-size="12" fill="#94a3b8">
         Cached version unavailable
       </text>
     </svg>

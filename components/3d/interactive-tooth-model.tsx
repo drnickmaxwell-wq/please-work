@@ -140,7 +140,7 @@ function ModelLoader() {
       />
       <p 
         className="text-slate-600 text-center"
-        style={{ fontFamily: 'Lora, serif' }}
+        style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
       >
         Loading 3D Model...
       </p>
@@ -242,13 +242,13 @@ export default function InteractiveToothModel({
           <div>
             <h3 
               className="text-2xl font-bold text-slate-800 mb-2"
-              style={{ fontFamily: 'Montserrat, sans-serif' }}
+              style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
             >
               {title}
             </h3>
             <p 
               className="text-slate-600 max-w-md"
-              style={{ fontFamily: 'Lora, serif' }}
+              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
             >
               {description}
             </p>
@@ -360,7 +360,7 @@ export default function InteractiveToothModel({
               <div className="flex items-center justify-between mb-6">
                 <h4 
                   className="text-xl font-bold text-slate-800"
-                  style={{ fontFamily: 'Montserrat, sans-serif' }}
+                  style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                 >
                   3D Model Info
                 </h4>
@@ -377,7 +377,7 @@ export default function InteractiveToothModel({
                   <h5 className="font-semibold text-slate-700 mb-2">Treatment Type</h5>
                   <p 
                     className="text-slate-600 text-sm"
-                    style={{ fontFamily: 'Lora, serif' }}
+                    style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                   >
                     {treatmentType.charAt(0).toUpperCase() + treatmentType.slice(1).replace('-', ' ')}
                   </p>
@@ -387,7 +387,7 @@ export default function InteractiveToothModel({
                   <h5 className="font-semibold text-slate-700 mb-2">Interaction Guide</h5>
                   <ul 
                     className="text-slate-600 text-sm space-y-1"
-                    style={{ fontFamily: 'Lora, serif' }}
+                    style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                   >
                     <li>• Drag to rotate the model</li>
                     <li>• Scroll to zoom in/out</li>
@@ -403,7 +403,7 @@ export default function InteractiveToothModel({
                   <h5 className="font-semibold text-slate-700 mb-2">Technology</h5>
                   <p 
                     className="text-slate-600 text-sm"
-                    style={{ fontFamily: 'Lora, serif' }}
+                    style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                   >
                     Powered by WebGL and Three.js for smooth 3D rendering with optimized performance and lazy loading.
                   </p>

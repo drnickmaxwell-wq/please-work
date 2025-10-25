@@ -276,8 +276,8 @@ export class PersonalizationEngine {
         accent: '#D4AF37'
       },
       fonts: {
-        heading: 'Montserrat, sans-serif',
-        body: 'Lora, serif'
+        heading: 'var(--font-playfair), Georgia, serif',
+        body: 'var(--font-inter), system-ui, Arial'
       },
       waveBackground: '/waves-bg-2560.jpg'
     };
@@ -384,7 +384,7 @@ export class PersonalizationEngine {
         primaryColor: '#C2185B',
         secondaryColor: '#40C4B4',
         accentColor: '#D4AF37',
-        font: 'Lora, serif'
+        font: 'var(--font-playfair), Georgia, serif'
       }
     };
 
@@ -533,8 +533,8 @@ export function generateBrandConsistentStyling(context: string) {
       text: '#1E293B'
     },
     fonts: {
-      heading: 'Montserrat, sans-serif',
-      body: 'Lora, serif'
+      heading: 'var(--font-playfair), Georgia, serif',
+      body: 'var(--font-inter), system-ui, Arial'
     },
     effects: {
       gradient: 'linear-gradient(135deg, #C2185B 0%, #40C4B4 50%, #D4AF37 100%)',

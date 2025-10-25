@@ -10,6 +10,19 @@ import {
 } from 'framer-motion';
 import { easeInOutCubic, easeOutCubic, linearEase } from '@/lib/motion/easing';
 
+const FALLBACK_MOTION_CAP = 6;
+
+const getMotionCap = () => {
+  if (typeof window === 'undefined') {
+    return FALLBACK_MOTION_CAP;
+  }
+
+  const value = getComputedStyle(document.documentElement).getPropertyValue('--smh-parallax-max');
+  const parsed = Number.parseFloat(value);
+
+  return Number.isFinite(parsed) ? parsed : FALLBACK_MOTION_CAP;
+};
+
 interface HoverCard3DProps {
   children: React.ReactNode;
   className?: string;
@@ -72,7 +85,7 @@ const HoverCard3D: React.FC<HoverCard3DProps> = ({
   return (
     <motion.div
       ref={ref}
-      className={`relative ${className}`}
+      className={`relative smh-anim ${className}`}
       style={{
         rotateX: prefersReducedMotion || !rotateOnHover ? undefined : rotateX,
         rotateY: prefersReducedMotion || !rotateOnHover ? undefined : rotateY,
@@ -117,6 +130,7 @@ const ParallaxElement: React.FC<ParallaxElementProps> = ({
   const elementRef = useRef<HTMLDivElement>(null);
   const frameRef = useRef<number | null>(null);
   const lastKnownScroll = useRef(0);
+  const motionCapRef = useRef(FALLBACK_MOTION_CAP);
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -129,8 +143,12 @@ const ParallaxElement: React.FC<ParallaxElementProps> = ({
     const element = elementRef.current;
     if (!element) return;
 
+    motionCapRef.current = getMotionCap();
+
     const applyTransform = () => {
-      const offset = lastKnownScroll.current * speed;
+      const rawOffset = lastKnownScroll.current * speed;
+      const maxOffset = motionCapRef.current;
+      const offset = Math.max(Math.min(rawOffset, maxOffset), -maxOffset);
       let transform: string;
 
       switch (direction) {
@@ -174,7 +192,7 @@ const ParallaxElement: React.FC<ParallaxElementProps> = ({
   }, [direction, speed, prefersReducedMotion]);
 
   return (
-    <div ref={elementRef} className={className}>
+    <div ref={elementRef} className={`smh-anim ${className}`}>
       {children}
     </div>
   );
@@ -199,6 +217,11 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({
   const y = useMotionValue(0);
   const springX = useSpring(x, { stiffness: 220, damping: 20, mass: 0.5 });
   const springY = useSpring(y, { stiffness: 220, damping: 20, mass: 0.5 });
+  const motionCapRef = useRef(FALLBACK_MOTION_CAP);
+
+  useEffect(() => {
+    motionCapRef.current = getMotionCap();
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!ref.current) return;
@@ -210,8 +233,11 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({
     const deltaX = (e.clientX - centerX) * strength;
     const deltaY = (e.clientY - centerY) * strength;
 
-    x.set(deltaX);
-    y.set(deltaY);
+    const maxOffset = motionCapRef.current;
+    const clamp = (value: number) => Math.max(Math.min(value, maxOffset), -maxOffset);
+
+    x.set(clamp(deltaX));
+    y.set(clamp(deltaY));
   };
 
   const handleMouseLeave = () => {
@@ -222,9 +248,9 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({
   return (
     <motion.button
       ref={ref}
-      className={`relative ${className}`}
+      className={`relative smh-anim ${className}`}
       style={{
-        fontFamily: 'Montserrat, sans-serif',
+        fontFamily: 'var(--font-inter), system-ui, Arial',
         x: prefersReducedMotion ? 0 : springX,
         y: prefersReducedMotion ? 0 : springY,
       }}
@@ -275,7 +301,7 @@ const FloatingGeometry: React.FC<FloatingGeometryProps> = ({
 
   const animations = {
     float: {
-      y: [-10, 10, -10],
+      y: [-6, 6, -6],
       transition: { duration: 4, repeat: Infinity, ease: easeInOutCubic },
     },
     rotate: {
@@ -283,7 +309,7 @@ const FloatingGeometry: React.FC<FloatingGeometryProps> = ({
       transition: { duration: 8, repeat: Infinity, ease: linearEase },
     },
     pulse: {
-      scale: [1, 1.2, 1],
+      scale: [1, 1.08, 1],
       opacity: [0.7, 1, 0.7],
       transition: { duration: 2, repeat: Infinity, ease: easeInOutCubic },
     },
@@ -295,7 +321,7 @@ const FloatingGeometry: React.FC<FloatingGeometryProps> = ({
 
   return (
     <motion.div
-      className={`${sizes[size]} ${shapes[shape]} ${className}`}
+      className={`smh-anim ${sizes[size]} ${shapes[shape]} ${className}`}
       style={{
         background: `linear-gradient(135deg, ${colors[color]}, ${colors[color]}80)`,
         boxShadow: `0 4px 20px ${colors[color]}40`,
@@ -330,9 +356,9 @@ const LiquidButton: React.FC<LiquidButtonProps> = ({
     <motion.button
       className={`
         relative px-8 py-4 rounded-full text-white font-semibold overflow-hidden
-        bg-gradient-to-r ${colors[color]} ${className}
+        bg-gradient-to-r ${colors[color]} smh-anim ${className}
       `}
-      style={{ fontFamily: 'Montserrat, sans-serif' }}
+      style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={onClick}
@@ -388,11 +414,11 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
 
   return (
     <motion.div
-      className={className}
-      initial={{ 
-        opacity: 0, 
-        y: initialDirection.y, 
-        x: initialDirection.x 
+      className={`smh-anim ${className}`.trim()}
+      initial={{
+        opacity: 0,
+        y: initialDirection.y,
+        x: initialDirection.x
       }}
       whileInView={{ 
         opacity: 1, 
@@ -461,7 +487,7 @@ const MorphingShape: React.FC<MorphingShapeProps> = ({
   }, [shapes.length, duration]);
 
   return (
-    <motion.div className={`relative ${className}`}>
+    <motion.div className={`relative smh-anim ${className}`}>
       <svg viewBox="0 0 100 100" className="w-full h-full">
         <motion.path
           d={shapes[currentShapeIndex]}

@@ -139,7 +139,7 @@ export default function DrSarahMitchellPage() {
             <div className="max-w-7xl mx-auto">
               <Link href="/team" className="inline-flex items-center text-slate-700 hover:text-pink-600 transition-colors">
                 <ArrowLeft className="w-5 h-5 mr-2" />
-                <span style={{ fontFamily: 'Montserrat, sans-serif' }}>Back to Team</span>
+                <span style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>Back to Team</span>
               </Link>
             </div>
           </section>
@@ -157,13 +157,13 @@ export default function DrSarahMitchellPage() {
                   <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl">
                     <h2 
                       className="text-4xl font-bold text-slate-800 mb-6"
-                      style={{ fontFamily: 'Montserrat, sans-serif' }}
+                      style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
                     >
                       About Dr. Mitchell
                     </h2>
                     <p 
                       className="text-lg text-slate-600 mb-6 leading-relaxed"
-                      style={{ fontFamily: 'Lora, serif' }}
+                      style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                     >
                       {clinicianData.bio}
                     </p>
@@ -171,7 +171,7 @@ export default function DrSarahMitchellPage() {
                     <div className="mb-6">
                       <h3 
                         className="text-xl font-semibold text-slate-800 mb-3"
-                        style={{ fontFamily: 'Montserrat, sans-serif' }}
+                        style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
                       >
                         Qualifications
                       </h3>
@@ -179,7 +179,7 @@ export default function DrSarahMitchellPage() {
                         {clinicianData.qualifications.map((qual, idx) => (
                           <div key={idx} className="flex items-center">
                             <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
-                            <span className="text-slate-600" style={{ fontFamily: 'Lora, serif' }}>
+                            <span className="text-slate-600" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                               {qual}
                             </span>
                           </div>
@@ -190,7 +190,7 @@ export default function DrSarahMitchellPage() {
                     <div>
                       <h3 
                         className="text-xl font-semibold text-slate-800 mb-3"
-                        style={{ fontFamily: 'Montserrat, sans-serif' }}
+                        style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
                       >
                         Achievements
                       </h3>
@@ -198,7 +198,7 @@ export default function DrSarahMitchellPage() {
                         {clinicianData.achievements.map((achievement, idx) => (
                           <div key={idx} className="flex items-center">
                             <Star className="w-5 h-5 text-yellow-500 mr-3" />
-                            <span className="text-slate-600" style={{ fontFamily: 'Lora, serif' }}>
+                            <span className="text-slate-600" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                               {achievement}
                             </span>
                           </div>
@@ -234,10 +234,10 @@ export default function DrSarahMitchellPage() {
                         <div className={`w-12 h-12 bg-gradient-to-br ${stat.color} rounded-xl flex items-center justify-center mx-auto mb-3`}>
                           <stat.icon className="w-6 h-6 text-white" />
                         </div>
-                        <div className="text-2xl font-bold text-slate-800 mb-1" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                        <div className="text-2xl font-bold text-slate-800 mb-1" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                           {stat.value}
                         </div>
-                        <div className="text-sm text-slate-600" style={{ fontFamily: 'Lora, serif' }}>
+                        <div className="text-sm text-slate-600" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                           {stat.label}
                         </div>
                       </motion.div>
@@ -248,7 +248,7 @@ export default function DrSarahMitchellPage() {
                   <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
                     <h3 
                       className="text-xl font-semibold text-slate-800 mb-4"
-                      style={{ fontFamily: 'Montserrat, sans-serif' }}
+                      style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
                     >
                       Specialties
                     </h3>
@@ -280,13 +280,13 @@ export default function DrSarahMitchellPage() {
               >
                 <h2 
                   className="text-4xl font-bold text-slate-800 mb-6"
-                  style={{ fontFamily: 'Montserrat, sans-serif' }}
+                  style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
                 >
                   Treatments with Dr. Mitchell
                 </h2>
                 <p 
                   className="text-xl text-slate-600 max-w-3xl mx-auto"
-                  style={{ fontFamily: 'Lora, serif' }}
+                  style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                 >
                   Discover the advanced treatments and personalized care that Dr. Mitchell provides 
                   to help you achieve your perfect smile.
@@ -305,13 +305,13 @@ export default function DrSarahMitchellPage() {
                   >
                     <h3 
                       className="text-2xl font-bold text-slate-800 mb-4"
-                      style={{ fontFamily: 'Montserrat, sans-serif' }}
+                      style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
                     >
                       {treatment.name}
                     </h3>
                     <p 
                       className="text-slate-600 mb-6 leading-relaxed"
-                      style={{ fontFamily: 'Lora, serif' }}
+                      style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                     >
                       {treatment.description}
                     </p>
@@ -348,13 +348,13 @@ export default function DrSarahMitchellPage() {
               >
                 <h2 
                   className="text-4xl font-bold text-slate-800 mb-6"
-                  style={{ fontFamily: 'Montserrat, sans-serif' }}
+                  style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
                 >
                   Patient Stories
                 </h2>
                 <p
                   className="text-xl text-slate-600"
-                  style={{ fontFamily: 'Lora, serif' }}
+                  style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                 >
                   Hear from patients who have experienced Dr. Mitchell’s exceptional care
                 </p>
@@ -377,7 +377,7 @@ export default function DrSarahMitchellPage() {
                     </div>
                     <p
                       className="text-slate-600 mb-6 leading-relaxed italic"
-                      style={{ fontFamily: 'Lora, serif' }}
+                      style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                     >
                       “{testimonial.text}”
                     </p>
@@ -388,7 +388,7 @@ export default function DrSarahMitchellPage() {
                         </span>
                       </div>
                       <div>
-                        <div className="font-semibold text-slate-800" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                        <div className="font-semibold text-slate-800" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                           {testimonial.name}
                         </div>
                         <div className="text-sm text-slate-500">
@@ -414,13 +414,13 @@ export default function DrSarahMitchellPage() {
               >
                 <h2 
                   className="text-4xl font-bold text-slate-800 mb-6"
-                  style={{ fontFamily: 'Montserrat, sans-serif' }}
+                  style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
                 >
                   Ready to Transform Your Smile?
                 </h2>
                 <p 
                   className="text-xl text-slate-600 mb-8"
-                  style={{ fontFamily: 'Lora, serif' }}
+                  style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                 >
                   Book your consultation with Dr. Mitchell and discover how our cutting-edge 
                   3D technology and gentle approach can give you the smile of your dreams.

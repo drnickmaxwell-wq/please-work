@@ -221,10 +221,10 @@ export default function ImplantsPage() {
             <div className="inline-flex p-4 rounded-xl bg-gradient-to-br from-pink-500 to-teal-500 mb-6">
               <Circle className="w-12 h-12 text-white" />
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-pink-600 via-teal-600 to-yellow-600 bg-clip-text text-transparent" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-pink-600 via-teal-600 to-yellow-600 bg-clip-text text-transparent" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
               Dental Implants
             </h1>
-            <p className="text-xl md:text-2xl text-slate-600 max-w-4xl mx-auto leading-relaxed" style={{ fontFamily: 'Lora, serif' }}>
+            <p className="text-xl md:text-2xl text-slate-600 max-w-4xl mx-auto leading-relaxed" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
               Restore your smile with the gold standard in tooth replacement. 
               Our advanced implant treatments provide permanent, natural-looking solutions that last a lifetime.
             </p>
@@ -241,10 +241,10 @@ export default function ImplantsPage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mb-12 text-center"
           >
-            <h2 className="text-4xl font-bold text-slate-800 mb-4" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+            <h2 className="text-4xl font-bold text-slate-800 mb-4" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
               Interactive 3D Implant Preview
             </h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto" style={{ fontFamily: 'Lora, serif' }}>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
               Explore how dental implants replace missing teeth. See the titanium implant, abutment, and crown in stunning 3D detail.
             </p>
           </motion.div>

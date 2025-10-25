@@ -1,0 +1,10 @@
+:root{
+  --smh-gradient: linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
+  --smh-gold:#F9E8C3;
+  --smh-parallax-max:6px;
+  --smh-wave-mask-url: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'><path d='M0,256L60,224C120,192,240,128,360,96C480,64,600,64,720,101.3C840,139,960,213,1080,213.3C1200,213,1320,139,1380,101.3L1440,64V320H0Z' fill='%23000'/></svg>");
+  --smh-filmgrain: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMBAKX0zK8AAAAASUVORK5CYII=");
+}
+.smh-wave-mask{ -webkit-mask-image: var(--smh-wave-mask-url); mask-image: var(--smh-wave-mask-url); -webkit-mask-size:cover; mask-size:cover; }
+.smh-filmgrain{ pointer-events:none; opacity:.08; mix-blend-mode:soft-light; background: var(--smh-filmgrain); background-size:256px 256px; }
+@media (prefers-reduced-motion: reduce){ .smh-anim{ animation:none!important; transform:none!important; } }

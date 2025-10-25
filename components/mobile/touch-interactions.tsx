@@ -183,7 +183,7 @@ const TouchButton: React.FC<TouchButtonProps> = ({
         ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
         ${className}
       `}
-      style={{ fontFamily: 'Montserrat, sans-serif' }}
+      style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
       onClick={handleClick}
@@ -285,7 +285,7 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
             </motion.div>
             
             {/* Progress text */}
-            <p className="text-xs text-slate-600" style={{ fontFamily: 'Lora, serif' }}>
+            <p className="text-xs text-slate-600" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
               {isRefreshing ? 'Refreshing...' : refreshProgress >= 1 ? 'Release to refresh' : 'Pull to refresh'}
             </p>
           </div>
@@ -386,7 +386,7 @@ const TouchSlider: React.FC<TouchSliderProps> = ({
       </div>
       
       {/* Value display */}
-      <div className="flex justify-between mt-2 text-sm text-slate-600" style={{ fontFamily: 'Lora, serif' }}>
+      <div className="flex justify-between mt-2 text-sm text-slate-600" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
         <span>{min}</span>
         <span className="font-semibold text-pink-600">{value}</span>
         <span>{max}</span>
@@ -474,7 +474,7 @@ const LongPressButton: React.FC<LongPressButtonProps> = ({
         ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
         ${className}
       `}
-      style={{ fontFamily: 'Montserrat, sans-serif' }}
+      style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
       onTouchStart={handleStart}
       onTouchEnd={handleEnd}
       onTouchCancel={handleEnd}

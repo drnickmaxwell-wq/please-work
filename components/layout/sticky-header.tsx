@@ -81,15 +81,15 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
         <div className="flex items-center justify-center space-x-4">
           <div className="flex items-center space-x-2">
             <Phone className="w-4 h-4" />
-            <span style={{ fontFamily: 'Montserrat, sans-serif' }}>Emergency: 01273 453109</span>
+            <span style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>Emergency: 01273 453109</span>
           </div>
           <div className="hidden md:flex items-center space-x-2">
             <MapPin className="w-4 h-4" />
-            <span style={{ fontFamily: 'Lora, serif' }}>Shoreham-by-Sea, West Sussex</span>
+            <span style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>Shoreham-by-Sea, West Sussex</span>
           </div>
           <div className="hidden lg:flex items-center space-x-2">
             <Clock className="w-4 h-4" />
-            <span style={{ fontFamily: 'Lora, serif' }}>24/7 Emergency Care</span>
+            <span style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>24/7 Emergency Care</span>
           </div>
         </div>
       </motion.div>
@@ -116,15 +116,15 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
             >
               <Link href="/" className="flex items-center space-x-3">
                 <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-teal-500 flex items-center justify-center">
-                  <span className="text-white font-bold text-lg" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                  <span className="text-white font-bold text-lg" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                     SMH
                   </span>
                 </div>
                 <div className="hidden sm:block">
-                  <h1 className="text-lg font-bold text-slate-800" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                  <h1 className="text-lg font-bold text-slate-800" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
                     St Mary’s House
                   </h1>
-                  <p className="text-sm text-slate-600" style={{ fontFamily: 'Lora, serif' }}>
+                  <p className="text-sm text-slate-600" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                     Dental Care
                   </p>
                 </div>
@@ -143,7 +143,7 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
                   <Link
                     href={item.href}
                     className="flex items-center space-x-1 text-slate-700 hover:text-pink-600 transition-colors duration-200 font-medium"
-                    style={{ fontFamily: 'Montserrat, sans-serif' }}
+                    style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                   >
                     <span>{item.name}</span>
                     {item.dropdown && <ChevronDown className="w-4 h-4" />}
@@ -164,7 +164,7 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
                             key={dropdownItem.name}
                             href={dropdownItem.href}
                             className="block px-4 py-3 text-slate-700 hover:text-pink-600 hover:bg-pink-50/50 transition-all duration-200"
-                            style={{ fontFamily: 'Lora, serif' }}
+                            style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                           >
                             {dropdownItem.name}
                           </Link>
@@ -185,7 +185,7 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
                 className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-slate-100 to-slate-200 text-slate-700 rounded-full hover:from-slate-200 hover:to-slate-300 transition-all duration-200 border border-slate-300"
               >
                 <Phone className="w-4 h-4" />
-                <span className="font-medium" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                <span className="font-medium" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                   Call Now
                 </span>
               </motion.a>
@@ -196,7 +196,7 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
                 className="flex items-center space-x-2 px-6 py-2 bg-gradient-to-r from-pink-500 to-teal-500 text-white rounded-full hover:from-pink-600 hover:to-teal-600 transition-all duration-200 shadow-lg"
               >
                 <Calendar className="w-4 h-4" />
-                <span className="font-medium" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                <span className="font-medium" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                   Book Free Consultation
                 </span>
               </motion.button>
@@ -231,7 +231,7 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
                       href={item.href}
                       onClick={() => setIsMobileMenuOpen(false)}
                       className="block py-2 text-slate-700 hover:text-pink-600 transition-colors duration-200 font-medium"
-                      style={{ fontFamily: 'Montserrat, sans-serif' }}
+                      style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                     >
                       {item.name}
                     </Link>
@@ -243,7 +243,7 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
                             href={dropdownItem.href}
                             onClick={() => setIsMobileMenuOpen(false)}
                             className="block py-1 text-sm text-slate-600 hover:text-pink-600 transition-colors duration-200"
-                            style={{ fontFamily: 'Lora, serif' }}
+                            style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                           >
                             {dropdownItem.name}
                           </Link>
@@ -261,7 +261,7 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
                     className="flex items-center justify-center space-x-2 w-full py-3 bg-gradient-to-r from-slate-100 to-slate-200 text-slate-700 rounded-full"
                   >
                     <Phone className="w-4 h-4" />
-                    <span className="font-medium" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                    <span className="font-medium" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                       Call Now
                     </span>
                   </motion.a>
@@ -271,7 +271,7 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
                     className="flex items-center justify-center space-x-2 w-full py-3 bg-gradient-to-r from-pink-500 to-teal-500 text-white rounded-full"
                   >
                     <Calendar className="w-4 h-4" />
-                    <span className="font-medium" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                    <span className="font-medium" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                       Book Free Consultation
                     </span>
                   </motion.button>

@@ -18,10 +18,10 @@ const BrandLoadingComponent = () => (
       </div>
 
       {/* Loading text with brand fonts */}
-      <h3 className="text-lg font-semibold text-slate-800 mb-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+      <h3 className="text-lg font-semibold text-slate-800 mb-2" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
         Loading...
       </h3>
-      <p className="text-slate-600 text-sm" style={{ fontFamily: 'Lora, serif' }}>
+      <p className="text-slate-600 text-sm" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
         Preparing your luxury dental experience
       </p>
     </div>
@@ -40,10 +40,10 @@ const TreatmentPageLoader = () => (
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
           </svg>
         </div>
-        <h2 className="text-2xl font-bold text-slate-800 mb-4" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+        <h2 className="text-2xl font-bold text-slate-800 mb-4" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
           Loading Treatment Information
         </h2>
-        <p className="text-slate-600" style={{ fontFamily: 'Lora, serif' }}>
+        <p className="text-slate-600" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
           Preparing detailed treatment insights...
         </p>
       </div>
@@ -62,10 +62,10 @@ const BlogPageLoader = () => (
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
           </svg>
         </div>
-        <h2 className="text-2xl font-bold text-slate-800 mb-4" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+        <h2 className="text-2xl font-bold text-slate-800 mb-4" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
           Loading Dental Health Insights
         </h2>
-        <p className="text-slate-600" style={{ fontFamily: 'Lora, serif' }}>
+        <p className="text-slate-600" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
           Preparing expert articles and tips...
         </p>
       </div>
@@ -119,10 +119,10 @@ export const DynamicComponents = {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
             </div>
-            <h2 className="text-2xl font-bold text-slate-800 mb-4" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+            <h2 className="text-2xl font-bold text-slate-800 mb-4" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
               Loading Patient Stories
             </h2>
-            <p className="text-slate-600" style={{ fontFamily: 'Lora, serif' }}>
+            <p className="text-slate-600" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
               Preparing inspiring transformation stories...
             </p>
           </div>
@@ -140,10 +140,10 @@ export const DynamicComponents = {
           <div className="w-20 h-20 bg-gradient-to-br from-pink-500 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-6">
             <div className="w-10 h-10 border-2 border-white border-t-transparent rounded-full animate-spin" />
           </div>
-          <h2 className="text-2xl font-bold text-slate-800 mb-4" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+          <h2 className="text-2xl font-bold text-slate-800 mb-4" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
             Initializing AI Smile Quiz
           </h2>
-          <p className="text-slate-600" style={{ fontFamily: 'Lora, serif' }}>
+          <p className="text-slate-600" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
             Preparing your personalized assessment...
           </p>
         </div>
@@ -178,7 +178,7 @@ export const DynamicComponents = {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
             </svg>
           </div>
-          <p className="text-sm text-slate-600" style={{ fontFamily: 'Lora, serif' }}>
+          <p className="text-sm text-slate-600" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
             Loading AI Assistant...
           </p>
         </div>
