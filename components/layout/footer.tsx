@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { footer as footerNavigation } from '@/config/navigation.mirrored';
 import { Phone, Mail, MapPin, Clock, Facebook, Instagram, Twitter } from 'lucide-react';
+import '@/styles/footer/footer-lux.css';
 
 // Brand Colors: Magenta #C2185B, Turquoise #40C4B4, Gold #D4AF37
 // Fonts: Montserrat headings, Lora body text
@@ -53,8 +54,8 @@ export default function Footer() {
   ];
 
   return (
-    <footer 
-      className="relative bg-slate-900 text-white overflow-hidden"
+    <footer
+      className="footer footer--lux relative bg-slate-900 text-white overflow-hidden"
       style={{
         backgroundImage: 'url(/waves-bg-2560.jpg)',
         backgroundSize: 'cover',
@@ -62,11 +63,12 @@ export default function Footer() {
         backgroundAttachment: 'fixed'
       }}
     >
+      <div className="footer-keyline" aria-hidden="true" />
       {/* Brand Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-pink-900/90 via-slate-900/95 to-teal-900/90" />
-      
+      <div className="footer-gradient-overlay absolute inset-0 bg-gradient-to-br from-pink-900/90 via-slate-900/95 to-teal-900/90" />
+
       {/* Floating Particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none footer-blooms">
         {[...Array(15)].map((_, i) => (
           <motion.div
             key={i}
@@ -92,7 +94,7 @@ export default function Footer() {
         ))}
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 footer-content-panel">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Practice Information */}
@@ -120,7 +122,7 @@ export default function Footer() {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="w-10 h-10 bg-gradient-to-r from-pink-500 to-teal-500 rounded-full flex items-center justify-center text-white hover:from-pink-600 hover:to-teal-600 transition-all duration-200"
+                  className="footer-social-icon w-10 h-10 bg-gradient-to-r from-pink-500 to-teal-500 rounded-full flex items-center justify-center text-white hover:from-pink-600 hover:to-teal-600 transition-all duration-200"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                 >
@@ -143,7 +145,7 @@ export default function Footer() {
                 <motion.a
                   key={info.label}
                   href={info.link}
-                  className="flex items-start space-x-3 text-slate-300 hover:text-white transition-colors duration-200 group"
+                  className="footer-link flex items-start space-x-3 text-slate-300 hover:text-white transition-colors duration-200 group"
                   whileHover={{ x: 5 }}
                 >
                   <div className="text-pink-400 group-hover:text-teal-400 transition-colors duration-200 mt-0.5">
@@ -210,7 +212,7 @@ export default function Footer() {
                 <motion.a
                   key={link.label}
                   href={link.path}
-                  className="block text-slate-300 hover:text-white transition-colors duration-200"
+                  className="footer-link block text-slate-300 hover:text-white transition-colors duration-200"
                   style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                   whileHover={{ x: 5 }}
                 >
@@ -222,8 +224,8 @@ export default function Footer() {
         </div>
 
         {/* Treatment Links */}
-        <div className="border-t border-slate-700 pt-8 mb-8">
-          <h4 
+        <div className="footer-divider border-t border-slate-700 pt-8 mb-8">
+          <h4
             className="text-lg font-semibold text-white mb-6 text-center"
             style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
           >
@@ -234,12 +236,12 @@ export default function Footer() {
               <motion.a
                 key={treatment.label}
                 href={treatment.path}
-                className="text-center p-3 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 hover:bg-white/10 transition-all duration-200"
+                className="footer-tile text-center p-3 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 hover:bg-white/10 transition-all duration-200"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <span
-                  className="text-sm text-slate-300 hover:text-white"
+                  className="footer-link text-sm text-slate-300 hover:text-white"
                   style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                 >
                   {treatment.label}
@@ -250,20 +252,20 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-slate-700 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <div 
+        <div className="footer-divider border-t border-slate-700 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <div
             className="text-slate-400 text-sm"
             style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
           >
             © {currentYear} St Mary’s House Dental Care. All rights reserved.
           </div>
-          
+
           <div className="flex space-x-6 text-sm">
             {legalLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.path}
-                className="text-slate-400 hover:text-white transition-colors duration-200"
+                className="footer-link text-slate-400 hover:text-white transition-colors duration-200"
                 style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
               >
                 {link.label}
@@ -274,7 +276,7 @@ export default function Footer() {
 
         {/* Emergency Contact Banner */}
         <motion.div
-          className="mt-8 bg-gradient-to-r from-red-600 to-red-700 rounded-lg p-4 text-center"
+          className="footer-alert mt-8 bg-gradient-to-r from-red-600 to-red-700 rounded-lg p-4 text-center"
           animate={{
             boxShadow: [
               '0 0 0 0 rgba(220, 38, 38, 0.4)',
@@ -284,14 +286,14 @@ export default function Footer() {
           }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <p 
+          <p
             className="text-white font-semibold"
             style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
           >
-            Dental Emergency? Call us 24/7: 
-            <a 
-              href="tel:01273453109" 
-              className="ml-2 underline hover:no-underline"
+            Dental Emergency? Call us 24/7:
+            <a
+              href="tel:01273453109"
+              className="footer-link ml-2 underline hover:no-underline"
             >
               01273 453109
             </a>
