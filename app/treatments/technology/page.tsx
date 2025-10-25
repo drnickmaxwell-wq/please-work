@@ -86,13 +86,20 @@ export default function TechnologyPage() {
       <TechnologySchema />
 
       {/* Champagne hero wrapper using your brand tokens + wave + particles */}
-      <section id="hero" className="relative overflow-clip">
-        <BrandHeroGradient intensity="bold" clip="wave-bottom" goldDensity="med" waveOpacity={0.2} />
-        <div className="relative z-[2]">
-          <TechnologyHero />
-          <ScrollCue />
-        </div>
-      </section>
+      <BrandHeroGradient
+        intensity="bold"
+        clip="wave-bottom"
+        goldDensity="med"
+        waveOpacity={0.2}
+        particles
+      >
+        <section id="hero" className="relative overflow-clip">
+          <div className="relative z-[2]">
+            <TechnologyHero />
+            <ScrollCue />
+          </div>
+        </section>
+      </BrandHeroGradient>
 
       {/* Main sections */}
       <main className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 space-y-24 py-16">
