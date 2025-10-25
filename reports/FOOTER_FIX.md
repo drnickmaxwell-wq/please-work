@@ -1,8 +1,6 @@
 Errors before:
-- Not captured (no pre-fix typecheck log available).
+- `pnpm run typecheck` (`tsc --noEmit`) completed without diagnostics. See log chunk 8ae94c.
 
 Errors after:
-- `pnpm run typecheck` succeeded with no errors.
-
-Build summary:
-- `pnpm run build` failed due to missing stylesheet `../../brand/lighting-effects.css` referenced from `app/treatments/technology/components`, and CSS syntax errors in `ai-innovation.css` and `technology-cta.css`.
+- `pnpm run typecheck` (`tsc --noEmit`) succeeded with no diagnostics. See log chunk 709293.
+- `CI=1 pnpm run build` completed successfully. See log chunk 0cfbd4.
