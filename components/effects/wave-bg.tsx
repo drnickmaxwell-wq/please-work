@@ -1,1 +1,3 @@
-export default function W(){return null as any}
+export default function W(): null {
+  return null;
+}

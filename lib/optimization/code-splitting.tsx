@@ -1,5 +1,4 @@
 import dynamic from 'next/dynamic';
-import { ComponentType } from 'react';
 
 // Brand-consistent loading component
 const BrandLoadingComponent = () => (

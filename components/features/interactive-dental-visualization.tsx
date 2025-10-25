@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { easeInOutCubic, linearEase } from '@/lib/motion/easing';
-import { Play, Sparkles, ArrowRight, Zap, Shield, Heart } from 'lucide-react';
+import { Play, Sparkles, ArrowRight, Zap, Heart } from 'lucide-react';
 
 const InteractiveDentalVisualization = () => {
   const [activeDemo, setActiveDemo] = useState('3d-scanning');
@@ -171,7 +171,7 @@ const InteractiveDentalVisualization = () => {
             viewport={{ once: true }}
             className="space-y-6"
           >
-            {demos.map((demo, index) => {
+            {demos.map((demo) => {
               const IconComponent = demo.icon;
               const isActive = activeDemo === demo.id;
               

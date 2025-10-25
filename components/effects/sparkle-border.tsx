@@ -1,1 +1,3 @@
-export function SparkleBorder(){return null as any}
+export function SparkleBorder(): null {
+  return null;
+}

@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { easeInOutCubic } from '@/lib/motion/easing';
-import { Star, Award, Heart, Calendar, Phone, Mail, MapPin, Play, ArrowLeft, CheckCircle } from 'lucide-react';
+import { Star, Award, Heart, Calendar, Phone, ArrowLeft, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 import FourKHeroVideo from '@/components/hero/4k-hero-video';
 

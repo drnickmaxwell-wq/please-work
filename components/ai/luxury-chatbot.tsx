@@ -8,13 +8,9 @@ import {
   MessageCircle,
   X,
   Send,
-  Mic, 
-  MicOff, 
-  Volume2, 
-  VolumeX,
+  Mic,
+  MicOff,
   Sparkles,
-  Heart,
-  Phone,
   Calendar,
   Zap,
   DollarSign
@@ -163,7 +159,6 @@ export default function LuxuryChatbot() {
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
-  const [isSpeaking, setIsSpeaking] = useState(false);
   const [connectionStatus, setConnectionStatus] = useState<'connected' | 'connecting' | 'disconnected'>('connected');
   
   const messagesEndRef = useRef<HTMLDivElement>(null);

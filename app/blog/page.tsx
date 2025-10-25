@@ -3,19 +3,14 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { 
-  Calendar, 
-  Clock, 
-  User, 
-  Tag, 
+import {
+  Calendar,
+  Clock,
+  User,
   Search,
   Filter,
   ArrowRight,
-  BookOpen,
-  Sparkles,
-  Heart,
-  Shield,
-  Zap
+  BookOpen
 } from 'lucide-react';
 
 const BlogPage = () => {

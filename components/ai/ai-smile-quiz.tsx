@@ -2,18 +2,13 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { easeInOutCubic, linearEase } from '@/lib/motion/easing';
-import { 
-  Sparkles, 
-  ArrowRight, 
-  ArrowLeft, 
-  CheckCircle, 
-  Star,
-  Camera,
-  Smile,
-  Heart,
-  Award,
-  Zap
+import { linearEase } from '@/lib/motion/easing';
+import {
+  Sparkles,
+  ArrowRight,
+  ArrowLeft,
+  CheckCircle,
+  Award
 } from 'lucide-react';
 
 interface QuizQuestion {

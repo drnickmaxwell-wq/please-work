@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useEffect, useState } from 'react';
-import { motion, useInView, useScroll, useTransform, useSpring } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { easeInOutCubic } from '@/lib/motion/easing';
 
 // Brand Colors: Magenta #C2185B, Turquoise #40C4B4, Gold #D4AF37
@@ -102,7 +102,6 @@ export function StaggeredReveal({
   className = ''
 }: StaggeredRevealProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { amount: 0.1, once: true });
 
   return (
     <div ref={ref} className={className}>

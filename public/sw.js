@@ -1,7 +1,6 @@
 // St Mary's House Dental Care - Service Worker
 // Maintains luxury brand experience even when offline
 
-const CACHE_NAME = 'smh-dental-v1.0.0';
 const STATIC_CACHE = 'smh-static-v1.0.0';
 const DYNAMIC_CACHE = 'smh-dynamic-v1.0.0';
 const IMAGE_CACHE = 'smh-images-v1.0.0';

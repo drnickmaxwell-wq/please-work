@@ -4,14 +4,10 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { easeInOutCubic } from '@/lib/motion/easing';
-import { 
-  Video, 
-  Calendar, 
-  Clock, 
-  User, 
-  Phone, 
-  Mail, 
-  CheckCircle, 
+import {
+  Video,
+  Clock,
+  CheckCircle,
   Shield,
   Monitor,
   Headphones,

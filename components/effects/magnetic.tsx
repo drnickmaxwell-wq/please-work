@@ -1,1 +1,3 @@
-export function Magnetic(){return null as any}
+export function Magnetic(): null {
+  return null;
+}
