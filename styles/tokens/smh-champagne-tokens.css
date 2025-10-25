@@ -1,0 +1,40 @@
+/* SMH Champagne Design Tokens (v2.0) */
+:root{
+  --smh-primary-magenta:#C2185B;--smh-primary-teal:#40C4B4;--smh-accent-gold:#D4AF37;
+  --smh-champagne:#F9E8C3;--smh-sand:#F8F4EE;
+  --smh-bg:#FFFFFF;--smh-text:#1A1A1A;--smh-text-muted:#4C4C4C;
+  --smh-gradient:linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
+  --motion-ease:cubic-bezier(0.645,0.045,0.355,1);--motion-hue-shift:3deg;--motion-ripple-speed:4s;--motion-hover-scale:1.03;
+  --glow-gold:0 0 12px rgba(212,175,55,.45);--glow-teal:0 0 8px rgba(64,196,180,.40);--glow-magenta:0 0 8px rgba(194,24,91,.40);
+  --shadow-elevate-light:0 4px 12px rgba(0,0,0,.05);
+  --font-heading:"Montserrat",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+  --font-body:"Lora",Georgia,Cambria,"Times New Roman",Times,serif;
+  --font-data:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+  --film-grain-opacity:.10;--particles-opacity:.10
+}
+@media (prefers-color-scheme:dark){
+  :root{--smh-bg:#0D0E10;--smh-text:#FFFFFF;--smh-text-muted:#D3D3D3;
+    --smh-gradient:linear-gradient(135deg,#EE66D1 0%,#00D6DB 100%);
+    --shadow-elevate-dark:0 4px 16px rgba(0,0,0,.40);
+    --film-grain-opacity:.085;--particles-opacity:.06}
+}
+html{color:var(--smh-text);background:var(--smh-bg);font-family:var(--font-body)}
+.smh-heading,h1,h2,h3,h4{font-family:var(--font-heading)}
+.smh-gradient-bg{background-image:var(--smh-gradient);background-size:200% 200%;animation:smhHueDrift 15s var(--motion-ease) infinite alternate}
+.smh-gold-border{border:1px solid color-mix(in oklab,var(--smh-accent-gold) 70%,transparent);box-shadow:var(--glow-gold)}
+.smh-film-grain{pointer-events:none;background-image:url("/textures/film-grain-desktop.webp");background-size:cover;opacity:var(--film-grain-opacity);mix-blend-mode:overlay}
+.smh-particles-gold{pointer-events:none;background-image:url("/textures/particles-gold.webp");background-size:cover;opacity:var(--particles-opacity)}
+.smh-particles-teal{pointer-events:none;background-image:url("/textures/particles-teal.webp");background-size:cover;opacity:var(--particles-opacity)}
+.smh-particles-magenta{pointer-events:none;background-image:url("/textures/particles-magenta.webp");background-size:cover;opacity:var(--particles-opacity)}
+.smh-wave-mask{-webkit-mask-image:url("/waves/smh-wave-mask.svg");mask-image:url("/waves/smh-wave-mask.svg");-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-size:cover;mask-size:cover;-webkit-mask-position:top center;mask-position:top center}
+.smh-btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.875rem 1.25rem;border-radius:999px;color:#fff;background-image:var(--smh-gradient);border:1px solid color-mix(in oklab,var(--smh-accent-gold) 50%,transparent);box-shadow:var(--glow-gold);transition:transform 180ms var(--motion-ease),box-shadow 240ms var(--motion-ease),filter 240ms var(--motion-ease)}
+.smh-btn:hover{transform:scale(var(--motion-hover-scale));filter:brightness(1.05) saturate(1.02);box-shadow:0 0 0 2px color-mix(in oklab,var(--smh-accent-gold) 35%,transparent),var(--glow-gold)}
+.smh-btn:focus-visible{outline:2px solid var(--smh-primary-teal);outline-offset:3px}
+.smh-glass{backdrop-filter:blur(30px);background:color-mix(in oklab,var(--smh-bg) 70%,transparent);border:1px solid color-mix(in oklab,var(--smh-text) 12%,transparent);border-radius:16px;box-shadow:var(--shadow-elevate-light)}
+.smh-wave-divider{position:relative;isolation:isolate}
+.smh-wave-divider::before{content:"";position:absolute;inset:-12vw 0 auto 0;height:20vw;background:var(--smh-gradient);-webkit-mask-image:url("/waves/smh-wave-mask.svg");mask-image:url("/waves/smh-wave-mask.svg");-webkit-mask-size:cover;mask-size:cover;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:top center;mask-position:top center;opacity:.95;z-index:-1}
+@keyframes smhHueDrift{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(var(--motion-hue-shift))}}
+:where(a,button,[role="button"],input,textarea,select){min-height:44px}
+:focus-visible{outline:2px solid var(--smh-primary-teal);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.smh-gradient-bg{animation:none}[class*="smh-particles-"]{animation:none}}
+.smh-text{color:var(--smh-text)}.smh-text-dim{color:var(--smh-text-muted)}.smh-surface{background:var(--smh-bg);color:var(--smh-text)}
