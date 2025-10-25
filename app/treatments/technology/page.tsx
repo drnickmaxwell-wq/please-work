@@ -47,7 +47,7 @@ export default function TechnologyPage() {
       {/* Champagne hero wrapper using your brand tokens + wave + particles */}
       <section id="hero" className="relative overflow-clip">
         <BrandHeroGradient intensity="bold" clip="wave-bottom" goldDensity="med" waveOpacity={0.2} />
-        <div className="relative z-10">
+        <div className="relative z-[2]">
           <TechnologyHero />
           <ScrollCue />
         </div>
