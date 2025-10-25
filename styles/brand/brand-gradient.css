@@ -1,0 +1,46 @@
+/* styles/brand/brand-gradient.css
+   Decorative brand layers. These classes are always aria-hidden and sit behind content. */
+
+:root{
+  /* Fallbacks only; real values should come from tokens. Safe defaults keep visuals subtle. */
+  --brand-magenta: #C2185B;
+  --brand-teal:    #40C4B4;
+  --brand-gold:    #F9E8C3;
+  --surface-0:     #F8F4EE;
+}
+
+/* Base gradient wash */
+.brand-gradient {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(120% 120% at 0% 0%, color-mix(in oklab, var(--brand-magenta) 85%, white) 0%, transparent 60%),
+    radial-gradient(120% 120% at 100% 100%, color-mix(in oklab, var(--brand-teal) 85%, white) 0%, transparent 60%);
+  mix-blend-mode: normal;
+}
+
+/* Wave mask overlay (SVG image via inline style) */
+.brand-wave {
+  position: absolute; inset: 0; opacity: .18; background-repeat:no-repeat;
+  background-position:center bottom; background-size:cover; pointer-events:none; z-index: 0;
+}
+
+/* Tiled particle sheets */
+.brand-particles { position:absolute; inset:0; background-repeat:repeat; opacity:.12; pointer-events:none; z-index: 0; }
+
+/* Film grain (desktop/mobile switching handled by image-set in inline style) */
+.brand-filmgrain { position:absolute; inset:0; opacity:.06; background-size:cover; pointer-events:none; z-index:0; }
+
+/* Gentle global hue drift (respects reduced motion) */
+@media (prefers-reduced-motion:no-preference){
+  .brand-hue-drift { animation: brand-hue 60s linear infinite alternate; }
+  @keyframes brand-hue { from { filter:hue-rotate(-2deg) } to { filter:hue-rotate(2deg) } }
+}
+
+/* Primary button shimmer */
+.btn-shimmer{ position:relative; overflow:hidden }
+.btn-shimmer:after{
+  content:""; position:absolute; inset:-200% -50%; transform:rotate(12deg);
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.25) 50%, transparent 100%);
+  translate:-120% 0; transition: translate .6s ease;
+}
+.btn-shimmer:hover:after, .btn-shimmer:focus-visible:after{ translate:120% 0 }

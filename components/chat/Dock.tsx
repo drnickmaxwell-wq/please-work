@@ -72,7 +72,10 @@ export default function Dock() {
       if (process.env.NODE_ENV !== 'production') {
         const diagnostics = {
           offline: isOfflineResponse(result),
-          threadId: isRecord(result) && typeof result.threadId === 'string' ? result.threadId : undefined,
+          threadId:
+            isRecord(result) && 'threadId' in result && typeof result.threadId === 'string'
+              ? result.threadId
+              : undefined,
           messageLength: isRecord(result) && typeof result.message === 'string' ? result.message.length : undefined,
         };
         console.log('[chat-dock] sendMessage result', diagnostics);
@@ -84,7 +87,7 @@ export default function Dock() {
       }
 
       if (isRecord(result)) {
-        if (typeof result.threadId === 'string') {
+        if ('threadId' in result && typeof result.threadId === 'string') {
           setThreadId(result.threadId);
         }
 
