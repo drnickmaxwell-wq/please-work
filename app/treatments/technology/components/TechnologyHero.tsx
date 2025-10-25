@@ -46,6 +46,19 @@ export default function TechnologyHero() {
     <section ref={heroRef} className="technology-hero tech-hero">
       {/* Gradient Background */}
       <div className="hero-gradient"></div>
+
+      <div
+        className="wave-layer wave-back"
+        style={{ backgroundImage: 'url(/waves/smh-wave-mask.svg)' }}
+      />
+      <div
+        className="wave-layer wave-mid"
+        style={{ backgroundImage: 'url(/waves/smh-wave-mask.svg)' }}
+      />
+      <div
+        className="wave-layer wave-front"
+        style={{ backgroundImage: 'url(/waves/smh-wave-mask.svg)' }}
+      />
       
       {/* Parallax Triptych - Three wave planes */}
       <div className="hero-wave-slow"></div>
@@ -79,7 +92,9 @@ export default function TechnologyHero() {
       
       {/* Hero Content */}
       <div className="hero-content">
-        <h1 className="hero-title iridescent-text depth-bloom">Technology in Harmony</h1>
+        <h1 className="hero-title iridescent-text depth-bloom iridescent-heading">
+          Technology in Harmony
+        </h1>
         
         <p className="hero-subtitle">Where precision meets artistry</p>
         
