@@ -1,14 +1,13 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import Link from 'next/link';
-import { 
-  Sparkles, 
-  Zap, 
-  Heart, 
-  Shield, 
-  Star, 
+import {
+  Sparkles,
+  Heart,
+  Shield,
+  Star,
   ArrowRight,
   Microscope,
   Smile,
@@ -83,7 +82,9 @@ const treatments = [
   }
 ];
 
-const containerVariants = {
+const animationEase: [number, number, number, number] = [0.42, 0, 0.58, 1];
+
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -93,14 +94,14 @@ const containerVariants = {
   }
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       duration: 0.6,
-      ease: "easeOut"
+      ease: animationEase
     }
   }
 };

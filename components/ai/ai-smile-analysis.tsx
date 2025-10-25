@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { easeInOutCubic, easeOutCubic, linearEase } from '@/lib/motion/easing';
 import { 
   Camera, Upload, Sparkles, Star, CheckCircle, ArrowRight, 
   Zap, Heart, Shield, Award, Download, Share2, RotateCcw,
@@ -166,7 +167,7 @@ export default function AISmileAnalysis() {
               duration: 4 + Math.random() * 2,
               repeat: Infinity,
               delay: Math.random() * 2,
-              ease: "easeInOut"
+            ease: easeInOutCubic
             }}
           />
         ))}
@@ -332,7 +333,7 @@ export default function AISmileAnalysis() {
                     <div className="w-24 h-24 bg-gradient-to-br from-pink-500 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-6">
                       <motion.div
                         animate={{ rotate: 360 }}
-                        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                        transition={{ duration: 2, repeat: Infinity, ease: linearEase }}
                       >
                         <Sparkles className="w-12 h-12 text-white" />
                       </motion.div>
@@ -402,7 +403,7 @@ export default function AISmileAnalysis() {
                             strokeLinecap="round"
                             initial={{ strokeDasharray: "0 351.86" }}
                             animate={{ strokeDasharray: `${(analysisResult.overallScore / 100) * 351.86} 351.86` }}
-                            transition={{ duration: 2, ease: "easeOut" }}
+                            transition={{ duration: 2, ease: easeOutCubic }}
                           />
                         </svg>
                         <div className="absolute inset-0 flex items-center justify-center">

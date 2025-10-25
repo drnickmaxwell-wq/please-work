@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { easeOutCubic, linearEase } from '@/lib/motion/easing';
 
 interface LazyImageProps {
   src: string;
@@ -136,7 +137,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
       <motion.div
         initial={{ opacity: 0, scale: 1.05 }}
         animate={{ opacity: isLoaded ? 1 : 0, scale: isLoaded ? 1 : 1.05 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
+        transition={{ duration: 0.5, ease: easeOutCubic }}
       >
         <Image
           src={src}
@@ -169,7 +170,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
             {/* Spinning ring with brand colors */}
             <motion.div
               animate={{ rotate: 360 }}
-              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 2, repeat: Infinity, ease: linearEase }}
               className="w-8 h-8 border-2 border-transparent border-t-pink-500 border-r-teal-500 rounded-full"
             />
             {/* Inner glow */}

@@ -10,8 +10,6 @@ const IMAGE_CACHE = 'smh-images-v1.0.0';
 const CRITICAL_ASSETS = [
   '/',
   '/manifest.json',
-  '/waves-bg-2560.jpg',
-  '/favicon.ico',
   '/_next/static/css/app/layout.css',
   '/_next/static/chunks/webpack.js',
   '/_next/static/chunks/main.js',
@@ -20,10 +18,7 @@ const CRITICAL_ASSETS = [
 
 // Brand assets that should be cached
 const BRAND_ASSETS = [
-  '/waves-bg-2560.jpg',
   '/hero-poster.jpg',
-  '/smh-logo.png',
-  '/smh-logo-white.png',
 ];
 
 // Routes that work offline

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { easeInOutCubic } from '@/lib/motion/easing';
 import { Star, Award, Heart, Users, Calendar, Phone, Mail, MapPin } from 'lucide-react';
 import Link from 'next/link';
 
@@ -98,7 +99,7 @@ export default function TeamPage() {
               duration: 4 + Math.random() * 2,
               repeat: Infinity,
               delay: Math.random() * 2,
-              ease: "easeInOut"
+              ease: easeInOutCubic
             }}
           />
         ))}

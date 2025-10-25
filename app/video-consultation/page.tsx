@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { easeInOutCubic } from '@/lib/motion/easing';
 import { 
   Video, 
   Calendar, 
@@ -151,7 +152,7 @@ export default function VideoConsultationPage() {
                   "M0,400 Q300,200 600,400 T1200,400 L1200,800 L0,800 Z"
                 ]
               }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              transition={{ duration: 8, repeat: Infinity, ease: easeInOutCubic }}
             />
           </svg>
         </div>

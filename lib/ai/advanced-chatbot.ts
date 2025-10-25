@@ -220,7 +220,7 @@ CURRENT MESSAGE: "${message}"
 
 Respond as Dr. Marina with appropriate emotional awareness. Keep responses conversational (2-3 sentences), end with a question or clear next step, and naturally incorporate coastal language where appropriate.`,
         temperature: 0.7,
-        maxTokens: 200,
+        maxOutputTokens: 200,
       });
 
       return response.text;
@@ -309,7 +309,7 @@ CURRENT MESSAGE: "${message}"
 
 Respond as Dr. Marina with emotional awareness and coastal charm.`,
         temperature: 0.7,
-        maxTokens: 200,
+        maxOutputTokens: 200,
       });
     } catch (error) {
       console.error('Stream response error:', error);

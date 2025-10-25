@@ -2,10 +2,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { z } from 'zod';
 
-// Initialize Stripe
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
-  apiVersion: '2023-10-16',
-});
+const createStripeClient = () => {
+  const secretKey = process.env.STRIPE_SECRET_KEY;
+  if (!secretKey) {
+    return null;
+  }
+  return new Stripe(secretKey);
+};
 
 // Payment intent schema
 const paymentIntentSchema = z.object({
@@ -36,6 +39,15 @@ const treatmentPricing: Record<string, number> = {
 // POST - Create payment intent
 export async function POST(request: NextRequest) {
   try {
+    const stripe = createStripeClient();
+
+    if (!stripe) {
+      return NextResponse.json(
+        { error: 'Payment service temporarily unavailable' },
+        { status: 503 }
+      );
+    }
+
     const body = await request.json();
     const validatedData = paymentIntentSchema.parse(body);
 
@@ -60,7 +72,7 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json({
-      clientSecret: paymentIntent.client_secret,
+      clientSecret: paymentIntent.client_secret ?? '',
       paymentIntentId: paymentIntent.id,
       amount: paymentIntent.amount,
       currency: paymentIntent.currency,
@@ -135,6 +147,15 @@ export async function GET(request: NextRequest) {
 // PUT - Update payment intent
 export async function PUT(request: NextRequest) {
   try {
+    const stripe = createStripeClient();
+
+    if (!stripe) {
+      return NextResponse.json(
+        { error: 'Payment service temporarily unavailable' },
+        { status: 503 }
+      );
+    }
+
     const { paymentIntentId, ...updateData } = await request.json();
 
     if (!paymentIntentId) {
@@ -174,11 +195,19 @@ export async function PUT(request: NextRequest) {
 async function handleStripeWebhook(request: NextRequest) {
   const sig = request.headers.get('stripe-signature');
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+  const stripe = createStripeClient();
 
   if (!sig || !webhookSecret) {
     return NextResponse.json(
       { error: 'Missing signature or webhook secret' },
       { status: 400 }
+    );
+  }
+
+  if (!stripe) {
+    return NextResponse.json(
+      { error: 'Payment service temporarily unavailable' },
+      { status: 503 }
     );
   }
 

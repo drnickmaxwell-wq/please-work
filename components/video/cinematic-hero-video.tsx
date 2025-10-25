@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { easeInOutCubic, linearEase } from '@/lib/motion/easing';
 import { Play, Pause, Volume2, VolumeX, Maximize, RotateCcw } from 'lucide-react';
 
 // Brand Colors: Magenta #C2185B, Turquoise #40C4B4, Gold #D4AF37
@@ -166,7 +167,7 @@ export default function CinematicHeroVideo({
               duration: 6 + Math.random() * 4,
               repeat: Infinity,
               delay: Math.random() * 4,
-              ease: "easeInOut"
+            ease: easeInOutCubic
             }}
           />
         ))}
@@ -333,7 +334,7 @@ export default function CinematicHeroVideo({
               <motion.div
                 className="w-16 h-16 border-4 border-white/20 border-t-white rounded-full mx-auto mb-4"
                 animate={{ rotate: 360 }}
-                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                transition={{ duration: 1, repeat: Infinity, ease: linearEase }}
               />
               <p className="text-xl font-medium" style={{ fontFamily: 'Montserrat, sans-serif' }}>
                 Loading Luxury Experience...

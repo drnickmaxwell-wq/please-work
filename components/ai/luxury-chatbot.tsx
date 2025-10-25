@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { easeInOutCubic, easeOutCubic } from '@/lib/motion/easing';
 import type { LucideIcon } from 'lucide-react';
 import {
   MessageCircle,
@@ -36,7 +37,7 @@ function FloatingSparkle({ delay = 0 }: { delay?: number }) {
         duration: 3,
         delay,
         repeat: Infinity,
-        ease: "easeOut"
+        ease: easeOutCubic
       }}
       className="absolute text-yellow-400 text-xs pointer-events-none"
     >
@@ -304,7 +305,7 @@ export default function LuxuryChatbot() {
             initial={{ opacity: 0, scale: 0.8, y: 100 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 100 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
+            transition={{ duration: 0.3, ease: easeOutCubic }}
             className="fixed bottom-6 right-6 z-50 w-96 h-[600px] bg-gradient-to-br from-slate-50 to-teal-50 rounded-3xl shadow-2xl border border-white/20 backdrop-blur-sm overflow-hidden"
           >
             {/* Header */}
@@ -320,7 +321,7 @@ export default function LuxuryChatbot() {
                       "M0,50 Q100,80 200,50 T400,50 V100 H0 Z",
                       "M0,50 Q100,20 200,50 T400,50 V100 H0 Z"
                     ]}}
-                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    transition={{ duration: 4, repeat: Infinity, ease: easeInOutCubic }}
                   />
                 </svg>
               </div>

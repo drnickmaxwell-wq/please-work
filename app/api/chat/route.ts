@@ -1,10 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
-
-// Initialize OpenAI client
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+import type { ChatCompletionMessageParam } from 'openai/resources/chat/completions';
 
 // Dental practice context and personality
 const SYSTEM_PROMPT = `You are Dr. Sarah, the AI assistant for St Mary's House Dental Care, a luxury coastal dental practice in Shoreham-by-Sea. You are warm, professional, knowledgeable, and empathetic.
@@ -59,11 +55,23 @@ interface EmotionPayload {
 }
 
 export async function POST(request: NextRequest) {
+  const key = process.env.OPENAI_API_KEY;
+  if (!key) {
+    return new Response(JSON.stringify({ error: 'Service unavailable' }), {
+      status: 503,
+      headers: { 'content-type': 'application/json' }
+    });
+  }
+
   try {
     const { messages, userEmotion } = (await request.json()) as {
       messages: IncomingChatMessage[];
       userEmotion?: EmotionPayload;
     };
+
+    const openai = new OpenAI({
+      apiKey: key,
+    });
 
     if (!messages || !Array.isArray(messages)) {
       return NextResponse.json(
@@ -84,9 +92,9 @@ Please adjust your response tone accordingly:
     }
 
     // Prepare messages for OpenAI
-    const openaiMessages = [
+    const openaiMessages: ChatCompletionMessageParam[] = [
       { role: 'system', content: systemPrompt },
-      ...messages.map(msg => ({
+      ...messages.map<ChatCompletionMessageParam>(msg => ({
         role: msg.role,
         content: msg.content
       }))
@@ -109,7 +117,7 @@ Please adjust your response tone accordingly:
     }
 
     // Analyze the response for emotion and intent
-    const responseAnalysis = await analyzeResponse(assistantMessage);
+    const responseAnalysis = await analyzeResponse(assistantMessage, openai);
 
     return NextResponse.json({
       message: assistantMessage,
@@ -119,6 +127,8 @@ Please adjust your response tone accordingly:
 
   } catch (error) {
     console.error('Chat API Error:', error);
+
+    const message = error instanceof Error ? error.message : 'Unknown error';
     
     // Fallback response for errors
     const fallbackMessage = "I apologize, but I'm experiencing some technical difficulties right now. Please feel free to call our practice directly at 01273 123456 for immediate assistance, or try again in a moment. Our team is always here to help with your dental needs!";
@@ -130,13 +140,13 @@ Please adjust your response tone accordingly:
         confidence: 1.0,
         suggestedActions: ['call_practice', 'try_again']
       },
-      error: process.env.NODE_ENV === 'development' ? error.message : 'Service temporarily unavailable'
+      error: process.env.NODE_ENV === 'development' ? message : 'Service temporarily unavailable'
     }, { status: 500 });
   }
 }
 
 // Analyze assistant response for intent and suggested actions
-async function analyzeResponse(message: string) {
+async function analyzeResponse(message: string, client: OpenAI) {
   try {
     const analysisPrompt = `Analyze this dental assistant response and determine:
 1. Primary intent (consultation, emergency, information, booking, etc.)
@@ -155,7 +165,7 @@ Return JSON format:
 Possible intents: consultation, emergency, information, booking, treatment_info, anxiety_support, cost_inquiry
 Possible actions: book_consultation, call_emergency, schedule_appointment, learn_more, contact_practice, view_treatments`;
 
-    const analysis = await openai.chat.completions.create({
+    const analysis = await client.chat.completions.create({
       model: 'gpt-3.5-turbo',
       messages: [{ role: 'user', content: analysisPrompt }],
       max_tokens: 150,

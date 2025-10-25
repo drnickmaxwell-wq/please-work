@@ -31,9 +31,7 @@ class StripePaymentAdapter {
       this.isConfigured = false;
       this.stripe = null;
     } else {
-      this.stripe = new Stripe(secretKey, {
-        apiVersion: '2023-10-16',
-      });
+      this.stripe = new Stripe(secretKey);
       this.isConfigured = true;
     }
   }
@@ -73,7 +71,7 @@ class StripePaymentAdapter {
 
       return {
         id: paymentIntent.id,
-        clientSecret: paymentIntent.client_secret!,
+        clientSecret: paymentIntent.client_secret ?? '',
         amount: paymentIntent.amount / 100,
         currency: paymentIntent.currency,
         status: paymentIntent.status,
@@ -111,13 +109,20 @@ class StripePaymentAdapter {
         },
       });
 
-      const invoice = subscription.latest_invoice as Stripe.Invoice;
-      const paymentIntent = invoice.payment_intent as Stripe.PaymentIntent;
+      const latestInvoice = subscription.latest_invoice;
+      const paymentIntent =
+        typeof latestInvoice === 'object' && latestInvoice !== null && 'payment_intent' in latestInvoice
+          ? latestInvoice.payment_intent
+          : null;
+      const paymentIntentObject =
+        typeof paymentIntent === 'object' && paymentIntent !== null
+          ? (paymentIntent as Stripe.PaymentIntent)
+          : null;
 
       return {
         subscriptionId: subscription.id,
-        clientSecret: paymentIntent.client_secret!,
-        status: subscription.status,
+        clientSecret: paymentIntentObject?.client_secret ?? '',
+        status: subscription.status ?? 'incomplete',
       };
     } catch (error) {
       console.error('Stripe subscription creation error:', error);
@@ -191,7 +196,7 @@ class StripePaymentAdapter {
   async processRefund(
     paymentIntentId: string,
     amount?: number,
-    reason?: string
+    reason?: Stripe.RefundCreateParams.Reason
   ): Promise<{ refundId: string; status: string; amount: number }> {
     if (!this.isConfigured || !this.stripe) {
       return {
@@ -205,7 +210,7 @@ class StripePaymentAdapter {
       const refund = await this.stripe.refunds.create({
         payment_intent: paymentIntentId,
         amount: amount ? amount * 100 : undefined, // Convert to pence if specified
-        reason: reason as Stripe.RefundCreateParams.Reason,
+        reason,
         metadata: {
           practice: 'St Marys House Dental Care',
           refundDate: new Date().toISOString(),
@@ -214,7 +219,7 @@ class StripePaymentAdapter {
 
       return {
         refundId: refund.id,
-        status: refund.status,
+        status: refund.status ?? 'unknown',
         amount: refund.amount / 100,
       };
     } catch (error) {

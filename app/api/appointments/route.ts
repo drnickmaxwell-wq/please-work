@@ -27,14 +27,14 @@ interface AppointmentRecord extends AppointmentRequest {
 }
 
 // Available appointment slots (in a real app, this would come from a calendar system)
-const availableSlots = {
-  'monday': ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00'],
-  'tuesday': ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00'],
-  'wednesday': ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00'],
-  'thursday': ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00'],
-  'friday': ['09:00', '10:00', '11:00', '14:00', '15:00'],
-  'saturday': ['09:00', '10:00', '11:00', '12:00'],
-  'sunday': [] // Closed
+const availableSlots: Record<string, string[]> = {
+  monday: ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00'],
+  tuesday: ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00'],
+  wednesday: ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00'],
+  thursday: ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00'],
+  friday: ['09:00', '10:00', '11:00', '14:00', '15:00'],
+  saturday: ['09:00', '10:00', '11:00', '12:00'],
+  sunday: [] // Closed
 };
 
 const treatmentTypes = [
@@ -145,13 +145,13 @@ export async function GET(request: NextRequest) {
     const dayOfWeek = requestedDate.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
     
     // Get base available slots for the day
-    let slots = availableSlots[dayOfWeek] || [];
+    let slots: string[] = availableSlots[dayOfWeek] || [];
 
     // Filter out past slots if it's today
     const today = new Date();
     if (requestedDate.toDateString() === today.toDateString()) {
       const currentHour = today.getHours();
-      slots = slots.filter(slot => {
+      slots = slots.filter((slot: string) => {
         const slotHour = parseInt(slot.split(':')[0]);
         return slotHour > currentHour;
       });

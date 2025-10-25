@@ -1,11 +1,11 @@
 'use client';
 
 import React, { Suspense, useRef, useState, useEffect } from 'react';
-import { Canvas, useFrame, useLoader } from '@react-three/fiber';
-import { OrbitControls, PerspectiveCamera, Environment, ContactShadows, Text, Html } from '@react-three/drei';
-import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { OrbitControls, PerspectiveCamera, Environment, ContactShadows } from '@react-three/drei';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Play, Pause, RotateCcw, ZoomIn, ZoomOut, Info, Sparkles } from 'lucide-react';
+import { easeInOutCubic, linearEase } from '@/lib/motion/easing';
+import { Play, Pause, RotateCcw, Info, Sparkles } from 'lucide-react';
 import * as THREE from 'three';
 
 // Brand Colors: Magenta #C2185B, Turquoise #40C4B4, Gold #D4AF37
@@ -130,7 +130,7 @@ function ModelLoader() {
     <div className="flex flex-col items-center justify-center p-8 h-full">
       <motion.div
         animate={{ rotate: 360 }}
-        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+        transition={{ duration: 2, repeat: Infinity, ease: linearEase }}
         className="w-16 h-16 border-4 border-pink-200 border-t-pink-500 rounded-full mb-4"
       />
       <p 
@@ -154,7 +154,20 @@ export default function InteractiveToothModel({
   const [showAfter, setShowAfter] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
-  const controlsRef = useRef<OrbitControlsImpl | null>(null);
+  const controlsRef = useRef<{ reset: () => void } | null>(null);
+
+  const handleControlsRef = (instance: unknown) => {
+    if (
+      instance &&
+      typeof instance === 'object' &&
+      'reset' in instance &&
+      typeof (instance as { reset?: unknown }).reset === 'function'
+    ) {
+      controlsRef.current = instance as { reset: () => void };
+    } else {
+      controlsRef.current = null;
+    }
+  };
 
   useEffect(() => {
     // Simulate loading delay for optimization
@@ -163,9 +176,7 @@ export default function InteractiveToothModel({
   }, []);
 
   const resetView = () => {
-    if (controlsRef.current) {
-      controlsRef.current.reset();
-    }
+    controlsRef.current?.reset();
   };
 
   const toggleAnimation = () => {
@@ -214,7 +225,7 @@ export default function InteractiveToothModel({
               duration: 3 + Math.random() * 2,
               repeat: Infinity,
               delay: Math.random() * 2,
-              ease: "easeInOut"
+              ease: easeInOutCubic
             }}
           />
         ))}
@@ -253,7 +264,7 @@ export default function InteractiveToothModel({
           <Canvas>
             <PerspectiveCamera makeDefault position={[0, 0, 5]} />
             <OrbitControls
-              ref={controlsRef}
+              ref={handleControlsRef}
               enablePan={false}
               enableZoom={true}
               enableRotate={true}

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { easeInOutCubic, linearEase } from '@/lib/motion/easing';
 import { Play, Sparkles, ArrowRight, Zap, Shield, Heart } from 'lucide-react';
 
 const InteractiveDentalVisualization = () => {
@@ -70,7 +71,7 @@ const InteractiveDentalVisualization = () => {
               duration: 3 + Math.random() * 2,
               repeat: Infinity,
               delay: Math.random() * 2,
-              ease: "easeInOut"
+              ease: easeInOutCubic
             }}
           />
         ))}
@@ -97,7 +98,7 @@ const InteractiveDentalVisualization = () => {
               duration: 8 + Math.random() * 4,
               repeat: Infinity,
               delay: Math.random() * 3,
-              ease: "easeInOut"
+              ease: easeInOutCubic
             }}
           />
         ))}
@@ -118,7 +119,7 @@ const InteractiveDentalVisualization = () => {
             fill="none"
             initial={{ pathLength: 0 }}
             animate={{ pathLength: 1 }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            transition={{ duration: 4, repeat: Infinity, ease: easeInOutCubic }}
           />
           <motion.path
             d="M0,500 Q480,600 960,500 T1920,500"
@@ -127,7 +128,7 @@ const InteractiveDentalVisualization = () => {
             fill="none"
             initial={{ pathLength: 0 }}
             animate={{ pathLength: 1 }}
-            transition={{ duration: 5, delay: 1, repeat: Infinity, ease: "easeInOut" }}
+            transition={{ duration: 5, delay: 1, repeat: Infinity, ease: easeInOutCubic }}
           />
         </svg>
       </div>
@@ -238,7 +239,7 @@ const InteractiveDentalVisualization = () => {
                     transition={{
                       duration: 20,
                       repeat: Infinity,
-                      ease: "linear"
+                    ease: linearEase
                     }}
                     className="absolute top-10 left-10 w-20 h-20 bg-gradient-to-br from-pink-400/30 to-transparent rounded-full"
                   />
@@ -250,7 +251,7 @@ const InteractiveDentalVisualization = () => {
                     transition={{
                       duration: 15,
                       repeat: Infinity,
-                      ease: "linear"
+                    ease: linearEase
                     }}
                     className="absolute bottom-10 right-10 w-16 h-16 bg-gradient-to-br from-teal-400/30 to-transparent rounded-full"
                   />
@@ -262,7 +263,7 @@ const InteractiveDentalVisualization = () => {
                     transition={{
                       duration: 8,
                       repeat: Infinity,
-                      ease: "easeInOut"
+                    ease: easeInOutCubic
                     }}
                     className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-gradient-to-br from-yellow-400/20 to-transparent rounded-full"
                   />
@@ -315,7 +316,7 @@ const InteractiveDentalVisualization = () => {
               transition={{ 
                 duration: 4,
                 repeat: Infinity,
-                ease: "easeInOut"
+                ease: easeInOutCubic
               }}
               className="absolute -top-6 -right-6 w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full shadow-lg"
             />
@@ -328,7 +329,7 @@ const InteractiveDentalVisualization = () => {
               transition={{ 
                 duration: 3,
                 repeat: Infinity,
-                ease: "easeInOut",
+                ease: easeInOutCubic,
                 delay: 1
               }}
               className="absolute -bottom-4 -left-4 w-8 h-8 bg-gradient-to-br from-pink-400 to-pink-500 rounded-full shadow-lg"

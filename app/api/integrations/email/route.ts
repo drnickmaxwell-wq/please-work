@@ -6,13 +6,19 @@ const emailSchema = z.object({
   to: z.string().email('Valid email address is required'),
   subject: z.string().min(1, 'Subject is required'),
   type: z.enum(['appointment_confirmation', 'appointment_reminder', 'treatment_info', 'emergency_response', 'payment_confirmation', 'newsletter', 'custom']),
-  templateData: z.record(z.any()).optional(),
+  templateData: z.record(z.string(), z.any()).optional(),
   htmlContent: z.string().optional(),
   textContent: z.string().optional(),
 });
 
 // Email templates
-const emailTemplates = {
+type EmailTemplateContent = {
+  subject: string;
+  html: string;
+  text: string;
+};
+
+const emailTemplates: Record<string, EmailTemplateContent> = {
   appointment_confirmation: {
     subject: 'Appointment Confirmation - St Mary\'s House Dental Care',
     html: `

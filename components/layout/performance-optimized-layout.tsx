@@ -2,6 +2,7 @@
 
 import React, { Suspense, lazy } from 'react';
 import { motion } from 'framer-motion';
+import { linearEase } from '@/lib/motion/easing';
 import StickyHeader from './sticky-header';
 import { ScrollProgress } from '@/components/effects/parallax-scroll';
 
@@ -33,7 +34,7 @@ function BrandLoadingSpinner() {
           borderLeftColor: 'transparent'
         }}
         animate={{ rotate: 360 }}
-        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+        transition={{ duration: 1, repeat: Infinity, ease: linearEase }}
       />
       <span 
         className="ml-3 text-slate-600"

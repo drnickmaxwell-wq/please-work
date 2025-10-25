@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { easeOutCubic, linearEase } from '@/lib/motion/easing';
 import { Play, Pause, Volume2, VolumeX, Maximize2, Sparkles } from 'lucide-react';
 
 // Floating Particle Component
@@ -49,7 +50,7 @@ function FloatingParticle({
         duration: 8,
         delay,
         repeat: Infinity,
-        ease: "easeOut",
+        ease: easeOutCubic,
       }}
       className="absolute w-1 h-1 rounded-full"
       style={{ backgroundColor: color, boxShadow: `0 0 6px ${color}` }}
@@ -161,7 +162,7 @@ export default function CinematicHeroVideo() {
             <div className="text-center">
               <motion.div
                 animate={{ rotate: 360 }}
-                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                transition={{ duration: 2, repeat: Infinity, ease: linearEase }}
                 className="w-16 h-16 border-4 border-transparent border-t-yellow-400 border-r-teal-400 rounded-full mx-auto mb-6"
               />
               <motion.p
