@@ -23,6 +23,8 @@ import "./components/technology-cta.css";
 
 import ScrollCue from "./components/ScrollCue";
 import "./components/scroll-cue.css";
+import { TreatmentGrid } from "@/components/ai24/TreatmentGrid";
+import { TestimonialCarousel } from "@/components/ai24/TestimonialCarousel";
 
 export const metadata: Metadata = {
   title: "Technology | St Mary’s House Dental Care",
@@ -39,6 +41,45 @@ export const metadata: Metadata = {
 };
 
 export default function TechnologyPage() {
+  const tools = [
+    {
+      title: "AI Cost Estimator",
+      excerpt: "Personalised estimates based on your case.",
+      ctaLabel: "Estimate now",
+      ctaHref: "#cost",
+    },
+    {
+      title: "Treatment Time Predictor",
+      excerpt: "Get a realistic timeline from consult to results.",
+      ctaLabel: "Check timeline",
+      ctaHref: "#timeline",
+    },
+    {
+      title: "AR Smile Try-On",
+      excerpt: "Preview your smile with augmented reality.",
+      ctaLabel: "Open preview",
+      ctaHref: "#ar",
+    },
+  ];
+
+  const testimonials = [
+    {
+      quote:
+        "Absolutely brilliant service. The AI tools helped me understand exactly what to expect.",
+      name: "Emma Roberts",
+    },
+    {
+      quote:
+        "Professional, precise, and painless. Results exceeded expectations.",
+      name: "Michael Chen",
+    },
+    {
+      quote:
+        "I was nervous about dental work, but the team put me at ease. Incredible!",
+      name: "Lucy Anderson",
+    },
+  ];
+
   return (
     <>
       {/* JSON-LD */}
@@ -57,6 +98,25 @@ export default function TechnologyPage() {
       <main className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 space-y-24 py-16">
         <DigitalWorkflow />
         <EquipmentGallery />
+        <section id="personalize" className="relative py-20">
+          <div className="mx-auto max-w-6xl px-4">
+            <h2 className="text-4xl md:text-5xl font-semibold iridescent-heading mb-8">
+              Personalize Your Journey
+            </h2>
+            <p className="mb-10 text-slate-600 max-w-2xl">
+              Use our AI-powered tools to get a clearer picture of your treatment plan.
+            </p>
+            <TreatmentGrid items={tools} />
+          </div>
+        </section>
+        <section id="stories" className="relative py-20">
+          <div className="mx-auto max-w-6xl px-4">
+            <h2 className="text-4xl md:text-5xl font-semibold iridescent-heading mb-10">
+              Patient Stories
+            </h2>
+            <TestimonialCarousel testimonials={testimonials} />
+          </div>
+        </section>
         <AIInnovation />
         <Sustainability />
         <TechnologyCTA />
