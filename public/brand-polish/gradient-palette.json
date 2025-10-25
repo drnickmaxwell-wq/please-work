@@ -1,0 +1,20 @@
+{
+  "angle_degrees": 135,
+  "stops": [
+    {
+      "hex": "#C2185B",
+      "position": 0.0,
+      "name": "magenta"
+    },
+    {
+      "hex": "#40C4B4",
+      "position": 0.6,
+      "name": "turquoise"
+    },
+    {
+      "hex": "#D4AF37",
+      "position": 1.0,
+      "name": "gold"
+    }
+  ]
+}
