@@ -63,10 +63,10 @@ const Lazy3DLoader = () => (
       </div>
 
       {/* Loading text with brand fonts */}
-      <h3 className="text-xl font-bold text-slate-800 mb-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+      <h3 className="text-xl font-bold text-slate-800 mb-2" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
         Loading 3D Model
       </h3>
-      <p className="text-slate-600 mb-4" style={{ fontFamily: 'Lora, serif' }}>
+      <p className="text-slate-600 mb-4" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
         Preparing interactive dental visualization...
       </p>
 

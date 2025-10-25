@@ -124,7 +124,7 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
               </svg>
-              <span className="text-sm font-medium" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+              <span className="text-sm font-medium" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                 You’re offline. Some features may be limited.
               </span>
             </div>
@@ -143,10 +143,10 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({
           >
             <div className="flex items-center justify-between">
               <div className="flex-1">
-                <h3 className="font-semibold text-sm mb-1" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                <h3 className="font-semibold text-sm mb-1" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
                   Install SMH Dental App
                 </h3>
-                <p className="text-xs opacity-90" style={{ fontFamily: 'Lora, serif' }}>
+                <p className="text-xs opacity-90" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                   Get quick access to appointments and emergency care
                 </p>
               </div>
@@ -269,11 +269,11 @@ const MobilePage: React.FC<MobilePageProps> = ({
             
             {title && (
               <div className="flex-1">
-                <h1 className="text-lg font-bold text-slate-800" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                <h1 className="text-lg font-bold text-slate-800" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
                   {title}
                 </h1>
                 {description && (
-                  <p className="text-sm text-slate-600 mt-1" style={{ fontFamily: 'Lora, serif' }}>
+                  <p className="text-sm text-slate-600 mt-1" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                     {description}
                   </p>
                 )}

@@ -190,7 +190,7 @@ export default function AISmileAnalysis() {
             
             <h1 
               className="text-5xl md:text-7xl font-bold mb-6"
-              style={{ fontFamily: 'Montserrat, sans-serif' }}
+              style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
             >
               <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-teal-600 bg-clip-text text-transparent">
                 AI Smile
@@ -201,7 +201,7 @@ export default function AISmileAnalysis() {
             
             <p 
               className="text-xl text-slate-700 max-w-3xl mx-auto leading-relaxed"
-              style={{ fontFamily: 'Lora, serif' }}
+              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
             >
               Upload a photo of your smile and let our advanced AI technology analyze your teeth, 
               gums, and overall oral health to provide personalized treatment recommendations.
@@ -244,13 +244,13 @@ export default function AISmileAnalysis() {
                     <div>
                       <h3 
                         className="text-2xl font-bold text-slate-800 mb-3"
-                        style={{ fontFamily: 'Montserrat, sans-serif' }}
+                        style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
                       >
                         Upload Your Smile Photo
                       </h3>
                       <p 
                         className="text-slate-600 mb-6"
-                        style={{ fontFamily: 'Lora, serif' }}
+                        style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                       >
                         Drag and drop your photo here, or click to browse
                       </p>
@@ -346,7 +346,7 @@ export default function AISmileAnalysis() {
                     
                     <h3 
                       className="text-2xl font-bold text-slate-800 mb-4"
-                      style={{ fontFamily: 'Montserrat, sans-serif' }}
+                      style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
                     >
                       Analyzing Your Smile...
                     </h3>
@@ -415,7 +415,7 @@ export default function AISmileAnalysis() {
                           <div className="text-center">
                             <div 
                               className="text-3xl font-bold text-slate-800"
-                              style={{ fontFamily: 'Montserrat, sans-serif' }}
+                              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                             >
                               {analysisResult.overallScore}
                             </div>
@@ -433,13 +433,13 @@ export default function AISmileAnalysis() {
                       
                       <h3 
                         className="text-2xl font-bold text-slate-800 mb-2"
-                        style={{ fontFamily: 'Montserrat, sans-serif' }}
+                        style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
                       >
                         Excellent Smile Potential!
                       </h3>
                       <p 
                         className="text-slate-600"
-                        style={{ fontFamily: 'Lora, serif' }}
+                        style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                       >
                         AI Confidence: {analysisResult.confidence}%
                       </p>
@@ -449,7 +449,7 @@ export default function AISmileAnalysis() {
                     <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl">
                       <h4 
                         className="text-xl font-bold text-slate-800 mb-6"
-                        style={{ fontFamily: 'Montserrat, sans-serif' }}
+                        style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                       >
                         Detailed Analysis
                       </h4>
@@ -488,7 +488,7 @@ export default function AISmileAnalysis() {
                     <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl">
                       <h4 
                         className="text-xl font-bold text-slate-800 mb-6"
-                        style={{ fontFamily: 'Montserrat, sans-serif' }}
+                        style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                       >
                         AI Recommendations
                       </h4>
@@ -505,7 +505,7 @@ export default function AISmileAnalysis() {
                             <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
                             <span 
                               className="text-slate-600 leading-relaxed"
-                              style={{ fontFamily: 'Lora, serif' }}
+                              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                             >
                               {rec}
                             </span>
@@ -518,7 +518,7 @@ export default function AISmileAnalysis() {
                     <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl">
                       <h4 
                         className="text-xl font-bold text-slate-800 mb-6"
-                        style={{ fontFamily: 'Montserrat, sans-serif' }}
+                        style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                       >
                         Suggested Treatments
                       </h4>
@@ -535,7 +535,7 @@ export default function AISmileAnalysis() {
                             <div className="flex items-start justify-between mb-3">
                               <h5 
                                 className="font-bold text-slate-800"
-                                style={{ fontFamily: 'Montserrat, sans-serif' }}
+                                style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                               >
                                 {treatment.name}
                               </h5>
@@ -550,7 +550,7 @@ export default function AISmileAnalysis() {
                             
                             <p 
                               className="text-slate-600 mb-4"
-                              style={{ fontFamily: 'Lora, serif' }}
+                              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                             >
                               {treatment.description}
                             </p>
@@ -573,7 +573,7 @@ export default function AISmileAnalysis() {
                     <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl text-center">
                       <h4 
                         className="text-xl font-bold text-slate-800 mb-6"
-                        style={{ fontFamily: 'Montserrat, sans-serif' }}
+                        style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                       >
                         Ready to Transform Your Smile?
                       </h4>

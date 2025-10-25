@@ -192,11 +192,11 @@ export default function VeneersPage() {
               <Sparkles className="w-12 h-12 text-white" />
             </div>
             
-            <h1 className="text-5xl md:text-7xl font-bold text-slate-800 mb-6" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+            <h1 className="text-5xl md:text-7xl font-bold text-slate-800 mb-6" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
               Porcelain <span className="bg-gradient-to-r from-pink-600 via-teal-600 to-yellow-600 bg-clip-text text-transparent">Veneers</span>
             </h1>
             
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed" style={{ fontFamily: 'Lora, serif' }}>
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
               Transform your smile with ultra-thin, custom-crafted porcelain veneers.
               Achieve the perfect smile you’ve always dreamed of with our advanced 3D design technology.
             </p>
@@ -275,10 +275,10 @@ export default function VeneersPage() {
                   }`}>
                     <IconComponent className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-slate-800 mb-4" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                  <h3 className="text-xl font-bold text-slate-800 mb-4" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
                     {benefit.title}
                   </h3>
-                  <p className="text-slate-600 leading-relaxed" style={{ fontFamily: 'Lora, serif' }}>
+                  <p className="text-slate-600 leading-relaxed" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                     {benefit.description}
                   </p>
                 </motion.div>

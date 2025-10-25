@@ -158,25 +158,25 @@ export default function PatientEducationPage() {
                 <span className="text-white font-bold text-sm">SMH</span>
               </div>
               <div>
-                <div className="font-bold text-slate-800" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                <div className="font-bold text-slate-800" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                   St Mary’s House
                 </div>
-                <div className="text-sm text-slate-600" style={{ fontFamily: 'Lora, serif' }}>
+                <div className="text-sm text-slate-600" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                   Dental Care
                 </div>
               </div>
             </div>
             
             <div className="hidden md:flex items-center space-x-8">
-              <Link href="/" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'Lora, serif' }}>Home</Link>
-              <Link href="/about" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'Lora, serif' }}>About</Link>
-              <Link href="/treatments" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'Lora, serif' }}>Treatments</Link>
-              <Link href="/team" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'Lora, serif' }}>Team</Link>
-              <Link href="/contact" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'Lora, serif' }}>Contact</Link>
+              <Link href="/" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>Home</Link>
+              <Link href="/about" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>About</Link>
+              <Link href="/treatments" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>Treatments</Link>
+              <Link href="/team" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>Team</Link>
+              <Link href="/contact" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>Contact</Link>
             </div>
 
             <div className="flex items-center space-x-4">
-              <button className="bg-gradient-to-r from-pink-500 to-teal-500 text-white px-6 py-2 rounded-full hover:from-pink-600 hover:to-teal-600 transition-all duration-200" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+              <button className="bg-gradient-to-r from-pink-500 to-teal-500 text-white px-6 py-2 rounded-full hover:from-pink-600 hover:to-teal-600 transition-all duration-200" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                 Book Free Consultation
               </button>
             </div>
@@ -258,7 +258,7 @@ export default function PatientEducationPage() {
               <BookOpen className="w-12 h-12 text-yellow-400 mr-4" />
               <h1 
                 className="text-5xl md:text-6xl font-bold text-white leading-tight"
-                style={{ fontFamily: 'Montserrat, sans-serif' }}
+                style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
               >
                 Patient
                 <span className="bg-gradient-to-r from-yellow-400 to-pink-400 bg-clip-text text-transparent ml-4">
@@ -269,7 +269,7 @@ export default function PatientEducationPage() {
             
             <p 
               className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed mb-8"
-              style={{ fontFamily: 'Lora, serif' }}
+              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
             >
               Empower yourself with knowledge through our comprehensive library of 
               educational videos, covering everything from basic oral hygiene to 
@@ -279,7 +279,7 @@ export default function PatientEducationPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.button
                 className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-pink-600 hover:to-purple-700 transition-all duration-200 shadow-lg"
-                style={{ fontFamily: 'Montserrat, sans-serif' }}
+                style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -288,7 +288,7 @@ export default function PatientEducationPage() {
               
               <motion.button
                 className="bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/30 transition-all duration-200 border border-white/30"
-                style={{ fontFamily: 'Montserrat, sans-serif' }}
+                style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -310,7 +310,7 @@ export default function PatientEducationPage() {
                 type="text"
                 placeholder="Search videos..."
                 className="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                style={{ fontFamily: 'Lora, serif' }}
+                style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -327,7 +327,7 @@ export default function PatientEducationPage() {
                       ? 'bg-gradient-to-r from-pink-500 to-teal-500 text-white'
                       : 'bg-white text-slate-600 hover:bg-slate-100'
                   }`}
-                  style={{ fontFamily: 'Montserrat, sans-serif' }}
+                  style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                 >
                   {category.name} ({category.count})
                 </button>
@@ -343,13 +343,13 @@ export default function PatientEducationPage() {
           <div className="text-center mb-16">
             <h2 
               className="text-4xl font-bold bg-gradient-to-r from-pink-600 to-teal-600 bg-clip-text text-transparent mb-4"
-              style={{ fontFamily: 'Montserrat, sans-serif' }}
+              style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
             >
               Featured Educational Videos
             </h2>
             <p 
               className="text-xl text-slate-600 max-w-3xl mx-auto"
-              style={{ fontFamily: 'Lora, serif' }}
+              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
             >
               Our most popular and comprehensive educational content
             </p>
@@ -382,14 +382,14 @@ export default function PatientEducationPage() {
                 <div className="p-6">
                   <h3 
                     className="text-xl font-bold text-slate-800 mb-3"
-                    style={{ fontFamily: 'Montserrat, sans-serif' }}
+                    style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
                   >
                     {video.title}
                   </h3>
                   
                   <p 
                     className="text-slate-600 mb-4 leading-relaxed"
-                    style={{ fontFamily: 'Lora, serif' }}
+                    style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                   >
                     {video.description}
                   </p>
@@ -410,7 +410,7 @@ export default function PatientEducationPage() {
                   <div className="flex items-center justify-between">
                     <motion.button
                       className="bg-gradient-to-r from-pink-500 to-teal-500 text-white px-6 py-2 rounded-full font-medium hover:from-pink-600 hover:to-teal-600 transition-all duration-200"
-                      style={{ fontFamily: 'Montserrat, sans-serif' }}
+                      style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -439,13 +439,13 @@ export default function PatientEducationPage() {
           <div className="text-center mb-16">
             <h2 
               className="text-4xl font-bold bg-gradient-to-r from-pink-600 to-teal-600 bg-clip-text text-transparent mb-4"
-              style={{ fontFamily: 'Montserrat, sans-serif' }}
+              style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
             >
               Complete Video Library
             </h2>
             <p 
               className="text-xl text-slate-600"
-              style={{ fontFamily: 'Lora, serif' }}
+              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
             >
               {filteredVideos.length} videos found
             </p>
@@ -473,14 +473,14 @@ export default function PatientEducationPage() {
                 <div className="p-4">
                   <h3 
                     className="text-lg font-bold text-slate-800 mb-2"
-                    style={{ fontFamily: 'Montserrat, sans-serif' }}
+                    style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
                   >
                     {video.title}
                   </h3>
                   
                   <p 
                     className="text-slate-600 text-sm mb-3 leading-relaxed"
-                    style={{ fontFamily: 'Lora, serif' }}
+                    style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                   >
                     {video.description}
                   </p>
@@ -499,7 +499,7 @@ export default function PatientEducationPage() {
                     
                     <motion.button
                       className="bg-gradient-to-r from-pink-500 to-teal-500 text-white px-4 py-1 rounded-full text-sm font-medium hover:from-pink-600 hover:to-teal-600 transition-all duration-200"
-                      style={{ fontFamily: 'Montserrat, sans-serif' }}
+                      style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -516,13 +516,13 @@ export default function PatientEducationPage() {
               <Video className="w-16 h-16 text-slate-400 mx-auto mb-4" />
               <h3 
                 className="text-xl font-bold text-slate-600 mb-2"
-                style={{ fontFamily: 'Montserrat, sans-serif' }}
+                style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
               >
                 No videos found
               </h3>
               <p 
                 className="text-slate-500"
-                style={{ fontFamily: 'Lora, serif' }}
+                style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
               >
                 Try adjusting your search or filter criteria
               </p>

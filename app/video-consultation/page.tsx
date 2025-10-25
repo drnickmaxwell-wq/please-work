@@ -90,25 +90,25 @@ export default function VideoConsultationPage() {
                 <span className="text-white font-bold text-sm">SMH</span>
               </div>
               <div>
-                <div className="font-bold text-slate-800" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                <div className="font-bold text-slate-800" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                   St Mary’s House
                 </div>
-                <div className="text-sm text-slate-600" style={{ fontFamily: 'Lora, serif' }}>
+                <div className="text-sm text-slate-600" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                   Dental Care
                 </div>
               </div>
             </div>
             
             <div className="hidden md:flex items-center space-x-8">
-              <Link href="/" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'Lora, serif' }}>Home</Link>
-              <Link href="/about" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'Lora, serif' }}>About</Link>
-              <Link href="/treatments" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'Lora, serif' }}>Treatments</Link>
-              <Link href="/team" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'Lora, serif' }}>Team</Link>
-              <Link href="/contact" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'Lora, serif' }}>Contact</Link>
+              <Link href="/" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>Home</Link>
+              <Link href="/about" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>About</Link>
+              <Link href="/treatments" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>Treatments</Link>
+              <Link href="/team" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>Team</Link>
+              <Link href="/contact" className="text-slate-700 hover:text-pink-600 transition-colors" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>Contact</Link>
             </div>
 
             <div className="flex items-center space-x-4">
-              <button className="bg-gradient-to-r from-pink-500 to-teal-500 text-white px-6 py-2 rounded-full hover:from-pink-600 hover:to-teal-600 transition-all duration-200" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+              <button className="bg-gradient-to-r from-pink-500 to-teal-500 text-white px-6 py-2 rounded-full hover:from-pink-600 hover:to-teal-600 transition-all duration-200" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                 Book Free Consultation
               </button>
             </div>
@@ -190,7 +190,7 @@ export default function VideoConsultationPage() {
               <Video className="w-12 h-12 text-yellow-400 mr-4" />
               <h1 
                 className="text-5xl md:text-6xl font-bold text-white leading-tight"
-                style={{ fontFamily: 'Montserrat, sans-serif' }}
+                style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
               >
                 Video
                 <span className="bg-gradient-to-r from-yellow-400 to-pink-400 bg-clip-text text-transparent ml-4">
@@ -201,7 +201,7 @@ export default function VideoConsultationPage() {
             
             <p 
               className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed mb-8"
-              style={{ fontFamily: 'Lora, serif' }}
+              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
             >
               Connect with our expert dentists from the comfort of your home. 
               Get professional dental advice, treatment planning, and follow-up care 
@@ -211,7 +211,7 @@ export default function VideoConsultationPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.button
                 className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-pink-600 hover:to-purple-700 transition-all duration-200 shadow-lg"
-                style={{ fontFamily: 'Montserrat, sans-serif' }}
+                style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -220,7 +220,7 @@ export default function VideoConsultationPage() {
               
               <motion.button
                 className="bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/30 transition-all duration-200 border border-white/30"
-                style={{ fontFamily: 'Montserrat, sans-serif' }}
+                style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -237,13 +237,13 @@ export default function VideoConsultationPage() {
           <div className="text-center mb-16">
             <h2 
               className="text-4xl font-bold bg-gradient-to-r from-pink-600 to-teal-600 bg-clip-text text-transparent mb-4"
-              style={{ fontFamily: 'Montserrat, sans-serif' }}
+              style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
             >
               Why Choose Video Consultations?
             </h2>
             <p 
               className="text-xl text-slate-600 max-w-3xl mx-auto"
-              style={{ fontFamily: 'Lora, serif' }}
+              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
             >
               Experience the future of dental care with our advanced video consultation platform
             </p>
@@ -271,14 +271,14 @@ export default function VideoConsultationPage() {
                 
                 <h3 
                   className="text-xl font-bold text-slate-800 mb-3"
-                  style={{ fontFamily: 'Montserrat, sans-serif' }}
+                  style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
                 >
                   {benefit.title}
                 </h3>
                 
                 <p 
                   className="text-slate-600 leading-relaxed"
-                  style={{ fontFamily: 'Lora, serif' }}
+                  style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                 >
                   {benefit.description}
                 </p>
@@ -304,13 +304,13 @@ export default function VideoConsultationPage() {
           <div className="text-center mb-12">
             <h2 
               className="text-4xl font-bold text-white mb-4"
-              style={{ fontFamily: 'Montserrat, sans-serif' }}
+              style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
             >
               Book Your Video Consultation
             </h2>
             <p 
               className="text-xl text-white/80"
-              style={{ fontFamily: 'Lora, serif' }}
+              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
             >
               Schedule a convenient time for your virtual appointment
             </p>
@@ -322,7 +322,7 @@ export default function VideoConsultationPage() {
                 <div>
                   <label 
                     className="block text-white font-medium mb-2"
-                    style={{ fontFamily: 'Montserrat, sans-serif' }}
+                    style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                   >
                     Full Name
                   </label>
@@ -339,7 +339,7 @@ export default function VideoConsultationPage() {
                 <div>
                   <label 
                     className="block text-white font-medium mb-2"
-                    style={{ fontFamily: 'Montserrat, sans-serif' }}
+                    style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                   >
                     Email Address
                   </label>
@@ -356,7 +356,7 @@ export default function VideoConsultationPage() {
                 <div>
                   <label 
                     className="block text-white font-medium mb-2"
-                    style={{ fontFamily: 'Montserrat, sans-serif' }}
+                    style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                   >
                     Phone Number
                   </label>
@@ -373,7 +373,7 @@ export default function VideoConsultationPage() {
                 <div>
                   <label 
                     className="block text-white font-medium mb-2"
-                    style={{ fontFamily: 'Montserrat, sans-serif' }}
+                    style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                   >
                     Preferred Date
                   </label>
@@ -390,7 +390,7 @@ export default function VideoConsultationPage() {
               <div>
                 <label 
                   className="block text-white font-medium mb-4"
-                  style={{ fontFamily: 'Montserrat, sans-serif' }}
+                  style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                 >
                   Preferred Time
                 </label>
@@ -415,7 +415,7 @@ export default function VideoConsultationPage() {
               <div>
                 <label 
                   className="block text-white font-medium mb-2"
-                  style={{ fontFamily: 'Montserrat, sans-serif' }}
+                  style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                 >
                   Dental Concern
                 </label>
@@ -432,7 +432,7 @@ export default function VideoConsultationPage() {
                 <motion.button
                   type="submit"
                   className="bg-gradient-to-r from-pink-500 to-teal-500 text-white px-12 py-4 rounded-full font-bold text-lg hover:from-pink-600 hover:to-teal-600 transition-all duration-200 shadow-lg"
-                  style={{ fontFamily: 'Montserrat, sans-serif' }}
+                  style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -450,13 +450,13 @@ export default function VideoConsultationPage() {
           <div className="text-center mb-16">
             <h2 
               className="text-4xl font-bold bg-gradient-to-r from-pink-600 to-teal-600 bg-clip-text text-transparent mb-4"
-              style={{ fontFamily: 'Montserrat, sans-serif' }}
+              style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
             >
               Technical Requirements
             </h2>
             <p 
               className="text-xl text-slate-600"
-              style={{ fontFamily: 'Lora, serif' }}
+              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
             >
               Ensure you have everything needed for a smooth consultation
             </p>
@@ -483,7 +483,7 @@ export default function VideoConsultationPage() {
                 
                 <p 
                   className="text-slate-700 font-medium"
-                  style={{ fontFamily: 'Lora, serif' }}
+                  style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                 >
                   {req.text}
                 </p>
@@ -494,7 +494,7 @@ export default function VideoConsultationPage() {
           <div className="text-center mt-12">
             <motion.button
               className="bg-gradient-to-r from-teal-500 to-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:from-teal-600 hover:to-blue-700 transition-all duration-200"
-              style={{ fontFamily: 'Montserrat, sans-serif' }}
+              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

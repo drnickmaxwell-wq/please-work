@@ -112,7 +112,7 @@ export default function TeamPage() {
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <p className="text-sm font-semibold" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+        <p className="text-sm font-semibold" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
           🚨 Emergency Dental Care Available 24/7 - Call 01273 453109 🚨
         </p>
       </motion.div>
@@ -135,7 +135,7 @@ export default function TeamPage() {
               
               <h1 
                 className="text-5xl md:text-7xl font-bold mb-6"
-                style={{ fontFamily: 'Montserrat, sans-serif' }}
+                style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
               >
                 <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-teal-600 bg-clip-text text-transparent">
                   Exceptional
@@ -146,7 +146,7 @@ export default function TeamPage() {
               
               <p 
                 className="text-xl text-slate-700 max-w-3xl mx-auto leading-relaxed"
-                style={{ fontFamily: 'Lora, serif' }}
+                style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
               >
                 Meet our award-winning team of dental professionals who combine advanced technology 
                 with compassionate care to deliver exceptional results in our luxury coastal setting.
@@ -176,10 +176,10 @@ export default function TeamPage() {
                   <div className={`w-12 h-12 bg-gradient-to-br ${stat.color} rounded-xl flex items-center justify-center mx-auto mb-3`}>
                     <stat.icon className="w-6 h-6 text-white" />
                   </div>
-                  <div className="text-2xl font-bold text-slate-800 mb-1" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                  <div className="text-2xl font-bold text-slate-800 mb-1" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                     {stat.value}
                   </div>
-                  <div className="text-sm text-slate-600" style={{ fontFamily: 'Lora, serif' }}>
+                  <div className="text-sm text-slate-600" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                     {stat.label}
                   </div>
                 </motion.div>
@@ -209,13 +209,13 @@ export default function TeamPage() {
                         <div className="absolute bottom-6 left-6 text-white">
                           <h3 
                             className="text-2xl font-bold mb-2"
-                            style={{ fontFamily: 'Montserrat, sans-serif' }}
+                            style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
                           >
                             {member.name}
                           </h3>
                           <p 
                             className="text-white/90 mb-3"
-                            style={{ fontFamily: 'Lora, serif' }}
+                            style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                           >
                             {member.title}
                           </p>
@@ -238,7 +238,7 @@ export default function TeamPage() {
                         <div className="mb-6">
                           <h4 
                             className="text-lg font-semibold text-slate-800 mb-3"
-                            style={{ fontFamily: 'Montserrat, sans-serif' }}
+                            style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                           >
                             Specialties
                           </h4>
@@ -256,7 +256,7 @@ export default function TeamPage() {
 
                         <p 
                           className="text-slate-600 mb-6 leading-relaxed"
-                          style={{ fontFamily: 'Lora, serif' }}
+                          style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                         >
                           {member.bio}
                         </p>
@@ -265,7 +265,7 @@ export default function TeamPage() {
                           <div>
                             <h5 
                               className="font-semibold text-slate-800 mb-2"
-                              style={{ fontFamily: 'Montserrat, sans-serif' }}
+                              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                             >
                               Qualifications
                             </h5>
@@ -284,7 +284,7 @@ export default function TeamPage() {
                           <div>
                             <h5 
                               className="font-semibold text-slate-800 mb-2"
-                              style={{ fontFamily: 'Montserrat, sans-serif' }}
+                              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                             >
                               Achievements
                             </h5>
@@ -326,13 +326,13 @@ export default function TeamPage() {
             >
               <h2 
                 className="text-4xl font-bold text-slate-800 mb-6"
-                style={{ fontFamily: 'Montserrat, sans-serif' }}
+                style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
               >
                 Ready to Meet Your Perfect Dentist?
               </h2>
               <p 
                 className="text-xl text-slate-600 mb-8"
-                style={{ fontFamily: 'Lora, serif' }}
+                style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
               >
                 Book a consultation with any of our expert dentists and discover
                 why we’re the leading dental practice in Shoreham-by-Sea.

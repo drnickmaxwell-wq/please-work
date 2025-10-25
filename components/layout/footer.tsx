@@ -110,13 +110,13 @@ export default function Footer() {
             <div>
               <h3 
                 className="text-2xl font-bold bg-gradient-to-r from-pink-400 to-teal-400 bg-clip-text text-transparent mb-4"
-                style={{ fontFamily: 'Montserrat, sans-serif' }}
+                style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
               >
                 St Mary’s House Dental Care
               </h3>
               <p 
                 className="text-slate-300 leading-relaxed"
-                style={{ fontFamily: 'Lora, serif' }}
+                style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
               >
                 Experience luxury coastal dentistry with our AI-powered 3D treatments, 
                 award-winning patient care, and stunning seaside location.
@@ -144,7 +144,7 @@ export default function Footer() {
           <div>
             <h4 
               className="text-lg font-semibold text-white mb-6"
-              style={{ fontFamily: 'Montserrat, sans-serif' }}
+              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
             >
               Contact Information
             </h4>
@@ -162,13 +162,13 @@ export default function Footer() {
                   <div>
                     <div 
                       className="font-medium text-white"
-                      style={{ fontFamily: 'Montserrat, sans-serif' }}
+                      style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                     >
                       {info.label}
                     </div>
                     <div 
                       className="text-sm"
-                      style={{ fontFamily: 'Lora, serif' }}
+                      style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                     >
                       {info.value}
                     </div>
@@ -182,7 +182,7 @@ export default function Footer() {
           <div>
             <h4 
               className="text-lg font-semibold text-white mb-6 flex items-center"
-              style={{ fontFamily: 'Montserrat, sans-serif' }}
+              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
             >
               <Clock className="w-5 h-5 text-yellow-400 mr-2" />
               Opening Hours
@@ -192,13 +192,13 @@ export default function Footer() {
                 <div key={index} className="flex justify-between items-center">
                   <span 
                     className="text-slate-300"
-                    style={{ fontFamily: 'Lora, serif' }}
+                    style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                   >
                     {schedule.day}
                   </span>
                   <span 
                     className="text-white font-medium"
-                    style={{ fontFamily: 'Montserrat, sans-serif' }}
+                    style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                   >
                     {schedule.hours}
                   </span>
@@ -211,7 +211,7 @@ export default function Footer() {
           <div>
             <h4 
               className="text-lg font-semibold text-white mb-6"
-              style={{ fontFamily: 'Montserrat, sans-serif' }}
+              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
             >
               Quick Links
             </h4>
@@ -221,7 +221,7 @@ export default function Footer() {
                   key={link.name}
                   href={link.href}
                   className="block text-slate-300 hover:text-white transition-colors duration-200"
-                  style={{ fontFamily: 'Lora, serif' }}
+                  style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                   whileHover={{ x: 5 }}
                 >
                   {link.name}
@@ -235,7 +235,7 @@ export default function Footer() {
         <div className="border-t border-slate-700 pt-8 mb-8">
           <h4 
             className="text-lg font-semibold text-white mb-6 text-center"
-            style={{ fontFamily: 'Montserrat, sans-serif' }}
+            style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
           >
             Our Treatments
           </h4>
@@ -250,7 +250,7 @@ export default function Footer() {
               >
                 <span 
                   className="text-sm text-slate-300 hover:text-white"
-                  style={{ fontFamily: 'Lora, serif' }}
+                  style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                 >
                   {treatment.name}
                 </span>
@@ -263,7 +263,7 @@ export default function Footer() {
         <div className="border-t border-slate-700 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <div 
             className="text-slate-400 text-sm"
-            style={{ fontFamily: 'Lora, serif' }}
+            style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
           >
             © {currentYear} St Mary’s House Dental Care. All rights reserved.
           </div>
@@ -272,21 +272,21 @@ export default function Footer() {
             <a 
               href="/privacy-policy" 
               className="text-slate-400 hover:text-white transition-colors duration-200"
-              style={{ fontFamily: 'Lora, serif' }}
+              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
             >
               Privacy Policy
             </a>
             <a 
               href="/terms-conditions" 
               className="text-slate-400 hover:text-white transition-colors duration-200"
-              style={{ fontFamily: 'Lora, serif' }}
+              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
             >
               Terms & Conditions
             </a>
             <a 
               href="/cookie-policy" 
               className="text-slate-400 hover:text-white transition-colors duration-200"
-              style={{ fontFamily: 'Lora, serif' }}
+              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
             >
               Cookie Policy
             </a>
@@ -307,7 +307,7 @@ export default function Footer() {
         >
           <p 
             className="text-white font-semibold"
-            style={{ fontFamily: 'Montserrat, sans-serif' }}
+            style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
           >
             Dental Emergency? Call us 24/7: 
             <a 

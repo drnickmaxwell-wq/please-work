@@ -142,7 +142,7 @@ export function LiquidButton({
       onMouseLeave={() => setIsHovered(false)}
       onClick={onClick}
       className={`relative overflow-hidden rounded-full font-medium transition-all duration-300 ${getVariantStyles()} ${getSizeStyles()} ${className}`}
-      style={{ fontFamily: 'Montserrat, sans-serif' }}
+      style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
     >

@@ -183,7 +183,7 @@ export default function CinematicHeroVideo({
           >
             <motion.h1 
               className="text-6xl md:text-8xl font-bold mb-6 leading-tight"
-              style={{ fontFamily: 'Montserrat, sans-serif' }}
+              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
               animate={{
                 textShadow: [
                   '0 0 20px rgba(194, 24, 91, 0.5)',
@@ -199,7 +199,7 @@ export default function CinematicHeroVideo({
             
             <motion.h2 
               className="text-2xl md:text-4xl font-light mb-8 bg-gradient-to-r from-pink-300 via-teal-300 to-yellow-300 bg-clip-text text-transparent"
-              style={{ fontFamily: 'Lora, serif' }}
+              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.8 }}
@@ -210,7 +210,7 @@ export default function CinematicHeroVideo({
             {description && (
               <motion.p 
                 className="text-lg md:text-xl mb-12 text-white/90 max-w-2xl mx-auto leading-relaxed"
-                style={{ fontFamily: 'Lora, serif' }}
+                style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 1.1 }}
@@ -222,7 +222,7 @@ export default function CinematicHeroVideo({
             <motion.button
               onClick={ctaAction}
               className="group relative px-12 py-4 bg-gradient-to-r from-pink-500 via-teal-500 to-yellow-500 text-white font-bold text-lg rounded-full overflow-hidden"
-              style={{ fontFamily: 'Montserrat, sans-serif' }}
+              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 1.4 }}
@@ -336,7 +336,7 @@ export default function CinematicHeroVideo({
                 animate={{ rotate: 360 }}
                 transition={{ duration: 1, repeat: Infinity, ease: linearEase }}
               />
-              <p className="text-xl font-medium" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+              <p className="text-xl font-medium" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                 Loading Luxury Experience...
               </p>
             </div>
