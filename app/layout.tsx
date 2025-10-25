@@ -1,34 +1,13 @@
+import type { CSSProperties } from 'react';
 import type { Metadata, Viewport } from "next";
 import "./styles/smh-tokens.css";
 import "./globals.css";
-import localFont from 'next/font/local';
 import PerformanceOptimizedLayout from '@/components/layout/performance-optimized-layout';
 
-const inter = localFont({
-  src: [
-    {
-      path: '../node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2',
-      style: 'normal',
-      weight: '100 900',
-    },
-  ],
-  display: 'swap',
-  fallback: ['system-ui', 'Arial'],
-  variable: '--font-inter',
-});
-
-const playfair = localFont({
-  src: [
-    {
-      path: '../node_modules/@fontsource-variable/playfair-display/files/playfair-display-latin-wght-normal.woff2',
-      style: 'normal',
-      weight: '400 900',
-    },
-  ],
-  display: 'swap',
-  fallback: ['Georgia', 'serif'],
-  variable: '--font-playfair',
-});
+const rootFontStyle = {
+  '--font-inter': 'Inter, system-ui, Arial',
+  '--font-playfair': 'Playfair Display, Georgia, serif',
+} as CSSProperties;
 
 export const metadata: Metadata = {
   title: "St Mary's House Dental Care | Luxury Coastal Dentistry in Shoreham-by-Sea",
@@ -112,7 +91,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-GB" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="en-GB" style={rootFontStyle} className="font-sans">
       <head>
         {/* PWA Manifest */}
         <link rel="manifest" href="/manifest.json" />

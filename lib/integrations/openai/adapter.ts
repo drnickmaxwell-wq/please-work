@@ -116,7 +116,7 @@ class OpenAIAdapter {
     }
 
     try {
-      await this.client.chat.completions.create({
+      const completion = await this.client.chat.completions.create({
         model: "gpt-4",
         messages: [
           {
@@ -156,7 +156,7 @@ class OpenAIAdapter {
         temperature: 0.7
       });
 
-      const aiMessage = response.choices[0]?.message?.content || '';
+      const aiMessage = completion.choices[0]?.message?.content || '';
       return this.parseChatResponse(aiMessage, message);
       
     } catch (error) {
