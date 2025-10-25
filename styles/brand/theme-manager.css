@@ -1,0 +1,155 @@
+/* Theme Transition Overlay - 1s gold fade */
+.theme-transition-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+  z-index: 9999;
+  pointer-events: none;
+  animation: goldFade 1s ease-in-out forwards;
+}
+
+@keyframes goldFade {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Light Mode (Day Theme) - Default */
+:root[data-theme="light"] {
+  --magenta: #C2185B;
+  --turquoise: #40C4B4;
+  --gold: #D4AF37;
+  --warm-mist: #F9F9FA;
+  --foreground: #333;
+  --background: #F9F9FA;
+  
+  /* Gradient */
+  --gradient-angle: 135deg;
+  --gradient-start: #C2185B;
+  --gradient-mid: #40C4B4;
+  --gradient-end: #D4AF37;
+  
+  /* Glass */
+  --glass-bg: rgba(255, 255, 255, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-shadow: rgba(0, 0, 0, 0.05);
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.08);
+  
+  /* Noise overlay */
+  --noise-opacity: 0.02;
+  
+  /* Typography */
+  --heading-color: #222;
+  --body-color: #333;
+  --muted-color: #666;
+}
+
+/* Dark Mode (Evening Theme) */
+:root[data-theme="dark"] {
+  --magenta: #A1154B;
+  --turquoise: #2BAA9D;
+  --gold: #C49C3C;
+  --warm-mist: #101010;
+  --foreground: #E8E8E8;
+  --background: #101010;
+  
+  /* Gradient - Darker tones */
+  --gradient-angle: 135deg;
+  --gradient-start: #A1154B;
+  --gradient-mid: #2BAA9D;
+  --gradient-end: #C49C3C;
+  
+  /* Glass - More transparent with inner glow */
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-shadow: rgba(0, 0, 0, 0.3);
+  --glass-inner-glow: rgba(255, 255, 255, 0.15);
+  
+  /* Shadows - Deeper */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.5);
+  
+  /* Noise overlay */
+  --noise-opacity: 0.015;
+  
+  /* Typography - Lighter with subsurface edge */
+  --heading-color: #F0F0F0;
+  --body-color: #E8E8E8;
+  --muted-color: #A0A0A0;
+}
+
+/* Global Theme Transition - 1s fade */
+:root {
+  transition: 
+    --magenta 1s ease-in-out,
+    --turquoise 1s ease-in-out,
+    --gold 1s ease-in-out,
+    --warm-mist 1s ease-in-out,
+    --foreground 1s ease-in-out,
+    --background 1s ease-in-out,
+    --glass-bg 1s ease-in-out,
+    --glass-border 1s ease-in-out,
+    --glass-shadow 1s ease-in-out,
+    --heading-color 1s ease-in-out,
+    --body-color 1s ease-in-out,
+    --muted-color 1s ease-in-out;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  transition: background-color 1s ease-in-out, color 1s ease-in-out;
+}
+
+/* Dark Mode Wave Adjustments - Slower (50%) + Soft Bloom Halo */
+:root[data-theme="dark"] .hero-wave-slow {
+  animation-duration: 60s; /* 30s * 2 = 60s (50% slower) */
+}
+
+:root[data-theme="dark"] .hero-wave-medium {
+  animation-duration: 40s; /* 20s * 2 = 40s (50% slower) */
+}
+
+:root[data-theme="dark"] .hero-wave-reverse {
+  animation-duration: 80s; /* 40s * 2 = 80s (50% slower) */
+}
+
+:root[data-theme="dark"] .hero-wave-slow::after,
+:root[data-theme="dark"] .hero-wave-medium::after,
+:root[data-theme="dark"] .hero-wave-reverse::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+  pointer-events: none;
+  transition: box-shadow 1s ease-out;
+}
+
+/* Champagne Lock: Dark-mode wave bloom fade on idle (0.3 → 0.15) */
+:root[data-theme="dark"].idle-mode .hero-wave-slow::after,
+:root[data-theme="dark"].idle-mode .hero-wave-medium::after,
+:root[data-theme="dark"].idle-mode .hero-wave-reverse::after {
+  box-shadow: 0 0 40px rgba(212, 175, 55, 0.15);
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .theme-transition-overlay {
+    animation: none;
+    opacity: 0;
+  }
+  
+  :root {
+    transition: none;
+  }
+  
+  body {
+    transition: none;
+  }
+}
+
