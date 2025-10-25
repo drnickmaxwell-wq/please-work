@@ -138,8 +138,6 @@
 /* 3D Viewer Placeholder */
 .ai-viewer {
   position: relative;
-}.ai-viewer {
-  position: relative;
   width: 100%;
   aspect-ratio: 1;
   background: linear-gradient(135deg, rgba(194, 24, 91, 0.05), rgba(64, 196, 180, 0.05));
@@ -148,6 +146,8 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Ambient Orbit-Light Animation - 20s loop */
@@ -166,8 +166,6 @@
 @keyframes orbitLight {
   0% { transform: translate(-50%, -50%) rotate(0deg) translateX(150px) rotate(0deg); }
   100% { transform: translate(-50%, -50%) rotate(360deg) translateX(150px) rotate(-360deg); }
-}ackdrop-filter: blur(18px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Magenta-to-Turquoise Glow Pulse (30s loop) */
