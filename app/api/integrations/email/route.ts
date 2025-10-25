@@ -286,30 +286,3 @@ async function sendEmail(emailData: {
   };
 }
 
-// Bulk email sending for newsletters
-async function sendBulkEmail(
-  recipients: string[],
-  templateType: string,
-  templateData: Record<string, unknown>,
-) {
-  const results = [];
-
-  for (const recipient of recipients) {
-    try {
-      const result = await sendEmail({
-        to: recipient,
-        subject: emailTemplates[templateType as keyof typeof emailTemplates]?.subject || 'Newsletter',
-        html: emailTemplates[templateType as keyof typeof emailTemplates]?.html || '',
-        text: emailTemplates[templateType as keyof typeof emailTemplates]?.text || '',
-        type: templateType
-      });
-      results.push({ recipient, success: true, messageId: result.messageId });
-    } catch (error) {
-      const message = error instanceof Error ? error.message : 'Unknown error';
-      results.push({ recipient, success: false, error: message });
-    }
-  }
-
-  return results;
-}
-

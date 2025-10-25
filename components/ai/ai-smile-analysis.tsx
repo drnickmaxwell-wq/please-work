@@ -1,12 +1,13 @@
 'use client';
 
+import Image from 'next/image';
 import React, { useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { easeInOutCubic, easeOutCubic, linearEase } from '@/lib/motion/easing';
-import { 
-  Camera, Upload, Sparkles, Star, CheckCircle, ArrowRight, 
-  Zap, Heart, Shield, Award, Download, Share2, RotateCcw,
-  Eye, Smile, Circle, Palette, Gauge, TrendingUp
+import {
+  Camera, Upload, Sparkles, Star, CheckCircle, ArrowRight,
+  Zap, Heart, Download, Share2, RotateCcw,
+  Eye, Circle
 } from 'lucide-react';
 
 // Brand Colors: Magenta #C2185B, Turquoise #40C4B4, Gold #D4AF37
@@ -287,10 +288,14 @@ export default function AISmileAnalysis() {
               ) : (
                 <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl">
                   <div className="relative mb-6">
-                    <img
+                    <Image
                       src={uploadedImage}
                       alt="Uploaded smile"
                       className="w-full h-80 object-cover rounded-2xl"
+                      width={800}
+                      height={600}
+                      sizes="100vw"
+                      unoptimized
                     />
                     <button
                       onClick={resetAnalysis}

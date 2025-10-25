@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { easeInOutCubic } from '@/lib/motion/easing';
-import { Star, Award, Heart, Users, Calendar, Phone, Mail, MapPin } from 'lucide-react';
+import { Star, Award, Heart, Users, Calendar, Phone } from 'lucide-react';
 import Link from 'next/link';
 
 // Brand Colors: Magenta #C2185B, Turquoise #40C4B4, Gold #D4AF37

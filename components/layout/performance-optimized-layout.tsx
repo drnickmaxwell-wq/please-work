@@ -46,41 +46,6 @@ function BrandLoadingSpinner() {
   );
 }
 
-// Brand-consistent error boundary
-function BrandErrorFallback({ error }: { error: Error }) {
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-teal-50 to-yellow-50 flex items-center justify-center">
-      <div className="text-center p-8 bg-white/90 backdrop-blur-lg rounded-2xl shadow-xl border border-pink-100 max-w-md mx-4">
-        <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-4">
-          <span className="text-white text-2xl" style={{ fontFamily: 'Montserrat, sans-serif' }}>!</span>
-        </div>
-        <h2 className="text-xl font-bold text-slate-800 mb-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-          Something went wrong
-        </h2>
-        <p className="text-slate-600 mb-4" style={{ fontFamily: 'Lora, serif' }}>
-          We’re experiencing a temporary issue. Please refresh the page or contact us directly.
-        </p>
-        <div className="space-y-2">
-          <button
-            onClick={() => window.location.reload()}
-            className="w-full px-4 py-2 bg-gradient-to-r from-pink-500 to-teal-500 text-white rounded-lg font-medium hover:from-pink-600 hover:to-teal-600 transition-all duration-200"
-            style={{ fontFamily: 'Montserrat, sans-serif' }}
-          >
-            Refresh Page
-          </button>
-          <a
-            href="tel:01273453109"
-            className="block w-full px-4 py-2 bg-gradient-to-r from-slate-100 to-slate-200 text-slate-700 rounded-lg font-medium hover:from-slate-200 hover:to-slate-300 transition-all duration-200"
-            style={{ fontFamily: 'Montserrat, sans-serif' }}
-          >
-            Call Us: 01273 453109
-          </a>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export default function PerformanceOptimizedLayout({
   children,
   showHeader = true,

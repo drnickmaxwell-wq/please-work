@@ -5,8 +5,7 @@ import CinematicHeroVideo from '@/components/video/cinematic-hero-video';
 import InteractiveDentalVisualization from '@/components/features/interactive-dental-visualization';
 import LuxuryChatbot from '@/components/ai/luxury-chatbot';
 import { FloatingGeometry } from '@/components/effects/micro-interactions';
-import { ScrollReveal, StaggeredReveal } from '@/components/effects/enhanced-scroll-animations';
-import { MagneticButton, LiquidButton, FloatingCard } from '@/components/effects/advanced-hover-effects';
+import { ScrollReveal } from '@/components/effects/enhanced-scroll-animations';
 
 export default function Home() {
   const organizationSchema = {

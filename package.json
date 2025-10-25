@@ -7,8 +7,9 @@
     "build": "next build --turbopack",
     "postbuild": "next-sitemap",
     "start": "next start",
-    "lint": "eslint",
-    "typecheck": "tsc --noEmit"
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.24",

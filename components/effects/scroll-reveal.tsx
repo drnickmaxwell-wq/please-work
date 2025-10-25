@@ -1,1 +1,3 @@
-export default function SR(){return null as any}
+export default function SR(): null {
+  return null;
+}

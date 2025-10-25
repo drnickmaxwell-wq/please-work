@@ -125,7 +125,7 @@ export default function Footer() {
 
             {/* Social Links */}
             <div className="flex space-x-4">
-              {socialLinks.map((social, index) => (
+              {socialLinks.map((social) => (
                 <motion.a
                   key={social.label}
                   href={social.href}
@@ -149,7 +149,7 @@ export default function Footer() {
               Contact Information
             </h4>
             <div className="space-y-4">
-              {contactInfo.map((info, index) => (
+              {contactInfo.map((info) => (
                 <motion.a
                   key={info.label}
                   href={info.link}
@@ -216,7 +216,7 @@ export default function Footer() {
               Quick Links
             </h4>
             <div className="space-y-2">
-              {quickLinks.map((link, index) => (
+              {quickLinks.map((link) => (
                 <motion.a
                   key={link.name}
                   href={link.href}
@@ -240,7 +240,7 @@ export default function Footer() {
             Our Treatments
           </h4>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {treatments.map((treatment, index) => (
+            {treatments.map((treatment) => (
               <motion.a
                 key={treatment.name}
                 href={treatment.href}

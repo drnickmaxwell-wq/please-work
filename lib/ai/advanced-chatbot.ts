@@ -176,8 +176,7 @@ Remember: You're not just booking appointments - you're creating a luxury experi
   async generateResponse(
     message: string,
     emotion: EmotionAnalysis,
-    sessionHistory: ChatMessage[] = [],
-    patientProfile?: ChatSession['patientProfile']
+    sessionHistory: ChatMessage[] = []
   ): Promise<string> {
     try {
       // Build context from session history

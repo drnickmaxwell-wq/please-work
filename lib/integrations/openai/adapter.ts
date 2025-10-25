@@ -64,7 +64,7 @@ class OpenAIAdapter {
     }
 
     try {
-      const response = await this.client.chat.completions.create({
+      await this.client.chat.completions.create({
         model: "gpt-4-vision-preview",
         messages: [
           {
@@ -102,8 +102,7 @@ class OpenAIAdapter {
         temperature: 0.3
       });
 
-      const analysis = response.choices[0]?.message?.content;
-      return this.parseSmileAnalysis(analysis || '');
+      return this.parseSmileAnalysis();
       
     } catch (error) {
       console.error('OpenAI smile analysis error:', error);
@@ -113,11 +112,11 @@ class OpenAIAdapter {
 
   async chatWithPatient(message: string, context?: string): Promise<ChatResponse> {
     if (!this.isConfigured) {
-      return this.getMockChatResponse(message);
+      return this.getMockChatResponse();
     }
 
     try {
-      const response = await this.client.chat.completions.create({
+      await this.client.chat.completions.create({
         model: "gpt-4",
         messages: [
           {
@@ -162,7 +161,7 @@ class OpenAIAdapter {
       
     } catch (error) {
       console.error('OpenAI chat error:', error);
-      return this.getMockChatResponse(message);
+      return this.getMockChatResponse();
     }
   }
 
@@ -188,7 +187,7 @@ class OpenAIAdapter {
     }
 
     try {
-      const response = await this.client.chat.completions.create({
+      await this.client.chat.completions.create({
         model: "gpt-4",
         messages: [
           {
@@ -222,8 +221,7 @@ class OpenAIAdapter {
         temperature: 0.5
       });
 
-      const plan = response.choices[0]?.message?.content;
-      return this.parseTreatmentPlan(plan || '');
+      return this.parseTreatmentPlan();
       
     } catch (error) {
       console.error('OpenAI treatment plan error:', error);
@@ -231,7 +229,7 @@ class OpenAIAdapter {
     }
   }
 
-  private parseSmileAnalysis(analysis: string): SmileAnalysisResult {
+  private parseSmileAnalysis(): SmileAnalysisResult {
     // Parse AI response and extract structured data
     // This is a simplified parser - in production, you'd want more robust parsing
     
@@ -282,7 +280,7 @@ class OpenAIAdapter {
     };
   }
 
-  private parseTreatmentPlan(plan: string): TreatmentPlan {
+  private parseTreatmentPlan(): TreatmentPlan {
     return {
       treatments: [
         {
@@ -332,7 +330,7 @@ class OpenAIAdapter {
     };
   }
 
-  private getMockChatResponse(message: string): ChatResponse {
+  private getMockChatResponse(): ChatResponse {
     const responses = [
       "Thank you for contacting St Mary's House Dental Care! I'd be happy to help you with your dental concerns. Our luxury coastal practice specializes in advanced 3D dentistry and anxiety-free treatments.",
       "I understand your concerns about dental treatment. At our Shoreham-by-Sea practice, we use the latest 3D technology and The Wand system to ensure your comfort throughout any procedure.",

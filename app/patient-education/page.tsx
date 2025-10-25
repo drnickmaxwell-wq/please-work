@@ -7,12 +7,10 @@ import { easeInOutCubic } from '@/lib/motion/easing';
 import {
   Play,
   Search,
-  Filter,
   BookOpen,
   Video,
   Eye,
   Star,
-  Download,
   Share2,
   Bookmark
 } from 'lucide-react';

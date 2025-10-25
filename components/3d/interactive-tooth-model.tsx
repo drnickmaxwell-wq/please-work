@@ -20,14 +20,19 @@ interface ToothModelProps {
 }
 
 // Optimized 3D Tooth Component with lazy loading
-function ToothModel({ treatmentType, beforeColor = '#F5F5DC', afterColor = '#FFFFFF' }: { 
-  treatmentType: string; 
-  beforeColor?: string; 
-  afterColor?: string; 
+function ToothModel({
+  treatmentType,
+  beforeColor = '#F5F5DC',
+  afterColor = '#FFFFFF',
+  showAfter = false,
+}: {
+  treatmentType: string;
+  beforeColor?: string;
+  afterColor?: string;
+  showAfter?: boolean;
 }) {
   const meshRef = useRef<THREE.Mesh>(null);
-  const [isAnimating, setIsAnimating] = useState(true);
-  const [showAfter, setShowAfter] = useState(false);
+  const isAnimating = true;
 
   useFrame((state) => {
     if (meshRef.current && isAnimating) {
@@ -280,10 +285,11 @@ export default function InteractiveToothModel({
             <pointLight position={[10, -10, -5]} intensity={0.5} color="#C2185B" />
             
             <Suspense fallback={null}>
-              <ToothModel 
-                treatmentType={treatmentType} 
+              <ToothModel
+                treatmentType={treatmentType}
                 beforeColor={beforeColor}
                 afterColor={afterColor}
+                showAfter={showAfter}
               />
               <Environment preset="studio" />
               <ContactShadows

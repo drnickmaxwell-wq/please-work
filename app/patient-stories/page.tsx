@@ -2,15 +2,13 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
-import { 
-  Star, 
-  Quote, 
-  Play, 
-  ChevronLeft, 
+import {
+  Star,
+  Quote,
+  Play,
+  ChevronLeft,
   ChevronRight,
   Heart,
-  Sparkles,
   Award,
   Users,
   Calendar,
@@ -19,7 +17,6 @@ import {
 
 const PatientStoriesPage = () => {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
-  const [activeBeforeAfter, setActiveBeforeAfter] = useState(0);
 
   const testimonials = [
     {

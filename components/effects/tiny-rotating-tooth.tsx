@@ -1,1 +1,3 @@
-export default function T(){return null as any}
+export default function T(): null {
+  return null;
+}

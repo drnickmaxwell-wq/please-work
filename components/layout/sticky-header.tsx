@@ -3,15 +3,14 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { 
-  Phone, 
-  Calendar, 
-  Menu, 
-  X, 
+import {
+  Phone,
+  Calendar,
+  Menu,
+  X,
   ChevronDown,
   MapPin,
-  Clock,
-  Star
+  Clock
 } from 'lucide-react';
 
 // Brand Colors: Magenta #C2185B, Turquoise #40C4B4, Gold #D4AF37
@@ -134,7 +133,7 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center space-x-8">
-              {navigationItems.map((item, index) => (
+              {navigationItems.map((item) => (
                 <div
                   key={item.name}
                   className="relative"
