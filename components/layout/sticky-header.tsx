@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import { primary } from '@/config/navigation.mirrored';
 import {
   Phone,
   Calendar,
@@ -38,37 +39,14 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const navigationItems = [
-    { name: 'Home', href: '/' },
-    { 
-      name: 'About', 
-      href: '/about',
-      dropdown: [
-        { name: 'Our Practice', href: '/about' },
-        { name: 'Our Team', href: '/team' },
-        { name: 'Technology', href: '/3d-showcase' },
-        { name: 'Patient Stories', href: '/patient-stories' }
-      ]
-    },
-    { 
-      name: 'Treatments', 
-      href: '/treatments',
-      dropdown: [
-        { name: 'All Treatments', href: '/treatments' },
-        { name: '3D Digital Dentistry', href: '/treatments/3d-dentistry' },
-        { name: 'Porcelain Veneers', href: '/treatments/veneers' },
-        { name: 'Dental Implants', href: '/treatments/implants' },
-        { name: 'Teeth Whitening', href: '/treatments/whitening' },
-        { name: 'Emergency Dentist', href: '/emergency-dentist' },
-        { name: 'Anxiety Dentistry', href: '/anxiety-dentistry' }
-      ]
-    },
-    { name: 'Team', href: '/team' },
-    { name: 'Patient Stories', href: '/patient-stories' },
-    { name: 'Blog', href: '/blog' },
-    { name: 'Contact', href: '/contact' }
-  ];
+  const navigationItems = primary.map((item) => ({
+    name: item.label,
+    href: item.path,
+    dropdown: item.submenu?.map((subItem) => ({
+      name: subItem.label,
+      href: subItem.path,
+    })),
+  }));
 
   return (
     <>
