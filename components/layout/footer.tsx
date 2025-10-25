@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { footer as footerNavigation } from '@/config/navigation.mirrored';
 import { Phone, Mail, MapPin, Clock, Facebook, Instagram, Twitter } from 'lucide-react';
 
 // Brand Colors: Magenta #C2185B, Turquoise #40C4B4, Gold #D4AF37
@@ -37,24 +38,13 @@ export default function Footer() {
     { day: 'Saturday', hours: '9:00 AM - 1:00 PM' },
     { day: 'Sunday', hours: 'Closed' }
   ];
-
-  const quickLinks = [
-    { name: 'About Us', href: '/about' },
-    { name: 'Treatments', href: '/treatments' },
-    { name: 'Team', href: '/team' },
-    { name: 'Patient Stories', href: '/patient-stories' },
-    { name: 'Blog', href: '/blog' },
-    { name: 'Contact', href: '/contact' }
-  ];
-
-  const treatments = [
-    { name: '3D Digital Dentistry', href: '/treatments/3d-dentistry' },
-    { name: 'Porcelain Veneers', href: '/treatments/veneers' },
-    { name: 'Dental Implants', href: '/treatments/implants' },
-    { name: 'Teeth Whitening', href: '/treatments/whitening' },
-    { name: 'Emergency Dentist', href: '/emergency-dentist' },
-    { name: 'Anxiety Dentistry', href: '/anxiety-dentistry' }
-  ];
+  const footerSections = footerNavigation;
+  const quickLinksSection = footerSections.find((section) => section.key === 'practice') ?? footerSections[0];
+  const quickLinks = quickLinksSection?.items ?? [];
+  const treatmentsSection = footerSections.find((section) => section.key === 'services');
+  const treatments = treatmentsSection?.items ?? [];
+  const legalSection = footerSections.find((section) => section.key === 'legal');
+  const legalLinks = legalSection?.items ?? [];
 
   const socialLinks = [
     { icon: <Facebook className="w-5 h-5" />, href: '#', label: 'Facebook' },
@@ -269,27 +259,16 @@ export default function Footer() {
           </div>
           
           <div className="flex space-x-6 text-sm">
-            <a 
-              href="/privacy-policy" 
-              className="text-slate-400 hover:text-white transition-colors duration-200"
-              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
-            >
-              Privacy Policy
-            </a>
-            <a 
-              href="/terms-conditions" 
-              className="text-slate-400 hover:text-white transition-colors duration-200"
-              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
-            >
-              Terms & Conditions
-            </a>
-            <a 
-              href="/cookie-policy" 
-              className="text-slate-400 hover:text-white transition-colors duration-200"
-              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
-            >
-              Cookie Policy
-            </a>
+            {legalLinks.map((link) => (
+              <a
+                key={link.path}
+                href={link.path}
+                className="text-slate-400 hover:text-white transition-colors duration-200"
+                style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
         </div>
 
