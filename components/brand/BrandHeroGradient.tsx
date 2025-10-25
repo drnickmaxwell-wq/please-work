@@ -25,7 +25,8 @@ export default function BrandHeroGradient({
   goldDensity = "low",
   clip = "none",
 }: Props) {
-  const particleAlpha = { low: 0.10, med: 0.14, high: 0.18 }[goldDensity];
+  const particleAlpha = { low: 0.1, med: 0.14, high: 0.18 }[goldDensity];
+  const particleOpacity = `calc(${particleAlpha} * var(--particles-enabled))`;
   const gradOpacity = { soft: 0.20, standard: 0.32, bold: 0.42 }[intensity];
 
   return (
@@ -46,11 +47,11 @@ export default function BrandHeroGradient({
       <div
         className="brand-particles"
         style={{
-          opacity: particleAlpha,
+          opacity: particleOpacity,
           backgroundImage: `
-            url(${asset("/textures/particles-gold.webp")}),
-            url(${asset("/textures/particles-teal.webp")}),
-            url(${asset("/textures/particles-magenta.webp")})
+            var(--brand-particles-gold, url(${asset("/textures/particles-gold.webp")})),
+            var(--brand-particles-teal, url(${asset("/textures/particles-teal.webp")})),
+            var(--brand-particles-magenta, url(${asset("/textures/particles-magenta.webp")}))
           `,
         }}
       />

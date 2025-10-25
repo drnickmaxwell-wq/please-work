@@ -51,3 +51,8 @@ Path: `styles/tokens/smh-champagne-tokens.css` — ✅ found
 - If any files are ❌ missing, add them to the paths above.
 - If variables are ❌ missing, extend the token file rather than hard-coding colors.
 - Ensure at least one page imports `styles/brand/brand-gradient.css` and uses `<BrandHeroGradient>`.
+
+## Tokens Completed ✅
+
+- Added placeholder Champagne token pack values for magenta, teal, gold, and supporting surfaces while awaiting final art direction.
+- Introduced particles feature flag wiring and inline SVG particle placeholders so BrandHeroGradient stays stable without shipping binary textures.
