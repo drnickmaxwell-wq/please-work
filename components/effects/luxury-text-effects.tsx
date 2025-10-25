@@ -2,6 +2,13 @@
 
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { easeInOutCubic } from '@/lib/motion/easing';
+
+const SHIMMER_DIRECTION_CONFIG = {
+  'left-to-right': ['-200% 0', '200% 0'] as const,
+  'right-to-left': ['200% 0', '-200% 0'] as const,
+  'center-out': ['0% 0', '-200% 0', '200% 0'] as const,
+} satisfies Record<'left-to-right' | 'right-to-left' | 'center-out', readonly string[]>;
 
 interface ShimmerTextProps {
   children: React.ReactNode;
@@ -45,24 +52,19 @@ const ShimmerText: React.FC<ShimmerTextProps> = ({
     fast: '1.5s',
   };
 
-  // Direction configurations
-  const directionConfig = {
-    'left-to-right': '-200% 0, 200% 0',
-    'right-to-left': '200% 0, -200% 0',
-    'center-out': '0 0, -200% 0, 200% 0',
-  };
-
   const config = intensityConfig[intensity];
   const animationDuration = speedConfig[speed];
-  const animationValues = directionConfig[direction];
 
+  const positions = SHIMMER_DIRECTION_CONFIG[direction];
+  const startPosition = positions[0];
+  const endPosition = positions[positions.length - 1];
   const shimmerStyle = {
     background: `linear-gradient(90deg, ${config.colors.join(', ')})`,
     backgroundSize: config.size,
     backgroundClip: 'text',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
-    backgroundPosition: '-200% 0',
+    backgroundPosition: startPosition,
   };
 
   const animationClass = `shimmer-${trigger}-${intensity}-${speed}-${direction}`;
@@ -70,12 +72,23 @@ const ShimmerText: React.FC<ShimmerTextProps> = ({
   useEffect(() => {
     // Inject CSS animation
     const style = document.createElement('style');
+    const currentPositions = SHIMMER_DIRECTION_CONFIG[direction];
+    const keyframes = currentPositions.length === 3
+      ? `
+        0% { background-position: ${currentPositions[0]}; }
+        50% { background-position: ${currentPositions[1]}; }
+        100% { background-position: ${currentPositions[2]}; }
+      `
+      : `
+        0% { background-position: ${currentPositions[0]}; }
+        100% { background-position: ${currentPositions[1]}; }
+      `;
+
     style.textContent = `
       @keyframes ${animationClass} {
-        0% { background-position: -200% 0; }
-        100% { background-position: 200% 0; }
+        ${keyframes}
       }
-      
+
       .${animationClass} {
         animation: ${animationClass} ${animationDuration} ease-in-out;
       }
@@ -93,7 +106,7 @@ const ShimmerText: React.FC<ShimmerTextProps> = ({
     return () => {
       document.head.removeChild(style);
     };
-  }, [animationClass, animationDuration]);
+  }, [animationClass, animationDuration, direction]);
 
   const triggerClass = trigger === 'always' 
     ? `${animationClass}-always` 
@@ -106,9 +119,9 @@ const ShimmerText: React.FC<ShimmerTextProps> = ({
       ref={textRef}
       className={`${className} ${triggerClass}`}
       style={shimmerStyle}
-      initial={trigger === 'viewport' ? { backgroundPosition: '-200% 0' } : undefined}
-      whileInView={trigger === 'viewport' ? { backgroundPosition: '200% 0' } : undefined}
-      transition={trigger === 'viewport' ? { duration: parseFloat(animationDuration), ease: 'easeInOut' } : undefined}
+      initial={trigger === 'viewport' ? { backgroundPosition: startPosition } : undefined}
+      whileInView={trigger === 'viewport' ? { backgroundPosition: endPosition } : undefined}
+      transition={trigger === 'viewport' ? { duration: parseFloat(animationDuration), ease: easeInOutCubic } : undefined}
       viewport={{ once: true }}
     >
       {children}
@@ -154,7 +167,7 @@ const GradientText: React.FC<GradientTextProps> = ({
       transition={animate ? {
         duration: 3,
         repeat: Infinity,
-        ease: 'easeInOut',
+        ease: easeInOutCubic,
       } : undefined}
     >
       {children}
@@ -255,7 +268,7 @@ const FloatingText: React.FC<FloatingTextProps> = ({
         duration: config.duration,
         repeat: Infinity,
         repeatType: 'reverse',
-        ease: 'easeInOut',
+        ease: easeInOutCubic,
       }}
     >
       {children}
@@ -313,7 +326,7 @@ const GlowText: React.FC<GlowTextProps> = ({
       transition={pulse ? {
         duration: 2,
         repeat: Infinity,
-        ease: 'easeInOut',
+        ease: easeInOutCubic,
       } : undefined}
     >
       {children}
@@ -332,37 +345,31 @@ export {
 
 type TextEffect = 'shimmer' | 'gradient' | 'glow' | 'float';
 
-type EffectPropsMap = {
-  shimmer: ShimmerTextProps;
-  gradient: GradientTextProps;
-  glow: GlowTextProps;
-  float: FloatingTextProps;
-};
+type EffectComponentProps = { children: React.ReactNode } & Record<string, unknown>;
 
-type WithoutChildren<T> = T extends { children?: React.ReactNode }
-  ? Omit<T, 'children'>
-  : T;
-
-const effectComponents = {
+const effectComponents: Record<TextEffect, React.ComponentType<EffectComponentProps>> = {
   shimmer: ShimmerText,
   gradient: GradientText,
   glow: GlowText,
   float: FloatingText,
-} as const satisfies Record<TextEffect, React.ComponentType<EffectPropsMap[TextEffect]>>;
+};
+
+const getEffectComponent = (effect: TextEffect) => effectComponents[effect];
 
 // Utility function to apply text effects to existing components
-export const withTextEffect = <Effect extends TextEffect, Props>(
+export const withTextEffect = <Props extends object>(
   Component: React.ComponentType<Props>,
-  effect: Effect,
-  options: Partial<WithoutChildren<EffectPropsMap[Effect]>> = {}
+  effect: TextEffect,
+  options?: Record<string, unknown>
 ) => {
-  const EffectComponent = effectComponents[effect] as React.ComponentType<EffectPropsMap[Effect]>;
+  const EffectComponent = getEffectComponent(effect);
+  const effectProps = options ?? {};
 
-  const WrappedComponent = React.forwardRef<unknown, Props>((props, ref) => (
-    <EffectComponent {...(options as EffectPropsMap[Effect])}>
-      {React.createElement(Component, { ...props, ref } as Props & { ref: React.Ref<unknown> })}
+  const WrappedComponent: React.FC<Props> = (props) => (
+    <EffectComponent {...effectProps}>
+      <Component {...props} />
     </EffectComponent>
-  ));
+  );
 
   WrappedComponent.displayName = `WithTextEffect(${Component.displayName ?? Component.name ?? 'Component'})`;
 

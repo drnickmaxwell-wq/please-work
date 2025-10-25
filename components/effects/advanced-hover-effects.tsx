@@ -2,6 +2,7 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { easeInOutCubic, easeOutCubic, linearEase } from '@/lib/motion/easing';
 
 // Brand Colors: Magenta #C2185B, Turquoise #40C4B4, Gold #D4AF37
 // Fonts: Montserrat headings, Lora body text
@@ -156,7 +157,7 @@ export function LiquidButton({
           scale: isHovered ? 3 : 0,
           opacity: isHovered ? 0.8 : 0
         }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
+        transition={{ duration: 0.4, ease: easeOutCubic }}
       />
       
       {/* Ripple Effect */}
@@ -170,7 +171,7 @@ export function LiquidButton({
           scale: isHovered ? 2 : 0,
           opacity: isHovered ? 0.3 : 0
         }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        transition={{ duration: 0.6, ease: easeOutCubic }}
       />
       
       {/* Content */}
@@ -296,7 +297,7 @@ export function MorphingIcon({
           rotateY: isToggled ? 180 : 0,
           scale: isToggled ? 0.8 : 1
         }}
-        transition={{ duration: 0.4, ease: "easeInOut" }}
+        transition={{ duration: 0.4, ease: easeInOutCubic }}
         className="relative"
       >
         <motion.div
@@ -379,7 +380,7 @@ export function GlowingBorder({
         }}
         transition={{ 
           opacity: { duration: 0.3 },
-          rotate: { duration: 2, repeat: Infinity, ease: "linear" }
+          rotate: { duration: 2, repeat: Infinity, ease: linearEase }
         }}
       />
       
@@ -432,7 +433,7 @@ export function PulsingElement({
         transition={{
           duration: speed,
           repeat: Infinity,
-          ease: "easeInOut"
+          ease: easeInOutCubic
         }}
       />
       

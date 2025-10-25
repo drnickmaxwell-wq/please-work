@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useInView, useScroll, useTransform, useSpring } from 'framer-motion';
+import { easeInOutCubic } from '@/lib/motion/easing';
 
 // Brand Colors: Magenta #C2185B, Turquoise #40C4B4, Gold #D4AF37
 // Fonts: Montserrat headings, Lora body text
@@ -28,8 +29,8 @@ export function ScrollReveal({
   once = true
 }: ScrollRevealProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { 
-    threshold, 
+  const isInView = useInView(ref, {
+    amount: threshold,
     once,
     margin: "-10% 0px -10% 0px"
   });
@@ -101,7 +102,7 @@ export function StaggeredReveal({
   className = ''
 }: StaggeredRevealProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { threshold: 0.1, once: true });
+  const isInView = useInView(ref, { amount: 0.1, once: true });
 
   return (
     <div ref={ref} className={className}>
@@ -216,7 +217,7 @@ export function CountUp({
   className = ''
 }: CountUpProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { threshold: 0.5, once: true });
+  const isInView = useInView(ref, { amount: 0.5, once: true });
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -266,7 +267,7 @@ export function Typewriter({
   cursor = true
 }: TypewriterProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { threshold: 0.5, once: true });
+  const isInView = useInView(ref, { amount: 0.5, once: true });
   const [displayText, setDisplayText] = useState('');
   const [showCursor, setShowCursor] = useState(true);
 
@@ -322,7 +323,7 @@ export function MorphingShape({
   size = 100
 }: MorphingShapeProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { threshold: 0.3 });
+  const isInView = useInView(ref, { amount: 0.3 });
 
   const getColor = () => {
     switch (color) {
@@ -358,7 +359,7 @@ export function MorphingShape({
         transition={{
           duration: 8,
           repeat: Infinity,
-          ease: "easeInOut"
+          ease: easeInOutCubic
         }}
         className="blur-sm opacity-30"
       />
@@ -378,7 +379,7 @@ export function WaveReveal({
   direction = 'left'
 }: WaveRevealProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { threshold: 0.2, once: true });
+  const isInView = useInView(ref, { amount: 0.2, once: true });
 
   const getClipPath = () => {
     switch (direction) {
@@ -419,7 +420,7 @@ export function WaveReveal({
 // Hook for scroll-triggered animations
 export function useScrollAnimation(threshold = 0.1) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { threshold, once: true });
+  const isInView = useInView(ref, { amount: threshold, once: true });
   const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {

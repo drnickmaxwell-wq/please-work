@@ -123,7 +123,7 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({
 interface TouchButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
-  variant?: 'primary' | 'secondary' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'ghost' | 'emergency';
   size?: 'sm' | 'md' | 'lg';
   hapticFeedback?: boolean;
   className?: string;
@@ -141,10 +141,11 @@ const TouchButton: React.FC<TouchButtonProps> = ({
 }) => {
   const [isPressed, setIsPressed] = useState(false);
 
-  const variants = {
+  const variants: Record<NonNullable<TouchButtonProps['variant']>, string> = {
     primary: 'bg-gradient-to-r from-pink-500 to-teal-500 text-white shadow-lg shadow-pink-500/25',
     secondary: 'bg-white text-slate-700 border border-slate-200 shadow-md',
     ghost: 'bg-transparent text-slate-600 border border-slate-300',
+    emergency: 'bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg shadow-red-500/25',
   };
 
   const sizes = {
@@ -411,8 +412,8 @@ const LongPressButton: React.FC<LongPressButtonProps> = ({
 }) => {
   const [isPressed, setIsPressed] = useState(false);
   const [progress, setProgress] = useState(0);
-  const timeoutRef = useRef<NodeJS.Timeout>();
-  const intervalRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleStart = () => {
     if (disabled) return;

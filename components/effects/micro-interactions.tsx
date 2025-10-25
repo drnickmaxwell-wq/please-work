@@ -8,6 +8,7 @@ import {
   useTransform,
   useReducedMotion,
 } from 'framer-motion';
+import { easeInOutCubic, easeOutCubic, linearEase } from '@/lib/motion/easing';
 
 interface HoverCard3DProps {
   children: React.ReactNode;
@@ -114,7 +115,7 @@ const ParallaxElement: React.FC<ParallaxElementProps> = ({
 }) => {
   const prefersReducedMotion = useReducedMotion();
   const elementRef = useRef<HTMLDivElement>(null);
-  const frameRef = useRef<number>();
+  const frameRef = useRef<number | null>(null);
   const lastKnownScroll = useRef(0);
 
   useEffect(() => {
@@ -149,13 +150,13 @@ const ParallaxElement: React.FC<ParallaxElementProps> = ({
       }
 
       element.style.transform = transform;
-      frameRef.current = undefined;
+      frameRef.current = null;
     };
 
     const handleScroll = () => {
       lastKnownScroll.current = window.scrollY;
 
-      if (frameRef.current !== undefined) return;
+      if (frameRef.current !== null) return;
 
       frameRef.current = requestAnimationFrame(applyTransform);
     };
@@ -166,7 +167,7 @@ const ParallaxElement: React.FC<ParallaxElementProps> = ({
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      if (frameRef.current !== undefined) {
+      if (frameRef.current !== null) {
         cancelAnimationFrame(frameRef.current);
       }
     };
@@ -275,20 +276,20 @@ const FloatingGeometry: React.FC<FloatingGeometryProps> = ({
   const animations = {
     float: {
       y: [-10, 10, -10],
-      transition: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
+      transition: { duration: 4, repeat: Infinity, ease: easeInOutCubic },
     },
     rotate: {
       rotate: [0, 360],
-      transition: { duration: 8, repeat: Infinity, ease: 'linear' },
+      transition: { duration: 8, repeat: Infinity, ease: linearEase },
     },
     pulse: {
       scale: [1, 1.2, 1],
       opacity: [0.7, 1, 0.7],
-      transition: { duration: 2, repeat: Infinity, ease: 'easeInOut' },
+      transition: { duration: 2, repeat: Infinity, ease: easeInOutCubic },
     },
     orbit: {
       rotate: [0, 360],
-      transition: { duration: 10, repeat: Infinity, ease: 'linear' },
+      transition: { duration: 10, repeat: Infinity, ease: linearEase },
     },
   };
 
@@ -343,7 +344,7 @@ const LiquidButton: React.FC<LiquidButtonProps> = ({
         className="absolute inset-0 bg-white/20"
         initial={{ clipPath: 'circle(0% at 50% 50%)' }}
         animate={isHovered ? { clipPath: 'circle(100% at 50% 50%)' } : { clipPath: 'circle(0% at 50% 50%)' }}
-        transition={{ duration: 0.5, ease: 'easeInOut' }}
+        transition={{ duration: 0.5, ease: easeInOutCubic }}
       />
 
       {/* Ripple effect */}
@@ -402,7 +403,7 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
       transition={{ 
         duration, 
         delay, 
-        ease: 'easeOut' 
+        ease: easeOutCubic
       }}
     >
       {children}
@@ -466,7 +467,7 @@ const MorphingShape: React.FC<MorphingShapeProps> = ({
           d={shapes[currentShapeIndex]}
           fill={color}
           animate={{ d: shapes[currentShapeIndex] }}
-          transition={{ duration: duration * 0.8, ease: 'easeInOut' }}
+          transition={{ duration: duration * 0.8, ease: easeInOutCubic }}
         />
       </svg>
     </motion.div>

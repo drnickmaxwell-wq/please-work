@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
+import { easeInOutCubic, easeOutCubic, linearEase } from '@/lib/motion/easing';
 
 // Dynamically import 3D components to enable code splitting
 const ToothModelViewer = dynamic(() => import('@/components/3d/tooth-model-viewer'), {
@@ -11,13 +12,8 @@ const ToothModelViewer = dynamic(() => import('@/components/3d/tooth-model-viewe
 });
 
 interface Lazy3DModelProps {
-  modelType: 'tooth' | 'implant' | 'veneer' | 'orthodontic';
-  modelUrl?: string;
   className?: string;
-  autoRotate?: boolean;
-  interactive?: boolean;
-  onLoad?: () => void;
-  onError?: () => void;
+  posterSrc?: string;
 }
 
 // Luxury loading component with brand colors
@@ -40,9 +36,9 @@ const Lazy3DLoader = () => (
             rotateY: 360,
             rotateX: [0, 15, 0, -15, 0]
           }}
-          transition={{ 
-            rotateY: { duration: 3, repeat: Infinity, ease: "linear" },
-            rotateX: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+          transition={{
+            rotateY: { duration: 3, repeat: Infinity, ease: linearEase },
+            rotateX: { duration: 2, repeat: Infinity, ease: easeInOutCubic }
           }}
           className="w-16 h-16 mx-auto"
         >
@@ -56,12 +52,12 @@ const Lazy3DLoader = () => (
         {/* Orbital rings */}
         <motion.div
           animate={{ rotate: 360 }}
-          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 4, repeat: Infinity, ease: linearEase }}
           className="absolute inset-0 border-2 border-pink-200 rounded-full"
         />
         <motion.div
           animate={{ rotate: -360 }}
-          transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 6, repeat: Infinity, ease: linearEase }}
           className="absolute inset-2 border border-teal-200 rounded-full"
         />
       </div>
@@ -85,7 +81,7 @@ const Lazy3DLoader = () => (
             className="bg-gradient-to-r from-pink-500 to-teal-500 h-2 rounded-full"
             initial={{ width: 0 }}
             animate={{ width: "100%" }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 3, repeat: Infinity, ease: easeInOutCubic }}
           />
         </div>
       </div>
@@ -123,17 +119,10 @@ const Lazy3DLoader = () => (
 );
 
 const Lazy3DModel: React.FC<Lazy3DModelProps> = ({
-  modelType,
-  modelUrl,
   className = '',
-  autoRotate = true,
-  interactive = true,
-  onLoad,
-  onError,
+  posterSrc,
 }) => {
   const [isInView, setIsInView] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [hasError, setHasError] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Intersection Observer for lazy loading
@@ -158,39 +147,6 @@ const Lazy3DModel: React.FC<Lazy3DModelProps> = ({
     return () => observer.disconnect();
   }, []);
 
-  const handleLoad = () => {
-    setIsLoaded(true);
-    onLoad?.();
-  };
-
-  const handleError = () => {
-    setHasError(true);
-    onError?.();
-  };
-
-  // Error fallback with brand styling
-  const ErrorFallback = () => (
-    <div className="w-full h-full min-h-[300px] bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl flex items-center justify-center">
-      <div className="text-center p-6">
-        <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-          </svg>
-        </div>
-        <h3 className="text-lg font-bold text-slate-800 mb-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-          3D Model Unavailable
-        </h3>
-        <p className="text-slate-600" style={{ fontFamily: 'Lora, serif' }}>
-          Unable to load the 3D visualization. Please try again later.
-        </p>
-      </div>
-    </div>
-  );
-
-  if (hasError) {
-    return <ErrorFallback />;
-  }
-
   return (
     <div ref={containerRef} className={`relative ${className}`}>
       {!isInView ? (
@@ -200,40 +156,15 @@ const Lazy3DModel: React.FC<Lazy3DModelProps> = ({
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+            transition={{ duration: 0.5, ease: easeOutCubic }}
             className="w-full h-full"
           >
             <ToothModelViewer
-              modelType={modelType}
-              modelUrl={modelUrl}
-              autoRotate={autoRotate}
-              interactive={interactive}
-              onLoad={handleLoad}
-              onError={handleError}
+              className="w-full h-full object-contain"
+              posterSrc={posterSrc}
             />
           </motion.div>
         </Suspense>
-      )}
-
-      {/* Loading overlay */}
-      {isInView && !isLoaded && (
-        <motion.div
-          initial={{ opacity: 1 }}
-          animate={{ opacity: 0 }}
-          transition={{ duration: 0.5, delay: 2 }}
-          className="absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-10"
-        >
-          <div className="text-center">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-              className="w-8 h-8 border-2 border-transparent border-t-pink-500 border-r-teal-500 rounded-full mx-auto mb-2"
-            />
-            <p className="text-sm text-slate-600" style={{ fontFamily: 'Lora, serif' }}>
-              Finalizing 3D model...
-            </p>
-          </div>
-        </motion.div>
       )}
     </div>
   );

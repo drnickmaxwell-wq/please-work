@@ -2,14 +2,14 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { easeInOutCubic } from '@/lib/motion/easing';
 import Link from 'next/link';
 import InteractiveToothModel from '@/components/3d/interactive-tooth-model';
-import { 
-  Sparkles, 
-  Star, 
-  Clock, 
-  Shield, 
-  Heart, 
+import {
+  Sparkles,
+  Star,
+  Clock,
+  Shield,
   ArrowRight,
   CheckCircle,
   Palette,
@@ -144,7 +144,7 @@ export default function VeneersPage() {
                 duration: 4 + Math.random() * 3,
                 repeat: Infinity,
                 delay: Math.random() * 3,
-                ease: "easeInOut"
+                ease: easeInOutCubic
               }}
             />
           ))}
@@ -167,7 +167,7 @@ export default function VeneersPage() {
               fill="none"
               initial={{ pathLength: 0 }}
               animate={{ pathLength: 1 }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              transition={{ duration: 3, repeat: Infinity, ease: easeInOutCubic }}
             />
             <motion.path
               d="M0,450 Q400,250 800,450 T1200,450"
@@ -176,7 +176,7 @@ export default function VeneersPage() {
               fill="none"
               initial={{ pathLength: 0 }}
               animate={{ pathLength: 1 }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              transition={{ duration: 4, repeat: Infinity, ease: easeInOutCubic, delay: 1 }}
             />
           </svg>
         </div>

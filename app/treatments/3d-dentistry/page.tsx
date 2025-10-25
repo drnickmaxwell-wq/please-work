@@ -3,13 +3,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { 
-  Microscope, 
-  Zap, 
-  Clock, 
-  Shield, 
-  Star, 
-  ArrowRight,
+import {
+  Microscope,
+  Zap,
+  Clock,
+  Shield,
+  Star,
   CheckCircle,
   Camera,
   Printer,

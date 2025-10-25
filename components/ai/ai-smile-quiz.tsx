@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { easeInOutCubic, linearEase } from '@/lib/motion/easing';
 import { 
   Sparkles, 
   ArrowRight, 
@@ -152,7 +153,14 @@ const AISmileQuiz = () => {
     
     // Calculate result based on answers
     const anxietyLevel = answers[4] === "Yes, I'm very anxious about dental visits" ? "high" : "low";
-    const comfortImportance = answers[6] || 5;
+    const concerns = Array.isArray(answers[2]) ? answers[2] : [];
+    const comfortAnswer = answers[6];
+    const comfortImportance =
+      typeof comfortAnswer === 'number'
+        ? comfortAnswer
+        : typeof comfortAnswer === 'string'
+          ? Number(comfortAnswer) || 5
+          : 5;
 
     let category = "Cosmetic Enhancement";
     let score = 75;
@@ -160,17 +168,17 @@ const AISmileQuiz = () => {
     const treatments: string[] = [];
     
     // Analyze answers to determine recommendations
-    if (answers[2]?.includes("Tooth color/staining")) {
+    if (concerns.includes("Tooth color/staining")) {
       treatments.push("Professional Teeth Whitening", "Porcelain Veneers");
       recommendations.push("Consider our advanced whitening treatments for dramatic color improvement");
     }
-    
-    if (answers[2]?.includes("Crooked or misaligned teeth")) {
+
+    if (concerns.includes("Crooked or misaligned teeth")) {
       treatments.push("Clear Aligners", "Porcelain Veneers");
       recommendations.push("3D digital orthodontics can straighten your smile discreetly");
     }
-    
-    if (answers[2]?.includes("Missing teeth")) {
+
+    if (concerns.includes("Missing teeth")) {
       treatments.push("3D Digital Implants", "Dental Bridges");
       recommendations.push("Our 3D-guided implant technology provides permanent tooth replacement");
       category = "Restorative Care";
@@ -220,7 +228,7 @@ const AISmileQuiz = () => {
           <div className="w-32 h-32 bg-gradient-to-br from-pink-500 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-8">
             <motion.div
               animate={{ rotate: 360 }}
-              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 2, repeat: Infinity, ease: linearEase }}
             >
               <Sparkles className="w-16 h-16 text-white" />
             </motion.div>

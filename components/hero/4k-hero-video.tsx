@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { easeInOutCubic, linearEase } from '@/lib/motion/easing';
 import { Play, Pause, Volume2, VolumeX, Maximize, Minimize } from 'lucide-react';
 
 // Brand Colors: Magenta #C2185B, Turquoise #40C4B4, Gold #D4AF37
@@ -161,7 +162,7 @@ export default function FourKHeroVideo({
             fill="none"
             initial={{ pathLength: 0, opacity: 0 }}
             animate={{ pathLength: 1, opacity: 1 }}
-            transition={{ duration: 3, ease: "easeInOut" }}
+            transition={{ duration: 3, ease: easeInOutCubic }}
           />
           <motion.path
             d="M0,600 Q480,800 960,600 T1920,600"
@@ -170,7 +171,7 @@ export default function FourKHeroVideo({
             fill="none"
             initial={{ pathLength: 0, opacity: 0 }}
             animate={{ pathLength: 1, opacity: 1 }}
-            transition={{ duration: 3, delay: 0.5, ease: "easeInOut" }}
+            transition={{ duration: 3, delay: 0.5, ease: easeInOutCubic }}
           />
           
           {/* Particle Dots */}
@@ -307,7 +308,7 @@ export default function FourKHeroVideo({
             <motion.div
               className="w-16 h-16 border-4 border-white/30 border-t-white rounded-full mx-auto mb-4"
               animate={{ rotate: 360 }}
-              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 1, repeat: Infinity, ease: linearEase }}
             />
             <p className="text-lg font-semibold" style={{ fontFamily: 'Montserrat, sans-serif' }}>
               Loading Luxury Experience...

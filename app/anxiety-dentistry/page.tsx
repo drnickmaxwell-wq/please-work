@@ -3,18 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { 
-  Heart, 
-  Shield, 
-  Smile, 
-  Star, 
-  CheckCircle, 
-  ArrowRight,
-  Headphones,
-  Waves,
-  Sparkles,
-  Clock
-} from 'lucide-react';
+import { Heart } from 'lucide-react';
 
 export default function AnxietyDentistryPage() {
   return (

@@ -3,17 +3,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { 
-  AlertTriangle, 
-  Clock, 
-  Phone, 
-  Shield, 
-  Heart, 
-  Zap,
-  CheckCircle,
-  ArrowRight,
-  MapPin,
-  Calendar
+import {
+  AlertTriangle,
+  Clock,
+  Phone,
+  Shield,
+  Heart,
+  Zap
 } from 'lucide-react';
 
 const emergencyTypes = [
