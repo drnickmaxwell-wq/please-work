@@ -13,7 +13,7 @@ const MAX_GRAIN = 0.25;
 const GRAIN_STEP = 0.01;
 
 const ChampagnePreviewPage = () => {
-  const [showParticles, setShowParticles] = useState(true);
+  const [particlesVariant, setParticlesVariant] = useState<'gold' | 'none'>('gold');
   const [grainOpacity, setGrainOpacity] = useState(0.14);
   const [goldRimEnabled, setGoldRimEnabled] = useState(false);
 
@@ -37,8 +37,8 @@ const ChampagnePreviewPage = () => {
               type="checkbox"
               role="switch"
               aria-label="Toggle particle overlay"
-              checked={showParticles}
-              onChange={(event) => setShowParticles(event.target.checked)}
+              checked={particlesVariant !== 'none'}
+              onChange={(event) => setParticlesVariant(event.target.checked ? 'gold' : 'none')}
             />
           </div>
           <div className="champagne-control">
@@ -81,15 +81,10 @@ const ChampagnePreviewPage = () => {
             clip: 'wave-bottom',
             goldDensity: 'med',
             waveOpacity: 0.24,
-            particles: showParticles,
-            waveMask: '/waves/smh-wave-mask.svg',
-            gradient: {
-              from: 'var(--brand-magenta)',
-              to: 'var(--brand-teal)',
-            },
-            grain: {
-              opacity: grainOpacity,
-            },
+            particles: particlesVariant,
+            grainOpacity,
+            goldRimEnabled,
+            driftEnabled: true,
           } as BrandHeroGradientProps)}
         >
           <section className="champagne-hero" style={heroStyle}>

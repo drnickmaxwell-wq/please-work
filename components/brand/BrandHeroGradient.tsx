@@ -2,35 +2,41 @@
 "use client";
 
 import React, { PropsWithChildren, useEffect, useMemo, useRef } from "react";
+import type { CSSProperties } from "react";
 import { asset } from "@/lib/asset";
-import ParticlesSoft from "./ParticlesSoft";
 import { useParallax } from "./hooks/useParallax";
 import "@/app/globals/hero-polish.css";
 
+const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
+
+type ParticlePalette = "gold" | "teal" | "magenta" | "none";
+
+type ParticleDensity = "low" | "med" | "high";
+
 export type BrandHeroGradientProps = PropsWithChildren<{
-  /** Overall opacity of the gradient wash */
+  /** Overall opacity + saturation of the gradient wash */
   intensity?: "soft" | "standard" | "bold";
   /** Opacity of wave mask layer (0–1) */
   waveOpacity?: number;
-  /** Density of gold particles */
-  goldDensity?: "low" | "med" | "high";
-  /** Not used for clipping yet; reserved for future SVG clip-path variants */
+  /** Density of particle overlay */
+  goldDensity?: ParticleDensity;
+  /** Optional clip mask */
   clip?: "none" | "wave-top" | "wave-bottom";
-  /** Toggle particle overlay */
-  particles?: boolean;
+  /** Particle palette */
+  particles?: ParticlePalette;
+  /** Enable champagne drift motion */
+  driftEnabled?: boolean;
+  /** Draw optional gold rim */
+  goldRimEnabled?: boolean;
+  /** Grain opacity override */
+  grainOpacity?: number;
 }>;
 
-const intensityOpacity = {
-  soft: 0.2,
-  standard: 0.32,
-  bold: 0.42,
-} as const;
-
-const particleStrength = {
-  low: 0.8,
-  med: 1,
-  high: 1.25,
-} as const;
+const particleDensityAttr: Record<ParticleDensity, ParticleDensity> = {
+  low: "low",
+  med: "med",
+  high: "high",
+};
 
 function MotionDiv({ children }: PropsWithChildren) {
   const ref = useRef<HTMLDivElement>(null);
@@ -79,32 +85,17 @@ function MotionDiv({ children }: PropsWithChildren) {
 
 export default function BrandHeroGradient({
   intensity = "standard",
-  waveOpacity = 0.18,
+  waveOpacity = 0.2,
   goldDensity = "low",
   clip = "none",
-  particles = true,
+  particles = "gold",
+  driftEnabled = true,
+  goldRimEnabled = false,
+  grainOpacity = 0.14,
   children,
 }: BrandHeroGradientProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const highlightRef = useRef<HTMLDivElement>(null);
   const { x, y, rotateZ } = useParallax(containerRef);
-
-  useEffect(() => {
-    if (!highlightRef.current) return;
-    highlightRef.current.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(
-      2,
-    )}px, 0) rotate(${rotateZ.toFixed(2)}deg)`;
-  }, [x, y, rotateZ]);
-
-  const baseOpacity = useMemo(() => Math.min(0.28 + intensityOpacity[intensity] * 1.3, 0.85), [intensity]);
-  const accentOpacity = useMemo(
-    () => Math.min(0.18 + intensityOpacity[intensity] * 1.1, 0.68),
-    [intensity],
-  );
-  const highlightOpacity = useMemo(
-    () => Math.min(0.24 + intensityOpacity[intensity] * 0.9, 0.72),
-    [intensity],
-  );
 
   const clipClass = useMemo(() => {
     if (clip === "wave-top") return "brand-hero-clip-top";
@@ -112,41 +103,47 @@ export default function BrandHeroGradient({
     return "";
   }, [clip]);
 
-  const particleMultiplier = particleStrength[goldDensity] ?? particleStrength.low;
+  const driftStyle: CSSProperties = driftEnabled
+    ? {
+        "--hero-drift-x": `${x.toFixed(2)}px`,
+        "--hero-drift-y": `${y.toFixed(2)}px`,
+        "--hero-drift-rotate": `${rotateZ.toFixed(2)}deg`,
+      }
+    : {
+        "--hero-drift-x": "0px",
+        "--hero-drift-y": "0px",
+        "--hero-drift-rotate": "0deg",
+      };
+
+  const shellStyle: CSSProperties = {
+    ...driftStyle,
+    "--hero-grain-opacity": clamp(grainOpacity, 0, 1),
+    "--hero-wave-opacity": clamp(waveOpacity, 0, 1),
+  };
+
+  const particlesVariant: ParticlePalette = particles ?? "gold";
+  const showParticles = particlesVariant !== "none";
+  const particleDensity = particleDensityAttr[goldDensity ?? "low"] ?? "low";
+  const waveImage = asset("/brand-polish/wave-light-overlay.webp");
 
   return (
-    <div ref={containerRef} className={`brand-hero-shell ${clipClass}`.trim()}>
+    <div ref={containerRef} className={`brand-hero-shell ${clipClass}`.trim()} style={shellStyle}>
       <div className="brand-hero-layers" aria-hidden="true">
-        <div className="brand-hero-layer brand-hero-layer--base" style={{ opacity: baseOpacity }} />
-        <div className="brand-hero-layer brand-hero-layer--accent" style={{ opacity: accentOpacity }} />
-        <div
-          className="brand-hero-layer brand-hero-layer--highlight"
-          ref={highlightRef}
-          style={{
-            opacity: highlightOpacity,
-            backgroundImage: `linear-gradient(120deg, color-mix(in oklab, var(--brand-gold) 32%, transparent) 0%, transparent 65%), url(${asset(
-              "/brand-polish/glass-reflect.svg",
-            )})`,
-          }}
+        <span className="hero-layer hero-layer--gradient" data-motion={driftEnabled} data-intensity={intensity} />
+        <span
+          className="hero-layer hero-layer--wave"
+          style={{ "--hero-wave-image": `url(${waveImage})` } as CSSProperties}
         />
-        <div
-          className="brand-hero-layer brand-hero-layer--wave"
-          style={{
-            opacity: waveOpacity,
-            backgroundImage: `url(${asset("/brand-polish/wave-light-overlay.webp")})`,
-          }}
-        />
-        <div
-          className="brand-hero-layer brand-hero-layer--shimmer"
-          style={{ opacity: Math.min(0.36 + intensityOpacity[intensity], 0.7) }}
-        />
-        <div
-          className="brand-hero-layer brand-hero-layer--grain"
-          style={{ backgroundImage: `image-set(url(${asset("/textures/film-grain-desktop.webp")}) 1x)` }}
-        />
+        {showParticles ? (
+          <span
+            className="hero-layer hero-layer--particles particles"
+            data-variant={particlesVariant}
+            data-density={particleDensity}
+          />
+        ) : null}
+        <span className="hero-layer hero-layer--grain film-grain" />
+        {goldRimEnabled ? <span className="hero-layer hero-layer--gold-rim" data-glow={driftEnabled} /> : null}
       </div>
-
-      {particles ? <ParticlesSoft strength={particleMultiplier} /> : null}
 
       {children ? <MotionDiv>{children}</MotionDiv> : null}
     </div>
