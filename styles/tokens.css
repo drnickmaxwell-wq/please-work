@@ -89,7 +89,6 @@
 :root {
   --smh-primary-magenta: var(--brand-magenta);
   --smh-primary-teal: var(--brand-teal);
-  --smh-filmgrain: url('/assets/manus/textures/home-hero-film-grain.webp');
 }
 :root {
   --footer-ink-start: #0B1220;
@@ -170,7 +169,6 @@
 :root {
   --smh-primary-magenta: var(--brand-magenta);
   --smh-primary-teal: var(--brand-teal);
-  --smh-filmgrain: url('/assets/manus/textures/home-hero-film-grain.webp');
 }
 :root{
   --glass-bg-weak: rgba(8, 20, 30, 0.22);
@@ -244,3 +242,32 @@
   --journey-card-focus: 0 0 0 2px rgba(241, 208, 150, 0.7), 0 0 0 6px rgba(241, 208, 150, 0.2);
   --journey-veil: linear-gradient(180deg, rgba(8, 14, 24, 0.32), rgba(8, 14, 24, 0));
 }
+
+/* ========================================
+   Champagne v4.1 Tokens (tokens-only directive)
+   ======================================== */
+:root{
+  --smh-primary-magenta:#C2185B;
+  --smh-primary-teal:#40C4B4;
+  --smh-accent-gold:#D4AF37;
+  --smh-text:#1A1A1A; 
+  --smh-text-muted:#4C4C4C; 
+  --smh-bg:#FFFFFF;
+  --smh-gradient:linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
+  --cta-gradient:linear-gradient(90deg,var(--smh-primary-magenta),var(--smh-primary-teal) 55%,var(--smh-accent-gold));
+  --motion-easing:cubic-bezier(.22,.55,.18,1);
+  --motion-fast:180ms; 
+  --motion-normal:300ms; 
+  --motion-slow:480ms;
+  --smh-parallax-max:6px; 
+  --grain-opacity:.07;
+}
+@media (prefers-color-scheme:dark){
+  :root{ 
+    --smh-text:#FFFFFF; 
+    --smh-text-muted:#D3D3D3; 
+    --smh-bg:#0D0E10;
+    --smh-gradient:linear-gradient(135deg,#EE66D1 0%,#00D6DB 100%); 
+  }
+}
+
