@@ -1,6 +1,5 @@
 import type { CSSProperties } from 'react';
 import type { Metadata, Viewport } from "next";
-import "./styles/smh-tokens.css";
 import "./globals.css";
 import "@/styles/brand/brand-gradient.css";
 import "@/styles/brand/lux-glass.css";
