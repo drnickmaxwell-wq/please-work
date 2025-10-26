@@ -83,25 +83,27 @@ const FooterLuxe = () => {
               <label className="sr-only" htmlFor="footer-email">
                 Email address
               </label>
-              <input
-                id="footer-email"
-                className="footer-luxe__input"
-                type="email"
-                inputMode="email"
-                name="email"
-                value={email}
-                onChange={(event) => {
-                  setEmail(event.target.value);
-                  if (status !== 'idle') {
-                    setStatus('idle');
-                    setMessage('');
-                  }
-                }}
-                aria-invalid={status === 'error'}
-                aria-describedby={message ? feedbackId : undefined}
-                placeholder="you@example.com"
-                required
-              />
+              <div className="footer-luxe__field">
+                <input
+                  id="footer-email"
+                  className="footer-luxe__input"
+                  type="email"
+                  inputMode="email"
+                  name="email"
+                  value={email}
+                  onChange={(event) => {
+                    setEmail(event.target.value);
+                    if (status !== 'idle') {
+                      setStatus('idle');
+                      setMessage('');
+                    }
+                  }}
+                  aria-invalid={status === 'error'}
+                  aria-describedby={message ? feedbackId : undefined}
+                  placeholder="you@example.com"
+                  required
+                />
+              </div>
               <button type="submit" className="smh-btn footer-luxe__button">
                 Subscribe
               </button>
@@ -137,20 +139,43 @@ const FooterLuxe = () => {
       </div>
       <style jsx>{`
         .footer-luxe {
-          background: linear-gradient(180deg, var(--navy-900), var(--navy-950));
-          border-top: 1px solid var(--gold-champagne);
-          color: rgba(244, 247, 252, 0.86);
+          position: relative;
+          overflow: clip;
+          background: linear-gradient(
+            var(--footer-grad-angle),
+            var(--footer-ink-start),
+            var(--footer-ink-mid) 55%,
+            var(--footer-ink-end)
+          );
+          color: var(--body-on-glass);
           padding: clamp(3.5rem, 7vw, 5rem) clamp(1.5rem, 5vw, 4.5rem) clamp(2.5rem, 4vw, 3.5rem);
+          box-shadow: var(--footer-shadow);
+        }
+
+        .footer-luxe::before {
+          content: '';
+          position: absolute;
+          inset: -10%;
+          background:
+            radial-gradient(6px 6px at 14% 20%, var(--footer-particles-ink) 0 60%, var(--footer-clear) 61%) no-repeat,
+            radial-gradient(8px 8px at 42% 72%, var(--footer-particles-ink) 0 60%, var(--footer-clear) 61%) no-repeat,
+            radial-gradient(5px 5px at 78% 34%, var(--footer-particles-ink) 0 60%, var(--footer-clear) 61%) no-repeat;
+          filter: blur(0.3px);
+          opacity: 0.35;
+          pointer-events: none;
+          animation: float var(--motion-duration-normal) var(--motion-easing-smooth) both;
         }
 
         .footer-luxe__rim {
           height: 1px;
           width: 100%;
-          background: linear-gradient(90deg, transparent, rgba(249, 232, 195, 0.35), transparent);
+          background: linear-gradient(90deg, var(--footer-clear), var(--footer-ring), var(--footer-clear));
           margin-bottom: clamp(2rem, 4vw, 3rem);
         }
 
         .footer-luxe__inner {
+          position: relative;
+          z-index: 1;
           max-width: min(1180px, 94vw);
           margin: 0 auto;
           display: grid;
@@ -166,12 +191,14 @@ const FooterLuxe = () => {
         .footer-luxe__brand {
           display: grid;
           gap: 1rem;
+          max-width: 42ch;
         }
 
         h3 {
           margin: 0;
           font-size: 1.6rem;
-          color: rgba(249, 232, 195, 0.88);
+          font-family: var(--font-display, 'Playfair Display', serif);
+          color: var(--ink-on-glass);
         }
 
         h4 {
@@ -179,12 +206,14 @@ const FooterLuxe = () => {
           text-transform: uppercase;
           letter-spacing: 0.14em;
           font-size: 0.85rem;
-          color: rgba(249, 232, 195, 0.7);
+          color: var(--gold-champagne);
+          opacity: 0.8;
         }
 
         p {
           margin: 0;
-          color: rgba(217, 226, 234, 0.78);
+          color: var(--body-on-glass);
+          opacity: 0.86;
         }
 
         ul {
@@ -196,14 +225,17 @@ const FooterLuxe = () => {
         }
 
         a {
-          color: rgba(237, 241, 246, 0.85);
+          color: var(--ink-on-glass);
+          opacity: 0.92;
           text-decoration: none;
-          transition: color 0.2s ease;
+          transition: color var(--motion-duration-normal) var(--motion-easing-smooth),
+            opacity var(--motion-duration-normal) var(--motion-easing-smooth);
         }
 
         a:hover,
         a:focus-visible {
           color: var(--gold-champagne);
+          opacity: 1;
         }
 
         .footer-luxe__newsletter p {
@@ -216,40 +248,70 @@ const FooterLuxe = () => {
           gap: 0.75rem;
         }
 
+        .footer-luxe__field {
+          position: relative;
+          border-radius: 14px;
+          background: var(--input-bg);
+          border: 1px solid var(--input-border);
+          box-shadow: var(--cta-glow);
+          backdrop-filter: blur(var(--footer-blur));
+        }
+
+        .footer-luxe__field::before {
+          content: '';
+          position: absolute;
+          inset: 8px;
+          border-radius: inherit;
+          box-shadow: 0 0 0 1px var(--footer-ring);
+          pointer-events: none;
+        }
+
         .footer-luxe__input {
-          background: rgba(10, 18, 27, 0.65);
-          border: 1px solid rgba(249, 232, 195, 0.25);
-          border-radius: 999px;
-          padding: 0.85rem 1.1rem;
-          color: rgba(244, 247, 252, 0.92);
-          font-family: var(--font-inter, system-ui, sans-serif);
+          width: 100%;
+          padding: 0.9rem 1.15rem;
+          border: none;
+          outline: none;
+          border-radius: inherit;
+          background: var(--footer-clear);
+          color: var(--input-text);
+          font-family: var(--font-body, 'Inter', sans-serif);
         }
 
         .footer-luxe__input::placeholder {
-          color: rgba(180, 195, 210, 0.6);
+          color: var(--input-text);
+          opacity: 0.6;
         }
 
-        .footer-luxe__input:focus {
-          outline: 2px solid rgba(249, 232, 195, 0.55);
+        .footer-luxe__input:focus-visible {
+          outline: 2px solid var(--footer-ring);
           outline-offset: 2px;
         }
 
         .footer-luxe__button {
           width: fit-content;
+          justify-content: center;
+        }
+
+        .footer-luxe__button:focus-visible {
+          outline: 2px solid var(--footer-ring);
+          outline-offset: 2px;
         }
 
         .footer-luxe__feedback {
           font-size: 0.9rem;
           min-height: 1.2rem;
-          color: rgba(217, 226, 234, 0.75);
+          color: var(--body-on-glass);
+          opacity: 0.75;
         }
 
         .footer-luxe__feedback[data-status='error'] {
-          color: #fca5a5;
+          color: var(--brand-magenta);
+          opacity: 0.9;
         }
 
         .footer-luxe__feedback[data-status='success'] {
-          color: #86efac;
+          color: var(--brand-teal);
+          opacity: 0.9;
         }
 
         .footer-luxe__meta {
@@ -258,7 +320,7 @@ const FooterLuxe = () => {
           gap: 1rem 2rem;
           justify-content: space-between;
           align-items: center;
-          border-top: 1px solid rgba(249, 232, 195, 0.2);
+          border-top: 1px solid color-mix(in srgb, var(--footer-particles-ink) 40%, var(--footer-clear));
           padding-top: clamp(1.5rem, 3vw, 2.5rem);
         }
 
@@ -274,20 +336,26 @@ const FooterLuxe = () => {
           width: 2.5rem;
           height: 2.5rem;
           border-radius: 999px;
-          border: 1px solid rgba(249, 232, 195, 0.3);
-          color: rgba(249, 232, 195, 0.85);
+          border: 1px solid var(--footer-ring);
+          color: var(--gold-champagne);
+          transition: background-color var(--motion-duration-normal) var(--motion-easing-smooth),
+            color var(--motion-duration-normal) var(--motion-easing-smooth);
         }
 
         .footer-luxe__social a:hover,
         .footer-luxe__social a:focus-visible {
-          background: rgba(249, 232, 195, 0.14);
-          color: rgba(13, 24, 34, 0.92);
+          background: color-mix(in srgb, var(--footer-ring) 45%, var(--footer-clear));
+          color: var(--ink-on-glass);
         }
 
         .footer-luxe__links {
           display: flex;
           gap: 1rem;
           flex-wrap: wrap;
+        }
+
+        .footer-luxe__links a {
+          font-size: 0.9rem;
         }
 
         .sr-only {
@@ -310,7 +378,22 @@ const FooterLuxe = () => {
 
           .footer-luxe__button {
             width: 100%;
-            justify-content: center;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .footer-luxe::before {
+            animation: none;
+          }
+        }
+
+        @keyframes float {
+          from {
+            transform: translateY(0);
+          }
+
+          to {
+            transform: translateY(-2.5px);
           }
         }
       `}</style>
