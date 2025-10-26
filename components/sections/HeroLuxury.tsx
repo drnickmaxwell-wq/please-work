@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 
 function Stat({ label, value }: { label: string; value: string }) {
