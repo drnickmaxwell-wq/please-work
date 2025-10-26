@@ -1,15 +1,22 @@
 'use client';
 
-import React from 'react';
+import type { ComponentType } from 'react';
 import { motion } from 'framer-motion';
 import { footer as footerNavigation } from '@/config/navigation.mirrored';
 import { Phone, Mail, MapPin, Clock, Facebook, Instagram, Twitter } from 'lucide-react';
 import '@/styles/footer/footer-lux.css';
+import NavyFooter from './footer/Footer';
 
 // Brand Colors: Magenta #C2185B, Turquoise #40C4B4, Gold #D4AF37
 // Fonts: Montserrat headings, Lora body text
 
-export default function Footer() {
+type LinkAny = { label?: string; path?: string; name?: string; href?: string };
+const toLink = (link: LinkAny) => ({
+  label: link.label ?? link.name ?? '',
+  path: link.path ?? link.href ?? '#',
+});
+
+export function LegacyFooter() {
   const currentYear = new Date().getFullYear();
 
   const contactInfo = [
@@ -209,18 +216,18 @@ export default function Footer() {
             </h4>
             <div className="space-y-2">
               {quickLinks.map((link) => {
-                const { label, path } = link;
-                const key = path ?? label;
+                const normalized = toLink(link);
+                const key = `${normalized.label}-${normalized.path}`;
 
                 return (
                   <motion.a
                     key={key}
-                    href={path ?? '#'}
+                    href={normalized.path}
                     className="footer-link block text-slate-300 hover:text-white transition-colors duration-200"
                     style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                     whileHover={{ x: 5 }}
                   >
-                    {label}
+                    {normalized.label}
                   </motion.a>
                 );
               })}
@@ -238,13 +245,13 @@ export default function Footer() {
           </h4>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {treatments.map((treatment) => {
-              const { label, path } = treatment;
-              const key = path ?? label;
+              const normalized = toLink(treatment);
+              const key = `${normalized.label}-${normalized.path}`;
 
               return (
                 <motion.a
                   key={key}
-                  href={path ?? '#'}
+                  href={normalized.path}
                   className="footer-tile text-center p-3 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 hover:bg-white/10 transition-all duration-200"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -253,7 +260,7 @@ export default function Footer() {
                     className="footer-link text-sm text-slate-300 hover:text-white"
                     style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                   >
-                    {label}
+                    {normalized.label}
                   </span>
                 </motion.a>
               );
@@ -272,17 +279,17 @@ export default function Footer() {
 
           <div className="flex space-x-6 text-sm">
             {legalLinks.map((link) => {
-              const { label, path } = link;
-              const key = path ?? label;
+              const normalized = toLink(link);
+              const key = `${normalized.label}-${normalized.path}`;
 
               return (
                 <a
                   key={key}
-                  href={path ?? '#'}
+                  href={normalized.path}
                   className="footer-link text-slate-400 hover:text-white transition-colors duration-200"
                   style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                 >
-                  {label}
+                  {normalized.label}
                 </a>
               );
             })}
@@ -317,5 +324,15 @@ export default function Footer() {
       </div>
     </footer>
   );
+}
+
+const useNavy = process.env.NEXT_PUBLIC_FOOTER === 'navy';
+const FooterComponent: ComponentType = useNavy ? NavyFooter : LegacyFooter;
+
+export { default as NavyFooter } from './footer/Footer';
+
+export default function Footer() {
+  const Impl = FooterComponent;
+  return <Impl />;
 }
 
