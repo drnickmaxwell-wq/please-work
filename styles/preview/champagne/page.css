@@ -130,49 +130,12 @@
   background: linear-gradient(135deg, rgba(28, 16, 9, 0.95), rgba(52, 27, 9, 0.95));
 }
 
-.hero-preview {
-  background: linear-gradient(135deg, rgba(20, 12, 12, 0.95), rgba(74, 48, 19, 0.95));
-}
-
 .hero-preview .hero-layer {
   position: absolute;
   inset: 0;
   pointer-events: none;
   transition: opacity 0.4s ease;
   z-index: 0;
-}
-
-.hero-preview .hero-layer--particles {
-  background-image: radial-gradient(circle at 20% 20%, rgba(255, 240, 211, 0.3) 0, transparent 55%),
-    radial-gradient(circle at 80% 30%, rgba(255, 237, 199, 0.35) 0, transparent 60%),
-    radial-gradient(circle at 55% 75%, rgba(255, 226, 188, 0.3) 0, transparent 65%);
-  background-repeat: no-repeat;
-  opacity: 0;
-}
-
-.hero-preview.show-particles .hero-layer--particles {
-  opacity: 0.85;
-}
-
-.hero-preview .hero-layer--grain {
-  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160"%3E%3Cfilter id="n" x="0" y="0" width="100%25" height="100%25"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="160" height="160" filter="url(%23n)" opacity="0.28"/%3E%3C/svg%3E');
-  mix-blend-mode: screen;
-  opacity: 0;
-}
-
-.hero-preview.show-grain .hero-layer--grain {
-  opacity: 0.35;
-}
-
-.hero-preview .hero-layer--shimmer {
-  background: linear-gradient(120deg, transparent 0%, rgba(255, 220, 156, 0.12) 45%, rgba(255, 236, 205, 0.25) 55%, transparent 100%);
-  opacity: 0;
-  transform: translateX(-30%);
-}
-
-.hero-preview.show-shimmer .hero-layer--shimmer {
-  opacity: 0.85;
-  animation: shimmerSweep 4.5s infinite;
 }
 
 @keyframes shimmerSweep {
@@ -208,15 +171,6 @@
 .footer-preview {
   color: rgba(255, 240, 224, 0.95);
   position: relative;
-}
-
-.footer-preview::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 0%, rgba(255, 215, 172, 0.25), transparent 70%);
-  opacity: 0.9;
-  pointer-events: none;
 }
 
 .preview-footer h3 {

@@ -1,0 +1,65 @@
+@layer preview-champagne.utilities {
+  .lux-wave {
+    background:
+      radial-gradient(1200px 600px at 70% 10%, color-mix(in oklab, var(--brand-teal) 22%, transparent), transparent 60%),
+      linear-gradient(
+        135deg,
+        color-mix(in oklab, var(--brand-magenta) 78%, #000 10%) 0%,
+        color-mix(in oklab, var(--brand-teal) 78%, #000 10%) 60%,
+        color-mix(in oklab, var(--brand-gold) 55%, #000 18%) 100%
+      ),
+      url('/waves/smh-wave-mask.svg');
+    background-blend-mode: soft-light, overlay, normal;
+    background-size: cover, cover, 1600px auto;
+    background-position: center, center, 50% 30%;
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    filter: saturate(0.92) contrast(1.02);
+  }
+
+  .lux-grain {
+    --lux-grain-opacity-base: 0.08;
+    opacity: var(--lux-grain-opacity, var(--lux-grain-opacity-base));
+    background-image: url('/textures/film-grain-desktop.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
+    mix-blend-mode: soft-light;
+    pointer-events: none;
+    transition: opacity 280ms ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lux-grain {
+      --lux-grain-opacity-base: 0.05;
+    }
+  }
+
+  .lux-particles {
+    --lux-particles-opacity-base: 0.12;
+    opacity: var(--lux-particles-opacity, var(--lux-particles-opacity-base));
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      url('/particles/particles-gold.webp'),
+      url('/particles/particles-magenta.webp'),
+      url('/particles/particles-teal.webp');
+    background-size: 620px auto, 700px auto, 640px auto;
+    background-repeat: repeat;
+    background-position: center;
+    mix-blend-mode: screen;
+    transition: opacity 320ms ease;
+  }
+
+  .lux-gold-rim {
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-gold) 65%, transparent);
+  }
+
+  .lux-glass {
+    background: color-mix(in oklab, var(--surface-0) 30%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 12px;
+    box-shadow: var(--shadow-soft);
+  }
+}
