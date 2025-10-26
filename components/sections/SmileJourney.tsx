@@ -88,9 +88,9 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
               return (
                 <article
                   key={step.title}
+                  role="group"
                   tabIndex={0}
                   className="journey-card focus-visible:outline-none"
-                  style={{ boxShadow: "var(--shadow-card-soft)" }}
                 >
                   {iconPath && (
                     <div className="journey-card-icon">
@@ -231,26 +231,30 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
 
         .journey-card {
           position: relative;
-          background: var(--glass-bg-weak);
-          border: 1px solid var(--glass-border);
+          background: var(--glass-bg-soft);
           border-radius: 1.125rem;
           padding: 1.75rem;
           backdrop-filter: var(--glass-blur);
           -webkit-backdrop-filter: var(--glass-blur);
           display: grid;
           gap: 1rem;
+          color: var(--text-hero);
+          box-shadow: inset 0 0 0 1px var(--glass-highlight);
           transition: transform var(--motion-duration-normal) var(--motion-easing-smooth),
             box-shadow var(--motion-duration-normal) var(--motion-easing-smooth);
         }
 
         .journey-card:hover {
-          transform: translateY(-4px);
-          box-shadow: var(--shadow-card);
+          transform: translateY(-2px);
+          box-shadow: inset 0 0 0 1px var(--glass-keyline), var(--shadow-card);
         }
 
         .journey-card:focus-visible {
-          transform: translateY(-2px);
-          box-shadow: var(--outline-focus);
+          outline: none;
+          box-shadow:
+            inset 0 0 0 2px var(--glass-keyline),
+            0 0 0 4px color-mix(in srgb, var(--brand-gold) 32%, transparent),
+            0 22px 60px color-mix(in srgb, var(--navy-950) 28%, transparent);
         }
 
         .journey-card-icon {
@@ -275,14 +279,14 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           font-size: 1.35rem;
           font-weight: 600;
           margin: 0;
-          color: var(--gold-champagne);
+          color: var(--text-hero);
         }
 
         .journey-card p {
           margin: 0;
           font-family: var(--font-body);
           line-height: 1.6;
-          opacity: 0.85;
+          color: var(--text-hero-muted);
         }
 
         .journey-callout {
@@ -309,6 +313,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           gap: 1.5rem;
           justify-items: center;
           text-shadow: var(--shadow-hero-text);
+          color: var(--text-hero);
         }
 
         .journey-callout-content h3 {
@@ -322,7 +327,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           font-family: var(--font-body);
           margin: 0;
           line-height: 1.6;
-          opacity: 0.9;
+          color: var(--text-hero-muted);
         }
 
         .journey-callout-actions {
@@ -383,6 +388,12 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           .journey-cta-primary,
           .journey-cta-secondary {
             width: 100%;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .journey-card:hover {
+            transform: none;
           }
         }
       `}</style>
