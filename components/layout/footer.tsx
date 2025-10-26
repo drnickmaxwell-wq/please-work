@@ -1,17 +1,17 @@
 'use client';
 
-import type { ComponentType } from 'react';
 import { motion } from 'framer-motion';
 import { footer as footerNavigation } from '@/config/navigation.mirrored';
 import { Phone, Mail, MapPin, Clock, Facebook, Instagram, Twitter } from 'lucide-react';
 import '@/styles/footer/footer-lux.css';
-import NavyFooter from './footer/Footer';
+import FooterLuxe from './FooterLuxe';
 
 // Brand Colors: Magenta #C2185B, Turquoise #40C4B4, Gold #D4AF37
 // Fonts: Montserrat headings, Lora body text
 
-type LinkAny = { label?: string; path?: string; name?: string; href?: string };
-const toLink = (link: LinkAny) => ({
+type FooterLinkInput = { label?: string; path?: string; name?: string; href?: string };
+type FooterLink = { label: string; path: string };
+const toLink = (link: FooterLinkInput): FooterLink => ({
   label: link.label ?? link.name ?? '',
   path: link.path ?? link.href ?? '#',
 });
@@ -46,13 +46,13 @@ export function LegacyFooter() {
     { day: 'Saturday', hours: '9:00 AM - 1:00 PM' },
     { day: 'Sunday', hours: 'Closed' }
   ];
-  const footerSections = footerNavigation;
+  const footerSections = footerNavigation as { key?: string; items?: FooterLinkInput[] }[];
   const quickLinksSection = footerSections.find((section) => section.key === 'practice') ?? footerSections[0];
-  const quickLinks = quickLinksSection?.items ?? [];
+  const quickLinks = (quickLinksSection?.items ?? []) as FooterLinkInput[];
   const treatmentsSection = footerSections.find((section) => section.key === 'services');
-  const treatments = treatmentsSection?.items ?? [];
+  const treatments = (treatmentsSection?.items ?? []) as FooterLinkInput[];
   const legalSection = footerSections.find((section) => section.key === 'legal');
-  const legalLinks = legalSection?.items ?? [];
+  const legalLinks = (legalSection?.items ?? []) as FooterLinkInput[];
 
   const socialLinks = [
     { icon: <Facebook className="w-5 h-5" />, href: '#', label: 'Facebook' },
@@ -326,13 +326,9 @@ export function LegacyFooter() {
   );
 }
 
-const useNavy = process.env.NEXT_PUBLIC_FOOTER === 'navy';
-const FooterComponent: ComponentType = useNavy ? NavyFooter : LegacyFooter;
-
 export { default as NavyFooter } from './footer/Footer';
 
 export default function Footer() {
-  const Impl = FooterComponent;
-  return <Impl />;
+  return <FooterLuxe />;
 }
 

@@ -6,7 +6,8 @@ import type { CSSProperties } from 'react';
 import BrandHeroGradient, { type BrandHeroGradientProps } from '@/components/brand/BrandHeroGradient';
 import '@/styles/tokens/smh-champagne-tokens.css';
 import '@/styles/brand/brand-gradient.css';
-import './champagne.css';
+
+import styles from './champagne-preview.module.css';
 
 const MIN_GRAIN = 0;
 const MAX_GRAIN = 0.25;
@@ -24,11 +25,11 @@ const ChampagnePreviewPage = () => {
   );
 
   return (
-    <div className="champagne-preview">
-      <section className="champagne-controls" aria-label="Champagne hero controls">
-        <p className="champagne-controls-title">Layer Toggles</p>
-        <div className="champagne-control-group">
-          <div className="champagne-control">
+    <div className={styles.preview}>
+      <section className={styles.controls} aria-label="Champagne hero controls">
+        <p className={styles.controlsTitle}>Layer Toggles</p>
+        <div className={styles.controlGroup}>
+          <div className={styles.control}>
             <label htmlFor="champagne-toggle-particles">
               <span>Particles</span>
             </label>
@@ -37,11 +38,12 @@ const ChampagnePreviewPage = () => {
               type="checkbox"
               role="switch"
               aria-label="Toggle particle overlay"
+              className={styles.toggle}
               checked={particlesVariant !== 'none'}
               onChange={(event) => setParticlesVariant(event.target.checked ? 'gold' : 'none')}
             />
           </div>
-          <div className="champagne-control">
+          <div className={styles.control}>
             <label htmlFor="champagne-toggle-grain">
               <span>Grain</span>
             </label>
@@ -53,12 +55,13 @@ const ChampagnePreviewPage = () => {
               step={GRAIN_STEP}
               aria-valuetext={`${formattedGrain}`}
               aria-label="Adjust film grain opacity"
+              className={styles.range}
               value={grainOpacity}
               onChange={(event) => setGrainOpacity(Number(event.target.value))}
             />
-            <span className="champagne-control-output">Opacity {formattedGrain}</span>
+            <span className={styles.output}>Opacity {formattedGrain}</span>
           </div>
-          <div className="champagne-control">
+          <div className={styles.control}>
             <label htmlFor="champagne-toggle-gold">
               <span>Gold Rim</span>
             </label>
@@ -67,6 +70,7 @@ const ChampagnePreviewPage = () => {
               type="checkbox"
               role="switch"
               aria-label="Toggle gold rim highlight"
+              className={styles.toggle}
               checked={goldRimEnabled}
               onChange={(event) => setGoldRimEnabled(event.target.checked)}
             />
@@ -74,7 +78,7 @@ const ChampagnePreviewPage = () => {
         </div>
       </section>
 
-      <div className="champagne-hero-frame">
+      <div className={styles.heroFrame}>
         <BrandHeroGradient
           {...({
             intensity: 'bold',
@@ -87,25 +91,24 @@ const ChampagnePreviewPage = () => {
             driftEnabled: true,
           } as BrandHeroGradientProps)}
         >
-          <section className="champagne-hero" style={heroStyle}>
-            <div className="champagne-shimmer" aria-hidden="true" />
-            <div className="champagne-hero-content">
-              <p className="champagne-eyebrow">Champagne Preview</p>
-              <h1 className="champagne-heading">On-brand radiance, ready for launch</h1>
-              <p className="champagne-description">
+          <section className={styles.hero} style={heroStyle}>
+            <div className={styles.heroContent}>
+              <p className={styles.heroEyebrow}>Champagne Preview</p>
+              <h1 className={styles.heroTitle}>On-brand radiance, ready for launch</h1>
+              <p className={styles.heroDescription}>
                 This hero uses production tokens for the magenta-to-teal gradient while layering particles, wave masks, and
                 film grain that can be tuned for polish audits.
               </p>
-              <a className="champagne-cta" href="#consult">
+              <a className="smh-btn" href="#consult">
                 Plan Your Consultation
               </a>
             </div>
           </section>
         </BrandHeroGradient>
-        <div className="champagne-gold-rim" data-enabled={goldRimEnabled} aria-hidden="true" />
+        <div className={styles.goldRim} data-enabled={goldRimEnabled} aria-hidden="true" />
       </div>
 
-      <p className="champagne-note">
+      <p className={styles.heroNote}>
         Preview the Champagne hero with adjustable layers to validate the gold rim treatment alongside film grain and particles.
       </p>
     </div>
