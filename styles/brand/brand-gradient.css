@@ -1,51 +1,139 @@
 /* styles/brand/brand-gradient.css
-   Decorative brand layers. These classes are always aria-hidden and sit behind content. */
+   Champagne drift + sweep treatments for hero gradients. */
 
-:root{
-  /* Fallbacks only; real values should come from tokens. Safe defaults keep visuals subtle. */
-  --brand-magenta: #C2185B;
-  --brand-teal:    #40C4B4;
-  --brand-gold:    #F9E8C3;
-  --surface-0:     #F8F4EE;
+:root {
+  --champagne-gradient-opacity-soft: 0.58;
+  --champagne-gradient-opacity-standard: 0.68;
+  --champagne-gradient-opacity-bold: 0.78;
+  --champagne-wave-opacity-soft: 0.14;
+  --champagne-wave-opacity-standard: 0.2;
+  --champagne-wave-opacity-bold: 0.28;
 }
 
-/* Base gradient wash */
-.brand-gradient {
-  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+.hero-layer--gradient {
+  position: absolute;
+  inset: 0;
   background:
-    radial-gradient(120% 120% at 0% 0%, color-mix(in oklab, var(--brand-magenta) 85%, white) 0%, transparent 60%),
-    radial-gradient(120% 120% at 100% 100%, color-mix(in oklab, var(--brand-teal) 85%, white) 0%, transparent 60%);
-  mix-blend-mode: normal;
+    radial-gradient(160% 120% at 8% 12%, color-mix(in srgb, var(--brand-magenta, #c2185b) 75%, rgba(255, 255, 255, 0.08)) 0%, transparent 70%),
+    radial-gradient(150% 120% at 92% 18%, color-mix(in srgb, var(--brand-teal, #40c4b4) 72%, rgba(18, 22, 28, 0.2)) 0%, transparent 68%),
+    linear-gradient(135deg, color-mix(in srgb, var(--brand-gold, #d4af37) 48%, rgba(255, 255, 255, 0.14)) 0%, color-mix(in srgb, var(--brand-magenta, #c2185b) 45%, rgba(0, 0, 0, 0.08)) 52%, color-mix(in srgb, var(--brand-teal, #40c4b4) 54%, rgba(255, 255, 255, 0.1)) 100%);
+  background-size: 220% 220%, 220% 220%, 200% 200%;
+  opacity: var(--champagne-gradient-opacity, var(--champagne-gradient-opacity-standard));
+  mix-blend-mode: screen;
+  transform: translate3d(var(--hero-drift-x, 0px), var(--hero-drift-y, 0px), 0)
+    rotate(var(--hero-drift-rotate, 0deg));
+  will-change: transform, filter, background-position;
 }
 
-/* Wave mask overlay (SVG image via inline style) */
-.brand-wave {
-  position: absolute; inset: 0; opacity: .18; background-repeat:no-repeat;
-  background-position:center bottom; background-size:cover; pointer-events:none; z-index: 0;
+.hero-layer--gradient[data-intensity="soft"] {
+  --champagne-gradient-opacity: var(--champagne-gradient-opacity-soft);
+  filter: saturate(0.95);
 }
 
-/* Tiled particle sheets */
-.brand-particles { position:absolute; inset:0; background-repeat:repeat; opacity:.12; pointer-events:none; z-index: 0; }
-
-/* Film grain (desktop/mobile switching handled by image-set in inline style) */
-.brand-filmgrain { position:absolute; inset:0; opacity:.06; background-size:cover; pointer-events:none; z-index:0; }
-
-/* Gentle global hue drift (respects reduced motion) */
-@media (prefers-reduced-motion:no-preference){
-  .brand-hue-drift { animation: brand-hue 60s linear infinite alternate; }
-  @keyframes brand-hue { from { filter:hue-rotate(-2deg) } to { filter:hue-rotate(2deg) } }
+.hero-layer--gradient[data-intensity="bold"] {
+  --champagne-gradient-opacity: var(--champagne-gradient-opacity-bold);
+  filter: saturate(1.08);
 }
 
-/* Primary button shimmer */
-.btn-shimmer{ position:relative; overflow:hidden }
-.btn-shimmer:after{
-  content:""; position:absolute; inset:-200% -50%; transform:rotate(12deg);
-  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.25) 50%, transparent 100%);
-  translate:-120% 0; transition: translate .6s ease;
+.hero-layer--wave {
+  position: absolute;
+  inset: -6% -4%;
+  background-image: var(--hero-wave-image, url("/waves/smh-wave-mask.svg"));
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 120% 120%;
+  mix-blend-mode: soft-light;
+  opacity: var(--hero-wave-opacity, var(--champagne-wave-opacity-standard));
+  transform: translate3d(calc(var(--hero-drift-x, 0px) * 0.4), calc(var(--hero-drift-y, 0px) * 0.4), 0);
+  will-change: transform;
 }
-.btn-shimmer:hover:after, .btn-shimmer:focus-visible:after{ translate:120% 0 }
 
-.btn-champagne{
-  background:linear-gradient(135deg,#C2185B 0%,#40C4B4 60%,#D4AF37 100%);
-  color:#fff;
+.hero-layer--particles {
+  position: absolute;
+  inset: 0;
+  --particlesOpacity: var(--hero-particles-opacity, 0.16);
+  transform: translate3d(calc(var(--hero-drift-x, 0px) * -0.15), calc(var(--hero-drift-y, 0px) * -0.15), 0);
+  will-change: transform;
+  mix-blend-mode: screen;
+}
+
+.hero-layer--particles[data-density="high"] {
+  --hero-particles-opacity: 0.24;
+}
+
+.hero-layer--particles[data-density="med"] {
+  --hero-particles-opacity: 0.18;
+}
+
+.hero-layer--particles[data-density="low"] {
+  --hero-particles-opacity: 0.12;
+}
+
+.hero-layer--gold-rim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero-layer--gold-rim::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: color-mix(in srgb, var(--gold-rail, color-mix(in srgb, var(--brand-gold, #d4af37) 68%, transparent)) 42%, transparent);
+  opacity: 0.8;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  padding: 1px;
+}
+
+.hero-layer--gold-rim[data-glow="true"]::before {
+  box-shadow: 0 0 32px color-mix(in srgb, var(--brand-gold, #d4af37) 38%, transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-layer--gradient[data-motion="true"] {
+    animation:
+      champagne-drift 42s ease-in-out infinite alternate,
+      champagne-sweep 90s linear infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-layer--gradient,
+  .hero-layer--wave,
+  .hero-layer--particles {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+@keyframes champagne-drift {
+  0% {
+    background-position: 0% 0%, 100% 4%, 40% 40%;
+  }
+  50% {
+    background-position: 6% 4%, 94% 6%, 58% 58%;
+  }
+  100% {
+    background-position: 2% 2%, 98% 4%, 32% 52%;
+  }
+}
+
+@keyframes champagne-sweep {
+  0% {
+    filter: hue-rotate(-3deg) saturate(1);
+  }
+  50% {
+    filter: hue-rotate(3deg) saturate(1.06);
+  }
+  100% {
+    filter: hue-rotate(-3deg) saturate(1);
+  }
 }

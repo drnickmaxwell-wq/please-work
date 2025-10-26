@@ -3,6 +3,8 @@
 import React, { useEffect, useRef } from 'react';
 import './technology-hero.css';
 
+const champagnePhase2 = process.env.NEXT_PUBLIC_CHAMPAGNE_PHASE2 === '1';
+
 export default function TechnologyHero() {
   const heroRef = useRef<HTMLElement>(null);
 
@@ -99,7 +101,10 @@ export default function TechnologyHero() {
         <p className="hero-subtitle">Where precision meets artistry</p>
         
         <div className="hero-ctas">
-          <a href="#digital-workflow" className="cta-primary">
+          <a
+            href="#digital-workflow"
+            className={`cta-primary${champagnePhase2 ? ' sparkle-hover' : ''}`}
+          >
             Explore Our Digital Workflow
             <span className="cta-underline"></span>
           </a>

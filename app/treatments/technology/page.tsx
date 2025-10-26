@@ -25,6 +25,7 @@ import ScrollCue from "./components/ScrollCue";
 import "./components/scroll-cue.css";
 import { TreatmentGrid } from "@/components/ai24/TreatmentGrid";
 import { TestimonialCarousel } from "@/components/ai24/TestimonialCarousel";
+import FaqAccordion from "@/components/faq/FaqAccordion";
 
 export const metadata: Metadata = {
   title: "Technology | St Mary’s House Dental Care",
@@ -41,6 +42,7 @@ export const metadata: Metadata = {
 };
 
 export default function TechnologyPage() {
+  const champagnePhase2 = process.env.NEXT_PUBLIC_CHAMPAGNE_PHASE2 === "1";
   const tools = [
     {
       title: "AI Cost Estimator",
@@ -80,6 +82,24 @@ export default function TechnologyPage() {
     },
   ];
 
+  const technologyFaq = [
+    {
+      question: "How does AI improve my dental visit?",
+      answer:
+        "Predictive scanners and real-time analysis reduce guesswork, shorten chair time, and visualise outcomes before treatment begins.",
+    },
+    {
+      question: "Can I preview my smile changes virtually?",
+      answer:
+        "Yes. Our AR try-on and 3D modelling suite let you explore adjustments before we ever touch a tooth, so you can make confident decisions.",
+    },
+    {
+      question: "Is the technology comfortable for anxious patients?",
+      answer:
+        "We pair gentle laser dentistry with guided sedation pathways and noise-dampened equipment for a calmer experience from start to finish.",
+    },
+  ];
+
   return (
     <>
       {/* JSON-LD */}
@@ -90,8 +110,10 @@ export default function TechnologyPage() {
         intensity="bold"
         clip="wave-bottom"
         goldDensity="med"
-        waveOpacity={0.2}
-        particles
+        waveOpacity={champagnePhase2 ? 0.24 : 0.2}
+        particles={champagnePhase2 ? "gold" : "none"}
+        driftEnabled={champagnePhase2}
+        grainOpacity={champagnePhase2 ? 0.14 : 0.1}
       >
         <section id="hero" className="relative overflow-clip">
           <div className="relative z-[2]">
@@ -126,6 +148,14 @@ export default function TechnologyPage() {
         </section>
         <AIInnovation />
         <Sustainability />
+        <section id="technology-faq" className="relative py-20">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl md:text-4xl font-semibold iridescent-heading mb-8">
+              Technology FAQs
+            </h2>
+            <FaqAccordion items={technologyFaq} glassEnabled={champagnePhase2} />
+          </div>
+        </section>
         <TechnologyCTA />
       </main>
     </>
