@@ -1,4 +1,4 @@
-import Footer from "@/components/layout/footer/Footer";
+import { FooterLuxe } from "@/components/footer-luxe";
 
 export default function FooterLuxePreview() {
   return (
@@ -9,7 +9,7 @@ export default function FooterLuxePreview() {
           <p>Scroll to the bottom to preview the new navy “champagne dusk” footer.</p>
         </div>
       </section>
-      <Footer />
+      <FooterLuxe />
     </main>
   );
 }

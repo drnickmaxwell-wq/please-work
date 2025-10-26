@@ -8,6 +8,7 @@ import "@/styles/brand/brand-textures.css";
 import "@/styles/brand/brand-motion.css";
 import "@/styles/brand/brand-flags.css";
 import PerformanceOptimizedLayout from '@/components/layout/performance-optimized-layout';
+import { FooterLuxe } from '@/components/footer-luxe';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL ?? 'https://www.stmaryshousedental.co.uk';
 
@@ -172,9 +173,10 @@ export default function RootLayout({
         
         {/* Main content wrapper */}
         <div id="main-content" className="relative">
-          <PerformanceOptimizedLayout>
+          <PerformanceOptimizedLayout showFooter={false}>
             {children}
           </PerformanceOptimizedLayout>
+          <FooterLuxe />
         </div>
         
         {/* Performance monitoring script */}

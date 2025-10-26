@@ -1,10 +1,22 @@
+import type { Metadata } from 'next';
+
 import BrandHeroGradient from '@/components/brand/BrandHeroGradient';
 import FaqAccordion from '@/components/faq/FaqAccordion';
 import CompositeBonding from '@/components/sections/treatments/CompositeBonding';
 
 import styles from './composite-bonding.module.css';
 
-export const metadata = { title: 'Composite Bonding' };
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL ?? 'https://www.stmaryshousedental.co.uk';
+const canonicalBase = siteUrl.endsWith('/') ? siteUrl.slice(0, -1) : siteUrl;
+const pageUrl = `${canonicalBase}/treatments/composite-bonding`;
+
+export const metadata: Metadata = {
+  title: 'Composite Bonding in Shoreham-by-Sea | St Mary’s House Dental',
+  description:
+    'Discover hand-sculpted composite bonding finished in a single visit at St Mary’s House Dental in Shoreham-by-Sea.',
+  alternates: { canonical: pageUrl },
+};
 
 const champagnePhase2 = process.env.NEXT_PUBLIC_CHAMPAGNE_PHASE2 === '1';
 
