@@ -95,7 +95,7 @@ export default function HeroLuxury({
       aria-labelledby="home-hero-title"
       style={focusRingVars}
     >
-      <div className="hero-panel">
+      <div className="hero-panel before:absolute before:inset-0 before:bg-gradient-to-br before:content-[''] after:absolute after:inset-0 after:mix-blend-overlay after:content-['']">
         {showParticles && <div className="hero-particles" aria-hidden="true" />}
         <div className="hero-panel-inner">
           <div className="max-w-7xl mx-auto px-6 md:px-8">
@@ -134,48 +134,10 @@ export default function HeroLuxury({
           color: var(--text-hero);
         }
 
-        .luxury-home-hero::before,
-        .luxury-home-hero::after {
-          content: "";
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-        }
-
-        .luxury-home-hero::before {
-          z-index: 1;
-          inset: -10% -20% -5% -20%;
-          background:
-            radial-gradient(1200px 600px at 0% 40%, color-mix(in srgb, var(--text-hero) 12%, transparent 88%), transparent 60%),
-            linear-gradient(135deg, color-mix(in srgb, var(--text-hero) 10%, transparent 90%), transparent 55%);
-          -webkit-mask-image:
-            linear-gradient(to bottom, rgb(0 0 0 / 1) 0 40%, transparent 60%),
-            linear-gradient(to right, rgb(0 0 0 / 0.9) 0 55%, rgb(0 0 0 / 0.7) 60%, transparent 85%);
-          -webkit-mask-composite: source-in;
-          mask-image:
-            linear-gradient(to bottom, rgb(0 0 0 / 1) 0 40%, transparent 60%),
-            linear-gradient(to right, rgb(0 0 0 / 0.9) 0 55%, rgb(0 0 0 / 0.7) 60%, transparent 85%);
-          mask-composite: intersect;
-          mix-blend-mode: screen;
-          transform: var(--wave-transform, translate3d(0, 0, 0));
-          transition: transform var(--motion-duration-slow) var(--motion-easing-smooth);
-        }
-
-        .luxury-home-hero::after {
-          z-index: 2;
-          inset: -1px;
-          background: repeating-radial-gradient(
-            circle at 20% 30%,
-            rgb(from var(--text-hero) r g b / var(--grain-opacity)) 0 var(--particles-size),
-            transparent var(--particles-size) calc(var(--particles-size) * 2)
-          );
-          mix-blend-mode: soft-light;
-          opacity: calc(var(--grain-opacity) * var(--hero-grain-strength, 1));
-        }
-
         .hero-panel {
           position: relative;
-          z-index: 3;
+          isolation: isolate;
+          z-index: 0;
           width: 100%;
           background: var(--gradient-champagne);
           box-shadow: var(--rim-gold-inset), var(--bloom-outer);
@@ -184,8 +146,48 @@ export default function HeroLuxury({
           display: flex;
         }
 
+        .hero-panel::before,
+        .hero-panel::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+        }
+
+        .hero-panel::before {
+          z-index: 0;
+          inset: -12% -22% -8% -22%;
+          background:
+            radial-gradient(1200px 600px at 0% 42%, color-mix(in srgb, var(--text-hero) 12%, transparent 88%), transparent 62%),
+            linear-gradient(135deg, color-mix(in srgb, var(--text-hero) 10%, transparent 90%), transparent 58%);
+          -webkit-mask-image:
+            linear-gradient(to bottom, rgb(0 0 0 / 1) 0 45%, transparent 68%),
+            linear-gradient(to right, rgb(0 0 0 / 0.9) 0 55%, rgb(0 0 0 / 0.7) 62%, transparent 85%);
+          -webkit-mask-composite: source-in;
+          mask-image:
+            linear-gradient(to bottom, rgb(0 0 0 / 1) 0 45%, transparent 68%),
+            linear-gradient(to right, rgb(0 0 0 / 0.9) 0 55%, rgb(0 0 0 / 0.7) 62%, transparent 85%);
+          mask-composite: intersect;
+          mix-blend-mode: screen;
+          transform: var(--wave-transform, translate3d(0, 0, 0));
+          transition: transform var(--motion-duration-slow) var(--motion-easing-smooth);
+        }
+
+        .hero-panel::after {
+          z-index: 3;
+          inset: -1px;
+          background: repeating-radial-gradient(
+            circle at 22% 32%,
+            rgb(from var(--text-hero) r g b / var(--grain-opacity)) 0 var(--particles-size),
+            transparent var(--particles-size) calc(var(--particles-size) * 2)
+          );
+          mix-blend-mode: soft-light;
+          opacity: calc(var(--grain-opacity) * var(--hero-grain-strength, 1));
+        }
+
         .hero-panel-inner {
           position: relative;
+          z-index: 2;
           width: 100%;
           padding: clamp(3rem, 8vw, 5rem) 0;
         }
@@ -193,6 +195,7 @@ export default function HeroLuxury({
         .hero-particles {
           position: absolute;
           inset: 0;
+          z-index: 1;
           background:
             radial-gradient(var(--particles-size), rgb(from var(--text-hero) r g b / calc(var(--particles-opacity) * 1.4)), transparent 70%) 12% 18% /
               var(--particles-spread) var(--particles-spread),
