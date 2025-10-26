@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import BrandHeroGradient from '@/components/brand/BrandHeroGradient';
 import FaqAccordion from '@/components/faq/FaqAccordion';
@@ -87,11 +87,27 @@ function HeroPreview({
 }
 
 export default function ChampagnePhaseTwoPreview() {
+  const [experimentsEnabled, setExperimentsEnabled] = useState(false);
+
+  useEffect(() => {
+    const syncFromUrl = () => {
+      const params = new URLSearchParams(window.location.search);
+      setExperimentsEnabled(params.get('exp') === '1');
+    };
+
+    syncFromUrl();
+    window.addEventListener('popstate', syncFromUrl);
+    return () => window.removeEventListener('popstate', syncFromUrl);
+  }, []);
+
   const [particles, setParticles] = useState<ParticleOption>('gold');
   const [grainOpacity, setGrainOpacity] = useState(0.14);
   const [driftEnabled, setDriftEnabled] = useState(true);
 
   const formattedGrain = useMemo(() => grainOpacity.toFixed(2), [grainOpacity]);
+  const appliedParticles = experimentsEnabled ? particles : 'gold';
+  const appliedGrain = experimentsEnabled ? grainOpacity : 0.14;
+  const appliedDrift = experimentsEnabled ? driftEnabled : true;
 
   return (
     <div className={`${styles.page} mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8`}>
@@ -112,6 +128,11 @@ export default function ChampagnePhaseTwoPreview() {
           <p>
             Particles, grain, and motion respond immediately for both hero variants.
           </p>
+          {!experimentsEnabled && (
+            <p className={styles.panelNotice}>
+              Experiments are disabled. Append <code>?exp=1</code> to the preview URL to unlock interactive layer controls.
+            </p>
+          )}
         </div>
         <div className={`${styles.panelControls} md:flex-row md:items-center md:justify-end`}>
           <label className={styles.controlInline} htmlFor="particles-select">
@@ -120,7 +141,11 @@ export default function ChampagnePhaseTwoPreview() {
               id="particles-select"
               className={styles.select}
               value={particles}
-              onChange={(event) => setParticles(event.target.value as ParticleOption)}
+              onChange={(event) => {
+                if (!experimentsEnabled) return;
+                setParticles(event.target.value as ParticleOption);
+              }}
+              disabled={!experimentsEnabled}
             >
               {particleOptions.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -139,7 +164,11 @@ export default function ChampagnePhaseTwoPreview() {
               step={GRAIN_STEP}
               className={styles.range}
               value={grainOpacity}
-              onChange={(event) => setGrainOpacity(Number(event.target.value))}
+              onChange={(event) => {
+                if (!experimentsEnabled) return;
+                setGrainOpacity(Number(event.target.value));
+              }}
+              disabled={!experimentsEnabled}
             />
           </label>
           <label className={styles.controlInline} htmlFor="drift-toggle">
@@ -150,7 +179,11 @@ export default function ChampagnePhaseTwoPreview() {
               role="switch"
               className={styles.toggle}
               checked={driftEnabled}
-              onChange={(event) => setDriftEnabled(event.target.checked)}
+              onChange={(event) => {
+                if (!experimentsEnabled) return;
+                setDriftEnabled(event.target.checked);
+              }}
+              disabled={!experimentsEnabled}
             />
           </label>
         </div>
@@ -159,11 +192,11 @@ export default function ChampagnePhaseTwoPreview() {
       <section className="grid gap-8 md:grid-cols-2" aria-label="Hero variants">
         <div className="space-y-4">
           <h3 className={styles.sectionTitle}>Particles + grain</h3>
-          <HeroPreview particles={particles} grain={grainOpacity} goldRim={false} driftEnabled={driftEnabled} />
+          <HeroPreview particles={appliedParticles} grain={appliedGrain} goldRim={false} driftEnabled={appliedDrift} />
         </div>
         <div className="space-y-4">
           <h3 className={styles.sectionTitle}>Add gold rim</h3>
-          <HeroPreview particles={particles} grain={grainOpacity} goldRim driftEnabled={driftEnabled} />
+          <HeroPreview particles={appliedParticles} grain={appliedGrain} goldRim driftEnabled={appliedDrift} />
         </div>
       </section>
 
