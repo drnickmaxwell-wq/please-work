@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Link from "next/link";
 
 export interface LuxuryHomeHeroProps {
@@ -10,9 +9,6 @@ export interface LuxuryHomeHeroProps {
   primaryLabel?: string;
   secondaryHref?: string;
   secondaryLabel?: string;
-  showParticles?: boolean;
-  showGrain?: boolean;
-  reducedMotion?: boolean;
 }
 
 export default function HeroLuxury({
@@ -22,301 +18,202 @@ export default function HeroLuxury({
   primaryLabel = "Book a consultation",
   secondaryHref = "/treatments",
   secondaryLabel = "Explore treatments",
-  showParticles = true,
-  showGrain = true,
-  reducedMotion,
 }: LuxuryHomeHeroProps) {
-  const heroRef = useRef<HTMLElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-
-  // Detect prefers-reduced-motion
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setPrefersReducedMotion(mediaQuery.matches);
-
-    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
-    mediaQuery.addEventListener("change", handler);
-    return () => mediaQuery.removeEventListener("change", handler);
-  }, []);
-
-  const isMotionEnabled = reducedMotion !== undefined ? !reducedMotion : !prefersReducedMotion;
-
-  // Parallax effect on mouse move
-  useEffect(() => {
-    if (!isMotionEnabled || !heroRef.current) return;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e;
-      const { innerWidth, innerHeight } = window;
-
-      // Normalize to -1 to 1 range
-      const x = (clientX / innerWidth - 0.5) * 2;
-      const y = (clientY / innerHeight - 0.5) * 2;
-
-      setMousePosition({ x, y });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [isMotionEnabled]);
-
-  // Calculate parallax transforms (wave ±4px, particles ±3px)
-  const waveTransform = isMotionEnabled
-    ? `translate3d(${mousePosition.x * 4}px, ${mousePosition.y * 4}px, 0)`
-    : "translate3d(0, 0, 0)";
-
-  const particlesTransform = isMotionEnabled
-    ? `translate3d(${mousePosition.x * -3}px, ${mousePosition.y * -3}px, 0)`
-    : "translate3d(0, 0, 0)";
-
-  const focusRingVars = {
-    "--outline-focus-color": "var(--brand-gold)",
-    "--wave-transform": waveTransform,
-    "--particle-transform": particlesTransform,
-    "--hero-grain-strength": showGrain ? "1" : "0",
-  } as CSSProperties;
-
-  const sectionClassName = [
-    "luxury-home-hero",
-    "relative",
-    "overflow-hidden",
-    "py-24",
-    "md:py-28",
-    isMotionEnabled ? "" : "motion-reduced",
-  ]
-    .filter(Boolean)
-    .join(" ");
-
   return (
-    <section
-      ref={heroRef}
-      className={sectionClassName}
-      aria-labelledby="home-hero-title"
-      style={focusRingVars}
-    >
-      <div className="hero-panel before:absolute before:inset-0 before:bg-gradient-to-br before:content-[''] after:absolute after:inset-0 after:mix-blend-overlay after:content-['']">
-        {showParticles && <div className="hero-particles" aria-hidden="true" />}
-        <div className="hero-panel-inner">
-          <div className="max-w-7xl mx-auto px-6 md:px-8">
-            <div className="hero-veil">
-              <div className="hero-content-wrapper">
-                <h1 id="home-hero-title" className="hero-title">
-                  {title}
-                </h1>
+    <section data-hero="champagne" aria-labelledby="home-hero-title">
+      <div className="hero-container">
+        <div className="hero-pane">
+          <span className="ink-veil" aria-hidden="true" />
 
-                {subtitle && <p className="hero-subtitle">{subtitle}</p>}
+          <div className="hero-copy">
+            <h1 id="home-hero-title">{title}</h1>
+            {subtitle && <p className="hero-subtitle">{subtitle}</p>}
 
-                <div className="hero-cta-group">
-                  <Link href={primaryHref} className="hero-cta hero-cta-primary">
-                    {primaryLabel}
-                  </Link>
+            <div className="cta" role="group" aria-label="Primary actions">
+              <Link href={primaryHref} className="hero-cta hero-cta-primary">
+                {primaryLabel}
+              </Link>
 
-                  {secondaryHref && secondaryLabel && (
-                    <Link href={secondaryHref} className="hero-cta hero-cta-secondary">
-                      {secondaryLabel}
-                    </Link>
-                  )}
-                </div>
-              </div>
+              {secondaryHref && secondaryLabel && (
+                <Link href={secondaryHref} className="hero-cta hero-cta-secondary">
+                  {secondaryLabel}
+                </Link>
+              )}
             </div>
           </div>
         </div>
       </div>
 
       <style jsx>{`
-        .luxury-home-hero {
+        section[data-hero="champagne"] {
           position: relative;
-          isolation: isolate;
+          width: 100vw;
+          margin-inline: calc(50% - 50vw);
+          overflow: clip;
+          min-height: clamp(56vh, 68vh, 78vh);
+          background: linear-gradient(
+            135deg,
+            var(--champ-start) 0%,
+            var(--champ-mid) 55%,
+            var(--champ-end) 100%
+          );
           display: flex;
           align-items: center;
-          min-height: 68vh;
-          color: var(--text-hero);
-        }
-
-        .hero-panel {
-          position: relative;
+          justify-content: center;
           isolation: isolate;
-          z-index: 0;
-          width: 100%;
-          background: var(--gradient-champagne);
-          box-shadow: var(--rim-gold-inset), var(--bloom-outer);
-          border-radius: clamp(2rem, 6vw, 3rem);
-          overflow: hidden;
-          display: flex;
         }
 
-        .hero-panel::before,
-        .hero-panel::after {
+        section[data-hero="champagne"]::before,
+        section[data-hero="champagne"]::after {
           content: "";
           position: absolute;
           inset: 0;
           pointer-events: none;
         }
 
-        .hero-panel::before {
-          z-index: 0;
-          inset: -12% -22% -8% -22%;
+        section[data-hero="champagne"]::before {
           background:
-            radial-gradient(1200px 600px at 0% 42%, color-mix(in srgb, var(--text-hero) 12%, transparent 88%), transparent 62%),
-            linear-gradient(135deg, color-mix(in srgb, var(--text-hero) 10%, transparent 90%), transparent 58%);
-          -webkit-mask-image:
-            linear-gradient(to bottom, rgb(0 0 0 / 1) 0 45%, transparent 68%),
-            linear-gradient(to right, rgb(0 0 0 / 0.9) 0 55%, rgb(0 0 0 / 0.7) 62%, transparent 85%);
-          -webkit-mask-composite: source-in;
-          mask-image:
-            linear-gradient(to bottom, rgb(0 0 0 / 1) 0 45%, transparent 68%),
-            linear-gradient(to right, rgb(0 0 0 / 0.9) 0 55%, rgb(0 0 0 / 0.7) 62%, transparent 85%);
-          mask-composite: intersect;
-          mix-blend-mode: screen;
-          transform: var(--wave-transform, translate3d(0, 0, 0));
-          transition: transform var(--motion-duration-slow) var(--motion-easing-smooth);
-        }
-
-        .hero-panel::after {
-          z-index: 3;
-          inset: -1px;
-          background: repeating-radial-gradient(
-            circle at 22% 32%,
-            rgb(from var(--text-hero) r g b / var(--grain-opacity)) 0 var(--particles-size),
-            transparent var(--particles-size) calc(var(--particles-size) * 2)
-          );
+            radial-gradient(120% 120% at 0% 100%, var(--wave-ink) 0%, transparent 60%),
+            radial-gradient(90% 90% at 100% 10%, var(--wave-ink-soft) 0%, transparent 70%);
           mix-blend-mode: soft-light;
-          opacity: calc(var(--grain-opacity) * var(--hero-grain-strength, 1));
+          opacity: var(--fx-wave-opacity);
         }
 
-        .hero-panel-inner {
+        section[data-hero="champagne"]::after {
+          background-image: repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.015) 0px,
+            rgba(0, 0, 0, 0.02) 1px,
+            transparent 2px
+          );
+          opacity: var(--fx-grain-opacity);
+        }
+
+        .hero-container {
           position: relative;
-          z-index: 2;
-          width: 100%;
-          padding: clamp(3rem, 8vw, 5rem) 0;
+          width: min(100%, 1320px);
+          margin-inline: auto;
+          padding: clamp(72px, 8vw, 112px) clamp(20px, 6vw, 56px);
+          display: flex;
+          justify-content: center;
         }
 
-        .hero-particles {
+        .hero-pane {
+          position: relative;
+          background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.26)),
+            var(--glass-bg);
+          backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+          -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+          border-radius: 22px;
+          box-shadow: var(--shadow-glass), var(--glow-edge);
+          outline: 1px solid var(--glass-border);
+          padding: clamp(24px, 4vw, 56px);
+          width: min(100%, 720px);
+        }
+
+        .hero-pane::before {
+          content: "";
+          position: absolute;
+          inset: 10px;
+          border-radius: inherit;
+          box-shadow: 0 0 0 1px var(--glass-inner-ring);
+          opacity: 0.75;
+          pointer-events: none;
+        }
+
+        .ink-veil {
           position: absolute;
           inset: 0;
-          z-index: 1;
-          background:
-            radial-gradient(var(--particles-size), rgb(from var(--text-hero) r g b / calc(var(--particles-opacity) * 1.4)), transparent 70%) 12% 18% /
-              var(--particles-spread) var(--particles-spread),
-            radial-gradient(var(--particles-size), rgb(from var(--text-hero) r g b / calc(var(--particles-opacity) * 1.2)), transparent 70%) 48% 42% /
-              calc(var(--particles-spread) * 0.9) calc(var(--particles-spread) * 0.9),
-            radial-gradient(var(--particles-size), rgb(from var(--text-hero) r g b / calc(var(--particles-opacity) * 1.3)), transparent 70%) 76% 24% /
-              calc(var(--particles-spread) * 1.2) calc(var(--particles-spread) * 1.2);
-          opacity: var(--particles-opacity);
-          mix-blend-mode: overlay;
-          filter: blur(0.2px);
+          border-radius: inherit;
+          background: linear-gradient(
+            180deg,
+            rgba(8, 14, 24, 0.28),
+            rgba(8, 14, 24, 0)
+          );
           pointer-events: none;
-          transform: var(--particle-transform, translate3d(0, 0, 0));
-          transition: transform var(--motion-duration-slow) var(--motion-easing-smooth);
-          animation: float var(--motion-duration-slow) var(--motion-easing-smooth) alternate infinite;
         }
 
-        .hero-veil {
+        .hero-copy {
           position: relative;
-          border-radius: clamp(1.5rem, 4vw, 2.5rem);
-          padding: clamp(2rem, 5vw, 3rem);
-          background: linear-gradient(125deg, var(--veil-darker) 0%, var(--veil-dark) 35%, transparent 70%);
-          backdrop-filter: blur(18px);
-          -webkit-backdrop-filter: blur(18px);
-          box-shadow: inset 0 0 0 1px var(--glass-highlight);
+          display: grid;
+          gap: clamp(16px, 3vw, 28px);
         }
 
-        .hero-content-wrapper {
-          position: relative;
-          max-width: 42rem;
-          color: var(--text-hero);
-          text-shadow: var(--shadow-hero-text);
-          display: flex;
-          flex-direction: column;
-          gap: 2rem;
-        }
-
-        .hero-title {
-          font-family: var(--font-display);
-          font-size: clamp(2.75rem, 6vw, 4.5rem);
-          font-weight: 700;
-          line-height: 1.1;
-          letter-spacing: -0.015em;
+        h1 {
           margin: 0;
+          color: var(--ink-on-glass);
+          font-size: clamp(34px, 6vw, 64px);
+          line-height: 1.04;
+          letter-spacing: -0.01em;
+          font-family: var(--font-display);
+          font-weight: 600;
         }
 
         .hero-subtitle {
-          font-family: var(--font-body);
-          font-size: clamp(1rem, 1.8vw, 1.25rem);
-          line-height: 1.6;
           margin: 0;
-          color: var(--text-hero-muted);
+          color: var(--body-on-glass);
+          font-family: var(--font-body);
+          font-size: clamp(16px, 2.2vw, 20px);
+          line-height: 1.6;
+          max-width: 60ch;
         }
 
-        .hero-cta-group {
+        .cta {
           display: flex;
           flex-wrap: wrap;
-          gap: 1rem;
+          gap: 16px;
         }
 
         .hero-cta {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          min-width: 11rem;
-          min-height: 3rem;
-          padding: 0.75rem 2rem;
+          min-height: 48px;
+          padding: 0.85rem 2.25rem;
+          border-radius: var(--radius-pill);
           font-family: var(--font-body);
           font-weight: 600;
           font-size: 1rem;
-          border-radius: var(--radius-pill);
           text-decoration: none;
-          transition: transform var(--motion-duration-normal) var(--motion-easing-smooth),
+          transition:
+            transform var(--motion-duration-normal) var(--motion-easing-smooth),
             box-shadow var(--motion-duration-normal) var(--motion-easing-smooth);
+          box-shadow: 0 3px 0 rgba(0, 0, 0, 0.25);
+        }
+
+        .hero-cta:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 5px 18px rgba(226, 182, 74, 0.25);
+        }
+
+        .hero-cta:focus-visible {
+          outline: 2px solid var(--glass-inner-ring);
+          outline-offset: 2px;
         }
 
         .hero-cta-primary {
-          background: var(--gradient-cta);
-          color: var(--paper);
-          box-shadow: var(--shadow-glow);
-        }
-
-        .hero-cta-primary:hover {
-          transform: translateY(-2px);
-          box-shadow: var(--shadow-glow), var(--shadow-card);
-        }
-
-        .hero-cta-primary:focus-visible {
-          outline: none;
-          box-shadow: var(--outline-focus);
+          color: var(--ink);
+          background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.92),
+            rgba(226, 182, 74, 0.65)
+          );
         }
 
         .hero-cta-secondary {
-          background: var(--glass-bg-strong);
-          color: var(--paper);
-          border: 1px solid var(--glass-border);
-          backdrop-filter: var(--glass-blur);
-          -webkit-backdrop-filter: var(--glass-blur);
+          color: var(--ink-on-glass);
+          background: rgba(10, 19, 32, 0.35);
+          border: 1px solid rgba(255, 255, 255, 0.24);
         }
 
-        .hero-cta-secondary:hover {
-          transform: translateY(-2px);
-          box-shadow: var(--shadow-card-soft);
-        }
-
-        .hero-cta-secondary:focus-visible {
-          outline: none;
-          box-shadow: var(--outline-focus);
-        }
-
-        @media (max-width: 640px) {
-          .hero-panel {
-            border-radius: clamp(1.5rem, 8vw, 2.5rem);
+        @media (max-width: 768px) {
+          .hero-container {
+            padding-block: clamp(72px, 16vw, 112px);
           }
 
-          .hero-panel-inner {
-            padding: clamp(2.5rem, 10vw, 4rem) 0;
-          }
-
-          .hero-veil {
-            padding: clamp(1.5rem, 8vw, 2.5rem);
-            background: linear-gradient(135deg, var(--veil-darker) 0%, var(--veil-dark) 45%, transparent 80%);
+          .hero-pane {
+            padding: clamp(24px, 8vw, 48px);
           }
 
           .hero-cta {
@@ -325,35 +222,8 @@ export default function HeroLuxury({
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .hero-cta,
-          .hero-particles,
-          .luxury-home-hero::before {
-            transition: none !important;
-          }
-
-          .hero-particles {
-            animation: none !important;
-          }
-        }
-
-        .luxury-home-hero.motion-reduced::before {
-          transition: none;
-          transform: translate3d(0, 0, 0);
-        }
-
-        .luxury-home-hero.motion-reduced .hero-particles {
-          transition: none;
-          animation: none;
-          transform: translate3d(0, 0, 0);
-        }
-
-        @keyframes float {
-          from {
-            transform: translate3d(0, -2px, 0);
-          }
-
-          to {
-            transform: translate3d(0, 2px, 0);
+          .hero-cta {
+            transition-duration: 0ms !important;
           }
         }
       `}</style>

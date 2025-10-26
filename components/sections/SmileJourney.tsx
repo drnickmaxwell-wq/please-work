@@ -57,66 +57,49 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
   );
 
   const focusRingVars = {
-    "--outline-focus-color": "var(--brand-gold)",
+    "--outline-focus-color": "var(--glass-inner-ring)",
   } as CSSProperties;
 
   return (
-    <section
-      className="journey-section relative overflow-hidden py-20 md:py-24"
-      aria-labelledby="journey-hero-title"
-      style={focusRingVars}
-    >
-      <div className="journey-layer journey-gradient" aria-hidden />
-      <div className="journey-layer journey-wave" aria-hidden />
-      <div className="journey-layer journey-particles" aria-hidden />
-      <div className="journey-layer journey-grain" aria-hidden />
-      <div className="absolute inset-0 pointer-events-none z-20" style={{ background: "var(--hero-veil)" }} aria-hidden />
+    <section className="journey-section" aria-labelledby="journey-hero-title" style={focusRingVars}>
+      <div className="journey-inner">
+        <header className="journey-header" id="journey-hero-title">
+          <h2>Your Smile Journey</h2>
+          <p>Discover the path to your perfect smile</p>
+          <Link href="/ai-smile-quiz" className="journey-cta">
+            Start Your Journey
+          </Link>
+        </header>
 
-      <div className="relative z-30">
-        <div className="max-w-7xl mx-auto px-6 md:px-8 space-y-16">
-          <header className="journey-header text-center text-white">
-            <h2 id="journey-hero-title">Your Smile Journey</h2>
-            <p>Discover the path to your perfect smile</p>
-            <Link href="/ai-smile-quiz" className="journey-cta focus-visible:outline-none">
-              Start Your Journey
-            </Link>
-          </header>
+        <div className="journey-grid" aria-label="Patient journey timeline">
+          {steps.map((step) => {
+            const iconPath = step.icon ? iconMap[step.icon] : undefined;
+            return (
+              <article key={step.title} role="group" tabIndex={0} className="journey-card">
+                {iconPath && (
+                  <div className="journey-card-icon">
+                    <img src={iconPath} alt="" aria-hidden="true" />
+                  </div>
+                )}
+                <h3>{step.title}</h3>
+                <p>{step.body}</p>
+              </article>
+            );
+          })}
+        </div>
 
-          <div className="journey-grid" aria-label="Patient journey timeline">
-            {steps.map((step) => {
-              const iconPath = step.icon ? iconMap[step.icon] : undefined;
-              return (
-                <article
-                  key={step.title}
-                  role="group"
-                  tabIndex={0}
-                  className="journey-card focus-visible:outline-none"
-                >
-                  {iconPath && (
-                    <div className="journey-card-icon">
-                      <img src={iconPath} alt="" aria-hidden="true" />
-                    </div>
-                  )}
-                  <h3>{step.title}</h3>
-                  <p>{step.body}</p>
-                </article>
-              );
-            })}
-          </div>
-
-          <div className="journey-callout">
-            <div className="journey-callout-sheen" aria-hidden />
-            <div className="journey-callout-content">
-              <h3>Ready to Begin?</h3>
-              <p>Take the first step toward your perfect smile.</p>
-              <div className="journey-callout-actions">
-                <Link href="/contact" className="journey-cta-primary focus-visible:outline-none">
-                  Book a consultation
-                </Link>
-                <Link href="/treatments" className="journey-cta-secondary focus-visible:outline-none">
-                  See treatment options
-                </Link>
-              </div>
+        <div className="journey-callout">
+          <span className="journey-callout-veil" aria-hidden="true" />
+          <div className="journey-callout-content">
+            <h3>Ready to Begin?</h3>
+            <p>Take the first step toward your perfect smile.</p>
+            <div className="journey-callout-actions">
+              <Link href="/contact" className="journey-cta-primary">
+                Book a consultation
+              </Link>
+              <Link href="/treatments" className="journey-cta-secondary">
+                See treatment options
+              </Link>
             </div>
           </div>
         </div>
@@ -124,148 +107,177 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
 
       <style jsx>{`
         .journey-section {
-          background: var(--background);
-          color: var(--paper);
+          position: relative;
+          width: 100vw;
+          margin-inline: calc(50% - 50vw);
+          overflow: clip;
+          background: linear-gradient(
+            135deg,
+            var(--champ-start) 0%,
+            var(--champ-mid) 55%,
+            var(--champ-end) 100%
+          );
+          padding-block: clamp(96px, 14vw, 168px);
+          color: var(--ink-on-glass);
+          isolation: isolate;
         }
 
-        .journey-layer {
+        .journey-section::before,
+        .journey-section::after {
+          content: "";
           position: absolute;
           inset: 0;
           pointer-events: none;
-          z-index: 10;
         }
 
-        .journey-gradient {
-          background: var(--gradient-champagne);
+        .journey-section::before {
+          background:
+            radial-gradient(140% 140% at 10% 110%, var(--wave-ink) 0%, transparent 60%),
+            radial-gradient(120% 120% at 100% -10%, var(--wave-ink-soft) 0%, transparent 70%);
+          mix-blend-mode: soft-light;
+          opacity: var(--fx-wave-opacity);
         }
 
-        .journey-wave {
-          background-image: url('/assets/manus/waves/home-hero-mask-desktop.webp');
-          background-size: cover;
-          background-position: center;
-          background-repeat: no-repeat;
-          mix-blend-mode: overlay;
-          opacity: 0.35;
+        .journey-section::after {
+          background-image: repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.015) 0px,
+            rgba(0, 0, 0, 0.02) 1px,
+            transparent 2px
+          );
+          opacity: var(--fx-grain-opacity);
         }
 
-        @media (max-width: 768px) {
-          .journey-wave {
-            background-image: url('/assets/manus/waves/home-hero-mask-mobile.webp');
-          }
-        }
-
-        .journey-particles {
-          background-image: url('/assets/manus/particles/home-hero-particles.webp');
-          background-size: 1024px 1024px;
-          background-repeat: repeat;
-          mix-blend-mode: screen;
-          opacity: 0.06;
-        }
-
-        .journey-grain {
-          background-image: url('/assets/manus/textures/home-hero-film-grain.webp');
-          background-size: 512px 512px;
-          background-repeat: repeat;
-          mix-blend-mode: overlay;
-          opacity: 0.06;
+        .journey-inner {
+          position: relative;
+          width: min(100%, 1280px);
+          margin-inline: auto;
+          padding-inline: clamp(20px, 6vw, 56px);
+          display: grid;
+          gap: clamp(64px, 8vw, 96px);
+          z-index: 1;
         }
 
         .journey-header {
           display: grid;
           gap: 1rem;
           justify-items: center;
-          text-shadow: var(--shadow-hero-text);
+          text-align: center;
         }
 
         .journey-header h2 {
-          font-family: var(--font-display);
-          font-size: clamp(2.25rem, 5vw, 3.5rem);
-          font-weight: 700;
-          line-height: 1.2;
           margin: 0;
+          font-family: var(--font-display);
+          font-size: clamp(32px, 5vw, 48px);
+          font-weight: 600;
+          line-height: 1.15;
+          color: var(--ink-on-glass);
         }
 
         .journey-header p {
-          font-family: var(--font-body);
-          font-size: clamp(1rem, 1.6vw, 1.25rem);
-          line-height: 1.6;
-          max-width: 36rem;
           margin: 0;
-          opacity: 0.92;
+          font-family: var(--font-body);
+          color: var(--body-on-glass);
+          font-size: clamp(16px, 2vw, 20px);
+          line-height: 1.6;
+          max-width: 40ch;
         }
 
         .journey-cta {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          min-height: 3rem;
-          padding: 0.75rem 2rem;
-          margin-top: 0.5rem;
+          min-height: 48px;
+          padding: 0.85rem 2.25rem;
+          border-radius: var(--radius-pill);
           font-family: var(--font-body);
           font-weight: 600;
           font-size: 1rem;
-          border-radius: var(--radius-pill);
-          color: var(--paper);
-          background: var(--gradient-cta);
-          box-shadow: var(--shadow-glow);
           text-decoration: none;
-          transition: transform var(--motion-duration-normal) var(--motion-easing-smooth),
+          color: var(--ink);
+          background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.92),
+            rgba(226, 182, 74, 0.65)
+          );
+          box-shadow: 0 3px 0 rgba(0, 0, 0, 0.25);
+          transition:
+            transform var(--motion-duration-normal) var(--motion-easing-smooth),
             box-shadow var(--motion-duration-normal) var(--motion-easing-smooth);
         }
 
         .journey-cta:hover {
-          transform: translateY(-2px);
-          box-shadow: var(--shadow-glow), var(--shadow-card);
+          transform: translateY(-1px);
+          box-shadow: 0 5px 18px rgba(226, 182, 74, 0.25);
         }
 
         .journey-cta:focus-visible {
-          outline: none;
-          box-shadow: var(--outline-focus);
+          outline: 2px solid var(--glass-inner-ring);
+          outline-offset: 2px;
         }
 
         .journey-grid {
           display: grid;
-          gap: 1.75rem;
+          gap: clamp(20px, 4vw, 32px);
           grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         }
 
         .journey-card {
           position: relative;
-          background: var(--glass-bg-soft);
-          border-radius: 1.125rem;
-          padding: 1.75rem;
-          backdrop-filter: var(--glass-blur);
-          -webkit-backdrop-filter: var(--glass-blur);
           display: grid;
           gap: 1rem;
-          color: var(--text-hero);
-          box-shadow: inset 0 0 0 1px var(--glass-highlight);
-          transition: transform var(--motion-duration-normal) var(--motion-easing-smooth),
+          padding: clamp(24px, 4vw, 32px);
+          border-radius: 20px;
+          background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0.28)),
+            var(--glass-bg);
+          backdrop-filter: blur(10px) saturate(115%);
+          -webkit-backdrop-filter: blur(10px) saturate(115%);
+          border: 1px solid var(--glass-border);
+          box-shadow: var(--shadow-glass);
+          color: var(--ink-on-glass);
+          transition:
+            transform var(--motion-duration-normal) var(--motion-easing-smooth),
             box-shadow var(--motion-duration-normal) var(--motion-easing-smooth);
+        }
+
+        .journey-card::before {
+          content: "";
+          position: absolute;
+          inset: 8px;
+          border-radius: inherit;
+          box-shadow: 0 0 0 1px var(--glass-inner-ring);
+          opacity: 0.35;
+          pointer-events: none;
+          transition: opacity var(--motion-duration-fast) var(--motion-easing-smooth);
         }
 
         .journey-card:hover {
           transform: translateY(-2px);
-          box-shadow: inset 0 0 0 1px var(--glass-keyline), var(--shadow-card);
+          box-shadow: var(--shadow-glass), 0 8px 22px rgba(0, 0, 0, 0.25);
+        }
+
+        .journey-card:hover::before {
+          opacity: 0.55;
         }
 
         .journey-card:focus-visible {
-          outline: none;
-          box-shadow:
-            inset 0 0 0 2px var(--glass-keyline),
-            0 0 0 4px color-mix(in srgb, var(--brand-gold) 32%, transparent),
-            0 22px 60px color-mix(in srgb, var(--navy-950) 28%, transparent);
+          outline: 2px solid var(--glass-inner-ring);
+          outline-offset: 2px;
+        }
+
+        .journey-card:focus-visible::before {
+          opacity: 0.55;
         }
 
         .journey-card-icon {
           width: 3rem;
           height: 3rem;
           border-radius: 0.75rem;
-          border: 1px solid var(--glass-border);
-          background: var(--gradient-champagne);
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          display: grid;
+          place-items: center;
+          background: rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(255, 255, 255, 0.24);
         }
 
         .journey-card-icon img {
@@ -275,65 +287,77 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
         }
 
         .journey-card h3 {
+          margin: 0;
           font-family: var(--font-display);
           font-size: 1.35rem;
           font-weight: 600;
-          margin: 0;
-          color: var(--text-hero);
         }
 
         .journey-card p {
           margin: 0;
           font-family: var(--font-body);
+          color: var(--body-on-glass);
           line-height: 1.6;
-          color: var(--text-hero-muted);
         }
 
         .journey-callout {
           position: relative;
-          overflow: hidden;
-          border-radius: 1.5rem;
-          padding: clamp(2rem, 4vw, 3rem);
-          background: var(--glass-bg-strong);
+          border-radius: 24px;
+          padding: clamp(32px, 6vw, 48px);
+          background:
+            linear-gradient(200deg, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0.32)),
+            var(--glass-bg);
           border: 1px solid var(--glass-border);
-          box-shadow: var(--shadow-card);
-          text-align: center;
+          box-shadow: var(--shadow-glass);
+          backdrop-filter: blur(12px) saturate(120%);
+          -webkit-backdrop-filter: blur(12px) saturate(120%);
+          overflow: hidden;
         }
 
-        .journey-callout-sheen {
+        .journey-callout::before {
+          content: "";
+          position: absolute;
+          inset: 12px;
+          border-radius: inherit;
+          box-shadow: 0 0 0 1px var(--glass-inner-ring);
+          opacity: 0.35;
+          pointer-events: none;
+        }
+
+        .journey-callout-veil {
           position: absolute;
           inset: 0;
-          background: var(--gradient-champagne);
-          opacity: 0.12;
+          background: linear-gradient(180deg, rgba(8, 14, 24, 0.32), rgba(8, 14, 24, 0));
+          pointer-events: none;
         }
 
         .journey-callout-content {
           position: relative;
           display: grid;
-          gap: 1.5rem;
+          gap: clamp(16px, 3vw, 24px);
           justify-items: center;
-          text-shadow: var(--shadow-hero-text);
-          color: var(--text-hero);
+          text-align: center;
+          color: var(--ink-on-glass);
         }
 
         .journey-callout-content h3 {
-          font-family: var(--font-display);
-          font-size: clamp(1.75rem, 3vw, 2.25rem);
-          font-weight: 700;
           margin: 0;
+          font-family: var(--font-display);
+          font-size: clamp(28px, 4vw, 36px);
+          font-weight: 600;
         }
 
         .journey-callout-content p {
-          font-family: var(--font-body);
           margin: 0;
+          font-family: var(--font-body);
+          color: var(--body-on-glass);
           line-height: 1.6;
-          color: var(--text-hero-muted);
         }
 
         .journey-callout-actions {
           display: flex;
           flex-wrap: wrap;
-          gap: 1rem;
+          gap: 16px;
           justify-content: center;
         }
 
@@ -342,48 +366,56 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          min-height: 3rem;
-          padding: 0.75rem 2rem;
+          min-height: 48px;
+          padding: 0.85rem 2.25rem;
           border-radius: var(--radius-pill);
           font-family: var(--font-body);
           font-weight: 600;
           font-size: 1rem;
           text-decoration: none;
-          transition: transform var(--motion-duration-normal) var(--motion-easing-smooth),
+          transition:
+            transform var(--motion-duration-normal) var(--motion-easing-smooth),
             box-shadow var(--motion-duration-normal) var(--motion-easing-smooth);
         }
 
         .journey-cta-primary {
-          background: var(--gradient-cta);
-          color: var(--paper);
-          box-shadow: var(--shadow-glow);
-        }
-
-        .journey-cta-primary:hover {
-          transform: translateY(-2px);
-          box-shadow: var(--shadow-glow), var(--shadow-card);
+          color: var(--ink);
+          background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.92),
+            rgba(226, 182, 74, 0.65)
+          );
+          box-shadow: 0 3px 0 rgba(0, 0, 0, 0.25);
         }
 
         .journey-cta-secondary {
-          background: var(--glass-bg-weak);
-          color: var(--paper);
-          border: 1px solid var(--glass-border);
-          backdrop-filter: var(--glass-blur);
-          -webkit-backdrop-filter: var(--glass-blur);
+          color: var(--ink-on-glass);
+          background: rgba(10, 19, 32, 0.35);
+          border: 1px solid rgba(255, 255, 255, 0.24);
+          box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2);
         }
 
+        .journey-cta-primary:hover,
         .journey-cta-secondary:hover {
-          transform: translateY(-2px);
-          box-shadow: var(--shadow-card-soft);
+          transform: translateY(-1px);
+          box-shadow: 0 5px 18px rgba(226, 182, 74, 0.25);
         }
 
         .journey-cta-primary:focus-visible,
         .journey-cta-secondary:focus-visible {
-          outline: none;
-          box-shadow: var(--outline-focus);
+          outline: 2px solid var(--glass-inner-ring);
+          outline-offset: 2px;
         }
 
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
+          .journey-card {
+            padding: clamp(20px, 6vw, 28px);
+          }
+
+          .journey-callout {
+            padding: clamp(28px, 10vw, 40px);
+          }
+
           .journey-cta,
           .journey-cta-primary,
           .journey-cta-secondary {
@@ -392,8 +424,11 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .journey-card:hover {
-            transform: none;
+          .journey-cta,
+          .journey-card,
+          .journey-cta-primary,
+          .journey-cta-secondary {
+            transition-duration: 0ms !important;
           }
         }
       `}</style>

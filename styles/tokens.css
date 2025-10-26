@@ -54,6 +54,37 @@
   --glass-bg-dark: rgba(12, 21, 32, 0.45);
 }
 
+:root {
+  /* Manus luxury champagne hero tokens */
+  --champ-start: #d94591;
+  --champ-mid: #2ec9b5;
+  --champ-end: #e2b64a;
+
+  --wave-ink: rgba(8, 14, 24, 0.28);
+  --wave-ink-soft: rgba(8, 14, 24, 0.16);
+
+  --fx-wave-opacity: 0.65;
+  --fx-grain-opacity: 0.08;
+
+  --glass-bg: rgba(14, 22, 34, 0.42);
+  --glass-border: rgba(255, 255, 255, 0.28);
+  --glass-inner-ring: rgba(255, 215, 160, 0.25);
+  --glass-blur: 16px;
+
+  --shadow-glass: 0 8px 36px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.18);
+  --glow-edge: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 0 24px rgba(226, 182, 74, 0.18);
+
+  --motion-duration-fast: 140ms;
+  --motion-duration-normal: 260ms;
+  --motion-duration-slow: 420ms;
+  --motion-easing-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --ink: #0a1320;
+  --ink-strong: #060a12;
+  --ink-on-glass: rgba(255, 255, 255, 0.96);
+  --body-on-glass: rgba(255, 255, 255, 0.86);
+}
+
 /* SMH Aliases for compatibility */
 :root {
   --smh-primary-magenta: var(--brand-magenta);
