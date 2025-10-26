@@ -139,3 +139,37 @@
 
   --hero-veil: linear-gradient(180deg, rgba(8,20,30,.28), rgba(8,20,30,.28));
 }
+
+/* --- SMH Champagne hero/particle/glass tokens --- */
+:root {
+  /* shadows & rims */
+  --shadow-hero-text: 0 1px 0 rgba(0,0,0,.25), 0 18px 40px rgba(2,10,18,.22);
+  --rim-gold-inset: inset 0 0 0 2px rgba(233, 200, 132, .75), inset 0 0 0 1px rgba(255,255,255,.06);
+  --bloom-outer: 0 22px 60px rgba(255, 220, 160, .25);
+
+  /* glass panels (strong/soft) */
+  --glass-bg-strong: rgba(12,18,24,.66);
+  --glass-bg-soft: rgba(12,18,24,.46);
+  --glass-keyline: rgba(233, 200, 132, .45);
+  --glass-highlight: rgba(255,255,255,.12);
+
+  /* particles & grain */
+  --grain-opacity: .07;                /* 0 – .12 */
+  --particles-opacity: .15;            /* 0 – .25 */
+  --particles-size: 2px;
+  --particles-spread: 140px;
+
+  /* motion */
+  --motion-duration-fast: .22s;
+  --motion-duration-normal: .36s;
+  --motion-duration-slow: .6s;
+  --motion-easing-smooth: cubic-bezier(.22,.61,.36,1);
+
+  /* contrast helpers */
+  --veil-dark: rgba(3,6,10,.28);       /* overlay for bright gradient bands */
+  --veil-darker: rgba(3,6,10,.38);
+
+  /* headline/body */
+  --text-hero: #fff;
+  --text-hero-muted: rgba(255,255,255,.82);
+}
