@@ -22,6 +22,7 @@ export default function HeroLuxury({
 }: HeroLuxuryProps) {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -34,6 +35,12 @@ export default function HeroLuxury({
 
     mediaQuery.addEventListener("change", handleChange);
     return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
+  useEffect(() => {
+    // Entrance animation
+    const timer = setTimeout(() => setIsVisible(true), 50);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -68,34 +75,39 @@ export default function HeroLuxury({
       {/* Layer 1: Gradient Base */}
       <div className="hero-gradient" aria-hidden="true" />
 
-      {/* Layer 2: Wave Mask (CSS-only) */}
-      <div className="hero-wave" style={parallaxWave} aria-hidden="true" />
+      {/* Layer 2: CSS Wave Masks (3-4 diagonal layers) */}
+      <div className="hero-waves" style={parallaxWave} aria-hidden="true">
+        <div className="wave-layer wave-1" />
+        <div className="wave-layer wave-2" />
+        <div className="wave-layer wave-3" />
+        <div className="wave-layer wave-4" />
+      </div>
 
-      {/* Layer 3: Particles (CSS-only) */}
+      {/* Layer 3: Gold Particles */}
       <div className="hero-particles" style={parallaxParticles} aria-hidden="true" />
 
-      {/* Layer 4: Film Grain (CSS-only) */}
+      {/* Layer 4: Film Grain */}
       <div className="hero-grain" aria-hidden="true" />
 
-      {/* Layer 5: Content */}
-      <div className="hero-content">
-        <div className="hero-pane">
-          <div className="ink-veil" aria-hidden="true" />
-          <div className="hero-copy">
-            <h1 id="hero-title">{title}</h1>
-            {subtitle && <p className="hero-subtitle">{subtitle}</p>}
+      {/* Layer 5: Content with Frosted Glass Pane */}
+      <div className={`hero-content ${isVisible ? "visible" : ""}`}>
+        {/* Ink veil behind text for contrast */}
+        <div className="ink-veil" aria-hidden="true" />
+        
+        <div className="glass-pane">
+          <h1 id="hero-title">{title}</h1>
+          {subtitle && <p className="hero-subtitle">{subtitle}</p>}
 
-            <div className="hero-ctas" role="group" aria-label="Primary actions">
-              <Link href={primaryHref} className="hero-cta hero-cta-primary">
-                {primaryLabel}
+          <div className="hero-ctas" role="group" aria-label="Primary actions">
+            <Link href={primaryHref} className="hero-cta hero-cta-primary">
+              {primaryLabel}
+            </Link>
+
+            {secondaryHref && secondaryLabel && (
+              <Link href={secondaryHref} className="hero-cta hero-cta-secondary">
+                {secondaryLabel}
               </Link>
-
-              {secondaryHref && secondaryLabel && (
-                <Link href={secondaryHref} className="hero-cta hero-cta-secondary">
-                  {secondaryLabel}
-                </Link>
-              )}
-            </div>
+            )}
           </div>
         </div>
       </div>
@@ -121,78 +133,127 @@ export default function HeroLuxury({
           z-index: 1;
         }
 
-        /* Layer 2: Wave Mask (CSS diagonal waves) */
-        .hero-wave {
+        /* Layer 2: CSS Wave Masks (diagonal layers) */
+        .hero-waves {
           position: absolute;
           inset: 0;
           z-index: 2;
-          background: repeating-linear-gradient(
-            -45deg,
-            transparent,
-            transparent 40px,
-            rgba(11, 19, 32, 0.18) 40px,
-            rgba(11, 19, 32, 0.18) 80px,
-            transparent 80px,
-            transparent 120px,
-            rgba(11, 19, 32, 0.12) 120px,
-            rgba(11, 19, 32, 0.12) 160px
-          );
-          mix-blend-mode: overlay;
-          opacity: 0.6;
           transition: transform var(--motion-normal) var(--motion-easing);
         }
 
+        .wave-layer {
+          position: absolute;
+          inset: 0;
+          mix-blend-mode: overlay;
+        }
+
+        .wave-1 {
+          background: linear-gradient(
+            135deg,
+            transparent 0%,
+            transparent 20%,
+            rgba(255, 255, 255, 0.08) 40%,
+            rgba(255, 255, 255, 0.12) 50%,
+            rgba(255, 255, 255, 0.08) 60%,
+            transparent 80%,
+            transparent 100%
+          );
+          opacity: 0.6;
+        }
+
+        .wave-2 {
+          background: linear-gradient(
+            125deg,
+            transparent 0%,
+            transparent 30%,
+            rgba(0, 0, 0, 0.06) 45%,
+            rgba(0, 0, 0, 0.1) 55%,
+            rgba(0, 0, 0, 0.06) 65%,
+            transparent 85%,
+            transparent 100%
+          );
+          opacity: 0.4;
+        }
+
+        .wave-3 {
+          background: linear-gradient(
+            145deg,
+            transparent 0%,
+            transparent 25%,
+            rgba(255, 255, 255, 0.05) 42%,
+            rgba(255, 255, 255, 0.09) 52%,
+            rgba(255, 255, 255, 0.05) 62%,
+            transparent 78%,
+            transparent 100%
+          );
+          opacity: 0.5;
+        }
+
+        .wave-4 {
+          background: linear-gradient(
+            115deg,
+            transparent 0%,
+            transparent 35%,
+            rgba(0, 0, 0, 0.04) 48%,
+            rgba(0, 0, 0, 0.08) 58%,
+            rgba(0, 0, 0, 0.04) 68%,
+            transparent 88%,
+            transparent 100%
+          );
+          opacity: 0.3;
+        }
+
         @media (prefers-reduced-motion: reduce) {
-          .hero-wave {
+          .hero-waves {
             transform: none !important;
             transition: none !important;
           }
         }
 
-        /* Layer 3: Particles (CSS radial-gradient dots) */
+        /* Layer 3: Gold Particles */
         .hero-particles {
           position: absolute;
           inset: 0;
           z-index: 3;
           background-image: radial-gradient(
-              circle at 20% 30%,
+              circle at 18% 25%,
               rgba(212, 175, 55, 0.24) 1px,
               transparent 1px
             ),
             radial-gradient(
-              circle at 80% 20%,
+              circle at 12% 45%,
               rgba(212, 175, 55, 0.24) 1.5px,
               transparent 1.5px
             ),
             radial-gradient(
-              circle at 40% 70%,
+              circle at 22% 65%,
               rgba(212, 175, 55, 0.24) 1px,
               transparent 1px
             ),
             radial-gradient(
-              circle at 90% 60%,
+              circle at 8% 80%,
               rgba(212, 175, 55, 0.24) 2px,
               transparent 2px
             ),
             radial-gradient(
-              circle at 15% 80%,
-              rgba(212, 175, 55, 0.24) 1px,
-              transparent 1px
-            ),
-            radial-gradient(
-              circle at 60% 40%,
+              circle at 85% 20%,
               rgba(212, 175, 55, 0.24) 1.5px,
               transparent 1.5px
             ),
             radial-gradient(
-              circle at 30% 50%,
+              circle at 92% 55%,
               rgba(212, 175, 55, 0.24) 1px,
               transparent 1px
             ),
             radial-gradient(
-              circle at 70% 85%,
+              circle at 88% 75%,
               rgba(212, 175, 55, 0.24) 2px,
               transparent 2px
+            ),
+            radial-gradient(
+              circle at 78% 90%,
+              rgba(212, 175, 55, 0.24) 1px,
+              transparent 1px
             );
           background-size: 100% 100%;
           background-position: 0 0;
@@ -208,7 +269,7 @@ export default function HeroLuxury({
           }
         }
 
-        /* Layer 4: Film Grain (CSS noise pattern) */
+        /* Layer 4: Film Grain */
         .hero-grain {
           position: absolute;
           inset: 0;
@@ -232,82 +293,80 @@ export default function HeroLuxury({
           pointer-events: none;
         }
 
-        /* Layer 5: Content */
+        /* Layer 5: Content Container */
         .hero-content {
           position: relative;
           z-index: 5;
           width: 100%;
           max-width: min(1200px, 92vw);
           margin-inline: auto;
-          display: flex;
-          justify-content: center;
+          opacity: 0;
+          transform: translateY(24px);
+          transition: opacity var(--motion-slow) var(--motion-easing),
+            transform var(--motion-slow) var(--motion-easing);
         }
 
-        .hero-pane {
-          position: relative;
-          background: color-mix(in oklab, #0b1320 42%, transparent);
-          backdrop-filter: blur(6px);
-          -webkit-backdrop-filter: blur(6px);
-          border-radius: 22px;
-          border: 1px solid rgba(212, 175, 55, 0.28);
-          box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.18),
-            0 24px 60px rgba(0, 0, 0, 0.35);
-          padding: clamp(40px, 6vw, 72px);
-          width: min(100%, 720px);
+        .hero-content.visible {
+          opacity: 1;
+          transform: translateY(0);
         }
 
-        .hero-pane::before {
-          content: "";
-          position: absolute;
-          inset: 0;
-          border-radius: inherit;
-          background: linear-gradient(
-            180deg,
-            rgba(255, 255, 255, 0.08),
-            transparent 65%
-          );
-          mix-blend-mode: soft-light;
-          opacity: 0.5;
-          pointer-events: none;
+        @media (prefers-reduced-motion: reduce) {
+          .hero-content {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+          }
         }
 
+        /* Ink Veil (behind text only for contrast) */
         .ink-veil {
           position: absolute;
-          inset: 0;
-          border-radius: inherit;
-          background: linear-gradient(
-            180deg,
-            rgba(8, 14, 24, 0.32),
-            rgba(8, 14, 24, 0)
-          );
+          inset: -40px;
+          background: color-mix(in oklab, #0b1320 42%, transparent);
+          filter: blur(6px);
+          -webkit-filter: blur(6px);
+          border-radius: 24px;
+          z-index: -1;
           pointer-events: none;
         }
 
-        .hero-copy {
+        /* Frosted Glass Pane */
+        .glass-pane {
           position: relative;
+          padding: clamp(48px, 6vw, 72px) clamp(32px, 5vw, 64px);
+          background: rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(255, 255, 255, 0.18);
+          border-radius: 24px;
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12),
+            inset 0 0 0 1px rgba(255, 255, 255, 0.1);
           display: grid;
-          gap: clamp(20px, 3vw, 32px);
+          gap: clamp(24px, 3vw, 36px);
+          text-align: center;
+          justify-items: center;
         }
 
         h1 {
           margin: 0;
-          color: #ffffff;
+          color: var(--smh-text);
           font-size: clamp(40px, 6vw, 72px);
           line-height: 1.05;
           letter-spacing: -0.01em;
           font-family: var(--font-display);
           font-weight: 700;
-          text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+          text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
         }
 
         .hero-subtitle {
           margin: 0;
-          color: rgba(255, 255, 255, 0.86);
+          color: var(--smh-text-muted);
           font-family: var(--font-body);
           font-size: clamp(16px, 1.8vw, 20px);
           line-height: 1.6;
           max-width: 60ch;
-          text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+          text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
         }
 
         .hero-ctas {
@@ -315,6 +374,7 @@ export default function HeroLuxury({
           flex-wrap: wrap;
           gap: 16px;
           margin-top: 8px;
+          justify-content: center;
         }
 
         .hero-cta {
@@ -332,43 +392,72 @@ export default function HeroLuxury({
           transition: transform var(--motion-normal) var(--motion-easing),
             box-shadow var(--motion-normal) var(--motion-easing);
           cursor: pointer;
+          position: relative;
         }
 
+        /* Primary CTA with gold inner ring focus */
         .hero-cta-primary {
-          color: #1a1a1a;
+          color: var(--smh-bg);
           background: var(--cta-gradient);
-          box-shadow: 0 4px 16px rgba(212, 175, 55, 0.35);
+          box-shadow: 0 4px 16px rgba(212, 175, 55, 0.35),
+            inset 0 0 0 1px rgba(212, 175, 55, 0.5);
         }
 
         .hero-cta-primary:hover {
           transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(212, 175, 55, 0.45);
+          box-shadow: 0 8px 24px rgba(212, 175, 55, 0.45),
+            inset 0 0 0 1px rgba(212, 175, 55, 0.7);
         }
 
         .hero-cta-primary:focus-visible {
           outline: none;
-          box-shadow: 0 0 0 2px var(--smh-accent-gold),
-            0 0 0 6px rgba(212, 175, 55, 0.25);
+          box-shadow: 0 0 0 2px var(--smh-bg),
+            0 0 0 6px var(--smh-accent-gold),
+            inset 0 0 0 2px rgba(212, 175, 55, 0.8);
         }
 
+        /* Secondary CTA with gold keyline */
         .hero-cta-secondary {
-          color: #ffffff;
-          background: rgba(14, 22, 34, 0.42);
-          border: 1px solid rgba(212, 175, 55, 0.38);
+          color: var(--smh-text);
+          background: rgba(255, 255, 255, 0.12);
+          border: 1px solid var(--smh-accent-gold);
           backdrop-filter: blur(8px);
           -webkit-backdrop-filter: blur(8px);
+          box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.3);
         }
 
         .hero-cta-secondary:hover {
           transform: translateY(-2px);
-          border-color: rgba(212, 175, 55, 0.6);
-          background: rgba(14, 22, 34, 0.55);
+          border-color: var(--smh-accent-gold);
+          background: rgba(255, 255, 255, 0.2);
+          box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.5);
         }
 
         .hero-cta-secondary:focus-visible {
           outline: none;
-          box-shadow: 0 0 0 2px var(--smh-accent-gold),
-            0 0 0 6px rgba(212, 175, 55, 0.25);
+          box-shadow: 0 0 0 2px var(--smh-bg),
+            0 0 0 6px var(--smh-accent-gold),
+            inset 0 0 0 1px rgba(212, 175, 55, 0.6);
+        }
+
+        @media (prefers-color-scheme: dark) {
+          h1 {
+            color: var(--smh-text);
+          }
+          .hero-subtitle {
+            color: var(--smh-text-muted);
+          }
+          .glass-pane {
+            background: rgba(13, 14, 16, 0.4);
+            border-color: rgba(255, 255, 255, 0.12);
+          }
+          .hero-cta-primary {
+            color: var(--smh-bg);
+          }
+          .hero-cta-secondary {
+            color: var(--smh-text);
+            background: rgba(13, 14, 16, 0.3);
+          }
         }
 
         @media (max-width: 768px) {
@@ -377,8 +466,8 @@ export default function HeroLuxury({
             padding: clamp(60px, 10vh, 96px) clamp(16px, 4vw, 32px);
           }
 
-          .hero-pane {
-            padding: clamp(28px, 7vw, 48px);
+          .glass-pane {
+            padding: clamp(32px, 5vw, 48px) clamp(24px, 4vw, 40px);
           }
 
           .hero-cta {
