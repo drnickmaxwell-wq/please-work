@@ -1,280 +1,374 @@
-'use client';
+"use client";
 
-import type { CSSProperties } from 'react';
-import Link from 'next/link';
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 
-const heroBackgroundStyle: CSSProperties = {
-  background:
-    'linear-gradient(135deg, color-mix(in oklab, var(--navy-950) 94%, transparent) 0%, color-mix(in oklab, var(--navy-900) 88%, transparent) 58%, color-mix(in oklab, var(--gold-champagne) 18%, transparent) 100%), radial-gradient(1200px 820px at 18% 12%, color-mix(in oklab, var(--smh-primary-magenta, var(--brand-magenta)) 28%, transparent) 0%, transparent 70%), radial-gradient(1000px 760px at 82% 18%, color-mix(in oklab, var(--smh-primary-teal, var(--brand-teal)) 26%, transparent) 0%, color-mix(in oklab, var(--gold-champagne) 12%, transparent) 70%)',
-  backgroundBlendMode: 'overlay, soft-light, normal',
-};
-
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="hero-lux__stat">
-      <span className="hero-lux__stat-value">{value}</span>
-      <span className="hero-lux__stat-label">{label}</span>
-    </div>
-  );
+export interface LuxuryHomeHeroProps {
+  title?: string;
+  subtitle?: string;
+  primaryHref?: string;
+  primaryLabel?: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+  showParticles?: boolean;
+  showGrain?: boolean;
+  reducedMotion?: boolean;
 }
 
-const HeroLuxury = () => {
+export default function HeroLuxury({
+  title = "Going the Extra Smile",
+  subtitle = "Private dental care with calm precision",
+  primaryHref = "/book",
+  primaryLabel = "Book a consultation",
+  secondaryHref = "/treatments",
+  secondaryLabel = "Explore treatments",
+  showParticles = true,
+  showGrain = true,
+  reducedMotion,
+}: LuxuryHomeHeroProps) {
+  const heroRef = useRef<HTMLElement>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  // Detect prefers-reduced-motion
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, []);
+
+  const isMotionEnabled = reducedMotion !== undefined ? !reducedMotion : !prefersReducedMotion;
+
+  // Parallax effect on mouse move
+  useEffect(() => {
+    if (!isMotionEnabled || !heroRef.current) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      const { innerWidth, innerHeight } = window;
+      
+      // Normalize to -1 to 1 range
+      const x = (clientX / innerWidth - 0.5) * 2;
+      const y = (clientY / innerHeight - 0.5) * 2;
+      
+      setMousePosition({ x, y });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [isMotionEnabled]);
+
+  // Calculate parallax transforms (wave ±4px, particles ±3px)
+  const waveTransform = isMotionEnabled
+    ? `translate(${mousePosition.x * 4}px, ${mousePosition.y * 4}px)`
+    : "translate(0, 0)";
+  
+  const particlesTransform = isMotionEnabled
+    ? `translate(${mousePosition.x * -3}px, ${mousePosition.y * -3}px)`
+    : "translate(0, 0)";
+
   return (
-    <section className="hero-lux" style={heroBackgroundStyle}>
-      <div className="hero-lux__texture" aria-hidden="true" />
-      <svg className="lux-wave" viewBox="0 0 1440 320" aria-hidden="true">
-        <defs>
-          <linearGradient id="lux-wave-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#fff" stopOpacity="0.6" />
-            <stop offset="40%" stopColor="#fff" stopOpacity="0.4" />
-            <stop offset="100%" stopColor="#fff" stopOpacity="0.05" />
-          </linearGradient>
-          <mask id="lux-wave-mask">
-            <path
-              d="M0,200 C180,150 360,90 540,110 C720,130 900,230 1080,220 C1260,210 1350,150 1440,180 L1440,320 L0,320 Z"
-              fill="url(#lux-wave-gradient)"
-            />
-          </mask>
-        </defs>
-        <rect width="1440" height="320" fill="var(--gold-champagne)" mask="url(#lux-wave-mask)" opacity="0.22" />
-      </svg>
-      <div className="hero-lux__inner">
-        <div className="hero-lux__copy">
-          <p className="hero-lux__eyebrow">Luxury coastal dentistry, reimagined</p>
-          <h1 className="hero-lux__heading">
-            Precision smiles crafted with champagne calm
-          </h1>
-          <p className="hero-lux__subheading">
-            Immerse yourself in a serene, technology-led experience that blends mindful comfort with meticulous cosmetic results.
-          </p>
-          <div className="hero-lux__actions">
-            <Link className="smh-btn" href="/book">
-              Book a private consultation
-            </Link>
-            <Link className="smh-btn hero-lux__secondary" href="/treatments">
-              Explore signature treatments
-            </Link>
-          </div>
-        </div>
-        <aside className="hero-lux__visual" aria-label="Highlights from our studio">
-          <div className="hero-lux__panel">
-            <div className="hero-lux__panel-inner">
-              <p className="hero-lux__panel-title">What to expect</p>
-              <div className="hero-lux__stats">
-                <Stat label="Digital smile preview" value="4K" />
-                <Stat label="Average treatment time" value="45 min" />
-                <Stat label="Patient comfort rating" value="98%" />
-              </div>
-              <p className="hero-lux__panel-copy">
-                Every visit begins with a sensory welcome ritual, calming aromatics and a personalised plan shaped by our AI planning suite.
+    <section
+      ref={heroRef}
+      className="luxury-home-hero"
+      aria-labelledby="home-hero-title"
+    >
+      {/* Layer 1: Gradient Base */}
+      <div className="hero-gradient-base" />
+
+      {/* Layer 2: Wave Mask */}
+      <div
+        className="hero-wave-mask"
+        style={{
+          transform: waveTransform,
+          transition: isMotionEnabled ? "transform 0.48s cubic-bezier(0.65, 0, 0.35, 1)" : "none",
+        }}
+      />
+
+      {/* Layer 3: Particles */}
+      {showParticles && (
+        <div
+          className="hero-particles"
+          style={{
+            transform: particlesTransform,
+            transition: isMotionEnabled ? "transform 0.48s cubic-bezier(0.65, 0, 0.35, 1)" : "none",
+          }}
+        />
+      )}
+
+      {/* Layer 4: Film Grain */}
+      {showGrain && <div className="hero-film-grain" />}
+
+      {/* Layer 5: Content */}
+      <div className="hero-content">
+        <div className="container">
+          <div className="hero-content-wrapper">
+            <h1
+              id="home-hero-title"
+              className="hero-title"
+            >
+              {title}
+            </h1>
+
+            {subtitle && (
+              <p className="hero-subtitle">
+                {subtitle}
               </p>
+            )}
+
+            <div className="hero-cta-group">
+              <Link href={primaryHref} className="hero-cta-primary">
+                {primaryLabel}
+              </Link>
+
+              {secondaryHref && secondaryLabel && (
+                <Link href={secondaryHref} className="hero-cta-secondary">
+                  {secondaryLabel}
+                </Link>
+              )}
             </div>
           </div>
-        </aside>
+        </div>
       </div>
+
       <style jsx>{`
-        .hero-lux {
+        .luxury-home-hero {
           position: relative;
-          overflow: hidden;
-          color: color-mix(in srgb, white 92%, var(--navy-950) 8%);
-          padding: clamp(4rem, 6vw, 7rem) clamp(1.5rem, 5vw, 5rem);
-          isolation: isolate;
-        }
-
-        .hero-lux__texture {
-          position: absolute;
-          inset: 0;
-          background-image: radial-gradient(140% 95% at 20% 10%, color-mix(in oklab, var(--gold-champagne) 32%, transparent) 0%, transparent 60%),
-            radial-gradient(120% 80% at 75% 25%, color-mix(in oklab, var(--smh-primary-teal, var(--brand-teal)) 26%, transparent) 0%, transparent 65%);
-          opacity: 0.9;
-          pointer-events: none;
-          mix-blend-mode: screen;
-        }
-
-        .lux-wave {
-          position: absolute;
-          inset-inline: 0;
-          bottom: -1px;
-          width: 100%;
-          height: auto;
-          mix-blend-mode: screen;
-        }
-
-        .hero-lux::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background-image: var(--smh-filmgrain, none);
-          opacity: var(--grain-opacity, 0.05);
-          mix-blend-mode: soft-light;
-          pointer-events: none;
-        }
-
-        .hero-lux__inner {
-          position: relative;
-          display: grid;
-          gap: clamp(2.5rem, 4vw, 4rem);
-          grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
-          max-width: min(1160px, 94vw);
-          margin: 0 auto;
-          z-index: 1;
-          align-items: center;
-        }
-
-        .hero-lux__copy {
-          display: grid;
-          gap: 1.25rem;
-        }
-
-        .hero-lux__eyebrow {
-          font-size: 0.95rem;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
-          color: color-mix(in srgb, var(--gold-champagne) 78%, transparent);
-          margin: 0;
-        }
-
-        .hero-lux__heading {
-          font-family: var(--font-playfair, 'Playfair Display', serif);
-          font-size: clamp(2.8rem, 5vw, 3.8rem);
-          line-height: 1.1;
-          margin: 0;
-          text-wrap: balance;
-        }
-
-        .hero-lux__subheading {
-          font-size: clamp(1.05rem, 2vw, 1.3rem);
-          color: color-mix(in srgb, white 88%, var(--navy-950) 12%);
-          margin: 0;
-          max-width: 36ch;
-        }
-
-        .hero-lux__actions {
           display: flex;
-          flex-wrap: wrap;
-          gap: 1rem;
           align-items: center;
-        }
-
-        .hero-lux__secondary {
-          background-image: none !important;
-          background-color: transparent;
-          color: var(--gold-champagne);
-          border-color: color-mix(in oklab, var(--gold-champagne) 70%, transparent);
-          box-shadow: none;
-        }
-
-        .hero-lux__secondary:hover,
-        .hero-lux__secondary:focus-visible {
-          color: color-mix(in oklab, var(--navy-950) 94%, white 6%);
-          background-color: color-mix(in oklab, var(--gold-champagne) 90%, white 10%);
-          box-shadow: 0 0 0 2px color-mix(in oklab, var(--gold-champagne) 20%, transparent);
-        }
-
-        .hero-lux__visual {
-          position: relative;
-        }
-
-        .hero-lux__panel {
-          position: relative;
-          border-radius: 24px;
-          background: color-mix(in oklab, var(--navy-900) 72%, transparent);
-          border: 1px solid color-mix(in oklab, var(--gold-champagne) 25%, transparent);
-          box-shadow: 0 25px 50px color-mix(in oklab, var(--navy-950) 45%, transparent);
+          min-height: 70vh;
           overflow: hidden;
-        }
-
-        .hero-lux__panel::before {
-          content: '';
-          position: absolute;
-          inset: 1px;
-          border-radius: inherit;
-          background: radial-gradient(circle at 20% 20%, color-mix(in oklab, var(--gold-champagne) 25%, transparent) 0%, transparent 55%),
-            radial-gradient(circle at 80% 35%, color-mix(in oklab, var(--smh-primary-teal, var(--brand-teal)) 20%, transparent) 0%, transparent 65%);
-          opacity: 0.9;
-          pointer-events: none;
-        }
-
-        .hero-lux__panel-inner {
-          position: relative;
-          padding: clamp(1.75rem, 3vw, 2.5rem);
-          display: grid;
-          gap: 1.5rem;
-        }
-
-        .hero-lux__panel-title {
-          font-size: 0.95rem;
-          text-transform: uppercase;
-          letter-spacing: 0.16em;
-          color: color-mix(in srgb, var(--gold-champagne) 70%, transparent);
-          margin: 0;
-        }
-
-        .hero-lux__stats {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-          gap: 1rem;
-        }
-
-        .hero-lux__stat {
-          display: grid;
-          gap: 0.35rem;
-        }
-
-        .hero-lux__stat-value {
-          font-size: 1.8rem;
-          font-weight: 600;
-          color: color-mix(in srgb, var(--gold-champagne) 92%, transparent);
-          font-family: var(--font-playfair, 'Playfair Display', serif);
-        }
-
-        .hero-lux__stat-label {
-          font-size: 0.95rem;
-          color: color-mix(in srgb, white 78%, var(--navy-950) 22%);
-        }
-
-        .hero-lux__panel-copy {
-          margin: 0;
-          font-size: 1rem;
-          color: color-mix(in srgb, white 86%, var(--navy-950) 14%);
-        }
-
-        .hero-lux__panel,
-        .hero-lux__texture,
-        .lux-wave {
-          animation: heroFloat 12s ease-in-out infinite alternate;
-        }
-
-        @keyframes heroFloat {
-          0% {
-            transform: translate3d(0, -4px, 0);
-          }
-          100% {
-            transform: translate3d(0, 4px, 0);
-          }
+          padding: clamp(4rem, 6vw, 7rem) 0;
         }
 
         @media (max-width: 768px) {
-          .hero-lux {
-            text-align: left;
-          }
-
-          .hero-lux__panel {
-            margin-inline: auto;
-            max-width: 420px;
+          .luxury-home-hero {
+            min-height: 68vh;
           }
         }
 
+        /* Layer 1: Gradient Base */
+        .hero-gradient-base {
+          position: absolute;
+          inset: 0;
+          background: var(--gradient-champagne);
+          z-index: 1;
+        }
+
+        /* Layer 2: Wave Mask */
+        .hero-wave-mask {
+          position: absolute;
+          inset: 0;
+          z-index: 2;
+          background-image: url('/assets/manus/waves/home-hero-mask-desktop.webp');
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          opacity: 0.4;
+          mix-blend-mode: overlay;
+          will-change: transform;
+        }
+
+        @media (max-width: 768px) {
+          .hero-wave-mask {
+            background-image: url('/assets/manus/waves/home-hero-mask-mobile.webp');
+          }
+        }
+
+        /* Layer 3: Particles */
+        .hero-particles {
+          position: absolute;
+          inset: 0;
+          z-index: 3;
+          background-image: url('/assets/manus/particles/home-hero-particles.webp');
+          background-size: 1024px 1024px;
+          background-repeat: repeat;
+          opacity: 0.08;
+          mix-blend-mode: screen;
+          will-change: transform;
+          pointer-events: none;
+        }
+
+        /* Layer 4: Film Grain */
+        .hero-film-grain {
+          position: absolute;
+          inset: 0;
+          z-index: 4;
+          background-image: url('/assets/manus/textures/home-hero-film-grain.webp');
+          background-size: 512px 512px;
+          background-repeat: repeat;
+          opacity: 0.07;
+          mix-blend-mode: overlay;
+          pointer-events: none;
+        }
+
+        /* Layer 5: Content */
+        .hero-content {
+          position: relative;
+          z-index: 5;
+          width: 100%;
+          color: var(--paper);
+          text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 clamp(1.5rem, 5vw, 3rem);
+        }
+
+        .hero-content-wrapper {
+          max-width: 800px;
+          padding: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+          .hero-content-wrapper {
+            padding: 1.5rem 0;
+          }
+        }
+
+        .hero-title {
+          font-family: var(--font-display);
+          font-size: clamp(40px, 6vw, 72px);
+          font-weight: 700;
+          line-height: 1.1;
+          letter-spacing: -0.015em;
+          margin: 0 0 1.5rem 0;
+          color: var(--paper);
+          animation: ${isMotionEnabled ? 'fadeInUp 0.4s cubic-bezier(0.65, 0, 0.35, 1)' : 'none'};
+        }
+
+        .hero-subtitle {
+          font-family: var(--font-body);
+          font-size: clamp(16px, 1.8vw, 20px);
+          line-height: 1.6;
+          max-width: 600px;
+          margin: 0 0 2.5rem 0;
+          color: rgba(255, 255, 255, 0.95);
+          animation: ${isMotionEnabled ? 'fadeInUp 0.4s cubic-bezier(0.65, 0, 0.35, 1) 0.1s both' : 'none'};
+        }
+
+        /* CTA Buttons */
+        .hero-cta-group {
+          display: flex;
+          gap: 1rem;
+          flex-wrap: wrap;
+          animation: ${isMotionEnabled ? 'fadeInUp 0.4s cubic-bezier(0.65, 0, 0.35, 1) 0.22s both' : 'none'};
+        }
+
+        .hero-cta-primary,
+        .hero-cta-secondary {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          min-width: 180px;
+          min-height: 44px;
+          padding: 0.75rem 2rem;
+          font-size: 1rem;
+          font-weight: 600;
+          font-family: var(--font-body);
+          text-decoration: none;
+          border-radius: var(--radius-pill);
+          transition: all 0.3s cubic-bezier(0.65, 0, 0.35, 1);
+          cursor: pointer;
+        }
+
+        .hero-cta-primary {
+          background: var(--gradient-cta);
+          color: var(--paper);
+          border: none;
+          box-shadow: var(--shadow-glow);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .hero-cta-primary::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
+          opacity: 0;
+          transition: opacity 0.3s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        .hero-cta-primary:hover::before {
+          opacity: 1;
+        }
+
+        .hero-cta-primary:hover {
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-glow), 0 12px 32px rgba(194, 24, 91, 0.3);
+        }
+
+        .hero-cta-primary:focus-visible {
+          outline: none;
+          box-shadow: 0 0 0 2px var(--brand-gold), var(--shadow-gold-glow);
+        }
+
+        .hero-cta-secondary {
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          color: var(--paper);
+          border: 1px solid var(--brand-gold);
+        }
+
+        .hero-cta-secondary:hover {
+          background: rgba(212, 175, 55, 0.15);
+          border-color: var(--brand-gold);
+          transform: translateY(-2px);
+          box-shadow: 0 0 16px rgba(212, 175, 55, 0.3);
+        }
+
+        .hero-cta-secondary:focus-visible {
+          outline: none;
+          box-shadow: 0 0 0 2px var(--brand-gold), var(--shadow-gold-glow);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        /* Reduced Motion */
         @media (prefers-reduced-motion: reduce) {
-          .hero-lux__panel,
-          .hero-lux__texture,
-          .lux-wave {
-            animation: none;
+          .hero-wave-mask,
+          .hero-particles {
+            transform: none !important;
+            transition: none !important;
+          }
+          
+          .hero-title,
+          .hero-subtitle,
+          .hero-cta-group {
+            animation: none !important;
+          }
+          
+          .hero-cta-primary:hover,
+          .hero-cta-secondary:hover {
+            transform: none;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .hero-cta-primary,
+          .hero-cta-secondary {
+            width: 100%;
           }
         }
       `}</style>
     </section>
   );
-};
+}
 
-export default HeroLuxury;

@@ -1,6 +1,63 @@
-:root{
-  --navy-900:#0C1520; --navy-950:#070C10;
-  --gold-champagne:#F9E8C3; --gold-alpha-40:rgba(249,232,195,.40);
-  --glass-bg:rgba(12,21,32,.45); --glass-border:rgba(255,255,255,.10);
-  --grain-opacity:.05;
+:root {
+  /* Navy Tokens */
+  --navy-900: #0C1520;
+  --navy-950: #070C10;
+  --navy: #0B1A1E;
+  
+  /* Brand Colors */
+  --brand-magenta: #C2185B;
+  --brand-teal: #40C4B4;
+  --brand-gold: #D4AF37;
+  --gold-champagne: #F9E8C3;
+  
+  /* Champagne Gradient - 135deg */
+  --gradient-champagne: linear-gradient(135deg, #C2185B 0%, #40C4B4 60%, #D4AF37 100%);
+  
+  /* CTA Gradient */
+  --gradient-cta: linear-gradient(135deg, #D94BC6 0%, #00C2C7 100%);
+  
+  /* Alpha Variants */
+  --gold-alpha-40: rgba(249, 232, 195, 0.40);
+  
+  /* Glass Morphism */
+  --glass-bg: rgba(12, 21, 32, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.10);
+  
+  /* Film Grain */
+  --grain-opacity: 0.05;
+  
+  /* Typography */
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+  
+  /* Colors */
+  --paper: #FFFFFF;
+  --background: #070C10;
+  
+  /* Radius */
+  --radius-pill: 9999px;
+  
+  /* Shadows */
+  --shadow-glow: 0 8px 24px rgba(194, 24, 91, 0.25);
+  --shadow-gold-glow: 0 0 24px rgba(212, 175, 55, 0.4);
+  
+  /* Motion Tokens */
+  --motion-easing-smooth: cubic-bezier(0.65, 0, 0.35, 1);
+  --motion-duration-fast: 0.18s;
+  --motion-duration-normal: 0.3s;
+  --motion-duration-slow: 0.48s;
+  
+  /* Glass Tokens */
+  --glass-blur: blur(24px);
+  --glass-border-light: rgba(255, 255, 255, 0.12);
+  --glass-bg-light: rgba(255, 255, 255, 0.08);
+  --glass-bg-dark: rgba(12, 21, 32, 0.45);
 }
+
+/* SMH Aliases for compatibility */
+:root {
+  --smh-primary-magenta: var(--brand-magenta);
+  --smh-primary-teal: var(--brand-teal);
+  --smh-filmgrain: url('/assets/manus/textures/home-hero-film-grain.webp');
+}
+
