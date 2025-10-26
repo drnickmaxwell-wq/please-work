@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 
 import HomePageClient from '@/components/home/home-page-client';
+import HeroLuxury from '@/components/sections/HeroLuxury';
+import SmileJourney from '@/components/sections/SmileJourney';
 import { JsonLd, schema } from '@/lib/seo';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL ?? 'https://www.stmaryshousedental.co.uk';
@@ -35,6 +37,8 @@ export default function Home() {
   return (
     <>
       <JsonLd json={localBusinessJson} />
+      <HeroLuxury />
+      <SmileJourney />
       <HomePageClient />
     </>
   );

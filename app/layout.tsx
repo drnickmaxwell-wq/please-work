@@ -7,7 +7,7 @@ import "@/styles/brand/brand-textures.css";
 import "@/styles/brand/brand-motion.css";
 import "@/styles/brand/brand-flags.css";
 import PerformanceOptimizedLayout from '@/components/layout/performance-optimized-layout';
-import { FooterLuxe } from '@/components/footer-luxe';
+import FooterLuxe from '@/components/layout/FooterLuxe';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL ?? 'https://www.stmaryshousedental.co.uk';
 
