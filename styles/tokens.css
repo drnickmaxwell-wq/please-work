@@ -122,3 +122,20 @@
   --smh-primary-teal: var(--brand-teal);
   --smh-filmgrain: url('/assets/manus/textures/home-hero-film-grain.webp');
 }
+:root{
+  --glass-bg-weak: rgba(8, 20, 30, 0.22);
+  --glass-bg-strong: rgba(8, 20, 30, 0.36);
+  --shadow-hero-text: 0 1px 0 rgba(0,0,0,0.35);
+  --shadow-card: 0 12px 40px rgba(0,0,0,0.25);
+  --shadow-card-soft: 0 6px 24px rgba(0,0,0,0.18);
+  --keyline-gold: 1px solid var(--gold-300);
+  --outline-focus-color: var(--gold-300);
+  --outline-focus: 0 0 0 2px var(--outline-focus-color), 0 0 0 6px rgba(255,215,130,.25);
+
+  --motion-duration-fast: 160ms;
+  --motion-duration-normal: 260ms;
+  --motion-duration-slow: 420ms;
+  --motion-easing-smooth: cubic-bezier(.22,.61,.36,1);
+
+  --hero-veil: linear-gradient(180deg, rgba(8,20,30,.28), rgba(8,20,30,.28));
+}
