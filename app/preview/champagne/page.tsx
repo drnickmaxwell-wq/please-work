@@ -2,6 +2,9 @@
 
 import { useState } from 'react';
 
+import BrandHeroGradient from '@/components/brand/BrandHeroGradient';
+import '@/app/treatments/technology/components/technology-hero.css';
+import '@/app/treatments/technology/components/ai-innovation.css';
 import '@/styles/preview/champagne/page.css';
 import '@/styles/preview/champagne/layers.css';
 import '@/styles/preview/champagne/hero.css';
@@ -64,70 +67,194 @@ const ChampagnePreviewPage = () => {
             >
               <header>Preview Hero</header>
               <div className="preview-variant-body">
-                <div className="hero-champagne lux-wave">
-                  <span>Champagne background layers</span>
+                <BrandHeroGradient
+                  intensity="bold"
+                  clip="wave-bottom"
+                  goldDensity="med"
+                  waveOpacity={0.24}
+                  particles={showParticles}
+                >
                   <div
-                    className="hero-layer hero-layer--particles lux-particles"
-                    aria-hidden="true"
-                    role="presentation"
+                    className="hero-preview-stage"
+                    style={{
+                      display: 'grid',
+                      placeItems: 'center',
+                      padding: '3rem 1.5rem',
+                      gap: '1.5rem',
+                    }}
                   >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src="/particles/particles-gold.webp"
-                      alt=""
-                      loading="lazy"
-                      fetchPriority="low"
-                      decoding="async"
-                      className="hero-layer-media hero-layer-media--particles"
-                      aria-hidden="true"
-                      role="presentation"
-                    />
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src="/particles/particles-magenta.webp"
-                      alt=""
-                      loading="lazy"
-                      fetchPriority="low"
-                      decoding="async"
-                      className="hero-layer-media hero-layer-media--particles"
-                      aria-hidden="true"
-                      role="presentation"
-                    />
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src="/particles/particles-teal.webp"
-                      alt=""
-                      loading="lazy"
-                      fetchPriority="low"
-                      decoding="async"
-                      className="hero-layer-media hero-layer-media--particles"
-                      aria-hidden="true"
-                      role="presentation"
-                    />
+                    <div
+                      className="hero-champagne tech-hero"
+                      style={{
+                        width: 'min(100%, 620px)',
+                        padding: '2.75rem',
+                        textAlign: 'left',
+                        gap: '1.75rem',
+                      }}
+                    >
+                      <div
+                        className="hero-layer hero-layer--particles lux-particles"
+                        aria-hidden="true"
+                        role="presentation"
+                      >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src="/particles/particles-gold.webp"
+                          alt=""
+                          loading="lazy"
+                          fetchPriority="low"
+                          decoding="async"
+                          className="hero-layer-media hero-layer-media--particles"
+                          aria-hidden="true"
+                          role="presentation"
+                        />
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src="/particles/particles-magenta.webp"
+                          alt=""
+                          loading="lazy"
+                          fetchPriority="low"
+                          decoding="async"
+                          className="hero-layer-media hero-layer-media--particles"
+                          aria-hidden="true"
+                          role="presentation"
+                        />
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src="/particles/particles-teal.webp"
+                          alt=""
+                          loading="lazy"
+                          fetchPriority="low"
+                          decoding="async"
+                          className="hero-layer-media hero-layer-media--particles"
+                          aria-hidden="true"
+                          role="presentation"
+                        />
+                      </div>
+                      <div
+                        className="hero-layer hero-layer--grain lux-grain"
+                        aria-hidden="true"
+                        role="presentation"
+                      >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src="/textures/film-grain-desktop.webp"
+                          srcSet="/textures/film-grain-mobile.webp 600w, /textures/film-grain-desktop.webp 1200w"
+                          sizes="(max-width: 768px) 600px, 1200px"
+                          alt=""
+                          loading="lazy"
+                          fetchPriority="low"
+                          decoding="async"
+                          className="hero-layer-media hero-layer-media--grain"
+                          aria-hidden="true"
+                          role="presentation"
+                        />
+                      </div>
+                      <div
+                        className="hero-layer hero-layer--shimmer"
+                        aria-hidden="true"
+                        role="presentation"
+                      />
+
+                      <div
+                        className="hero-headline-group"
+                        style={{
+                          position: 'relative',
+                          zIndex: 3,
+                          display: 'grid',
+                          gap: '0.75rem',
+                        }}
+                      >
+                        <span
+                          style={{
+                            fontSize: '0.8rem',
+                            letterSpacing: '0.32em',
+                            textTransform: 'uppercase',
+                            color: 'rgba(255, 240, 224, 0.7)',
+                          }}
+                        >
+                          Champagne Preview
+                        </span>
+                        <h3
+                          className="smh-heading"
+                          style={{
+                            margin: 0,
+                            fontSize: '2rem',
+                            lineHeight: 1.2,
+                            color: 'rgba(255, 250, 238, 0.94)',
+                          }}
+                        >
+                          Radiant First Impressions
+                        </h3>
+                        <p
+                          style={{
+                            margin: 0,
+                            fontSize: '1.05rem',
+                            lineHeight: 1.6,
+                            color: 'rgba(255, 244, 226, 0.78)',
+                          }}
+                        >
+                          A wave-driven hero inspired by our Composite Bonding reveal, reframed in Champagne gold, teal, and
+                          magenta. Layered particles, film grain, and shimmer can be toggled to audit each lighting pass.
+                        </p>
+                      </div>
+
+                      <div
+                        className="lux-glass"
+                        style={{
+                          position: 'relative',
+                          zIndex: 3,
+                          borderRadius: '18px',
+                          padding: '1.5rem',
+                          display: 'grid',
+                          gap: '0.85rem',
+                        }}
+                      >
+                        <p
+                          style={{
+                            margin: 0,
+                            fontSize: '0.78rem',
+                            letterSpacing: '0.28em',
+                            textTransform: 'uppercase',
+                            color: 'rgba(255, 239, 220, 0.75)',
+                          }}
+                        >
+                          Glass Concierge Cue
+                        </p>
+                        <p
+                          style={{
+                            margin: 0,
+                            fontSize: '0.95rem',
+                            lineHeight: 1.6,
+                            color: 'rgba(255, 249, 236, 0.9)',
+                          }}
+                        >
+                          Backdrop blur mirrors the production call-to-action while retaining Champagne translucency and a
+                          polished rim.
+                        </p>
+                        <a
+                          href="#book"
+                          style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '0.5rem',
+                            padding: '0.75rem 1.5rem',
+                            borderRadius: '999px',
+                            background:
+                              'linear-gradient(135deg, rgba(255, 245, 226, 0.18), rgba(255, 214, 170, 0.28))',
+                            color: 'var(--surface-0)',
+                            textDecoration: 'none',
+                            fontWeight: 600,
+                            letterSpacing: '0.05em',
+                          }}
+                        >
+                          Plan Your Consultation
+                        </a>
+                      </div>
+                    </div>
                   </div>
-                  <div
-                    className="hero-layer hero-layer--grain lux-grain"
-                    aria-hidden="true"
-                    role="presentation"
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src="/textures/film-grain-desktop.webp"
-                      alt=""
-                      loading="lazy"
-                      fetchPriority="low"
-                      decoding="async"
-                      className="hero-layer-media hero-layer-media--grain"
-                      aria-hidden="true"
-                      role="presentation"
-                    />
-                  </div>
-                  <div
-                    className="hero-layer hero-layer--shimmer"
-                    aria-hidden="true"
-                    role="presentation"
-                  />
-                </div>
+                </BrandHeroGradient>
               </div>
             </article>
           </div>
