@@ -1,7 +1,7 @@
 'use client';
 
 import StickyHeader from '@/components/layout/sticky-header';
-import Footer from '@/components/layout/footer';
+import { FooterLuxe } from '@/components/footer-luxe';
 
 import '@/styles/tokens/smh-champagne-tokens.css';
 
@@ -21,7 +21,7 @@ export default function Technology() {
           3D viewer placeholder
         </div>
       </section>
-      <Footer />
+      <FooterLuxe />
     </main>
   );
 }

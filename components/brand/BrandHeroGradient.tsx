@@ -103,7 +103,7 @@ export default function BrandHeroGradient({
     return "";
   }, [clip]);
 
-  const driftStyle: CSSProperties = driftEnabled
+  const driftStyle = (driftEnabled
     ? {
         "--hero-drift-x": `${x.toFixed(2)}px`,
         "--hero-drift-y": `${y.toFixed(2)}px`,
@@ -113,13 +113,13 @@ export default function BrandHeroGradient({
         "--hero-drift-x": "0px",
         "--hero-drift-y": "0px",
         "--hero-drift-rotate": "0deg",
-      };
+      }) as CSSProperties;
 
-  const shellStyle: CSSProperties = {
+  const shellStyle = {
     ...driftStyle,
     "--hero-grain-opacity": clamp(grainOpacity, 0, 1),
     "--hero-wave-opacity": clamp(waveOpacity, 0, 1),
-  };
+  } as CSSProperties;
 
   const particlesVariant: ParticlePalette = particles ?? "gold";
   const showParticles = particlesVariant !== "none";

@@ -86,7 +86,7 @@ export default function Sustainability() {
               </p>
               
               <p>
-                Precision means fewer adjustments, fewer remakes, and better long-term outcomes. It's not just efficient—it's responsible dentistry.
+                Precision means fewer adjustments, fewer remakes, and better long-term outcomes. It’s not just efficient—it’s responsible dentistry.
               </p>
               
               <p>

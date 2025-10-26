@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const path = require('path');
 
 const manusAssetsDir = path.join(__dirname, 'public', 'assets', 'manus');

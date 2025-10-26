@@ -1,7 +1,7 @@
 'use client';
 import { useParams } from 'next/navigation';
 import StickyHeader from '@/components/layout/sticky-header';
-import Footer from '@/components/layout/footer';
+import { FooterLuxe } from '@/components/footer-luxe';
 
 export default function TeamMember(){
   const { slug } = useParams();
@@ -17,7 +17,7 @@ export default function TeamMember(){
           </div>
         </div>
       </section>
-      <Footer />
+      <FooterLuxe />
     </main>
   );
 }

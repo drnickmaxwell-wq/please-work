@@ -1,12 +1,18 @@
 .faq-accordion {
   display: grid;
   gap: 1rem;
+  --faq-ease: cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
 .faq-item {
   border-radius: var(--lux-glass-radius, 22px);
   overflow: hidden;
   position: relative;
+  background: rgba(0, 194, 199, 0.08);
+  border: 1px solid #f9e8c3;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 18px 40px rgba(6, 18, 32, 0.08);
 }
 
 .faq-item::before {
@@ -14,8 +20,8 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  border: 1px solid color-mix(in oklab, var(--gold-rail, color-mix(in oklab, var(--brand-gold) 68%, transparent)) 26%, transparent);
-  opacity: 0.88;
+  border: 1px solid rgba(249, 232, 195, 0.6);
+  mix-blend-mode: screen;
   pointer-events: none;
 }
 
@@ -29,16 +35,15 @@
   border: none;
   border-radius: inherit;
   padding: 1.35rem 1.75rem;
-  background: color-mix(in srgb, var(--surface-0) 90%, transparent);
+  background: transparent;
   color: inherit;
   cursor: pointer;
   text-align: left;
   font: inherit;
   line-height: 1.5;
-  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--gold-rail, color-mix(in srgb, var(--brand-gold) 64%, transparent)) 100%, transparent);
   transition:
-    color 160ms var(--motion-ease, cubic-bezier(0.4, 0, 0.2, 1)),
-    background-color 160ms var(--motion-ease, cubic-bezier(0.4, 0, 0.2, 1));
+    color 200ms var(--faq-ease),
+    background-color 200ms var(--faq-ease);
 }
 
 .faq-trigger.lux-glass {
@@ -46,7 +51,7 @@
 }
 
 .faq-trigger:focus-visible {
-  outline: 1px solid color-mix(in oklab, var(--gold-rail, color-mix(in oklab, var(--brand-gold) 68%, transparent)) 38%, transparent);
+  outline: 1px solid rgba(249, 232, 195, 0.75);
   outline-offset: 4px;
 }
 
@@ -62,17 +67,17 @@
   width: 1.75rem;
   height: 1.75rem;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--brand-gold) 18%, transparent);
-  color: color-mix(in srgb, var(--surface-0) 92%, transparent);
+  background: rgba(249, 232, 195, 0.35);
+  color: rgba(6, 18, 32, 0.82);
   font-weight: 600;
   transition:
-    transform 240ms var(--motion-ease, cubic-bezier(0.4, 0, 0.2, 1)),
-    background-color 240ms var(--motion-ease, cubic-bezier(0.4, 0, 0.2, 1));
+    transform 320ms var(--faq-ease),
+    background-color 320ms var(--faq-ease);
 }
 
 .faq-trigger[data-open="true"] .faq-trigger-icon {
   transform: rotate(45deg);
-  background: color-mix(in srgb, var(--brand-gold) 34%, transparent);
+  background: rgba(249, 232, 195, 0.55);
 }
 
 .faq-content {
@@ -81,8 +86,9 @@
   max-height: 0;
   opacity: 0;
   transition:
-    max-height 200ms var(--motion-ease, cubic-bezier(0.4, 0, 0.2, 1)),
-    opacity 240ms var(--motion-ease, cubic-bezier(0.4, 0, 0.2, 1));
+    max-height 360ms var(--faq-ease),
+    opacity 360ms var(--faq-ease),
+    padding-bottom 360ms var(--faq-ease);
 }
 
 .faq-content[data-open="true"] {
@@ -92,7 +98,7 @@
 
 .faq-content p {
   margin: 0;
-  color: color-mix(in srgb, var(--surface-0) 18%, var(--smh-text));
+  color: color-mix(in srgb, rgba(6, 18, 32, 0.88) 92%, var(--smh-text));
 }
 
 :root[data-theme="dark"] .faq-content p {

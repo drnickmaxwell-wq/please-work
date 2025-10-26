@@ -1,6 +1,6 @@
 'use client';
 import StickyHeader from '@/components/layout/sticky-header';
-import Footer from '@/components/layout/footer';
+import { FooterLuxe } from '@/components/footer-luxe';
 import Link from 'next/link';
 
 export default function TeamPage(){
@@ -24,7 +24,7 @@ export default function TeamPage(){
           ))}
         </div>
       </section>
-      <Footer />
+      <FooterLuxe />
     </main>
   );
 }

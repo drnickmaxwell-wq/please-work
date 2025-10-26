@@ -1,6 +1,6 @@
 'use client';
 import StickyHeader from '@/components/layout/sticky-header';
-import Footer from '@/components/layout/footer';
+import { FooterLuxe } from '@/components/footer-luxe';
 import { motion } from 'framer-motion';
 export default function Stories(){
   const list = [
@@ -22,7 +22,7 @@ export default function Stories(){
           ))}
         </div>
       </section>
-      <Footer />
+      <FooterLuxe />
     </main>
   );
 }
