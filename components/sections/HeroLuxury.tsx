@@ -47,19 +47,14 @@ export default function HeroLuxury({
       <style jsx>{`
         section[data-hero="champagne"] {
           position: relative;
-          width: 100vw;
-          margin-inline: calc(50% - 50vw);
-          overflow: clip;
-          min-height: clamp(56vh, 68vh, 78vh);
-          background: linear-gradient(
-            135deg,
-            var(--champ-start) 0%,
-            var(--champ-mid) 55%,
-            var(--champ-end) 100%
-          );
+          width: 100%;
+          margin: 0;
+          overflow: hidden;
+          min-height: clamp(72svh, 100svh, 860px);
           display: flex;
           align-items: center;
           justify-content: center;
+          padding-block: clamp(80px, 12vh, 128px);
           isolation: isolate;
         }
 
@@ -72,28 +67,39 @@ export default function HeroLuxury({
         }
 
         section[data-hero="champagne"]::before {
-          background:
-            radial-gradient(120% 120% at 0% 100%, var(--wave-ink) 0%, transparent 60%),
-            radial-gradient(90% 90% at 100% 10%, var(--wave-ink-soft) 0%, transparent 70%);
-          mix-blend-mode: soft-light;
-          opacity: var(--fx-wave-opacity);
+          background: var(--smh-champagne);
+          z-index: 0;
         }
 
         section[data-hero="champagne"]::after {
-          background-image: repeating-linear-gradient(
-            0deg,
-            rgba(255, 255, 255, 0.015) 0px,
-            rgba(0, 0, 0, 0.02) 1px,
-            transparent 2px
-          );
-          opacity: var(--fx-grain-opacity);
+          background:
+            linear-gradient(180deg, var(--hero-wave-top), var(--hero-wave-bottom)),
+            repeating-linear-gradient(
+              0deg,
+              var(--hero-grain-light) 0px,
+              var(--hero-grain-dark) 1px,
+              transparent 2px
+            );
+          mix-blend-mode: soft-light;
+          opacity: 0.58;
+          z-index: 1;
+          mask-image: var(--hero-wave-mask);
+          mask-repeat: no-repeat;
+          mask-size: 140% 100%;
+          mask-position: top center;
+          -webkit-mask-image: var(--hero-wave-mask);
+          -webkit-mask-repeat: no-repeat;
+          -webkit-mask-size: 140% 100%;
+          -webkit-mask-position: top center;
         }
 
         .hero-container {
           position: relative;
-          width: min(100%, 1320px);
+          z-index: 2;
+          width: 100%;
+          max-width: min(1200px, 92vw);
           margin-inline: auto;
-          padding: clamp(72px, 8vw, 112px) clamp(20px, 6vw, 56px);
+          padding-inline: clamp(20px, 5vw, 60px);
           display: flex;
           justify-content: center;
         }
@@ -101,24 +107,26 @@ export default function HeroLuxury({
         .hero-pane {
           position: relative;
           background:
-            linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.26)),
-            var(--glass-bg);
-          backdrop-filter: blur(var(--glass-blur)) saturate(120%);
-          -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+            linear-gradient(var(--ink-veil), var(--ink-veil)),
+            linear-gradient(var(--glass-bg), var(--glass-bg));
+          background-blend-mode: soft-light, normal;
+          backdrop-filter: blur(14px) saturate(1.05);
+          -webkit-backdrop-filter: blur(14px) saturate(1.05);
           border-radius: 22px;
-          box-shadow: var(--shadow-glass), var(--glow-edge);
-          outline: 1px solid var(--glass-border);
-          padding: clamp(24px, 4vw, 56px);
+          border: 1px solid var(--glass-border);
+          box-shadow: inset 0 0 0 1px var(--gold-rim), var(--shadow-hero-bloom);
+          padding: clamp(32px, 6vw, 64px);
           width: min(100%, 720px);
         }
 
         .hero-pane::before {
           content: "";
           position: absolute;
-          inset: 10px;
+          inset: 0;
           border-radius: inherit;
-          box-shadow: 0 0 0 1px var(--glass-inner-ring);
-          opacity: 0.75;
+          background: linear-gradient(180deg, var(--hero-pane-highlight), transparent 65%);
+          mix-blend-mode: soft-light;
+          opacity: 0.55;
           pointer-events: none;
         }
 
@@ -126,11 +134,7 @@ export default function HeroLuxury({
           position: absolute;
           inset: 0;
           border-radius: inherit;
-          background: linear-gradient(
-            180deg,
-            rgba(8, 14, 24, 0.28),
-            rgba(8, 14, 24, 0)
-          );
+          background: var(--veil-overlay);
           pointer-events: none;
         }
 
@@ -179,32 +183,28 @@ export default function HeroLuxury({
           transition:
             transform var(--motion-duration-normal) var(--motion-easing-smooth),
             box-shadow var(--motion-duration-normal) var(--motion-easing-smooth);
-          box-shadow: 0 3px 0 rgba(0, 0, 0, 0.25);
+          box-shadow: var(--shadow-cta-rest);
         }
 
         .hero-cta:hover {
           transform: translateY(-1px);
-          box-shadow: 0 5px 18px rgba(226, 182, 74, 0.25);
+          box-shadow: var(--shadow-cta);
         }
 
         .hero-cta:focus-visible {
-          outline: 2px solid var(--glass-inner-ring);
-          outline-offset: 2px;
+          outline: none;
+          box-shadow: var(--journey-card-focus), var(--shadow-cta-rest);
         }
 
         .hero-cta-primary {
           color: var(--ink);
-          background: linear-gradient(
-            135deg,
-            rgba(255, 255, 255, 0.92),
-            rgba(226, 182, 74, 0.65)
-          );
+          background: var(--gradient-cta);
         }
 
         .hero-cta-secondary {
           color: var(--ink-on-glass);
-          background: rgba(10, 19, 32, 0.35);
-          border: 1px solid rgba(255, 255, 255, 0.24);
+          background: color-mix(in srgb, var(--ink-veil) 40%, transparent);
+          border: 1px solid var(--journey-card-keyline);
         }
 
         @media (max-width: 768px) {
