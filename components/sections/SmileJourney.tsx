@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 
 const cards = [
@@ -59,8 +61,10 @@ const SmileJourney = () => {
       </div>
       <style jsx>{`
         .smile-journey {
-          background: linear-gradient(160deg, rgba(12, 21, 32, 0.94), rgba(7, 12, 16, 0.98));
-          color: rgba(238, 243, 249, 0.92);
+          background:
+            radial-gradient(130% 85% at 15% 15%, color-mix(in srgb, var(--smh-teal-01) 20%, transparent), transparent 60%),
+            linear-gradient(160deg, color-mix(in srgb, var(--smh-bg-01) 96%, transparent), color-mix(in srgb, var(--smh-bg-01) 88%, transparent));
+          color: var(--smh-ink-01);
           padding: clamp(4.5rem, 8vw, 7rem) clamp(1.5rem, 5vw, 5rem);
         }
 
@@ -81,21 +85,21 @@ const SmileJourney = () => {
           text-transform: uppercase;
           letter-spacing: 0.18em;
           font-size: 0.9rem;
-          color: rgba(249, 232, 195, 0.7);
+          color: color-mix(in srgb, var(--smh-gold-01) 65%, transparent);
           margin: 0;
         }
 
         .smile-journey__lead {
           margin: 0;
           font-size: clamp(1.05rem, 2vw, 1.25rem);
-          color: rgba(224, 230, 238, 0.85);
+          color: color-mix(in srgb, var(--smh-ink-02) 85%, transparent);
         }
 
         h2 {
           margin: 0;
           font-size: clamp(2rem, 4vw, 2.8rem);
           line-height: 1.2;
-          color: rgba(249, 232, 195, 0.92);
+          color: color-mix(in srgb, var(--smh-gold-01) 82%, transparent);
         }
 
         .smile-journey__grid {
@@ -121,12 +125,12 @@ const SmileJourney = () => {
         .smile-journey__card-body h3 {
           margin: 0;
           font-size: 1.35rem;
-          color: rgba(249, 232, 195, 0.88);
+          color: color-mix(in srgb, var(--smh-gold-01) 78%, transparent);
         }
 
         .smile-journey__card-body p {
           margin: 0;
-          color: rgba(215, 224, 234, 0.82);
+          color: color-mix(in srgb, var(--smh-ink-02) 78%, transparent);
         }
 
         .smile-journey__card-body ul {
@@ -140,7 +144,7 @@ const SmileJourney = () => {
         .smile-journey__card-body li {
           position: relative;
           padding-left: 1.5rem;
-          color: rgba(215, 224, 234, 0.78);
+          color: color-mix(in srgb, var(--smh-ink-02) 74%, transparent);
         }
 
         .smile-journey__card-body li::before {
@@ -151,13 +155,14 @@ const SmileJourney = () => {
           width: 0.5rem;
           height: 0.5rem;
           border-radius: 999px;
-          background: rgba(249, 232, 195, 0.65);
-          box-shadow: 0 0 12px rgba(249, 232, 195, 0.45);
+          background: color-mix(in srgb, var(--smh-gold-01) 68%, transparent);
+          box-shadow: 0 0 12px color-mix(in srgb, var(--smh-gold-01) 45%, transparent);
         }
 
         .gold-keyline {
-          border-top: 1px solid var(--gold-alpha-40);
+          border-top: 1px solid color-mix(in srgb, var(--smh-ink-02) 32%, transparent);
           margin: 0 clamp(1.5rem, 3vw, 2.25rem);
+          transition: border-color 0.2s ease;
         }
 
         .smile-journey__card-footer {
@@ -170,16 +175,22 @@ const SmileJourney = () => {
         }
 
         .glass {
-          background: var(--glass-bg);
-          border: 1px solid var(--glass-border);
+          background: var(--smh-glass);
+          border: 1px solid color-mix(in srgb, var(--smh-ink-02) 38%, transparent);
           backdrop-filter: blur(24px);
           border-radius: 18px;
           box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
-          transition: transform 0.18s ease;
+          transition: transform 0.18s ease, border-color 0.2s ease, box-shadow 0.3s ease;
         }
 
         .glass:where(:hover, :focus-within) {
           transform: translateY(-2px);
+          border-color: color-mix(in srgb, var(--smh-gold-01) 70%, transparent);
+          box-shadow: 0 24px 50px color-mix(in srgb, var(--smh-bg-01) 45%, transparent);
+        }
+
+        .smile-journey__card:where(:hover, :focus-within) .gold-keyline {
+          border-color: var(--smh-gold-01);
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -189,6 +200,12 @@ const SmileJourney = () => {
 
           .glass:where(:hover, :focus-within) {
             transform: none;
+            border-color: color-mix(in srgb, var(--smh-ink-02) 38%, transparent);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
+          }
+
+          .smile-journey__card:where(:hover, :focus-within) .gold-keyline {
+            border-color: color-mix(in srgb, var(--smh-ink-02) 32%, transparent);
           }
         }
       `}</style>

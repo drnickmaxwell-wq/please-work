@@ -4,3 +4,21 @@
   --glass-bg:rgba(12,21,32,.45); --glass-border:rgba(255,255,255,.10);
   --grain-opacity:.05;
 }
+
+
+/* SMH Luxury Tokens */
+:root{
+  --smh-bg-01: #0F1C23;           /* luxe navy */
+  --smh-ink-01: #E8F1F6;          /* high-ink headings */
+  --smh-ink-02: #C7D6DF;          /* body text */
+  --smh-gold-01: #D8B26E;         /* keyline gold */
+  --smh-teal-01: #14B8A6;         /* teal glass */
+  --smh-mint-01: #86E9CF;         /* mint highlight */
+  --smh-rose-01: #E072A4;         /* subtle accent */
+  --smh-shadow-lg: 0 30px 60px rgba(0,0,0,.35);
+  --smh-glass: rgba(15,28,35,.55);
+}
+@media (prefers-color-scheme: dark){
+  :root{ --smh-ink-01:#EEF6FA; --smh-ink-02:#D7E5EE; }
+}
+
