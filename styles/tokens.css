@@ -1,0 +1,6 @@
+:root{
+  --navy-900:#0C1520; --navy-950:#070C10;
+  --gold-champagne:#F9E8C3; --gold-alpha-40:rgba(249,232,195,.40);
+  --glass-bg:rgba(12,21,32,.45); --glass-border:rgba(255,255,255,.10);
+  --grain-opacity:.05;
+}
