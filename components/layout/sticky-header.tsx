@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { primary } from '@/config/navigation.mirrored';
+import { MAIN_NAV, TREATMENTS, RESOURCES, type NavLink } from '@/lib/nav';
 import {
   Phone,
   Calendar,
@@ -39,14 +39,31 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  const navigationItems = primary.map((item) => ({
-    name: item.label,
-    href: item.path,
-    dropdown: item.submenu?.map((subItem) => ({
-      name: subItem.label,
-      href: subItem.path,
+  const getEnabledLinks = (links: NavLink[]) => links.filter((link) => link.enabled !== false);
+
+  const mainNavigation = getEnabledLinks(MAIN_NAV);
+  const treatmentLinks = getEnabledLinks(TREATMENTS);
+  const resourceLinks = getEnabledLinks(RESOURCES);
+
+  const navigationItems = [
+    ...mainNavigation.map((item) => ({
+      name: item.label,
+      href: item.href,
+      dropdown:
+        item.href === '/treatments'
+          ? treatmentLinks.map((link) => ({ name: link.label, href: link.href }))
+          : undefined,
     })),
-  }));
+    ...(resourceLinks.length
+      ? [
+          {
+            name: 'Resources',
+            href: resourceLinks[0].href,
+            dropdown: resourceLinks.map((link) => ({ name: link.label, href: link.href })),
+          },
+        ]
+      : []),
+  ];
 
   return (
     <>

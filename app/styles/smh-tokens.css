@@ -4,6 +4,22 @@
   --smh-parallax-max:6px;
   --smh-wave-mask-url: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'><path d='M0,256L60,224C120,192,240,128,360,96C480,64,600,64,720,101.3C840,139,960,213,1080,213.3C1200,213,1320,139,1380,101.3L1440,64V320H0Z' fill='%23000'/></svg>");
   --smh-filmgrain: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMBAKX0zK8AAAAASUVORK5CYII=");
+  --smh-navy-900: #0f1a21;
+  --smh-navy-800: #12222b;
+  --smh-gold-600: #D4AF37;
+  --smh-gold-500: #C9A33A;
+  --smh-footer-rim: linear-gradient(
+    90deg,
+    color-mix(in oklab, var(--smh-gold-600) 45%, transparent) 0%,
+    color-mix(in oklab, var(--smh-gold-600) 20%, transparent) 15%,
+    color-mix(in oklab, #ffffff 10%, transparent) 50%,
+    color-mix(in oklab, var(--smh-gold-600) 20%, transparent) 85%,
+    color-mix(in oklab, var(--smh-gold-600) 45%, transparent) 100%
+  );
+  --smh-footer-bg:
+    radial-gradient(1200px 420px at 50% -40%, rgba(255,215,160,0.10) 0%, rgba(19,29,36,0) 65%),
+    radial-gradient(900px 600px at 80% 10%, rgba(0,214,199,0.06) 0%, rgba(19,29,36,0) 60%),
+    linear-gradient(180deg, var(--smh-navy-900), var(--smh-navy-800));
 }
 .smh-wave-mask{ -webkit-mask-image: var(--smh-wave-mask-url); mask-image: var(--smh-wave-mask-url); -webkit-mask-size:cover; mask-size:cover; }
 .smh-filmgrain{ pointer-events:none; opacity:.08; mix-blend-mode:soft-light; background: var(--smh-filmgrain); background-size:256px 256px; }
