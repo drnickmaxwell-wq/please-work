@@ -2,9 +2,9 @@
    Champagne drift + sweep treatments for hero gradients. */
 
 :root {
-  --champagne-gradient-opacity-soft: 0.58;
-  --champagne-gradient-opacity-standard: 0.68;
-  --champagne-gradient-opacity-bold: 0.78;
+  --champagne-gradient-opacity-soft: 0.72;
+  --champagne-gradient-opacity-standard: 0.92;
+  --champagne-gradient-opacity-bold: 0.96;
   --champagne-wave-opacity-soft: 0.14;
   --champagne-wave-opacity-standard: 0.2;
   --champagne-wave-opacity-bold: 0.28;
@@ -14,15 +14,13 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(160% 120% at 8% 12%, color-mix(in srgb, var(--brand-magenta, #c2185b) 75%, rgba(255, 255, 255, 0.08)) 0%, transparent 70%),
-    radial-gradient(150% 120% at 92% 18%, color-mix(in srgb, var(--brand-teal, #40c4b4) 72%, rgba(18, 22, 28, 0.2)) 0%, transparent 68%),
-    linear-gradient(135deg, color-mix(in srgb, var(--brand-gold, #d4af37) 48%, rgba(255, 255, 255, 0.14)) 0%, color-mix(in srgb, var(--brand-magenta, #c2185b) 45%, rgba(0, 0, 0, 0.08)) 52%, color-mix(in srgb, var(--brand-teal, #40c4b4) 54%, rgba(255, 255, 255, 0.1)) 100%);
-  background-size: 220% 220%, 220% 220%, 200% 200%;
+    radial-gradient(1200px 900px at 30% 10%, rgba(255, 255, 255, 0.06), transparent 55%),
+    linear-gradient(140deg, var(--smh-champagne-pink, color-mix(in srgb, var(--brand-magenta, #c2185b) 92%, white 8%)) 0%, var(--smh-champagne-teal, color-mix(in srgb, var(--brand-teal, #40c4b4) 92%, white 8%)) 60%, var(--smh-champagne-amber, color-mix(in srgb, var(--brand-gold, #d4af37) 88%, white 12%)) 100%);
   opacity: var(--champagne-gradient-opacity, var(--champagne-gradient-opacity-standard));
-  mix-blend-mode: screen;
+  mix-blend-mode: normal;
   transform: translate3d(var(--hero-drift-x, 0px), var(--hero-drift-y, 0px), 0)
     rotate(var(--hero-drift-rotate, 0deg));
-  will-change: transform, filter, background-position;
+  will-change: transform, filter;
 }
 
 .hero-layer--gradient[data-intensity="soft"] {
@@ -37,12 +35,9 @@
 
 .hero-layer--wave {
   position: absolute;
-  inset: -6% -4%;
-  background-image: var(--hero-wave-image, url("/waves/smh-wave-mask.svg"));
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 120% 120%;
-  mix-blend-mode: soft-light;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(6, 14, 26, 0.32) 0%, rgba(6, 14, 26, 0.08) 55%, transparent 100%);
+  mix-blend-mode: normal;
   opacity: var(--hero-wave-opacity, var(--champagne-wave-opacity-standard));
   transform: translate3d(calc(var(--hero-drift-x, 0px) * 0.4), calc(var(--hero-drift-y, 0px) * 0.4), 0);
   will-change: transform;

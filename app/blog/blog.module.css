@@ -26,7 +26,7 @@
   inset: 0;
   background-image: url('/textures/film-grain-desktop.webp');
   background-size: cover;
-  opacity: 0.08;
+  opacity: 0.04;
   mix-blend-mode: overlay;
   pointer-events: none;
 }
@@ -77,13 +77,14 @@
   gap: clamp(1.25rem, 3vw, 1.75rem);
   padding: clamp(1.8rem, 4vw, 2.4rem);
   border-radius: clamp(1.75rem, 4vw, 2.5rem);
-  background: color-mix(in oklab, var(--smh-sand, var(--surface-0)) 94%, transparent);
-  border: 1px solid color-mix(in oklab, var(--smh-accent-gold, var(--brand-gold)) 20%, transparent);
-  box-shadow: 0 16px 40px color-mix(in oklab, var(--smh-navy-900) 18%, transparent);
-  -webkit-backdrop-filter: blur(18px) saturate(1.04);
-  backdrop-filter: blur(18px) saturate(1.04);
-  transition: transform 220ms var(--motion-ease, cubic-bezier(0.4, 0, 0.2, 1)),
-    box-shadow 220ms var(--motion-ease, cubic-bezier(0.4, 0, 0.2, 1));
+  background: rgba(14, 26, 32, 0.55);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  -webkit-backdrop-filter: blur(9px);
+  backdrop-filter: blur(9px);
+  transition: transform 240ms cubic-bezier(.22, .61, .36, 1),
+    box-shadow 240ms cubic-bezier(.22, .61, .36, 1),
+    border-color 240ms cubic-bezier(.22, .61, .36, 1);
 }
 
 .card::after {
@@ -91,16 +92,17 @@
   position: absolute;
   inset: 1px;
   border-radius: inherit;
-  background: linear-gradient(135deg, color-mix(in oklab, var(--smh-sand, var(--surface-0)) 24%, transparent), transparent 65%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 65%);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 200ms var(--motion-ease, cubic-bezier(0.4, 0, 0.2, 1));
+  transition: opacity 240ms cubic-bezier(.22, .61, .36, 1);
 }
 
 .card:hover,
 .card:focus-within {
   transform: translateY(-4px);
-  box-shadow: 0 22px 54px color-mix(in oklab, var(--smh-navy-900) 22%, transparent);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.26);
+  border-color: rgba(212, 175, 55, 0.45);
 }
 
 .card:hover::after,
@@ -113,13 +115,13 @@
   flex-wrap: wrap;
   gap: 0.75rem;
   font-size: 0.85rem;
-  color: color-mix(in oklab, var(--smh-text-muted) 70%, transparent);
+  color: rgba(235, 240, 244, 0.72);
 }
 
 .cardTitle {
   margin: 0;
   font-size: 1.45rem;
-  color: color-mix(in oklab, var(--smh-text) 96%, transparent);
+  color: color-mix(in oklab, var(--smh-sand, var(--surface-0)) 96%, transparent);
   position: relative;
 }
 
@@ -142,7 +144,7 @@
 
 .cardCopy {
   margin: 0;
-  color: color-mix(in oklab, var(--smh-text-muted) 78%, transparent);
+  color: color-mix(in oklab, var(--smh-sand, var(--surface-0)) 78%, transparent);
   line-height: 1.7;
 }
 

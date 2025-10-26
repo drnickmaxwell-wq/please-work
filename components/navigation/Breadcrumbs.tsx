@@ -6,25 +6,9 @@ import { useMemo } from 'react';
 
 import styles from './breadcrumbs.module.css';
 
-const LABEL_MAP: Record<string, string> = {
-  '3d-dentistry': '3D Dentistry',
-  'composite-bonding': 'Composite Bonding',
-  'dental-implants': 'Dental Implants',
-  implants: 'Dental Implants',
-  technology: 'Technology',
-  veneers: 'Porcelain Veneers',
-  whitening: 'Teeth Whitening',
-  cosmetic: 'Cosmetic Dentistry',
-  general: 'General Dentistry',
-  orthodontics: 'Orthodontics',
-};
+import { MAIN_NAV, TREATMENTS } from '@/lib/nav';
 
 const formatSegment = (segment: string) => {
-  const mapped = LABEL_MAP[segment];
-  if (mapped) {
-    return mapped;
-  }
-
   return segment
     .split('-')
     .map((part) => (part ? part[0].toUpperCase() + part.slice(1) : part))
@@ -38,10 +22,30 @@ export type BreadcrumbsProps = {
 export default function Breadcrumbs({ className }: BreadcrumbsProps) {
   const segments = useSelectedLayoutSegments();
 
+  const navLookup = useMemo(() => {
+    const entries = new Map<string, string>();
+    const normalise = (href: string) => {
+      if (href.length > 1 && href.endsWith('/')) {
+        return href.slice(0, -1);
+      }
+      return href;
+    };
+
+    [...MAIN_NAV, ...TREATMENTS].forEach((link) => {
+      const key = normalise(link.href);
+      if (link.label) {
+        entries.set(key, link.label);
+      }
+    });
+
+    return entries;
+  }, []);
+
   const crumbs = useMemo(() => {
+    const resolveLabel = (href: string, fallback: string) => navLookup.get(href) ?? fallback;
     const base = [
-      { href: '/', label: 'Home' },
-      { href: '/treatments', label: 'Treatments' },
+      { href: '/', label: resolveLabel('/', 'Home') },
+      { href: '/treatments', label: resolveLabel('/treatments', 'Treatments') },
     ];
 
     if (!segments.length) {
@@ -49,12 +53,17 @@ export default function Breadcrumbs({ className }: BreadcrumbsProps) {
     }
 
     return base.concat(
-      segments.map((segment, index) => ({
-        href: `/treatments/${segments.slice(0, index + 1).join('/')}`,
-        label: formatSegment(segment),
-      })),
+      segments.map((segment, index) => {
+        const path = `/treatments/${segments.slice(0, index + 1).join('/')}`;
+        const normalised = path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path;
+
+        return {
+          href: normalised,
+          label: resolveLabel(normalised, formatSegment(segment)),
+        };
+      }),
     );
-  }, [segments]);
+  }, [navLookup, segments]);
 
   const lastIndex = crumbs.length - 1;
 

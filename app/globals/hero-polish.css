@@ -30,22 +30,24 @@
   overflow: hidden;
 }
 
-.brand-hero-shell.brand-hero-clip-top .brand-hero-layers,
-.brand-hero-shell.brand-hero-clip-bottom .brand-hero-layers {
-  -webkit-mask-image: url("/waves/smh-wave-mask.svg");
-  mask-image: url("/waves/smh-wave-mask.svg");
+.brand-hero-shell.brand-hero-clip-top .brand-hero-layers {
+  -webkit-mask-image: radial-gradient(130% 85% at 50% 0%, #000 40%, transparent 72%);
+  mask-image: radial-gradient(130% 85% at 50% 0%, #000 40%, transparent 72%);
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-size: cover;
   mask-size: cover;
-}
-
-.brand-hero-shell.brand-hero-clip-top .brand-hero-layers {
   -webkit-mask-position: top center;
   mask-position: top center;
 }
 
 .brand-hero-shell.brand-hero-clip-bottom .brand-hero-layers {
+  -webkit-mask-image: radial-gradient(130% 85% at 50% 100%, #000 40%, transparent 72%);
+  mask-image: radial-gradient(130% 85% at 50% 100%, #000 40%, transparent 72%);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: cover;
+  mask-size: cover;
   -webkit-mask-position: bottom center;
   mask-position: bottom center;
 }

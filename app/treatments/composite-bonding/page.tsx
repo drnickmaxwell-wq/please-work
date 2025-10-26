@@ -56,7 +56,9 @@ const bondingResults = [
 
 function HeroContent() {
   return (
-    <section className={styles.hero}>
+    <section className={`${styles.hero} hero`}>
+      <div aria-hidden="true" className="champagne-overlay champagne-wave-mask" />
+      <div aria-hidden="true" className="champagne-grain" />
       <div className={styles.heroContent}>
         <p className={styles.heroEyebrow}>Composite Bonding</p>
         <h1 className={styles.heroTitle}>Hand-sculpted brilliance, finished in a single visit</h1>

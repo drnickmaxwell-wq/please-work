@@ -63,7 +63,7 @@ function AccordionItem({ id, question, answer, isOpen, onToggle, glassEnabled }:
   );
 
   const triggerClasses = useMemo(() => {
-    const base = 'faq-trigger';
+    const base = 'faq-trigger accord-motion';
     return glassEnabled ? `${base} lux-glass` : base;
   }, [glassEnabled]);
 
@@ -88,7 +88,7 @@ function AccordionItem({ id, question, answer, isOpen, onToggle, glassEnabled }:
         id={`${id}-panel`}
         role="region"
         aria-labelledby={`${id}-trigger`}
-        className="faq-content"
+        className="faq-content accord-motion"
         data-open={isOpen}
         aria-hidden={!isOpen}
         style={contentStyle}

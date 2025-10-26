@@ -26,7 +26,7 @@
   inset: 0;
   background-image: url('/textures/film-grain-desktop.webp');
   background-size: cover;
-  opacity: 0.08;
+  opacity: 0.04;
   pointer-events: none;
   mix-blend-mode: overlay;
 }
@@ -77,13 +77,14 @@
   gap: clamp(1.25rem, 3vw, 1.75rem);
   padding: clamp(1.8rem, 4vw, 2.4rem);
   border-radius: clamp(1.75rem, 4vw, 2.5rem);
-  background: color-mix(in oklab, var(--smh-navy-900) 70%, transparent);
-  border: 1px solid color-mix(in oklab, var(--smh-accent-gold, var(--brand-gold)) 22%, transparent);
-  box-shadow: 0 20px 48px color-mix(in oklab, var(--smh-navy-900) 42%, transparent);
-  -webkit-backdrop-filter: blur(24px) saturate(1.08);
-  backdrop-filter: blur(24px) saturate(1.08);
-  transition: transform 220ms var(--motion-ease, cubic-bezier(0.4, 0, 0.2, 1)),
-    box-shadow 220ms var(--motion-ease, cubic-bezier(0.4, 0, 0.2, 1));
+  background: rgba(14, 26, 32, 0.55);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  -webkit-backdrop-filter: blur(9px);
+  backdrop-filter: blur(9px);
+  transition: transform 240ms cubic-bezier(.22, .61, .36, 1),
+    box-shadow 240ms cubic-bezier(.22, .61, .36, 1),
+    border-color 240ms cubic-bezier(.22, .61, .36, 1);
 }
 
 .card::after {
@@ -91,16 +92,17 @@
   position: absolute;
   inset: 1px;
   border-radius: inherit;
-  background: linear-gradient(160deg, color-mix(in oklab, var(--smh-sand, var(--surface-0)) 18%, transparent), transparent 60%);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.08), transparent 60%);
   opacity: 0;
-  transition: opacity 200ms var(--motion-ease, cubic-bezier(0.4, 0, 0.2, 1));
+  transition: opacity 240ms cubic-bezier(.22, .61, .36, 1);
   pointer-events: none;
 }
 
 .card:hover,
 .card:focus-within {
   transform: translateY(-6px);
-  box-shadow: 0 28px 60px color-mix(in oklab, var(--smh-navy-900) 52%, transparent);
+  box-shadow: 0 26px 48px rgba(0, 0, 0, 0.28);
+  border-color: rgba(212, 175, 55, 0.45);
 }
 
 .card:hover::after,
