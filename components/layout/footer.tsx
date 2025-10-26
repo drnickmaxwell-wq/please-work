@@ -208,17 +208,22 @@ export default function Footer() {
               Quick Links
             </h4>
             <div className="space-y-2">
-              {quickLinks.map((link) => (
-                <motion.a
-                  key={link.label}
-                  href={link.path}
-                  className="footer-link block text-slate-300 hover:text-white transition-colors duration-200"
-                  style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
-                  whileHover={{ x: 5 }}
-                >
-                  {link.label}
-                </motion.a>
-              ))}
+              {quickLinks.map((link) => {
+                const { label, path } = link;
+                const key = path ?? label;
+
+                return (
+                  <motion.a
+                    key={key}
+                    href={path ?? '#'}
+                    className="footer-link block text-slate-300 hover:text-white transition-colors duration-200"
+                    style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
+                    whileHover={{ x: 5 }}
+                  >
+                    {label}
+                  </motion.a>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -232,22 +237,27 @@ export default function Footer() {
             Our Treatments
           </h4>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {treatments.map((treatment) => (
-              <motion.a
-                key={treatment.label}
-                href={treatment.path}
-                className="footer-tile text-center p-3 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 hover:bg-white/10 transition-all duration-200"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <span
-                  className="footer-link text-sm text-slate-300 hover:text-white"
-                  style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
+            {treatments.map((treatment) => {
+              const { label, path } = treatment;
+              const key = path ?? label;
+
+              return (
+                <motion.a
+                  key={key}
+                  href={path ?? '#'}
+                  className="footer-tile text-center p-3 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 hover:bg-white/10 transition-all duration-200"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  {treatment.label}
-                </span>
-              </motion.a>
-            ))}
+                  <span
+                    className="footer-link text-sm text-slate-300 hover:text-white"
+                    style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
+                  >
+                    {label}
+                  </span>
+                </motion.a>
+              );
+            })}
           </div>
         </div>
 
@@ -261,16 +271,21 @@ export default function Footer() {
           </div>
 
           <div className="flex space-x-6 text-sm">
-            {legalLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.path}
-                className="footer-link text-slate-400 hover:text-white transition-colors duration-200"
-                style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
-              >
-                {link.label}
-              </a>
-            ))}
+            {legalLinks.map((link) => {
+              const { label, path } = link;
+              const key = path ?? label;
+
+              return (
+                <a
+                  key={key}
+                  href={path ?? '#'}
+                  className="footer-link text-slate-400 hover:text-white transition-colors duration-200"
+                  style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
+                >
+                  {label}
+                </a>
+              );
+            })}
           </div>
         </div>
 
