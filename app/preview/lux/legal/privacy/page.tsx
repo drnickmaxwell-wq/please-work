@@ -1,6 +1,5 @@
 'use client';
 import StickyHeader from '@/components/layout/sticky-header';
-import { FooterLuxe } from '@/components/footer-luxe';
 
 export default function Page() {
   return (
@@ -12,7 +11,6 @@ export default function Page() {
           <p>Privacy policy placeholder. Replace with your finalized text.</p>
         </div>
       </section>
-      <FooterLuxe />
     </main>
   );
 }

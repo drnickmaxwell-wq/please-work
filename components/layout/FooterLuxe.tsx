@@ -43,7 +43,14 @@ const FooterLuxe = () => {
   };
 
   return (
-    <footer className="footer-luxe">
+    <footer
+      className="footer-luxe"
+      style={{
+        background: `linear-gradient(180deg,var(--smh-navy-1),var(--smh-navy-2))`,
+        borderTop: `2px solid var(--smh-gold-ink)`,
+        color: 'rgba(255,255,255,.92)',
+      }}
+    >
       <div className="footer-luxe__rim" aria-hidden="true" />
       <div className="footer-luxe__inner">
         <div className="footer-luxe__grid">
@@ -137,16 +144,13 @@ const FooterLuxe = () => {
       </div>
       <style jsx>{`
         .footer-luxe {
-          background: linear-gradient(180deg, var(--navy-900), var(--navy-950));
-          border-top: 1px solid var(--gold-champagne);
-          color: rgba(244, 247, 252, 0.86);
           padding: clamp(3.5rem, 7vw, 5rem) clamp(1.5rem, 5vw, 4.5rem) clamp(2.5rem, 4vw, 3.5rem);
         }
 
         .footer-luxe__rim {
           height: 1px;
           width: 100%;
-          background: linear-gradient(90deg, transparent, rgba(249, 232, 195, 0.35), transparent);
+          background: linear-gradient(90deg, transparent, var(--smh-keyline), transparent);
           margin-bottom: clamp(2rem, 4vw, 3rem);
         }
 
@@ -171,7 +175,7 @@ const FooterLuxe = () => {
         h3 {
           margin: 0;
           font-size: 1.6rem;
-          color: rgba(249, 232, 195, 0.88);
+          color: var(--smh-gold-ink);
         }
 
         h4 {
@@ -203,7 +207,7 @@ const FooterLuxe = () => {
 
         a:hover,
         a:focus-visible {
-          color: var(--gold-champagne);
+          color: var(--smh-gold);
         }
 
         .footer-luxe__newsletter p {
@@ -217,8 +221,8 @@ const FooterLuxe = () => {
         }
 
         .footer-luxe__input {
-          background: rgba(10, 18, 27, 0.65);
-          border: 1px solid rgba(249, 232, 195, 0.25);
+          background: var(--smh-glass);
+          border: 1px solid var(--smh-keyline);
           border-radius: 999px;
           padding: 0.85rem 1.1rem;
           color: rgba(244, 247, 252, 0.92);
@@ -230,7 +234,7 @@ const FooterLuxe = () => {
         }
 
         .footer-luxe__input:focus {
-          outline: 2px solid rgba(249, 232, 195, 0.55);
+          outline: 2px solid var(--smh-gold);
           outline-offset: 2px;
         }
 
@@ -258,7 +262,7 @@ const FooterLuxe = () => {
           gap: 1rem 2rem;
           justify-content: space-between;
           align-items: center;
-          border-top: 1px solid rgba(249, 232, 195, 0.2);
+          border-top: 1px solid var(--smh-keyline);
           padding-top: clamp(1.5rem, 3vw, 2.5rem);
         }
 
@@ -274,14 +278,14 @@ const FooterLuxe = () => {
           width: 2.5rem;
           height: 2.5rem;
           border-radius: 999px;
-          border: 1px solid rgba(249, 232, 195, 0.3);
-          color: rgba(249, 232, 195, 0.85);
+          border: 1px solid var(--smh-keyline);
+          color: var(--smh-gold-ink);
         }
 
         .footer-luxe__social a:hover,
         .footer-luxe__social a:focus-visible {
-          background: rgba(249, 232, 195, 0.14);
-          color: rgba(13, 24, 34, 0.92);
+          background: var(--smh-glass-soft);
+          color: var(--smh-gold);
         }
 
         .footer-luxe__links {

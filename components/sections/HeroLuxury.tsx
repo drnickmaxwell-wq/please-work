@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 
 function Stat({ label, value }: { label: string; value: string }) {
@@ -27,7 +29,7 @@ const HeroLuxury = () => {
             />
           </mask>
         </defs>
-        <rect width="1440" height="320" fill="var(--gold-champagne)" mask="url(#lux-wave-mask)" opacity="0.22" />
+        <rect width="1440" height="320" fill="var(--smh-gold)" mask="url(#lux-wave-mask)" opacity="0.22" />
       </svg>
       <div className="hero-lux__inner">
         <div className="hero-lux__copy">
@@ -67,9 +69,14 @@ const HeroLuxury = () => {
         .hero-lux {
           position: relative;
           overflow: hidden;
-          color: #f8fbff;
-          background:
-            linear-gradient(135deg, rgba(7, 12, 16, 0.95), rgba(12, 21, 32, 0.92) 40%, rgba(249, 232, 195, 0.24));
+          color: rgba(248, 251, 255, 0.96);
+          background: linear-gradient(
+              135deg,
+              color-mix(in srgb, var(--smh-navy-1) 92%, transparent) 0%,
+              color-mix(in srgb, var(--smh-navy-2) 88%, transparent) 40%,
+              color-mix(in srgb, var(--smh-grad-end) 40%, transparent) 100%
+            ),
+            var(--smh-grad);
           padding: clamp(4rem, 6vw, 7rem) clamp(1.5rem, 5vw, 5rem);
           isolation: isolate;
         }
@@ -77,8 +84,8 @@ const HeroLuxury = () => {
         .hero-lux__texture {
           position: absolute;
           inset: 0;
-          background-image: radial-gradient(140% 95% at 20% 10%, rgba(249, 232, 195, 0.18), transparent 60%),
-            radial-gradient(120% 80% at 75% 25%, rgba(64, 196, 180, 0.12), transparent 65%);
+          background-image: radial-gradient(140% 95% at 20% 10%, color-mix(in srgb, var(--smh-gold) 32%, transparent), transparent 60%),
+            radial-gradient(120% 80% at 75% 25%, color-mix(in srgb, var(--smh-grad-mid) 28%, transparent), transparent 65%);
           opacity: 0.9;
           pointer-events: none;
           mix-blend-mode: screen;
@@ -123,7 +130,7 @@ const HeroLuxury = () => {
           font-size: 0.95rem;
           letter-spacing: 0.18em;
           text-transform: uppercase;
-          color: rgba(249, 232, 195, 0.78);
+          color: var(--smh-gold-ink);
           margin: 0;
         }
 
@@ -152,16 +159,16 @@ const HeroLuxury = () => {
         .hero-lux__secondary {
           background-image: none !important;
           background-color: transparent;
-          color: var(--gold-champagne);
-          border-color: rgba(249, 232, 195, 0.7);
+          color: var(--smh-gold);
+          border-color: var(--smh-keyline);
           box-shadow: none;
         }
 
         .hero-lux__secondary:hover,
         .hero-lux__secondary:focus-visible {
-          color: #101c28;
-          background-color: rgba(249, 232, 195, 0.9);
-          box-shadow: 0 0 0 2px rgba(249, 232, 195, 0.2);
+          color: var(--smh-navy-1);
+          background-color: color-mix(in srgb, var(--smh-gold) 82%, white 18%);
+          box-shadow: 0 0 0 2px var(--smh-keyline);
         }
 
         .hero-lux__visual {
@@ -171,9 +178,9 @@ const HeroLuxury = () => {
         .hero-lux__panel {
           position: relative;
           border-radius: 24px;
-          background: rgba(10, 18, 27, 0.65);
-          border: 1px solid rgba(249, 232, 195, 0.25);
-          box-shadow: 0 25px 50px rgba(6, 11, 16, 0.45);
+          background: var(--smh-glass);
+          border: 1px solid var(--smh-keyline);
+          box-shadow: var(--smh-shadow);
           overflow: hidden;
         }
 
@@ -182,8 +189,8 @@ const HeroLuxury = () => {
           position: absolute;
           inset: 1px;
           border-radius: inherit;
-          background: radial-gradient(circle at 20% 20%, rgba(249, 232, 195, 0.25), transparent 55%),
-            radial-gradient(circle at 80% 35%, rgba(64, 196, 180, 0.2), transparent 65%);
+          background: radial-gradient(circle at 20% 20%, color-mix(in srgb, var(--smh-gold) 42%, transparent), transparent 55%),
+            radial-gradient(circle at 80% 35%, color-mix(in srgb, var(--smh-grad-mid) 38%, transparent), transparent 65%);
           opacity: 0.9;
           pointer-events: none;
         }
@@ -199,7 +206,7 @@ const HeroLuxury = () => {
           font-size: 0.95rem;
           text-transform: uppercase;
           letter-spacing: 0.16em;
-          color: rgba(249, 232, 195, 0.7);
+          color: var(--smh-gold-ink);
           margin: 0;
         }
 
@@ -217,7 +224,7 @@ const HeroLuxury = () => {
         .hero-lux__stat-value {
           font-size: 1.8rem;
           font-weight: 600;
-          color: rgba(249, 232, 195, 0.92);
+          color: color-mix(in srgb, var(--smh-gold) 80%, white 20%);
           font-family: var(--font-playfair, 'Playfair Display', serif);
         }
 

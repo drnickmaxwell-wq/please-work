@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 
 const cards = [
@@ -59,7 +61,12 @@ const SmileJourney = () => {
       </div>
       <style jsx>{`
         .smile-journey {
-          background: linear-gradient(160deg, rgba(12, 21, 32, 0.94), rgba(7, 12, 16, 0.98));
+          background: linear-gradient(
+              160deg,
+              color-mix(in srgb, var(--smh-navy-1) 92%, transparent),
+              color-mix(in srgb, var(--smh-navy-2) 96%, transparent)
+            ),
+            var(--smh-grad);
           color: rgba(238, 243, 249, 0.92);
           padding: clamp(4.5rem, 8vw, 7rem) clamp(1.5rem, 5vw, 5rem);
         }
@@ -81,7 +88,7 @@ const SmileJourney = () => {
           text-transform: uppercase;
           letter-spacing: 0.18em;
           font-size: 0.9rem;
-          color: rgba(249, 232, 195, 0.7);
+          color: var(--smh-gold-ink);
           margin: 0;
         }
 
@@ -95,7 +102,7 @@ const SmileJourney = () => {
           margin: 0;
           font-size: clamp(2rem, 4vw, 2.8rem);
           line-height: 1.2;
-          color: rgba(249, 232, 195, 0.92);
+          color: color-mix(in srgb, var(--smh-gold) 75%, white 25%);
         }
 
         .smile-journey__grid {
@@ -121,7 +128,7 @@ const SmileJourney = () => {
         .smile-journey__card-body h3 {
           margin: 0;
           font-size: 1.35rem;
-          color: rgba(249, 232, 195, 0.88);
+          color: color-mix(in srgb, var(--smh-gold) 70%, white 30%);
         }
 
         .smile-journey__card-body p {
@@ -151,12 +158,12 @@ const SmileJourney = () => {
           width: 0.5rem;
           height: 0.5rem;
           border-radius: 999px;
-          background: rgba(249, 232, 195, 0.65);
-          box-shadow: 0 0 12px rgba(249, 232, 195, 0.45);
+          background: color-mix(in srgb, var(--smh-gold) 65%, white 35%);
+          box-shadow: 0 0 12px var(--smh-keyline);
         }
 
         .gold-keyline {
-          border-top: 1px solid var(--gold-alpha-40);
+          border-top: 1px solid var(--smh-keyline);
           margin: 0 clamp(1.5rem, 3vw, 2.25rem);
         }
 
@@ -170,11 +177,11 @@ const SmileJourney = () => {
         }
 
         .glass {
-          background: var(--glass-bg);
-          border: 1px solid var(--glass-border);
+          background: var(--smh-glass);
+          border: 1px solid var(--smh-keyline);
           backdrop-filter: blur(24px);
           border-radius: 18px;
-          box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
+          box-shadow: var(--smh-shadow);
           transition: transform 0.18s ease;
         }
 

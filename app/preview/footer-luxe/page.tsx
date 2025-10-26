@@ -1,5 +1,3 @@
-import { FooterLuxe } from "@/components/footer-luxe";
-
 export default function FooterLuxePreview() {
   return (
     <main>
@@ -9,7 +7,6 @@ export default function FooterLuxePreview() {
           <p>Scroll to the bottom to preview the new navy “champagne dusk” footer.</p>
         </div>
       </section>
-      <FooterLuxe />
     </main>
   );
 }
