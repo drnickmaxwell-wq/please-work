@@ -3,7 +3,6 @@ import type { Metadata } from 'next';
 import BrandHeroGradient from '@/components/brand/BrandHeroGradient';
 import FaqAccordion from '@/components/faq/FaqAccordion';
 import CompositeBonding from '@/components/sections/treatments/CompositeBonding';
-
 import styles from './composite-bonding.module.css';
 
 const siteUrl =
@@ -35,6 +34,23 @@ const bondingFaq = [
     question: 'What is the appointment like?',
     answer:
       'Plan for a single calm visit: digital shade capture, minimal preparation, sculpting, and final contouring in around 90 minutes per smile zone.',
+  },
+];
+
+const bondingResults = [
+  {
+    title: 'Micro-gap refinement',
+    description:
+      'Closing small spacing along the upper arch with layered resin that mirrors neighbouring translucency.',
+  },
+  {
+    title: 'Edge rebalancing',
+    description: 'Softening chipped corners and asymmetric lengths for a balanced smile line in a single appointment.',
+  },
+  {
+    title: 'Lustre revival',
+    description:
+      'Tuning brightness and gloss with a calibrated polish so the finish feels luminous yet entirely natural.',
   },
 ];
 
@@ -84,6 +100,24 @@ export default function CompositeBondingPage() {
       <div className={styles.sectionGrid}>
         <CompositeBonding />
       </div>
+
+      <section id="results" className={styles.resultsSection} aria-labelledby="bonding-results-heading">
+        <div className={styles.resultsIntro}>
+          <h2 id="bonding-results-heading">Results our guests love</h2>
+          <p>
+            Precision-mapped casework keeps each enhancement subtle from conversational distance while shining under studio
+            light. Here are a few of the transformations we complete every week.
+          </p>
+        </div>
+        <div className={styles.resultsGrid}>
+          {bondingResults.map((item) => (
+            <article key={item.title} className={styles.resultCard}>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
 
       <section id="faq" className={styles.faqSection}>
         <div className={styles.faqIntro}>

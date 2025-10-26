@@ -16,7 +16,7 @@
   border-radius: 18px;
   border: 1px solid color-mix(in srgb, var(--brand-teal) 24%, transparent);
   background: color-mix(in srgb, var(--smh-sand) 78%, transparent);
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 24px 48px color-mix(in srgb, var(--smh-text) 12%, transparent);
 }
 
 .controlsTitle {
@@ -25,6 +25,13 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--brand-gold) 40%, var(--smh-text));
+}
+
+.controlsNotice {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--smh-text-muted) 78%, transparent);
+  max-width: 32rem;
 }
 
 .controlGroup {
@@ -70,7 +77,7 @@
   background: color-mix(in srgb, var(--smh-sand) 92%, transparent);
   transform: translateX(0);
   transition: transform 200ms ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--smh-text) 18%, transparent);
 }
 
 .toggle:checked {

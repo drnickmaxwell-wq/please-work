@@ -1,15 +1,25 @@
 'use client';
+
 import StickyHeader from '@/components/layout/sticky-header';
 import Footer from '@/components/layout/footer';
 
-export default function Technology(){
+import '@/styles/tokens/smh-champagne-tokens.css';
+
+export default function Technology() {
   return (
-    <main className="min-h-screen bg-white dark:bg-[#0b1220]">
+    <main className="min-h-screen" style={{ background: 'var(--smh-bg)', color: 'var(--smh-text)' }}>
       <StickyHeader />
       <section className="max-w-7xl mx-auto px-6 py-14">
-        <h1 className="text-3xl font-bold">3D & Digital Technology</h1>
-        <p className="mt-2 opacity-80">Precision scanners, same‑day crowns, AR smile previews and gentle comfort tech.</p>
-        <div className="mt-6 aspect-[16/9] rounded-xl bg-white/60 dark:bg-white/5 border grid place-items-center">3D viewer placeholder</div>
+        <h1 className="text-3xl font-bold">3D &amp; Digital Technology</h1>
+        <p className="mt-2 opacity-80">
+          Precision scanners, same-day crowns, AR smile previews and gentle comfort tech.
+        </p>
+        <div className="mt-6 aspect-[16/9] rounded-xl border grid place-items-center" style={{
+          background: 'color-mix(in oklab, var(--smh-sand, var(--surface-0)) 86%, transparent)',
+          color: 'var(--smh-text)'
+        }}>
+          3D viewer placeholder
+        </div>
       </section>
       <Footer />
     </main>

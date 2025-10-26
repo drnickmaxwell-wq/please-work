@@ -49,6 +49,12 @@
   color: color-mix(in srgb, var(--smh-text-muted) 78%, transparent);
 }
 
+.panelNotice {
+  margin: 0;
+  font-size: 0.85rem;
+  color: color-mix(in srgb, var(--smh-text-muted) 78%, transparent);
+}
+
 .panelControls {
   display: flex;
   flex-direction: column;
@@ -101,6 +107,13 @@
   color: var(--smh-text);
 }
 
+.select:disabled,
+.range:disabled,
+.toggle:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
 .range {
   accent-color: color-mix(in srgb, var(--brand-teal) 55%, var(--brand-magenta) 45%);
 }
@@ -127,7 +140,7 @@
   background: color-mix(in srgb, var(--smh-sand) 92%, transparent);
   transform: translateX(0);
   transition: transform 200ms ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--smh-text) 18%, transparent);
 }
 
 .toggle:checked {

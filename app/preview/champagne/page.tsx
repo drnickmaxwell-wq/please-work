@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { CSSProperties } from 'react';
 
 import BrandHeroGradient, { type BrandHeroGradientProps } from '@/components/brand/BrandHeroGradient';
@@ -14,20 +14,38 @@ const MAX_GRAIN = 0.25;
 const GRAIN_STEP = 0.01;
 
 const ChampagnePreviewPage = () => {
+  const [experimentsEnabled, setExperimentsEnabled] = useState(false);
+
+  useEffect(() => {
+    const syncFromUrl = () => {
+      const params = new URLSearchParams(window.location.search);
+      setExperimentsEnabled(params.get('exp') === '1');
+    };
+
+    syncFromUrl();
+    window.addEventListener('popstate', syncFromUrl);
+    return () => window.removeEventListener('popstate', syncFromUrl);
+  }, []);
+
   const [particlesVariant, setParticlesVariant] = useState<'gold' | 'none'>('gold');
   const [grainOpacity, setGrainOpacity] = useState(0.14);
   const [goldRimEnabled, setGoldRimEnabled] = useState(false);
 
   const formattedGrain = useMemo(() => grainOpacity.toFixed(2), [grainOpacity]);
   const heroStyle = useMemo<CSSProperties>(
-    () => ({ '--champagne-grain': formattedGrain }),
-    [formattedGrain],
+    () => ({ '--champagne-grain': experimentsEnabled ? formattedGrain : undefined }),
+    [formattedGrain, experimentsEnabled],
   );
 
   return (
     <div className={styles.preview}>
       <section className={styles.controls} aria-label="Champagne hero controls">
         <p className={styles.controlsTitle}>Layer Toggles</p>
+        {!experimentsEnabled && (
+          <p className={styles.controlsNotice}>
+            Experiments are locked. Add <code>?exp=1</code> to the URL to explore grain, particles, and gold rim variations.
+          </p>
+        )}
         <div className={styles.controlGroup}>
           <div className={styles.control}>
             <label htmlFor="champagne-toggle-particles">
@@ -40,7 +58,11 @@ const ChampagnePreviewPage = () => {
               aria-label="Toggle particle overlay"
               className={styles.toggle}
               checked={particlesVariant !== 'none'}
-              onChange={(event) => setParticlesVariant(event.target.checked ? 'gold' : 'none')}
+              onChange={(event) => {
+                if (!experimentsEnabled) return;
+                setParticlesVariant(event.target.checked ? 'gold' : 'none');
+              }}
+              disabled={!experimentsEnabled}
             />
           </div>
           <div className={styles.control}>
@@ -57,7 +79,11 @@ const ChampagnePreviewPage = () => {
               aria-label="Adjust film grain opacity"
               className={styles.range}
               value={grainOpacity}
-              onChange={(event) => setGrainOpacity(Number(event.target.value))}
+              onChange={(event) => {
+                if (!experimentsEnabled) return;
+                setGrainOpacity(Number(event.target.value));
+              }}
+              disabled={!experimentsEnabled}
             />
             <span className={styles.output}>Opacity {formattedGrain}</span>
           </div>
@@ -72,7 +98,11 @@ const ChampagnePreviewPage = () => {
               aria-label="Toggle gold rim highlight"
               className={styles.toggle}
               checked={goldRimEnabled}
-              onChange={(event) => setGoldRimEnabled(event.target.checked)}
+              onChange={(event) => {
+                if (!experimentsEnabled) return;
+                setGoldRimEnabled(event.target.checked);
+              }}
+              disabled={!experimentsEnabled}
             />
           </div>
         </div>
@@ -85,9 +115,9 @@ const ChampagnePreviewPage = () => {
             clip: 'wave-bottom',
             goldDensity: 'med',
             waveOpacity: 0.24,
-            particles: particlesVariant,
-            grainOpacity,
-            goldRimEnabled,
+            particles: experimentsEnabled ? particlesVariant : 'gold',
+            grainOpacity: experimentsEnabled ? grainOpacity : 0.14,
+            goldRimEnabled: experimentsEnabled ? goldRimEnabled : false,
             driftEnabled: true,
           } as BrandHeroGradientProps)}
         >
