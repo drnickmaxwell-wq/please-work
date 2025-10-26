@@ -3,6 +3,9 @@
 import { useState } from 'react';
 
 import '@/styles/preview/champagne/page.css';
+import '@/styles/preview/champagne/layers.css';
+import '@/styles/preview/champagne/hero.css';
+import '@/styles/preview/champagne/footer.css';
 
 const ChampagnePreviewPage = () => {
   const [showParticles, setShowParticles] = useState(true);
@@ -61,10 +64,12 @@ const ChampagnePreviewPage = () => {
             >
               <header>Preview Hero</header>
               <div className="preview-variant-body">
-                <span>Champagne background layers</span>
-                <div className="hero-layer hero-layer--particles" aria-hidden="true" />
-                <div className="hero-layer hero-layer--grain" aria-hidden="true" />
-                <div className="hero-layer hero-layer--shimmer" aria-hidden="true" />
+                <div className="hero-champagne lux-wave">
+                  <span>Champagne background layers</span>
+                  <div className="hero-layer hero-layer--particles lux-particles" aria-hidden="true" />
+                  <div className="hero-layer hero-layer--grain lux-grain" aria-hidden="true" />
+                  <div className="hero-layer hero-layer--shimmer" aria-hidden="true" />
+                </div>
               </div>
             </article>
           </div>
@@ -86,10 +91,16 @@ const ChampagnePreviewPage = () => {
             <article className="preview-variant-card footer-card">
               <header>Preview Footer</header>
               <div className="preview-variant-body">
-                <div className="preview-footer footer-preview">
+                <div className="preview-footer footer-preview footer-champagne">
                   <h3>Champagne Details</h3>
-                  <p>Warm highlight bloom with layered gradients.</p>
-                  <p>Elevated typography and luminous accents.</p>
+                  <div className="footer-preview-cards">
+                    <div className="footer-preview-card lux-glass lux-gold-rim">
+                      <p>Warm highlight bloom with layered gradients.</p>
+                    </div>
+                    <div className="footer-preview-card lux-glass lux-gold-rim">
+                      <p>Elevated typography and luminous accents.</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </article>
