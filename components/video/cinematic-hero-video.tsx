@@ -41,6 +41,7 @@ export default function CinematicHeroVideo({
   const [showControls, setShowControls] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [isPreviewRoute, setIsPreviewRoute] = useState(false);
   
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -51,7 +52,7 @@ export default function CinematicHeroVideo({
   });
 
   const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.5], [0.3, 0.7]);
+  const overlayOpacity = useTransform(scrollYProgress, [0, 0.5], [0.82, 0.92]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -71,6 +72,14 @@ export default function CinematicHeroVideo({
       video.removeEventListener('loadeddata', handleLoadedData);
       video.removeEventListener('timeupdate', handleTimeUpdate);
     };
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    setIsPreviewRoute(window.location.pathname.startsWith('/preview'));
   }, []);
 
   const togglePlay = () => {
@@ -113,16 +122,16 @@ export default function CinematicHeroVideo({
   };
 
   return (
-    <div 
+    <div
       ref={containerRef}
-      className={`relative h-screen overflow-hidden ${className}`}
+      className={`relative hero overflow-hidden ${className}`}
       onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => setShowControls(false)}
     >
       {/* Video Background */}
       <motion.div
         style={{ scale: videoScale }}
-        className="absolute inset-0 w-full h-full"
+        className="absolute inset-0 w-full h-full -z-10"
       >
         <video
           ref={videoRef}
@@ -141,12 +150,11 @@ export default function CinematicHeroVideo({
 
       {/* Brand Gradient Overlay */}
       <motion.div
-        style={{
-          opacity: overlayOpacity,
-          background: 'linear-gradient(135deg, rgba(217, 75, 198, 0.65) 0%, rgba(0, 194, 199, 0.65) 100%)',
-        }}
-        className="absolute inset-0"
+        aria-hidden="true"
+        style={{ opacity: overlayOpacity }}
+        className="champagne-overlay champagne-wave-mask"
       />
+      <div aria-hidden="true" className="champagne-grain" />
 
       {/* Floating Particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -189,7 +197,7 @@ export default function CinematicHeroVideo({
               className="text-6xl md:text-8xl font-bold mb-6 leading-tight"
               style={{
                 fontFamily: 'var(--font-inter), system-ui, Arial',
-                textShadow: '0 28px 56px rgba(6, 18, 32, 0.25)',
+                textShadow: '0 1px 2px rgba(0, 0, 0, 0.25)',
               }}
             >
               {title}
@@ -199,7 +207,7 @@ export default function CinematicHeroVideo({
               className="text-2xl md:text-4xl font-light mb-8 bg-gradient-to-r from-pink-300 via-teal-300 to-yellow-300 bg-clip-text text-transparent"
               style={{
                 fontFamily: 'var(--font-inter), system-ui, Arial',
-                textShadow: '0 22px 44px rgba(6, 18, 32, 0.25)',
+                textShadow: '0 1px 2px rgba(0, 0, 0, 0.25)',
               }}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -213,7 +221,7 @@ export default function CinematicHeroVideo({
                 className="text-lg md:text-xl mb-12 text-white/90 max-w-2xl mx-auto leading-relaxed"
                 style={{
                   fontFamily: 'var(--font-inter), system-ui, Arial',
-                  textShadow: '0 18px 40px rgba(6, 18, 32, 0.25)',
+                  textShadow: '0 1px 2px rgba(0, 0, 0, 0.25)',
                 }}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -332,7 +340,7 @@ export default function CinematicHeroVideo({
           <motion.div
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-gradient-to-br from-pink-900 via-teal-900 to-yellow-900 flex items-center justify-center z-30"
+            className="absolute inset-0 flex items-center justify-center z-30 bg-slate-950/80 backdrop-blur-md"
           >
             <div className="text-center text-white">
               <motion.div
@@ -341,7 +349,7 @@ export default function CinematicHeroVideo({
                 transition={{ duration: 1, repeat: Infinity, ease: linearEase }}
               />
               <p className="text-xl font-medium" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
-                Loading Luxury Experience...
+                {isPreviewRoute ? 'Loading Luxury Experience...' : 'Loading experience...'}
               </p>
             </div>
           </motion.div>

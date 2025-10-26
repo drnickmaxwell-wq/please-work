@@ -3,7 +3,6 @@
 
 import React, { PropsWithChildren, useEffect, useMemo, useRef } from "react";
 import type { CSSProperties } from "react";
-import { asset } from "@/lib/asset";
 import { useParallax } from "./hooks/useParallax";
 import "@/app/globals/hero-polish.css";
 
@@ -124,16 +123,11 @@ export default function BrandHeroGradient({
   const particlesVariant: ParticlePalette = particles ?? "gold";
   const showParticles = particlesVariant !== "none";
   const particleDensity = particleDensityAttr[goldDensity ?? "low"] ?? "low";
-  const waveImage = asset("/brand-polish/wave-light-overlay.webp");
-
   return (
     <div ref={containerRef} className={`brand-hero-shell ${clipClass}`.trim()} style={shellStyle}>
       <div className="brand-hero-layers" aria-hidden="true">
         <span className="hero-layer hero-layer--gradient" data-motion={driftEnabled} data-intensity={intensity} />
-        <span
-          className="hero-layer hero-layer--wave"
-          style={{ "--hero-wave-image": `url(${waveImage})` } as CSSProperties}
-        />
+        <span className="hero-layer hero-layer--wave champagne-wave-mask" />
         {showParticles ? (
           <span
             className="hero-layer hero-layer--particles particles"
@@ -141,7 +135,7 @@ export default function BrandHeroGradient({
             data-density={particleDensity}
           />
         ) : null}
-        <span className="hero-layer hero-layer--grain film-grain" />
+        <span className="hero-layer hero-layer--grain champagne-grain" />
         {goldRimEnabled ? <span className="hero-layer hero-layer--gold-rim" data-glow={driftEnabled} /> : null}
       </div>
 

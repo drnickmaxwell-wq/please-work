@@ -89,7 +89,9 @@ export default function TechnologyPage() {
         driftEnabled={champagnePhase2}
         grainOpacity={champagnePhase2 ? 0.14 : 0.1}
       >
-        <section className={styles.hero}>
+        <section className={`${styles.hero} hero`}>
+          <div aria-hidden="true" className="champagne-overlay champagne-wave-mask" />
+          <div aria-hidden="true" className="champagne-grain" />
           <div className={styles.heroContent}>
             <p className={styles.heroEyebrow}>Technology</p>
             <h1 className={styles.heroTitle}>Calm precision, powered by digital artistry</h1>
