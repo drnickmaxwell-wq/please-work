@@ -66,9 +66,67 @@ const ChampagnePreviewPage = () => {
               <div className="preview-variant-body">
                 <div className="hero-champagne lux-wave">
                   <span>Champagne background layers</span>
-                  <div className="hero-layer hero-layer--particles lux-particles" aria-hidden="true" />
-                  <div className="hero-layer hero-layer--grain lux-grain" aria-hidden="true" />
-                  <div className="hero-layer hero-layer--shimmer" aria-hidden="true" />
+                  <div
+                    className="hero-layer hero-layer--particles lux-particles"
+                    aria-hidden="true"
+                    role="presentation"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/particles/particles-gold.webp"
+                      alt=""
+                      loading="lazy"
+                      fetchPriority="low"
+                      decoding="async"
+                      className="hero-layer-media hero-layer-media--particles"
+                      aria-hidden="true"
+                      role="presentation"
+                    />
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/particles/particles-magenta.webp"
+                      alt=""
+                      loading="lazy"
+                      fetchPriority="low"
+                      decoding="async"
+                      className="hero-layer-media hero-layer-media--particles"
+                      aria-hidden="true"
+                      role="presentation"
+                    />
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/particles/particles-teal.webp"
+                      alt=""
+                      loading="lazy"
+                      fetchPriority="low"
+                      decoding="async"
+                      className="hero-layer-media hero-layer-media--particles"
+                      aria-hidden="true"
+                      role="presentation"
+                    />
+                  </div>
+                  <div
+                    className="hero-layer hero-layer--grain lux-grain"
+                    aria-hidden="true"
+                    role="presentation"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/textures/film-grain-desktop.webp"
+                      alt=""
+                      loading="lazy"
+                      fetchPriority="low"
+                      decoding="async"
+                      className="hero-layer-media hero-layer-media--grain"
+                      aria-hidden="true"
+                      role="presentation"
+                    />
+                  </div>
+                  <div
+                    className="hero-layer hero-layer--shimmer"
+                    aria-hidden="true"
+                    role="presentation"
+                  />
                 </div>
               </div>
             </article>
