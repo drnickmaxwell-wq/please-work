@@ -37,9 +37,11 @@ export default function Home() {
   return (
     <>
       <JsonLd json={localBusinessJson} />
-      <HeroLuxury />
-      <SmileJourney />
-      <HomePageClient />
+      <main id="main-content" className="min-h-screen overflow-hidden relative">
+        <HeroLuxury />
+        <SmileJourney />
+        <HomePageClient />
+      </main>
     </>
   );
 }

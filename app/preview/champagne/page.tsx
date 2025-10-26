@@ -33,7 +33,10 @@ const ChampagnePreviewPage = () => {
 
   const formattedGrain = useMemo(() => grainOpacity.toFixed(2), [grainOpacity]);
   const heroStyle = useMemo<CSSProperties>(
-    () => ({ '--champagne-grain': experimentsEnabled ? formattedGrain : undefined }),
+    () =>
+      ({
+        '--champagne-grain': experimentsEnabled ? formattedGrain : undefined,
+      }) as CSSProperties,
     [formattedGrain, experimentsEnabled],
   );
 

@@ -9,7 +9,7 @@ import { Particles } from '@/components/fx/Particles';
 
 export default function HomePageClient() {
   return (
-    <main id="main-content" className="min-h-screen overflow-hidden relative">
+    <>
       {/* Floating Geometry Elements */}
       <div className="fixed inset-0 pointer-events-none z-10">
         <FloatingGeometry
@@ -68,6 +68,6 @@ export default function HomePageClient() {
       <ScrollReveal direction="scale" delay={0.4}>
         <LuxuryChatbot />
       </ScrollReveal>
-    </main>
+    </>
   );
 }
