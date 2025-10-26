@@ -92,6 +92,25 @@
   --smh-filmgrain: url('/assets/manus/textures/home-hero-film-grain.webp');
 }
 :root {
+  --footer-ink-start: #0B1220;
+  --footer-ink-mid: #0E1A2A;
+  --footer-ink-end: #0B0F18;
+  --footer-grad-angle: 180deg;
+  --footer-particles-ink: rgba(255, 255, 255, 0.08);
+  --footer-ring: rgba(255, 215, 160, 0.28);
+  --footer-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  --footer-blur: 8px;
+  --footer-clear: rgba(0, 0, 0, 0);
+
+  --input-bg: rgba(255, 255, 255, 0.06);
+  --input-border: rgba(255, 255, 255, 0.24);
+  --input-text: rgba(255, 255, 255, 0.92);
+  --cta-glow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 16px 32px rgba(226, 182, 74, 0.18);
+
+  --motion-duration-normal: 260ms;
+  --motion-easing-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+}
+:root {
   /* Navy Tokens */
   --navy-900: #0C1520;
   --navy-950: #070C10;
