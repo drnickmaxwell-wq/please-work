@@ -140,30 +140,42 @@ const FooterLuxe = () => {
       <style jsx>{`
         .footer-luxe {
           position: relative;
-          overflow: clip;
+          overflow: hidden;
+          background: transparent;
+          color: var(--body-on-glass);
+          padding: clamp(3.5rem, 7vw, 5rem) clamp(1.5rem, 5vw, 4.5rem) clamp(2.5rem, 4vw, 3.5rem);
+          box-shadow: var(--footer-shadow);
+          isolation: isolate;
+        }
+
+        .footer-luxe::before,
+        .footer-luxe::after {
+          content: '';
+          position: absolute;
+          inset: -10%;
+          pointer-events: none;
+        }
+
+        .footer-luxe::before {
+          background:
+            radial-gradient(6px 6px at 14% 20%, var(--footer-particles-ink) 0 60%, var(--footer-clear) 61%) no-repeat,
+            radial-gradient(8px 8px at 42% 72%, var(--footer-particles-ink) 0 60%, var(--footer-clear) 61%) no-repeat,
+            radial-gradient(5px 5px at 78% 34%, var(--footer-particles-ink) 0 60%, var(--footer-clear) 61%) no-repeat;
+          filter: blur(0.3px);
+          opacity: 0.4;
+          z-index: 0;
+          animation: float calc(var(--motion-duration-slow) * 6) var(--motion-easing-smooth) infinite alternate;
+        }
+
+        .footer-luxe::after {
+          inset: 0;
           background: linear-gradient(
             var(--footer-grad-angle),
             var(--footer-ink-start),
             var(--footer-ink-mid) 55%,
             var(--footer-ink-end)
           );
-          color: var(--body-on-glass);
-          padding: clamp(3.5rem, 7vw, 5rem) clamp(1.5rem, 5vw, 4.5rem) clamp(2.5rem, 4vw, 3.5rem);
-          box-shadow: var(--footer-shadow);
-        }
-
-        .footer-luxe::before {
-          content: '';
-          position: absolute;
-          inset: -10%;
-          background:
-            radial-gradient(6px 6px at 14% 20%, var(--footer-particles-ink) 0 60%, var(--footer-clear) 61%) no-repeat,
-            radial-gradient(8px 8px at 42% 72%, var(--footer-particles-ink) 0 60%, var(--footer-clear) 61%) no-repeat,
-            radial-gradient(5px 5px at 78% 34%, var(--footer-particles-ink) 0 60%, var(--footer-clear) 61%) no-repeat;
-          filter: blur(0.3px);
-          opacity: 0.35;
-          pointer-events: none;
-          animation: float var(--motion-duration-normal) var(--motion-easing-smooth) both;
+          z-index: 1;
         }
 
         .footer-luxe__rim {
@@ -171,11 +183,13 @@ const FooterLuxe = () => {
           width: 100%;
           background: linear-gradient(90deg, var(--footer-clear), var(--footer-ring), var(--footer-clear));
           margin-bottom: clamp(2rem, 4vw, 3rem);
+          position: relative;
+          z-index: 2;
         }
 
         .footer-luxe__inner {
           position: relative;
-          z-index: 1;
+          z-index: 2;
           max-width: min(1180px, 94vw);
           margin: 0 auto;
           display: grid;
