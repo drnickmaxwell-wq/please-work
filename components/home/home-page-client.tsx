@@ -5,6 +5,7 @@ import InteractiveDentalVisualization from '@/components/features/interactive-de
 import LuxuryChatbot from '@/components/ai/luxury-chatbot';
 import { FloatingGeometry } from '@/components/effects/micro-interactions';
 import { ScrollReveal } from '@/components/effects/enhanced-scroll-animations';
+import { Particles } from '@/components/fx/Particles';
 
 export default function HomePageClient() {
   return (
@@ -43,11 +44,20 @@ export default function HomePageClient() {
 
       {/* Cinematic Hero Video - Brand Consistent */}
       <section className="relative overflow-hidden">
-        <div
-          className="absolute inset-0 -z-10 smh-wave-mask"
-          style={{ background: 'var(--smh-gradient)' }}
-        />
-        <div className="absolute inset-0 smh-filmgrain" />
+        <div className="absolute inset-0 -z-10">
+          <div
+            className="absolute inset-0"
+            style={{ background: 'linear-gradient(135deg, #D94BC6 0%, #00C2C7 100%)' }}
+          />
+          <div
+            className="absolute inset-0 smh-wave-mask"
+            style={{
+              background: 'linear-gradient(180deg, rgba(6, 14, 26, 0.34) 0%, rgba(6, 14, 26, 0.08) 55%, rgba(6, 14, 26, 0) 100%)',
+            }}
+          />
+          <div className="absolute inset-0 smh-filmgrain" />
+        </div>
+        <Particles />
         <CinematicHeroVideo
           videoSrc="/videos/dental-hero-4k.mp4"
           posterSrc="/hero-poster.jpg"

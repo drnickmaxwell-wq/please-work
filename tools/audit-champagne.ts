@@ -56,8 +56,8 @@ const files = mustExist.map(statFile);
 
 // token checks
 const tokenPath = path.join(root, "styles/tokens/smh-champagne-tokens.css");
-let tokenVars: Record<string, boolean> = {};
-let tokenNotes: string[] = [];
+const tokenVars: Record<string, boolean> = {};
+const tokenNotes: string[] = [];
 const requiredVars = [
   "--brand-magenta", "--brand-teal", "--brand-gold",
   "--surface-0", "--radius", "--shadow-soft"

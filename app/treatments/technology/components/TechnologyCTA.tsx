@@ -29,7 +29,7 @@ export default function TechnologyCTA() {
       
       {/* CTA Content */}
       <div className="cta-content">
-        <h2 className="cta-title iridescent-text">Experience Tomorrow's Dentistry Today.</h2>
+        <h2 className="cta-title iridescent-text">Experience Tomorrow’s Dentistry Today.</h2>
         
         <p className="cta-subtitle">
           Discover how our precision technology creates exceptional outcomes with unmatched comfort.

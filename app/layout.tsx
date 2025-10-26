@@ -172,7 +172,7 @@ export default function RootLayout({
         
         {/* Main content wrapper */}
         <div id="main-content" className="relative">
-          <PerformanceOptimizedLayout showFooter={false}>
+          <PerformanceOptimizedLayout>
             {children}
           </PerformanceOptimizedLayout>
           <FooterLuxe />

@@ -25,5 +25,6 @@ export const TREATMENTS: NavLink[] = [
 
 export const RESOURCES: NavLink[] = [
   { label: 'Patient Stories', href: '/stories', enabled: true },
+  { label: 'AI Smile Quiz', href: '/ai-smile-quiz', enabled: true },
   { label: 'Blog', href: '/blog', enabled: true },
 ];

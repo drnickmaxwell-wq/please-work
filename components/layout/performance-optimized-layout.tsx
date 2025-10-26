@@ -10,13 +10,11 @@ import { ScrollProgress } from '@/components/effects/parallax-scroll';
 // Fonts: Montserrat headings, Lora body text
 
 // Lazy load components for performance
-const Footer = lazy(() => import('./footer'));
 const FloatingActionButtons = lazy(() => import('@/components/ui/floating-action-buttons'));
 
 interface PerformanceOptimizedLayoutProps {
   children: React.ReactNode;
   showHeader?: boolean;
-  showFooter?: boolean;
   showFloatingButtons?: boolean;
   className?: string;
 }
@@ -49,7 +47,6 @@ function BrandLoadingSpinner() {
 export default function PerformanceOptimizedLayout({
   children,
   showHeader = true,
-  showFooter = true,
   showFloatingButtons = true,
   className = ''
 }: PerformanceOptimizedLayoutProps) {
@@ -69,13 +66,6 @@ export default function PerformanceOptimizedLayout({
       <main className="relative">
         {children}
       </main>
-      
-      {/* Footer */}
-      {showFooter && (
-        <Suspense fallback={<BrandLoadingSpinner />}>
-          <Footer />
-        </Suspense>
-      )}
       
       {/* Floating Action Buttons */}
       {showFloatingButtons && (

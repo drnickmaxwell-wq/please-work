@@ -1,6 +1,6 @@
 'use client';
 import StickyHeader from '@/components/layout/sticky-header';
-import Footer from '@/components/layout/footer';
+import { FooterLuxe } from '@/components/footer-luxe';
 
 export default function Page() {
   return (
@@ -18,7 +18,7 @@ export default function Page() {
 
         </div>
       </section>
-      <Footer />
+      <FooterLuxe />
     </main>
   );
 }

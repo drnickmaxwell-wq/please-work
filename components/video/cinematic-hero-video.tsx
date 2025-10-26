@@ -2,7 +2,8 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { easeInOutCubic, linearEase } from '@/lib/motion/easing';
+import { easeInOutCubic } from '@/app/lib/motion';
+import { linearEase } from '@/lib/motion/easing';
 import { Play, Pause, Volume2, VolumeX, Maximize, RotateCcw } from 'lucide-react';
 
 // Brand Colors: Magenta #C2185B, Turquoise #40C4B4, Gold #D4AF37
@@ -139,9 +140,12 @@ export default function CinematicHeroVideo({
       </motion.div>
 
       {/* Brand Gradient Overlay */}
-      <motion.div 
-        style={{ opacity: overlayOpacity }}
-        className="absolute inset-0 bg-gradient-to-br from-pink-900/40 via-teal-900/40 to-yellow-900/40"
+      <motion.div
+        style={{
+          opacity: overlayOpacity,
+          background: 'linear-gradient(135deg, rgba(217, 75, 198, 0.65) 0%, rgba(0, 194, 199, 0.65) 100%)',
+        }}
+        className="absolute inset-0"
       />
 
       {/* Floating Particles */}
@@ -181,25 +185,22 @@ export default function CinematicHeroVideo({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
           >
-            <motion.h1 
+            <motion.h1
               className="text-6xl md:text-8xl font-bold mb-6 leading-tight"
-              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
-              animate={{
-                textShadow: [
-                  '0 0 20px rgba(194, 24, 91, 0.5)',
-                  '0 0 30px rgba(64, 196, 180, 0.5)',
-                  '0 0 20px rgba(212, 175, 55, 0.5)',
-                  '0 0 20px rgba(194, 24, 91, 0.5)'
-                ]
+              style={{
+                fontFamily: 'var(--font-inter), system-ui, Arial',
+                textShadow: '0 28px 56px rgba(6, 18, 32, 0.25)',
               }}
-              transition={{ duration: 4, repeat: Infinity }}
             >
               {title}
             </motion.h1>
-            
-            <motion.h2 
+
+            <motion.h2
               className="text-2xl md:text-4xl font-light mb-8 bg-gradient-to-r from-pink-300 via-teal-300 to-yellow-300 bg-clip-text text-transparent"
-              style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
+              style={{
+                fontFamily: 'var(--font-inter), system-ui, Arial',
+                textShadow: '0 22px 44px rgba(6, 18, 32, 0.25)',
+              }}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.8 }}
@@ -208,9 +209,12 @@ export default function CinematicHeroVideo({
             </motion.h2>
 
             {description && (
-              <motion.p 
+              <motion.p
                 className="text-lg md:text-xl mb-12 text-white/90 max-w-2xl mx-auto leading-relaxed"
-                style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
+                style={{
+                  fontFamily: 'var(--font-inter), system-ui, Arial',
+                  textShadow: '0 18px 40px rgba(6, 18, 32, 0.25)',
+                }}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 1.1 }}
