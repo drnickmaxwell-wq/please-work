@@ -46,7 +46,6 @@ export default function HeroLuxury({
         <div
           className="glass-pane mx-auto max-w-5xl rounded-3xl px-6 py-10 md:px-10 md:py-14 shadow-none"
           style={{
-            background: "var(--glass-bg-strong)",
             border: "1px solid var(--glass-border)",
             backdropFilter: "blur(14px)",
             WebkitBackdropFilter: "blur(14px)",

@@ -6,9 +6,9 @@
   --brand-teal:    var(--smh-primary-teal);    /* #40C4B4 */
   --brand-gold:    var(--smh-accent-gold);     /* #D4AF37 */
 
-  /* Glass scale */
-  --glass-bg-weak: color-mix(in srgb, var(--smh-bg) 90%, transparent 10%);
-  --glass-bg-strong: color-mix(in srgb, var(--smh-bg) 82%, transparent 18%);
+  /* Glass scale (ensure translucency over gradient) */
+  --glass-bg-weak: color-mix(in srgb, var(--smh-bg) 60%, transparent 40%);
+  --glass-bg-strong: color-mix(in srgb, var(--smh-bg) 40%, transparent 60%);
   --glass-border: color-mix(in srgb, var(--smh-text) 14%, transparent 86%);
 
   /* Ink & veils (used for legibility on frosted panes) */
@@ -32,8 +32,9 @@
 /* Dark-mode tuning */
 @media (prefers-color-scheme: dark) {
   :root {
-    --glass-bg-weak: color-mix(in srgb, var(--smh-bg) 86%, transparent 14%);
-    --glass-bg-strong: color-mix(in srgb, var(--smh-bg) 78%, transparent 22%);
+    /* Dark mode can afford slightly more translucency */
+    --glass-bg-weak: color-mix(in srgb, var(--smh-bg) 55%, transparent 45%);
+    --glass-bg-strong: color-mix(in srgb, var(--smh-bg) 35%, transparent 65%);
     --glass-border: color-mix(in srgb, var(--smh-text) 24%, transparent 76%);
   }
 }
