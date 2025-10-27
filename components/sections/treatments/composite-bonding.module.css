@@ -21,12 +21,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-      145deg,
-      color-mix(in oklab, var(--smh-primary-magenta, var(--brand-magenta)) 12%, transparent) 0%,
-      color-mix(in oklab, var(--smh-primary-teal, var(--brand-teal)) 8%, transparent) 42%,
-      color-mix(in oklab, var(--smh-accent-gold, var(--brand-gold)) 14%, transparent) 100%
-    );
+  background: var(--smh-panel-radiance);
   mix-blend-mode: soft-light;
   opacity: 0.58;
   pointer-events: none;
@@ -144,11 +139,7 @@
   border-radius: clamp(1.75rem, 4vw, 2.5rem);
   overflow: hidden;
   border: 1px solid color-mix(in oklab, var(--smh-accent-gold, var(--brand-gold)) 24%, transparent);
-  background: linear-gradient(
-    135deg,
-    color-mix(in oklab, var(--smh-navy-900) 82%, transparent),
-    color-mix(in oklab, var(--smh-navy-800) 55%, transparent)
-  );
+  background: var(--smh-media-depth);
   min-height: clamp(12rem, 30vw, 16rem);
   display: grid;
   place-items: center;

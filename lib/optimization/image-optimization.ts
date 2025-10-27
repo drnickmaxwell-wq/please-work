@@ -1,5 +1,6 @@
 // Image optimization utilities for St Mary's House Dental Care
 // Maintains brand consistency across all image loading states
+import { SMH_BRAND_COLOR_FALLBACKS, SMH_BRAND_COLOR_TOKENS } from '@/lib/brand/palette';
 
 export interface OptimizedImageConfig {
   src: string;
@@ -14,17 +15,17 @@ export interface OptimizedImageConfig {
 }
 
 const BRAND_COLOR_METADATA = {
-  magenta: { token: '--smh-primary-magenta', fallback: '#C2185B' },
-  turquoise: { token: '--smh-primary-teal', fallback: '#40C4B4' },
-  gold: { token: '--smh-accent-gold', fallback: '#D4AF37' }
+  magenta: { token: SMH_BRAND_COLOR_TOKENS.magenta, fallback: SMH_BRAND_COLOR_FALLBACKS.magenta },
+  turquoise: { token: SMH_BRAND_COLOR_TOKENS.teal, fallback: SMH_BRAND_COLOR_FALLBACKS.teal },
+  gold: { token: SMH_BRAND_COLOR_TOKENS.gold, fallback: SMH_BRAND_COLOR_FALLBACKS.gold }
 } as const;
 
 type BrandCoreColor = keyof typeof BRAND_COLOR_METADATA;
 
 export const BRAND_COLORS = {
-  magenta: 'var(--smh-primary-magenta)',
-  turquoise: 'var(--smh-primary-teal)',
-  gold: 'var(--smh-accent-gold)',
+  magenta: `var(${SMH_BRAND_COLOR_TOKENS.magenta})`,
+  turquoise: `var(${SMH_BRAND_COLOR_TOKENS.teal})`,
+  gold: `var(${SMH_BRAND_COLOR_TOKENS.gold})`,
   slate: {
     50: '#f8fafc',
     100: '#f1f5f9',

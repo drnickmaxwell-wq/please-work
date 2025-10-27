@@ -121,7 +121,7 @@
   font-weight: 600;
   color: var(--smh-navy-900);
   cursor: pointer;
-  background-image: linear-gradient(120deg, color-mix(in oklab, var(--smh-accent-gold, var(--brand-gold)) 88%, transparent), color-mix(in oklab, var(--smh-accent-gold, var(--brand-gold)) 58%, transparent));
+  background: var(--smh-footer-button);
   transition: transform 180ms var(--motion-ease, cubic-bezier(0.4, 0, 0.2, 1)),
     box-shadow 180ms var(--motion-ease, cubic-bezier(0.4, 0, 0.2, 1));
 }
@@ -129,8 +129,7 @@
 .button:hover,
 .button:focus-visible {
   transform: translateY(-1px);
-  box-shadow: 0 0 0 2px color-mix(in oklab, var(--smh-accent-gold, var(--brand-gold)) 45%, transparent),
-    0 18px 40px color-mix(in oklab, var(--smh-navy-900) 28%, transparent);
+  box-shadow: var(--smh-footer-button-shadow);
   outline: none;
 }
 
