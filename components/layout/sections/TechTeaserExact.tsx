@@ -10,8 +10,7 @@ export default function TechTeaserExact(){
             Precision scanners, same-day crowns, AR smile previews and gentle comfort tech.
           </p>
           <a href="/preview/lux/technology"
-             className="mt-4 inline-flex items-center rounded-full px-5 py-2 text-white font-semibold
-                        bg-[var(--gradient-cta)]">
+             className="mt-4 inline-flex items-center rounded-full px-5 py-2 bg-[var(--gradient-cta)] text-white shadow-lg">
             Explore Technology
           </a>
         </div>
