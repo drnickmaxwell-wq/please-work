@@ -76,6 +76,9 @@ export default function WhyHeroGreyPage() {
     const heroComputed = heroEl ? getComputedStyle(heroEl) : null;
     const paneComputed = paneEl ? getComputedStyle(paneEl) : null;
 
+    const heroBackground = heroComputed?.getPropertyValue("background").trim() ?? "";
+    const paneBackground = paneComputed?.getPropertyValue("background").trim() ?? "";
+
     const tokens: TokenSnapshot = {
       gradient: rootStyles.getPropertyValue("--smh-gradient").trim(),
       magenta: rootStyles.getPropertyValue("--smh-primary-magenta").trim(),
@@ -84,6 +87,12 @@ export default function WhyHeroGreyPage() {
       glassStrong: rootStyles.getPropertyValue("--glass-bg-strong").trim(),
       glassBorder: rootStyles.getPropertyValue("--glass-border").trim(),
     };
+
+    console.log("[champagne-preview] hero surfaces", {
+      "--glass-border": tokens.glassBorder,
+      heroBackground,
+      paneBackground,
+    });
 
     const gatherRules = (rules: CSSRuleList | undefined | null, context?: string): string[] => {
       if (!rules) return [];
