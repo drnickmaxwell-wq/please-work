@@ -100,9 +100,10 @@ export default function HeroLuxury({
           width: min(100%, 720px);
           border-radius: 22px;
           background: var(--glass-bg-strong);
-          backdrop-filter: blur(var(--glass-blur)) saturate(1.05);
-          -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.05);
+          backdrop-filter: blur(var(--glass-blur));
+          -webkit-backdrop-filter: blur(var(--glass-blur));
           border: 1px solid var(--glass-border);
+          color: var(--smh-text);
           box-shadow: var(--rim-gold-inset), var(--shadow-hero-bloom);
           padding: clamp(32px, 6vw, 64px);
         }
