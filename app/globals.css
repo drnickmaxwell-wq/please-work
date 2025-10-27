@@ -1,10 +1,11 @@
-@import "@/styles/tokens/smh-champagne-tokens.css";   /* brand locks: magenta/teal/gold, smh gradient, light/dark */
-@import "@/styles/tokens.css";                         /* shared tokens: glass, rim, CTA, motion */
-@import "@/styles/brand/brand-gradient.css";          /* gradient+waves overlay helpers */
-@import "@/app/styles/smh-tokens.css";                /* smh footer/nav supplements */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";                           /* 1) Tailwind first */
+@import "@/styles/tokens/smh-champagne-tokens.css"; /* 2) Source-of-truth tokens */
+@import "@/styles/tokens.css";                   /* 3) Shared tokens & glass/rim */
+@import "@/styles/brand/brand-gradient.css";     /* 4) Gradient & waves */
+@import "@/styles/brand/brand-textures.css";     /* 5) Grain/particles */
+@import "@/styles/brand/lux-glass.css";          /* 6) Glass rules */
+@import "@/styles/brand/brand-motion.css";       /* 7) Motion */
+@import "@/app/styles/smh-tokens.css";           /* 8) App-specific add-ons */
 
 :root {
   /* Brand Colors - Luxury Coastal Theme */

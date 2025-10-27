@@ -1,24 +1,13 @@
-/* SMH aliases & surfaces */
+/* Aliases used across the app */
 :root {
   --brand-magenta: var(--smh-primary-magenta);
-  --brand-teal: var(--smh-primary-teal);
-  --brand-gold: var(--smh-accent-gold);
+  --brand-teal:    var(--smh-primary-teal);
+  --brand-gold:    var(--smh-accent-gold);
 
-  /* Glass & rim used across site */
-  --glass-bg-weak: color-mix(in srgb, var(--smh-bg) 88%, transparent 12%);
-  --glass-bg:       color-mix(in srgb, var(--smh-bg) 80%, transparent 20%);
-  --glass-bg-strong: color-mix(in srgb, var(--smh-bg) 72%, transparent 28%);
-  --glass-border:    color-mix(in srgb, var(--smh-text) 12%, transparent 88%);
-  --glass-blur: 12px;
-  --rim-gold-inset: inset 0 0 0 1px color-mix(in srgb, var(--brand-gold) 55%, transparent);
-}
+  /* Glass scale (complete) */
+  --glass-bg-weak:   color-mix(in srgb, var(--smh-bg) 82%, black 18%);
+  --glass-bg-strong: color-mix(in srgb, var(--smh-bg) 72%, black 28%);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --glass-bg-weak:  color-mix(in srgb, #0D0E10 75%, transparent 25%);
-    --glass-bg:       color-mix(in srgb, #0D0E10 70%, transparent 30%);
-    --glass-bg-strong:color-mix(in srgb, #0D0E10 62%, transparent 38%);
-    --glass-border:   color-mix(in srgb, #FFFFFF 14%, transparent 86%);
-    --glass-blur: 12px;
-  }
+  /* Gold rim utility */
+  --rim-gold-inset: inset 0 0 0 1px color-mix(in srgb, var(--brand-gold) 68%, transparent);
 }

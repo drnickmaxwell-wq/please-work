@@ -1,113 +1,25 @@
-/* SMH Champagne – canonical token sheet */
-:root{
-  --smh-primary-magenta:#C2185B;
-  --smh-primary-teal:#40C4B4;
-  --smh-accent-gold:#D4AF37;
+:root {
+  /* Brand hues */
+  --smh-primary-magenta: #C2185B;
+  --smh-primary-teal:    #40C4B4;
+  --smh-accent-gold:     #D4AF37;
 
-  /* Base neutrals */
-  --smh-bg:#FFFFFF;
-  --smh-text:#1A1A1A;
-  --smh-text-muted:#4C4C4C;
+  /* Neutrals */
+  --smh-bg: #FFFFFF;
+  --smh-text: #1A1A1A;
+  --smh-text-muted: #4C4C4C;
 
-  /* Core hero gradient */
-  --smh-gradient:linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
-
-  /* CTA gradient (tokens use this name) */
-  --gradient-cta:linear-gradient(135deg,#D94BC6 0%,#00C2C7 60%,var(--smh-accent-gold) 100%);
-
-  /* Hero + overlay treatments */
-  --smh-hero-shimmer:linear-gradient(
-    90deg,
-    color-mix(in srgb,var(--smh-bg) 82%,transparent) 0%,
-    color-mix(in srgb,var(--smh-accent-gold) 88%,var(--smh-bg) 12%) 25%,
-    color-mix(in srgb,var(--smh-bg) 100%,transparent) 50%,
-    color-mix(in srgb,var(--smh-accent-gold) 88%,var(--smh-bg) 12%) 75%,
-    color-mix(in srgb,var(--smh-bg) 82%,transparent) 100%
-  );
-  --smh-hero-overlay-wave:linear-gradient(
-    180deg,
-    color-mix(in srgb,var(--smh-primary-magenta) 18%,transparent) 0%,
-    color-mix(in srgb,var(--smh-primary-teal) 12%,transparent) 100%
-  );
-  --smh-hero-overlay-grain:repeating-linear-gradient(
-    0deg,
-    color-mix(in srgb,var(--smh-primary-magenta) 10%,transparent) 0px,
-    color-mix(in srgb,var(--smh-primary-teal) 8%,transparent) 1px,
-    transparent 2px
-  );
-  --smh-hero-pane-highlight:linear-gradient(
-    180deg,
-    color-mix(in srgb,var(--smh-accent-gold) 28%,transparent) 0%,
-    transparent 70%
-  );
-  --smh-hero-wave-mask:url('/waves/smh-wave-mask.svg');
-
-  /* Micro interactions + motion accents */
-  --smh-morphing-pink:linear-gradient(45deg,color-mix(in srgb,var(--smh-primary-magenta) 94%,transparent),color-mix(in srgb,var(--smh-primary-magenta) 42%,transparent));
-  --smh-morphing-teal:linear-gradient(45deg,color-mix(in srgb,var(--smh-primary-teal) 94%,transparent),color-mix(in srgb,var(--smh-primary-teal) 42%,transparent));
-  --smh-morphing-gold:linear-gradient(45deg,color-mix(in srgb,var(--smh-accent-gold) 92%,transparent),color-mix(in srgb,var(--smh-accent-gold) 40%,transparent));
-  --smh-micro-magenta:linear-gradient(135deg,color-mix(in srgb,var(--smh-primary-magenta) 100%,transparent),color-mix(in srgb,var(--smh-primary-magenta) 48%,transparent));
-  --smh-micro-teal:linear-gradient(135deg,color-mix(in srgb,var(--smh-primary-teal) 100%,transparent),color-mix(in srgb,var(--smh-primary-teal) 48%,transparent));
-  --smh-micro-gold:linear-gradient(135deg,color-mix(in srgb,var(--smh-accent-gold) 100%,transparent),color-mix(in srgb,var(--smh-accent-gold) 48%,transparent));
-  --smh-micro-magenta-shadow:0 4px 20px color-mix(in srgb,var(--smh-primary-magenta) 36%,transparent);
-  --smh-micro-teal-shadow:0 4px 20px color-mix(in srgb,var(--smh-primary-teal) 34%,transparent);
-  --smh-micro-gold-shadow:0 4px 20px color-mix(in srgb,var(--smh-accent-gold) 32%,transparent);
-
-  /* Liquid button gradients */
-  --smh-liquid-primary:linear-gradient(135deg,var(--smh-primary-magenta) 0%,var(--smh-primary-teal) 100%);
-  --smh-liquid-secondary:linear-gradient(135deg,var(--smh-primary-teal) 0%,var(--smh-accent-gold) 100%);
-  --smh-liquid-accent:linear-gradient(135deg,var(--smh-accent-gold) 0%,var(--smh-primary-magenta) 100%);
-  --smh-liquid-shadow:0 14px 36px color-mix(in srgb,var(--smh-primary-magenta) 22%,transparent);
-
-  /* Shimmer states */
-  --smh-shimmer-subtle:linear-gradient(
-    90deg,
-    color-mix(in srgb,var(--smh-accent-gold) 38%,transparent) 0%,
-    color-mix(in srgb,var(--smh-bg) 86%,transparent) 50%,
-    color-mix(in srgb,var(--smh-accent-gold) 38%,transparent) 100%
-  );
-  --smh-shimmer-medium:linear-gradient(
-    90deg,
-    color-mix(in srgb,var(--smh-accent-gold) 52%,transparent) 0%,
-    color-mix(in srgb,var(--smh-bg) 94%,transparent) 50%,
-    color-mix(in srgb,var(--smh-accent-gold) 52%,transparent) 100%
-  );
-  --smh-shimmer-strong:linear-gradient(
-    90deg,
-    color-mix(in srgb,var(--smh-accent-gold) 68%,transparent) 0%,
-    color-mix(in srgb,var(--smh-bg) 100%,transparent) 50%,
-    color-mix(in srgb,var(--smh-accent-gold) 68%,transparent) 100%
-  );
-
-  /* Text gradients */
-  --smh-gradient-secondary:linear-gradient(135deg,var(--smh-primary-teal) 0%,var(--smh-accent-gold) 100%);
-  --smh-gradient-accent:linear-gradient(135deg,var(--smh-accent-gold) 0%,var(--smh-primary-magenta) 100%);
-  --smh-gradient-rainbow:linear-gradient(135deg,var(--smh-primary-magenta) 0%,var(--smh-primary-teal) 25%,var(--smh-accent-gold) 50%,var(--smh-primary-magenta) 75%,var(--smh-primary-teal) 100%);
-
-  /* Panel + surface treatments */
-  --smh-panel-radiance:linear-gradient(
-    145deg,
-    color-mix(in oklab,var(--smh-primary-magenta) 12%,transparent) 0%,
-    color-mix(in oklab,var(--smh-primary-teal) 8%,transparent) 42%,
-    color-mix(in oklab,var(--smh-accent-gold) 14%,transparent) 100%
-  );
-  --smh-media-depth:linear-gradient(
-    135deg,
-    color-mix(in oklab,var(--smh-navy-900) 82%,transparent),
-    color-mix(in oklab,var(--smh-navy-800) 55%,transparent)
-  );
-  --smh-footer-button:linear-gradient(
-    120deg,
-    color-mix(in oklab,var(--smh-accent-gold) 88%,transparent),
-    color-mix(in oklab,var(--smh-accent-gold) 58%,transparent)
-  );
-  --smh-footer-button-shadow:0 0 0 2px color-mix(in oklab,var(--smh-accent-gold) 45%,transparent),0 18px 40px color-mix(in oklab,var(--smh-navy-900) 28%,transparent);
+  /* Champagne gradient (light) */
+  --smh-gradient: linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
 }
-@media (prefers-color-scheme:dark){
-  :root{
-    --smh-bg:#0D0E10;
-    --smh-text:#FFFFFF;
-    --smh-text-muted:#D3D3D3;
-    --smh-gradient:linear-gradient(135deg,#EE66D1 0%,#00D6DB 100%);
+
+/* Dark overrides */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --smh-bg: #0D0E10;
+    --smh-text: #FFFFFF;
+    --smh-text-muted: #D3D3D3;
+    --smh-gradient: linear-gradient(135deg,#EE66D1 0%,#00D6DB 100%);
   }
 }
+

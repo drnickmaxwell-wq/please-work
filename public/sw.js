@@ -5,9 +5,10 @@ const STATIC_CACHE = 'smh-static-v1.0.0';
 const DYNAMIC_CACHE = 'smh-dynamic-v1.0.0';
 const IMAGE_CACHE = 'smh-images-v1.0.0';
 
-const BRAND_MAGENTA = '#C2185B'; // var(--brand-magenta)
-const BRAND_TEAL = '#40C4B4'; // var(--brand-teal)
-const BRAND_GOLD = '#D4AF37'; // var(--brand-gold)
+const BRAND_MAGENTA = 'var(--smh-primary-magenta)';
+const BRAND_TEAL = 'var(--smh-primary-teal)';
+const BRAND_GOLD = 'var(--smh-accent-gold)';
+const BRAND_GRADIENT = 'var(--smh-gradient)';
 
 // Critical assets for offline functionality
 const CRITICAL_ASSETS = [
@@ -282,7 +283,7 @@ function getOfflineHTML() {
         .logo {
           width: 80px;
           height: 80px;
-          background: linear-gradient(135deg, ${BRAND_MAGENTA}, ${BRAND_TEAL});
+          background: ${BRAND_GRADIENT};
           border-radius: 50%;
           display: flex;
           align-items: center;
@@ -326,15 +327,15 @@ function getOfflineHTML() {
         
         .feature {
           padding: 1rem;
-          background: rgba(194, 24, 91, 0.05); /* ${BRAND_MAGENTA} */
+          background: color-mix(in srgb, ${BRAND_MAGENTA} 5%, transparent);
           border-radius: 12px;
-          border: 1px solid rgba(194, 24, 91, 0.1); /* ${BRAND_MAGENTA} */
+          border: 1px solid color-mix(in srgb, ${BRAND_MAGENTA} 10%, transparent);
         }
         
         .feature-icon {
           width: 40px;
           height: 40px;
-          background: linear-gradient(135deg, ${BRAND_MAGENTA}, ${BRAND_TEAL});
+          background: ${BRAND_GRADIENT};
           border-radius: 8px;
           display: flex;
           align-items: center;
@@ -358,7 +359,7 @@ function getOfflineHTML() {
         }
         
         .retry-btn {
-          background: linear-gradient(135deg, ${BRAND_MAGENTA}, ${BRAND_TEAL});
+          background: ${BRAND_GRADIENT};
           color: white;
           border: none;
           padding: 12px 24px;

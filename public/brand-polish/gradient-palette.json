@@ -1,18 +1,19 @@
 {
   "angle_degrees": 135,
+  "gradient": "var(--smh-gradient)",
   "stops": [
     {
-      "hex": "#C2185B",
+      "token": "--smh-primary-magenta",
       "position": 0.0,
       "name": "magenta"
     },
     {
-      "hex": "#40C4B4",
+      "token": "--smh-primary-teal",
       "position": 0.6,
       "name": "turquoise"
     },
     {
-      "hex": "#D4AF37",
+      "token": "--smh-accent-gold",
       "position": 1.0,
       "name": "gold"
     }
