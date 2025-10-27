@@ -39,17 +39,40 @@ export default function HeroLuxury({
       data-hero="champagne"
       aria-labelledby="home-hero-title"
       className="relative overflow-hidden isolate"
+      style={{ background: "var(--smh-gradient)" }}
     >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          backgroundImage: "url('/waves/smh-wave-mask.svg')",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          opacity: 0.22,
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          opacity: 0.1,
+          backgroundImage:
+            "radial-gradient(2px 2px at 12% 28%, color-mix(in srgb, var(--smh-accent-gold) 70%, transparent) 60%, transparent 61%)," +
+            "radial-gradient(2px 2px at 78% 62%, color-mix(in srgb, var(--smh-accent-gold) 65%, transparent) 60%, transparent 61%)," +
+            "radial-gradient(1.5px 1.5px at 32% 68%, color-mix(in srgb, var(--smh-accent-gold) 60%, transparent) 60%, transparent 61%)",
+        }}
+      />
       <div className="hero-container">
         <div
-          className="glass-pane mx-auto max-w-5xl rounded-3xl px-6 py-10 md:px-10 md:py-14"
+          className="glass-pane relative z-10 mx-auto max-w-5xl rounded-3xl px-6 py-10 md:px-10 md:py-14 bg-transparent"
           style={{
             background: "var(--glass-bg-strong)",
             border: "1px solid var(--glass-border)",
             backdropFilter: "blur(14px)",
             WebkitBackdropFilter: "blur(14px)",
             boxShadow:
-              "0 24px 80px color-mix(in srgb, black 20%, transparent 80%)",
+              "0 24px 80px color-mix(in srgb, black 16%, transparent 84%)",
           }}
         >
           <div className="hero-copy">
