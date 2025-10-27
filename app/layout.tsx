@@ -151,7 +151,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className="antialiased bg-white text-slate-900 overflow-x-hidden"
+        className="antialiased text-slate-900 overflow-x-hidden min-h-screen bg-[var(--smh-bg)]"
         style={{
           WebkitFontSmoothing: 'antialiased',
           MozOsxFontSmoothing: 'grayscale',

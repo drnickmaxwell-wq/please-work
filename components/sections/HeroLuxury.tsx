@@ -39,6 +39,7 @@ export default function HeroLuxury({
       data-hero="champagne"
       aria-labelledby="home-hero-title"
       className="relative overflow-hidden isolate"
+      style={{ background: "var(--smh-gradient)" }}
     >
       <div aria-hidden className="gold-flecks"></div>
       <div className="hero-container">

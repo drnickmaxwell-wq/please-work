@@ -51,7 +51,7 @@ export default function PerformanceOptimizedLayout({
   className = ''
 }: PerformanceOptimizedLayoutProps) {
   return (
-    <div className={`min-h-screen bg-white ${className}`}>
+    <div className={`min-h-screen bg-transparent ${className}`}>
       {/* Scroll Progress Indicator */}
       <ScrollProgress className="fixed top-0 left-0 right-0 z-50" />
       
