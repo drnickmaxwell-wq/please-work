@@ -1,67 +1,25 @@
-/* SMH Champagne Design Tokens (v2.0) */
+/* SMH Champagne – canonical token sheet */
 :root{
-  --brand-magenta:#C2185B;
-  --brand-teal:#40C4B4;
-  --brand-gold:#D4AF37;
-  --surface-0:#F8F4EE;
-  --radius:16px;
-  --shadow-soft:0 10px 30px rgba(0,0,0,0.08);
-  --champagne-grad:var(--smh-gradient);
-  --brand-particles-gold:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%221%22%20height%3D%221%22%3E%3Crect%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23D4AF37%22%20fill-opacity%3D%220.32%22/%3E%3C/svg%3E");
-  --brand-particles-teal:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%221%22%20height%3D%221%22%3E%3Crect%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2340C4B4%22%20fill-opacity%3D%220.28%22/%3E%3C/svg%3E");
-  --brand-particles-magenta:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%221%22%20height%3D%221%22%3E%3Crect%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23C2185B%22%20fill-opacity%3D%220.3%22/%3E%3C/svg%3E");
-
   --smh-primary-magenta:#C2185B;
   --smh-primary-teal:#40C4B4;
   --smh-accent-gold:#D4AF37;
-  --smh-champagne:#F9E8C3;
-  --smh-sand:#F8F4EE;
+
+  /* Base neutrals */
   --smh-bg:#FFFFFF;
   --smh-text:#1A1A1A;
   --smh-text-muted:#4C4C4C;
+
+  /* Core hero gradient */
   --smh-gradient:linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
-  --gradient-champagne:var(--smh-gradient);
-  --cta-gradient:linear-gradient(135deg,#D94BC6 0%,#00C2C7 70%,#F9E8C3 100%);
-  --gradient-cta:var(--cta-gradient);
-  --motion-ease:cubic-bezier(0.645,0.045,0.355,1);--motion-hue-shift:3deg;--motion-ripple-speed:4s;--motion-hover-scale:1.03;
-  --glow-gold:0 0 12px rgba(212,175,55,.45);--glow-teal:0 0 8px rgba(64,196,180,.40);--glow-magenta:0 0 8px rgba(194,24,91,.40);
-  --shadow-elevate-light:0 4px 12px rgba(0,0,0,.05);
-  --font-heading:"Montserrat",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
-  --font-body:"Lora",Georgia,Cambria,"Times New Roman",Times,serif;
-  --font-data:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
-  --film-grain-opacity:.04;--particles-opacity:.10;
-  --glass-bg-weak:color-mix(in srgb,var(--smh-bg) 75%,black 25%);
-  --glass-bg-strong:color-mix(in srgb,var(--smh-bg) 55%,black 45%);
-  --glass-blur:22px;
-  --glass-border:color-mix(in srgb,var(--smh-accent-gold) 22%,transparent);
-  --rim-gold-inset:0 0 0 1px color-mix(in srgb,var(--smh-accent-gold) 65%,transparent),0 0 32px 0 color-mix(in srgb,var(--smh-accent-gold) 22%,transparent) inset;
-  --glass-bg:var(--glass-bg-strong);
+
+  /* CTA gradient (tokens use this name) */
+  --gradient-cta:linear-gradient(135deg,#D94BC6 0%,#00C2C7 60%,#D4AF37 100%);
 }
 @media (prefers-color-scheme:dark){
-  :root{--smh-bg:#0D0E10;--smh-text:#FFFFFF;--smh-text-muted:#D3D3D3;
+  :root{
+    --smh-bg:#0D0E10;
+    --smh-text:#FFFFFF;
+    --smh-text-muted:#D3D3D3;
     --smh-gradient:linear-gradient(135deg,#EE66D1 0%,#00D6DB 100%);
-    --shadow-elevate-dark:0 4px 16px rgba(0,0,0,.40);
-    --film-grain-opacity:.04;--particles-opacity:.06;
-    --glass-bg-weak:color-mix(in srgb,var(--smh-bg) 80%,black 20%);
-    --glass-bg-strong:color-mix(in srgb,var(--smh-bg) 60%,black 40%)}
+  }
 }
-html{color:var(--smh-text);background:var(--smh-bg);font-family:var(--font-body)}
-.smh-heading,h1,h2,h3,h4{font-family:var(--font-heading)}
-.smh-gradient-bg{background-image:var(--smh-gradient);background-size:200% 200%;animation:smhHueDrift 15s var(--motion-ease) infinite alternate}
-.smh-gold-border{border:1px solid color-mix(in oklab,var(--smh-accent-gold) 70%,transparent);box-shadow:var(--glow-gold)}
-.smh-film-grain{pointer-events:none;background-image:url("/textures/film-grain-desktop.webp");background-size:cover;opacity:var(--film-grain-opacity);mix-blend-mode:overlay}
-.smh-particles-gold{pointer-events:none;background-image:var(--brand-particles-gold);background-size:cover;opacity:var(--particles-opacity)}
-.smh-particles-teal{pointer-events:none;background-image:var(--brand-particles-teal);background-size:cover;opacity:var(--particles-opacity)}
-.smh-particles-magenta{pointer-events:none;background-image:var(--brand-particles-magenta);background-size:cover;opacity:var(--particles-opacity)}
-.smh-wave-mask{-webkit-mask-image:radial-gradient(130% 85% at 50% 0%, #000 40%, transparent 72%);mask-image:radial-gradient(130% 85% at 50% 0%, #000 40%, transparent 72%);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-size:cover;mask-size:cover;-webkit-mask-position:top center;mask-position:top center}
-.smh-btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.875rem 1.25rem;border-radius:999px;color:#fff;background-image:var(--smh-gradient);border:1px solid color-mix(in oklab,var(--smh-accent-gold) 50%,transparent);box-shadow:var(--glow-gold);transition:transform 180ms var(--motion-ease),box-shadow 240ms var(--motion-ease),filter 240ms var(--motion-ease)}
-.smh-btn:hover{transform:scale(var(--motion-hover-scale));filter:brightness(1.05) saturate(1.02);box-shadow:0 0 0 2px color-mix(in oklab,var(--smh-accent-gold) 35%,transparent),var(--glow-gold)}
-.smh-btn:focus-visible{outline:2px solid var(--smh-primary-teal);outline-offset:3px}
-.smh-glass{backdrop-filter:blur(30px);background:color-mix(in oklab,var(--smh-bg) 70%,transparent);border:1px solid color-mix(in oklab,var(--smh-text) 12%,transparent);border-radius:16px;box-shadow:var(--shadow-elevate-light)}
-.smh-wave-divider{position:relative;isolation:isolate}
-.smh-wave-divider::before{content:"";position:absolute;inset:-12vw 0 auto 0;height:20vw;background:var(--smh-gradient);-webkit-mask-image:url("/waves/smh-wave-mask.svg");mask-image:url("/waves/smh-wave-mask.svg");-webkit-mask-size:cover;mask-size:cover;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:top center;mask-position:top center;opacity:.95;z-index:-1}
-@keyframes smhHueDrift{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(var(--motion-hue-shift))}}
-:where(a,button,[role="button"],input,textarea,select){min-height:44px}
-:focus-visible{outline:2px solid var(--smh-primary-teal);outline-offset:3px}
-@media (prefers-reduced-motion:reduce){.smh-gradient-bg{animation:none}[class*="smh-particles-"]{animation:none}}
-.smh-text{color:var(--smh-text)}.smh-text-dim{color:var(--smh-text-muted)}.smh-surface{background:var(--smh-bg);color:var(--smh-text)}
