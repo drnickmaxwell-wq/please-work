@@ -10,6 +10,42 @@
   --champagne-wave-opacity-bold: 0.28;
 }
 
+/* Champagne hero underplate */
+section[data-hero="champagne"] {
+  position: relative;
+  isolation: isolate;
+  background: var(--smh-gradient);
+  /* the base wash is the brand gradient */
+}
+
+/* Subtle film grain + vignette live on ::before and ::after */
+section[data-hero="champagne"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  opacity: 0.18; /* keep light */
+  background:
+    radial-gradient(120% 100% at 0% 0%, rgba(0,0,0,.08), transparent 55%),
+    radial-gradient(140% 110% at 100% 100%, rgba(0,0,0,.08), transparent 60%);
+
+  z-index: 0;
+}
+
+section[data-hero="champagne"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.22; /* keep waves subtle */
+  background-image: url("/assets/waves/smh-wave-mask.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .hero-layer--gradient {
   position: absolute;
   inset: 0;
