@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 
 export interface LuxuryHomeHeroProps {
@@ -19,10 +20,37 @@ export default function HeroLuxury({
   secondaryHref = "/treatments",
   secondaryLabel = "Explore treatments",
 }: LuxuryHomeHeroProps) {
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const s = getComputedStyle(document.documentElement);
+      console.log("SMH tokens:", {
+        gradient: s.getPropertyValue("--smh-gradient").trim(),
+        magenta: s.getPropertyValue("--smh-primary-magenta").trim(),
+        teal: s.getPropertyValue("--smh-primary-teal").trim(),
+        gold: s.getPropertyValue("--smh-accent-gold").trim(),
+        glassStrong: s.getPropertyValue("--glass-bg-strong").trim(),
+      });
+    }
+  }, []);
+
   return (
-    <section data-hero="champagne" aria-labelledby="home-hero-title">
+    <section
+      data-hero="champagne"
+      aria-labelledby="home-hero-title"
+      className="relative overflow-hidden"
+    >
       <div className="hero-container">
-        <div className="hero-pane">
+        <div
+          className="glass-pane mx-auto max-w-5xl rounded-3xl px-6 py-10 md:px-10 md:py-14"
+          style={{
+            background: "var(--glass-bg-strong)",
+            border: "1px solid var(--glass-border)",
+            backdropFilter: "blur(14px)",
+            WebkitBackdropFilter: "blur(14px)",
+            boxShadow:
+              "0 24px 80px color-mix(in srgb, black 20%, transparent 80%)",
+          }}
+        >
           <div className="hero-copy">
             <h1 id="home-hero-title">{title}</h1>
             {subtitle && <p className="hero-subtitle ink-veil">{subtitle}</p>}
@@ -47,7 +75,6 @@ export default function HeroLuxury({
           position: relative;
           width: 100%;
           margin: 0;
-          overflow: hidden;
           min-height: clamp(72svh, 100svh, 860px);
           display: flex;
           align-items: center;
@@ -56,59 +83,22 @@ export default function HeroLuxury({
           isolation: isolate;
         }
 
-        section[data-hero="champagne"]::before,
-        section[data-hero="champagne"]::after {
-          content: "";
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-        }
-
-        section[data-hero="champagne"]::before {
-          background: var(--smh-gradient);
-          z-index: 0;
-        }
-
-        section[data-hero="champagne"]::after {
-          background:
-            var(--smh-hero-overlay-wave),
-            var(--smh-hero-overlay-grain);
-          mix-blend-mode: soft-light;
-          opacity: 0.58;
-          z-index: 1;
-          mask-image: var(--smh-hero-wave-mask);
-          mask-repeat: no-repeat;
-          mask-size: 140% 100%;
-          mask-position: top center;
-          -webkit-mask-image: var(--smh-hero-wave-mask);
-          -webkit-mask-repeat: no-repeat;
-          -webkit-mask-size: 140% 100%;
-          -webkit-mask-position: top center;
-        }
-
         .hero-container {
           position: relative;
-          z-index: 2;
+          z-index: 1;
           width: 100%;
           display: flex;
           justify-content: center;
           padding-inline: clamp(20px, 5vw, 60px);
         }
 
-        .hero-pane {
+        .glass-pane {
           position: relative;
           width: min(100%, 720px);
-          border-radius: 22px;
-          background: var(--glass-bg-strong);
-          backdrop-filter: blur(var(--glass-blur));
-          -webkit-backdrop-filter: blur(var(--glass-blur));
-          border: 1px solid var(--glass-border);
           color: var(--smh-text);
-          box-shadow: var(--rim-gold-inset), var(--shadow-hero-bloom);
-          padding: clamp(32px, 6vw, 64px);
         }
 
-        .hero-pane::before {
+        .glass-pane::before {
           content: "";
           position: absolute;
           inset: 0;
@@ -210,10 +200,6 @@ export default function HeroLuxury({
         @media (max-width: 768px) {
           .hero-container {
             padding-block: clamp(72px, 16vw, 112px);
-          }
-
-          .hero-pane {
-            padding: clamp(24px, 8vw, 48px);
           }
 
           .hero-cta {

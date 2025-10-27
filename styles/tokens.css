@@ -7,8 +7,9 @@
   --brand-gold:    var(--smh-accent-gold);     /* #D4AF37 */
 
   /* Glass scale */
-  --glass-bg-weak:   color-mix(in srgb, var(--smh-bg) 88%, black 12%);
-  --glass-bg-strong: color-mix(in srgb, var(--smh-bg) 72%, black 28%);
+  --glass-bg-weak: color-mix(in srgb, var(--smh-bg) 90%, transparent 10%);
+  --glass-bg-strong: color-mix(in srgb, var(--smh-bg) 82%, transparent 18%);
+  --glass-border: color-mix(in srgb, var(--smh-text) 14%, transparent 86%);
 
   /* Ink & veils (used for legibility on frosted panes) */
   --ink:           color-mix(in srgb, var(--smh-text) 100%, transparent);
@@ -31,7 +32,8 @@
 /* Dark-mode tuning */
 @media (prefers-color-scheme: dark) {
   :root {
-    --glass-bg-weak:   color-mix(in srgb, var(--smh-bg) 84%, black 16%);
-    --glass-bg-strong: color-mix(in srgb, var(--smh-bg) 68%, black 32%);
+    --glass-bg-weak: color-mix(in srgb, var(--smh-bg) 86%, transparent 14%);
+    --glass-bg-strong: color-mix(in srgb, var(--smh-bg) 78%, transparent 22%);
+    --glass-border: color-mix(in srgb, var(--smh-text) 24%, transparent 76%);
   }
 }
