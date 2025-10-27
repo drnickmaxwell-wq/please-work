@@ -64,7 +64,7 @@ export default function Head() {
     <>
       <meta
         name="theme-color"
-        content="#C2185B"
+        content="var(--smh-primary-magenta)"
         media="(prefers-color-scheme: light)"
       />
       <meta

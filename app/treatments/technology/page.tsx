@@ -103,7 +103,7 @@ export default function TechnologyPage() {
               <a className="smh-btn" href="#digital-workflow">
                 Explore the workflow
               </a>
-              <a className="smh-btn" href="#equipment" style={{ backgroundImage: 'var(--smh-gradient)' }}>
+              <a className="smh-btn bg-[var(--smh-gradient)]" href="#equipment">
                 View our equipment
               </a>
             </div>

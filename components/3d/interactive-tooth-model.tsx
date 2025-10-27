@@ -8,8 +8,31 @@ import { easeInOutCubic, linearEase } from '@/lib/motion/easing';
 import { Play, Pause, RotateCcw, Info, Sparkles } from 'lucide-react';
 import * as THREE from 'three';
 
-// Brand Colors: Magenta #C2185B, Turquoise #40C4B4, Gold #D4AF37
+// Brand Colors: Magenta var(--smh-primary-magenta), Turquoise var(--smh-primary-teal), Gold var(--smh-accent-gold)
 // Fonts: Montserrat headings, Lora body text
+
+const defaultBrandColors: Record<'magenta' | 'teal' | 'gold', string> = {
+  magenta: '#C2185B',
+  teal: '#40C4B4',
+  gold: '#D4AF37'
+};
+
+function useBrandColors() {
+  const [brandColors, setBrandColors] = useState(defaultBrandColors);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const computed = getComputedStyle(document.documentElement);
+    setBrandColors({
+      magenta: computed.getPropertyValue('--smh-primary-magenta').trim() || defaultBrandColors.magenta,
+      teal: computed.getPropertyValue('--smh-primary-teal').trim() || defaultBrandColors.teal,
+      gold: computed.getPropertyValue('--smh-accent-gold').trim() || defaultBrandColors.gold
+    });
+  }, []);
+
+  return brandColors;
+}
 
 interface ToothModelProps {
   treatmentType: 'veneer' | 'implant' | 'whitening' | '3d-scan';
@@ -33,6 +56,7 @@ function ToothModel({
 }) {
   const meshRef = useRef<THREE.Mesh>(null);
   const isAnimating = true;
+  const brandColors = useBrandColors();
 
   useFrame((state) => {
     if (meshRef.current && isAnimating) {
@@ -75,7 +99,7 @@ function ToothModel({
       {/* Glow effect */}
       <mesh geometry={geometry} position={[0, 0, 0]} scale={1.05}>
         <meshBasicMaterial
-          color={showAfter ? '#40C4B4' : '#C2185B'}
+          color={showAfter ? brandColors.teal : brandColors.magenta}
           transparent
           opacity={0.2}
         />
@@ -93,7 +117,7 @@ function ToothModel({
         >
           <sphereGeometry args={[0.02]} />
           <meshBasicMaterial
-            color={i % 3 === 0 ? '#C2185B' : i % 3 === 1 ? '#40C4B4' : '#D4AF37'}
+            color={i % 3 === 0 ? brandColors.magenta : i % 3 === 1 ? brandColors.teal : brandColors.gold}
             transparent
             opacity={0.8}
           />
@@ -148,7 +172,7 @@ function ModelLoader() {
   );
 }
 
-export default function InteractiveToothModel({ 
+export default function InteractiveToothModel({
   treatmentType, 
   title, 
   description, 
@@ -160,6 +184,7 @@ export default function InteractiveToothModel({
   const [showInfo, setShowInfo] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const controlsRef = useRef<{ reset: () => void } | null>(null);
+  const brandColors = useBrandColors();
 
   const handleControlsRef = (instance: unknown) => {
     if (
@@ -281,8 +306,8 @@ export default function InteractiveToothModel({
             
             <ambientLight intensity={0.4} />
             <directionalLight position={[10, 10, 5]} intensity={1} />
-            <pointLight position={[-10, -10, -5]} intensity={0.5} color="#40C4B4" />
-            <pointLight position={[10, -10, -5]} intensity={0.5} color="#C2185B" />
+            <pointLight position={[-10, -10, -5]} intensity={0.5} color={brandColors.teal} />
+            <pointLight position={[10, -10, -5]} intensity={0.5} color={brandColors.magenta} />
             
             <Suspense fallback={null}>
               <ToothModel

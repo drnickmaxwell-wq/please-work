@@ -13,11 +13,18 @@ export interface OptimizedImageConfig {
   placeholder?: 'blur' | 'empty' | 'brand';
 }
 
-// Brand color palette for placeholders
+const BRAND_COLOR_METADATA = {
+  magenta: { token: '--smh-primary-magenta', fallback: '#C2185B' },
+  turquoise: { token: '--smh-primary-teal', fallback: '#40C4B4' },
+  gold: { token: '--smh-accent-gold', fallback: '#D4AF37' }
+} as const;
+
+type BrandCoreColor = keyof typeof BRAND_COLOR_METADATA;
+
 export const BRAND_COLORS = {
-  magenta: '#C2185B',
-  turquoise: '#40C4B4',
-  gold: '#D4AF37',
+  magenta: 'var(--smh-primary-magenta)',
+  turquoise: 'var(--smh-primary-teal)',
+  gold: 'var(--smh-accent-gold)',
   slate: {
     50: '#f8fafc',
     100: '#f1f5f9',
@@ -40,6 +47,26 @@ export const BRAND_COLORS = {
   },
 };
 
+function resolveBrandColor(color: BrandCoreColor): string {
+  if (typeof window === 'undefined') {
+    return BRAND_COLOR_METADATA[color].fallback;
+  }
+
+  const value = getComputedStyle(document.documentElement)
+    .getPropertyValue(BRAND_COLOR_METADATA[color].token)
+    .trim();
+
+  return value || BRAND_COLOR_METADATA[color].fallback;
+}
+
+function hexWithAlpha(hex: string, alpha: number): string {
+  const normalized = hex.replace('#', '');
+  const alphaValue = Math.round(Math.min(Math.max(alpha, 0), 1) * 255)
+    .toString(16)
+    .padStart(2, '0');
+  return `#${normalized}${alphaValue}`;
+}
+
 // Generate brand-consistent blur data URL
 export function generateBrandBlurDataURL(type: 'gradient' | 'solid' | 'pattern' = 'gradient'): string {
   const canvas = document.createElement('canvas');
@@ -51,14 +78,18 @@ export function generateBrandBlurDataURL(type: 'gradient' | 'solid' | 'pattern' 
 
   switch (type) {
     case 'gradient':
+      const magenta = resolveBrandColor('magenta');
+      const turquoise = resolveBrandColor('turquoise');
+      const gold = resolveBrandColor('gold');
+
       const gradient = ctx.createLinearGradient(0, 0, 40, 40);
-      gradient.addColorStop(0, `${BRAND_COLORS.magenta}20`);
-      gradient.addColorStop(0.5, `${BRAND_COLORS.turquoise}20`);
-      gradient.addColorStop(1, `${BRAND_COLORS.gold}20`);
+      gradient.addColorStop(0, hexWithAlpha(magenta, 0.125));
+      gradient.addColorStop(0.5, hexWithAlpha(turquoise, 0.125));
+      gradient.addColorStop(1, hexWithAlpha(gold, 0.125));
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, 40, 40);
       break;
-      
+
     case 'solid':
       ctx.fillStyle = `${BRAND_COLORS.slate[100]}`;
       ctx.fillRect(0, 0, 40, 40);
@@ -70,7 +101,7 @@ export function generateBrandBlurDataURL(type: 'gradient' | 'solid' | 'pattern' 
       ctx.fillRect(0, 0, 40, 40);
       
       // Add dots pattern
-      ctx.fillStyle = `${BRAND_COLORS.magenta}10`;
+      ctx.fillStyle = hexWithAlpha(resolveBrandColor('magenta'), 0.0625);
       for (let i = 0; i < 40; i += 8) {
         for (let j = 0; j < 40; j += 8) {
           ctx.beginPath();
@@ -90,13 +121,17 @@ export function generateBrandSVGPlaceholder(
   height: number = 300, 
   text: string = 'Loading...'
 ): string {
+  const magenta = resolveBrandColor('magenta');
+  const turquoise = resolveBrandColor('turquoise');
+  const gold = resolveBrandColor('gold');
+
   return `data:image/svg+xml;base64,${btoa(`
     <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:${BRAND_COLORS.magenta};stop-opacity:0.05" />
-          <stop offset="50%" style="stop-color:${BRAND_COLORS.turquoise};stop-opacity:0.05" />
-          <stop offset="100%" style="stop-color:${BRAND_COLORS.gold};stop-opacity:0.05" />
+          <stop offset="0%" style="stop-color:${magenta};stop-opacity:0.05" />
+          <stop offset="50%" style="stop-color:${turquoise};stop-opacity:0.05" />
+          <stop offset="100%" style="stop-color:${gold};stop-opacity:0.05" />
         </linearGradient>
         <linearGradient id="shimmer" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" style="stop-color:${BRAND_COLORS.slate[200]};stop-opacity:0" />
@@ -111,9 +146,9 @@ export function generateBrandSVGPlaceholder(
       <rect width="100%" height="100%" fill="url(#shimmer)" />
       
       <!-- Brand logo placeholder -->
-      <circle cx="${width/2}" cy="${height/2 - 20}" r="20" fill="${BRAND_COLORS.magenta}" opacity="0.2" />
-      <circle cx="${width/2}" cy="${height/2 - 20}" r="15" fill="${BRAND_COLORS.turquoise}" opacity="0.3" />
-      <circle cx="${width/2}" cy="${height/2 - 20}" r="10" fill="${BRAND_COLORS.gold}" opacity="0.4" />
+      <circle cx="${width/2}" cy="${height/2 - 20}" r="20" fill="${magenta}" opacity="0.2" />
+      <circle cx="${width/2}" cy="${height/2 - 20}" r="15" fill="${turquoise}" opacity="0.3" />
+      <circle cx="${width/2}" cy="${height/2 - 20}" r="10" fill="${gold}" opacity="0.4" />
       
       <!-- Loading text -->
       <text x="${width/2}" y="${height/2 + 20}" text-anchor="middle" 
@@ -121,13 +156,13 @@ export function generateBrandSVGPlaceholder(
             fill="${BRAND_COLORS.slate[600]}">${text}</text>
       
       <!-- Decorative elements -->
-      <circle cx="${width * 0.2}" cy="${height * 0.3}" r="3" fill="${BRAND_COLORS.magenta}" opacity="0.3">
+      <circle cx="${width * 0.2}" cy="${height * 0.3}" r="3" fill="${magenta}" opacity="0.3">
         <animate attributeName="opacity" values="0.3;0.7;0.3" dur="2s" repeatCount="indefinite" />
       </circle>
-      <circle cx="${width * 0.8}" cy="${height * 0.7}" r="2" fill="${BRAND_COLORS.turquoise}" opacity="0.4">
+      <circle cx="${width * 0.8}" cy="${height * 0.7}" r="2" fill="${turquoise}" opacity="0.4">
         <animate attributeName="opacity" values="0.4;0.8;0.4" dur="1.5s" repeatCount="indefinite" />
       </circle>
-      <circle cx="${width * 0.7}" cy="${height * 0.2}" r="2.5" fill="${BRAND_COLORS.gold}" opacity="0.3">
+      <circle cx="${width * 0.7}" cy="${height * 0.2}" r="2.5" fill="${gold}" opacity="0.3">
         <animate attributeName="opacity" values="0.3;0.6;0.3" dur="1.8s" repeatCount="indefinite" />
       </circle>
     </svg>

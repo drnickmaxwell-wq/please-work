@@ -4,7 +4,7 @@
   display: grid;
   gap: clamp(1.5rem, 4vw, 2.75rem);
   color: #fdfbff;
-  background: linear-gradient(135deg, #d94bc6 0%, #00c2c7 100%);
+  background: var(--smh-gradient);
   border-radius: clamp(2rem, 5vw, 3rem);
   box-shadow:
     inset 0 -1px 0 rgba(255, 255, 255, 0.12),

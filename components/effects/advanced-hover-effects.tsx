@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { easeInOutCubic, easeOutCubic, linearEase } from '@/lib/motion/easing';
 
-// Brand Colors: Magenta #C2185B, Turquoise #40C4B4, Gold #D4AF37
+// Brand Colors: Magenta var(--smh-primary-magenta), Turquoise var(--smh-primary-teal), Gold var(--smh-accent-gold)
 // Fonts: Montserrat headings, Lora body text
 
 interface MagneticButtonProps {

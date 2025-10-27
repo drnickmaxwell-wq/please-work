@@ -15,7 +15,7 @@ import {
   Camera
 } from 'lucide-react';
 
-// Brand Colors: Magenta #C2185B, Turquoise #40C4B4, Gold #D4AF37
+// Brand Colors: Magenta var(--smh-primary-magenta), Turquoise var(--smh-primary-teal), Gold var(--smh-accent-gold)
 // Fonts: Montserrat headings, Lora body text
 
 export default function VideoConsultationPage() {
@@ -133,9 +133,9 @@ export default function VideoConsultationPage() {
           <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
             <defs>
               <linearGradient id="waveGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#C2185B" stopOpacity="0.3" />
-                <stop offset="50%" stopColor="#40C4B4" stopOpacity="0.2" />
-                <stop offset="100%" stopColor="#D4AF37" stopOpacity="0.3" />
+                <stop offset="0%" stopColor="var(--smh-primary-magenta)" stopOpacity="0.3" />
+                <stop offset="50%" stopColor="var(--smh-primary-teal)" stopOpacity="0.2" />
+                <stop offset="100%" stopColor="var(--smh-accent-gold)" stopOpacity="0.3" />
               </linearGradient>
             </defs>
             <motion.path

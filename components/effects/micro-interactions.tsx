@@ -281,9 +281,9 @@ const FloatingGeometry: React.FC<FloatingGeometryProps> = ({
   className = '',
 }) => {
   const colors = {
-    magenta: '#C2185B',
-    turquoise: '#40C4B4',
-    gold: '#D4AF37',
+    magenta: 'var(--smh-primary-magenta)',
+    turquoise: 'var(--smh-primary-teal)',
+    gold: 'var(--smh-accent-gold)',
   };
 
   const sizes = {
@@ -474,7 +474,7 @@ const MorphingShape: React.FC<MorphingShapeProps> = ({
   shapes,
   duration = 3,
   className = '',
-  color = '#C2185B',
+  color = 'var(--smh-primary-magenta)',
 }) => {
   const [currentShapeIndex, setCurrentShapeIndex] = useState(0);
 

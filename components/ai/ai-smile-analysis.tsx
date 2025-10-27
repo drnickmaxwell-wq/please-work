@@ -10,7 +10,7 @@ import {
   Eye, Circle
 } from 'lucide-react';
 
-// Brand Colors: Magenta #C2185B, Turquoise #40C4B4, Gold #D4AF37
+// Brand Colors: Magenta var(--smh-primary-magenta), Turquoise var(--smh-primary-teal), Gold var(--smh-accent-gold)
 // Fonts: Montserrat headings, Lora body text
 
 interface AnalysisResult {
@@ -424,9 +424,9 @@ export default function AISmileAnalysis() {
                         </div>
                         <defs>
                           <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="#C2185B" />
-                            <stop offset="50%" stopColor="#40C4B4" />
-                            <stop offset="100%" stopColor="#D4AF37" />
+                            <stop offset="0%" stopColor="var(--smh-primary-magenta)" />
+                            <stop offset="50%" stopColor="var(--smh-primary-teal)" />
+                            <stop offset="100%" stopColor="var(--smh-accent-gold)" />
                           </linearGradient>
                         </defs>
                       </div>

@@ -1,6 +1,6 @@
 import Stripe from 'stripe';
 
-// Brand Colors: Magenta #C2185B, Turquoise #40C4B4, Gold #D4AF37
+// Brand Colors: Magenta var(--smh-primary-magenta), Turquoise var(--smh-primary-teal), Gold var(--smh-accent-gold)
 // Fonts: Montserrat headings, Lora body text
 
 interface PaymentIntent {

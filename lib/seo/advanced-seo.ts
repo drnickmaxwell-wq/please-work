@@ -1,5 +1,5 @@
 // Advanced SEO and AI Search Optimization
-// Maintaining brand consistency: Magenta #C2185B, Turquoise #40C4B4, Gold #D4AF37
+// Maintaining brand consistency: Magenta var(--smh-primary-magenta), Turquoise var(--smh-primary-teal), Gold var(--smh-accent-gold)
 
 export interface SEOConfig {
   title: string;

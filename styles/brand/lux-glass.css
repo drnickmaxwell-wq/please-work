@@ -2,7 +2,7 @@
    Shared luxury glass treatment used across hero + FAQ surfaces. */
 
 .lux-glass {
-  --lux-gold-rail: var(--gold-rail, color-mix(in srgb, var(--brand-gold, #d4af37) 68%, transparent));
+  --lux-gold-rail: var(--gold-rail, color-mix(in srgb, var(--brand-gold, var(--smh-accent-gold)) 68%, transparent));
   --lux-glass-blur: 24px;
   --lux-glass-saturation: 1.1;
   background: color-mix(in srgb, rgba(18, 22, 28, 0.45) 88%, transparent);

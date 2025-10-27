@@ -1,7 +1,7 @@
 :root {
-  --magenta: #C2185B;
-  --turquoise: #40C4B4;
-  --gold: #D4AF37;
+  --magenta: var(--smh-primary-magenta);
+  --turquoise: var(--smh-primary-teal);
+  --gold: var(--smh-accent-gold);
   --warm-mist: #F9F9FA;
   --glass-bg: rgba(255, 255, 255, 0.08);
   --glass-border: rgba(255, 255, 255, 0.15);
@@ -22,7 +22,7 @@
 .hero-gradient {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, var(--magenta) 0%, var(--turquoise) 50%, var(--gold) 100%);
+  background: var(--gradient-cta);
   z-index: 1;
 }
 

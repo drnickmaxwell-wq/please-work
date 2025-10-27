@@ -15,7 +15,7 @@
   inset: 0;
   background:
     radial-gradient(1200px 900px at 30% 10%, rgba(255, 255, 255, 0.06), transparent 55%),
-    linear-gradient(140deg, var(--smh-champagne-pink, color-mix(in srgb, var(--brand-magenta, #c2185b) 92%, white 8%)) 0%, var(--smh-champagne-teal, color-mix(in srgb, var(--brand-teal, #40c4b4) 92%, white 8%)) 60%, var(--smh-champagne-amber, color-mix(in srgb, var(--brand-gold, #d4af37) 88%, white 12%)) 100%);
+    linear-gradient(140deg, var(--smh-champagne-pink, color-mix(in srgb, var(--brand-magenta, var(--smh-primary-magenta)) 92%, white 8%)) 0%, var(--smh-champagne-teal, color-mix(in srgb, var(--brand-teal, var(--smh-primary-teal)) 92%, white 8%)) 60%, var(--smh-champagne-amber, color-mix(in srgb, var(--brand-gold, var(--smh-accent-gold)) 88%, white 12%)) 100%);
   opacity: var(--champagne-gradient-opacity, var(--champagne-gradient-opacity-standard));
   mix-blend-mode: normal;
   transform: translate3d(var(--hero-drift-x, 0px), var(--hero-drift-y, 0px), 0)
@@ -75,7 +75,7 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: color-mix(in srgb, var(--gold-rail, color-mix(in srgb, var(--brand-gold, #d4af37) 68%, transparent)) 42%, transparent);
+  background: color-mix(in srgb, var(--gold-rail, color-mix(in srgb, var(--brand-gold, var(--smh-accent-gold)) 68%, transparent)) 42%, transparent);
   opacity: 0.8;
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
@@ -89,7 +89,7 @@
 }
 
 .hero-layer--gold-rim[data-glow="true"]::before {
-  box-shadow: 0 0 32px color-mix(in srgb, var(--brand-gold, #d4af37) 38%, transparent);
+  box-shadow: 0 0 32px color-mix(in srgb, var(--brand-gold, var(--smh-accent-gold)) 38%, transparent);
 }
 
 @media (prefers-reduced-motion: no-preference) {

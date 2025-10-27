@@ -6,7 +6,7 @@ import { linearEase } from '@/lib/motion/easing';
 import StickyHeader from './sticky-header';
 import { ScrollProgress } from '@/components/effects/parallax-scroll';
 
-// Brand Colors: Magenta #C2185B, Turquoise #40C4B4, Gold #D4AF37
+// Brand Colors: Magenta var(--smh-primary-magenta), Turquoise var(--smh-primary-teal), Gold var(--smh-accent-gold)
 // Fonts: Montserrat headings, Lora body text
 
 // Lazy load components for performance
