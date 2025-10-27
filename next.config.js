@@ -11,6 +11,7 @@ const nextConfig = {
   webpack(config) {
     config.resolve.alias = {
       ...(config.resolve.alias ?? {}),
+      '@': __dirname,
       '@manus/assets': manusAssetsDir,
     };
     return config;

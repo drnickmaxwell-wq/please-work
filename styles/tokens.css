@@ -10,3 +10,14 @@
   --glass-border:1px solid color-mix(in srgb, var(--brand-gold) 22%, transparent);
   --rim-gold-inset:inset 0 0 0 1px color-mix(in srgb, var(--brand-gold) 55%, transparent);
 }
+
+:root {
+  /* strong glass background used by hero content pane */
+  --glass-bg-strong: color-mix(in srgb, var(--smh-bg) 72%, black 28%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --glass-bg-strong: color-mix(in srgb, var(--smh-bg) 68%, white 32%);
+  }
+}
