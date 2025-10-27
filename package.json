@@ -12,7 +12,8 @@
     "lint:fix": "eslint . --fix",
     "audit:champagne": "tsx tools/audit-champagne.ts",
     "guard:preflight": "tsx tools/guard/preflight.ts",
-    "brand:verify": "tsx scripts/verify-brand-tokens.ts"
+    "brand:verify": "tsx scripts/verify-brand-tokens.ts",
+    "brand:guard": "node scripts/brand-lock-guard.cjs"
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.24",
