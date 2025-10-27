@@ -150,6 +150,38 @@ h4, h5, h6 {
   animation: sparkle 2s ease-in-out infinite;
 }
 
+/* Icon Brand Utilities */
+.icon-brand {
+  color: var(--icon-primary-color, var(--brand-gold));
+}
+
+.icon-brand--magenta {
+  --icon-primary-color: var(--brand-magenta);
+  color: var(--icon-primary-color);
+}
+
+.icon-brand--teal {
+  --icon-primary-color: var(--brand-teal);
+  color: var(--icon-primary-color);
+}
+
+.icon-brand--gold {
+  --icon-primary-color: var(--brand-gold);
+  color: var(--icon-primary-color);
+}
+
+.icon-accent--magenta {
+  --icon-accent-color: var(--brand-magenta);
+}
+
+.icon-accent--teal {
+  --icon-accent-color: var(--brand-teal);
+}
+
+.icon-accent--gold {
+  --icon-accent-color: var(--brand-gold);
+}
+
 /* Luxury Text Effects */
 .text-shimmer {
   background: linear-gradient(
