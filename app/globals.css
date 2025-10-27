@@ -1,219 +1,35 @@
-@import "tailwindcss";                           /* 1) Tailwind first */
-@import "@/styles/tokens/smh-champagne-tokens.css"; /* 2) Source-of-truth tokens */
-@import "@/styles/tokens.css";                   /* 3) Shared tokens & glass/rim */
-@import "@/styles/brand/brand-gradient.css";     /* 4) Gradient & waves */
-@import "@/styles/brand/brand-textures.css";     /* 5) Grain/particles */
-@import "@/styles/brand/lux-glass.css";          /* 6) Glass rules */
-@import "@/styles/brand/brand-motion.css";       /* 7) Motion */
-@import "@/app/styles/smh-tokens.css";           /* 8) App-specific add-ons */
+/* app/globals.css — CANONICAL, DO NOT EDIT WITHOUT BRAND LOCK */
 
-:root {
-  /* Brand Colors - Luxury Coastal Theme */
-  --magenta: var(--smh-primary-magenta);
-  --turquoise: var(--smh-primary-teal);
-  --gold: var(--smh-accent-gold);
-  --smh-champagne-pink: color-mix(in srgb, var(--magenta) 92%, white 8%);
-  --smh-champagne-teal: color-mix(in srgb, var(--turquoise) 92%, white 8%);
-  --smh-champagne-amber: color-mix(in srgb, var(--gold) 88%, white 12%);
+@import "@/styles/tokens/smh-champagne-tokens.css";
+@import "@/styles/tokens.css";
+@import "@/styles/brand/brand-gradient.css";
+@import "@/styles/brand/lux-glass.css";
+@import "@/styles/brand/brand-textures.css";
+@import "@/styles/brand/brand-motion.css";
+@import "tailwindcss";
+@import "@/app/styles/smh-tokens.css";
 
-  --font-body: var(--font-inter), system-ui, Arial;
-  --font-heading: var(--font-playfair), Georgia, serif;
-  
-  /* Neutral Colors */
-  --background: #F7F7F9;
-  --foreground: #1A1C1F;
-  --surface: #FFFFFF;
-  --muted: #6A6F7A;
-  
-  /* Luxury Effects */
-  --glow-magenta: 0 0 20px rgba(194, 24, 91, 0.3);
-  --glow-turquoise: 0 0 20px rgba(64, 196, 180, 0.3);
-  --glow-gold: 0 0 20px rgba(212, 175, 55, 0.3);
-  
-  --radius: 18px;
-  --max-width: 1200px;
-}
-
+/* Tailwind 4 design-token bridge → reads our CSS variables */
 @theme {
-  --color-background: var(--smh-bg);
-  --color-foreground: var(--smh-text);
   --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+  --color-background: var(--smh-bg);
+  --color-foreground: var(--smh-text);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0F1419;
-    --foreground: #E2E8F0;
-    --surface: #1A1F2E;
-    --muted: #94A3B8;
-  }
+/* Root ties to champagne tokens */
+:root {
+  color-scheme: light dark;
+  background-color: var(--smh-bg);
+  color: var(--smh-text);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-body);
-  scroll-behavior: smooth;
-  max-width: 100vw;
-  overflow-x: hidden;
+/* Utility helpers used by brand-lock and previews */
+.glass-pane {
+  background: var(--glass-bg-strong);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border-radius: 18px;
+  box-shadow: var(--rim-gold-inset);
+  padding: 24px;
 }
-
-.hero {
-  min-height: clamp(420px, 65vh, 720px);
-}
-
-.champagne-overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(1200px 900px at 30% 10%, rgba(255, 255, 255, 0.06), transparent 55%),
-    linear-gradient(140deg, var(--smh-champagne-pink) 0%, var(--smh-champagne-teal) 60%, var(--smh-champagne-amber) 100%);
-  mix-blend-mode: normal;
-  opacity: 0.92;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.champagne-wave-mask {
-  -webkit-mask-image: radial-gradient(130% 85% at 50% 0%, #000 40%, transparent 72%);
-  mask-image: radial-gradient(130% 85% at 50% 0%, #000 40%, transparent 72%);
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-size: cover;
-  mask-size: cover;
-}
-
-.champagne-grain {
-  position: absolute;
-  inset: 0;
-  background-image: var(--smh-filmgrain);
-  background-size: 220px;
-  background-repeat: repeat;
-  opacity: 0.04;
-  mix-blend-mode: overlay;
-  pointer-events: none;
-  z-index: 0;
-}
-
-h1, h2, h3 {
-  font-family: var(--font-heading);
-  font-weight: 600;
-}
-
-h4, h5, h6 {
-  font-family: var(--font-body);
-  font-weight: 600;
-}
-
-/* Luxury Animations */
-@keyframes shimmer {
-  0% { 
-    background-position: -200% 0; 
-  }
-  100% { 
-    background-position: 200% 0; 
-  }
-}
-
-@keyframes caustics {
-  0%, 100% { 
-    transform: scale(1) rotate(0deg);
-    opacity: 0.3;
-  }
-  33% { 
-    transform: scale(1.05) rotate(2deg);
-    opacity: 0.4;
-  }
-  66% { 
-    transform: scale(1.1) rotate(-2deg);
-    opacity: 0.5;
-  }
-}
-
-@keyframes sparkle {
-  0%, 100% {
-    opacity: 0;
-    transform: scale(0) rotate(0deg);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1) rotate(180deg);
-  }
-}
-
-/* Utility Classes */
-.animate-shimmer {
-  animation: shimmer 3s ease-in-out infinite;
-}
-
-.animate-caustics {
-  animation: caustics 8s ease-in-out infinite;
-}
-
-.animate-sparkle {
-  animation: sparkle 2s ease-in-out infinite;
-}
-
-/* Icon Brand Utilities */
-.icon-brand {
-  color: var(--icon-primary-color, var(--brand-gold));
-}
-
-.icon-brand--magenta {
-  --icon-primary-color: var(--brand-magenta);
-  color: var(--icon-primary-color);
-}
-
-.icon-brand--teal {
-  --icon-primary-color: var(--brand-teal);
-  color: var(--icon-primary-color);
-}
-
-.icon-brand--gold {
-  --icon-primary-color: var(--brand-gold);
-  color: var(--icon-primary-color);
-}
-
-.icon-accent--magenta {
-  --icon-accent-color: var(--brand-magenta);
-}
-
-.icon-accent--teal {
-  --icon-accent-color: var(--brand-teal);
-}
-
-.icon-accent--gold {
-  --icon-accent-color: var(--brand-gold);
-}
-
-/* Luxury Text Effects */
-.text-shimmer {
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.8) 0%,
-    rgba(255, 215, 0, 1) 25%,
-    rgba(255, 255, 255, 1) 50%,
-    rgba(255, 215, 0, 1) 75%,
-    rgba(255, 255, 255, 0.8) 100%
-  );
-  background-size: 200% 100%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shimmer 3s ease-in-out infinite;
-}
-
-/* Accessibility */
-@media (prefers-reduced-motion: reduce) {
-  .animate-shimmer,
-  .animate-caustics,
-  .animate-sparkle {
-    animation: none;
-  }
-  
-  body {
-    scroll-behavior: auto;
-  }
-}
-
