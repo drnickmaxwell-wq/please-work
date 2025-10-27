@@ -5,6 +5,10 @@ const STATIC_CACHE = 'smh-static-v1.0.0';
 const DYNAMIC_CACHE = 'smh-dynamic-v1.0.0';
 const IMAGE_CACHE = 'smh-images-v1.0.0';
 
+const BRAND_MAGENTA = '#C2185B'; // var(--brand-magenta)
+const BRAND_TEAL = '#40C4B4'; // var(--brand-teal)
+const BRAND_GOLD = '#D4AF37'; // var(--brand-gold)
+
 // Critical assets for offline functionality
 const CRITICAL_ASSETS = [
   '/',
@@ -278,7 +282,7 @@ function getOfflineHTML() {
         .logo {
           width: 80px;
           height: 80px;
-          background: linear-gradient(135deg, #C2185B, #40C4B4);
+          background: linear-gradient(135deg, ${BRAND_MAGENTA}, ${BRAND_TEAL});
           border-radius: 50%;
           display: flex;
           align-items: center;
@@ -299,7 +303,7 @@ function getOfflineHTML() {
           font-family: 'Playfair Display', Georgia, serif;
           font-size: 2rem;
           font-weight: 700;
-          background: linear-gradient(135deg, #C2185B, #40C4B4, #D4AF37);
+          background: linear-gradient(135deg, ${BRAND_MAGENTA}, ${BRAND_TEAL}, ${BRAND_GOLD});
           background-clip: text;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
@@ -322,15 +326,15 @@ function getOfflineHTML() {
         
         .feature {
           padding: 1rem;
-          background: rgba(194, 24, 91, 0.05);
+          background: rgba(194, 24, 91, 0.05); /* ${BRAND_MAGENTA} */
           border-radius: 12px;
-          border: 1px solid rgba(194, 24, 91, 0.1);
+          border: 1px solid rgba(194, 24, 91, 0.1); /* ${BRAND_MAGENTA} */
         }
         
         .feature-icon {
           width: 40px;
           height: 40px;
-          background: linear-gradient(135deg, #C2185B, #40C4B4);
+          background: linear-gradient(135deg, ${BRAND_MAGENTA}, ${BRAND_TEAL});
           border-radius: 8px;
           display: flex;
           align-items: center;
@@ -354,7 +358,7 @@ function getOfflineHTML() {
         }
         
         .retry-btn {
-          background: linear-gradient(135deg, #C2185B, #40C4B4);
+          background: linear-gradient(135deg, ${BRAND_MAGENTA}, ${BRAND_TEAL});
           color: white;
           border: none;
           padding: 12px 24px;
@@ -392,11 +396,11 @@ function getOfflineHTML() {
           animation: float 6s infinite ease-in-out;
         }
         
-        .particle:nth-child(1) { background: #C2185B; top: 20%; left: 10%; animation-delay: 0s; }
-        .particle:nth-child(2) { background: #40C4B4; top: 60%; left: 80%; animation-delay: 2s; }
-        .particle:nth-child(3) { background: #D4AF37; top: 80%; left: 20%; animation-delay: 4s; }
-        .particle:nth-child(4) { background: #C2185B; top: 30%; left: 70%; animation-delay: 1s; }
-        .particle:nth-child(5) { background: #40C4B4; top: 70%; left: 50%; animation-delay: 3s; }
+        .particle:nth-child(1) { background: ${BRAND_MAGENTA}; top: 20%; left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { background: ${BRAND_TEAL}; top: 60%; left: 80%; animation-delay: 2s; }
+        .particle:nth-child(3) { background: ${BRAND_GOLD}; top: 80%; left: 20%; animation-delay: 4s; }
+        .particle:nth-child(4) { background: ${BRAND_MAGENTA}; top: 30%; left: 70%; animation-delay: 1s; }
+        .particle:nth-child(5) { background: ${BRAND_TEAL}; top: 70%; left: 50%; animation-delay: 3s; }
         
         @keyframes float {
           0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
@@ -450,13 +454,13 @@ function getOfflineImageSVG() {
     <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#C2185B;stop-opacity:0.1" />
-          <stop offset="50%" style="stop-color:#40C4B4;stop-opacity:0.1" />
-          <stop offset="100%" style="stop-color:#D4AF37;stop-opacity:0.1" />
+          <stop offset="0%" style="stop-color:${BRAND_MAGENTA};stop-opacity:0.1" />
+          <stop offset="50%" style="stop-color:${BRAND_TEAL};stop-opacity:0.1" />
+          <stop offset="100%" style="stop-color:${BRAND_GOLD};stop-opacity:0.1" />
         </linearGradient>
         <linearGradient id="icon" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#C2185B" />
-          <stop offset="100%" style="stop-color:#40C4B4" />
+          <stop offset="0%" style="stop-color:${BRAND_MAGENTA}" />
+          <stop offset="100%" style="stop-color:${BRAND_TEAL}" />
         </linearGradient>
       </defs>
       <rect width="100%" height="100%" fill="url(#bg)" />

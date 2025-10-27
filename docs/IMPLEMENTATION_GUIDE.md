@@ -56,7 +56,7 @@ cp path/to/new/tokens.css styles/
 
 ### Step 4.3: Verify Assets
 
-All visual assets (`.webp`, `.svg`) are referenced from the `/public/assets/manus/` directory. 
+All visual assets (`.webp`, `.svg`) are referenced from the `/public/assets/manus/` directory.
 
 1.  **Verify Directory:** Ensure the `/public/assets/manus/` directory exists and contains the following subdirectories:
     - `icons/`
@@ -65,7 +65,23 @@ All visual assets (`.webp`, `.svg`) are referenced from the `/public/assets/manu
     - `waves/`
 2.  **Copy Assets:** If missing, copy the entire `manus` asset folder into your `public/assets/` directory.
 
-### Step 4.4: Verify Page Integration
+### Step 4.4: Icon Colour Utilities
+
+SVG icons in `/public/icons/` and `/public/assets/manus/icons/` now default to `stroke="currentColor"`/`fill="currentColor"` so that brand colour tokens can be applied contextually. When inlining the SVG markup (instead of `<img>`), scope the colour with the utility helpers added to `app/globals.css`:
+
+```html
+<span class="icon-brand icon-brand--magenta icon-accent--teal">
+  <!-- inline SVG -->
+</span>
+```
+
+- `.icon-brand` ensures the icon inherits the `color` property.
+- `.icon-brand--{magenta|teal|gold}` sets the primary stroke/fill via `--icon-primary-color`.
+- `.icon-accent--{magenta|teal|gold}` sets the optional accent channel used by icons with secondary fills.
+
+When the SVG is referenced via `<img>` the embedded fallback values preserve the legacy palette, so no changes are required for existing image references.
+
+### Step 4.5: Verify Page Integration
 
 The main homepage at `app/page.tsx` should already be set up to import and render these components. No changes are typically needed here, but you can verify the implementation:
 
