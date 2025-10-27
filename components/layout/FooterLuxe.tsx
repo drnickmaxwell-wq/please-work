@@ -141,47 +141,32 @@ const FooterLuxe = () => {
         .footer-luxe {
           position: relative;
           overflow: hidden;
-          background: transparent;
+          background: var(--smh-footer-bg);
           color: var(--body-on-glass);
           padding: clamp(3.5rem, 7vw, 5rem) clamp(1.5rem, 5vw, 4.5rem) clamp(2.5rem, 4vw, 3.5rem);
           box-shadow: var(--footer-shadow);
           isolation: isolate;
         }
 
-        .footer-luxe::before,
-        .footer-luxe::after {
+        .footer-luxe::before {
           content: '';
           position: absolute;
           inset: -10%;
           pointer-events: none;
-        }
-
-        .footer-luxe::before {
           background:
             radial-gradient(6px 6px at 14% 20%, var(--footer-particles-ink) 0 60%, var(--footer-clear) 61%) no-repeat,
             radial-gradient(8px 8px at 42% 72%, var(--footer-particles-ink) 0 60%, var(--footer-clear) 61%) no-repeat,
             radial-gradient(5px 5px at 78% 34%, var(--footer-particles-ink) 0 60%, var(--footer-clear) 61%) no-repeat;
           filter: blur(0.3px);
-          opacity: 0.4;
+          opacity: 0.24;
           z-index: 0;
           animation: float calc(var(--motion-duration-slow) * 6) var(--motion-easing-smooth) infinite alternate;
-        }
-
-        .footer-luxe::after {
-          inset: 0;
-          background: linear-gradient(
-            var(--footer-grad-angle),
-            var(--footer-ink-start),
-            var(--footer-ink-mid) 55%,
-            var(--footer-ink-end)
-          );
-          z-index: 1;
         }
 
         .footer-luxe__rim {
           height: 1px;
           width: 100%;
-          background: linear-gradient(90deg, var(--footer-clear), var(--footer-ring), var(--footer-clear));
+          background: var(--smh-footer-rim);
           margin-bottom: clamp(2rem, 4vw, 3rem);
           position: relative;
           z-index: 2;
@@ -220,7 +205,7 @@ const FooterLuxe = () => {
           text-transform: uppercase;
           letter-spacing: 0.14em;
           font-size: 0.85rem;
-          color: var(--gold-champagne);
+          color: var(--smh-accent-gold);
           opacity: 0.8;
         }
 
@@ -248,7 +233,7 @@ const FooterLuxe = () => {
 
         a:hover,
         a:focus-visible {
-          color: var(--gold-champagne);
+          color: var(--smh-accent-gold);
           opacity: 1;
         }
 
@@ -319,12 +304,12 @@ const FooterLuxe = () => {
         }
 
         .footer-luxe__feedback[data-status='error'] {
-          color: var(--brand-magenta);
+          color: var(--smh-primary-magenta);
           opacity: 0.9;
         }
 
         .footer-luxe__feedback[data-status='success'] {
-          color: var(--brand-teal);
+          color: var(--smh-primary-teal);
           opacity: 0.9;
         }
 
@@ -351,7 +336,7 @@ const FooterLuxe = () => {
           height: 2.5rem;
           border-radius: 999px;
           border: 1px solid var(--footer-ring);
-          color: var(--gold-champagne);
+          color: var(--smh-accent-gold);
           transition: background-color var(--motion-duration-normal) var(--motion-easing-smooth),
             color var(--motion-duration-normal) var(--motion-easing-smooth);
         }
@@ -407,7 +392,7 @@ const FooterLuxe = () => {
           }
 
           to {
-            transform: translateY(-2.5px);
+            transform: translateY(-0.5px);
           }
         }
       `}</style>

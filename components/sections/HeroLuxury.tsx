@@ -23,11 +23,9 @@ export default function HeroLuxury({
     <section data-hero="champagne" aria-labelledby="home-hero-title">
       <div className="hero-container">
         <div className="hero-pane">
-          <span className="ink-veil" aria-hidden="true" />
-
           <div className="hero-copy">
             <h1 id="home-hero-title">{title}</h1>
-            {subtitle && <p className="hero-subtitle">{subtitle}</p>}
+            {subtitle && <p className="hero-subtitle ink-veil">{subtitle}</p>}
 
             <div className="cta" role="group" aria-label="Primary actions">
               <Link href={primaryHref} className="hero-cta hero-cta-primary">
@@ -67,7 +65,7 @@ export default function HeroLuxury({
         }
 
         section[data-hero="champagne"]::before {
-          background: var(--smh-champagne);
+          background: var(--smh-gradient);
           z-index: 0;
         }
 
@@ -97,26 +95,21 @@ export default function HeroLuxury({
           position: relative;
           z-index: 2;
           width: 100%;
-          max-width: min(1200px, 92vw);
-          margin-inline: auto;
-          padding-inline: clamp(20px, 5vw, 60px);
           display: flex;
           justify-content: center;
+          padding-inline: clamp(20px, 5vw, 60px);
         }
 
         .hero-pane {
           position: relative;
-          background:
-            linear-gradient(var(--ink-veil), var(--ink-veil)),
-            linear-gradient(var(--glass-bg), var(--glass-bg));
-          background-blend-mode: soft-light, normal;
-          backdrop-filter: blur(14px) saturate(1.05);
-          -webkit-backdrop-filter: blur(14px) saturate(1.05);
-          border-radius: 22px;
-          border: 1px solid var(--glass-border);
-          box-shadow: inset 0 0 0 1px var(--gold-rim), var(--shadow-hero-bloom);
-          padding: clamp(32px, 6vw, 64px);
           width: min(100%, 720px);
+          border-radius: 22px;
+          background: var(--glass-bg-strong);
+          backdrop-filter: blur(var(--glass-blur)) saturate(1.05);
+          -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.05);
+          border: 1px solid var(--glass-border);
+          box-shadow: var(--rim-gold-inset), var(--shadow-hero-bloom);
+          padding: clamp(32px, 6vw, 64px);
         }
 
         .hero-pane::before {
@@ -127,14 +120,6 @@ export default function HeroLuxury({
           background: linear-gradient(180deg, var(--hero-pane-highlight), transparent 65%);
           mix-blend-mode: soft-light;
           opacity: 0.55;
-          pointer-events: none;
-        }
-
-        .ink-veil {
-          position: absolute;
-          inset: 0;
-          border-radius: inherit;
-          background: var(--veil-overlay);
           pointer-events: none;
         }
 
@@ -161,6 +146,25 @@ export default function HeroLuxury({
           font-size: clamp(16px, 2.2vw, 20px);
           line-height: 1.6;
           max-width: 60ch;
+          position: relative;
+          padding: clamp(12px, 2vw, 16px) clamp(16px, 3vw, 24px);
+          border-radius: 18px;
+          display: inline-block;
+        }
+
+        .ink-veil {
+          position: relative;
+          isolation: isolate;
+        }
+
+        .ink-veil::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          border-radius: inherit;
+          background: color-mix(in srgb, black 36%, transparent);
+          pointer-events: none;
+          z-index: -1;
         }
 
         .cta {
@@ -198,13 +202,13 @@ export default function HeroLuxury({
 
         .hero-cta-primary {
           color: var(--ink);
-          background: var(--gradient-cta);
+          background: var(--cta-gradient);
         }
 
         .hero-cta-secondary {
           color: var(--ink-on-glass);
-          background: color-mix(in srgb, var(--ink-veil) 40%, transparent);
-          border: 1px solid var(--journey-card-keyline);
+          background: var(--glass-bg-weak);
+          border: 1px solid var(--glass-border);
         }
 
         @media (max-width: 768px) {

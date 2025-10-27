@@ -125,7 +125,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
         }
 
         .journey-section::before {
-          background: var(--smh-champagne);
+          background: var(--smh-gradient);
           z-index: 0;
         }
 
@@ -201,7 +201,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           font-size: 1rem;
           text-decoration: none;
           color: var(--ink);
-          background: var(--gradient-cta);
+          background: var(--cta-gradient);
           box-shadow: var(--shadow-cta-rest);
           transition:
             transform var(--motion-duration-normal) var(--motion-easing-smooth),
@@ -230,14 +230,11 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           gap: 1.1rem;
           padding: clamp(28px, 4.5vw, 40px);
           border-radius: 22px;
-          background:
-            linear-gradient(var(--ink-veil), var(--ink-veil)),
-            linear-gradient(var(--glass-bg), var(--glass-bg));
-          background-blend-mode: soft-light, normal;
-          backdrop-filter: blur(12px) saturate(1.05);
-          -webkit-backdrop-filter: blur(12px) saturate(1.05);
-          border: 1px solid var(--journey-card-keyline);
-          box-shadow: var(--journey-card-shadow);
+          background: var(--glass-bg-strong);
+          backdrop-filter: blur(var(--glass-blur)) saturate(1.05);
+          -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.05);
+          border: 1px solid var(--glass-border);
+          box-shadow: var(--rim-gold-inset), var(--journey-card-shadow);
           color: var(--ink-on-glass);
           transition:
             transform var(--motion-duration-normal) var(--motion-easing-smooth),
@@ -250,7 +247,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           position: absolute;
           inset: 10px;
           border-radius: inherit;
-          border: 1px solid color-mix(in srgb, var(--journey-card-keyline) 60%, transparent);
+          border: 1px solid color-mix(in srgb, var(--glass-border) 65%, transparent);
           opacity: 0.45;
           pointer-events: none;
           transition: opacity var(--motion-duration-fast) var(--motion-easing-smooth);
@@ -280,8 +277,8 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           border-radius: 0.75rem;
           display: grid;
           place-items: center;
-          background: color-mix(in srgb, var(--ink-veil) 28%, transparent);
-          border: 1px solid var(--journey-card-keyline);
+          background: var(--glass-bg-weak);
+          border: 1px solid var(--glass-border);
         }
 
         .journey-card-icon img {
@@ -308,14 +305,11 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           position: relative;
           border-radius: 26px;
           padding: clamp(36px, 6vw, 52px);
-          background:
-            linear-gradient(var(--ink-veil), var(--ink-veil)),
-            linear-gradient(var(--glass-bg), var(--glass-bg));
-          background-blend-mode: soft-light, normal;
-          border: 1px solid var(--journey-card-keyline);
-          box-shadow: inset 0 0 0 1px var(--gold-rim), var(--journey-card-shadow);
-          backdrop-filter: blur(14px) saturate(1.05);
-          -webkit-backdrop-filter: blur(14px) saturate(1.05);
+          background: var(--glass-bg-strong);
+          border: 1px solid var(--glass-border);
+          box-shadow: var(--rim-gold-inset), var(--journey-card-shadow);
+          backdrop-filter: blur(var(--glass-blur)) saturate(1.05);
+          -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.05);
           overflow: hidden;
         }
 
@@ -333,7 +327,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
         .journey-callout-veil {
           position: absolute;
           inset: 0;
-          background: var(--journey-veil);
+          background: color-mix(in srgb, black 36%, transparent);
           pointer-events: none;
         }
 
@@ -386,14 +380,14 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
 
         .journey-cta-primary {
           color: var(--ink);
-          background: var(--gradient-cta);
+          background: var(--cta-gradient);
           box-shadow: var(--shadow-cta-rest);
         }
 
         .journey-cta-secondary {
           color: var(--ink-on-glass);
-          background: color-mix(in srgb, var(--ink-veil) 40%, transparent);
-          border: 1px solid var(--journey-card-keyline);
+          background: var(--glass-bg-weak);
+          border: 1px solid var(--glass-border);
           box-shadow: var(--shadow-cta-rest);
         }
 
