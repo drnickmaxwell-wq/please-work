@@ -327,24 +327,27 @@ export function MorphingShape({
   const getColor = () => {
     switch (color) {
       case 'pink':
-        return '#C2185B';
+        return 'var(--brand-magenta)';
       case 'teal':
-        return '#40C4B4';
+        return 'var(--brand-teal)';
       case 'yellow':
-        return '#D4AF37';
+        return 'var(--brand-gold)';
       default:
-        return '#C2185B';
+        return 'var(--brand-magenta)';
     }
   };
+
+  const baseColor = getColor();
+  const gradientTint = `color-mix(in srgb, ${baseColor} 50%, transparent)`;
 
   return (
     <div ref={ref} className={`relative ${className}`}>
       <motion.div
-        style={{
-          width: size,
-          height: size,
-          background: `linear-gradient(45deg, ${getColor()}, ${getColor()}80)`
-        }}
+          style={{
+            width: size,
+            height: size,
+            background: `linear-gradient(45deg, ${baseColor}, ${gradientTint})`
+          }}
         animate={isInView ? {
           borderRadius: [
             "20% 80% 80% 20%",

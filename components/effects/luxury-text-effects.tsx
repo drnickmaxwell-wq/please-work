@@ -143,11 +143,11 @@ const GradientText: React.FC<GradientTextProps> = ({
   animate = false,
 }) => {
   const gradients = {
-    primary: 'linear-gradient(135deg, #C2185B 0%, #40C4B4 50%, #D4AF37 100%)',
-    secondary: 'linear-gradient(135deg, #40C4B4 0%, #D4AF37 100%)',
-    accent: 'linear-gradient(135deg, #D4AF37 0%, #C2185B 100%)',
-    rainbow: 'linear-gradient(135deg, #C2185B 0%, #40C4B4 25%, #D4AF37 50%, #C2185B 75%, #40C4B4 100%)',
-  };
+    primary: 'linear-gradient(135deg, var(--brand-magenta) 0%, var(--brand-teal) 50%, var(--brand-gold) 100%)',
+    secondary: 'linear-gradient(135deg, var(--brand-teal) 0%, var(--brand-gold) 100%)',
+    accent: 'linear-gradient(135deg, var(--brand-gold) 0%, var(--brand-magenta) 100%)',
+    rainbow: 'linear-gradient(135deg, var(--brand-magenta) 0%, var(--brand-teal) 25%, var(--brand-gold) 50%, var(--brand-magenta) 75%, var(--brand-teal) 100%)',
+  } as const;
 
   const baseStyle = {
     background: gradients[variant],
@@ -292,11 +292,11 @@ const GlowText: React.FC<GlowTextProps> = ({
   pulse = false,
 }) => {
   const colorConfig = {
-    magenta: '#C2185B',
-    turquoise: '#40C4B4',
-    gold: '#D4AF37',
+    magenta: 'var(--brand-magenta)',
+    turquoise: 'var(--brand-teal)',
+    gold: 'var(--brand-gold)',
     white: '#FFFFFF',
-  };
+  } as const;
 
   const intensityConfig = {
     subtle: '0 0 10px',

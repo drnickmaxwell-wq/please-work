@@ -7,9 +7,9 @@ export default function HeroBand(){
       <div className="absolute inset-0 -z-20"
            style={{
              background:
-               'radial-gradient(1200px circle at 20% 20%, rgba(194,24,91,0.60), transparent 60%),' +
-               'radial-gradient(1000px circle at 80% 30%, rgba(64,196,180,0.50), transparent 60%),' +
-               'radial-gradient(900px circle at 50% 80%, rgba(212,175,55,0.35), transparent 60%)'
+               'radial-gradient(1200px circle at 20% 20%, color-mix(in srgb, var(--brand-magenta) 60%, transparent) 0%, transparent 60%),' +
+               'radial-gradient(1000px circle at 80% 30%, color-mix(in srgb, var(--brand-teal) 50%, transparent) 0%, transparent 60%),' +
+               'radial-gradient(900px circle at 50% 80%, color-mix(in srgb, var(--brand-gold) 35%, transparent) 0%, transparent 60%)'
            }} />
       <div className="absolute inset-0 -z-10"
            style={{
@@ -36,7 +36,12 @@ export default function HeroBand(){
         <div className="max-w-3xl">
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold leading-tight"
               style={{fontFamily:'var(--font-playfair), Georgia, serif'}}>
-            <span className="bg-gradient-to-r from-[#C2185B] via-[#40C4B4] to-[#D4AF37] bg-clip-text text-transparent">
+            <span
+              className="text-transparent bg-clip-text"
+              style={{
+                backgroundImage: 'linear-gradient(90deg, var(--brand-magenta), var(--brand-teal), var(--brand-gold))'
+              }}
+            >
               Luxury Coastal Dentistry
             </span>
           </h1>

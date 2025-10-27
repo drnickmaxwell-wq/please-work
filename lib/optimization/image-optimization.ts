@@ -13,11 +13,65 @@ export interface OptimizedImageConfig {
   placeholder?: 'blur' | 'empty' | 'brand';
 }
 
+const BRAND_FALLBACKS = {
+  magenta: [194, 24, 91] as const,
+  teal: [64, 196, 180] as const,
+  gold: [212, 175, 55] as const
+};
+
+const toRgb = (values: readonly [number, number, number]) => `rgb(${values.join(', ')})`;
+
+const parseColor = (value: string) => {
+  const parser = new Option();
+  parser.style.color = value;
+  return parser.style.color;
+};
+
+const getBrandToken = (token: string, fallback: readonly [number, number, number]) => {
+  const fallbackColor = toRgb(fallback);
+
+  if (typeof window === 'undefined') {
+    return fallbackColor;
+  }
+
+  const value = getComputedStyle(document.documentElement).getPropertyValue(token).trim();
+  if (!value) {
+    return fallbackColor;
+  }
+
+  return parseColor(value) || fallbackColor;
+};
+
+const withAlpha = (color: string, alpha: number) => {
+  if (color.startsWith('rgba')) {
+    const components = color.slice(color.indexOf('(') + 1, color.lastIndexOf(')')).split(',').map(part => part.trim());
+    return `rgba(${components[0]}, ${components[1]}, ${components[2]}, ${alpha})`;
+  }
+
+  if (color.startsWith('rgb')) {
+    const components = color.slice(color.indexOf('(') + 1, color.lastIndexOf(')'));
+    return `rgba(${components}, ${alpha})`;
+  }
+
+  const parsed = parseColor(color);
+  if (!parsed) {
+    return color;
+  }
+
+  return withAlpha(parsed, alpha);
+};
+
 // Brand color palette for placeholders
 export const BRAND_COLORS = {
-  magenta: '#C2185B',
-  turquoise: '#40C4B4',
-  gold: '#D4AF37',
+  get magenta() {
+    return getBrandToken('--brand-magenta', BRAND_FALLBACKS.magenta);
+  },
+  get turquoise() {
+    return getBrandToken('--brand-teal', BRAND_FALLBACKS.teal);
+  },
+  get gold() {
+    return getBrandToken('--brand-gold', BRAND_FALLBACKS.gold);
+  },
   slate: {
     50: '#f8fafc',
     100: '#f1f5f9',
@@ -38,7 +92,7 @@ export const BRAND_COLORS = {
     100: '#ccfbf1',
     200: '#99f6e4',
   },
-};
+} as const;
 
 // Generate brand-consistent blur data URL
 export function generateBrandBlurDataURL(type: 'gradient' | 'solid' | 'pattern' = 'gradient'): string {
@@ -52,9 +106,9 @@ export function generateBrandBlurDataURL(type: 'gradient' | 'solid' | 'pattern' 
   switch (type) {
     case 'gradient':
       const gradient = ctx.createLinearGradient(0, 0, 40, 40);
-      gradient.addColorStop(0, `${BRAND_COLORS.magenta}20`);
-      gradient.addColorStop(0.5, `${BRAND_COLORS.turquoise}20`);
-      gradient.addColorStop(1, `${BRAND_COLORS.gold}20`);
+      gradient.addColorStop(0, withAlpha(BRAND_COLORS.magenta, 0.125));
+      gradient.addColorStop(0.5, withAlpha(BRAND_COLORS.turquoise, 0.125));
+      gradient.addColorStop(1, withAlpha(BRAND_COLORS.gold, 0.125));
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, 40, 40);
       break;
@@ -70,7 +124,7 @@ export function generateBrandBlurDataURL(type: 'gradient' | 'solid' | 'pattern' 
       ctx.fillRect(0, 0, 40, 40);
       
       // Add dots pattern
-      ctx.fillStyle = `${BRAND_COLORS.magenta}10`;
+      ctx.fillStyle = withAlpha(BRAND_COLORS.magenta, 0.0625);
       for (let i = 0; i < 40; i += 8) {
         for (let j = 0; j < 40; j += 8) {
           ctx.beginPath();

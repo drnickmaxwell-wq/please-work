@@ -281,10 +281,22 @@ const FloatingGeometry: React.FC<FloatingGeometryProps> = ({
   className = '',
 }) => {
   const colors = {
-    magenta: '#C2185B',
-    turquoise: '#40C4B4',
-    gold: '#D4AF37',
-  };
+    magenta: {
+      base: 'var(--brand-magenta)',
+      tint: 'color-mix(in srgb, var(--brand-magenta) 50%, transparent)',
+      shadow: 'color-mix(in srgb, var(--brand-magenta) 25%, transparent)'
+    },
+    turquoise: {
+      base: 'var(--brand-teal)',
+      tint: 'color-mix(in srgb, var(--brand-teal) 50%, transparent)',
+      shadow: 'color-mix(in srgb, var(--brand-teal) 25%, transparent)'
+    },
+    gold: {
+      base: 'var(--brand-gold)',
+      tint: 'color-mix(in srgb, var(--brand-gold) 50%, transparent)',
+      shadow: 'color-mix(in srgb, var(--brand-gold) 25%, transparent)'
+    }
+  } as const;
 
   const sizes = {
     sm: 'w-8 h-8',
@@ -323,8 +335,8 @@ const FloatingGeometry: React.FC<FloatingGeometryProps> = ({
     <motion.div
       className={`smh-anim ${sizes[size]} ${shapes[shape]} ${className}`}
       style={{
-        background: `linear-gradient(135deg, ${colors[color]}, ${colors[color]}80)`,
-        boxShadow: `0 4px 20px ${colors[color]}40`,
+        background: `linear-gradient(135deg, ${colors[color].base}, ${colors[color].tint})`,
+        boxShadow: `0 4px 20px ${colors[color].shadow}`,
       }}
       animate={animations[animation]}
     />
@@ -474,7 +486,7 @@ const MorphingShape: React.FC<MorphingShapeProps> = ({
   shapes,
   duration = 3,
   className = '',
-  color = '#C2185B',
+  color = 'var(--brand-magenta)',
 }) => {
   const [currentShapeIndex, setCurrentShapeIndex] = useState(0);
 

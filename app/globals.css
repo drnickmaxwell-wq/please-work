@@ -4,9 +4,9 @@
 
 :root {
   /* Brand Colors - Luxury Coastal Theme */
-  --magenta: #C2185B;
-  --turquoise: #40C4B4;
-  --gold: #D4AF37;
+  --magenta: var(--brand-magenta);
+  --turquoise: var(--brand-teal);
+  --gold: var(--brand-gold);
   --smh-champagne-pink: color-mix(in srgb, var(--magenta) 92%, white 8%);
   --smh-champagne-teal: color-mix(in srgb, var(--turquoise) 92%, white 8%);
   --smh-champagne-amber: color-mix(in srgb, var(--gold) 88%, white 12%);
@@ -21,9 +21,9 @@
   --muted: #6A6F7A;
   
   /* Luxury Effects */
-  --glow-magenta: 0 0 20px rgba(194, 24, 91, 0.3);
-  --glow-turquoise: 0 0 20px rgba(64, 196, 180, 0.3);
-  --glow-gold: 0 0 20px rgba(212, 175, 55, 0.3);
+  --glow-magenta: 0 0 20px color-mix(in srgb, var(--brand-magenta) 30%, transparent);
+  --glow-turquoise: 0 0 20px color-mix(in srgb, var(--brand-teal) 30%, transparent);
+  --glow-gold: 0 0 20px color-mix(in srgb, var(--brand-gold) 30%, transparent);
   
   --radius: 18px;
   --max-width: 1200px;

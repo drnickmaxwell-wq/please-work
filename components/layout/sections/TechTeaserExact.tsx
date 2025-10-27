@@ -9,9 +9,11 @@ export default function TechTeaserExact(){
           <p className="mt-2 opacity-80">
             Precision scanners, same-day crowns, AR smile previews and gentle comfort tech.
           </p>
-          <a href="/preview/lux/technology"
-             className="mt-4 inline-flex items-center rounded-full px-5 py-2 text-white font-semibold
-                        bg-gradient-to-r from-[#C2185B] via-[#40C4B4] to-[#D4AF37]">
+          <a
+            href="/preview/lux/technology"
+            className="mt-4 inline-flex items-center rounded-full px-5 py-2 text-white font-semibold"
+            style={{ backgroundImage: 'var(--gradient-cta)' }}
+          >
             Explore Technology
           </a>
         </div>
