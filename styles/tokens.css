@@ -4,21 +4,44 @@
   --brand-teal: var(--smh-primary-teal);
   --brand-gold: var(--smh-accent-gold);
 
-  /* Glass & rim used across site */
-  --glass-bg-weak: color-mix(in srgb, var(--smh-bg) 88%, transparent 12%);
-  --glass-bg:       color-mix(in srgb, var(--smh-bg) 80%, transparent 20%);
-  --glass-bg-strong: color-mix(in srgb, var(--smh-bg) 72%, transparent 28%);
-  --glass-border:    color-mix(in srgb, var(--smh-text) 12%, transparent 88%);
-  --glass-blur: 12px;
-  --rim-gold-inset: inset 0 0 0 1px color-mix(in srgb, var(--brand-gold) 55%, transparent);
+  /* Glassmorphism stack */
+  --glass-bg-weak: color-mix(in srgb, var(--smh-bg) 88%, black 12%);
+  --glass-bg-strong: color-mix(in srgb, var(--smh-bg) 72%, black 28%);
+  --glass-border: color-mix(in srgb, var(--smh-text) 14%, transparent 86%);
+  --glass-blur: 16px;
+  --rim-gold-inset: inset 0 0 0 1px color-mix(in srgb, var(--brand-gold) 48%, transparent);
+
+  /* Ink & typography helpers */
+  --ink: color-mix(in srgb, var(--smh-text) 100%, transparent);
+  --ink-strong: color-mix(in srgb, var(--smh-text) 100%, transparent);
+  --ink-on-glass: color-mix(in srgb, var(--smh-text) 94%, transparent 6%);
+  --body-on-glass: color-mix(in srgb, var(--smh-text-muted) 86%, transparent 14%);
+  --ink-veil-08: color-mix(in srgb, black 8%, transparent);
+  --ink-veil-12: color-mix(in srgb, black 12%, transparent);
+
+  /* CTA + elevation */
+  --cta-gradient: var(--gradient-cta, var(--smh-gradient));
+  --shadow-cta-rest: 0 18px 40px color-mix(in srgb, black 12%, transparent);
+  --shadow-cta: 0 22px 48px color-mix(in srgb, black 16%, transparent);
+  --shadow-hero-bloom: 0 48px 120px color-mix(in srgb, black 22%, transparent);
+  --journey-card-shadow: 0 32px 90px color-mix(in srgb, black 18%, transparent);
+  --journey-card-shadow-hover: 0 38px 110px color-mix(in srgb, black 22%, transparent);
+  --journey-card-focus: 0 0 0 2px color-mix(in srgb, var(--brand-gold) 55%, transparent);
+  --radius-pill: 999px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --glass-bg-weak:  color-mix(in srgb, #0D0E10 75%, transparent 25%);
-    --glass-bg:       color-mix(in srgb, #0D0E10 70%, transparent 30%);
-    --glass-bg-strong:color-mix(in srgb, #0D0E10 62%, transparent 38%);
-    --glass-border:   color-mix(in srgb, #FFFFFF 14%, transparent 86%);
-    --glass-blur: 12px;
+    --glass-bg-weak: color-mix(in srgb, var(--smh-bg) 84%, black 16%);
+    --glass-bg-strong: color-mix(in srgb, var(--smh-bg) 68%, black 32%);
+    --glass-border: color-mix(in srgb, var(--smh-text) 26%, transparent 74%);
+    --ink-veil-08: color-mix(in srgb, black 14%, transparent);
+    --ink-veil-12: color-mix(in srgb, black 20%, transparent);
+    --shadow-cta-rest: 0 18px 40px color-mix(in srgb, black 26%, transparent);
+    --shadow-cta: 0 22px 58px color-mix(in srgb, black 32%, transparent);
+    --shadow-hero-bloom: 0 48px 120px color-mix(in srgb, black 32%, transparent);
+    --journey-card-shadow: 0 32px 90px color-mix(in srgb, black 28%, transparent);
+    --journey-card-shadow-hover: 0 38px 110px color-mix(in srgb, black 34%, transparent);
+    --journey-card-focus: 0 0 0 2px color-mix(in srgb, var(--brand-gold) 65%, transparent);
   }
 }

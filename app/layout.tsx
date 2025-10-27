@@ -1,15 +1,9 @@
-import type { CSSProperties } from 'react';
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import PerformanceOptimizedLayout from '@/components/layout/performance-optimized-layout';
 import FooterLuxe from '@/components/layout/FooterLuxe';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL ?? 'https://www.stmaryshousedental.co.uk';
-
-const rootFontStyle = {
-  '--font-inter': 'Inter, system-ui, Arial',
-  '--font-playfair': 'Playfair Display, Georgia, serif',
-} as CSSProperties;
 
 export const metadata: Metadata = {
   title: "St Mary's House Dental Care | Luxury Coastal Dentistry in Shoreham-by-Sea",
@@ -93,7 +87,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-GB" style={rootFontStyle} className="font-sans">
+    <html lang="en-GB" className="font-sans">
       <head>
         {/* PWA Manifest */}
         <link rel="manifest" href="/manifest.json" />
@@ -150,13 +144,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body
-        className="antialiased bg-white text-slate-900 overflow-x-hidden"
-        style={{
-          WebkitFontSmoothing: 'antialiased',
-          MozOsxFontSmoothing: 'grayscale',
-        }}
-      >
+      <body className="antialiased bg-[var(--smh-bg)] text-[color:var(--smh-text)] overflow-x-hidden">
         {/* Skip to main content for accessibility */}
         <a
           href="#main-content"

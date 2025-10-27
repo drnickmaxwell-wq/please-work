@@ -20,12 +20,25 @@ export default function HeroLuxury({
   secondaryLabel = "Explore treatments",
 }: LuxuryHomeHeroProps) {
   return (
-    <section data-hero="champagne" aria-labelledby="home-hero-title">
+    <section
+      data-hero="champagne"
+      aria-labelledby="home-hero-title"
+      className="relative isolate flex min-h-[72svh] items-center justify-center overflow-hidden py-[clamp(80px,12vh,128px)]"
+    >
+      <span aria-hidden className="hero-gradient" />
+      <span aria-hidden className="hero-wave" />
+
       <div className="hero-container">
-        <div className="hero-pane">
+        <div className="hero-pane glass-pane veiled" data-strength="strong">
           <div className="hero-copy">
-            <h1 id="home-hero-title">{title}</h1>
-            {subtitle && <p className="hero-subtitle ink-veil">{subtitle}</p>}
+            <h1 id="home-hero-title" className="font-serif text-balance text-[color:var(--smh-text)]">
+              {title}
+            </h1>
+            {subtitle && (
+              <p className="hero-subtitle ink-veil font-sans text-[color:var(--smh-text-muted)]">
+                {subtitle}
+              </p>
+            )}
 
             <div className="cta" role="group" aria-label="Primary actions">
               <Link href={primaryHref} className="hero-cta hero-cta-primary">
@@ -44,37 +57,27 @@ export default function HeroLuxury({
 
       <style jsx>{`
         section[data-hero="champagne"] {
-          position: relative;
-          width: 100%;
-          margin: 0;
-          overflow: hidden;
-          min-height: clamp(72svh, 100svh, 860px);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding-block: clamp(80px, 12vh, 128px);
-          isolation: isolate;
+          background: var(--smh-gradient);
         }
 
-        section[data-hero="champagne"]::before,
-        section[data-hero="champagne"]::after {
-          content: "";
+        .hero-gradient {
           position: absolute;
           inset: 0;
+          background: radial-gradient(1200px 900px at 30% 10%, color-mix(in srgb, var(--smh-bg) 12%, transparent) 0%, transparent 55%);
+          opacity: 0.7;
           pointer-events: none;
-        }
-
-        section[data-hero="champagne"]::before {
-          background: var(--smh-gradient);
           z-index: 0;
         }
 
-        section[data-hero="champagne"]::after {
+        .hero-wave {
+          position: absolute;
+          inset: 0;
           background:
             var(--smh-hero-overlay-wave),
             var(--smh-hero-overlay-grain);
           mix-blend-mode: soft-light;
-          opacity: 0.58;
+          opacity: 0.6;
+          pointer-events: none;
           z-index: 1;
           mask-image: var(--smh-hero-wave-mask);
           mask-repeat: no-repeat;
@@ -96,26 +99,21 @@ export default function HeroLuxury({
         }
 
         .hero-pane {
-          position: relative;
           width: min(100%, 720px);
-          border-radius: 22px;
-          background: var(--glass-bg-strong);
-          backdrop-filter: blur(var(--glass-blur));
-          -webkit-backdrop-filter: blur(var(--glass-blur));
-          border: 1px solid var(--glass-border);
-          color: var(--smh-text);
-          box-shadow: var(--rim-gold-inset), var(--shadow-hero-bloom);
           padding: clamp(32px, 6vw, 64px);
+          box-shadow: var(--rim-gold-inset, inset 0 0 0 1px color-mix(in srgb, var(--brand-gold) 48%, transparent)),
+            var(--shadow-hero-bloom);
+          color: var(--ink-on-glass);
         }
 
-        .hero-pane::before {
+        .hero-pane::after {
           content: "";
           position: absolute;
           inset: 0;
           border-radius: inherit;
           background: var(--smh-hero-pane-highlight);
           mix-blend-mode: soft-light;
-          opacity: 0.55;
+          opacity: 0.45;
           pointer-events: none;
         }
 
@@ -127,40 +125,22 @@ export default function HeroLuxury({
 
         h1 {
           margin: 0;
-          color: var(--ink-on-glass);
-          font-size: clamp(34px, 6vw, 64px);
-          line-height: 1.04;
+          font-family: var(--font-serif);
+          font-size: clamp(2.125rem, 6vw, 4rem);
+          line-height: 1.05;
           letter-spacing: -0.01em;
-          font-family: var(--font-display);
-          font-weight: 600;
+          font-weight: 700;
         }
 
         .hero-subtitle {
           margin: 0;
-          color: var(--body-on-glass);
-          font-family: var(--font-body);
-          font-size: clamp(16px, 2.2vw, 20px);
+          font-size: clamp(1rem, 2.2vw, 1.25rem);
           line-height: 1.6;
           max-width: 60ch;
           position: relative;
           padding: clamp(12px, 2vw, 16px) clamp(16px, 3vw, 24px);
-          border-radius: 18px;
-          display: inline-block;
-        }
-
-        .ink-veil {
-          position: relative;
-          isolation: isolate;
-        }
-
-        .ink-veil::before {
-          content: "";
-          position: absolute;
-          inset: 0;
-          border-radius: inherit;
-          background: color-mix(in srgb, black 36%, transparent);
-          pointer-events: none;
-          z-index: -1;
+          border-radius: 1rem;
+          font-weight: 400;
         }
 
         .cta {
@@ -176,13 +156,13 @@ export default function HeroLuxury({
           min-height: 48px;
           padding: 0.85rem 2.25rem;
           border-radius: var(--radius-pill);
-          font-family: var(--font-body);
-          font-weight: 600;
+          font-family: var(--font-sans);
+          font-weight: 500;
           font-size: 1rem;
           text-decoration: none;
           transition:
-            transform var(--motion-duration-normal) var(--motion-easing-smooth),
-            box-shadow var(--motion-duration-normal) var(--motion-easing-smooth);
+            transform var(--motion-duration-normal, 220ms) ease,
+            box-shadow var(--motion-duration-normal, 220ms) ease;
           box-shadow: var(--shadow-cta-rest);
         }
 
@@ -193,7 +173,7 @@ export default function HeroLuxury({
 
         .hero-cta:focus-visible {
           outline: none;
-          box-shadow: var(--journey-card-focus), var(--shadow-cta-rest);
+          box-shadow: 0 0 0 2px color-mix(in srgb, var(--brand-gold) 65%, transparent), var(--shadow-cta-rest);
         }
 
         .hero-cta-primary {
@@ -223,7 +203,7 @@ export default function HeroLuxury({
 
         @media (prefers-reduced-motion: reduce) {
           .hero-cta {
-            transition-duration: 0ms !important;
+            transition: none;
           }
         }
       `}</style>

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, type CSSProperties } from "react";
+import { useMemo } from "react";
 
 export interface TimelineStep {
   title: string;
@@ -56,16 +56,12 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
     []
   );
 
-  const focusRingVars = {
-    "--outline-focus-color": "var(--glass-inner-ring)",
-  } as CSSProperties;
-
   return (
-    <section className="journey-section" aria-labelledby="journey-hero-title" style={focusRingVars}>
+    <section className="journey-section" aria-labelledby="journey-hero-title">
       <div className="journey-inner">
         <header className="journey-header" id="journey-hero-title">
-          <h2>Your Smile Journey</h2>
-          <p>Discover the path to your perfect smile</p>
+          <h2 className="font-serif text-[color:var(--smh-text)]">Your Smile Journey</h2>
+          <p className="font-sans text-[color:var(--smh-text-muted)]">Discover the path to your perfect smile</p>
           <Link href="/ai-smile-quiz" className="journey-cta">
             Start Your Journey
           </Link>
@@ -75,24 +71,30 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           {steps.map((step) => {
             const iconPath = step.icon ? iconMap[step.icon] : undefined;
             return (
-              <article key={step.title} role="group" tabIndex={0} className="journey-card">
+              <article
+                key={step.title}
+                role="group"
+                tabIndex={0}
+                className="journey-card glass-pane veiled"
+                data-strength="strong"
+              >
                 {iconPath && (
                   <div className="journey-card-icon">
                     <img src={iconPath} alt="" aria-hidden="true" />
                   </div>
                 )}
-                <h3>{step.title}</h3>
-                <p>{step.body}</p>
+                <h3 className="font-serif text-[color:var(--smh-text)]">{step.title}</h3>
+                <p className="font-sans text-[color:var(--smh-text-muted)]">{step.body}</p>
               </article>
             );
           })}
         </div>
 
-        <div className="journey-callout">
+        <div className="journey-callout glass-pane veiled" data-strength="strong">
           <span className="journey-callout-veil" aria-hidden="true" />
           <div className="journey-callout-content">
-            <h3>Ready to Begin?</h3>
-            <p>Take the first step toward your perfect smile.</p>
+            <h3 className="font-serif text-[color:var(--smh-text)]">Ready to Begin?</h3>
+            <p className="font-sans text-[color:var(--smh-text-muted)]">Take the first step toward your perfect smile.</p>
             <div className="journey-callout-actions">
               <Link href="/contact" className="journey-cta-primary">
                 Book a consultation
@@ -112,8 +114,8 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           margin: 0;
           overflow: hidden;
           padding-block: clamp(96px, 14vw, 168px);
-          color: var(--ink-on-glass);
           isolation: isolate;
+          background: var(--smh-gradient);
         }
 
         .journey-section::before,
@@ -125,7 +127,8 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
         }
 
         .journey-section::before {
-          background: var(--smh-gradient);
+          background: radial-gradient(1200px 900px at 30% 10%, color-mix(in srgb, var(--smh-bg) 12%, transparent) 0%, transparent 55%);
+          opacity: 0.7;
           z-index: 0;
         }
 
@@ -168,17 +171,13 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
 
         .journey-header h2 {
           margin: 0;
-          font-family: var(--font-display);
           font-size: clamp(32px, 5vw, 48px);
-          font-weight: 600;
+          font-weight: 700;
           line-height: 1.15;
-          color: var(--ink-on-glass);
         }
 
         .journey-header p {
           margin: 0;
-          font-family: var(--font-body);
-          color: var(--body-on-glass);
           font-size: clamp(16px, 2vw, 20px);
           line-height: 1.6;
           max-width: 40ch;
@@ -191,8 +190,8 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           min-height: 48px;
           padding: 0.85rem 2.25rem;
           border-radius: var(--radius-pill);
-          font-family: var(--font-body);
-          font-weight: 600;
+          font-family: var(--font-sans);
+          font-weight: 500;
           font-size: 1rem;
           text-decoration: none;
           color: var(--ink);
@@ -210,7 +209,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
 
         .journey-cta:focus-visible {
           outline: none;
-          box-shadow: var(--journey-card-focus), var(--shadow-cta-rest);
+          box-shadow: 0 0 0 2px color-mix(in srgb, var(--brand-gold) 65%, transparent), var(--shadow-cta-rest);
         }
 
         .journey-grid {
@@ -225,11 +224,8 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           gap: 1.1rem;
           padding: clamp(28px, 4.5vw, 40px);
           border-radius: 22px;
-          background: var(--glass-bg-strong);
-          backdrop-filter: blur(var(--glass-blur)) saturate(1.05);
-          -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.05);
-          border: 1px solid var(--glass-border);
-          box-shadow: var(--rim-gold-inset), var(--journey-card-shadow);
+          box-shadow: var(--rim-gold-inset, inset 0 0 0 1px color-mix(in srgb, var(--brand-gold) 48%, transparent)),
+            var(--journey-card-shadow);
           color: var(--ink-on-glass);
           transition:
             transform var(--motion-duration-normal) var(--motion-easing-smooth),
@@ -250,7 +246,8 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
 
         .journey-card:hover {
           transform: translateY(-4px);
-          box-shadow: var(--journey-card-shadow-hover);
+          box-shadow: var(--rim-gold-inset, inset 0 0 0 1px color-mix(in srgb, var(--brand-gold) 48%, transparent)),
+            var(--journey-card-shadow-hover);
         }
 
         .journey-card:hover::before {
@@ -259,7 +256,9 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
 
         .journey-card:focus-visible {
           outline: none;
-          box-shadow: var(--journey-card-focus), var(--journey-card-shadow);
+          box-shadow:
+            0 0 0 2px color-mix(in srgb, var(--brand-gold) 65%, transparent),
+            var(--journey-card-shadow);
         }
 
         .journey-card:focus-visible::before {
@@ -284,15 +283,12 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
 
         .journey-card h3 {
           margin: 0;
-          font-family: var(--font-display);
           font-size: 1.35rem;
-          font-weight: 600;
+          font-weight: 700;
         }
 
         .journey-card p {
           margin: 0;
-          font-family: var(--font-body);
-          color: var(--body-on-glass);
           line-height: 1.6;
         }
 
@@ -300,12 +296,10 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           position: relative;
           border-radius: 26px;
           padding: clamp(36px, 6vw, 52px);
-          background: var(--glass-bg-strong);
-          border: 1px solid var(--glass-border);
-          box-shadow: var(--rim-gold-inset), var(--journey-card-shadow);
-          backdrop-filter: blur(var(--glass-blur)) saturate(1.05);
-          -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.05);
+          box-shadow: var(--rim-gold-inset, inset 0 0 0 1px color-mix(in srgb, var(--brand-gold) 48%, transparent)),
+            var(--journey-card-shadow);
           overflow: hidden;
+          color: var(--ink-on-glass);
         }
 
         .journey-callout::before {
@@ -322,7 +316,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
         .journey-callout-veil {
           position: absolute;
           inset: 0;
-          background: color-mix(in srgb, black 36%, transparent);
+          background: var(--ink-veil-12);
           pointer-events: none;
         }
 
@@ -337,15 +331,12 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
 
         .journey-callout-content h3 {
           margin: 0;
-          font-family: var(--font-display);
           font-size: clamp(28px, 4vw, 36px);
-          font-weight: 600;
+          font-weight: 700;
         }
 
         .journey-callout-content p {
           margin: 0;
-          font-family: var(--font-body);
-          color: var(--body-on-glass);
           line-height: 1.6;
         }
 
@@ -364,8 +355,8 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           min-height: 48px;
           padding: 0.85rem 2.25rem;
           border-radius: var(--radius-pill);
-          font-family: var(--font-body);
-          font-weight: 600;
+          font-family: var(--font-sans);
+          font-weight: 500;
           font-size: 1rem;
           text-decoration: none;
           transition:
@@ -395,7 +386,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
         .journey-cta-primary:focus-visible,
         .journey-cta-secondary:focus-visible {
           outline: none;
-          box-shadow: var(--journey-card-focus), var(--shadow-cta-rest);
+          box-shadow: 0 0 0 2px color-mix(in srgb, var(--brand-gold) 65%, transparent), var(--shadow-cta-rest);
         }
 
         @media (max-width: 768px) {
