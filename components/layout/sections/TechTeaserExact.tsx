@@ -1,6 +1,6 @@
 'use client';
 
-export default function TechTeaserExact(){
+export default function TechTeaserExact() {
   return (
     <section className="py-16">
       <div className="max-w-7xl mx-auto px-6 grid gap-8 md:grid-cols-2 items-center">
@@ -11,7 +11,7 @@ export default function TechTeaserExact(){
           </p>
           <a
             href="/preview/lux/technology"
-            className="mt-4 inline-flex items-center rounded-full px-5 py-3 text-white bg-[var(--gradient-cta)] hover:opacity-95 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--smh-accent-gold)]"
+            className="mt-4 inline-flex items-center rounded-full px-5 py-2 bg-[var(--gradient-cta)] text-white shadow-lg"
           >
             Explore Technology
           </a>
