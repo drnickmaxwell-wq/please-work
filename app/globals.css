@@ -1,7 +1,15 @@
-@import "@/styles/tokens/smh-champagne-tokens.css";
-@import "@/styles/tokens.css";
-@import "@/styles/brand/brand-gradient.css";
+/* Tailwind must compile first so utilities exist */
 @import "tailwindcss";
+
+/* Brand tokens (variables only) */
+@import "../styles/tokens/smh-champagne-tokens.css";
+@import "../styles/tokens.css";
+
+/* Brand rules that *use* tokens */
+@import "../styles/brand/brand-gradient.css";
+@import "../styles/brand/lux-glass.css";
+@import "../styles/brand/brand-textures.css";
+@import "../styles/brand/brand-motion.css";
 
 :root {
   /* Brand Colors - Luxury Coastal Theme */

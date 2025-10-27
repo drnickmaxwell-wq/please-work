@@ -1,10 +1,6 @@
 import type { CSSProperties } from 'react';
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import "@/styles/brand/lux-glass.css";
-import "@/styles/brand/brand-textures.css";
-import "@/styles/brand/brand-motion.css";
-import "@/styles/brand/brand-flags.css";
 import PerformanceOptimizedLayout from '@/components/layout/performance-optimized-layout';
 import FooterLuxe from '@/components/layout/FooterLuxe';
 
