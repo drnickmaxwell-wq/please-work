@@ -11,8 +11,7 @@ export default function TechTeaserExact(){
           </p>
           <a
             href="/preview/lux/technology"
-            className="mt-4 inline-flex items-center rounded-full px-5 py-2 text-white font-semibold"
-            style={{ backgroundImage: 'var(--gradient-cta)' }}
+            className="mt-4 inline-flex items-center rounded-full px-5 py-3 text-white bg-[var(--gradient-cta)] hover:opacity-95 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--smh-accent-gold)]"
           >
             Explore Technology
           </a>
