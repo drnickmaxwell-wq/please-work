@@ -1,6 +1,17 @@
 :root{
+  --brand-magenta:#C2185B;
+  --brand-teal:#40C4B4;
+  --brand-gold:#D4AF37;
+  --smh-champagne:#F9E8C3;
+  --smh-sand:#F8F4EE;
+  --smh-bg:#FFFFFF;
+  --smh-text:#1A1A1A;
+  --smh-text-muted:#4C4C4C;
   --smh-gradient: linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
-  --smh-gold:#F9E8C3;
+  --gradient-champagne:var(--smh-gradient);
+  --gradient-cta:linear-gradient(135deg,#D94BC6 0%,#00C2C7 70%,#F9E8C3 100%);
+  --cta-gradient:var(--gradient-cta);
+  --smh-gold:var(--smh-champagne);
   --smh-parallax-max:6px;
   --smh-filmgrain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   --smh-navy-900: #0f1a21;
@@ -22,4 +33,13 @@
 }
 .smh-wave-mask{ -webkit-mask-image: radial-gradient(130% 85% at 50% 0%, #000 40%, transparent 72%); mask-image: radial-gradient(130% 85% at 50% 0%, #000 40%, transparent 72%); -webkit-mask-size:cover; mask-size:cover; -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; }
 .smh-filmgrain{ pointer-events:none; opacity:.04; mix-blend-mode:soft-light; background-image: var(--smh-filmgrain); background-size:220px; background-repeat:repeat; }
+@media (prefers-color-scheme:dark){
+  :root{
+    --smh-bg:#0D0E10;
+    --smh-text:#FFFFFF;
+    --smh-text-muted:#D3D3D3;
+    --smh-gradient: linear-gradient(135deg,#EE66D1 0%,#00D6DB 100%);
+    --gradient-champagne:var(--smh-gradient);
+  }
+}
 @media (prefers-reduced-motion: reduce){ .smh-anim{ animation:none!important; transform:none!important; } }
