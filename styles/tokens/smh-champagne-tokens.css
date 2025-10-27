@@ -1,22 +1,28 @@
 /* SMH Champagne Design Tokens (v2.0) */
 :root{
-  /* Placeholder values pending design director sign-off */
   --brand-magenta:#C2185B;
   --brand-teal:#40C4B4;
   --brand-gold:#D4AF37;
   --surface-0:#F8F4EE;
   --radius:16px;
   --shadow-soft:0 10px 30px rgba(0,0,0,0.08);
-  --champagne-grad:linear-gradient(45deg,var(--brand-magenta),var(--brand-teal),var(--brand-gold));
+  --champagne-grad:var(--smh-gradient);
   --brand-particles-gold:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%221%22%20height%3D%221%22%3E%3Crect%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23D4AF37%22%20fill-opacity%3D%220.32%22/%3E%3C/svg%3E");
   --brand-particles-teal:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%221%22%20height%3D%221%22%3E%3Crect%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2340C4B4%22%20fill-opacity%3D%220.28%22/%3E%3C/svg%3E");
   --brand-particles-magenta:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%221%22%20height%3D%221%22%3E%3Crect%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23C2185B%22%20fill-opacity%3D%220.3%22/%3E%3C/svg%3E");
 
-  --smh-primary-magenta:#C2185B;--smh-primary-teal:#40C4B4;--smh-accent-gold:#D4AF37;
-  --smh-champagne:#F9E8C3;--smh-sand:#F8F4EE;
-  --smh-bg:#FFFFFF;--smh-text:#1A1A1A;--smh-text-muted:#4C4C4C;
+  --smh-primary-magenta:#C2185B;
+  --smh-primary-teal:#40C4B4;
+  --smh-accent-gold:#D4AF37;
+  --smh-champagne:#F9E8C3;
+  --smh-sand:#F8F4EE;
+  --smh-bg:#FFFFFF;
+  --smh-text:#1A1A1A;
+  --smh-text-muted:#4C4C4C;
   --smh-gradient:linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
-  --cta-gradient:linear-gradient(90deg,var(--smh-primary-magenta) 0%,color-mix(in srgb,var(--smh-primary-teal),white 10%) 55%,var(--smh-accent-gold) 100%);
+  --gradient-champagne:var(--smh-gradient);
+  --cta-gradient:linear-gradient(135deg,#D94BC6 0%,#00C2C7 70%,#F9E8C3 100%);
+  --gradient-cta:var(--cta-gradient);
   --motion-ease:cubic-bezier(0.645,0.045,0.355,1);--motion-hue-shift:3deg;--motion-ripple-speed:4s;--motion-hover-scale:1.03;
   --glow-gold:0 0 12px rgba(212,175,55,.45);--glow-teal:0 0 8px rgba(64,196,180,.40);--glow-magenta:0 0 8px rgba(194,24,91,.40);
   --shadow-elevate-light:0 4px 12px rgba(0,0,0,.05);

@@ -1,57 +1,61 @@
 :root {
-  /* Navy Tokens */
-  --navy-900: #0C1520;
-  --navy-950: #070C10;
-  --navy: #0B1A1E;
-  
-  /* Brand Colors */
+  /* Core SMH Champagne palette */
   --brand-magenta: #C2185B;
   --brand-teal: #40C4B4;
   --brand-gold: #D4AF37;
-  --gold-champagne: #F9E8C3;
-  
-  /* Champagne Gradient - 135deg */
-  --gradient-champagne: linear-gradient(135deg, #C2185B 0%, #40C4B4 60%, #D4AF37 100%);
-  
-  /* CTA Gradient */
-  --gradient-cta: linear-gradient(135deg, #D94BC6 0%, #00C2C7 100%);
-  
-  /* Alpha Variants */
-  --gold-alpha-40: rgba(249, 232, 195, 0.40);
-  
-  /* Glass Morphism */
-  --glass-bg: rgba(12, 21, 32, 0.45);
-  --glass-border: rgba(255, 255, 255, 0.10);
-  
-  /* Film Grain */
-  --grain-opacity: 0.05;
-  
-  /* Typography */
+  --smh-champagne: #F9E8C3;
+  --smh-sand: #F8F4EE;
+  --gold-champagne: var(--smh-champagne);
+
+  /* Base surfaces & typography */
+  --smh-bg: #FFFFFF;
+  --smh-text: #1A1A1A;
+  --smh-text-muted: #4C4C4C;
+  --paper: var(--smh-bg);
+  --background: #070C10;
   --font-display: 'Playfair Display', serif;
   --font-body: 'Inter', sans-serif;
-  
-  /* Colors */
-  --paper: #FFFFFF;
-  --background: #070C10;
-  
-  /* Radius */
+
+  /* Gradients */
+  --smh-gradient: linear-gradient(135deg, #D94BC6 0%, #00C2C7 100%);
+  --gradient-champagne: var(--smh-gradient);
+  --gradient-cta: linear-gradient(135deg, #D94BC6 0%, #00C2C7 70%, #F9E8C3 100%);
+  --cta-gradient: var(--gradient-cta);
+
+  /* Glass + rim tokens */
+  --glass-bg-weak: color-mix(in srgb, var(--smh-bg) 75%, black 25%);
+  --glass-bg-strong: color-mix(in srgb, var(--smh-bg) 55%, black 45%);
+  --glass-border: color-mix(in srgb, var(--brand-gold) 22%, transparent);
+  --glass-blur: 22px;
+  --rim-gold-inset:
+    0 0 0 1px color-mix(in srgb, var(--brand-gold) 65%, transparent),
+    0 0 32px 0 color-mix(in srgb, var(--brand-gold) 22%, transparent) inset;
+  --glass-bg: var(--glass-bg-strong);
+
+  /* Decorative opacities */
+  --champagne-gradient-opacity-soft: 0.72;
+  --champagne-gradient-opacity-standard: 0.92;
+  --champagne-gradient-opacity-bold: 0.96;
+  --champagne-wave-opacity-soft: 0.14;
+  --champagne-wave-opacity-standard: 0.2;
+  --champagne-wave-opacity-bold: 0.28;
+  --gold-alpha-40: rgba(249, 232, 195, 0.4);
+
+  /* Additional brand system tokens */
+  --navy-900: #0C1520;
+  --navy-950: #070C10;
+  --navy: #0B1A1E;
+  --grain-opacity: 0.05;
   --radius-pill: 9999px;
-  
-  /* Shadows */
   --shadow-glow: 0 8px 24px rgba(194, 24, 91, 0.25);
   --shadow-gold-glow: 0 0 24px rgba(212, 175, 55, 0.4);
-  
-  /* Motion Tokens */
+  --glass-border-light: rgba(255, 255, 255, 0.12);
+  --glass-bg-light: rgba(255, 255, 255, 0.08);
+  --glass-bg-dark: rgba(12, 21, 32, 0.45);
   --motion-easing-smooth: cubic-bezier(0.65, 0, 0.35, 1);
   --motion-duration-fast: 0.18s;
   --motion-duration-normal: 0.3s;
   --motion-duration-slow: 0.48s;
-  
-  /* Glass Tokens */
-  --glass-blur: blur(24px);
-  --glass-border-light: rgba(255, 255, 255, 0.12);
-  --glass-bg-light: rgba(255, 255, 255, 0.08);
-  --glass-bg-dark: rgba(12, 21, 32, 0.45);
 }
 
 :root {
@@ -66,10 +70,7 @@
   --fx-wave-opacity: 0.65;
   --fx-grain-opacity: 0.08;
 
-  --glass-bg: rgba(14, 22, 34, 0.42);
-  --glass-border: rgba(255, 255, 255, 0.28);
   --glass-inner-ring: rgba(255, 215, 160, 0.25);
-  --glass-blur: 16px;
 
   --shadow-glass: 0 8px 36px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.18);
   --glow-edge: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 0 24px rgba(226, 182, 74, 0.18);
@@ -89,6 +90,7 @@
 :root {
   --smh-primary-magenta: var(--brand-magenta);
   --smh-primary-teal: var(--brand-teal);
+  --smh-accent-gold: var(--brand-gold);
   --smh-filmgrain: url('/assets/manus/textures/home-hero-film-grain.webp');
 }
 :root {
@@ -110,71 +112,9 @@
   --motion-duration-normal: 260ms;
   --motion-easing-smooth: cubic-bezier(0.22, 1, 0.36, 1);
 }
-:root {
-  /* Navy Tokens */
-  --navy-900: #0C1520;
-  --navy-950: #070C10;
-  --navy: #0B1A1E;
-  
-  /* Brand Colors */
-  --brand-magenta: #C2185B;
-  --brand-teal: #40C4B4;
-  --brand-gold: #D4AF37;
-  --gold-champagne: #F9E8C3;
-  
-  /* Champagne Gradient - 135deg */
-  --gradient-champagne: linear-gradient(135deg, #C2185B 0%, #40C4B4 60%, #D4AF37 100%);
-  
-  /* CTA Gradient */
-  --gradient-cta: linear-gradient(135deg, #D94BC6 0%, #00C2C7 100%);
-  
-  /* Alpha Variants */
-  --gold-alpha-40: rgba(249, 232, 195, 0.40);
-  
-  /* Glass Morphism */
-  --glass-bg: rgba(12, 21, 32, 0.45);
-  --glass-border: rgba(255, 255, 255, 0.10);
-  
-  /* Film Grain */
-  --grain-opacity: 0.05;
-  
-  /* Typography */
-  --font-display: 'Playfair Display', serif;
-  --font-body: 'Inter', sans-serif;
-  
-  /* Colors */
-  --paper: #FFFFFF;
-  --background: #070C10;
-  
-  /* Radius */
-  --radius-pill: 9999px;
-  
-  /* Shadows */
-  --shadow-glow: 0 8px 24px rgba(194, 24, 91, 0.25);
-  --shadow-gold-glow: 0 0 24px rgba(212, 175, 55, 0.4);
-  
-  /* Motion Tokens */
-  --motion-easing-smooth: cubic-bezier(0.65, 0, 0.35, 1);
-  --motion-duration-fast: 0.18s;
-  --motion-duration-normal: 0.3s;
-  --motion-duration-slow: 0.48s;
-  
-  /* Glass Tokens */
-  --glass-blur: blur(24px);
-  --glass-border-light: rgba(255, 255, 255, 0.12);
-  --glass-bg-light: rgba(255, 255, 255, 0.08);
-  --glass-bg-dark: rgba(12, 21, 32, 0.45);
-}
-
-/* SMH Aliases for compatibility */
-:root {
-  --smh-primary-magenta: var(--brand-magenta);
-  --smh-primary-teal: var(--brand-teal);
-  --smh-filmgrain: url('/assets/manus/textures/home-hero-film-grain.webp');
-}
 :root{
-  --glass-bg-weak: rgba(8, 20, 30, 0.22);
-  --glass-bg-strong: rgba(8, 20, 30, 0.36);
+  --glass-bg-weak: color-mix(in srgb, var(--smh-bg) 75%, black 25%);
+  --glass-bg-strong: color-mix(in srgb, var(--smh-bg) 55%, black 45%);
   --shadow-hero-text: 0 1px 0 rgba(0,0,0,0.35);
   --shadow-card: 0 12px 40px rgba(0,0,0,0.25);
   --shadow-card-soft: 0 6px 24px rgba(0,0,0,0.18);
@@ -194,11 +134,9 @@
 :root {
   /* shadows & rims */
   --shadow-hero-text: 0 1px 0 rgba(0,0,0,.25), 0 18px 40px rgba(2,10,18,.22);
-  --rim-gold-inset: inset 0 0 0 2px rgba(233, 200, 132, .75), inset 0 0 0 1px rgba(255,255,255,.06);
   --bloom-outer: 0 22px 60px rgba(255, 220, 160, .25);
 
   /* glass panels (strong/soft) */
-  --glass-bg-strong: rgba(12,18,24,.66);
   --glass-bg-soft: rgba(12,18,24,.46);
   --glass-keyline: rgba(233, 200, 132, .45);
   --glass-highlight: rgba(255,255,255,.12);
@@ -224,9 +162,7 @@
   --text-hero-muted: rgba(255,255,255,.82);
 }
 :root {
-  --smh-champagne: linear-gradient(135deg, var(--champ-start) 0%, var(--champ-mid) 55%, var(--champ-end) 100%);
   --ink-veil: rgba(8, 16, 26, 0.35);
-  --glass-bg: rgba(14, 22, 34, 0.36);
   --gold-rim: rgba(241, 208, 150, 0.62);
   --shadow-hero-bloom: 0 30px 80px rgba(5, 12, 20, 0.45);
   --shadow-cta: 0 14px 36px rgba(243, 208, 150, 0.32);
@@ -245,38 +181,14 @@
   --journey-veil: linear-gradient(180deg, rgba(8, 14, 24, 0.32), rgba(8, 14, 24, 0));
 }
 
-/* Champagne brand locks */
-:root {
-  --smh-primary-magenta: #C2185B;
-  --smh-primary-teal: #40C4B4;
-  --smh-accent-gold: #D4AF37;
-
-  --smh-gradient: linear-gradient(135deg, #D94BC6 0%, #00C2C7 100%);
-  --cta-gradient: linear-gradient(
-    90deg,
-    var(--smh-primary-magenta) 0%,
-    color-mix(in srgb, var(--smh-primary-teal), white 10%) 55%,
-    var(--smh-accent-gold) 100%
-  );
-
-  --glass-bg-weak: color-mix(in srgb, var(--smh-bg, #0D0E10) 75%, black 25%);
-  --glass-bg-strong: color-mix(in srgb, var(--smh-bg, #0D0E10) 55%, black 45%);
-  --glass-blur: 22px;
-  --glass-border: color-mix(in srgb, var(--smh-accent-gold, #D4AF37) 22%, transparent);
-  --rim-gold-inset:
-    0 0 0 1px color-mix(in srgb, var(--smh-accent-gold) 65%, transparent),
-    0 0 32px 0 color-mix(in srgb, var(--smh-accent-gold) 22%, transparent) inset;
-  --glass-bg: var(--glass-bg-strong);
-
-  /* Legacy aliases */
-  --gradient-cta: var(--cta-gradient);
-  --brand-magenta: var(--smh-primary-magenta);
-  --brand-teal: var(--smh-primary-teal);
-  --brand-gold: var(--smh-accent-gold);
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
+    --smh-bg: #0D0E10;
+    --smh-text: #FFFFFF;
+    --smh-text-muted: #D3D3D3;
     --smh-gradient: linear-gradient(135deg, #EE66D1 0%, #00D6DB 100%);
+    --gradient-champagne: var(--smh-gradient);
+    --glass-bg-weak: color-mix(in srgb, var(--smh-bg) 80%, black 20%);
+    --glass-bg-strong: color-mix(in srgb, var(--smh-bg) 60%, black 40%);
   }
 }
