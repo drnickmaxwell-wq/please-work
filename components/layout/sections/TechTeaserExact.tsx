@@ -11,7 +11,7 @@ export default function TechTeaserExact(){
           </p>
           <a href="/preview/lux/technology"
              className="mt-4 inline-flex items-center rounded-full px-5 py-2 text-white font-semibold
-                        bg-gradient-to-r from-[#C2185B] via-[#40C4B4] to-[#D4AF37]">
+                        bg-[var(--gradient-cta)]">
             Explore Technology
           </a>
         </div>

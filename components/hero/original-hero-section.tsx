@@ -42,7 +42,7 @@ const OriginalHeroSection = () => {
         vx: (Math.random() - 0.5) * 0.3,
         vy: (Math.random() - 0.5) * 0.3,
         size: Math.random() * 6 + 2,
-        color: ['#C2185B', '#40C4B4', '#D4AF37'][Math.floor(Math.random() * 3)],
+        color: ['var(--brand-magenta)', 'var(--brand-teal)', 'var(--brand-gold)'][Math.floor(Math.random() * 3)],
         opacity: Math.random() * 0.8 + 0.2
       });
     }

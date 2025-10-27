@@ -18,7 +18,7 @@ interface FloatingParticleProps {
 
 function FloatingParticle({
   delay = 0,
-  color = '#D4AF37',
+  color = 'var(--brand-gold)',
   startX,
   startY,
   driftX,
@@ -123,7 +123,7 @@ export default function CinematicHeroVideo() {
   const particleCount = prefersReducedMotion ? 0 : isMobile ? 12 : 20;
 
   const particles = useMemo(() => {
-    const colors = ['#D4AF37', '#40C4B4', '#C2185B'];
+    const colors = ['var(--brand-gold)', 'var(--brand-teal)', 'var(--brand-magenta)'];
     const randomFromSeed = (seed: number) => {
       const x = Math.sin(seed) * 10000;
       return x - Math.floor(x);
