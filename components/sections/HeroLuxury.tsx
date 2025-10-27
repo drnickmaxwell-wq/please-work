@@ -40,16 +40,17 @@ export default function HeroLuxury({
       aria-labelledby="home-hero-title"
       className="relative overflow-hidden isolate"
     >
+      <div aria-hidden className="gold-flecks"></div>
       <div className="hero-container">
         <div
-          className="glass-pane mx-auto max-w-5xl rounded-3xl px-6 py-10 md:px-10 md:py-14"
+          className="glass-pane mx-auto max-w-5xl rounded-3xl px-6 py-10 md:px-10 md:py-14 shadow-none"
           style={{
             background: "var(--glass-bg-strong)",
             border: "1px solid var(--glass-border)",
             backdropFilter: "blur(14px)",
             WebkitBackdropFilter: "blur(14px)",
             boxShadow:
-              "0 24px 80px color-mix(in srgb, black 20%, transparent 80%)",
+              "0 24px 80px color-mix(in srgb, black 16%, transparent 84%)",
           }}
         >
           <div className="hero-copy">

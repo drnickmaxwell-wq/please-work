@@ -10,35 +10,36 @@
   --champagne-wave-opacity-bold: 0.28;
 }
 
-/* Champagne hero underplate */
+/* Base Champagne gradient */
 section[data-hero="champagne"] {
   position: relative;
   isolation: isolate;
   background: var(--smh-gradient);
 }
 
-/* Subtle film grain + vignette live on ::before and ::after */
+/* Film-vignette (very light) */
 section[data-hero="champagne"]::before {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  mix-blend-mode: overlay;
-  opacity: 0.16;
   z-index: 0;
+  opacity: 0.14;
+  mix-blend-mode: overlay;
   background:
     radial-gradient(120% 100% at 0% 0%, rgba(0,0,0,.08), transparent 55%),
     radial-gradient(140% 110% at 100% 100%, rgba(0,0,0,.08), transparent 60%);
 }
 
+/* Wave mask layer */
 section[data-hero="champagne"]::after {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.2;
-  background-image: url("/assets/waves/smh-wave-mask.svg");
+  opacity: 0.22;
+  background-image: url("/waves/smh-wave-mask.svg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -165,4 +166,19 @@ section[data-hero="champagne"]::after {
   100% {
     filter: hue-rotate(-3deg) saturate(1);
   }
+}
+
+/* Gold flecks — extremely subtle */
+section[data-hero="champagne"] .gold-flecks {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  background-image:
+    radial-gradient(2px 2px at 12% 28%, color-mix(in srgb, var(--brand-gold) 75%, transparent) 60%, transparent 61%),
+    radial-gradient(2px 2px at 78% 62%, color-mix(in srgb, var(--brand-gold) 70%, transparent) 60%, transparent 61%),
+    radial-gradient(1.5px 1.5px at 32% 68%, color-mix(in srgb, var(--brand-gold) 65%, transparent) 60%, transparent 61%);
+  background-repeat: no-repeat;
+  filter: blur(0.2px);
 }
