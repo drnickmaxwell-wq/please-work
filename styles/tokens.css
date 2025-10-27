@@ -1,13 +1,37 @@
-/* Aliases used across the app */
-:root {
-  --brand-magenta: var(--smh-primary-magenta);
-  --brand-teal:    var(--smh-primary-teal);
-  --brand-gold:    var(--smh-accent-gold);
+/* styles/tokens.css — Canonical aliases & helpers for Champagne */
 
-  /* Glass scale (complete) */
-  --glass-bg-weak:   color-mix(in srgb, var(--smh-bg) 82%, black 18%);
+/* Base aliases back to champagne token sheet */
+:root {
+  --brand-magenta: var(--smh-primary-magenta); /* #C2185B */
+  --brand-teal:    var(--smh-primary-teal);    /* #40C4B4 */
+  --brand-gold:    var(--smh-accent-gold);     /* #D4AF37 */
+
+  /* Glass scale */
+  --glass-bg-weak:   color-mix(in srgb, var(--smh-bg) 88%, black 12%);
   --glass-bg-strong: color-mix(in srgb, var(--smh-bg) 72%, black 28%);
 
-  /* Gold rim utility */
-  --rim-gold-inset: inset 0 0 0 1px color-mix(in srgb, var(--brand-gold) 68%, transparent);
+  /* Ink & veils (used for legibility on frosted panes) */
+  --ink:           color-mix(in srgb, var(--smh-text) 100%, transparent);
+  --ink-strong:    color-mix(in srgb, var(--smh-text) 100%, transparent);
+  --ink-on-glass:  color-mix(in srgb, var(--smh-text) 94%, transparent 6%);
+  --ink-veil-08:   color-mix(in srgb, black 8%, transparent);
+  --ink-veil-12:   color-mix(in srgb, black 12%, transparent);
+
+  /* CTA & elevation */
+  --gradient-cta:  var(--smh-gradient); /* use brand gradient for primary CTAs */
+
+  --shadow-cta-rest:    0 18px 40px color-mix(in srgb, black 12%, transparent);
+  --shadow-cta:         0 22px 48px color-mix(in srgb, black 16%, transparent);
+  --shadow-hero-bloom:  0 48px 120px color-mix(in srgb, black 22%, transparent);
+
+  /* Gold rim utility (relies on --brand-gold) */
+  --rim-gold-inset: inset 0 0 0 1px color-mix(in srgb, var(--brand-gold) 56%, transparent);
+}
+
+/* Dark-mode tuning */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --glass-bg-weak:   color-mix(in srgb, var(--smh-bg) 84%, black 16%);
+    --glass-bg-strong: color-mix(in srgb, var(--smh-bg) 68%, black 32%);
+  }
 }
