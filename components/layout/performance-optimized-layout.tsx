@@ -26,9 +26,9 @@ function BrandLoadingSpinner() {
       <motion.div
         className="w-12 h-12 border-4 border-transparent rounded-full"
         style={{
-          borderTopColor: '#C2185B',
-          borderRightColor: '#40C4B4',
-          borderBottomColor: '#D4AF37',
+          borderTopColor: 'var(--brand-magenta)',
+          borderRightColor: 'var(--brand-teal)',
+          borderBottomColor: 'var(--brand-gold)',
           borderLeftColor: 'transparent'
         }}
         animate={{ rotate: 360 }}
