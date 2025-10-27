@@ -16,19 +16,28 @@
   --smh-champagne:#F9E8C3;--smh-sand:#F8F4EE;
   --smh-bg:#FFFFFF;--smh-text:#1A1A1A;--smh-text-muted:#4C4C4C;
   --smh-gradient:linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
+  --cta-gradient:linear-gradient(90deg,var(--smh-primary-magenta) 0%,color-mix(in srgb,var(--smh-primary-teal),white 10%) 55%,var(--smh-accent-gold) 100%);
   --motion-ease:cubic-bezier(0.645,0.045,0.355,1);--motion-hue-shift:3deg;--motion-ripple-speed:4s;--motion-hover-scale:1.03;
   --glow-gold:0 0 12px rgba(212,175,55,.45);--glow-teal:0 0 8px rgba(64,196,180,.40);--glow-magenta:0 0 8px rgba(194,24,91,.40);
   --shadow-elevate-light:0 4px 12px rgba(0,0,0,.05);
   --font-heading:"Montserrat",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
   --font-body:"Lora",Georgia,Cambria,"Times New Roman",Times,serif;
   --font-data:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
-  --film-grain-opacity:.04;--particles-opacity:.10
+  --film-grain-opacity:.04;--particles-opacity:.10;
+  --glass-bg-weak:color-mix(in srgb,var(--smh-bg) 75%,black 25%);
+  --glass-bg-strong:color-mix(in srgb,var(--smh-bg) 55%,black 45%);
+  --glass-blur:22px;
+  --glass-border:color-mix(in srgb,var(--smh-accent-gold) 22%,transparent);
+  --rim-gold-inset:0 0 0 1px color-mix(in srgb,var(--smh-accent-gold) 65%,transparent),0 0 32px 0 color-mix(in srgb,var(--smh-accent-gold) 22%,transparent) inset;
+  --glass-bg:var(--glass-bg-strong);
 }
 @media (prefers-color-scheme:dark){
   :root{--smh-bg:#0D0E10;--smh-text:#FFFFFF;--smh-text-muted:#D3D3D3;
     --smh-gradient:linear-gradient(135deg,#EE66D1 0%,#00D6DB 100%);
     --shadow-elevate-dark:0 4px 16px rgba(0,0,0,.40);
-    --film-grain-opacity:.04;--particles-opacity:.06}
+    --film-grain-opacity:.04;--particles-opacity:.06;
+    --glass-bg-weak:color-mix(in srgb,var(--smh-bg) 80%,black 20%);
+    --glass-bg-strong:color-mix(in srgb,var(--smh-bg) 60%,black 40%)}
 }
 html{color:var(--smh-text);background:var(--smh-bg);font-family:var(--font-body)}
 .smh-heading,h1,h2,h3,h4{font-family:var(--font-heading)}

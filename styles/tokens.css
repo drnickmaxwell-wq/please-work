@@ -244,3 +244,39 @@
   --journey-card-focus: 0 0 0 2px rgba(241, 208, 150, 0.7), 0 0 0 6px rgba(241, 208, 150, 0.2);
   --journey-veil: linear-gradient(180deg, rgba(8, 14, 24, 0.32), rgba(8, 14, 24, 0));
 }
+
+/* Champagne brand locks */
+:root {
+  --smh-primary-magenta: #C2185B;
+  --smh-primary-teal: #40C4B4;
+  --smh-accent-gold: #D4AF37;
+
+  --smh-gradient: linear-gradient(135deg, #D94BC6 0%, #00C2C7 100%);
+  --cta-gradient: linear-gradient(
+    90deg,
+    var(--smh-primary-magenta) 0%,
+    color-mix(in srgb, var(--smh-primary-teal), white 10%) 55%,
+    var(--smh-accent-gold) 100%
+  );
+
+  --glass-bg-weak: color-mix(in srgb, var(--smh-bg, #0D0E10) 75%, black 25%);
+  --glass-bg-strong: color-mix(in srgb, var(--smh-bg, #0D0E10) 55%, black 45%);
+  --glass-blur: 22px;
+  --glass-border: color-mix(in srgb, var(--smh-accent-gold, #D4AF37) 22%, transparent);
+  --rim-gold-inset:
+    0 0 0 1px color-mix(in srgb, var(--smh-accent-gold) 65%, transparent),
+    0 0 32px 0 color-mix(in srgb, var(--smh-accent-gold) 22%, transparent) inset;
+  --glass-bg: var(--glass-bg-strong);
+
+  /* Legacy aliases */
+  --gradient-cta: var(--cta-gradient);
+  --brand-magenta: var(--smh-primary-magenta);
+  --brand-teal: var(--smh-primary-teal);
+  --brand-gold: var(--smh-accent-gold);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --smh-gradient: linear-gradient(135deg, #EE66D1 0%, #00D6DB 100%);
+  }
+}
