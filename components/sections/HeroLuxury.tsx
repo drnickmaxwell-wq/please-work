@@ -71,21 +71,16 @@ export default function HeroLuxury({
 
         section[data-hero="champagne"]::after {
           background:
-            linear-gradient(180deg, var(--hero-wave-top), var(--hero-wave-bottom)),
-            repeating-linear-gradient(
-              0deg,
-              var(--hero-grain-light) 0px,
-              var(--hero-grain-dark) 1px,
-              transparent 2px
-            );
+            var(--smh-hero-overlay-wave),
+            var(--smh-hero-overlay-grain);
           mix-blend-mode: soft-light;
           opacity: 0.58;
           z-index: 1;
-          mask-image: var(--hero-wave-mask);
+          mask-image: var(--smh-hero-wave-mask);
           mask-repeat: no-repeat;
           mask-size: 140% 100%;
           mask-position: top center;
-          -webkit-mask-image: var(--hero-wave-mask);
+          -webkit-mask-image: var(--smh-hero-wave-mask);
           -webkit-mask-repeat: no-repeat;
           -webkit-mask-size: 140% 100%;
           -webkit-mask-position: top center;
@@ -117,7 +112,7 @@ export default function HeroLuxury({
           position: absolute;
           inset: 0;
           border-radius: inherit;
-          background: linear-gradient(180deg, var(--hero-pane-highlight), transparent 65%);
+          background: var(--smh-hero-pane-highlight);
           mix-blend-mode: soft-light;
           opacity: 0.55;
           pointer-events: none;

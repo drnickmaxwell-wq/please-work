@@ -7,14 +7,18 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { easeInOutCubic, linearEase } from '@/lib/motion/easing';
 import { Play, Pause, RotateCcw, Info, Sparkles } from 'lucide-react';
 import * as THREE from 'three';
+import {
+  getBrandColor,
+  SMH_BRAND_COLOR_FALLBACKS,
+} from '@/lib/brand/palette';
 
 // Brand Colors: Magenta var(--smh-primary-magenta), Turquoise var(--smh-primary-teal), Gold var(--smh-accent-gold)
 // Fonts: Montserrat headings, Lora body text
 
 const defaultBrandColors: Record<'magenta' | 'teal' | 'gold', string> = {
-  magenta: '#C2185B',
-  teal: '#40C4B4',
-  gold: '#D4AF37'
+  magenta: SMH_BRAND_COLOR_FALLBACKS.magenta,
+  teal: SMH_BRAND_COLOR_FALLBACKS.teal,
+  gold: SMH_BRAND_COLOR_FALLBACKS.gold,
 };
 
 function useBrandColors() {
@@ -23,11 +27,10 @@ function useBrandColors() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const computed = getComputedStyle(document.documentElement);
     setBrandColors({
-      magenta: computed.getPropertyValue('--smh-primary-magenta').trim() || defaultBrandColors.magenta,
-      teal: computed.getPropertyValue('--smh-primary-teal').trim() || defaultBrandColors.teal,
-      gold: computed.getPropertyValue('--smh-accent-gold').trim() || defaultBrandColors.gold
+      magenta: getBrandColor('magenta'),
+      teal: getBrandColor('teal'),
+      gold: getBrandColor('gold'),
     });
   }, []);
 

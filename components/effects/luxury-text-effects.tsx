@@ -29,21 +29,20 @@ const ShimmerText: React.FC<ShimmerTextProps> = ({
 }) => {
   const textRef = useRef<HTMLDivElement>(null);
 
-  // Intensity configurations with brand colors
   const intensityConfig = {
     subtle: {
-      colors: ['rgba(212, 175, 55, 0.3)', 'rgba(255, 255, 255, 0.8)', 'rgba(212, 175, 55, 0.3)'],
+      gradient: 'var(--smh-shimmer-subtle)',
       size: '200%',
     },
     medium: {
-      colors: ['rgba(212, 175, 55, 0.5)', 'rgba(255, 255, 255, 1)', 'rgba(212, 175, 55, 0.5)'],
+      gradient: 'var(--smh-shimmer-medium)',
       size: '300%',
     },
     strong: {
-      colors: ['rgba(212, 175, 55, 0.7)', 'rgba(255, 255, 255, 1)', 'rgba(212, 175, 55, 0.7)'],
+      gradient: 'var(--smh-shimmer-strong)',
       size: '400%',
     },
-  };
+  } as const;
 
   // Speed configurations
   const speedConfig = {
@@ -59,7 +58,7 @@ const ShimmerText: React.FC<ShimmerTextProps> = ({
   const startPosition = positions[0];
   const endPosition = positions[positions.length - 1];
   const shimmerStyle = {
-    background: `linear-gradient(90deg, ${config.colors.join(', ')})`,
+    background: config.gradient,
     backgroundSize: config.size,
     backgroundClip: 'text',
     WebkitBackgroundClip: 'text',
@@ -144,16 +143,16 @@ const GradientText: React.FC<GradientTextProps> = ({
 }) => {
   const gradientClasses: Record<Exclude<GradientTextProps['variant'], undefined>, string> = {
     primary: 'bg-[var(--gradient-cta)]',
-    secondary: 'bg-[var(--gradient-cta)]',
-    accent: 'bg-[var(--gradient-cta)]',
-    rainbow: 'bg-[var(--gradient-cta)]'
+    secondary: 'bg-[var(--smh-gradient-secondary)]',
+    accent: 'bg-[var(--smh-gradient-accent)]',
+    rainbow: 'bg-[var(--smh-gradient-rainbow)]'
   };
 
   const gradientBackgrounds: Record<Exclude<GradientTextProps['variant'], undefined>, string | undefined> = {
     primary: undefined,
-    secondary: 'linear-gradient(135deg, var(--smh-primary-teal) 0%, var(--smh-accent-gold) 100%)',
-    accent: 'linear-gradient(135deg, var(--smh-accent-gold) 0%, var(--smh-primary-magenta) 100%)',
-    rainbow: 'linear-gradient(135deg, var(--smh-primary-magenta) 0%, var(--smh-primary-teal) 25%, var(--smh-accent-gold) 50%, var(--smh-primary-magenta) 75%, var(--smh-primary-teal) 100%)',
+    secondary: 'var(--smh-gradient-secondary)',
+    accent: 'var(--smh-gradient-accent)',
+    rainbow: 'var(--smh-gradient-rainbow)',
   };
 
   const baseStyle = {

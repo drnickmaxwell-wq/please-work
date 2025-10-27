@@ -280,11 +280,17 @@ const FloatingGeometry: React.FC<FloatingGeometryProps> = ({
   animation = 'float',
   className = '',
 }) => {
-  const colors = {
-    magenta: 'var(--smh-primary-magenta)',
-    turquoise: 'var(--smh-primary-teal)',
-    gold: 'var(--smh-accent-gold)',
-  };
+  const gradients = {
+    magenta: 'var(--smh-micro-magenta)',
+    turquoise: 'var(--smh-micro-teal)',
+    gold: 'var(--smh-micro-gold)',
+  } as const;
+
+  const shadows = {
+    magenta: 'var(--smh-micro-magenta-shadow)',
+    turquoise: 'var(--smh-micro-teal-shadow)',
+    gold: 'var(--smh-micro-gold-shadow)',
+  } as const;
 
   const sizes = {
     sm: 'w-8 h-8',
@@ -323,8 +329,8 @@ const FloatingGeometry: React.FC<FloatingGeometryProps> = ({
     <motion.div
       className={`smh-anim ${sizes[size]} ${shapes[shape]} ${className}`}
       style={{
-        background: `linear-gradient(135deg, ${colors[color]}, ${colors[color]}80)`,
-        boxShadow: `0 4px 20px ${colors[color]}40`,
+        background: gradients[color],
+        boxShadow: shadows[color],
       }}
       animate={animations[animation]}
     />
@@ -346,19 +352,23 @@ const LiquidButton: React.FC<LiquidButtonProps> = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  const colors = {
-    primary: 'from-pink-500 to-teal-500',
-    secondary: 'from-teal-500 to-yellow-500',
-    accent: 'from-yellow-500 to-pink-500',
-  };
+  const buttonGradients = {
+    primary: 'var(--smh-liquid-primary)',
+    secondary: 'var(--smh-liquid-secondary)',
+    accent: 'var(--smh-liquid-accent)',
+  } as const;
 
   return (
     <motion.button
       className={`
         relative px-8 py-4 rounded-full text-white font-semibold overflow-hidden
-        bg-gradient-to-r ${colors[color]} smh-anim ${className}
+        smh-anim ${className}
       `}
-      style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
+      style={{
+        fontFamily: 'var(--font-inter), system-ui, Arial',
+        background: buttonGradients[color],
+        boxShadow: isHovered ? 'var(--smh-liquid-shadow)' : 'none'
+      }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={onClick}

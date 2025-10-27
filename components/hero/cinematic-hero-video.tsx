@@ -18,7 +18,7 @@ interface FloatingParticleProps {
 
 function FloatingParticle({
   delay = 0,
-  color = 'var(--brand-gold)',
+  color = 'var(--smh-accent-gold)',
   startX,
   startY,
   driftX,
@@ -61,10 +61,10 @@ function FloatingParticle({
 // Shimmer Text Component
 function ShimmerText({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
-    <span 
-      className={`bg-gradient-to-r from-white via-yellow-200 to-white bg-[length:200%_100%] animate-shimmer bg-clip-text text-transparent ${className}`}
+    <span
+      className={`bg-[length:200%_100%] animate-shimmer bg-clip-text text-transparent ${className}`}
       style={{
-        backgroundImage: 'linear-gradient(90deg, rgba(255,255,255,0.8) 0%, rgba(255,215,0,1) 25%, rgba(255,255,255,1) 50%, rgba(255,215,0,1) 75%, rgba(255,255,255,0.8) 100%)',
+        backgroundImage: 'var(--smh-hero-shimmer)',
         animation: 'shimmer 3s ease-in-out infinite'
       }}
     >
@@ -123,7 +123,11 @@ export default function CinematicHeroVideo() {
   const particleCount = prefersReducedMotion ? 0 : isMobile ? 12 : 20;
 
   const particles = useMemo(() => {
-    const colors = ['var(--brand-gold)', 'var(--brand-teal)', 'var(--brand-magenta)'];
+    const colors = [
+      'var(--smh-accent-gold)',
+      'var(--smh-primary-teal)',
+      'var(--smh-primary-magenta)'
+    ];
     const randomFromSeed = (seed: number) => {
       const x = Math.sin(seed) * 10000;
       return x - Math.floor(x);

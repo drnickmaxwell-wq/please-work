@@ -324,17 +324,10 @@ export function MorphingShape({
   const ref = useRef(null);
   const isInView = useInView(ref, { amount: 0.3 });
 
-  const getColor = () => {
-    switch (color) {
-      case 'pink':
-        return 'var(--smh-primary-magenta)';
-      case 'teal':
-        return 'var(--smh-primary-teal)';
-      case 'yellow':
-        return 'var(--smh-accent-gold)';
-      default:
-        return 'var(--smh-primary-magenta)';
-    }
+  const gradientMap: Record<typeof color, string> = {
+    pink: 'var(--smh-morphing-pink)',
+    teal: 'var(--smh-morphing-teal)',
+    yellow: 'var(--smh-morphing-gold)',
   };
 
   return (
@@ -343,7 +336,7 @@ export function MorphingShape({
         style={{
           width: size,
           height: size,
-          background: `linear-gradient(45deg, ${getColor()}, ${getColor()}80)`
+          background: gradientMap[color]
         }}
         animate={isInView ? {
           borderRadius: [
