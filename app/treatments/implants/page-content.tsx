@@ -185,9 +185,9 @@ export default function ImplantsPageContent() {
           <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1200 800">
             <defs>
               <linearGradient id="waveGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#C2185B" stopOpacity="0.3" />
-                <stop offset="50%" stopColor="#40C4B4" stopOpacity="0.3" />
-                <stop offset="100%" stopColor="#D4AF37" stopOpacity="0.3" />
+                <stop offset="0%" stopColor="var(--smh-primary-magenta)" stopOpacity="0.3" />
+                <stop offset="50%" stopColor="var(--smh-primary-teal)" stopOpacity="0.3" />
+                <stop offset="100%" stopColor="var(--smh-accent-gold)" stopOpacity="0.3" />
               </linearGradient>
             </defs>
             <motion.path

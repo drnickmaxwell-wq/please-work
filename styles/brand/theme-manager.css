@@ -16,18 +16,18 @@
 
 /* Light Mode (Day Theme) - Default */
 :root[data-theme="light"] {
-  --magenta: #C2185B;
-  --turquoise: #40C4B4;
-  --gold: #D4AF37;
+  --magenta: var(--smh-primary-magenta);
+  --turquoise: var(--smh-primary-teal);
+  --gold: var(--smh-accent-gold);
   --warm-mist: #F9F9FA;
   --foreground: #333;
   --background: #F9F9FA;
   
   /* Gradient */
   --gradient-angle: 135deg;
-  --gradient-start: #C2185B;
-  --gradient-mid: #40C4B4;
-  --gradient-end: #D4AF37;
+  --gradient-start: var(--smh-primary-magenta);
+  --gradient-mid: var(--smh-primary-teal);
+  --gradient-end: var(--smh-accent-gold);
   
   /* Glass */
   --glass-bg: rgba(255, 255, 255, 0.25);

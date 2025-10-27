@@ -15,8 +15,8 @@
   position: absolute;
   inset: -12%;
   background:
-    radial-gradient(130% 120% at 10% 18%, color-mix(in srgb, var(--brand-magenta, #c2185b) 54%, transparent) 0%, transparent 70%),
-    radial-gradient(130% 120% at 86% 12%, color-mix(in srgb, var(--brand-teal, #40c4b4) 58%, transparent) 0%, transparent 72%);
+    radial-gradient(130% 120% at 10% 18%, color-mix(in srgb, var(--brand-magenta, var(--smh-primary-magenta)) 54%, transparent) 0%, transparent 70%),
+    radial-gradient(130% 120% at 86% 12%, color-mix(in srgb, var(--brand-teal, var(--smh-primary-teal)) 58%, transparent) 0%, transparent 72%);
   filter: blur(70px);
   opacity: 0.32;
   z-index: -1;

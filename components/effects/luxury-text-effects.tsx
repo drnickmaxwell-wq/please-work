@@ -142,24 +142,39 @@ const GradientText: React.FC<GradientTextProps> = ({
   variant = 'primary',
   animate = false,
 }) => {
-  const gradients = {
-    primary: 'linear-gradient(135deg, #C2185B 0%, #40C4B4 50%, #D4AF37 100%)',
-    secondary: 'linear-gradient(135deg, #40C4B4 0%, #D4AF37 100%)',
-    accent: 'linear-gradient(135deg, #D4AF37 0%, #C2185B 100%)',
-    rainbow: 'linear-gradient(135deg, #C2185B 0%, #40C4B4 25%, #D4AF37 50%, #C2185B 75%, #40C4B4 100%)',
+  const gradientClasses: Record<Exclude<GradientTextProps['variant'], undefined>, string> = {
+    primary: 'bg-[var(--gradient-cta)]',
+    secondary: 'bg-[var(--gradient-cta)]',
+    accent: 'bg-[var(--gradient-cta)]',
+    rainbow: 'bg-[var(--gradient-cta)]'
+  };
+
+  const gradientBackgrounds: Record<Exclude<GradientTextProps['variant'], undefined>, string | undefined> = {
+    primary: undefined,
+    secondary: 'linear-gradient(135deg, var(--smh-primary-teal) 0%, var(--smh-accent-gold) 100%)',
+    accent: 'linear-gradient(135deg, var(--smh-accent-gold) 0%, var(--smh-primary-magenta) 100%)',
+    rainbow: 'linear-gradient(135deg, var(--smh-primary-magenta) 0%, var(--smh-primary-teal) 25%, var(--smh-accent-gold) 50%, var(--smh-primary-magenta) 75%, var(--smh-primary-teal) 100%)',
   };
 
   const baseStyle = {
-    background: gradients[variant],
+    background: gradientBackgrounds[variant],
     backgroundClip: 'text',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
     backgroundSize: animate ? '200% 200%' : '100% 100%',
   };
 
+  const combinedClassName = [
+    'bg-clip-text text-transparent',
+    gradientClasses[variant],
+    className
+  ]
+    .filter(Boolean)
+    .join(' ');
+
   return (
     <motion.span
-      className={className}
+      className={combinedClassName}
       style={baseStyle}
       animate={animate ? {
         backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
@@ -292,9 +307,9 @@ const GlowText: React.FC<GlowTextProps> = ({
   pulse = false,
 }) => {
   const colorConfig = {
-    magenta: '#C2185B',
-    turquoise: '#40C4B4',
-    gold: '#D4AF37',
+    magenta: 'var(--smh-primary-magenta)',
+    turquoise: 'var(--smh-primary-teal)',
+    gold: 'var(--smh-accent-gold)',
     white: '#FFFFFF',
   };
 

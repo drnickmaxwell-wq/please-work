@@ -13,7 +13,7 @@
   --smh-gradient:linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
 
   /* CTA gradient (tokens use this name) */
-  --gradient-cta:linear-gradient(135deg,#D94BC6 0%,#00C2C7 60%,#D4AF37 100%);
+  --gradient-cta:linear-gradient(135deg,#D94BC6 0%,#00C2C7 60%,var(--smh-accent-gold) 100%);
 }
 @media (prefers-color-scheme:dark){
   :root{

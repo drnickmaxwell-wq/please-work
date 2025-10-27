@@ -7,7 +7,7 @@ import { Star, Award, Heart, Calendar, Phone, ArrowLeft, CheckCircle } from 'luc
 import Link from 'next/link';
 import FourKHeroVideo from '@/components/hero/4k-hero-video';
 
-// Brand Colors: Magenta #C2185B, Turquoise #40C4B4, Gold #D4AF37
+// Brand Colors: Magenta var(--smh-primary-magenta), Turquoise var(--smh-primary-teal), Gold var(--smh-accent-gold)
 // Fonts: Montserrat headings, Lora body text
 
 export default function DrSarahMitchellPage() {

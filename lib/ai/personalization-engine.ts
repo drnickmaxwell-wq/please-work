@@ -1,5 +1,5 @@
 // AI-Powered Personalization Engine
-// Brand Colors: Magenta #C2185B, Turquoise #40C4B4, Gold #D4AF37
+// Brand Colors: Magenta var(--smh-primary-magenta), Turquoise var(--smh-primary-teal), Gold var(--smh-accent-gold)
 // Fonts: Montserrat headings, Lora body text
 
 export interface UserProfile {
@@ -97,9 +97,9 @@ export const PERSONALIZATION_RULES: PersonalizationRule[] = [
         subtitle: 'Experience calm, comfortable dentistry in our peaceful coastal setting',
         cta: 'Book Anxiety-Free Consultation',
         brandColors: {
-          primary: '#40C4B4', // Calming turquoise
-          secondary: '#C2185B',
-          accent: '#D4AF37'
+          primary: 'var(--smh-primary-teal)', // Calming turquoise
+          secondary: 'var(--smh-primary-magenta)',
+          accent: 'var(--smh-accent-gold)'
         }
       }
     },
@@ -127,9 +127,9 @@ export const PERSONALIZATION_RULES: PersonalizationRule[] = [
         phone: '01273 453109',
         style: 'urgent',
         brandColors: {
-          primary: '#C2185B', // Urgent magenta
-          secondary: '#40C4B4',
-          accent: '#D4AF37'
+          primary: 'var(--smh-primary-magenta)', // Urgent magenta
+          secondary: 'var(--smh-primary-teal)',
+          accent: 'var(--smh-accent-gold)'
         }
       }
     },
@@ -153,9 +153,9 @@ export const PERSONALIZATION_RULES: PersonalizationRule[] = [
         style: 'luxury',
         messaging: 'Transform Your Smile with Luxury Coastal Dentistry',
         brandColors: {
-          primary: '#D4AF37', // Luxury gold
-          secondary: '#C2185B',
-          accent: '#40C4B4'
+          primary: 'var(--smh-accent-gold)', // Luxury gold
+          secondary: 'var(--smh-primary-magenta)',
+          accent: 'var(--smh-primary-teal)'
         }
       }
     },
@@ -177,9 +177,9 @@ export const PERSONALIZATION_RULES: PersonalizationRule[] = [
         navigation: 'mobile-optimized',
         chatPosition: 'bottom-right',
         brandColors: {
-          primary: '#C2185B',
-          secondary: '#40C4B4',
-          accent: '#D4AF37'
+          primary: 'var(--smh-primary-magenta)',
+          secondary: 'var(--smh-primary-teal)',
+          accent: 'var(--smh-accent-gold)'
         }
       }
     },
@@ -200,9 +200,9 @@ export const PERSONALIZATION_RULES: PersonalizationRule[] = [
         showProgress: true,
         personalizedRecommendations: true,
         brandColors: {
-          primary: '#40C4B4', // Welcoming turquoise
-          secondary: '#C2185B',
-          accent: '#D4AF37'
+          primary: 'var(--smh-primary-teal)', // Welcoming turquoise
+          secondary: 'var(--smh-primary-magenta)',
+          accent: 'var(--smh-accent-gold)'
         }
       }
     },
@@ -223,9 +223,9 @@ export const PERSONALIZATION_RULES: PersonalizationRule[] = [
         messaging: 'Experience the pinnacle of luxury dental care',
         exclusiveOffers: true,
         brandColors: {
-          primary: '#D4AF37', // Premium gold
-          secondary: '#C2185B',
-          accent: '#40C4B4'
+          primary: 'var(--smh-accent-gold)', // Premium gold
+          secondary: 'var(--smh-primary-magenta)',
+          accent: 'var(--smh-primary-teal)'
         }
       }
     },
@@ -271,9 +271,9 @@ export class PersonalizationEngine {
     } = {
       ...modification,
       brandColors: modification.brandColors || {
-        primary: '#C2185B',
-        secondary: '#40C4B4',
-        accent: '#D4AF37'
+        primary: 'var(--smh-primary-magenta)',
+        secondary: 'var(--smh-primary-teal)',
+        accent: 'var(--smh-accent-gold)'
       },
       fonts: {
         heading: 'var(--font-playfair), Georgia, serif',
@@ -292,9 +292,9 @@ export class PersonalizationEngine {
         subtitle: 'Experience the future of dentistry with our AI-powered 3D treatments, luxury coastal setting, and award-winning patient care.',
         cta: 'Book Free Consultation',
         brandColors: {
-          primary: '#C2185B',
-          secondary: '#40C4B4',
-          accent: '#D4AF37'
+          primary: 'var(--smh-primary-magenta)',
+          secondary: 'var(--smh-primary-teal)',
+          accent: 'var(--smh-accent-gold)'
         }
       },
       'featured-treatments': {
@@ -302,9 +302,9 @@ export class PersonalizationEngine {
         style: 'coastal-luxury',
         messaging: 'Discover Advanced Dental Care',
         brandColors: {
-          primary: '#C2185B',
-          secondary: '#40C4B4',
-          accent: '#D4AF37'
+          primary: 'var(--smh-primary-magenta)',
+          secondary: 'var(--smh-primary-teal)',
+          accent: 'var(--smh-accent-gold)'
         }
       }
     };
@@ -381,9 +381,9 @@ export class PersonalizationEngine {
         'Do you accept my insurance?'
       ],
       brandStyling: {
-        primaryColor: '#C2185B',
-        secondaryColor: '#40C4B4',
-        accentColor: '#D4AF37',
+        primaryColor: 'var(--smh-primary-magenta)',
+        secondaryColor: 'var(--smh-primary-teal)',
+        accentColor: 'var(--smh-accent-gold)',
         font: 'var(--font-playfair), Georgia, serif'
       }
     };
@@ -526,9 +526,9 @@ export function adaptContentForUser(content: string, userProfile: UserProfile): 
 export function generateBrandConsistentStyling(context: string) {
   const brandStyling = {
     colors: {
-      primary: '#C2185B',
-      secondary: '#40C4B4',
-      accent: '#D4AF37',
+      primary: 'var(--smh-primary-magenta)',
+      secondary: 'var(--smh-primary-teal)',
+      accent: 'var(--smh-accent-gold)',
       background: '#FFFFFF',
       text: '#1E293B'
     },
@@ -537,14 +537,14 @@ export function generateBrandConsistentStyling(context: string) {
       body: 'var(--font-inter), system-ui, Arial'
     },
     effects: {
-      gradient: 'linear-gradient(135deg, #C2185B 0%, #40C4B4 50%, #D4AF37 100%)',
+      gradient: 'var(--gradient-cta)',
       shadow: '0 10px 25px rgba(194, 24, 91, 0.15)',
       borderRadius: '12px',
       backdropBlur: 'blur(10px)'
     },
     animations: {
       hover: 'transform: translateY(-2px); box-shadow: 0 15px 35px rgba(194, 24, 91, 0.25);',
-      focus: 'outline: 2px solid #40C4B4; outline-offset: 2px;',
+      focus: 'outline: 2px solid var(--smh-primary-teal); outline-offset: 2px;',
       active: 'transform: translateY(0px); box-shadow: 0 5px 15px rgba(194, 24, 91, 0.2);'
     }
   };
@@ -553,15 +553,15 @@ export function generateBrandConsistentStyling(context: string) {
   switch (context) {
     case 'emergency':
       brandStyling.colors.primary = '#DC2626'; // Red for urgency
-      brandStyling.effects.gradient = 'linear-gradient(135deg, #DC2626 0%, #C2185B 50%, #40C4B4 100%)';
+      brandStyling.effects.gradient = 'linear-gradient(135deg, #DC2626 0%, var(--smh-primary-magenta) 50%, var(--smh-primary-teal) 100%)';
       break;
     case 'luxury':
-      brandStyling.colors.primary = '#D4AF37'; // Gold for luxury
-      brandStyling.effects.gradient = 'linear-gradient(135deg, #D4AF37 0%, #C2185B 50%, #40C4B4 100%)';
+      brandStyling.colors.primary = 'var(--smh-accent-gold)'; // Gold for luxury
+      brandStyling.effects.gradient = 'linear-gradient(135deg, var(--smh-accent-gold) 0%, var(--smh-primary-magenta) 50%, var(--smh-primary-teal) 100%)';
       break;
     case 'calming':
-      brandStyling.colors.primary = '#40C4B4'; // Turquoise for calm
-      brandStyling.effects.gradient = 'linear-gradient(135deg, #40C4B4 0%, #D4AF37 50%, #C2185B 100%)';
+      brandStyling.colors.primary = 'var(--smh-primary-teal)'; // Turquoise for calm
+      brandStyling.effects.gradient = 'linear-gradient(135deg, var(--smh-primary-teal) 0%, var(--smh-accent-gold) 50%, var(--smh-primary-magenta) 100%)';
       break;
   }
 

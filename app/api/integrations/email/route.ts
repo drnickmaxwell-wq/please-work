@@ -23,7 +23,7 @@ const emailTemplates: Record<string, EmailTemplateContent> = {
     subject: 'Appointment Confirmation - St Mary\'s House Dental Care',
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f8fafc;">
-        <div style="background: linear-gradient(135deg, #C2185B, #40C4B4); padding: 30px; border-radius: 12px; text-align: center; margin-bottom: 30px;">
+        <div style="background: var(--smh-gradient); padding: 30px; border-radius: 12px; text-align: center; margin-bottom: 30px;">
           <h1 style="color: white; margin: 0; font-size: 28px;">St Mary's House Dental Care</h1>
           <p style="color: rgba(255,255,255,0.9); margin: 10px 0 0 0; font-size: 16px;">Luxury Coastal Dentistry</p>
         </div>
@@ -51,7 +51,7 @@ const emailTemplates: Record<string, EmailTemplateContent> = {
           </p>
           
           <div style="text-align: center; margin: 30px 0;">
-            <a href="{{practiceWebsite}}" style="background: linear-gradient(135deg, #C2185B, #40C4B4); color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold;">View Practice Information</a>
+            <a href="{{practiceWebsite}}" style="background: var(--gradient-cta); color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold;">View Practice Information</a>
           </div>
           
           <div style="border-top: 1px solid #e2e8f0; padding-top: 20px; margin-top: 30px;">
@@ -92,7 +92,7 @@ St Mary's House Dental Care Team
     subject: 'Appointment Reminder - Tomorrow at St Mary\'s House Dental Care',
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-        <h2 style="color: #C2185B;">Appointment Reminder</h2>
+        <h2 style="color: var(--smh-primary-magenta);">Appointment Reminder</h2>
         <p>Dear {{patientName}},</p>
         <p>This is a friendly reminder about your appointment tomorrow:</p>
         <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">

@@ -85,8 +85,8 @@ export const viewport: Viewport = {
   maximumScale: 5,
   userScalable: true,
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#C2185B' },
-    { media: '(prefers-color-scheme: dark)', color: '#C2185B' },
+    { media: '(prefers-color-scheme: light)', color: 'var(--smh-primary-magenta)' },
+    { media: '(prefers-color-scheme: dark)', color: 'var(--smh-primary-magenta)' },
   ],
   colorScheme: 'light',
   viewportFit: 'cover',
@@ -125,7 +125,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="SMH Dental" />
         
         {/* Microsoft Tiles */}
-        <meta name="msapplication-TileColor" content="#C2185B" />
+        <meta name="msapplication-TileColor" content="var(--smh-primary-magenta)" />
         <meta name="msapplication-TileImage" content="/icons/icon-144x144.png" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
         

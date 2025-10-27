@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { easeInOutCubic, linearEase } from '@/lib/motion/easing';
 import { Play, Pause, Volume2, VolumeX, Maximize, Minimize } from 'lucide-react';
 
-// Brand Colors: Magenta #C2185B, Turquoise #40C4B4, Gold #D4AF37
+// Brand Colors: Magenta var(--smh-primary-magenta), Turquoise var(--smh-primary-teal), Gold var(--smh-accent-gold)
 // Fonts: Montserrat headings, Lora body text
 
 interface HeroVideoProps {
@@ -143,14 +143,14 @@ export default function FourKHeroVideo({
           {/* Flowing Lines - Magenta to Turquoise */}
           <defs>
             <linearGradient id="waveGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#C2185B" stopOpacity="0.8" />
-              <stop offset="50%" stopColor="#40C4B4" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#D4AF37" stopOpacity="0.4" />
+              <stop offset="0%" stopColor="var(--smh-primary-magenta)" stopOpacity="0.8" />
+              <stop offset="50%" stopColor="var(--smh-primary-teal)" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="var(--smh-accent-gold)" stopOpacity="0.4" />
             </linearGradient>
             <linearGradient id="waveGradient2" x1="100%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#40C4B4" stopOpacity="0.7" />
-              <stop offset="50%" stopColor="#D4AF37" stopOpacity="0.5" />
-              <stop offset="100%" stopColor="#C2185B" stopOpacity="0.3" />
+              <stop offset="0%" stopColor="var(--smh-primary-teal)" stopOpacity="0.7" />
+              <stop offset="50%" stopColor="var(--smh-accent-gold)" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="var(--smh-primary-magenta)" stopOpacity="0.3" />
             </linearGradient>
           </defs>
           
@@ -181,7 +181,7 @@ export default function FourKHeroVideo({
               cx={Math.random() * 1920}
               cy={Math.random() * 1080}
               r="4"
-              fill={i % 3 === 0 ? '#C2185B' : i % 3 === 1 ? '#40C4B4' : '#D4AF37'}
+              fill={i % 3 === 0 ? 'var(--smh-primary-magenta)' : i % 3 === 1 ? 'var(--smh-primary-teal)' : 'var(--smh-accent-gold)'}
               initial={{ opacity: 0, scale: 0 }}
               animate={{ 
                 opacity: [0, 1, 0],

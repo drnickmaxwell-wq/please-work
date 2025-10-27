@@ -4,9 +4,9 @@
 
 :root {
   /* Brand Colors - Luxury Coastal Theme */
-  --magenta: #C2185B;
-  --turquoise: #40C4B4;
-  --gold: #D4AF37;
+  --magenta: var(--smh-primary-magenta);
+  --turquoise: var(--smh-primary-teal);
+  --gold: var(--smh-accent-gold);
   --smh-champagne-pink: color-mix(in srgb, var(--magenta) 92%, white 8%);
   --smh-champagne-teal: color-mix(in srgb, var(--turquoise) 92%, white 8%);
   --smh-champagne-amber: color-mix(in srgb, var(--gold) 88%, white 12%);

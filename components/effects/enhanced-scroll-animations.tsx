@@ -4,7 +4,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { easeInOutCubic } from '@/lib/motion/easing';
 
-// Brand Colors: Magenta #C2185B, Turquoise #40C4B4, Gold #D4AF37
+// Brand Colors: Magenta var(--smh-primary-magenta), Turquoise var(--smh-primary-teal), Gold var(--smh-accent-gold)
 // Fonts: Montserrat headings, Lora body text
 
 interface ScrollRevealProps {
@@ -327,13 +327,13 @@ export function MorphingShape({
   const getColor = () => {
     switch (color) {
       case 'pink':
-        return '#C2185B';
+        return 'var(--smh-primary-magenta)';
       case 'teal':
-        return '#40C4B4';
+        return 'var(--smh-primary-teal)';
       case 'yellow':
-        return '#D4AF37';
+        return 'var(--smh-accent-gold)';
       default:
-        return '#C2185B';
+        return 'var(--smh-primary-magenta)';
     }
   };
 
