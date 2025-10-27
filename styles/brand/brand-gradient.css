@@ -15,7 +15,6 @@ section[data-hero="champagne"] {
   position: relative;
   isolation: isolate;
   background: var(--smh-gradient);
-  /* the base wash is the brand gradient */
 }
 
 /* Subtle film grain + vignette live on ::before and ::after */
@@ -25,12 +24,11 @@ section[data-hero="champagne"]::before {
   inset: 0;
   pointer-events: none;
   mix-blend-mode: overlay;
-  opacity: 0.18; /* keep light */
+  opacity: 0.16;
+  z-index: 0;
   background:
     radial-gradient(120% 100% at 0% 0%, rgba(0,0,0,.08), transparent 55%),
     radial-gradient(140% 110% at 100% 100%, rgba(0,0,0,.08), transparent 60%);
-
-  z-index: 0;
 }
 
 section[data-hero="champagne"]::after {
@@ -39,7 +37,7 @@ section[data-hero="champagne"]::after {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.22; /* keep waves subtle */
+  opacity: 0.2;
   background-image: url("/assets/waves/smh-wave-mask.svg");
   background-size: cover;
   background-repeat: no-repeat;

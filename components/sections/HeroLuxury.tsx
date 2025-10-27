@@ -29,6 +29,7 @@ export default function HeroLuxury({
         teal: s.getPropertyValue("--smh-primary-teal").trim(),
         gold: s.getPropertyValue("--smh-accent-gold").trim(),
         glassStrong: s.getPropertyValue("--glass-bg-strong").trim(),
+        glassBorder: s.getPropertyValue("--glass-border").trim(),
       });
     }
   }, []);
@@ -37,7 +38,7 @@ export default function HeroLuxury({
     <section
       data-hero="champagne"
       aria-labelledby="home-hero-title"
-      className="relative overflow-hidden"
+      className="relative overflow-hidden isolate"
     >
       <div className="hero-container">
         <div
