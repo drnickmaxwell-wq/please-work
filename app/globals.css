@@ -1,6 +1,7 @@
+@import "@/styles/tokens/smh-champagne-tokens.css";
+@import "@/styles/tokens.css";
+@import "@/styles/brand/brand-gradient.css";
 @import "tailwindcss";
-@import "../styles/tokens.css";
-@import "./styles/smh-tokens.css";
 
 :root {
   /* Brand Colors - Luxury Coastal Theme */
