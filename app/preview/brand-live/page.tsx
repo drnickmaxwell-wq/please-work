@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+
+export const dynamic = "force-dynamic";
 
 import Hero4KVideo from "@/components/hero/4k-hero-video";
 
