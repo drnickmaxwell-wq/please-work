@@ -8,6 +8,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: '20' }
-      - run: npm i -g tsx
-      - run: npm run brand:verify
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+      - run: corepack enable
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run brand:verify
+      - run: pnpm run brand:guard

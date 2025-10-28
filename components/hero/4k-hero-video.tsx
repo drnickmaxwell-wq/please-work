@@ -7,7 +7,7 @@ export interface Hero4KVideoProps {
 
 export default function Hero4KVideo({ poster, ..._ }: Hero4KVideoProps) {
   return (
-    <section data-hero="champagne" data-page="home">
+    <section data-hero="champagne" data-page="home" className="relative">
       <div className="glass-pane mx-auto max-w-5xl rounded-2xl p-8">
         <div className="relative aspect-[16/9] overflow-hidden rounded-xl">
           {/* Fallback gradient under video */}

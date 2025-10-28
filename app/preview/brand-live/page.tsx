@@ -8,6 +8,7 @@ type Snapshot = {
   magenta: string;
   teal: string;
   glassStrong: string;
+  glassBorder: string;
 };
 
 const TOKENS: Array<[keyof Snapshot, string]> = [
@@ -15,6 +16,7 @@ const TOKENS: Array<[keyof Snapshot, string]> = [
   ["magenta", "--smh-primary-magenta"],
   ["teal", "--smh-primary-teal"],
   ["glassStrong", "--glass-bg-strong"],
+  ["glassBorder", "--glass-border"],
 ];
 
 export default function BrandLivePreview() {
@@ -41,7 +43,8 @@ export default function BrandLivePreview() {
 {`gradient: ${snapshot.gradient}
 magenta: ${snapshot.magenta}
 teal: ${snapshot.teal}
-glassStrong: ${snapshot.glassStrong}`}
+glassStrong: ${snapshot.glassStrong}
+glassBorder: ${snapshot.glassBorder}`}
           </pre>
         ) : (
           <p aria-live="polite">Reading tokens…</p>
