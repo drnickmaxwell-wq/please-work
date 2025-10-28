@@ -1,5 +1,17 @@
 /* styles/brand/brand-gradient.css — Champagne hero layers */
 
+@import "./champagne-sheen.css";
+
+@supports (background: color(from #000 srgb r g b)) {
+  :root {
+    --smh-gradient: linear-gradient(
+      135deg,
+      color(from #D94BC6 srgb to oklab l 0.60 a 0.35 b -0.10) 0%,
+      color(from #00C2C7 srgb to oklab l 0.68 a -0.18 b -0.05) 100%
+    );
+  }
+}
+
 section[data-hero="champagne"]{
   position:relative;
   isolation:isolate;
@@ -9,13 +21,14 @@ section[data-hero="champagne"]::before{
   content:'';
   position:absolute; inset:0;
   pointer-events:none;
-  background:radial-gradient(closest-side, transparent 0%, rgba(0,0,0,0.12) 70%, rgba(0,0,0,0.18) 100%);
+  background:radial-gradient(closest-side, transparent 0%, rgba(0,0,0,0.12) 70%, rgba(0,0,0,0.12) 100%);
 }
 section[data-hero="champagne"][data-wave="on"]::after{
   content:'';
   position:absolute; inset:0;
   pointer-events:none;
   background:
+    var(--champagne-sheen-overlay),
     url('/waves/smh-wave-mask.svg') center/cover no-repeat;
   opacity:.22;
 }
@@ -26,4 +39,10 @@ section[data-hero="champagne"][data-wave="on"]::after{
     radial-gradient(2px 2px at 70% 60%, color-mix(in srgb, var(--brand-gold) 70%, transparent 30%) 0%, transparent 100%);
   opacity:.06;
   filter: blur(.6px);
+}
+
+.fixed.top-8.left-0.right-0.z-40{
+  background:color-mix(in srgb, white 85%, transparent);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
 }

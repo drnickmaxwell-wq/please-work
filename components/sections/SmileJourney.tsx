@@ -61,7 +61,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
   } as CSSProperties;
 
   return (
-    <section className="journey-section" aria-labelledby="journey-hero-title" style={focusRingVars}>
+    <section className="journey-section champagne-sheen" aria-labelledby="journey-hero-title" style={focusRingVars}>
       <div className="journey-inner">
         <header className="journey-header" id="journey-hero-title">
           <h2>Your Smile Journey</h2>
@@ -131,9 +131,10 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
 
         .journey-section::after {
           background:
+            var(--champagne-sheen-overlay),
             var(--smh-hero-overlay-wave),
             var(--smh-hero-overlay-grain);
-          mix-blend-mode: soft-light;
+          mix-blend-mode: screen;
           opacity: 0.54;
           z-index: 1;
           mask-image: var(--smh-hero-wave-mask);

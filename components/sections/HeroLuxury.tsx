@@ -38,7 +38,7 @@ export default function HeroLuxury({
     <section
       data-hero="champagne"
       aria-labelledby="home-hero-title"
-      className="relative overflow-hidden isolate"
+      className="relative overflow-hidden isolate champagne-sheen"
       style={{ background: "var(--smh-gradient)" }}
     >
       <div aria-hidden className="gold-flecks"></div>
@@ -49,8 +49,7 @@ export default function HeroLuxury({
             border: "1px solid var(--glass-border)",
             backdropFilter: "blur(14px)",
             WebkitBackdropFilter: "blur(14px)",
-            boxShadow:
-              "0 24px 80px color-mix(in srgb, black 16%, transparent 84%)",
+            boxShadow: "var(--glass-box-shadow)",
           }}
         >
           <div className="hero-copy">
