@@ -143,7 +143,7 @@ const FooterLuxe = () => {
 
         [data-footer] a:hover,
         [data-footer] a:focus-visible {
-          color: color-mix(in srgb, var(--smh-accent-gold) 40%, var(--smh-text) 60%);
+          color: var(--smh-accent-gold);
         }
 
         .footer-luxe {
@@ -152,8 +152,8 @@ const FooterLuxe = () => {
           padding: clamp(3.5rem, 7vw, 5rem) clamp(1.5rem, 5vw, 4.5rem) clamp(2.5rem, 4vw, 3.5rem);
           isolation: isolate;
           background: var(--ink);
-          color: var(--smh-text);
-          --footer-keyline: color-mix(in srgb, var(--smh-accent-gold) 32%, transparent 68%);
+          color: color-mix(in srgb, white 95%, transparent);
+          --footer-keyline: color-mix(in srgb, var(--smh-accent-gold) 25%, transparent 75%);
           --footer-surface-strong: color-mix(in srgb, var(--ink) 68%, transparent 32%);
           --footer-surface-soft: color-mix(in srgb, var(--ink) 54%, transparent 46%);
           --footer-surface-muted: color-mix(in srgb, var(--ink) 42%, transparent 58%);
@@ -174,9 +174,9 @@ const FooterLuxe = () => {
         }
 
         .footer-luxe__rim {
-          height: 1px;
+          height: 0;
           width: 100%;
-          background: var(--footer-keyline);
+          border-top: 0.5px solid var(--footer-keyline);
           margin-bottom: clamp(2rem, 4vw, 3rem);
           position: relative;
           z-index: 2;
@@ -220,7 +220,7 @@ const FooterLuxe = () => {
 
         p {
           margin: 0;
-          color: color-mix(in srgb, var(--smh-text) 96%, transparent 4%);
+          color: color-mix(in srgb, white 90%, transparent 10%);
         }
 
         ul {

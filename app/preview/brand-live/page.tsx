@@ -2,96 +2,111 @@
 
 import { useCallback, useEffect, useState } from "react";
 
-export const dynamic = "force-dynamic";
-
 import Hero4KVideo from "@/components/hero/4k-hero-video";
 
-type Snapshot = {
+export const dynamic = "force-dynamic";
+
+type Diagnostics = {
   gradient: string;
   magenta: string;
   teal: string;
-  glassStrong: string;
-  paneBackground: string;
-  paneBoxShadow: string;
+  glassStrongPercent: string;
+  vignetteAlpha: string;
+  particlesOpacity: string;
 };
 
-const TOKENS: Array<[keyof Snapshot, string]> = [
-  ["gradient", "--smh-gradient"],
-  ["magenta", "--smh-primary-magenta"],
-  ["teal", "--smh-primary-teal"],
-  ["glassStrong", "--glass-bg-strong"],
-];
+const TOKEN_KEYS = {
+  gradient: "--smh-gradient",
+  magenta: "--smh-primary-magenta",
+  teal: "--smh-primary-teal",
+  glassStrong: "--glass-bg-strong",
+} as const;
 
 export default function BrandLivePreview() {
-  const [snapshot, setSnapshot] = useState<Snapshot | null>(null);
   const [waveOn, setWaveOn] = useState(false);
   const [particlesOn, setParticlesOn] = useState(true);
+  const [snapshot, setSnapshot] = useState<Diagnostics | null>(null);
 
-  const captureSnapshot = useCallback(() => {
+  const captureSnapshot = useCallback((): Diagnostics => {
     const root = document.documentElement;
     const styles = getComputedStyle(root);
-    const next = TOKENS.reduce((acc, [key, token]) => {
-      const value = styles.getPropertyValue(token).trim();
-      (acc as Snapshot)[key] = value;
-      return acc;
-    }, {} as Snapshot);
 
-    const pane = document.querySelector<HTMLElement>('section[data-hero="champagne"] .glass-pane');
-    if (pane) {
-      const paneStyles = getComputedStyle(pane);
-      const backgroundImage = paneStyles.backgroundImage;
-      const backgroundColor = paneStyles.backgroundColor;
-      next.paneBackground = backgroundImage && backgroundImage !== 'none' ? backgroundImage : backgroundColor;
-      next.paneBoxShadow = paneStyles.boxShadow;
-    } else {
-      next.paneBackground = 'n/a';
-      next.paneBoxShadow = 'n/a';
+    const gradient = styles.getPropertyValue(TOKEN_KEYS.gradient).trim();
+    const magenta = styles.getPropertyValue(TOKEN_KEYS.magenta).trim().toUpperCase();
+    const teal = styles.getPropertyValue(TOKEN_KEYS.teal).trim().toUpperCase();
+
+    const glassStrongToken = styles.getPropertyValue(TOKEN_KEYS.glassStrong).trim();
+    const glassStrongMatch = glassStrongToken.match(/(\d+(?:\.\d+)?)%/);
+    const glassStrongPercent = glassStrongMatch ? `${glassStrongMatch[1]}%` : glassStrongToken;
+
+    let vignetteAlpha = "n/a";
+    const hero = document.querySelector<HTMLElement>('section[data-hero="champagne"]');
+    if (hero) {
+      const before = getComputedStyle(hero, "::before").backgroundImage;
+      const alphaMatches = Array.from(before.matchAll(/rgba\(\s*0\s*,\s*0\s*,\s*0\s*,\s*(0?\.\d+)/gi));
+      if (alphaMatches.length > 0) {
+        vignetteAlpha = alphaMatches[alphaMatches.length - 1][1];
+      }
     }
 
-    return next;
-  }, []);
+    let particlesOpacity: string;
+    const canvas = document.querySelector<HTMLCanvasElement>('section[data-hero="champagne"] canvas');
+    if (canvas) {
+      particlesOpacity = getComputedStyle(canvas).opacity;
+    } else if (!particlesOn) {
+      particlesOpacity = "0 (toggle off)";
+    } else if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      particlesOpacity = "0 (prefers-reduced-motion)";
+    } else {
+      particlesOpacity = "n/a";
+    }
+
+    return {
+      gradient,
+      magenta,
+      teal,
+      glassStrongPercent,
+      vignetteAlpha,
+      particlesOpacity,
+    };
+  }, [particlesOn]);
 
   useEffect(() => {
     setSnapshot(captureSnapshot());
 
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    const handleThemeChange = () => {
-      setSnapshot(captureSnapshot());
-    };
+    const themeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const refresh = () => setSnapshot(captureSnapshot());
 
-    mediaQuery.addEventListener("change", handleThemeChange);
+    themeQuery.addEventListener("change", refresh);
+    motionQuery.addEventListener("change", refresh);
 
     return () => {
-      mediaQuery.removeEventListener("change", handleThemeChange);
+      themeQuery.removeEventListener("change", refresh);
+      motionQuery.removeEventListener("change", refresh);
     };
   }, [captureSnapshot]);
 
   useEffect(() => {
-    setSnapshot(captureSnapshot());
-  }, [captureSnapshot, waveOn, particlesOn]);
+    const frame = requestAnimationFrame(() => setSnapshot(captureSnapshot()));
+    return () => cancelAnimationFrame(frame);
+  }, [captureSnapshot, particlesOn, waveOn]);
+
+  const diagnostics: Array<[string, string]> = snapshot
+    ? [
+        ["Gradient", snapshot.gradient],
+        ["Magenta", snapshot.magenta],
+        ["Teal", snapshot.teal],
+        ["GlassStrong %", snapshot.glassStrongPercent],
+        ["Vignette alpha", snapshot.vignetteAlpha],
+        ["Particles opacity", snapshot.particlesOpacity],
+      ]
+    : [];
 
   return (
-    <main className="min-h-screen space-y-8 bg-[color:var(--smh-bg)] p-6 text-[color:var(--smh-text)]">
+    <main className="min-h-screen space-y-10 bg-[color:var(--smh-bg)] p-6 text-[color:var(--smh-text)]">
       <Hero4KVideo showParticles={particlesOn} />
-      <div className="max-w-3xl">
-        <div className="glass-pane">
-          <div className="space-y-4 p-6">
-            <h2 className="font-serif text-2xl">Live brand surface</h2>
-            {snapshot ? (
-              <pre className="whitespace-pre-wrap font-mono text-sm">
-{`gradient: ${snapshot.gradient}
-magenta: ${snapshot.magenta}
-teal: ${snapshot.teal}
-glassStrong: ${snapshot.glassStrong}
-paneBackground: ${snapshot.paneBackground}
-paneBoxShadow: ${snapshot.paneBoxShadow}`}
-              </pre>
-            ) : (
-              <p aria-live="polite">Reading tokens…</p>
-            )}
-          </div>
-        </div>
-      </div>
+
       <div className="flex flex-wrap items-center gap-3">
         <button
           type="button"
@@ -108,18 +123,52 @@ paneBoxShadow: ${snapshot.paneBoxShadow}`}
           Toggle particles (currently {particlesOn ? "on" : "off"})
         </button>
         <span className="text-sm text-[color:var(--smh-text-muted)]">
-          Wave overlay is opt-in. Default state is off.
+          Wave overlay stays off unless you opt in.
         </span>
       </div>
+
+      <div className="max-w-4xl">
+        <div className="glass-pane" style={{ boxShadow: "var(--glass-box-shadow)" }}>
+          <div className="space-y-6 p-6">
+            <h2 className="font-serif text-2xl">Live brand diagnostics</h2>
+            {snapshot ? (
+              <dl className="grid gap-3 font-mono text-xs sm:text-sm">
+                {diagnostics.map(([label, value]) => (
+                  <div key={label} className="flex flex-wrap items-baseline justify-between gap-4">
+                    <dt className="uppercase tracking-[0.12em] text-[color:var(--smh-text-muted)]">{label}</dt>
+                    <dd className="flex-1 text-right text-[color:var(--smh-text)]">{value}</dd>
+                  </div>
+                ))}
+              </dl>
+            ) : (
+              <p aria-live="polite">Reading tokens…</p>
+            )}
+          </div>
+        </div>
+      </div>
+
       <section
         data-hero="champagne"
-        data-wave={waveOn ? "on" : "off"}
-        className="relative isolate mt-8 min-h-[40vh] overflow-hidden rounded-2xl"
+        data-wave="off"
+        className="relative isolate champagne-sheen mt-4 min-h-[28vh] overflow-hidden rounded-2xl"
       >
         <div className="gold-flecks" aria-hidden />
         <div className="absolute inset-0 grid place-items-center text-center">
-          <p className="max-w-md font-serif text-xl text-[color:var(--smh-text)]">
-            Wave overlay is {waveOn ? "enabled" : "off"}. Toggle above to inspect layering.
+          <p className="max-w-md font-serif text-lg text-[color:var(--smh-text)]">
+            Reference surface with waves locked off. Sheen and vignette should feel calm and luminous.
+          </p>
+        </div>
+      </section>
+
+      <section
+        data-hero="champagne"
+        data-wave={waveOn ? "on" : "off"}
+        className="relative isolate champagne-sheen min-h-[32vh] overflow-hidden rounded-2xl"
+      >
+        <div className="gold-flecks" aria-hidden />
+        <div className="absolute inset-0 grid place-items-center text-center">
+          <p className="max-w-md font-serif text-lg text-[color:var(--smh-text)]">
+            Wave overlay is {waveOn ? "enabled" : "off"}. Toggle above to inspect layering and particle response.
           </p>
         </div>
       </section>

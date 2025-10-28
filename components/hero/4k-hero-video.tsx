@@ -10,10 +10,15 @@ export interface Hero4KVideoProps {
 
 export default function Hero4KVideo({ poster, showParticles = true, ..._ }: Hero4KVideoProps) {
   return (
-    <section data-hero="champagne" data-page="home" data-wave="off" className="relative isolate">
+    <section
+      data-hero="champagne"
+      data-page="home"
+      data-wave="off"
+      className="relative isolate champagne-sheen"
+    >
       <div className="gold-flecks" aria-hidden="true" />
       <div className="relative mx-auto max-w-5xl px-6 py-12 sm:px-10">
-        <div className="glass-pane">
+        <div className="glass-pane" style={{ boxShadow: 'var(--glass-box-shadow)' }}>
           <div className="space-y-6 p-8 sm:p-10">
             <div className="relative aspect-[16/9] overflow-hidden rounded-xl">
               <div aria-hidden className="absolute inset-0" style={{ background: 'var(--smh-gradient)' }} />

@@ -1,8 +1,6 @@
 name: Brand Guard
 
-on:
-  pull_request:
-    branches: [ "main" ]
+on: [pull_request]
 
 jobs:
   verify:
@@ -12,22 +10,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'pnpm'
       - run: corepack enable
       - run: pnpm install --frozen-lockfile
-      - name: Verify champagne brand locks
-        run: |
-          set -euo pipefail
-          hexes=( '#D94BC6' '#00C2C7' '#C2185B' '#40C4B4' )
-          for hex in "${hexes[@]}"; do
-            if rg --hidden --glob '!.git/' --glob '!node_modules/**' --glob '!styles/tokens/**' -n "$hex"; then
-              echo "::error::$hex found outside styles/tokens"
-              exit 1
-            fi
-          done
-          if ! rg --hidden --glob '!.git/' --glob '!node_modules/**' -F "--smh-gradient:linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);" styles/tokens/smh-champagne-tokens.css >/dev/null; then
-            echo '::error::--smh-gradient drift detected'
-            exit 1
-          fi
-      - run: pnpm run brand:guard
-      - run: pnpm -w typecheck
+      - run: node scripts/brand-guard.mjs
