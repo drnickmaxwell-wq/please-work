@@ -19,9 +19,9 @@
   --magenta: var(--smh-primary-magenta);
   --turquoise: var(--smh-primary-teal);
   --gold: var(--smh-accent-gold);
-  --warm-mist: #F9F9FA;
-  --foreground: #333;
-  --background: #F9F9FA;
+  --warm-mist: var(--smh-warm-mist);
+  --foreground: var(--smh-day-foreground);
+  --background: var(--smh-warm-mist);
   
   /* Gradient */
   --gradient-angle: 135deg;
@@ -43,25 +43,25 @@
   --noise-opacity: 0.02;
   
   /* Typography */
-  --heading-color: #222;
-  --body-color: #333;
-  --muted-color: #666;
+  --heading-color: var(--smh-day-heading);
+  --body-color: var(--smh-day-foreground);
+  --muted-color: var(--smh-day-muted);
 }
 
 /* Dark Mode (Evening Theme) */
 :root[data-theme="dark"] {
-  --magenta: #A1154B;
-  --turquoise: #2BAA9D;
-  --gold: #C49C3C;
-  --warm-mist: #101010;
-  --foreground: #E8E8E8;
-  --background: #101010;
+  --magenta: var(--smh-magenta-deep);
+  --turquoise: var(--smh-teal-deep);
+  --gold: var(--smh-gold-deep);
+  --warm-mist: var(--smh-ink-night);
+  --foreground: var(--smh-night-foreground);
+  --background: var(--smh-ink-night);
   
   /* Gradient - Darker tones */
   --gradient-angle: 135deg;
-  --gradient-start: #A1154B;
-  --gradient-mid: #2BAA9D;
-  --gradient-end: #C49C3C;
+  --gradient-start: var(--smh-magenta-deep);
+  --gradient-mid: var(--smh-teal-deep);
+  --gradient-end: var(--smh-gold-deep);
   
   /* Glass - More transparent with inner glow */
   --glass-bg: rgba(255, 255, 255, 0.08);
@@ -78,9 +78,9 @@
   --noise-opacity: 0.015;
   
   /* Typography - Lighter with subsurface edge */
-  --heading-color: #F0F0F0;
-  --body-color: #E8E8E8;
-  --muted-color: #A0A0A0;
+  --heading-color: var(--smh-night-heading);
+  --body-color: var(--smh-night-foreground);
+  --muted-color: var(--smh-night-muted);
 }
 
 /* Global Theme Transition - 1s fade */

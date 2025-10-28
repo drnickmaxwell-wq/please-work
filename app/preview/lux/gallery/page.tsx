@@ -4,7 +4,7 @@ import { FooterLuxe } from '@/components/footer-luxe';
 
 export default function Page() {
   return (
-    <main className="min-h-screen bg-white dark:bg-[#0b1220]">
+    <main className="min-h-screen bg-white dark:bg-[var(--smh-midnight)]">
       <StickyHeader />
       <section className="max-w-7xl mx-auto px-6 py-14">
         <h1 className="text-3xl font-bold text-slate-900 dark:text-white" style={{fontFamily:'var(--font-playfair), Georgia, serif'}}>Smile Gallery</h1>

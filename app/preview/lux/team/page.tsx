@@ -10,7 +10,7 @@ export default function TeamPage(){
     { slug:'anna', name:'Anna', role:'Hygienist' }
   ];
   return (
-    <main className="min-h-screen bg-white dark:bg-[#0b1220]">
+    <main className="min-h-screen bg-white dark:bg-[var(--smh-midnight)]">
       <StickyHeader />
       <section className="max-w-7xl mx-auto px-6 py-14">
         <h1 className="text-3xl font-bold">Our Team</h1>
