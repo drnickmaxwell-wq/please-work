@@ -45,6 +45,12 @@ section[data-hero="champagne"]::after {
   background-position: center;
 }
 
+/* Disable wave on home hero only */
+section[data-page="home"][data-hero="champagne"]::after {
+  opacity: 0 !important;
+  background-image: none !important;
+}
+
 .hero-layer--gradient {
   position: absolute;
   inset: 0;
