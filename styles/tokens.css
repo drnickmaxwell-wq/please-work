@@ -1,30 +1,15 @@
 /* styles/tokens.css — Canonical aliases & helpers for Champagne */
 
-:root{
-  --smh-gradient: linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
-
+:root {
   --brand-magenta: var(--smh-primary-magenta);
   --brand-teal: var(--smh-primary-teal);
   --brand-gold: var(--smh-accent-gold);
 
-  --champagne-sheen-opacity-d: .06;
-  --champagne-sheen-opacity-m: .05;
-  --champagne-vignette-alpha: .08;
-  --champagne-vignette-radius: .82;
-  --champagne-particles-opacity-d: .06;
-  --champagne-particles-opacity-m: .04;
+  --glass-box-shadow: 0 8px 24px rgba(0,0,0,.18);
+  --glass-shadow: var(--glass-box-shadow);
 
-  --glass-bg-strong: color-mix(in srgb,#0d0e10 78%,transparent);
-  --glass-bg-weak: color-mix(in srgb,#0d0e10 60%,transparent);
-  --glass-border: color-mix(in srgb,#fff 18%,transparent);
-  --glass-shadow: 0 8px 24px rgba(0,0,0,.18);
-  --glass-box-shadow: var(--glass-shadow);
-  --rim-gold-inset: inset 0 0 0 1px color-mix(in srgb,var(--brand-gold) 85%,transparent 15%);
-
-  --smh-text-strong: color-mix(in srgb,#ffffff 96%,transparent 4%);
-  --smh-text-subtle: color-mix(in srgb,#ffffff 72%,transparent 28%);
-
-  --footer-ink: var(--ink);
-  --footer-ink-grad: radial-gradient(120% 140% at 10% 0%, var(--ink) 0%, var(--ink) 60%, var(--ink) 100%);
-  --footer-keyline: color-mix(in srgb, var(--smh-accent-gold) 32%, transparent 68%);
+  --champagne-particles-opacity: .08;
+  --champagne-vignette-alpha: .18;
+  --champagne-vignette-radius: .45;
+  --champagne-sheen-opacity: .06;
 }
