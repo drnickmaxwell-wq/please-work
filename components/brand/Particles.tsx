@@ -135,15 +135,20 @@ export default function Particles({ className, style, ...rest }: ParticlesProps)
     };
   }, [shouldRender]);
 
-  if (!shouldRender) {
-    return null;
-  }
-
   const mergedStyle = {
-    opacity: 0.08,
+    opacity: 'var(--champagne-particles-opacity)',
     pointerEvents: 'none' as const,
     ...(style ?? {}),
   };
 
-  return <canvas ref={canvasRef} aria-hidden className={className} style={mergedStyle} {...rest} />;
+  return (
+    <canvas
+      ref={canvasRef}
+      aria-hidden
+      className={className}
+      data-state={shouldRender ? 'on' : 'off'}
+      style={mergedStyle}
+      {...rest}
+    />
+  );
 }

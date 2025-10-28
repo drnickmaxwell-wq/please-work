@@ -16,11 +16,11 @@
   --smh-night-heading:#F0F0F0;
   --smh-night-muted:#A0A0A0;
   --smh-gradient:linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
-  --glass-bg-strong:color-mix(in srgb, var(--ink) 28%, transparent 72%);
-  --glass-bg-weak:color-mix(in srgb, var(--ink) 18%, transparent 82%);
-  --glass-border:color-mix(in srgb, var(--smh-accent-gold) 26%, transparent 74%);
-  --glass-box-shadow:0 0 1px color-mix(in srgb, var(--smh-accent-gold) 30%, transparent),
-    0 0 12px color-mix(in srgb, var(--smh-primary-teal) 12%, transparent);
+  --glass-bg-strong:color-mix(in srgb,#0d0e10 78%,transparent);
+  --glass-bg-weak:color-mix(in srgb,#0d0e10 60%,transparent);
+  --glass-border:color-mix(in srgb,#fff 18%,transparent);
+  --glass-shadow:0 8px 24px rgba(0,0,0,.18);
+  --glass-box-shadow:var(--glass-shadow);
   --smh-bg:var(--ink);     /* dark ink surface (footer/night feel) */
   --smh-text:#F7F7F9;     /* light on dark */
   --smh-text-muted:#A9B0B7;

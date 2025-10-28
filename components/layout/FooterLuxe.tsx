@@ -27,7 +27,7 @@ const FooterLuxe = () => {
   const feedbackId = useMemo(() => 'newsletter-feedback', []);
 
   const footerVars = {
-    '--footer-text': 'color-mix(in srgb, white 95%, transparent)',
+    '--footer-text': 'var(--smh-text-strong)',
   } as CSSProperties;
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -137,11 +137,11 @@ const FooterLuxe = () => {
         .footer-luxe {
           position: relative;
           overflow: hidden;
-          padding: clamp(3.5rem, 7vw, 5rem) clamp(1.5rem, 5vw, 4.5rem) clamp(2.5rem, 4vw, 3.5rem);
+          padding: clamp(4rem, 7.5vw, 5.5rem) clamp(1.75rem, 5.5vw, 4.75rem) clamp(3rem, 4.5vw, 4.25rem);
           isolation: isolate;
           background: var(--ink);
           color: var(--footer-text);
-          --footer-keyline: color-mix(in srgb, var(--smh-accent-gold) 25%, transparent 75%);
+          --footer-keyline: color-mix(in srgb, var(--smh-accent-gold) 36%, transparent 64%);
           --footer-surface-strong: color-mix(in srgb, var(--ink) 68%, transparent 32%);
           --footer-surface-soft: color-mix(in srgb, var(--ink) 54%, transparent 46%);
           --footer-surface-muted: color-mix(in srgb, var(--ink) 42%, transparent 58%);
@@ -217,12 +217,12 @@ const FooterLuxe = () => {
           text-transform: uppercase;
           letter-spacing: 0.14em;
           font-size: 0.85rem;
-          color: color-mix(in srgb, white 88%, transparent 12%);
+          color: color-mix(in srgb, var(--smh-text-strong) 76%, transparent 24%);
         }
 
         p {
           margin: 0;
-          color: color-mix(in srgb, white 95%, transparent 5%);
+          color: color-mix(in srgb, var(--smh-text-strong) 86%, transparent 14%);
         }
 
         ul {
@@ -266,18 +266,17 @@ const FooterLuxe = () => {
           outline: none;
           border-radius: inherit;
           background: var(--footer-surface-soft);
-          color: var(--smh-text);
+          color: var(--smh-text-strong);
           font-family: var(--font-body, 'Inter', sans-serif);
         }
 
         .footer-luxe__input::placeholder {
-          color: var(--smh-text);
-          opacity: 0.54;
+          color: color-mix(in srgb, var(--smh-text-strong) 78%, transparent 22%);
         }
 
         .footer-luxe__input:focus-visible {
-          outline: 2px solid var(--footer-keyline);
-          outline-offset: 2px;
+          outline: 2px solid color-mix(in srgb, var(--smh-accent-gold) 36%, transparent 64%);
+          outline-offset: 3px;
         }
 
         .footer-luxe__button {
@@ -286,18 +285,18 @@ const FooterLuxe = () => {
         }
 
         .footer-luxe__button:focus-visible {
-          outline: 2px solid var(--footer-keyline);
-          outline-offset: 2px;
+          outline: 2px solid color-mix(in srgb, var(--smh-accent-gold) 36%, transparent 64%);
+          outline-offset: 3px;
         }
 
         .footer-luxe__feedback {
           font-size: 0.9rem;
           min-height: 1.2rem;
-          color: color-mix(in srgb, white 90%, transparent 10%);
+          color: color-mix(in srgb, var(--smh-text-strong) 82%, transparent 18%);
         }
 
         .footer-luxe__feedback[data-status='error'] {
-          color: var(--smh-primary-magenta);
+          color: color-mix(in srgb, var(--smh-primary-magenta) 82%, transparent 18%);
         }
 
         .footer-luxe__feedback[data-status='success'] {
@@ -310,8 +309,8 @@ const FooterLuxe = () => {
           gap: 1rem 2rem;
           justify-content: space-between;
           align-items: center;
-          border-top: 1px solid color-mix(in srgb, var(--smh-accent-gold) 26%, transparent 74%);
-          padding-top: clamp(1.5rem, 3vw, 2.5rem);
+          border-top: 1px solid color-mix(in srgb, var(--smh-accent-gold) 36%, transparent 64%);
+          padding-top: clamp(1.75rem, 3.5vw, 2.75rem);
         }
 
         .footer-luxe__social {
