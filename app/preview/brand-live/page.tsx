@@ -10,16 +10,15 @@ type Diagnostics = {
   gradient: string;
   magenta: string;
   teal: string;
-  glassStrongPercent: string;
   vignetteAlpha: string;
   particlesOpacity: string;
+  hasSurfaceClass: string;
 };
 
 const TOKEN_KEYS = {
   gradient: "--smh-gradient",
   magenta: "--smh-primary-magenta",
   teal: "--smh-primary-teal",
-  glassStrong: "--glass-bg-strong",
 } as const;
 
 export default function BrandLivePreview() {
@@ -35,22 +34,21 @@ export default function BrandLivePreview() {
     const magenta = styles.getPropertyValue(TOKEN_KEYS.magenta).trim().toUpperCase();
     const teal = styles.getPropertyValue(TOKEN_KEYS.teal).trim().toUpperCase();
 
-    const glassStrongToken = styles.getPropertyValue(TOKEN_KEYS.glassStrong).trim();
-    const glassStrongMatch = glassStrongToken.match(/(\d+(?:\.\d+)?)%/);
-    const glassStrongPercent = glassStrongMatch ? `${glassStrongMatch[1]}%` : glassStrongToken;
-
     let vignetteAlpha = "n/a";
     const hero = document.querySelector<HTMLElement>('section[data-hero="champagne"]');
     if (hero) {
-      const before = getComputedStyle(hero, "::before").backgroundImage;
-      const alphaMatches = Array.from(before.matchAll(/rgba\(\s*0\s*,\s*0\s*,\s*0\s*,\s*(0?\.\d+)/gi));
-      if (alphaMatches.length > 0) {
-        vignetteAlpha = alphaMatches[alphaMatches.length - 1][1];
+      const vignetteLayer = hero.querySelector<HTMLElement>(".vignette-layer");
+      if (vignetteLayer) {
+        const background = getComputedStyle(vignetteLayer).backgroundImage;
+        const alphaMatches = Array.from(background.matchAll(/rgba\(\s*0\s*,\s*0\s*,\s*0\s*,\s*(0?\.\d+)/gi));
+        if (alphaMatches.length > 0) {
+          vignetteAlpha = alphaMatches[alphaMatches.length - 1][1];
+        }
       }
     }
 
     let particlesOpacity: string;
-    const canvas = document.querySelector<HTMLCanvasElement>('section[data-hero="champagne"] canvas');
+    const canvas = document.querySelector<HTMLCanvasElement>('section[data-hero="champagne"] .particles-layer');
     if (canvas) {
       particlesOpacity = getComputedStyle(canvas).opacity;
     } else if (!particlesOn) {
@@ -61,13 +59,15 @@ export default function BrandLivePreview() {
       particlesOpacity = "n/a";
     }
 
+    const hasSurfaceClass = hero?.classList.contains("champagne-surface") ? "yes" : "no";
+
     return {
       gradient,
       magenta,
       teal,
-      glassStrongPercent,
       vignetteAlpha,
       particlesOpacity,
+      hasSurfaceClass,
     };
   }, [particlesOn]);
 
@@ -97,15 +97,15 @@ export default function BrandLivePreview() {
         ["Gradient", snapshot.gradient],
         ["Magenta", snapshot.magenta],
         ["Teal", snapshot.teal],
-        ["GlassStrong %", snapshot.glassStrongPercent],
         ["Vignette alpha", snapshot.vignetteAlpha],
         ["Particles opacity", snapshot.particlesOpacity],
+        ["Has .champagne-surface", snapshot.hasSurfaceClass],
       ]
     : [];
 
   return (
     <main className="min-h-screen space-y-10 bg-[color:var(--smh-bg)] p-6 text-[color:var(--smh-text)]">
-      <Hero4KVideo showParticles={particlesOn} />
+      <Hero4KVideo showParticles={particlesOn} showWave={waveOn} />
 
       <div className="flex flex-wrap items-center gap-3">
         <button
@@ -150,9 +150,11 @@ export default function BrandLivePreview() {
       <section
         data-hero="champagne"
         data-wave="off"
-        className="relative isolate champagne-sheen mt-4 min-h-[28vh] overflow-hidden rounded-2xl"
+        className="champagne-surface champagne-sheen relative mt-4 min-h-[28vh] overflow-hidden rounded-2xl"
       >
-        <div className="gold-flecks" aria-hidden />
+        <div className="wave-layer" aria-hidden data-state="off" />
+        <canvas className="particles-layer" aria-hidden data-state="off" />
+        <div className="vignette-layer" aria-hidden />
         <div className="absolute inset-0 grid place-items-center text-center">
           <p className="max-w-md font-serif text-lg text-[color:var(--smh-text)]">
             Reference surface with waves locked off. Sheen and vignette should feel calm and luminous.
@@ -163,9 +165,11 @@ export default function BrandLivePreview() {
       <section
         data-hero="champagne"
         data-wave={waveOn ? "on" : "off"}
-        className="relative isolate champagne-sheen min-h-[32vh] overflow-hidden rounded-2xl"
+        className="champagne-surface champagne-sheen relative min-h-[32vh] overflow-hidden rounded-2xl"
       >
-        <div className="gold-flecks" aria-hidden />
+        <div className="wave-layer" aria-hidden data-state={waveOn ? "on" : "off"} />
+        <canvas className="particles-layer" aria-hidden data-state={particlesOn ? "on" : "off"} />
+        <div className="vignette-layer" aria-hidden />
         <div className="absolute inset-0 grid place-items-center text-center">
           <p className="max-w-md font-serif text-lg text-[color:var(--smh-text)]">
             Wave overlay is {waveOn ? "enabled" : "off"}. Toggle above to inspect layering and particle response.

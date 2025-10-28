@@ -5,24 +5,36 @@ import Particles from '@/components/brand/Particles';
 export interface Hero4KVideoProps {
   poster?: string;
   showParticles?: boolean;
+  showWave?: boolean;
   [key: string]: unknown;
 }
 
-export default function Hero4KVideo({ poster, showParticles = true, ..._ }: Hero4KVideoProps) {
+export default function Hero4KVideo({
+  poster,
+  showParticles = true,
+  showWave = false,
+  ..._rest
+}: Hero4KVideoProps) {
   return (
     <section
       data-hero="champagne"
       data-page="home"
-      data-wave="off"
-      className="relative isolate champagne-sheen"
+      data-wave={showWave ? 'on' : 'off'}
+      className="champagne-surface champagne-sheen relative overflow-hidden"
     >
-      <div className="gold-flecks" aria-hidden="true" />
+      <div className="wave-layer" aria-hidden data-state={showWave ? 'on' : 'off'} />
+      {showParticles ? (
+        <Particles className="particles-layer" data-state="on" aria-hidden />
+      ) : (
+        <canvas className="particles-layer" data-state="off" aria-hidden />
+      )}
+      <div className="vignette-layer" aria-hidden />
+
       <div className="relative mx-auto max-w-5xl px-6 py-12 sm:px-10">
-        <div className="glass-pane" style={{ boxShadow: 'var(--glass-box-shadow)' }}>
+        <div className="glass-pane">
           <div className="space-y-6 p-8 sm:p-10">
             <div className="relative aspect-[16/9] overflow-hidden rounded-xl">
               <div aria-hidden className="absolute inset-0" style={{ background: 'var(--smh-gradient)' }} />
-              {showParticles ? <Particles className="absolute inset-0" aria-hidden /> : null}
               <video
                 className="absolute inset-0 z-[1] h-full w-full object-cover"
                 playsInline
@@ -54,7 +66,6 @@ export default function Hero4KVideo({ poster, showParticles = true, ..._ }: Hero
           </div>
         </div>
       </div>
-      <div className="gold-flecks" aria-hidden="true" />
     </section>
   );
 }
