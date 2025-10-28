@@ -131,20 +131,19 @@ const FooterLuxe = () => {
       </div>
       <style jsx>{`
         [data-footer] {
-          background: var(--footer-ink-grad);
+          background: var(--ink);
           color: var(--smh-text);
         }
 
         [data-footer] a {
           color: var(--smh-text);
-          opacity: 0.92;
           text-decoration: none;
-          transition: opacity var(--motion-duration-normal, 160ms) var(--motion-easing-smooth, ease);
+          transition: color var(--motion-duration-normal, 160ms) var(--motion-easing-smooth, ease);
         }
 
         [data-footer] a:hover,
         [data-footer] a:focus-visible {
-          opacity: 1;
+          color: color-mix(in srgb, var(--smh-accent-gold) 40%, var(--smh-text) 60%);
         }
 
         .footer-luxe {
@@ -152,6 +151,12 @@ const FooterLuxe = () => {
           overflow: hidden;
           padding: clamp(3.5rem, 7vw, 5rem) clamp(1.5rem, 5vw, 4.5rem) clamp(2.5rem, 4vw, 3.5rem);
           isolation: isolate;
+          background: var(--ink);
+          color: var(--smh-text);
+          --footer-keyline: color-mix(in srgb, var(--smh-accent-gold) 32%, transparent 68%);
+          --footer-surface-strong: color-mix(in srgb, var(--ink) 68%, transparent 32%);
+          --footer-surface-soft: color-mix(in srgb, var(--ink) 54%, transparent 46%);
+          --footer-surface-muted: color-mix(in srgb, var(--ink) 42%, transparent 58%);
         }
 
         .footer-luxe::before {
@@ -160,9 +165,9 @@ const FooterLuxe = () => {
           inset: -12%;
           pointer-events: none;
           background:
-            radial-gradient(8px 8px at 18% 24%, color-mix(in srgb, var(--brand-gold) 32%, transparent) 0 60%, transparent 61%) no-repeat,
-            radial-gradient(6px 6px at 64% 70%, color-mix(in srgb, var(--brand-gold) 26%, transparent) 0 60%, transparent 61%) no-repeat,
-            radial-gradient(4px 4px at 84% 32%, color-mix(in srgb, var(--brand-gold) 22%, transparent) 0 60%, transparent 61%) no-repeat;
+            radial-gradient(8px 8px at 18% 24%, color-mix(in srgb, var(--smh-accent-gold) 32%, transparent) 0 60%, transparent 61%) no-repeat,
+            radial-gradient(6px 6px at 64% 70%, color-mix(in srgb, var(--smh-accent-gold) 26%, transparent) 0 60%, transparent 61%) no-repeat,
+            radial-gradient(4px 4px at 84% 32%, color-mix(in srgb, var(--smh-accent-gold) 22%, transparent) 0 60%, transparent 61%) no-repeat;
           filter: blur(0.4px);
           opacity: 0.12;
           z-index: 0;
@@ -210,12 +215,12 @@ const FooterLuxe = () => {
           text-transform: uppercase;
           letter-spacing: 0.14em;
           font-size: 0.85rem;
-          color: color-mix(in srgb, var(--brand-gold) 62%, var(--smh-text) 38%);
+          color: color-mix(in srgb, var(--smh-accent-gold) 60%, var(--smh-text) 40%);
         }
 
         p {
           margin: 0;
-          color: color-mix(in srgb, var(--smh-text) 90%, transparent);
+          color: color-mix(in srgb, var(--smh-text) 96%, transparent 4%);
         }
 
         ul {
@@ -239,7 +244,7 @@ const FooterLuxe = () => {
         .footer-luxe__field {
           position: relative;
           border-radius: 14px;
-          background: color-mix(in srgb, var(--footer-ink) 68%, transparent 32%);
+          background: var(--footer-surface-strong);
           box-shadow: 0 0 0 1px var(--footer-keyline) inset;
         }
 
@@ -248,7 +253,7 @@ const FooterLuxe = () => {
           position: absolute;
           inset: 8px;
           border-radius: inherit;
-          box-shadow: 0 0 0 1px color-mix(in srgb, var(--footer-keyline) 70%, transparent);
+          box-shadow: 0 0 0 1px color-mix(in srgb, var(--smh-accent-gold) 38%, transparent 62%);
           pointer-events: none;
         }
 
@@ -258,7 +263,7 @@ const FooterLuxe = () => {
           border: none;
           outline: none;
           border-radius: inherit;
-          background: color-mix(in srgb, var(--footer-ink) 45%, transparent 55%);
+          background: var(--footer-surface-soft);
           color: var(--smh-text);
           font-family: var(--font-body, 'Inter', sans-serif);
         }
@@ -286,17 +291,15 @@ const FooterLuxe = () => {
         .footer-luxe__feedback {
           font-size: 0.9rem;
           min-height: 1.2rem;
-          color: var(--smh-text-muted);
+          color: color-mix(in srgb, var(--smh-text) 88%, transparent 12%);
         }
 
         .footer-luxe__feedback[data-status='error'] {
           color: var(--smh-primary-magenta);
-          opacity: 0.9;
         }
 
         .footer-luxe__feedback[data-status='success'] {
           color: var(--smh-primary-teal);
-          opacity: 0.9;
         }
 
         .footer-luxe__meta {
@@ -305,7 +308,7 @@ const FooterLuxe = () => {
           gap: 1rem 2rem;
           justify-content: space-between;
           align-items: center;
-          border-top: 1px solid color-mix(in srgb, var(--footer-keyline) 80%, transparent);
+          border-top: 1px solid color-mix(in srgb, var(--smh-accent-gold) 26%, transparent 74%);
           padding-top: clamp(1.5rem, 3vw, 2.5rem);
         }
 
@@ -322,15 +325,15 @@ const FooterLuxe = () => {
           height: 2.5rem;
           border-radius: 999px;
           box-shadow: 0 0 0 1px var(--footer-keyline) inset;
-          color: color-mix(in srgb, var(--brand-gold) 68%, var(--smh-text) 32%);
+          color: color-mix(in srgb, var(--smh-accent-gold) 80%, transparent 20%);
           transition: background-color var(--motion-duration-normal, 160ms) var(--motion-easing-smooth, ease),
             color var(--motion-duration-normal, 160ms) var(--motion-easing-smooth, ease);
         }
 
         .footer-luxe__social a:hover,
         .footer-luxe__social a:focus-visible {
-          background: color-mix(in srgb, var(--brand-gold) 16%, transparent 84%);
-          color: var(--smh-text);
+          background: color-mix(in srgb, var(--smh-primary-teal) 22%, transparent 78%);
+          color: var(--smh-primary-teal);
         }
 
         .footer-luxe__links {
