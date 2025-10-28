@@ -39,14 +39,15 @@ if (!gradientMatch) {
 }
 
 const gradient = gradientMatch[1].trim().toLowerCase();
+const requiredHexes = ['d94bc6', '00c2c7'];
 
 if (!gradient.includes('linear-gradient(135deg')) {
   console.error('✖ --smh-gradient must remain at 135deg');
   process.exit(1);
 }
 
-if (!gradient.includes('#d94bc6') || !gradient.includes('#00c2c7')) {
-  console.error('✖ --smh-gradient must contain #D94BC6 and #00C2C7');
+if (!requiredHexes.every((hex) => gradient.includes(`#${hex}`))) {
+  console.error('✖ --smh-gradient must contain the champagne anchor hues');
   process.exit(1);
 }
 

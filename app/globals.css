@@ -1,10 +1,10 @@
-/* app/globals.css — CANONICAL, DO NOT EDIT WITHOUT BRAND LOCK */
-
 @import "@/styles/tokens/smh-champagne-tokens.css";
 @import "@/styles/tokens.css";
 @import "@/styles/brand/brand-gradient.css";
 @import "tailwindcss";
 @import "@/app/styles/smh-tokens.css";
+
+/* app/globals.css — CANONICAL, DO NOT EDIT WITHOUT BRAND LOCK */
 
 /* Tailwind 4 design-token bridge → reads our CSS variables */
 @theme {
@@ -24,8 +24,16 @@
 /* Utility helpers used by brand-lock and previews */
 .glass-pane {
   background: var(--glass-bg-strong);
+  border: 1px solid var(--glass-border);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
   border-radius: 18px;
+}
+
+.glass-chip {
+  background: var(--glass-bg-weak);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius-pill);
 }

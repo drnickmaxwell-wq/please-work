@@ -43,7 +43,7 @@ const FooterLuxe = () => {
   };
 
   return (
-    <footer className="footer-luxe relative text-[color:var(--smh-text)]" data-footer>
+    <footer data-brand="champagne" className="footer-luxe relative text-[color:var(--smh-text)]" data-footer>
       <div className="footer-luxe__rim" aria-hidden="true" />
       <div className="footer-luxe__inner">
         <div className="footer-luxe__grid">
@@ -76,7 +76,7 @@ const FooterLuxe = () => {
             </ul>
           </div>
 
-          <div className="footer-luxe__newsletter">
+          <div className="footer-luxe__newsletter keyline-gold">
             <h4>Join our newsletter</h4>
             <p>Receive quarterly stories and gentle reminders curated by our clinical team.</p>
             <form className="footer-luxe__form" onSubmit={handleSubmit} noValidate>
@@ -139,12 +139,17 @@ const FooterLuxe = () => {
       </div>
       <style jsx>{`
         [data-footer] {
-          background: var(--smh-footer-bg);
-          border-top: 1px solid color-mix(in srgb, var(--smh-accent-gold) 22%, transparent);
+          color: var(--smh-text);
+          border-top: 1px solid color-mix(in srgb, var(--brand-gold) 28%, transparent 72%);
+          --footer-shadow: 0 42px 160px color-mix(in srgb, #000 32%, transparent);
+          --footer-particles-ink: color-mix(in srgb, var(--brand-gold) 36%, transparent 64%);
+          --footer-clear: color-mix(in srgb, var(--smh-bg) 16%, transparent 84%);
+          --footer-blur: 18px;
+          --footer-ring: color-mix(in srgb, var(--brand-gold) 55%, transparent 45%);
         }
 
         [data-footer] a {
-          color: var(--smh-text);
+          color: inherit;
         }
 
         .footer-luxe {
@@ -173,7 +178,10 @@ const FooterLuxe = () => {
         .footer-luxe__rim {
           height: 1px;
           width: 100%;
-          background: var(--smh-footer-rim);
+          background:
+            linear-gradient(90deg,
+              color-mix(in srgb, var(--brand-gold) 55%, transparent) 0%,
+              color-mix(in srgb, var(--brand-gold) 0%, transparent) 60%);
           margin-bottom: clamp(2rem, 4vw, 3rem);
           position: relative;
           z-index: 2;

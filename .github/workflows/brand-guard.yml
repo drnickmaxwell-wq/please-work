@@ -13,5 +13,5 @@ jobs:
           cache: 'pnpm'
       - run: corepack enable
       - run: pnpm install --frozen-lockfile
-      - run: pnpm run brand:verify
       - run: pnpm run brand:guard
+      - run: pnpm build

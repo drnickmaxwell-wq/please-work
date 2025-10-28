@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+
 import Hero4KVideo from "@/components/hero/4k-hero-video";
 
 type Snapshot = {
@@ -8,7 +9,7 @@ type Snapshot = {
   magenta: string;
   teal: string;
   glassStrong: string;
-  glassBorder: string;
+  heroWaves: string;
 };
 
 const TOKENS: Array<[keyof Snapshot, string]> = [
@@ -16,22 +17,41 @@ const TOKENS: Array<[keyof Snapshot, string]> = [
   ["magenta", "--smh-primary-magenta"],
   ["teal", "--smh-primary-teal"],
   ["glassStrong", "--glass-bg-strong"],
-  ["glassBorder", "--glass-border"],
+  ["heroWaves", "--hero-waves"],
 ];
 
 export default function BrandLivePreview() {
   const [snapshot, setSnapshot] = useState<Snapshot | null>(null);
 
-  useEffect(() => {
+  const captureSnapshot = useCallback(() => {
     const root = document.documentElement;
     const styles = getComputedStyle(root);
-    const next = TOKENS.reduce((acc, [key, token]) => {
+    return TOKENS.reduce((acc, [key, token]) => {
       const value = styles.getPropertyValue(token).trim();
       (acc as Snapshot)[key] = value;
       return acc;
     }, {} as Snapshot);
-    setSnapshot(next);
   }, []);
+
+  useEffect(() => {
+    setSnapshot(captureSnapshot());
+
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleThemeChange = () => {
+      setSnapshot(captureSnapshot());
+    };
+
+    mediaQuery.addEventListener("change", handleThemeChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleThemeChange);
+    };
+  }, [captureSnapshot]);
+
+  const disableWaves = () => {
+    document.documentElement.style.setProperty("--hero-waves", "0");
+    setSnapshot(captureSnapshot());
+  };
 
   return (
     <main className="min-h-screen space-y-8 bg-[color:var(--smh-bg)] p-6 text-[color:var(--smh-text)]">
@@ -44,16 +64,26 @@ export default function BrandLivePreview() {
 magenta: ${snapshot.magenta}
 teal: ${snapshot.teal}
 glassStrong: ${snapshot.glassStrong}
-glassBorder: ${snapshot.glassBorder}`}
+heroWaves: ${snapshot.heroWaves}`}
           </pre>
         ) : (
           <p aria-live="polite">Reading tokens…</p>
         )}
+        <button
+          type="button"
+          className="glass-chip mt-4 inline-flex items-center gap-2 px-4 py-2 text-sm text-[color:var(--smh-text)]"
+          onClick={disableWaves}
+        >
+          Lock hero waves off
+        </button>
       </div>
       <section data-hero="champagne" data-page="home" className="relative min-h-[40vh] rounded-2xl overflow-hidden mt-8">
-        <div className="gold-flecks" aria-hidden />
-        <div className="absolute inset-0 grid place-items-center">
+        <div className="gold-flecks" aria-hidden="true" />
+        <div className="absolute inset-0 grid place-items-center gap-4 text-center">
           <p className="text-white/80 font-serif text-xl">Champagne overlays test</p>
+          <p className="text-sm text-white/70">
+            Current --hero-waves: {snapshot?.heroWaves ?? "…"}
+          </p>
         </div>
       </section>
     </main>
