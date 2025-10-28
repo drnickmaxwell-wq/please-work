@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type CSSProperties } from 'react';
 import Link from 'next/link';
 
 import { MAIN_NAV, RESOURCES } from '@/lib/nav';
@@ -26,6 +26,10 @@ const FooterLuxe = () => {
 
   const feedbackId = useMemo(() => 'newsletter-feedback', []);
 
+  const footerVars = {
+    '--footer-text': 'color-mix(in srgb, white 95%, transparent)',
+  } as CSSProperties;
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const trimmed = email.trim();
@@ -43,7 +47,7 @@ const FooterLuxe = () => {
   };
 
   return (
-    <footer className="footer-luxe" data-footer>
+    <footer className="footer-luxe" data-footer style={footerVars}>
       <div className="footer-luxe__rim" aria-hidden="true" />
       <div className="footer-luxe__inner">
         <div className="footer-luxe__grid">
@@ -130,13 +134,21 @@ const FooterLuxe = () => {
         </div>
       </div>
       <style jsx>{`
-        [data-footer] {
+        .footer-luxe {
+          position: relative;
+          overflow: hidden;
+          padding: clamp(3.5rem, 7vw, 5rem) clamp(1.5rem, 5vw, 4.5rem) clamp(2.5rem, 4vw, 3.5rem);
+          isolation: isolate;
           background: var(--ink);
-          color: var(--smh-text);
+          color: var(--footer-text);
+          --footer-keyline: color-mix(in srgb, var(--smh-accent-gold) 25%, transparent 75%);
+          --footer-surface-strong: color-mix(in srgb, var(--ink) 68%, transparent 32%);
+          --footer-surface-soft: color-mix(in srgb, var(--ink) 54%, transparent 46%);
+          --footer-surface-muted: color-mix(in srgb, var(--ink) 42%, transparent 58%);
         }
 
         [data-footer] a {
-          color: var(--smh-text);
+          color: var(--footer-text);
           text-decoration: none;
           transition: color var(--motion-duration-normal, 160ms) var(--motion-easing-smooth, ease);
         }
@@ -144,19 +156,9 @@ const FooterLuxe = () => {
         [data-footer] a:hover,
         [data-footer] a:focus-visible {
           color: var(--smh-accent-gold);
-        }
-
-        .footer-luxe {
-          position: relative;
-          overflow: hidden;
-          padding: clamp(3.5rem, 7vw, 5rem) clamp(1.5rem, 5vw, 4.5rem) clamp(2.5rem, 4vw, 3.5rem);
-          isolation: isolate;
-          background: var(--ink);
-          color: color-mix(in srgb, white 95%, transparent);
-          --footer-keyline: color-mix(in srgb, var(--smh-accent-gold) 25%, transparent 75%);
-          --footer-surface-strong: color-mix(in srgb, var(--ink) 68%, transparent 32%);
-          --footer-surface-soft: color-mix(in srgb, var(--ink) 54%, transparent 46%);
-          --footer-surface-muted: color-mix(in srgb, var(--ink) 42%, transparent 58%);
+          text-decoration: underline;
+          text-decoration-thickness: 1px;
+          text-underline-offset: 2px;
         }
 
         .footer-luxe::before {
@@ -207,7 +209,7 @@ const FooterLuxe = () => {
           margin: 0;
           font-size: 1.6rem;
           font-family: var(--font-display, 'Playfair Display', serif);
-          color: var(--smh-text);
+          color: var(--footer-text);
         }
 
         h4 {
@@ -215,12 +217,12 @@ const FooterLuxe = () => {
           text-transform: uppercase;
           letter-spacing: 0.14em;
           font-size: 0.85rem;
-          color: color-mix(in srgb, var(--smh-accent-gold) 60%, var(--smh-text) 40%);
+          color: color-mix(in srgb, white 88%, transparent 12%);
         }
 
         p {
           margin: 0;
-          color: color-mix(in srgb, white 90%, transparent 10%);
+          color: color-mix(in srgb, white 95%, transparent 5%);
         }
 
         ul {
@@ -291,7 +293,7 @@ const FooterLuxe = () => {
         .footer-luxe__feedback {
           font-size: 0.9rem;
           min-height: 1.2rem;
-          color: color-mix(in srgb, var(--smh-text) 88%, transparent 12%);
+          color: color-mix(in srgb, white 90%, transparent 10%);
         }
 
         .footer-luxe__feedback[data-status='error'] {
