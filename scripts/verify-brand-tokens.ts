@@ -5,11 +5,12 @@ const MUST = [
   "--smh-primary-teal:",
   "--smh-accent-gold:",
   "--smh-gradient:",
-  "--glass-bg-strong:",
+  "--champagne-glass-bg:",
+  "--champagne-glass-border:",
+  "--champagne-sheen-opacity:",
 ];
 
-const css = fs.readFileSync("styles/tokens/smh-champagne-tokens.css","utf8")
-          + "\n" + fs.readFileSync("styles/tokens.css","utf8");
+const css = fs.readFileSync("styles/tokens/smh-champagne-tokens.css","utf8");
 
 const missing = MUST.filter(t => !css.includes(t));
 if (missing.length) {

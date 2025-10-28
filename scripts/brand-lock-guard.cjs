@@ -1,55 +1,43 @@
-// Fails CI if glass tokens lose translucency or the hero gradient drifts.
+// Guard rail for champagne tokens
 const fs = require('fs');
 
-const css = fs.readFileSync('styles/tokens.css', 'utf8');
-const champagne = fs.readFileSync('styles/tokens/smh-champagne-tokens.css', 'utf8');
+const tokens = fs.readFileSync('styles/tokens/smh-champagne-tokens.css', 'utf8');
 
-// naive but robust: capture the percentage used in glass strong definitions
-function extractPerc(text, varName) {
-  const re = new RegExp(`${varName}\\s*:\\s*color-mix\\([^\\)]*var\\(\\s*--smh-bg\\s*\\)\\s*(\\d+)%`, 'i');
-  const m = text.match(re);
-  return m ? parseInt(m[1], 10) : null;
+function extractPercent(source, variable, colour) {
+  const pattern = new RegExp(`${variable}\\s*:\\s*color-mix\\([^)]*${colour}\\s*(\\d+(?:\\.\\d+)?)%`, 'i');
+  const match = source.match(pattern);
+  return match ? Number.parseFloat(match[1]) : null;
 }
 
-const light = extractPerc(css, '--glass-bg-strong');
-const dark = (() => {
-  const darkBlock = css.split('@media').slice(1).join('@media'); // grab media parts
-  return extractPerc(darkBlock || '', '--glass-bg-strong');
-})();
-
-function assertOk(label, val) {
-  if (val == null) {
-    console.error(`✖ Could not find ${label} --glass-bg-strong definition`);
-    process.exit(1);
-  }
-  if (val > 78) {
-    console.error(`✖ ${label} glass too opaque: ${val}% bg (must be ≤ 78)`);
-    process.exit(1);
-  }
+const glassBg = extractPercent(tokens, '--champagne-glass-bg', 'white');
+if (glassBg == null) {
+  console.error('✖ Missing --champagne-glass-bg definition');
+  process.exit(1);
+}
+if (glassBg > 10) {
+  console.error(`✖ Glass background too opaque (${glassBg}%). Keep it ≤ 10%.`);
+  process.exit(1);
 }
 
-assertOk('light', light);
-assertOk('dark', dark);
+const glassBorder = extractPercent(tokens, '--champagne-glass-border', '#f9e8c3');
+if (glassBorder == null) {
+  console.error('✖ Missing --champagne-glass-border definition');
+  process.exit(1);
+}
+if (glassBorder > 40) {
+  console.error(`✖ Glass border mix too heavy (${glassBorder}%). Keep it ≤ 40%.`);
+  process.exit(1);
+}
 
-const gradientMatch = champagne.match(/--smh-gradient:\s*([^;]+);/i);
-
+const gradientMatch = tokens.match(/--smh-gradient:\s*([^;]+);/i);
 if (!gradientMatch) {
   console.error('✖ Could not locate --smh-gradient definition');
   process.exit(1);
 }
-
-const gradient = gradientMatch[1].trim().toLowerCase();
-const requiredHexes = ['d94bc6', '00c2c7'];
-
-if (!gradient.includes('linear-gradient(135deg')) {
-  console.error('✖ --smh-gradient must remain at 135deg');
+const gradient = gradientMatch[1].trim();
+if (gradient !== 'linear-gradient(135deg, #D94BC6 0%, #00C2C7 100%)') {
+  console.error(`✖ Gradient drift detected: ${gradient}`);
   process.exit(1);
 }
 
-if (!requiredHexes.every((hex) => gradient.includes(`#${hex}`))) {
-  console.error('✖ --smh-gradient must contain the champagne anchor hues');
-  process.exit(1);
-}
-
-console.log(`✔ Glass translucency OK (light=${light}%, dark=${dark}%)`);
-console.log(`✔ Champagne gradient locked (${gradientMatch[1].trim()})`);
+console.log('✔ Champagne tokens locked in.');

@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "postbuild": "next-sitemap",
+    "postbuild": "next-sitemap && pnpm run brand:guard",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
@@ -13,7 +13,7 @@
     "audit:champagne": "tsx tools/audit-champagne.ts",
     "guard:preflight": "tsx tools/guard/preflight.ts",
     "brand:verify": "tsx scripts/verify-brand-tokens.ts",
-    "brand:guard": "node ./scripts/brand-guard.js"
+    "brand:guard": "node ./scripts/brand-guard.cjs"
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.24",

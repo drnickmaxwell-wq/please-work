@@ -49,15 +49,6 @@ export interface SmileJourneyProps {
   steps?: TimelineStep[];
 }
 
-const overlayDataAttributes = {
-  "data-sheen-opacity-d": "var(--champagne-sheen-opacity-d)",
-  "data-sheen-opacity-m": "var(--champagne-sheen-opacity-m)",
-  "data-vignette-alpha": "var(--champagne-vignette-alpha)",
-  "data-vignette-radius": "var(--champagne-vignette-radius)",
-  "data-particles-opacity-d": "var(--champagne-particles-opacity-d)",
-  "data-particles-opacity-m": "var(--champagne-particles-opacity-m)",
-} as const;
-
 export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps) {
   const iconMap = useMemo(
     () => ({
@@ -73,23 +64,20 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
 
   return (
     <section
-      className="journey-surface champagne-surface champagne-sheen"
+      className="journey-surface champagne-surface"
       aria-labelledby="journey-hero-title"
       data-hero="champagne"
       data-wave="off"
       data-particles={particlesActive ? "on" : "off"}
       data-reduced-motion={prefersReducedMotion ? "true" : "false"}
-      {...overlayDataAttributes}
     >
-      <div className="gradient-layer" aria-hidden />
-      <div className="wave-layer" aria-hidden data-state="off" />
       {particlesActive ? (
-        <Particles className="particles-layer" data-state="on" aria-hidden />
+        <Particles className="champagne-particles" aria-hidden />
       ) : (
-        <canvas className="particles-layer" data-state="off" aria-hidden />
+        <canvas className="champagne-particles" aria-hidden data-state="off" />
       )}
-      <div className="vignette-layer" aria-hidden />
-      <div className="sheen-layer" aria-hidden />
+      <div className="champagne-vignette" aria-hidden />
+      <div className="champagne-sheen" aria-hidden />
 
       <div className="journey-inner">
         <header className="journey-header" id="journey-hero-title">
@@ -104,7 +92,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           {steps.map((step) => {
             const iconPath = step.icon ? iconMap[step.icon] : undefined;
             return (
-              <article key={step.title} role="group" tabIndex={0} className="journey-card">
+              <article key={step.title} role="group" tabIndex={0} className="journey-card champagne-glass">
                 {iconPath && (
                   <div className="journey-card-icon">
                     <img src={iconPath} alt="" aria-hidden="true" />
@@ -117,8 +105,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           })}
         </div>
 
-        <div className="journey-callout">
-          <span className="journey-callout-veil" aria-hidden="true" />
+        <div className="journey-callout champagne-glass">
           <div className="journey-callout-content">
             <h3>Ready to Begin?</h3>
             <p>Take the first step toward your perfect smile.</p>
@@ -144,7 +131,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
 
         .journey-inner {
           position: relative;
-          z-index: 7;
+          z-index: 4;
           width: 100%;
           max-width: min(1180px, 92vw);
           margin-inline: auto;
@@ -221,11 +208,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           gap: 1.1rem;
           padding: clamp(28px, 4.5vw, 40px);
           border-radius: 22px;
-          background: var(--glass-bg-strong);
-          backdrop-filter: blur(18px) saturate(1.05);
-          -webkit-backdrop-filter: blur(18px) saturate(1.05);
-          border: 1px solid var(--glass-border);
-          box-shadow: var(--rim-gold-inset), var(--journey-card-shadow);
+          box-shadow: var(--journey-card-shadow);
           color: var(--smh-text-strong, var(--smh-text));
           transition:
             transform var(--motion-duration-normal) var(--motion-easing-smooth),
@@ -268,8 +251,8 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           border-radius: 0.75rem;
           display: grid;
           place-items: center;
-          background: var(--glass-bg-weak);
-          border: 1px solid var(--glass-border);
+          background: color-mix(in srgb, white 12%, transparent);
+          border: 1px solid var(--champagne-glass-border);
         }
 
         .journey-card-icon img {
@@ -296,13 +279,9 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           position: relative;
           border-radius: 26px;
           padding: clamp(36px, 6vw, 52px);
-          background: var(--glass-bg-strong);
-          border: 1px solid var(--glass-border);
           box-shadow:
             inset 0 0 0 1px color-mix(in srgb, var(--smh-accent-gold) 30%, transparent),
             var(--journey-card-shadow);
-          backdrop-filter: blur(18px) saturate(1.05);
-          -webkit-backdrop-filter: blur(18px) saturate(1.05);
           overflow: hidden;
         }
 
@@ -314,13 +293,6 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           background: linear-gradient(160deg, rgba(255, 246, 224, 0.22), rgba(255, 255, 255, 0));
           mix-blend-mode: screen;
           opacity: 0.4;
-          pointer-events: none;
-        }
-
-        .journey-callout-veil {
-          position: absolute;
-          inset: 0;
-          background: color-mix(in srgb, black 28%, transparent);
           pointer-events: none;
         }
 
@@ -379,8 +351,8 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
 
         .journey-cta-secondary {
           color: var(--smh-text-strong, var(--smh-text));
-          background: var(--glass-bg-weak);
-          border: 1px solid var(--glass-border);
+          background: color-mix(in srgb, white 10%, transparent);
+          border: 1px solid var(--champagne-glass-border);
           box-shadow: var(--shadow-cta-rest);
         }
 

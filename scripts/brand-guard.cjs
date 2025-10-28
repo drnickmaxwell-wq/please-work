@@ -5,14 +5,11 @@ const path = require('path');
 const repoRoot = path.resolve(__dirname, '..');
 const ignored = new Set(['.git', 'node_modules', '.next', 'out', 'dist', '.turbo', '.vercel']);
 const binaryPattern = /\.(?:png|jpe?g|gif|mp4|mov|mp3|webm|avi|mkv|ico|icns|pdf|zip|gz|bz2|7z|tar|woff2?|ttf|eot|otf|heic|heif|avif|glb|gltf|wasm)$/i;
-const gradientTarget = 'linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%)';
-const gradientFiles = [
-  path.join('styles', 'tokens.css'),
-  path.join('styles', 'brand', 'brand-gradient.css'),
-  path.join('styles', 'tokens', 'smh-champagne-tokens.css'),
-];
+const gradientTarget = 'linear-gradient(135deg, #D94BC6 0%, #00C2C7 100%)';
+const gradientRegex = /linear-gradient\(135deg\s*,\s*#d94bc6(?:\s*0%)?\s*,\s*#00c2c7(?:\s*100%)?\s*\)/i;
+const tokensFile = path.join('styles', 'tokens', 'smh-champagne-tokens.css');
 
-const bannedHexes = ['#d94bc6', '#00c2c7', '#d4af37'];
+const bannedHexes = ['#d94bc6', '#00c2c7'];
 
 const errors = [];
 
@@ -21,27 +18,45 @@ function normalise(filePath) {
 }
 
 async function verifyGradientStrings() {
-  await Promise.all(
-    gradientFiles.map(async (relativePath) => {
+  const tokenPath = path.join(repoRoot, tokensFile);
+  try {
+    const contents = await fsp.readFile(tokenPath, 'utf8');
+    if (!contents.includes(gradientTarget)) {
+      errors.push(`Missing canonical gradient in ${tokensFile}`);
+    }
+  } catch (error) {
+    errors.push(`Unable to read ${tokensFile}: ${error.message}`);
+  }
+
+  const buildCssFiles = await findBuildCss();
+  if (buildCssFiles.length === 0) {
+    errors.push('No built CSS files found in .next. Run the build before brand:guard.');
+    return;
+  }
+
+  const cssChecks = await Promise.all(
+    buildCssFiles.map(async (relativePath) => {
       const filePath = path.join(repoRoot, relativePath);
       try {
         const contents = await fsp.readFile(filePath, 'utf8');
-        if (!contents.includes(gradientTarget)) {
-          errors.push(`Missing canonical gradient in ${relativePath}`);
-        }
+        return contents.includes(gradientTarget) || gradientRegex.test(contents);
       } catch (error) {
         errors.push(`Unable to read ${relativePath}: ${error.message}`);
+        return false;
       }
     })
   );
+
+  if (!cssChecks.some(Boolean)) {
+    errors.push('Built CSS is missing the canonical gradient string.');
+  }
 }
 
 function isAllowedHexFile(relativePath) {
   return (
     relativePath.startsWith('styles/tokens/') ||
-    relativePath === 'styles/tokens.css' ||
-    relativePath === 'styles/brand/brand-gradient.css' ||
-    relativePath === 'scripts/brand-guard.cjs'
+    relativePath === 'scripts/brand-guard.cjs' ||
+    relativePath === 'scripts/brand-lock-guard.cjs'
   );
 }
 
@@ -106,6 +121,30 @@ function validateSvg(relativePath, source) {
     const value = strokeMatch[1].trim().toLowerCase();
     if (value && value !== 'currentcolor' && value !== 'none') {
       errors.push(`SVG ${relativePath} has disallowed stroke="${strokeMatch[1]}"`);
+    }
+  }
+}
+
+async function findBuildCss() {
+  const cssFiles = [];
+  const nextDir = path.join(repoRoot, '.next');
+  try {
+    await walkBuild(nextDir, cssFiles);
+  } catch (error) {
+    errors.push(`Unable to scan build output: ${error.message}`);
+  }
+  return cssFiles;
+}
+
+async function walkBuild(directory, results) {
+  const entries = await fsp.readdir(directory, { withFileTypes: true });
+  for (const entry of entries) {
+    if (ignored.has(entry.name)) continue;
+    const fullPath = path.join(directory, entry.name);
+    if (entry.isDirectory()) {
+      await walkBuild(fullPath, results);
+    } else if (entry.isFile() && entry.name.endsWith('.css')) {
+      results.push(normalise(fullPath));
     }
   }
 }

@@ -10,15 +10,6 @@ export interface Hero4KVideoProps {
   [key: string]: unknown;
 }
 
-const overlayDataAttributes = {
-  'data-sheen-opacity-d': 'var(--champagne-sheen-opacity-d)',
-  'data-sheen-opacity-m': 'var(--champagne-sheen-opacity-m)',
-  'data-vignette-alpha': 'var(--champagne-vignette-alpha)',
-  'data-vignette-radius': 'var(--champagne-vignette-radius)',
-  'data-particles-opacity-d': 'var(--champagne-particles-opacity-d)',
-  'data-particles-opacity-m': 'var(--champagne-particles-opacity-m)',
-} as const;
-
 export default function Hero4KVideo({
   poster,
   showParticles = true,
@@ -27,32 +18,36 @@ export default function Hero4KVideo({
 }: Hero4KVideoProps) {
   const prefersReducedMotion = usePrefersReducedMotion();
   const particlesActive = showParticles && !prefersReducedMotion;
+  const sectionClassName = [
+    'champagne-surface relative w-full max-w-none overflow-hidden rounded-none',
+    'min-h-[clamp(520px,75vh,880px)]',
+    showWave ? 'has-wave' : '',
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <section
       data-hero="champagne"
       data-page="home"
+      className={sectionClassName}
       data-wave={showWave ? 'on' : 'off'}
       data-particles={particlesActive ? 'on' : 'off'}
       data-reduced-motion={prefersReducedMotion ? 'true' : 'false'}
-      className="champagne-surface champagne-sheen relative overflow-hidden"
-      {...overlayDataAttributes}
     >
-      <div className="gradient-layer" aria-hidden />
-      <div className="wave-layer" aria-hidden data-state={showWave ? 'on' : 'off'} />
       {particlesActive ? (
-        <Particles className="particles-layer" data-state="on" aria-hidden />
+        <Particles className="champagne-particles" aria-hidden />
       ) : (
-        <canvas className="particles-layer" data-state="off" aria-hidden />
+        <canvas className="champagne-particles" aria-hidden data-state="off" />
       )}
-      <div className="vignette-layer" aria-hidden />
-      <div className="sheen-layer" aria-hidden />
+      <div className="champagne-vignette" aria-hidden />
+      <div className="champagne-sheen" aria-hidden />
 
-      <div className="relative mx-auto max-w-5xl px-6 py-12 sm:px-10">
-        <div className="glass-pane rounded-[28px]">
+      <div className="relative z-[4] mx-auto max-w-5xl px-6 py-12 sm:px-10">
+        <div className="champagne-glass rounded-[28px]">
           <div className="space-y-6 p-8 sm:p-10">
             <div className="relative aspect-[16/9] overflow-hidden rounded-2xl">
-              <div aria-hidden className="absolute inset-0" style={{ background: 'var(--smh-gradient)' }} />
+              <div aria-hidden className="absolute inset-0" />
               <video
                 className="absolute inset-0 z-[1] h-full w-full object-cover"
                 playsInline

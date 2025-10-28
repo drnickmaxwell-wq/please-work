@@ -12,13 +12,9 @@ type Diagnostics = {
   magenta: string;
   teal: string;
   vignetteAlpha: string;
+  sheenOpacity: string;
   particlesOpacity: string;
-  hasSurfaceClass: string;
-  sheenDesktop: string;
-  sheenMobile: string;
-  vignetteRadius: string;
-  particlesDesktop: string;
-  particlesMobile: string;
+  surfaces: string[];
   reducedMotion: string;
 };
 
@@ -41,42 +37,31 @@ export default function BrandLivePreview() {
     const magenta = styles.getPropertyValue(TOKEN_KEYS.magenta).trim().toUpperCase();
     const teal = styles.getPropertyValue(TOKEN_KEYS.teal).trim().toUpperCase();
 
-    let vignetteAlpha = "n/a";
-    let sheenDesktop = "n/a";
-    let sheenMobile = "n/a";
-    let vignetteRadius = "n/a";
-    let particlesDesktop = "n/a";
-    let particlesMobile = "n/a";
-    const hero = document.querySelector<HTMLElement>('section[data-hero="champagne"]');
-    if (hero) {
-      sheenDesktop = hero.dataset.sheenOpacityD ?? "n/a";
-      sheenMobile = hero.dataset.sheenOpacityM ?? "n/a";
-      vignetteRadius = hero.dataset.vignetteRadius ?? "n/a";
-      particlesDesktop = hero.dataset.particlesOpacityD ?? "n/a";
-      particlesMobile = hero.dataset.particlesOpacityM ?? "n/a";
-      const vignetteLayer = hero.querySelector<HTMLElement>(".vignette-layer");
-      if (vignetteLayer) {
-        const background = getComputedStyle(vignetteLayer).backgroundImage;
-        const alphaMatches = Array.from(background.matchAll(/rgba\(\s*0\s*,\s*0\s*,\s*0\s*,\s*(0?\.\d+)/gi));
-        if (alphaMatches.length > 0) {
-          vignetteAlpha = alphaMatches[alphaMatches.length - 1][1];
-        }
-      }
-    }
+    const vignetteAlpha = styles.getPropertyValue("--champagne-vignette-alpha").trim();
+    const sheenOpacity = styles.getPropertyValue("--champagne-sheen-opacity").trim();
 
-    let particlesOpacity: string;
-    const canvas = document.querySelector<HTMLCanvasElement>('section[data-hero="champagne"] .particles-layer');
-    if (canvas) {
-      particlesOpacity = getComputedStyle(canvas).opacity;
+    let particlesOpacity = "n/a";
+    const particlesElement = document.querySelector<HTMLElement>('.champagne-surface .champagne-particles');
+    if (particlesElement) {
+      particlesOpacity = getComputedStyle(particlesElement).opacity;
+      const state = particlesElement.dataset.state;
+      if (state === 'off') {
+        particlesOpacity = `${particlesOpacity} (state: off)`;
+      }
     } else if (!particlesOn) {
       particlesOpacity = "0 (toggle off)";
-    } else if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      particlesOpacity = "0 (prefers-reduced-motion)";
-    } else {
-      particlesOpacity = "n/a";
     }
 
-    const hasSurfaceClass = hero?.classList.contains("champagne-surface") ? "yes" : "no";
+    const surfaces = Array.from(document.querySelectorAll<HTMLElement>(".champagne-surface"))
+      .map((surface, index) => {
+        const baseLabel = surface.getAttribute("data-page") ?? surface.getAttribute("data-hero") ?? "surface";
+        const label = `${baseLabel ?? 'surface'}#${index + 1}`;
+        const waveActive = surface.classList.contains("has-wave") || surface.dataset.wave === "on";
+        const particles = surface.querySelector<HTMLElement>(".champagne-particles");
+        const particleState = particles?.dataset.state ?? (particles ? "on" : "none");
+        return `${label}: wave=${waveActive ? "on" : "off"}, particles=${particleState}`;
+      });
+
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "yes" : "no";
 
     return {
@@ -84,13 +69,9 @@ export default function BrandLivePreview() {
       magenta,
       teal,
       vignetteAlpha,
+      sheenOpacity,
       particlesOpacity,
-      hasSurfaceClass,
-      sheenDesktop,
-      sheenMobile,
-      vignetteRadius,
-      particlesDesktop,
-      particlesMobile,
+      surfaces,
       reducedMotion,
     };
   }, [particlesOn]);
@@ -121,16 +102,12 @@ export default function BrandLivePreview() {
       snapshot
         ? [
             ["Gradient", snapshot.gradient],
-            ["Magenta", snapshot.magenta],
-            ["Teal", snapshot.teal],
+            ["Magenta token", snapshot.magenta],
+            ["Teal token", snapshot.teal],
             ["Vignette alpha", snapshot.vignetteAlpha],
-            ["Vignette radius token", snapshot.vignetteRadius],
+            ["Sheen opacity", snapshot.sheenOpacity],
             ["Particles opacity (computed)", snapshot.particlesOpacity],
-            ["Particles token desktop", snapshot.particlesDesktop],
-            ["Particles token mobile", snapshot.particlesMobile],
-            ["Sheen opacity desktop", snapshot.sheenDesktop],
-            ["Sheen opacity mobile", snapshot.sheenMobile],
-            ["Has .champagne-surface", snapshot.hasSurfaceClass],
+            ["Active surfaces", snapshot.surfaces.join("; ") || "none"],
             ["Reduced motion active", snapshot.reducedMotion],
           ]
         : [],
@@ -188,13 +165,11 @@ export default function BrandLivePreview() {
         data-hero="champagne"
         data-wave="off"
         data-particles="off"
-        className="champagne-surface champagne-sheen relative mt-4 min-h-[28vh] overflow-hidden rounded-2xl"
+        className="champagne-surface relative mt-4 min-h-[28vh] overflow-hidden rounded-2xl"
       >
-        <div className="gradient-layer" aria-hidden />
-        <div className="wave-layer" aria-hidden data-state="off" />
-        <canvas className="particles-layer" aria-hidden data-state="off" />
-        <div className="vignette-layer" aria-hidden />
-        <div className="sheen-layer" aria-hidden />
+        <canvas className="champagne-particles" aria-hidden data-state="off" />
+        <div className="champagne-vignette" aria-hidden />
+        <div className="champagne-sheen" aria-hidden />
         <div className="absolute inset-0 grid place-items-center text-center">
           <p className="max-w-md font-serif text-lg text-[color:var(--smh-text-strong, var(--smh-text))]">
             Reference surface with waves locked off. Sheen and vignette should feel calm and luminous.
@@ -206,17 +181,15 @@ export default function BrandLivePreview() {
         data-hero="champagne"
         data-wave={waveOn ? "on" : "off"}
         data-particles={particlesOn ? "on" : "off"}
-        className="champagne-surface champagne-sheen relative min-h-[32vh] overflow-hidden rounded-2xl"
+        className={`champagne-surface relative min-h-[32vh] overflow-hidden rounded-2xl ${waveOn ? 'has-wave' : ''}`}
       >
-        <div className="gradient-layer" aria-hidden />
-        <div className="wave-layer" aria-hidden data-state={waveOn ? "on" : "off"} />
         {particlesOn ? (
-          <Particles className="particles-layer" data-state="on" aria-hidden />
+          <Particles className="champagne-particles" aria-hidden />
         ) : (
-          <canvas className="particles-layer" aria-hidden data-state="off" />
+          <canvas className="champagne-particles" aria-hidden data-state="off" />
         )}
-        <div className="vignette-layer" aria-hidden />
-        <div className="sheen-layer" aria-hidden />
+        <div className="champagne-vignette" aria-hidden />
+        <div className="champagne-sheen" aria-hidden />
         <div className="absolute inset-0 grid place-items-center text-center">
           <p className="max-w-md font-serif text-lg text-[color:var(--smh-text-strong, var(--smh-text))]">
             Wave overlay is {waveOn ? "enabled" : "off"}. Toggle above to inspect layering and particle response.

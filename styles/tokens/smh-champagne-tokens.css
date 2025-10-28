@@ -1,8 +1,17 @@
 :root{
-  --ink:#0B0D0F;
   --smh-primary-magenta:#C2185B;
   --smh-primary-teal:#40C4B4;
   --smh-accent-gold:#D4AF37;
+  --smh-ink:#0B0D0F;
+  --smh-ink-90: color-mix(in srgb,var(--smh-ink) 90%, transparent);
+  --smh-text:#F7F7F5;
+  --smh-gradient: linear-gradient(135deg, #D94BC6 0%, #00C2C7 100%);
+  --champagne-vignette-alpha: 0.08; /* keep subtle so hues stay vivid */
+  --champagne-sheen-opacity: 0.07;
+  --champagne-glass-bg: color-mix(in srgb, white 8%, transparent);
+  --champagne-glass-border: color-mix(in srgb, #F9E8C3 30%, transparent);
+
+  /* extended palette + compatibility tokens */
   --smh-magenta-deep:#A1154B;
   --smh-teal-deep:#2BAA9D;
   --smh-gold-deep:#C49C3C;
@@ -15,20 +24,36 @@
   --smh-night-foreground:#E8E8E8;
   --smh-night-heading:#F0F0F0;
   --smh-night-muted:#A0A0A0;
-  --smh-gradient:linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
-  --glass-bg-strong:color-mix(in srgb,#0d0e10 78%,transparent);
-  --glass-bg-weak:color-mix(in srgb,#0d0e10 60%,transparent);
-  --glass-border:color-mix(in srgb,#fff 18%,transparent);
-  --glass-shadow:0 8px 24px rgba(0,0,0,.18);
-  --glass-box-shadow:var(--glass-shadow);
-  --smh-bg:var(--ink);     /* dark ink surface (footer/night feel) */
-  --smh-text:#F7F7F9;     /* light on dark */
   --smh-text-muted:#A9B0B7;
+  --smh-text-strong:color-mix(in srgb,#ffffff 96%,transparent 4%);
+  --smh-text-subtle:color-mix(in srgb,#ffffff 72%,transparent 28%);
+
+  --champagne-glass-sheen: linear-gradient(
+    to bottom right,
+    rgba(255,255,255,var(--champagne-sheen-opacity)) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(255,255,255,var(--champagne-sheen-opacity)) 100%
+  );
+
+  /* legacy glass aliases */
+  --glass-bg-strong: var(--champagne-glass-bg);
+  --glass-bg-weak: color-mix(in srgb, var(--champagne-glass-bg) 65%, transparent);
+  --glass-border: var(--champagne-glass-border);
+  --glass-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  --glass-box-shadow: var(--glass-shadow);
 }
+
 @media (prefers-color-scheme: light){
   :root{
     --smh-bg:#FFFFFF;
-    --smh-text:#1A1A1A;
-    --smh-text-muted:#6A6F74;
+    --smh-text:#0B0D0F;
+  }
+}
+
+@media (prefers-color-scheme: dark){
+  :root{
+    --smh-bg:var(--smh-ink);
+    --smh-text:#F7F7F5;
   }
 }

@@ -136,7 +136,6 @@ export default function Particles({ className, style, ...rest }: ParticlesProps)
   }, [shouldRender]);
 
   const mergedStyle = {
-    opacity: 'var(--champagne-particles-opacity)',
     pointerEvents: 'none' as const,
     ...(style ?? {}),
   };
