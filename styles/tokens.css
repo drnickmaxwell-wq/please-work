@@ -7,9 +7,9 @@
   --brand-gold:    var(--smh-accent-gold);     /* #D4AF37 */
 
   /* Glass scale (ensure translucency over gradient) */
-  --glass-bg-weak: color-mix(in srgb, var(--smh-bg) 60%, transparent 40%);
-  --glass-bg-strong: color-mix(in srgb, var(--smh-bg) 40%, transparent 60%);
-  --glass-border: color-mix(in srgb, var(--smh-text) 14%, transparent 86%);
+  --glass-bg-weak: color-mix(in srgb, var(--smh-bg) 78%, transparent 22%);
+  --glass-bg-strong: color-mix(in srgb, var(--smh-bg) 70%, transparent 30%);
+  --glass-border: color-mix(in srgb, var(--smh-text) 12%, transparent 88%);
 
   /* Ink & veils (used for legibility on frosted panes) */
   --ink:           color-mix(in srgb, var(--smh-text) 100%, transparent);
@@ -26,7 +26,7 @@
   --shadow-hero-bloom:  0 48px 120px color-mix(in srgb, black 22%, transparent);
 
   /* Gold rim utility (relies on --brand-gold) */
-  --rim-gold-inset: inset 0 0 0 1px color-mix(in srgb, var(--brand-gold) 56%, transparent);
+  --rim-gold-inset: inset 0 0 0 1px color-mix(in srgb, var(--smh-accent-gold) 90%, transparent 10%);
 }
 
 /* Dark-mode tuning */

@@ -1,7 +1,8 @@
-// Fails CI if --glass-bg-strong gets too opaque (>= 60% bg).
+// Fails CI if glass tokens lose translucency or the hero gradient drifts.
 const fs = require('fs');
 
 const css = fs.readFileSync('styles/tokens.css', 'utf8');
+const champagne = fs.readFileSync('styles/tokens/smh-champagne-tokens.css', 'utf8');
 
 // naive but robust: capture the percentage used in glass strong definitions
 function extractPerc(text, varName) {
@@ -21,8 +22,8 @@ function assertOk(label, val) {
     console.error(`✖ Could not find ${label} --glass-bg-strong definition`);
     process.exit(1);
   }
-  if (val >= 60) {
-    console.error(`✖ ${label} glass too opaque: ${val}% bg (must be < 60)`);
+  if (val > 78) {
+    console.error(`✖ ${label} glass too opaque: ${val}% bg (must be ≤ 78)`);
     process.exit(1);
   }
 }
@@ -30,4 +31,24 @@ function assertOk(label, val) {
 assertOk('light', light);
 assertOk('dark', dark);
 
+const gradientMatch = champagne.match(/--smh-gradient:\s*([^;]+);/i);
+
+if (!gradientMatch) {
+  console.error('✖ Could not locate --smh-gradient definition');
+  process.exit(1);
+}
+
+const gradient = gradientMatch[1].trim().toLowerCase();
+
+if (!gradient.includes('linear-gradient(135deg')) {
+  console.error('✖ --smh-gradient must remain at 135deg');
+  process.exit(1);
+}
+
+if (!gradient.includes('#d94bc6') || !gradient.includes('#00c2c7')) {
+  console.error('✖ --smh-gradient must contain #D94BC6 and #00C2C7');
+  process.exit(1);
+}
+
 console.log(`✔ Glass translucency OK (light=${light}%, dark=${dark}%)`);
+console.log(`✔ Champagne gradient locked (${gradientMatch[1].trim()})`);

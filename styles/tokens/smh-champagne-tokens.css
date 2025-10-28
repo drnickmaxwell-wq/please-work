@@ -10,7 +10,7 @@
   --smh-text-muted: #4C4C4C;
 
   /* Champagne gradient (light) */
-  --smh-gradient: linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
+  --smh-gradient: linear-gradient(135deg, #D94BC6 0%, #00C2C7 100%);
 }
 
 /* Dark overrides */
