@@ -7,19 +7,19 @@
 
   /* Glass scale tuned for vivid gradient behind it */
   --glass-bg-weak:  color-mix(in srgb, var(--smh-bg) 60%, transparent 40%);
-  --glass-bg-strong:color-mix(in srgb, var(--smh-bg) 45%, transparent 55%);
+  --glass-bg-strong:color-mix(in srgb, var(--smh-bg) 70%, transparent 30%);
   --glass-border:   color-mix(in srgb, var(--smh-text) 25%, transparent 75%);
   --rim-gold-inset: inset 0 0 0 1px color-mix(in srgb, var(--brand-gold) 85%, transparent 15%);
 
   /* Footer ink + gold accents */
-  --footer-ink: #0B0D0F;
-  --footer-ink-grad: radial-gradient(120% 140% at 10% 0%, #0B0D0F 0%, #0B0D0F 60%, #0B0D0F 100%);
+  --footer-ink: var(--smh-bg);
+  --footer-ink-grad: radial-gradient(120% 140% at 10% 0%, var(--smh-bg) 0%, var(--smh-bg) 60%, var(--smh-bg) 100%);
   --footer-keyline: color-mix(in srgb, var(--brand-gold) 40%, transparent 60%);
 }
 @media (prefers-color-scheme: dark){
   :root{
-    --glass-bg-weak:  color-mix(in srgb, #0B0D0F 55%, transparent 45%);
-    --glass-bg-strong:color-mix(in srgb, #0B0D0F 35%, transparent 65%);
-    --glass-border:   color-mix(in srgb, #DDE3EA 18%, transparent 82%);
+    --glass-bg-weak:  color-mix(in srgb, var(--smh-bg) 55%, transparent 45%);
+    --glass-bg-strong:color-mix(in srgb, var(--smh-bg) 70%, transparent 30%);
+    --glass-border:   color-mix(in srgb, var(--smh-text) 18%, transparent 82%);
   }
 }

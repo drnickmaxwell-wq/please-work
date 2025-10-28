@@ -69,7 +69,7 @@ export default function Head() {
       />
       <meta
         name="theme-color"
-        content="#0D0E10"
+        content="var(--smh-bg)"
         media="(prefers-color-scheme: dark)"
       />
       <script

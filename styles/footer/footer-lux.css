@@ -57,7 +57,7 @@
 }
 
 .footer-link:hover {
-  color: #f9e8c3;
+  color: var(--smh-accent-gold);
   -webkit-text-fill-color: transparent;
   background-clip: text;
   -webkit-background-clip: text;

@@ -2,7 +2,7 @@
   --magenta: var(--smh-primary-magenta);
   --turquoise: var(--smh-primary-teal);
   --gold: var(--smh-accent-gold);
-  --warm-mist: #F9F9FA;
+  --warm-mist: var(--smh-warm-mist);
   --glass-bg: rgba(255, 255, 255, 0.08);
   --glass-border: rgba(255, 255, 255, 0.15);
 }

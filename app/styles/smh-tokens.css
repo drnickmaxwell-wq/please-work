@@ -1,4 +1,4 @@
 :root{
-  --smh-gold:#F9E8C3;            /* micro-accents only */
+  --smh-gold:var(--smh-accent-gold);            /* micro-accents only */
   --smh-parallax-max:6px;
 }

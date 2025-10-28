@@ -6,7 +6,7 @@ import { FooterLuxe } from '@/components/footer-luxe';
 export default function TeamMember(){
   const { slug } = useParams();
   return (
-    <main className="min-h-screen bg-white dark:bg-[#0b1220]">
+    <main className="min-h-screen bg-white dark:bg-[var(--smh-midnight)]">
       <StickyHeader />
       <section className="max-w-4xl mx-auto px-6 py-14">
         <div className="grid gap-6 md:grid-cols-[240px_1fr] items-start">

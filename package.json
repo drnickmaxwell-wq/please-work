@@ -13,7 +13,6 @@
     "audit:champagne": "tsx tools/audit-champagne.ts",
     "guard:preflight": "tsx tools/guard/preflight.ts",
     "brand:verify": "tsx scripts/verify-brand-tokens.ts",
-    "brand:guard": "node ./scripts/brandGuard.mjs"
     "brand:guard": "node ./scripts/brand-guard.js"
   },
   "dependencies": {
@@ -51,6 +50,6 @@
     "typescript": "^5"
   },
   "engines": {
-    "node": ">=20 <=22"
+    "node": ">=20"
   }
 }

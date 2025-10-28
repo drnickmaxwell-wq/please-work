@@ -9,7 +9,7 @@ export default function Stories(){
     { quote:'The team are incredibly gentle and kind.', name:'R. Lawson' }
   ];
   return (
-    <main className="min-h-screen bg-white dark:bg-[#0b1220]">
+    <main className="min-h-screen bg-white dark:bg-[var(--smh-midnight)]">
       <StickyHeader />
       <section className="max-w-7xl mx-auto px-6 py-14">
         <h1 className="text-3xl font-bold">Patient Stories</h1>
