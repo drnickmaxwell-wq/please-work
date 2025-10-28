@@ -22,16 +22,35 @@ export default function BrandLivePreview() {
   const [snapshot, setSnapshot] = useState<Snapshot | null>(null);
   const [waveOn, setWaveOn] = useState(false);
 
-  useEffect(() => {
+  const captureSnapshot = useCallback(() => {
     const root = document.documentElement;
     const styles = getComputedStyle(root);
-    const next = TOKENS.reduce((acc, [key, token]) => {
+    return TOKENS.reduce((acc, [key, token]) => {
       const value = styles.getPropertyValue(token).trim();
       (acc as Snapshot)[key] = value;
       return acc;
     }, {} as Snapshot);
-    setSnapshot(next);
   }, []);
+
+  useEffect(() => {
+    setSnapshot(captureSnapshot());
+
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleThemeChange = () => {
+      setSnapshot(captureSnapshot());
+    };
+
+    mediaQuery.addEventListener("change", handleThemeChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleThemeChange);
+    };
+  }, [captureSnapshot]);
+
+  const disableWaves = () => {
+    document.documentElement.style.setProperty("--hero-waves", "0");
+    setSnapshot(captureSnapshot());
+  };
 
   return (
     <main className="min-h-screen space-y-8 bg-[color:var(--smh-bg)] p-6 text-[color:var(--smh-text)]">

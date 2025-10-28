@@ -328,7 +328,7 @@ export default function CinematicHeroVideo() {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={togglePlay}
-          className="p-3 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-all duration-300"
+          className="glass-chip p-3 text-white transition-all duration-300"
         >
           {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
         </motion.button>
@@ -337,7 +337,7 @@ export default function CinematicHeroVideo() {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={toggleMute}
-          className="p-3 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-all duration-300"
+          className="glass-chip p-3 text-white transition-all duration-300"
         >
           {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
         </motion.button>
@@ -364,7 +364,7 @@ export default function CinematicHeroVideo() {
             <motion.div
               animate={{ y: [0, 12, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
-              className="w-1 h-3 bg-white/60 rounded-full mt-2"
+              className="w-1 h-3 rounded-full mt-2 bg-[color-mix(in_srgb,var(--smh-text)_40%,transparent)]"
             />
           </div>
         </motion.div>

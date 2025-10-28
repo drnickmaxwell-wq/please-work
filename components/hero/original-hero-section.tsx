@@ -236,7 +236,7 @@ const OriginalHeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="inline-flex items-center px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-pink-200 mb-8"
+          className="glass-chip inline-flex items-center px-4 py-2 border border-pink-200/60 mb-8"
         >
           <Sparkles className="w-5 h-5 text-pink-500 mr-2" />
           <span className="text-sm font-semibold text-slate-700">3D Technology Showcase</span>

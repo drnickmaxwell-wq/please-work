@@ -74,7 +74,7 @@ const FooterLuxe = () => {
             </ul>
           </div>
 
-          <div className="footer-luxe__newsletter">
+          <div className="footer-luxe__newsletter keyline-gold">
             <h4>Join our newsletter</h4>
             <p>Receive quarterly stories and gentle reminders curated by our clinical team.</p>
             <form className="footer-luxe__form" onSubmit={handleSubmit} noValidate>

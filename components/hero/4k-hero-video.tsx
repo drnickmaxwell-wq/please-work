@@ -50,6 +50,7 @@ export default function Hero4KVideo({ poster, ..._ }: Hero4KVideoProps) {
           </div>
         </div>
       </div>
+      <div className="gold-flecks" aria-hidden="true" />
     </section>
   );
 }

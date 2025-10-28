@@ -18,9 +18,15 @@ export const SMH_BRAND_COLOR_VARIABLES: Record<BrandColorName, string> = {
   gold: `var(${SMH_BRAND_COLOR_TOKENS.gold})`,
 };
 
+export const SMH_BRAND_COLOR_FALLBACKS: Record<BrandColorName, string> = {
+  magenta: SMH_BRAND_COLOR_VARIABLES.magenta,
+  teal: SMH_BRAND_COLOR_VARIABLES.teal,
+  gold: SMH_BRAND_COLOR_VARIABLES.gold,
+};
+
 export function getBrandColor(name: BrandColorName): string {
   if (typeof window === 'undefined') {
-    return SMH_BRAND_COLOR_FALLBACKS[name];
+    return SMH_BRAND_COLOR_VARIABLES[name];
   }
 
   const token = SMH_BRAND_COLOR_TOKENS[name];
@@ -28,5 +34,5 @@ export function getBrandColor(name: BrandColorName): string {
     .getPropertyValue(token)
     .trim();
 
-  return value || SMH_BRAND_COLOR_FALLBACKS[name];
+  return value || SMH_BRAND_COLOR_VARIABLES[name];
 }

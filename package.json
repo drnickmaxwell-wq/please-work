@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "build": "next build",
     "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "eslint .",
@@ -14,6 +14,7 @@
     "guard:preflight": "tsx tools/guard/preflight.ts",
     "brand:verify": "tsx scripts/verify-brand-tokens.ts",
     "brand:guard": "node ./scripts/brandGuard.mjs"
+    "brand:guard": "node ./scripts/brand-guard.js"
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.24",
@@ -40,6 +41,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.21",
     "eslint": "^9",
     "eslint-config-next": "15.5.2",
     "next-sitemap": "^4.2.3",
