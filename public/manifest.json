@@ -4,7 +4,7 @@
   "description": "Luxury coastal dental care in Shoreham-by-Sea. Experience advanced 3D dentistry, porcelain veneers, dental implants, and anxiety-free treatments.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "var(--smh-bg)",
+  "background_color": "#0B0D0F",
   "theme_color": "var(--smh-primary-magenta)",
   "orientation": "portrait-primary",
   "scope": "/",

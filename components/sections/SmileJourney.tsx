@@ -131,6 +131,11 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
         .journey-surface {
           padding-block: clamp(96px, 14vw, 168px);
           color: var(--smh-text);
+          --journey-text-subtle: color-mix(in srgb, var(--smh-text) 85%, transparent);
+          --journey-text-muted: color-mix(in srgb, var(--smh-text) 70%, transparent);
+          --journey-pill-radius: 999px;
+          --journey-shadow-rest: 0 12px 32px rgba(0, 0, 0, 0.25);
+          --journey-shadow-hover: 0 16px 48px rgba(0, 0, 0, 0.3);
         }
 
         .journey-inner {
@@ -165,7 +170,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
         .journey-header p {
           margin: 0;
           font-family: var(--font-body);
-          color: var(--smh-text-subtle);
+          color: var(--journey-text-subtle);
           font-size: clamp(16px, 2vw, 20px);
           line-height: 1.6;
           max-width: 40ch;
@@ -177,14 +182,14 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           justify-content: center;
           min-height: 48px;
           padding: 0.85rem 2.25rem;
-          border-radius: var(--radius-pill);
+          border-radius: var(--journey-pill-radius);
           font-family: var(--font-body);
           font-weight: 600;
           font-size: 1rem;
           text-decoration: none;
           color: var(--smh-ink);
           background: var(--smh-gradient);
-          box-shadow: var(--shadow-cta-rest);
+          box-shadow: var(--journey-shadow-rest);
           transition:
             transform var(--motion-duration-normal) var(--motion-easing-smooth),
             box-shadow var(--motion-duration-normal) var(--motion-easing-smooth);
@@ -192,12 +197,12 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
 
         .journey-cta:hover {
           transform: translateY(-1px);
-          box-shadow: var(--shadow-cta);
+          box-shadow: var(--journey-shadow-hover);
         }
 
         .journey-cta:focus-visible {
           outline: none;
-          box-shadow: var(--journey-card-focus), var(--shadow-cta-rest);
+          box-shadow: var(--journey-card-focus), var(--journey-shadow-rest);
         }
 
         .journey-grid {
@@ -274,7 +279,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
         .journey-card p {
           margin: 0;
           font-family: var(--font-body);
-          color: var(--smh-text-subtle);
+          color: var(--journey-text-subtle);
           line-height: 1.6;
         }
 
@@ -316,7 +321,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
         .journey-callout-content p {
           margin: 0;
           font-family: var(--font-body);
-          color: var(--smh-text-subtle);
+          color: var(--journey-text-subtle);
           line-height: 1.6;
         }
 
@@ -334,7 +339,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           justify-content: center;
           min-height: 48px;
           padding: 0.85rem 2.25rem;
-          border-radius: var(--radius-pill);
+          border-radius: var(--journey-pill-radius);
           font-family: var(--font-body);
           font-weight: 600;
           font-size: 1rem;
@@ -347,26 +352,26 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
         .journey-cta-primary {
           color: var(--smh-ink);
           background: var(--smh-gradient);
-          box-shadow: var(--shadow-cta-rest);
+          box-shadow: var(--journey-shadow-rest);
         }
 
         .journey-cta-secondary {
           color: var(--smh-text);
           background: var(--champagne-glass-bg);
           border: 1px solid var(--champagne-glass-border);
-          box-shadow: var(--shadow-cta-rest);
+          box-shadow: var(--journey-shadow-rest);
         }
 
         .journey-cta-primary:hover,
         .journey-cta-secondary:hover {
           transform: translateY(-1px);
-          box-shadow: var(--shadow-cta);
+          box-shadow: var(--journey-shadow-hover);
         }
 
         .journey-cta-primary:focus-visible,
         .journey-cta-secondary:focus-visible {
           outline: none;
-          box-shadow: var(--journey-card-focus), var(--shadow-cta-rest);
+          box-shadow: var(--journey-card-focus), var(--journey-shadow-rest);
         }
 
         @media (max-width: 768px) {

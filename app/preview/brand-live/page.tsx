@@ -28,6 +28,8 @@ const WAVE_STYLE: CSSProperties = {
   "--champagne-wave": "url('/waves/smh-wave-mask.svg') center / cover no-repeat",
 };
 
+const SUBTLE_TEXT = "color-mix(in srgb, var(--smh-text) 85%, transparent)";
+
 export default function BrandLivePreview() {
   const [waveOn, setWaveOn] = useState(false);
   const [particlesOn, setParticlesOn] = useState(true);
@@ -121,7 +123,7 @@ export default function BrandLivePreview() {
   );
 
   return (
-    <main className="min-h-screen space-y-10 bg-[color:var(--smh-bg)] p-6 text-[color:var(--smh-text)]">
+    <main className="min-h-screen space-y-10 bg-[color:var(--smh-ink)] p-6 text-[color:var(--smh-text)]">
       <Hero4KVideo showParticles={particlesOn} showWave={waveOn} />
 
       <div className="flex flex-wrap items-center gap-3">
@@ -139,7 +141,7 @@ export default function BrandLivePreview() {
         >
           Toggle particles (currently {particlesOn ? "on" : "off"})
         </button>
-        <span className="text-sm text-[color:var(--smh-text-subtle)]">
+        <span className="text-sm" style={{ color: SUBTLE_TEXT }}>
           Reduced motion: {snapshot?.reducedMotion === "yes" ? "active" : "off"}
         </span>
       </div>
@@ -151,12 +153,16 @@ export default function BrandLivePreview() {
             {diagnostics.map(([label, value]) => (
               <div key={label} className="flex flex-col gap-1 rounded-lg border border-[color:var(--champagne-glass-border)] bg-[color:var(--champagne-glass-bg)]/60 p-3">
                 <dt className="font-semibold text-[color:var(--smh-text)]">{label}</dt>
-                <dd className="font-mono text-xs text-[color:var(--smh-text-subtle)]">{value}</dd>
+                <dd className="font-mono text-xs" style={{ color: SUBTLE_TEXT }}>
+                  {value}
+                </dd>
               </div>
             ))}
           </dl>
         ) : (
-          <p className="text-sm text-[color:var(--smh-text-subtle)]">Reading tokens…</p>
+          <p className="text-sm" style={{ color: SUBTLE_TEXT }}>
+            Reading tokens…
+          </p>
         )}
       </section>
 

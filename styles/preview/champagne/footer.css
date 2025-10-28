@@ -2,12 +2,12 @@
   .footer-champagne {
     position: relative;
     overflow: hidden;
-    border-top: 1px solid color-mix(in oklab, var(--brand-gold) 30%, rgba(0, 0, 0, 0.75));
+    border-top: 1px solid color-mix(in srgb, var(--brand-gold) 30%, rgba(0, 0, 0, 0.75));
     background: linear-gradient(
       180deg,
-      color-mix(in oklab, var(--brand-magenta) 22%, #050505 78%) 0%,
-      color-mix(in oklab, var(--brand-teal) 24%, #050505 76%) 55%,
-      color-mix(in oklab, var(--brand-gold) 28%, #050505 72%) 100%
+      color-mix(in srgb, var(--brand-magenta) 22%, #050505 78%) 0%,
+      color-mix(in srgb, var(--brand-teal) 24%, #050505 76%) 55%,
+      color-mix(in srgb, var(--brand-gold) 28%, #050505 72%) 100%
     );
     color: rgba(255, 242, 222, 0.92);
     isolation: isolate;
@@ -24,7 +24,7 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--brand-gold) 100%, transparent) 45%, transparent);
+    background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--brand-gold) 100%, transparent) 45%, transparent);
     opacity: 0.1;
     pointer-events: none;
   }

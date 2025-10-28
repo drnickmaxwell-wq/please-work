@@ -1,13 +1,11 @@
 # Manus Luxury Hero – Audit & Tokens
 
 ## New / Updated Tokens
-- `--champ-start`, `--champ-mid`, `--champ-end` – define the champagne gradient sweep applied to the hero and Smile Journey backdrops.
-- `--wave-ink`, `--wave-ink-soft` – soft navy overlays used for wave masks on both sections.
-- `--fx-wave-opacity`, `--fx-grain-opacity` – opacity controls for decorative layers.
-- `--glass-bg`, `--glass-border`, `--glass-inner-ring`, `--glass-blur` – glassmorphism stack referenced by the hero pane, Smile Journey cards, and callout.
-- `--shadow-glass`, `--glow-edge` – drop shadow and glow for elevated glass surfaces.
-- `--motion-duration-fast`, `--motion-duration-normal`, `--motion-duration-slow`, `--motion-easing-smooth` – motion curves for CTA and card micro-interactions (overridden to 0ms when users prefer reduced motion).
-- `--ink`, `--ink-strong`, `--ink-on-glass`, `--body-on-glass` – typography contrast tokens for glass surfaces and overlays.
+- `--smh-primary-magenta`, `--smh-primary-teal`, `--smh-accent-gold` – brand anchors for the champagne sweep and cta states.
+- `--smh-gradient` – canonical diagonal gradient applied to hero, Smile Journey, and diagnostics surfaces.
+- `--champagne-glass-bg`, `--champagne-glass-border` – shared glass stack for hero panes, Smile Journey cards, and live previews.
+- `--champagne-vignette-alpha`, `--champagne-sheen-opacity` – overlay controls to keep gradients vivid without heavy veils.
+- `--smh-ink`, `--smh-text` – base neutrals used to derive ink-on-glass and subtle text mixes within each component.
 
 ## Implementation Notes
 - **HeroLuxury.tsx** now renders a full-bleed `<section data-hero="champagne">` with gradient, wave, and film grain layers built entirely from tokens. The inner glass pane uses the updated glass tokens, including an inner gold ring and ink veil to maintain WCAG AA contrast.

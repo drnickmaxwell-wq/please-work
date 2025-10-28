@@ -8,15 +8,15 @@ type Snapshot = {
   magenta: string;
   teal: string;
   gold: string;
-  glassStrong: string;
+  glassBg: string;
 };
 
 const KEYS: Array<[keyof Snapshot, string]> = [
-  ["gradient",   "--smh-gradient"],
-  ["magenta",    "--smh-primary-magenta"],
-  ["teal",       "--smh-primary-teal"],
-  ["gold",       "--smh-accent-gold"],
-  ["glassStrong","--glass-bg-strong"],
+  ["gradient", "--smh-gradient"],
+  ["magenta", "--smh-primary-magenta"],
+  ["teal", "--smh-primary-teal"],
+  ["gold", "--smh-accent-gold"],
+  ["glassBg", "--champagne-glass-bg"],
 ];
 
 export default function BrandLock() {
@@ -34,7 +34,7 @@ export default function BrandLock() {
   }, []);
 
   return (
-    <main className="min-h-[60vh] flex items-center justify-center bg-[color:var(--smh-bg)] text-[color:var(--smh-text)] p-6">
+    <main className="min-h-[60vh] flex items-center justify-center bg-[color:var(--smh-ink)] text-[color:var(--smh-text)] p-6">
       <div className="glass-pane max-w-3xl w-full">
         <h2 className="font-serif text-2xl mb-4">Brand tokens are live</h2>
         {snap ? (
@@ -43,7 +43,7 @@ export default function BrandLock() {
 magenta: ${snap.magenta}
 teal:    ${snap.teal}
 gold:    ${snap.gold}
-glassStrong: ${snap.glassStrong}`}
+glassBg: ${snap.glassBg}`}
           </pre>
         ) : (
           <p aria-live="polite">Reading tokens…</p>

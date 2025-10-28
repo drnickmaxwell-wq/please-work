@@ -71,9 +71,9 @@
   position: relative;
   padding: clamp(2.5rem, 6vw, 3.75rem);
   border-radius: clamp(2.5rem, 6vw, 3.75rem);
-  border: 1px solid color-mix(in oklab, var(--smh-accent-gold, var(--brand-gold)) 26%, transparent);
-  background: color-mix(in oklab, var(--smh-navy-900) 72%, transparent);
-  color: color-mix(in oklab, var(--smh-sand, var(--surface-0)) 94%, transparent);
+  border: 1px solid color-mix(in srgb, var(--smh-accent-gold, var(--brand-gold)) 26%, transparent);
+  background: color-mix(in srgb, var(--smh-navy-900) 72%, transparent);
+  color: color-mix(in srgb, var(--smh-sand, var(--surface-0)) 94%, transparent);
   overflow: hidden;
   isolation: isolate;
   -webkit-backdrop-filter: blur(28px) saturate(1.06);
@@ -86,9 +86,9 @@
   inset: 0;
   background: linear-gradient(
       160deg,
-      color-mix(in oklab, var(--smh-primary-teal, var(--brand-teal)) 12%, transparent) 0%,
+      color-mix(in srgb, var(--smh-primary-teal, var(--brand-teal)) 12%, transparent) 0%,
       transparent 55%,
-      color-mix(in oklab, var(--smh-accent-gold, var(--brand-gold)) 18%, transparent) 100%
+      color-mix(in srgb, var(--smh-accent-gold, var(--brand-gold)) 18%, transparent) 100%
     );
   opacity: 0.55;
   mix-blend-mode: soft-light;
@@ -121,7 +121,7 @@
 
 .sectionHeader p {
   margin: 0;
-  color: color-mix(in oklab, var(--smh-sand, var(--surface-0)) 80%, transparent);
+  color: color-mix(in srgb, var(--smh-sand, var(--surface-0)) 80%, transparent);
   max-width: 36rem;
 }
 
@@ -138,9 +138,9 @@
   position: relative;
   padding: clamp(1.6rem, 4vw, 2.2rem);
   border-radius: clamp(1.75rem, 4vw, 2.5rem);
-  border: 1px solid color-mix(in oklab, var(--smh-accent-gold, var(--brand-gold)) 22%, transparent);
-  background: color-mix(in oklab, var(--smh-navy-900) 60%, transparent);
-  box-shadow: inset 0 1px 0 color-mix(in oklab, var(--smh-accent-gold, var(--brand-gold)) 16%, transparent);
+  border: 1px solid color-mix(in srgb, var(--smh-accent-gold, var(--brand-gold)) 22%, transparent);
+  background: color-mix(in srgb, var(--smh-navy-900) 60%, transparent);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--smh-accent-gold, var(--brand-gold)) 16%, transparent);
   display: grid;
   gap: 0.85rem;
 }
@@ -149,13 +149,13 @@
 .equipmentCard h3 {
   margin: 0;
   font-size: 1.25rem;
-  color: color-mix(in oklab, var(--smh-sand, var(--surface-0)) 94%, transparent);
+  color: color-mix(in srgb, var(--smh-sand, var(--surface-0)) 94%, transparent);
 }
 
 .workflowCard p,
 .equipmentCard p {
   margin: 0;
-  color: color-mix(in oklab, var(--smh-sand, var(--surface-0)) 76%, transparent);
+  color: color-mix(in srgb, var(--smh-sand, var(--surface-0)) 76%, transparent);
   line-height: 1.65;
 }
 
@@ -166,8 +166,8 @@
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 999px;
-  background: color-mix(in oklab, var(--smh-accent-gold, var(--brand-gold)) 28%, transparent);
-  color: color-mix(in oklab, var(--smh-sand, var(--surface-0)) 95%, transparent);
+  background: color-mix(in srgb, var(--smh-accent-gold, var(--brand-gold)) 28%, transparent);
+  color: color-mix(in srgb, var(--smh-sand, var(--surface-0)) 95%, transparent);
 }
 
 .cardIcon img {
@@ -182,7 +182,7 @@
   padding-left: 0;
   list-style: none;
   font-size: 0.95rem;
-  color: color-mix(in oklab, var(--smh-sand, var(--surface-0)) 72%, transparent);
+  color: color-mix(in srgb, var(--smh-sand, var(--surface-0)) 72%, transparent);
 }
 
 .timeline li {
@@ -193,7 +193,7 @@
 
 .timeline span {
   font-weight: 600;
-  color: color-mix(in oklab, var(--smh-sand, var(--surface-0)) 88%, transparent);
+  color: color-mix(in srgb, var(--smh-sand, var(--surface-0)) 88%, transparent);
 }
 
 .equipmentCard footer {
@@ -201,15 +201,15 @@
   flex-wrap: wrap;
   gap: 0.5rem 1.25rem;
   font-size: 0.85rem;
-  color: color-mix(in oklab, var(--smh-sand, var(--surface-0)) 70%, transparent);
+  color: color-mix(in srgb, var(--smh-sand, var(--surface-0)) 70%, transparent);
 }
 
 .faqSection {
-  background: color-mix(in oklab, var(--smh-sand, var(--surface-0)) 94%, transparent);
+  background: color-mix(in srgb, var(--smh-sand, var(--surface-0)) 94%, transparent);
   border-radius: clamp(2.5rem, 6vw, 3.75rem);
-  border: 1px solid color-mix(in oklab, var(--smh-accent-gold, var(--brand-gold)) 20%, transparent);
+  border: 1px solid color-mix(in srgb, var(--smh-accent-gold, var(--brand-gold)) 20%, transparent);
   padding: clamp(2.5rem, 6vw, 3.5rem);
-  box-shadow: 0 24px 60px color-mix(in oklab, var(--smh-navy-900) 18%, transparent);
+  box-shadow: 0 24px 60px color-mix(in srgb, var(--smh-navy-900) 18%, transparent);
 }
 
 .faqSection h2 {

@@ -8,9 +8,9 @@
   gap: clamp(2rem, 5vw, 3rem);
   padding: clamp(2.25rem, 6vw, 3.75rem);
   border-radius: clamp(2.5rem, 6vw, 3.75rem);
-  border: 1px solid color-mix(in oklab, var(--smh-accent-gold, var(--brand-gold)) 24%, transparent);
-  background: color-mix(in oklab, var(--smh-navy-900) 78%, transparent);
-  color: color-mix(in oklab, var(--smh-sand, var(--surface-0)) 94%, transparent);
+  border: 1px solid color-mix(in srgb, var(--smh-accent-gold, var(--brand-gold)) 24%, transparent);
+  background: color-mix(in srgb, var(--smh-navy-900) 78%, transparent);
+  color: color-mix(in srgb, var(--smh-sand, var(--surface-0)) 94%, transparent);
   -webkit-backdrop-filter: blur(28px) saturate(1.08);
   backdrop-filter: blur(28px) saturate(1.08);
   overflow: hidden;
@@ -49,14 +49,14 @@
   font-size: 0.75rem;
   letter-spacing: 0.36em;
   text-transform: uppercase;
-  color: color-mix(in oklab, var(--smh-accent-gold, var(--brand-gold)) 76%, transparent);
+  color: color-mix(in srgb, var(--smh-accent-gold, var(--brand-gold)) 76%, transparent);
 }
 
 .title {
   font-size: clamp(2.25rem, 4vw, 3rem);
   line-height: 1.12;
   margin: 0;
-  color: color-mix(in oklab, var(--smh-sand, var(--surface-0)) 96%, transparent);
+  color: color-mix(in srgb, var(--smh-sand, var(--surface-0)) 96%, transparent);
 }
 
 .copy {
@@ -64,7 +64,7 @@
   max-width: 40rem;
   font-size: clamp(1.05rem, 2.4vw, 1.2rem);
   line-height: 1.7;
-  color: color-mix(in oklab, var(--smh-sand, var(--surface-0)) 78%, transparent);
+  color: color-mix(in srgb, var(--smh-sand, var(--surface-0)) 78%, transparent);
 }
 
 .benefits {
@@ -82,9 +82,9 @@
   align-items: start;
   padding: 1rem 1.25rem;
   border-radius: 1.5rem;
-  border: 1px solid color-mix(in oklab, var(--smh-accent-gold, var(--brand-gold)) 24%, transparent);
-  background: color-mix(in oklab, var(--smh-navy-900) 58%, transparent);
-  box-shadow: inset 0 1px 0 color-mix(in oklab, var(--smh-accent-gold, var(--brand-gold)) 18%, transparent);
+  border: 1px solid color-mix(in srgb, var(--smh-accent-gold, var(--brand-gold)) 24%, transparent);
+  background: color-mix(in srgb, var(--smh-navy-900) 58%, transparent);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--smh-accent-gold, var(--brand-gold)) 18%, transparent);
 }
 
 .benefitIcon {
@@ -93,8 +93,8 @@
   width: 2.25rem;
   height: 2.25rem;
   border-radius: 999px;
-  background: color-mix(in oklab, var(--smh-accent-gold, var(--brand-gold)) 30%, transparent);
-  color: color-mix(in oklab, var(--smh-sand, var(--surface-0)) 92%, transparent);
+  background: color-mix(in srgb, var(--smh-accent-gold, var(--brand-gold)) 30%, transparent);
+  color: color-mix(in srgb, var(--smh-sand, var(--surface-0)) 92%, transparent);
   font-size: 1.1rem;
   font-weight: 600;
 }
@@ -103,12 +103,12 @@
   margin: 0;
   font-size: 1.1rem;
   font-weight: 600;
-  color: color-mix(in oklab, var(--smh-sand, var(--surface-0)) 92%, transparent);
+  color: color-mix(in srgb, var(--smh-sand, var(--surface-0)) 92%, transparent);
 }
 
 .benefitDescription {
   margin: 0.25rem 0 0;
-  color: color-mix(in oklab, var(--smh-sand, var(--surface-0)) 74%, transparent);
+  color: color-mix(in srgb, var(--smh-sand, var(--surface-0)) 74%, transparent);
   font-size: 0.98rem;
   line-height: 1.6;
 }
@@ -123,13 +123,13 @@
 .secondaryLink {
   font-weight: 500;
   text-decoration: none;
-  color: color-mix(in oklab, var(--smh-sand, var(--surface-0)) 78%, transparent);
+  color: color-mix(in srgb, var(--smh-sand, var(--surface-0)) 78%, transparent);
   transition: color 180ms var(--motion-ease, cubic-bezier(0.4, 0, 0.2, 1));
 }
 
 .secondaryLink:hover,
 .secondaryLink:focus-visible {
-  color: color-mix(in oklab, var(--smh-sand, var(--surface-0)) 94%, transparent);
+  color: color-mix(in srgb, var(--smh-sand, var(--surface-0)) 94%, transparent);
   outline: none;
 }
 
@@ -138,7 +138,7 @@
   z-index: 1;
   border-radius: clamp(1.75rem, 4vw, 2.5rem);
   overflow: hidden;
-  border: 1px solid color-mix(in oklab, var(--smh-accent-gold, var(--brand-gold)) 24%, transparent);
+  border: 1px solid color-mix(in srgb, var(--smh-accent-gold, var(--brand-gold)) 24%, transparent);
   background: var(--smh-media-depth);
   min-height: clamp(12rem, 30vw, 16rem);
   display: grid;
@@ -155,7 +155,7 @@
 
 .mediaFallback {
   text-align: center;
-  color: color-mix(in oklab, var(--smh-sand, var(--surface-0)) 68%, transparent);
+  color: color-mix(in srgb, var(--smh-sand, var(--surface-0)) 68%, transparent);
   font-size: 0.95rem;
   line-height: 1.6;
   max-width: 18rem;

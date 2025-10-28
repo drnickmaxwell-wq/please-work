@@ -28,8 +28,8 @@ export default function HeroLuxury({
         magenta: s.getPropertyValue("--smh-primary-magenta").trim(),
         teal: s.getPropertyValue("--smh-primary-teal").trim(),
         gold: s.getPropertyValue("--smh-accent-gold").trim(),
-        glassStrong: s.getPropertyValue("--glass-bg-strong").trim(),
-        glassBorder: s.getPropertyValue("--glass-border").trim(),
+        glassBg: s.getPropertyValue("--champagne-glass-bg").trim(),
+        glassBorder: s.getPropertyValue("--champagne-glass-border").trim(),
       });
     }
   }, []);
@@ -46,10 +46,10 @@ export default function HeroLuxury({
         <div
           className="glass-pane mx-auto max-w-5xl rounded-3xl px-6 py-10 md:px-10 md:py-14 shadow-none"
           style={{
-            border: "1px solid var(--glass-border)",
+            border: "1px solid var(--champagne-glass-border)",
             backdropFilter: "blur(14px)",
             WebkitBackdropFilter: "blur(14px)",
-            boxShadow: "var(--glass-box-shadow)",
+            boxShadow: "0 8px 24px rgba(0, 0, 0, 0.18)",
           }}
         >
           <div className="hero-copy">
@@ -97,6 +97,16 @@ export default function HeroLuxury({
           position: relative;
           width: min(100%, 720px);
           color: var(--smh-text);
+          background: var(--champagne-glass-bg);
+          border: 1px solid var(--champagne-glass-border);
+          --hero-ink-on-glass: color-mix(in srgb, var(--smh-ink) 78%, transparent 22%);
+          --hero-body-on-glass: color-mix(in srgb, var(--smh-text) 92%, transparent 8%);
+          --hero-glass-weak: color-mix(in srgb, white 4%, transparent);
+          --hero-pane-highlight: linear-gradient(120deg, rgba(255, 255, 255, 0.32) 0%, transparent 80%);
+          --hero-pill-radius: 999px;
+          --hero-shadow-rest: 0 12px 32px rgba(0, 0, 0, 0.25);
+          --hero-shadow-hover: 0 16px 48px rgba(0, 0, 0, 0.3);
+          --hero-focus-ring: 0 0 0 1px color-mix(in srgb, var(--smh-accent-gold) 46%, transparent);
         }
 
         .glass-pane::before {
@@ -104,7 +114,7 @@ export default function HeroLuxury({
           position: absolute;
           inset: 0;
           border-radius: inherit;
-          background: var(--smh-hero-pane-highlight);
+          background: var(--hero-pane-highlight);
           mix-blend-mode: soft-light;
           opacity: 0.55;
           pointer-events: none;
@@ -118,7 +128,7 @@ export default function HeroLuxury({
 
         h1 {
           margin: 0;
-          color: var(--ink-on-glass);
+          color: var(--hero-ink-on-glass);
           font-size: clamp(34px, 6vw, 64px);
           line-height: 1.04;
           letter-spacing: -0.01em;
@@ -128,7 +138,7 @@ export default function HeroLuxury({
 
         .hero-subtitle {
           margin: 0;
-          color: var(--body-on-glass);
+          color: var(--hero-body-on-glass);
           font-family: var(--font-body);
           font-size: clamp(16px, 2.2vw, 20px);
           line-height: 1.6;
@@ -166,7 +176,7 @@ export default function HeroLuxury({
           justify-content: center;
           min-height: 48px;
           padding: 0.85rem 2.25rem;
-          border-radius: var(--radius-pill);
+          border-radius: var(--hero-pill-radius);
           font-family: var(--font-body);
           font-weight: 600;
           font-size: 1rem;
@@ -174,28 +184,28 @@ export default function HeroLuxury({
           transition:
             transform var(--motion-duration-normal) var(--motion-easing-smooth),
             box-shadow var(--motion-duration-normal) var(--motion-easing-smooth);
-          box-shadow: var(--shadow-cta-rest);
+          box-shadow: var(--hero-shadow-rest);
         }
 
         .hero-cta:hover {
           transform: translateY(-1px);
-          box-shadow: var(--shadow-cta);
+          box-shadow: var(--hero-shadow-hover);
         }
 
         .hero-cta:focus-visible {
           outline: none;
-          box-shadow: var(--journey-card-focus), var(--shadow-cta-rest);
+          box-shadow: var(--hero-focus-ring), var(--hero-shadow-rest);
         }
 
         .hero-cta-primary {
-          color: var(--ink);
-          background: var(--cta-gradient);
+          color: var(--smh-ink);
+          background: var(--smh-gradient);
         }
 
         .hero-cta-secondary {
-          color: var(--ink-on-glass);
-          background: var(--glass-bg-weak);
-          border: 1px solid var(--glass-border);
+          color: var(--hero-ink-on-glass);
+          background: var(--hero-glass-weak);
+          border: 1px solid var(--champagne-glass-border);
         }
 
         @media (max-width: 768px) {

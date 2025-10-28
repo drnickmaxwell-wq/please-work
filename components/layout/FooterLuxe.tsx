@@ -20,6 +20,9 @@ const FooterLuxe = () => {
   const mainLinks = getEnabledLinks(MAIN_NAV);
   const resourceLinks = getEnabledLinks(RESOURCES);
 
+  const INK_95 = 'color-mix(in srgb, var(--smh-ink) 5%, white 95%)';
+  const INK_80 = 'color-mix(in srgb, var(--smh-ink) 20%, white 80%)';
+
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<FormStatus>('idle');
   const [message, setMessage] = useState('');
@@ -28,7 +31,7 @@ const FooterLuxe = () => {
 
   const footerStyle: CSSProperties = {
     background: 'var(--smh-ink)',
-    color: 'var(--smh-ink-95)',
+    color: INK_95,
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -147,6 +150,8 @@ const FooterLuxe = () => {
           --footer-surface-strong: color-mix(in srgb, var(--smh-ink) 68%, transparent 32%);
           --footer-surface-soft: color-mix(in srgb, var(--smh-ink) 54%, transparent 46%);
           --footer-surface-muted: color-mix(in srgb, var(--smh-ink) 42%, transparent 58%);
+          --footer-ink-95: ${INK_95};
+          --footer-ink-80: ${INK_80};
         }
 
         [data-footer] a {
@@ -215,7 +220,7 @@ const FooterLuxe = () => {
           margin: 0;
           font-size: 1.6rem;
           font-family: var(--font-display, 'Playfair Display', serif);
-          color: var(--smh-ink-95);
+          color: var(--footer-ink-95);
         }
 
         h4 {
@@ -223,12 +228,12 @@ const FooterLuxe = () => {
           text-transform: uppercase;
           letter-spacing: 0.14em;
           font-size: 0.85rem;
-          color: var(--smh-ink-80);
+          color: var(--footer-ink-80);
         }
 
         p {
           margin: 0;
-          color: var(--smh-ink-80);
+          color: var(--footer-ink-80);
         }
 
         ul {
@@ -272,12 +277,12 @@ const FooterLuxe = () => {
           outline: none;
           border-radius: inherit;
           background: var(--footer-surface-soft);
-          color: var(--smh-ink-95);
+          color: var(--footer-ink-95);
           font-family: var(--font-body, 'Inter', sans-serif);
         }
 
         .footer-luxe__input::placeholder {
-          color: color-mix(in srgb, var(--smh-ink-95) 68%, transparent 32%);
+          color: color-mix(in srgb, var(--footer-ink-95) 68%, transparent 32%);
         }
 
         .footer-luxe__field:focus-within {
@@ -301,7 +306,7 @@ const FooterLuxe = () => {
         .footer-luxe__feedback {
           font-size: 0.9rem;
           min-height: 1.2rem;
-          color: color-mix(in srgb, var(--smh-ink-95) 76%, transparent 24%);
+          color: color-mix(in srgb, var(--footer-ink-95) 76%, transparent 24%);
         }
 
         .footer-luxe__feedback[data-status='error'] {

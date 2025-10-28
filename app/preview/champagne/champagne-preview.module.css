@@ -4,6 +4,7 @@
   padding: clamp(1.5rem, 5vw, 3rem);
   background: color-mix(in srgb, var(--smh-sand) 86%, transparent);
   color: var(--smh-text);
+  --preview-text-muted: color-mix(in srgb, var(--smh-text) 70%, transparent);
 }
 
 .controls {
@@ -30,7 +31,7 @@
 .controlsNotice {
   font-size: 0.85rem;
   line-height: 1.6;
-  color: color-mix(in srgb, var(--smh-text-muted) 78%, transparent);
+  color: color-mix(in srgb, var(--preview-text-muted) 78%, transparent);
   max-width: 32rem;
 }
 
@@ -96,7 +97,7 @@
 
 .output {
   font-size: 0.85rem;
-  color: color-mix(in srgb, var(--smh-text-muted) 82%, transparent);
+  color: color-mix(in srgb, var(--preview-text-muted) 82%, transparent);
 }
 
 .heroFrame {
@@ -160,7 +161,7 @@
 
 .heroNote {
   font-size: 0.9rem;
-  color: color-mix(in srgb, var(--smh-text-muted) 82%, transparent);
+  color: color-mix(in srgb, var(--preview-text-muted) 82%, transparent);
   max-width: 48rem;
 }
 

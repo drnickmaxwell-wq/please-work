@@ -45,7 +45,7 @@ export default function CookieBanner() {
   const [open, setOpen] = useState(false);
 
   const containerStyle = {
-    '--cookie-dark-bg': 'color-mix(in srgb, var(--smh-bg) 95%, transparent 5%)',
+    '--cookie-dark-bg': 'color-mix(in srgb, var(--smh-ink) 95%, transparent 5%)',
   } as CSSProperties;
 
   useEffect(() => {

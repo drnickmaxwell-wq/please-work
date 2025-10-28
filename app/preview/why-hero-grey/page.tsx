@@ -8,7 +8,7 @@ type TokenSnapshot = {
   magenta: string;
   teal: string;
   gold: string;
-  glassStrong: string;
+  glassBg: string;
   glassBorder: string;
 };
 
@@ -84,12 +84,12 @@ export default function WhyHeroGreyPage() {
       magenta: rootStyles.getPropertyValue("--smh-primary-magenta").trim(),
       teal: rootStyles.getPropertyValue("--smh-primary-teal").trim(),
       gold: rootStyles.getPropertyValue("--smh-accent-gold").trim(),
-      glassStrong: rootStyles.getPropertyValue("--glass-bg-strong").trim(),
-      glassBorder: rootStyles.getPropertyValue("--glass-border").trim(),
+      glassBg: rootStyles.getPropertyValue("--champagne-glass-bg").trim(),
+      glassBorder: rootStyles.getPropertyValue("--champagne-glass-border").trim(),
     };
 
     console.log("[champagne-preview] hero surfaces", {
-      "--glass-border": tokens.glassBorder,
+      "--champagne-glass-border": tokens.glassBorder,
       heroBackground,
       paneBackground,
     });

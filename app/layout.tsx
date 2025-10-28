@@ -153,7 +153,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className="antialiased text-slate-900 overflow-x-hidden min-h-screen bg-[var(--smh-bg)]"
+        className="antialiased text-slate-900 overflow-x-hidden min-h-screen bg-[color:var(--smh-ink)]"
         style={{
           WebkitFontSmoothing: 'antialiased',
           MozOsxFontSmoothing: 'grayscale',

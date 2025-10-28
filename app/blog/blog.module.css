@@ -3,10 +3,11 @@
   isolation: isolate;
   background: linear-gradient(
     180deg,
-    color-mix(in oklab, var(--smh-sand, var(--surface-0)) 96%, transparent),
-    color-mix(in oklab, var(--smh-champagne) 88%, transparent)
+    color-mix(in srgb, var(--smh-sand, var(--surface-0)) 96%, transparent),
+    color-mix(in srgb, var(--smh-champagne) 88%, transparent)
   );
-  color: color-mix(in oklab, var(--smh-text) 94%, transparent);
+  color: color-mix(in srgb, var(--smh-text) 94%, transparent);
+  --blog-text-muted: color-mix(in srgb, var(--smh-text) 70%, transparent);
 }
 
 .page::before {
@@ -51,19 +52,19 @@
   font-size: 0.78rem;
   letter-spacing: 0.36em;
   text-transform: uppercase;
-  color: color-mix(in oklab, var(--smh-accent-gold, var(--brand-gold)) 74%, transparent);
+  color: color-mix(in srgb, var(--smh-accent-gold, var(--brand-gold)) 74%, transparent);
 }
 
 .header h1 {
   margin: 0;
   font-size: clamp(2.75rem, 5vw, 3.75rem);
-  color: color-mix(in oklab, var(--smh-text) 96%, transparent);
+  color: color-mix(in srgb, var(--smh-text) 96%, transparent);
 }
 
 .header p {
   margin: 0 auto;
   max-width: 40rem;
-  color: color-mix(in oklab, var(--smh-text-muted) 78%, transparent);
+  color: color-mix(in srgb, var(--blog-text-muted) 78%, transparent);
 }
 
 .grid {
@@ -121,7 +122,7 @@
 .cardTitle {
   margin: 0;
   font-size: 1.45rem;
-  color: color-mix(in oklab, var(--smh-sand, var(--surface-0)) 96%, transparent);
+  color: color-mix(in srgb, var(--smh-sand, var(--surface-0)) 96%, transparent);
   position: relative;
 }
 
@@ -133,7 +134,7 @@
   width: 0;
   height: 2px;
   border-radius: 999px;
-  background: color-mix(in oklab, var(--smh-accent-gold, var(--brand-gold)) 82%, transparent);
+  background: color-mix(in srgb, var(--smh-accent-gold, var(--brand-gold)) 82%, transparent);
   transition: width 220ms var(--motion-ease, cubic-bezier(0.4, 0, 0.2, 1));
 }
 
@@ -144,7 +145,7 @@
 
 .cardCopy {
   margin: 0;
-  color: color-mix(in oklab, var(--smh-sand, var(--surface-0)) 78%, transparent);
+  color: color-mix(in srgb, var(--smh-sand, var(--surface-0)) 78%, transparent);
   line-height: 1.7;
 }
 
@@ -153,7 +154,7 @@
   align-items: center;
   gap: 0.5rem;
   font-weight: 600;
-  color: color-mix(in oklab, var(--smh-accent-gold, var(--brand-gold)) 70%, transparent);
+  color: color-mix(in srgb, var(--smh-accent-gold, var(--brand-gold)) 70%, transparent);
   text-decoration: none;
   transition: color 180ms var(--motion-ease, cubic-bezier(0.4, 0, 0.2, 1)),
     transform 180ms var(--motion-ease, cubic-bezier(0.4, 0, 0.2, 1));
@@ -166,7 +167,7 @@
 
 .cardLink:hover,
 .cardLink:focus-visible {
-  color: color-mix(in oklab, var(--smh-text) 95%, transparent);
+  color: color-mix(in srgb, var(--smh-text) 95%, transparent);
   transform: translateY(-1px);
   outline: none;
 }
