@@ -11,7 +11,9 @@
   --ink-95:#F2F2F2;
   --pane-vignette-alpha:0.12;  /* subtle */
   --particles-opacity:0.08;    /* subtle */
+}
 
+:root{
   --smh-ink:var(--ink);
   --smh-ink-95:var(--ink-95);
   --smh-ink-80:color-mix(in oklab, var(--ink-95) 80%, transparent);
