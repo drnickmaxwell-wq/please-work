@@ -4,7 +4,15 @@
 @import "@/styles/tokens.css";
 @import "@/styles/brand/brand-gradient.css";
 @import "tailwindcss";
-@import "@/app/styles/smh-tokens.css";
+
+/* Glass helper */
+.glass-pane{
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 1px 0 var(--glass-border) inset, 0 8px 24px rgba(0,0,0,.18);
+  border-radius: 18px;
+}
 
 /* Tailwind 4 design-token bridge → reads our CSS variables */
 @theme {
@@ -19,13 +27,4 @@
   color-scheme: light dark;
   background-color: var(--smh-bg);
   color: var(--smh-text);
-}
-
-/* Utility helpers used by brand-lock and previews */
-.glass-pane {
-  background: var(--glass-bg-strong);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
-  border-radius: 18px;
 }

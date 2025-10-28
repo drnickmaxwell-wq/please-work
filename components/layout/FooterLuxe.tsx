@@ -43,15 +43,13 @@ const FooterLuxe = () => {
   };
 
   return (
-    <footer className="footer-luxe relative text-[color:var(--smh-text)]" data-footer>
+    <footer className="footer-luxe" data-footer>
       <div className="footer-luxe__rim" aria-hidden="true" />
       <div className="footer-luxe__inner">
         <div className="footer-luxe__grid">
           <div className="footer-luxe__brand">
             <h3>St Mary’s House Dental</h3>
-            <p>
-              Calm, contemporary care using precision technology and a lifetime approach to oral health.
-            </p>
+            <p>Calm, contemporary care using precision technology and a lifetime approach to oral health.</p>
           </div>
 
           <div>
@@ -118,13 +116,7 @@ const FooterLuxe = () => {
           <p>© {new Date().getFullYear()} St Mary’s House Dental Care. All rights reserved.</p>
           <div className="footer-luxe__social">
             {SOCIAL_LINKS.map((social) => (
-              <a
-                key={social.href}
-                href={social.href}
-                target="_blank"
-                rel="noreferrer noopener"
-                aria-label={social.label}
-              >
+              <a key={social.href} href={social.href} target="_blank" rel="noreferrer noopener" aria-label={social.label}>
                 <span aria-hidden="true">{social.short}</span>
               </a>
             ))}
@@ -139,41 +131,47 @@ const FooterLuxe = () => {
       </div>
       <style jsx>{`
         [data-footer] {
-          background: var(--smh-footer-bg);
-          border-top: 1px solid color-mix(in srgb, var(--smh-accent-gold) 22%, transparent);
+          background: var(--footer-ink-grad);
+          color: var(--smh-text);
         }
 
         [data-footer] a {
           color: var(--smh-text);
+          opacity: 0.92;
+          text-decoration: none;
+          transition: opacity var(--motion-duration-normal, 160ms) var(--motion-easing-smooth, ease);
+        }
+
+        [data-footer] a:hover,
+        [data-footer] a:focus-visible {
+          opacity: 1;
         }
 
         .footer-luxe {
           position: relative;
           overflow: hidden;
           padding: clamp(3.5rem, 7vw, 5rem) clamp(1.5rem, 5vw, 4.5rem) clamp(2.5rem, 4vw, 3.5rem);
-          box-shadow: var(--footer-shadow);
           isolation: isolate;
         }
 
         .footer-luxe::before {
           content: '';
           position: absolute;
-          inset: -10%;
+          inset: -12%;
           pointer-events: none;
           background:
-            radial-gradient(6px 6px at 14% 20%, var(--footer-particles-ink) 0 60%, var(--footer-clear) 61%) no-repeat,
-            radial-gradient(8px 8px at 42% 72%, var(--footer-particles-ink) 0 60%, var(--footer-clear) 61%) no-repeat,
-            radial-gradient(5px 5px at 78% 34%, var(--footer-particles-ink) 0 60%, var(--footer-clear) 61%) no-repeat;
-          filter: blur(0.3px);
-          opacity: 0.24;
+            radial-gradient(8px 8px at 18% 24%, color-mix(in srgb, var(--brand-gold) 32%, transparent) 0 60%, transparent 61%) no-repeat,
+            radial-gradient(6px 6px at 64% 70%, color-mix(in srgb, var(--brand-gold) 26%, transparent) 0 60%, transparent 61%) no-repeat,
+            radial-gradient(4px 4px at 84% 32%, color-mix(in srgb, var(--brand-gold) 22%, transparent) 0 60%, transparent 61%) no-repeat;
+          filter: blur(0.4px);
+          opacity: 0.12;
           z-index: 0;
-          animation: float calc(var(--motion-duration-slow) * 6) var(--motion-easing-smooth) infinite alternate;
         }
 
         .footer-luxe__rim {
           height: 1px;
           width: 100%;
-          background: var(--smh-footer-rim);
+          background: var(--footer-keyline);
           margin-bottom: clamp(2rem, 4vw, 3rem);
           position: relative;
           z-index: 2;
@@ -212,12 +210,12 @@ const FooterLuxe = () => {
           text-transform: uppercase;
           letter-spacing: 0.14em;
           font-size: 0.85rem;
-          color: var(--smh-accent-gold);
+          color: color-mix(in srgb, var(--brand-gold) 62%, var(--smh-text) 38%);
         }
 
         p {
           margin: 0;
-          color: var(--smh-text);
+          color: color-mix(in srgb, var(--smh-text) 90%, transparent);
         }
 
         ul {
@@ -226,16 +224,6 @@ const FooterLuxe = () => {
           margin: 0;
           display: grid;
           gap: 0.75rem;
-        }
-
-        a {
-          text-decoration: none;
-          transition: color var(--motion-duration-normal) var(--motion-easing-smooth);
-        }
-
-        a:hover,
-        a:focus-visible {
-          color: var(--smh-accent-gold);
         }
 
         .footer-luxe__newsletter p {
@@ -251,10 +239,8 @@ const FooterLuxe = () => {
         .footer-luxe__field {
           position: relative;
           border-radius: 14px;
-          background: var(--input-bg);
-          border: 1px solid var(--input-border);
-          box-shadow: var(--cta-glow);
-          backdrop-filter: blur(var(--footer-blur));
+          background: color-mix(in srgb, var(--footer-ink) 68%, transparent 32%);
+          box-shadow: 0 0 0 1px var(--footer-keyline) inset;
         }
 
         .footer-luxe__field::before {
@@ -262,7 +248,7 @@ const FooterLuxe = () => {
           position: absolute;
           inset: 8px;
           border-radius: inherit;
-          box-shadow: 0 0 0 1px var(--footer-ring);
+          box-shadow: 0 0 0 1px color-mix(in srgb, var(--footer-keyline) 70%, transparent);
           pointer-events: none;
         }
 
@@ -272,18 +258,18 @@ const FooterLuxe = () => {
           border: none;
           outline: none;
           border-radius: inherit;
-          background: var(--footer-clear);
-          color: var(--input-text);
+          background: color-mix(in srgb, var(--footer-ink) 45%, transparent 55%);
+          color: var(--smh-text);
           font-family: var(--font-body, 'Inter', sans-serif);
         }
 
         .footer-luxe__input::placeholder {
-          color: var(--input-text);
-          opacity: 0.6;
+          color: var(--smh-text);
+          opacity: 0.54;
         }
 
         .footer-luxe__input:focus-visible {
-          outline: 2px solid var(--footer-ring);
+          outline: 2px solid var(--footer-keyline);
           outline-offset: 2px;
         }
 
@@ -293,7 +279,7 @@ const FooterLuxe = () => {
         }
 
         .footer-luxe__button:focus-visible {
-          outline: 2px solid var(--footer-ring);
+          outline: 2px solid var(--footer-keyline);
           outline-offset: 2px;
         }
 
@@ -319,7 +305,7 @@ const FooterLuxe = () => {
           gap: 1rem 2rem;
           justify-content: space-between;
           align-items: center;
-          border-top: 1px solid color-mix(in srgb, var(--footer-particles-ink) 40%, var(--footer-clear));
+          border-top: 1px solid color-mix(in srgb, var(--footer-keyline) 80%, transparent);
           padding-top: clamp(1.5rem, 3vw, 2.5rem);
         }
 
@@ -335,16 +321,16 @@ const FooterLuxe = () => {
           width: 2.5rem;
           height: 2.5rem;
           border-radius: 999px;
-          border: 1px solid var(--footer-ring);
-          color: var(--smh-accent-gold);
-          transition: background-color var(--motion-duration-normal) var(--motion-easing-smooth),
-            color var(--motion-duration-normal) var(--motion-easing-smooth);
+          box-shadow: 0 0 0 1px var(--footer-keyline) inset;
+          color: color-mix(in srgb, var(--brand-gold) 68%, var(--smh-text) 32%);
+          transition: background-color var(--motion-duration-normal, 160ms) var(--motion-easing-smooth, ease),
+            color var(--motion-duration-normal, 160ms) var(--motion-easing-smooth, ease);
         }
 
         .footer-luxe__social a:hover,
         .footer-luxe__social a:focus-visible {
-          background: color-mix(in srgb, var(--footer-ring) 45%, var(--footer-clear));
-          color: var(--ink-on-glass);
+          background: color-mix(in srgb, var(--brand-gold) 16%, transparent 84%);
+          color: var(--smh-text);
         }
 
         .footer-luxe__links {
@@ -383,16 +369,6 @@ const FooterLuxe = () => {
         @media (prefers-reduced-motion: reduce) {
           .footer-luxe::before {
             animation: none;
-          }
-        }
-
-        @keyframes float {
-          from {
-            transform: translateY(0);
-          }
-
-          to {
-            transform: translateY(-0.5px);
           }
         }
       `}</style>

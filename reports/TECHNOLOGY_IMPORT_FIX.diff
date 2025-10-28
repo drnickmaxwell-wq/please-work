@@ -66,8 +66,8 @@ index e63bacd..15ceac3 100644
 -@import '../../brand/lighting-effects.css';
 -
  :root {
-   --magenta: #C2185B;
-   --turquoise: #40C4B4;
+   --magenta: var(--smh-primary-magenta);
+   --turquoise: var(--smh-primary-teal);
 @@ -407,3 +404,26 @@
    }
  }

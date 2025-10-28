@@ -1,26 +1,25 @@
-
-
 # St Mary’s House Dental – Champagne Design Lock (v5.0)
 
 **Core tokens**
 
-Token	Value	Purpose
---smh-primary-magenta	#C2185B	Hero start, gradient base
---smh-primary-teal	#40C4B4	Hero end, accent hover
---smh-accent-gold	#D4AF37	Icons, dividers, keylines
---smh-gradient	linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%)	Universal background
---smh-bg	#FFFFFF (light) / #0A0A0A (dark)	Neutral surfaces
---smh-text	#1A1A1A (light) / #FFFFFF (dark)	Primary text
---glass-bg-strong	color-mix(in srgb,var(--smh-bg) 40%, transparent 60%)	Pane background
---glass-border	color-mix(in srgb,var(--smh-text) 14%, transparent 86%)	Pane rim
---rim-gold-inset	inset 0 0 0 1px color-mix(in srgb, var(--smh-accent-gold) 60%, transparent 40%)	Accent outline
+Token | Value reference | Purpose
+---|---|---
+--smh-primary-magenta | Defined in `styles/tokens/smh-champagne-tokens.css` | Hero start, gradient base
+--smh-primary-teal | Defined in `styles/tokens/smh-champagne-tokens.css` | Hero end, accent hover
+--smh-accent-gold | Defined in `styles/tokens/smh-champagne-tokens.css` | Icons, dividers, keylines
+--smh-gradient | Canonical gradient token (`var(--smh-gradient)`) | Universal background
+--smh-bg | CSS variable switches per color-scheme | Neutral surfaces
+--smh-text | CSS variable switches per color-scheme | Primary text
+--glass-bg-strong | `var(--glass-bg-strong)` | Pane background
+--glass-border | `var(--glass-border)` | Pane rim
+--rim-gold-inset | `var(--rim-gold-inset)` | Accent outline
 
 Fonts:
 Playfair Display (headlines) · Inter (UI/body)
 
 Visual layers (hero):
-gradient → wave mask → flecks (gold, blur=8px, opacity≈0.08) → film grain (≈6%) → content
+gradient → wave mask → flecks (gold, blur≈0.6px, opacity≈0.06) → content
 
 CI protection:
-pnpm run brand:guard
-Blocks merges if --glass-bg-strong exceeds 60 % base colour or if any hard-coded brand hex is detected outside /styles/tokens.css.
+`pnpm run brand:guard`
+Blocks merges if `--glass-bg-strong` exceeds guard limits or if any hard-coded brand hex is detected outside `/styles/tokens/`.
