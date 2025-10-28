@@ -3,7 +3,6 @@
   isolation:isolate;
   background: var(--brand-gradient);
   border-radius: 1.25rem;
-  --champagne-particles-opacity: var(--particles-opacity);
 }
 
 .champagne-surface[data-wave="on"]::before{
