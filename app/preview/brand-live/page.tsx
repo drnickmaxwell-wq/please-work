@@ -50,6 +50,12 @@ glassBorder: ${snapshot.glassBorder}`}
           <p aria-live="polite">Reading tokens…</p>
         )}
       </div>
+      <section data-hero="champagne" data-page="home" className="relative min-h-[40vh] rounded-2xl overflow-hidden mt-8">
+        <div className="gold-flecks" aria-hidden />
+        <div className="absolute inset-0 grid place-items-center">
+          <p className="text-white/80 font-serif text-xl">Champagne overlays test</p>
+        </div>
+      </section>
     </main>
   );
 }
