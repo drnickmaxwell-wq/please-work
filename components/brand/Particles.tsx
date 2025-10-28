@@ -31,31 +31,32 @@ function parseHexToRgb(input: string) {
 
 export default function Particles({ className, style, ...rest }: ParticlesProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [shouldRender, setShouldRender] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const update = () => setShouldRender(!motionQuery.matches);
+    const update = () => setPrefersReducedMotion(motionQuery.matches);
     update();
 
-    if (motionQuery.addEventListener) {
-      motionQuery.addEventListener('change', update);
-    } else {
-      motionQuery.addListener(update);
-    }
-
-    return () => {
-      if (motionQuery.removeEventListener) {
-        motionQuery.removeEventListener('change', update);
-      } else {
-        motionQuery.removeListener(update);
-      }
-    };
+    motionQuery.addEventListener('change', update);
+    return () => motionQuery.removeEventListener('change', update);
   }, []);
 
+  const { ['data-state']: requestedState, ...forwardProps } = rest as (typeof rest) & {
+    'data-state'?: string;
+  };
+  const finalState = requestedState === 'off' || prefersReducedMotion ? 'off' : 'on';
+
   useEffect(() => {
-    if (!shouldRender) return;
+    if (finalState !== 'on') {
+      const canvas = canvasRef.current;
+      const context = canvas?.getContext('2d');
+      if (canvas && context) {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+      }
+      return;
+    }
     const canvas = canvasRef.current;
     if (!canvas) return;
     const context = canvas.getContext('2d');
@@ -133,17 +134,21 @@ export default function Particles({ className, style, ...rest }: ParticlesProps)
       window.removeEventListener('resize', handleResize);
       context.clearRect(0, 0, width, height);
     };
-  }, [shouldRender]);
-
-  if (!shouldRender) {
-    return null;
-  }
+  }, [finalState]);
 
   const mergedStyle = {
-    opacity: 0.08,
     pointerEvents: 'none' as const,
     ...(style ?? {}),
   };
 
-  return <canvas ref={canvasRef} aria-hidden className={className} style={mergedStyle} {...rest} />;
+  return (
+    <canvas
+      ref={canvasRef}
+      aria-hidden
+      className={className}
+      data-state={finalState}
+      style={mergedStyle}
+      {...forwardProps}
+    />
+  );
 }

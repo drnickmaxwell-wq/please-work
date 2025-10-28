@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState, type CSSProperties } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { MAIN_NAV, TREATMENTS, RESOURCES, type NavLink } from '@/lib/nav';
@@ -25,11 +25,24 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [hasChampagneSurface, setHasChampagneSurface] = useState(false);
 
   const { scrollY } = useScroll();
   const headerOpacity = useTransform(scrollY, [0, 100], [0.95, 1]);
   const headerScale = useTransform(scrollY, [0, 100], [1.02, 1]);
   const logoScale = useTransform(scrollY, [0, 100], [1, 0.9]);
+
+  const baseVeil = hasChampagneSurface ? 18 : 32;
+  const scrolledVeil = hasChampagneSurface ? 26 : 42;
+  const backgroundMix = isScrolled ? scrolledVeil : baseVeil;
+  const headerVeilStyle: CSSProperties = {
+    background: `color-mix(in srgb, var(--ink) ${backgroundMix}%, transparent)` as string,
+    borderColor: 'color-mix(in srgb, var(--smh-accent-gold) 26%, transparent 74%)',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    backdropFilter: 'blur(12px)',
+    WebkitBackdropFilter: 'blur(12px)',
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,6 +51,23 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const updateSurface = () => {
+      setHasChampagneSurface(Boolean(document.querySelector('.champagne-surface')));
+    };
+    updateSurface();
+
+    const observer = new MutationObserver(updateSurface);
+    observer.observe(document.body, { childList: true, subtree: true });
+    window.addEventListener('resize', updateSurface);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', updateSurface);
+    };
   }, []);
   const getEnabledLinks = (links: NavLink[]) => links.filter((link) => link.enabled !== false);
 
@@ -91,14 +121,15 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
 
       {/* Main Sticky Header */}
       <motion.header
-        style={{ 
+        style={{
           opacity: headerOpacity,
           scale: headerScale,
+          ...headerVeilStyle,
         }}
-        className={`fixed top-8 left-0 right-0 z-40 transition-all duration-300 ${
-          isScrolled 
-            ? 'bg-white/95 backdrop-blur-lg shadow-2xl border-b border-pink-100' 
-            : 'bg-white/90 backdrop-blur-md shadow-lg'
+        data-nav-veil="surface"
+        data-surface={hasChampagneSurface ? 'champagne' : undefined}
+        className={`fixed top-8 left-0 right-0 z-40 rounded-2xl border transition-all duration-300 ${
+          isScrolled ? 'shadow-2xl' : 'shadow-lg'
         } ${className}`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

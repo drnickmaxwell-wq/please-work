@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import Particles from '@/components/brand/Particles';
 
 export interface Hero4KVideoProps {
@@ -9,22 +11,58 @@ export interface Hero4KVideoProps {
   [key: string]: unknown;
 }
 
+const OVERLAY_DATA_MAP = {
+  gradientToken: '--smh-gradient',
+  sheenDesktop: '--champagne-sheen-opacity-d',
+  sheenMobile: '--champagne-sheen-opacity-m',
+  vignetteAlpha: '--champagne-vignette-alpha',
+  particlesDesktop: '--champagne-particles-opacity-d',
+  particlesMobile: '--champagne-particles-opacity-m',
+} as const;
+
 export default function Hero4KVideo({
   poster,
   showParticles = true,
   showWave = false,
-  ..._rest
+  ...rest
 }: Hero4KVideoProps) {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setPrefersReducedMotion(motionQuery.matches);
+    update();
+
+    motionQuery.addEventListener('change', update);
+    return () => motionQuery.removeEventListener('change', update);
+  }, []);
+
+  const particlesState = showParticles && !prefersReducedMotion ? 'on' : 'off';
+
   return (
     <section
       data-hero="champagne"
       data-page="home"
       data-wave={showWave ? 'on' : 'off'}
+      data-gradient-token={OVERLAY_DATA_MAP.gradientToken}
+      data-sheen-opacity-d={OVERLAY_DATA_MAP.sheenDesktop}
+      data-sheen-opacity-m={OVERLAY_DATA_MAP.sheenMobile}
+      data-vignette-alpha={OVERLAY_DATA_MAP.vignetteAlpha}
+      data-particles-opacity-d={OVERLAY_DATA_MAP.particlesDesktop}
+      data-particles-opacity-m={OVERLAY_DATA_MAP.particlesMobile}
+      data-reduced-motion={prefersReducedMotion ? 'true' : 'false'}
       className="champagne-surface champagne-sheen relative overflow-hidden"
+      {...rest}
     >
+      <div className="gradient-layer" aria-hidden />
       <div className="wave-layer" aria-hidden data-state={showWave ? 'on' : 'off'} />
       {showParticles ? (
-        <Particles className="particles-layer" data-state="on" aria-hidden />
+        <Particles
+          className="particles-layer"
+          data-state={particlesState}
+          aria-hidden
+        />
       ) : (
         <canvas className="particles-layer" data-state="off" aria-hidden />
       )}

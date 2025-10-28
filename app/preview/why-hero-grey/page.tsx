@@ -48,6 +48,8 @@ const pickStyle = (style: CSSStyleDeclaration | null): StyleSnapshot | null => {
   };
 };
 
+const DOCUMENT_RULE = (CSSRule as typeof CSSRule & { DOCUMENT_RULE?: number }).DOCUMENT_RULE;
+
 const describeRule = (rule: CSSRule): string => {
   if (rule.type === CSSRule.MEDIA_RULE) {
     return `@media ${(rule as CSSMediaRule).conditionText}`;
@@ -55,7 +57,7 @@ const describeRule = (rule: CSSRule): string => {
   if (rule.type === CSSRule.SUPPORTS_RULE) {
     return `@supports ${(rule as CSSSupportsRule).conditionText}`;
   }
-  if (rule.type === CSSRule.DOCUMENT_RULE) {
+  if (typeof DOCUMENT_RULE === "number" && rule.type === DOCUMENT_RULE) {
     return "@document";
   }
   return rule.cssText.split("{")[0]?.trim() ?? "";

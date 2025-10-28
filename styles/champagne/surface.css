@@ -1,0 +1,111 @@
+/* styles/champagne/surface.css — layered champagne surface helpers */
+
+.champagne-surface {
+  position: relative;
+  isolation: isolate;
+  color: var(--smh-text);
+  background: transparent;
+}
+
+.champagne-surface,
+.champagne-surface > * {
+  border-radius: inherit;
+}
+
+.champagne-surface .gradient-layer,
+.champagne-surface .wave-layer,
+.champagne-surface .particles-layer,
+.champagne-surface .vignette-layer {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.champagne-surface .gradient-layer {
+  z-index: 1;
+  background: var(--smh-gradient);
+}
+
+.champagne-surface .wave-layer {
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 200ms ease;
+  background:
+    linear-gradient(140deg, color-mix(in srgb, var(--brand-magenta) 32%, transparent) 0%,
+      color-mix(in srgb, var(--brand-teal) 36%, transparent) 100%),
+    url('/waves/smh-wave-mask.svg') center/cover no-repeat;
+  mix-blend-mode: screen;
+}
+
+.champagne-surface .wave-layer[data-state="on"],
+.champagne-surface[data-wave="on"] .wave-layer {
+  opacity: 0.28;
+}
+
+.champagne-surface .particles-layer {
+  z-index: 3;
+  opacity: var(--champagne-particles-opacity-d);
+  transition: opacity 220ms ease;
+}
+
+.champagne-surface .particles-layer[data-state="off"] {
+  opacity: 0;
+}
+
+@media (max-width: 768px) {
+  .champagne-surface .particles-layer {
+    opacity: var(--champagne-particles-opacity-m);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .champagne-surface .particles-layer {
+    opacity: 0 !important;
+  }
+}
+
+.champagne-surface .vignette-layer {
+  z-index: 4;
+  background: radial-gradient(
+    circle at 50% 45%,
+    rgba(13, 14, 16, 0) calc(var(--champagne-vignette-radius) * 100%),
+    rgba(13, 14, 16, var(--champagne-vignette-alpha)) 100%
+  );
+}
+
+.champagne-sheen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background:
+    radial-gradient(40% 35% at 28% 18%, rgba(255, 253, 247, 0.35), transparent 72%),
+    radial-gradient(48% 38% at 82% 88%, rgba(255, 243, 224, 0.28), transparent 70%);
+  mix-blend-mode: screen;
+  opacity: var(--champagne-sheen-opacity-d);
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .champagne-sheen::after {
+    opacity: var(--champagne-sheen-opacity-m);
+  }
+}
+
+.champagne-surface .glass-pane {
+  position: relative;
+  z-index: 6;
+  border-radius: inherit;
+  background: var(--glass-bg-strong);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.champagne-surface .glass-pane *,
+.champagne-surface .glass-pane {
+  color: inherit;
+}
+
