@@ -22,10 +22,10 @@
 }
 
 /* Utility helpers used by brand-lock and previews */
-.glass-pane {
+.glass-pane{
   background: var(--glass-bg-strong);
+  border: 1px solid var(--glass-border);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
   border-radius: 18px;
 }

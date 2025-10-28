@@ -37,22 +37,12 @@ export default function HeroLuxury({
   return (
     <section
       data-hero="champagne"
+      data-page="home"
       aria-labelledby="home-hero-title"
       className="relative overflow-hidden isolate"
-      style={{ background: "var(--smh-gradient)" }}
     >
-      <div aria-hidden className="gold-flecks"></div>
       <div className="hero-container">
-        <div
-          className="glass-pane mx-auto max-w-5xl rounded-3xl px-6 py-10 md:px-10 md:py-14 shadow-none"
-          style={{
-            border: "1px solid var(--glass-border)",
-            backdropFilter: "blur(14px)",
-            WebkitBackdropFilter: "blur(14px)",
-            boxShadow:
-              "0 24px 80px color-mix(in srgb, black 16%, transparent 84%)",
-          }}
-        >
+        <div className="glass-pane mx-auto max-w-5xl rounded-3xl px-6 py-10 md:px-10 md:py-14 shadow-none">
           <div className="hero-copy">
             <h1 id="home-hero-title">{title}</h1>
             {subtitle && <p className="hero-subtitle ink-veil">{subtitle}</p>}
@@ -71,6 +61,7 @@ export default function HeroLuxury({
           </div>
         </div>
       </div>
+      <div className="gold-flecks" aria-hidden="true" />
 
       <style jsx>{`
         section[data-hero="champagne"] {
@@ -190,7 +181,7 @@ export default function HeroLuxury({
 
         .hero-cta-primary {
           color: var(--ink);
-          background: var(--cta-gradient);
+          background: var(--smh-gradient);
         }
 
         .hero-cta-secondary {

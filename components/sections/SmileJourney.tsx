@@ -196,7 +196,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           font-size: 1rem;
           text-decoration: none;
           color: var(--ink);
-          background: var(--cta-gradient);
+          background: var(--smh-gradient);
           box-shadow: var(--shadow-cta-rest);
           transition:
             transform var(--motion-duration-normal) var(--motion-easing-smooth),
@@ -375,7 +375,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
 
         .journey-cta-primary {
           color: var(--ink);
-          background: var(--cta-gradient);
+          background: var(--smh-gradient);
           box-shadow: var(--shadow-cta-rest);
         }
 

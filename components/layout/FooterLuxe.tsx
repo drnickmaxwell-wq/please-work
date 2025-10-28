@@ -43,7 +43,11 @@ const FooterLuxe = () => {
   };
 
   return (
-    <footer className="footer-luxe relative text-[color:var(--smh-text)]" data-footer>
+    <footer
+      className="footer-luxe relative text-[color:var(--smh-text)]"
+      data-footer
+      data-brand="champagne"
+    >
       <div className="footer-luxe__rim" aria-hidden="true" />
       <div className="footer-luxe__inner">
         <div className="footer-luxe__grid">
@@ -76,7 +80,7 @@ const FooterLuxe = () => {
             </ul>
           </div>
 
-          <div className="footer-luxe__newsletter">
+          <div className="footer-luxe__newsletter keyline-gold">
             <h4>Join our newsletter</h4>
             <p>Receive quarterly stories and gentle reminders curated by our clinical team.</p>
             <form className="footer-luxe__form" onSubmit={handleSubmit} noValidate>
@@ -138,13 +142,22 @@ const FooterLuxe = () => {
         </div>
       </div>
       <style jsx>{`
-        [data-footer] {
-          background: var(--smh-footer-bg);
-          border-top: 1px solid color-mix(in srgb, var(--smh-accent-gold) 22%, transparent);
+        footer[data-brand='champagne'] {
+          --footer-shadow: 0 -44px 120px color-mix(in srgb, #000 58%, transparent);
+          --footer-particles-ink: color-mix(in srgb, var(--brand-gold) 42%, transparent 58%);
+          --footer-clear: color-mix(in srgb, var(--smh-bg) 18%, transparent 82%);
+          --input-bg: color-mix(in srgb, var(--smh-bg) 78%, transparent 22%);
+          --input-border: color-mix(in srgb, var(--smh-text) 18%, transparent 82%);
+          --footer-ring: color-mix(in srgb, var(--brand-gold) 60%, transparent 40%);
+          --input-text: var(--smh-text);
+          --footer-blur: 18px;
+          --cta-glow: 0 22px 54px color-mix(in srgb, #000 48%, transparent);
+          border-top: 1px solid color-mix(in srgb, var(--brand-gold) 26%, transparent 74%);
+          color: var(--smh-text);
         }
 
-        [data-footer] a {
-          color: var(--smh-text);
+        footer[data-brand='champagne'] a {
+          color: inherit;
         }
 
         .footer-luxe {
@@ -173,7 +186,7 @@ const FooterLuxe = () => {
         .footer-luxe__rim {
           height: 1px;
           width: 100%;
-          background: var(--smh-footer-rim);
+          background: color-mix(in srgb, var(--brand-gold) 52%, transparent 48%);
           margin-bottom: clamp(2rem, 4vw, 3rem);
           position: relative;
           z-index: 2;
