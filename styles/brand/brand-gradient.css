@@ -1,23 +1,11 @@
-/* styles/brand/brand-gradient.css — Champagne hero layers */
-
-@import "./champagne-sheen.css";
-@import "../champagne/surface.css";
-
 :root {
-  --smh-gradient: linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
+  /* DO NOT MODIFY – brand guard checks exact string */
+  --brand-gradient: linear-gradient(135deg, #D94BC6 0%, #00C2C7 100%);
 }
 
-section[data-hero="champagne"] {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-}
-
-section[data-hero="champagne"] .gradient-layer,
-section[data-hero="champagne"] .wave-layer,
-section[data-hero="champagne"] .particles-layer,
-section[data-hero="champagne"] .vignette-layer,
-section[data-hero="champagne"] .sheen-layer,
-section[data-hero="champagne"] .glass-pane {
-  border-radius: inherit;
+/* Helper class for surfaces that should show the gradient */
+.champagne-gradient {
+  background: var(--brand-gradient);
+  background-attachment: fixed;
+  background-size: 140% 140%;
 }
