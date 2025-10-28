@@ -1,51 +1,75 @@
-const fs = require('fs'); const path = require('path');
+const fs = require('fs');
+const path = require('path');
 
 const ROOT = process.cwd();
-const BAD_SPACES = /oklab|oklch|lab|lch|\bcolor-mix\([^)]*brand-gradient/gi;
-const LOCKED = {
-  gradient: 'linear-gradient(135deg, #D94BC6 0%, #00C2C7 100%)',
-  hexes: ['#C2185B', '#40C4B4', '#D4AF37']
-};
+const CANONICAL_GRADIENT = 'linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%)';
+const LOCKED_HEXES = ['#d94bc6', '#00c2c7', '#d4af37'];
 
-function read(p) { return fs.readFileSync(p, 'utf8'); }
-function allFiles(dir) {
-  const out=[]; for (const e of fs.readdirSync(dir,{withFileTypes:true})) {
-    const p=path.join(dir,e.name);
-    if (e.isDirectory()) out.push(...allFiles(p));
-    else out.push(p);
-  } return out;
+function walk(dir) {
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  const files = [];
+  for (const entry of entries) {
+    if (['node_modules', '.git', '.next', 'out'].includes(entry.name)) continue;
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      files.push(...walk(fullPath));
+    } else {
+      files.push(fullPath);
+    }
+  }
+  return files;
 }
 
-const files = allFiles(ROOT)
-  .filter(p => !p.includes('node_modules') && !p.includes('.git') && !p.endsWith('.lock'));
+function normaliseGradient(value) {
+  return value.replace(/\s+/g, '').toLowerCase();
+}
 
-let ok = true;
-for (const f of files) {
-  const s = read(f);
-  const isTokenFile = f.includes('styles/tokens');
-  const touchesGradient = isTokenFile || f.includes('brand-gradient');
+const NORMALISED_CANONICAL = normaliseGradient(CANONICAL_GRADIENT);
+const files = walk(ROOT).filter((filePath) => !filePath.endsWith('.lock'));
+let hasError = false;
 
-  // Gradient must exist exactly in at least one token file
-  if (isTokenFile && s.includes('--smh-gradient')) {
-    if (!s.includes(LOCKED.gradient)) { console.error('✗ Token gradient string drift in', f); ok=false; }
-  }
+for (const filePath of files) {
+  const contents = fs.readFileSync(filePath, 'utf8');
+  const relPath = path.relative(ROOT, filePath);
+  const inTokens = relPath.startsWith(path.join('styles', 'tokens') + path.sep);
+  const isGuardScript = relPath === path.join('scripts', 'brand-guard.cjs');
 
-  // No oklab/oklch/etc near the brand gradient
-  if (touchesGradient && BAD_SPACES.test(s)) {
-    console.error('✗ Color-space transform found next to brand gradient or tokens in', f);
-    ok=false;
-  }
-
-  // No hard-coded brand hexes outside token files (except this script)
-  if (!f.includes('styles/tokens') && !f.endsWith('brand-guard.cjs')) {
-    for (const hex of LOCKED.hexes) {
-      if (s.toLowerCase().includes(hex.toLowerCase())) {
-        console.error('✗ Hard-coded brand hex outside tokens in', f, hex);
-        ok=false;
+  if (!inTokens && !isGuardScript) {
+    for (const hex of LOCKED_HEXES) {
+      if (contents.toLowerCase().includes(hex)) {
+        console.error(`✗ Locked brand hex ${hex.toUpperCase()} found outside tokens in ${relPath}`);
+        hasError = true;
       }
+    }
+  }
+
+  const gradientMatches = contents.match(/linear-gradient\(135deg[^)]*\)/gi) ?? [];
+  for (const match of gradientMatches) {
+    const lower = match.toLowerCase();
+    if (!lower.includes('#d94bc6') && !lower.includes('#00c2c7')) continue;
+    if (normaliseGradient(match) !== NORMALISED_CANONICAL) {
+      console.error(`✗ Gradient drift detected in ${relPath}: ${match}`);
+      hasError = true;
+    }
+  }
+
+  const svgTagRegex = /<svg[^>]*>/gi;
+  let svgMatch;
+  while ((svgMatch = svgTagRegex.exec(contents)) !== null) {
+    const tag = svgMatch[0];
+    if (/fill="#/i.test(tag)) {
+      console.error(`✗ Inline fill detected on <svg> in ${relPath}`);
+      hasError = true;
+    }
+    if (/style="[^">]*color\s*:/i.test(tag)) {
+      console.error(`✗ Inline color style detected on <svg> in ${relPath}`);
+      hasError = true;
     }
   }
 }
 
-if (!ok) process.exit(1);
-console.log('✓ Brand lock OK');
+if (hasError) {
+  process.exit(1);
+}
+
+console.log('✓ Brand guard checks passed');

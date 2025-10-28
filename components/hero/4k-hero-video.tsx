@@ -25,18 +25,16 @@ export default function Hero4KVideo({
       data-wave={showWave ? 'on' : 'off'}
       data-particles={particlesActive ? 'on' : 'off'}
       data-reduced-motion={prefersReducedMotion ? 'true' : 'false'}
-      className="champagne-surface relative overflow-hidden"
+      className="champagne-surface relative min-h-[56vh] overflow-hidden sm:min-h-[62vh]"
     >
       {particlesActive ? (
         <Particles className="particles" data-state="on" aria-hidden />
       ) : (
         <div className="particles" data-state="off" aria-hidden style={{ opacity: 0 }} />
       )}
-      <div className="vignette" aria-hidden />
-      <div className="sheen" aria-hidden />
 
       <div className="relative mx-auto max-w-5xl px-6 py-12 sm:px-10">
-        <div className="glass-pane rounded-[28px]">
+        <div className="champagne-glass rounded-[28px]">
           <div className="space-y-6 p-8 sm:p-10">
             <div className="relative aspect-[16/9] overflow-hidden rounded-2xl">
               <div aria-hidden className="absolute inset-0" style={{ background: 'var(--brand-gradient)' }} />
@@ -57,7 +55,10 @@ export default function Hero4KVideo({
               <h1 className="font-serif text-5xl md:text-6xl">Going the Extra Smile</h1>
               <p className="opacity-90">Private dental care with calm precision</p>
               <div className="flex flex-wrap gap-4">
-                <a className="rounded-full bg-[var(--brand-gradient)] px-5 py-3 text-[color:var(--smh-text-strong, var(--smh-text))]" href="/contact">
+                <a
+                  className="rounded-full bg-[var(--brand-gradient)] px-5 py-3 text-[color:var(--smh-text-strong, var(--smh-text))]"
+                  href="/contact"
+                >
                   Book a consultation
                 </a>
                 <a

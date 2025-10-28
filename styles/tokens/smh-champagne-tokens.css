@@ -1,24 +1,28 @@
-:root {
-  --smh-primary-magenta: #C2185B;
-  --smh-primary-teal:    #40C4B4;
-  --smh-accent-gold:     #D4AF37;
+:root{
+  --smh-primary-magenta:#C2185B;
+  --smh-primary-teal:#40C4B4;
+  --smh-accent-gold:#D4AF37;
 
-  /* Canonical gradient – EXACT string (no functions, no spaces altered) */
-  --smh-gradient: linear-gradient(135deg, #D94BC6 0%, #00C2C7 100%);
+  /* locked gradient for guard */
+  --smh-gradient: linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
 
-  /* Ink + neutrals */
-  --smh-ink: #0C0F12;
-  --smh-ink-95: rgba(255,255,255,.95);
-  --smh-ink-80: rgba(255,255,255,.80);
+  /* glass & ink */
+  --ink:#0B0E10;
+  --ink-95:#F2F2F2;
+  --pane-vignette-alpha:0.12;  /* subtle */
+  --particles-opacity:0.08;    /* subtle */
 
-  --smh-bg: var(--smh-ink);
-  --smh-text: var(--smh-ink-95);
-  --smh-text-strong: var(--smh-ink-95);
-  --smh-text-subtle: var(--smh-ink-80);
-  --smh-text-muted: var(--smh-ink-80);
+  --smh-ink:var(--ink);
+  --smh-ink-95:var(--ink-95);
+  --smh-ink-80:color-mix(in oklab, var(--ink-95) 80%, transparent);
 
-  /* Glass + borders */
-  --glass-bg-strong: color-mix(in srgb, var(--smh-ink) 72%, transparent);
-  --glass-bg-weak:   color-mix(in srgb, var(--smh-ink) 60%, transparent);
-  --glass-border:    color-mix(in srgb, var(--smh-accent-gold) 28%, transparent);
+  --smh-bg:var(--ink);
+  --smh-text:var(--ink-95);
+  --smh-text-strong:var(--ink-95);
+  --smh-text-subtle:color-mix(in oklab, var(--ink-95) 84%, transparent);
+  --smh-text-muted:color-mix(in oklab, var(--ink-95) 68%, transparent);
+
+  --glass-bg-strong:color-mix(in oklab, var(--ink) 72%, transparent);
+  --glass-bg-weak:color-mix(in oklab, var(--ink) 60%, transparent);
+  --glass-border:color-mix(in oklab, var(--smh-accent-gold) 26%, transparent);
 }
