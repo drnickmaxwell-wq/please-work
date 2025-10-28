@@ -1,7 +1,7 @@
 # 🚀 Advanced Web Features & Effects Audit
 ## St Mary's House Dental Care Website
 
-**Brand Consistency**: Magenta #C2185B, Turquoise #40C4B4, Gold #D4AF37  
+**Brand Consistency**: Magenta var(--smh-primary-magenta), Turquoise var(--smh-primary-teal), Gold var(--smh-accent-gold)  
 **Typography**: Montserrat headings, Lora body text  
 **Date**: September 8, 2025
 

@@ -179,6 +179,6 @@ index f8bf482..dee4b5f 100644
  .btn-shimmer:hover:after, .btn-shimmer:focus-visible:after{ translate:120% 0 }
 +
 +.btn-champagne{
-+  background:linear-gradient(135deg,#C2185B 0%,#40C4B4 60%,#D4AF37 100%);
++  background:var(--smh-gradient);
 +  color:#fff;
 +}

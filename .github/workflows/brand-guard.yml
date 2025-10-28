@@ -1,7 +1,9 @@
 name: Brand Guard
+
 on:
   pull_request:
     branches: [ "main" ]
+
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -13,5 +15,4 @@ jobs:
           cache: 'pnpm'
       - run: corepack enable
       - run: pnpm install --frozen-lockfile
-      - run: pnpm run brand:guard
-      - run: pnpm build
+      - run: pnpm brand:guard

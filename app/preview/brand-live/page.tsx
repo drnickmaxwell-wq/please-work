@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import Hero4KVideo from "@/components/hero/4k-hero-video";
 
@@ -9,7 +9,6 @@ type Snapshot = {
   magenta: string;
   teal: string;
   glassStrong: string;
-  heroWaves: string;
 };
 
 const TOKENS: Array<[keyof Snapshot, string]> = [
@@ -17,11 +16,11 @@ const TOKENS: Array<[keyof Snapshot, string]> = [
   ["magenta", "--smh-primary-magenta"],
   ["teal", "--smh-primary-teal"],
   ["glassStrong", "--glass-bg-strong"],
-  ["heroWaves", "--hero-waves"],
 ];
 
 export default function BrandLivePreview() {
   const [snapshot, setSnapshot] = useState<Snapshot | null>(null);
+  const [waveOn, setWaveOn] = useState(false);
 
   const captureSnapshot = useCallback(() => {
     const root = document.documentElement;
@@ -56,33 +55,44 @@ export default function BrandLivePreview() {
   return (
     <main className="min-h-screen space-y-8 bg-[color:var(--smh-bg)] p-6 text-[color:var(--smh-text)]">
       <Hero4KVideo />
-      <div className="glass-pane max-w-3xl">
-        <h2 className="font-serif text-2xl mb-4">Live brand surface</h2>
-        {snapshot ? (
-          <pre className="whitespace-pre-wrap font-mono text-sm">
+      <div className="max-w-3xl">
+        <div className="glass-pane">
+          <div className="space-y-4 p-6">
+            <h2 className="font-serif text-2xl">Live brand surface</h2>
+            {snapshot ? (
+              <pre className="whitespace-pre-wrap font-mono text-sm">
 {`gradient: ${snapshot.gradient}
 magenta: ${snapshot.magenta}
 teal: ${snapshot.teal}
-glassStrong: ${snapshot.glassStrong}
-heroWaves: ${snapshot.heroWaves}`}
-          </pre>
-        ) : (
-          <p aria-live="polite">Reading tokens…</p>
-        )}
+glassStrong: ${snapshot.glassStrong}`}
+              </pre>
+            ) : (
+              <p aria-live="polite">Reading tokens…</p>
+            )}
+          </div>
+        </div>
+      </div>
+      <div className="flex items-center gap-3">
         <button
           type="button"
-          className="glass-chip mt-4 inline-flex items-center gap-2 px-4 py-2 text-sm text-[color:var(--smh-text)]"
-          onClick={disableWaves}
+          className="rounded-full border border-[color:var(--glass-border)] px-4 py-2 text-sm"
+          onClick={() => setWaveOn((value) => !value)}
         >
-          Lock hero waves off
+          Toggle wave (currently {waveOn ? "on" : "off"})
         </button>
+        <span className="text-sm text-[color:var(--smh-text-muted)]">
+          Wave overlay is opt-in. Default state is off.
+        </span>
       </div>
-      <section data-hero="champagne" data-page="home" className="relative min-h-[40vh] rounded-2xl overflow-hidden mt-8">
-        <div className="gold-flecks" aria-hidden="true" />
-        <div className="absolute inset-0 grid place-items-center gap-4 text-center">
-          <p className="text-white/80 font-serif text-xl">Champagne overlays test</p>
-          <p className="text-sm text-white/70">
-            Current --hero-waves: {snapshot?.heroWaves ?? "…"}
+      <section
+        data-hero="champagne"
+        data-wave={waveOn ? "on" : "off"}
+        className="relative isolate mt-8 min-h-[40vh] overflow-hidden rounded-2xl"
+      >
+        <div className="gold-flecks" aria-hidden />
+        <div className="absolute inset-0 grid place-items-center text-center">
+          <p className="max-w-md font-serif text-xl text-[color:var(--smh-text)]">
+            Wave overlay is {waveOn ? "enabled" : "off"}. Toggle above to inspect layering.
           </p>
         </div>
       </section>
