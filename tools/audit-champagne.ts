@@ -15,7 +15,6 @@ const mustExist: string[] = [
   "public/particles/particles-teal.webp",
   "public/particles/particles-magenta.webp",
   "styles/tokens/smh-champagne-tokens.css",
-  "styles/brand/brand-gradient.css",
   "components/brand/BrandHeroGradient.tsx"
 ];
 
@@ -72,8 +71,7 @@ if (fs.existsSync(tokenPath)) {
 
 // wiring checks
 const imports = scan(["app","components"], [
-  /BrandHeroGradient/, 
-  /brand-gradient\.css/,
+  /BrandHeroGradient/,
   /smh-champagne-tokens\.css/,
   /\/waves\/smh-wave-mask\.svg/,
   /film-grain-(mobile|desktop)\.webp/,

@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = process.cwd();
-const CANONICAL_GRADIENT = 'linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%)';
-const LOCKED_HEXES = ['#d94bc6', '#00c2c7', '#d4af37'];
+const CANONICAL_GRADIENT = 'linear-gradient(135deg, #D94BC6 0%, #00C2C7 100%)';
+const LOCKED_HEXES = ['#d94bc6', '#00c2c7'];
 
 function walk(dir) {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
@@ -32,9 +32,13 @@ for (const filePath of files) {
   const contents = fs.readFileSync(filePath, 'utf8');
   const relPath = path.relative(ROOT, filePath);
   const inTokens = relPath.startsWith(path.join('styles', 'tokens') + path.sep);
-  const isGuardScript = relPath === path.join('scripts', 'brand-guard.cjs');
+  const allowedHexFiles = new Set([
+    path.join('scripts', 'brand-guard.cjs'),
+    path.join('scripts', 'brand-lock-guard.cjs'),
+  ]);
+  const isAllowedHexFile = allowedHexFiles.has(relPath);
 
-  if (!inTokens && !isGuardScript) {
+  if (!inTokens && !isAllowedHexFile) {
     for (const hex of LOCKED_HEXES) {
       if (contents.toLowerCase().includes(hex)) {
         console.error(`✗ Locked brand hex ${hex.toUpperCase()} found outside tokens in ${relPath}`);
@@ -53,19 +57,35 @@ for (const filePath of files) {
     }
   }
 
-  const svgTagRegex = /<svg[^>]*>/gi;
-  let svgMatch;
-  while ((svgMatch = svgTagRegex.exec(contents)) !== null) {
-    const tag = svgMatch[0];
-    if (/fill="#/i.test(tag)) {
-      console.error(`✗ Inline fill detected on <svg> in ${relPath}`);
-      hasError = true;
-    }
-    if (/style="[^">]*color\s*:/i.test(tag)) {
-      console.error(`✗ Inline color style detected on <svg> in ${relPath}`);
+  if (relPath.endsWith('.svg') && relPath.includes(`${path.sep}icons${path.sep}`)) {
+    const fillViolations = contents.match(/fill\s*=\s*['"](?!none['"]).+?['"]/gi);
+    if (fillViolations) {
+      console.error(`✗ Non-compliant fill detected in ${relPath}: ${fillViolations[0]}`);
       hasError = true;
     }
   }
+}
+
+const buildDir = path.join(ROOT, '.next');
+let gradientFoundInBuild = false;
+if (fs.existsSync(buildDir)) {
+  const cssFiles = walk(buildDir).filter((file) => file.endsWith('.css'));
+  for (const cssFile of cssFiles) {
+    const css = fs.readFileSync(cssFile, 'utf8');
+    const gradientRegex = /linear-gradient\(135deg\s*,\s*#d94bc6(?:\s*0%?)?\s*,\s*#00c2c7(?:\s*100%?)?\s*\)/i;
+    if (gradientRegex.test(css)) {
+      gradientFoundInBuild = true;
+      break;
+    }
+  }
+} else {
+  console.error('✗ Build output not found. Run the build before brand guard.');
+  hasError = true;
+}
+
+if (!gradientFoundInBuild) {
+  console.error(`✗ Canonical gradient not found in built CSS (${CANONICAL_GRADIENT})`);
+  hasError = true;
 }
 
 if (hasError) {

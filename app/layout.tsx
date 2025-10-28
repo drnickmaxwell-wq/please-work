@@ -1,5 +1,4 @@
 import "@/styles/tokens/smh-champagne-tokens.css";
-import "@/styles/brand/brand-gradient.css";
 import "@/styles/champagne/surface.css";
 import "./globals.css";
 import type { CSSProperties } from 'react';

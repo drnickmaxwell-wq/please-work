@@ -1,35 +1,28 @@
 // Fails CI if glass tokens lose translucency or the hero gradient drifts.
 const fs = require('fs');
 
-const css = fs.readFileSync('styles/tokens.css', 'utf8');
 const champagne = fs.readFileSync('styles/tokens/smh-champagne-tokens.css', 'utf8');
 
-// naive but robust: capture the percentage used in glass strong definitions
-function extractPerc(text, varName) {
-  const re = new RegExp(`${varName}\\s*:\\s*color-mix\\([^\\)]*var\\(\\s*--smh-bg\\s*\\)\\s*(\\d+)%`, 'i');
-  const m = text.match(re);
-  return m ? parseInt(m[1], 10) : null;
+function extractOpacity(varName) {
+  const re = new RegExp(`${varName}\\s*:\\s*color-mix\\([^;]+)`, 'i');
+  const match = champagne.match(re);
+  if (!match) return null;
+  const [, body] = match;
+  const percMatch = body.match(/\s(\d+)%/);
+  return percMatch ? parseInt(percMatch[1], 10) : null;
 }
 
-const light = extractPerc(css, '--glass-bg-strong');
-const dark = (() => {
-  const darkBlock = css.split('@media').slice(1).join('@media'); // grab media parts
-  return extractPerc(darkBlock || '', '--glass-bg-strong');
-})();
+const glassOpacity = extractOpacity('--champagne-glass-bg');
 
-function assertOk(label, val) {
-  if (val == null) {
-    console.error(`✖ Could not find ${label} --glass-bg-strong definition`);
-    process.exit(1);
-  }
-  if (val > 78) {
-    console.error(`✖ ${label} glass too opaque: ${val}% bg (must be ≤ 78)`);
-    process.exit(1);
-  }
+if (glassOpacity == null) {
+  console.error('✖ Could not locate --champagne-glass-bg opacity');
+  process.exit(1);
 }
 
-assertOk('light', light);
-assertOk('dark', dark);
+if (glassOpacity > 12) {
+  console.error(`✖ Glass background too strong (${glassOpacity}%); keep ≤ 12%`);
+  process.exit(1);
+}
 
 const gradientMatch = champagne.match(/--smh-gradient:\s*([^;]+);/i);
 
@@ -38,18 +31,13 @@ if (!gradientMatch) {
   process.exit(1);
 }
 
-const gradient = gradientMatch[1].trim().toLowerCase();
-const requiredHexes = ['d94bc6', '00c2c7'];
+const gradient = gradientMatch[1].trim();
+const canonical = 'linear-gradient(135deg, #D94BC6 0%, #00C2C7 100%)';
 
-if (!gradient.includes('linear-gradient(135deg')) {
-  console.error('✖ --smh-gradient must remain at 135deg');
+if (gradient !== canonical) {
+  console.error(`✖ Gradient drifted. Expected "${canonical}" but found "${gradient}"`);
   process.exit(1);
 }
 
-if (!requiredHexes.every((hex) => gradient.includes(`#${hex}`))) {
-  console.error('✖ --smh-gradient must contain the champagne anchor hues');
-  process.exit(1);
-}
-
-console.log(`✔ Glass translucency OK (light=${light}%, dark=${dark}%)`);
-console.log(`✔ Champagne gradient locked (${gradientMatch[1].trim()})`);
+console.log(`✔ Glass translucency OK (${glassOpacity}%)`);
+console.log(`✔ Champagne gradient locked (${gradient})`);
