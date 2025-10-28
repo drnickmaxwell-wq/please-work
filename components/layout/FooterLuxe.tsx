@@ -43,7 +43,7 @@ const FooterLuxe = () => {
   };
 
   return (
-    <footer className="footer-luxe">
+    <footer className="footer-luxe relative text-[color:var(--smh-text)]" data-footer>
       <div className="footer-luxe__rim" aria-hidden="true" />
       <div className="footer-luxe__inner">
         <div className="footer-luxe__grid">
@@ -138,11 +138,18 @@ const FooterLuxe = () => {
         </div>
       </div>
       <style jsx>{`
+        [data-footer] {
+          background: var(--smh-footer-bg);
+          border-top: 1px solid color-mix(in srgb, var(--smh-accent-gold) 22%, transparent);
+        }
+
+        [data-footer] a {
+          color: var(--smh-text);
+        }
+
         .footer-luxe {
           position: relative;
           overflow: hidden;
-          background: var(--smh-footer-bg);
-          color: var(--body-on-glass);
           padding: clamp(3.5rem, 7vw, 5rem) clamp(1.5rem, 5vw, 4.5rem) clamp(2.5rem, 4vw, 3.5rem);
           box-shadow: var(--footer-shadow);
           isolation: isolate;
@@ -197,7 +204,7 @@ const FooterLuxe = () => {
           margin: 0;
           font-size: 1.6rem;
           font-family: var(--font-display, 'Playfair Display', serif);
-          color: var(--ink-on-glass);
+          color: var(--smh-text);
         }
 
         h4 {
@@ -206,13 +213,11 @@ const FooterLuxe = () => {
           letter-spacing: 0.14em;
           font-size: 0.85rem;
           color: var(--smh-accent-gold);
-          opacity: 0.8;
         }
 
         p {
           margin: 0;
-          color: var(--body-on-glass);
-          opacity: 0.86;
+          color: var(--smh-text);
         }
 
         ul {
@@ -224,17 +229,13 @@ const FooterLuxe = () => {
         }
 
         a {
-          color: var(--ink-on-glass);
-          opacity: 0.92;
           text-decoration: none;
-          transition: color var(--motion-duration-normal) var(--motion-easing-smooth),
-            opacity var(--motion-duration-normal) var(--motion-easing-smooth);
+          transition: color var(--motion-duration-normal) var(--motion-easing-smooth);
         }
 
         a:hover,
         a:focus-visible {
           color: var(--smh-accent-gold);
-          opacity: 1;
         }
 
         .footer-luxe__newsletter p {
@@ -299,8 +300,7 @@ const FooterLuxe = () => {
         .footer-luxe__feedback {
           font-size: 0.9rem;
           min-height: 1.2rem;
-          color: var(--body-on-glass);
-          opacity: 0.75;
+          color: var(--smh-text-muted);
         }
 
         .footer-luxe__feedback[data-status='error'] {

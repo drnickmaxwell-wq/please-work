@@ -3,9 +3,6 @@
 @import "@/styles/tokens/smh-champagne-tokens.css";
 @import "@/styles/tokens.css";
 @import "@/styles/brand/brand-gradient.css";
-@import "@/styles/brand/lux-glass.css";
-@import "@/styles/brand/brand-textures.css";
-@import "@/styles/brand/brand-motion.css";
 @import "tailwindcss";
 @import "@/app/styles/smh-tokens.css";
 
@@ -27,9 +24,8 @@
 /* Utility helpers used by brand-lock and previews */
 .glass-pane {
   background: var(--glass-bg-strong);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
   border-radius: 18px;
-  box-shadow: var(--rim-gold-inset);
-  padding: 24px;
 }

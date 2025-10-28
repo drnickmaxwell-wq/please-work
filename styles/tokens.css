@@ -1,40 +1,60 @@
 /* styles/tokens.css — Canonical aliases & helpers for Champagne */
 
-/* Base aliases back to champagne token sheet */
 :root {
-  --brand-magenta: var(--smh-primary-magenta); /* #C2185B */
-  --brand-teal:    var(--smh-primary-teal);    /* #40C4B4 */
-  --brand-gold:    var(--smh-accent-gold);     /* #D4AF37 */
+  /* Canonical brand aliases */
+  --brand-magenta: #C2185B;
+  --brand-teal: #40C4B4;
+  --brand-gold: #D4AF37;
 
-  /* Glass scale (ensure translucency over gradient) */
-  --glass-bg-weak: color-mix(in srgb, var(--smh-bg) 78%, transparent 22%);
+  /* SMH public tokens */
+  --smh-primary-magenta: var(--brand-magenta);
+  --smh-primary-teal: var(--brand-teal);
+  --smh-accent-gold: var(--brand-gold);
+  --smh-gradient: linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
+
+  /* Neutrals (light mode) */
+  --smh-bg: #FFFFFF;
+  --smh-text: #1A1A1A;
+  --smh-text-muted: #4C4C4C;
+
+  /* Glass scale (lighter to show gradient) */
+  --glass-bg-weak: color-mix(in srgb, var(--smh-bg) 60%, transparent 40%);
   --glass-bg-strong: color-mix(in srgb, var(--smh-bg) 70%, transparent 30%);
-  --glass-border: color-mix(in srgb, var(--smh-text) 12%, transparent 88%);
+  --glass-border: color-mix(in srgb, var(--smh-text) 16%, transparent 84%);
+
+  /* Footer palette */
+  --smh-footer-bg: radial-gradient(120% 120% at 0% 100%, #0f1a21 0%, #12222b 60%, #0d0e10 100%);
+  --smh-footer-rim: linear-gradient(90deg,
+    color-mix(in srgb, var(--smh-accent-gold) 40%, transparent),
+    color-mix(in srgb, var(--smh-accent-gold) 0%, transparent) 60%);
 
   /* Ink & veils (used for legibility on frosted panes) */
-  --ink:           color-mix(in srgb, var(--smh-text) 100%, transparent);
-  --ink-strong:    color-mix(in srgb, var(--smh-text) 100%, transparent);
-  --ink-on-glass:  color-mix(in srgb, var(--smh-text) 94%, transparent 6%);
-  --ink-veil-08:   color-mix(in srgb, black 8%, transparent);
-  --ink-veil-12:   color-mix(in srgb, black 12%, transparent);
+  --ink: color-mix(in srgb, var(--smh-text) 100%, transparent);
+  --ink-strong: color-mix(in srgb, var(--smh-text) 100%, transparent);
+  --ink-on-glass: color-mix(in srgb, var(--smh-text) 94%, transparent 6%);
+  --ink-veil-08: color-mix(in srgb, black 8%, transparent);
+  --ink-veil-12: color-mix(in srgb, black 12%, transparent);
 
   /* CTA & elevation */
-  --gradient-cta:  var(--smh-gradient); /* use brand gradient for primary CTAs */
-
-  --shadow-cta-rest:    0 18px 40px color-mix(in srgb, black 12%, transparent);
-  --shadow-cta:         0 22px 48px color-mix(in srgb, black 16%, transparent);
-  --shadow-hero-bloom:  0 48px 120px color-mix(in srgb, black 22%, transparent);
+  --gradient-cta: var(--smh-gradient);
+  --shadow-cta-rest: 0 18px 40px color-mix(in srgb, black 12%, transparent);
+  --shadow-cta: 0 22px 48px color-mix(in srgb, black 16%, transparent);
+  --shadow-hero-bloom: 0 48px 120px color-mix(in srgb, black 22%, transparent);
 
   /* Gold rim utility (relies on --brand-gold) */
   --rim-gold-inset: inset 0 0 0 1px color-mix(in srgb, var(--smh-accent-gold) 90%, transparent 10%);
 }
 
-/* Dark-mode tuning */
+/* Dark mode mirrors (keep if already present; otherwise add) */
 @media (prefers-color-scheme: dark) {
   :root {
-    /* Dark mode can afford slightly more translucency */
-    --glass-bg-weak: color-mix(in srgb, var(--smh-bg) 55%, transparent 45%);
-    --glass-bg-strong: color-mix(in srgb, var(--smh-bg) 35%, transparent 65%);
-    --glass-border: color-mix(in srgb, var(--smh-text) 24%, transparent 76%);
+    --smh-bg: #0D0E10;
+    --smh-text: #FFFFFF;
+    --smh-text-muted: #D3D3D3;
+
+    /* dark glass = still translucent */
+    --glass-bg-weak: color-mix(in srgb, var(--smh-bg) 60%, transparent 40%);
+    --glass-bg-strong: color-mix(in srgb, var(--smh-bg) 70%, transparent 30%);
+    --glass-border: color-mix(in srgb, var(--smh-text) 18%, transparent 82%);
   }
 }
