@@ -64,63 +64,66 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
 
   return (
     <section
-      className="journey-surface champagne-surface"
       aria-labelledby="journey-hero-title"
       data-hero="champagne"
-      data-wave="off"
       data-particles={particlesActive ? "on" : "off"}
       data-reduced-motion={prefersReducedMotion ? "true" : "false"}
+      className="relative"
     >
-      {particlesActive ? (
-        <Particles className="particles" data-state="on" aria-hidden />
-      ) : (
-        <div className="particles" data-state="off" aria-hidden style={{ opacity: 0 }} />
-      )}
-      <div className="vignette" aria-hidden />
-      <div className="sheen" aria-hidden />
+      <section
+        className="champagne-surface journey-surface overflow-hidden"
+        data-wave="on"
+        data-particles={particlesActive ? "on" : "off"}
+      >
+        {particlesActive ? (
+          <Particles className="particles" data-state="on" aria-hidden />
+        ) : (
+          <div className="particles" data-state="off" aria-hidden style={{ opacity: 0 }} />
+        )}
 
-      <div className="journey-inner">
-        <header className="journey-header" id="journey-hero-title">
-          <h2>Your Smile Journey</h2>
-          <p>Discover the path to your perfect smile</p>
-          <Link href="/ai-smile-quiz" className="journey-cta">
-            Start Your Journey
-          </Link>
-        </header>
+        <div className="journey-inner">
+          <header className="journey-header" id="journey-hero-title">
+            <h2>Your Smile Journey</h2>
+            <p>Discover the path to your perfect smile</p>
+            <Link href="/ai-smile-quiz" className="journey-cta">
+              Start Your Journey
+            </Link>
+          </header>
 
-        <div className="journey-grid" aria-label="Patient journey timeline">
-          {steps.map((step) => {
-            const iconPath = step.icon ? iconMap[step.icon] : undefined;
-            return (
-              <article key={step.title} role="group" tabIndex={0} className="journey-card glass-pane">
-                {iconPath && (
-                  <div className="journey-card-icon">
-                    <img src={iconPath} alt="" aria-hidden="true" />
-                  </div>
-                )}
-                <h3>{step.title}</h3>
-                <p>{step.body}</p>
-              </article>
-            );
-          })}
-        </div>
+          <div className="journey-grid" aria-label="Patient journey timeline">
+            {steps.map((step) => {
+              const iconPath = step.icon ? iconMap[step.icon] : undefined;
+              return (
+                <article key={step.title} role="group" tabIndex={0} className="journey-card champagne-glass">
+                  {iconPath && (
+                    <div className="journey-card-icon">
+                      <img src={iconPath} alt="" aria-hidden="true" />
+                    </div>
+                  )}
+                  <h3>{step.title}</h3>
+                  <p>{step.body}</p>
+                </article>
+              );
+            })}
+          </div>
 
-        <div className="journey-callout glass-pane">
-          <span className="journey-callout-veil" aria-hidden="true" />
-          <div className="journey-callout-content">
-            <h3>Ready to Begin?</h3>
-            <p>Take the first step toward your perfect smile.</p>
-            <div className="journey-callout-actions">
-              <Link href="/contact" className="journey-cta-primary">
-                Book a consultation
-              </Link>
-              <Link href="/treatments" className="journey-cta-secondary">
-                See treatment options
-              </Link>
+          <div className="journey-callout champagne-glass">
+            <span className="journey-callout-veil" aria-hidden="true" />
+            <div className="journey-callout-content">
+              <h3>Ready to Begin?</h3>
+              <p>Take the first step toward your perfect smile.</p>
+              <div className="journey-callout-actions">
+                <Link href="/contact" className="journey-cta-primary">
+                  Book a consultation
+                </Link>
+                <Link href="/treatments" className="journey-cta-secondary">
+                  See treatment options
+                </Link>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       <style jsx>{`
         .journey-surface {

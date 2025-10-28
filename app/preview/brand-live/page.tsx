@@ -41,8 +41,8 @@ export default function BrandLivePreview() {
     const hero = document.querySelector<HTMLElement>('section[data-hero="champagne"]');
     const surfaceCount = surfaces.length > 0 ? `${surfaces.length} surface(s)` : 'none';
 
-    let particlesOpacity = 'n/a';
-    let vignetteAlpha = 'n/a';
+    let particlesOpacity = styles.getPropertyValue('--particles-opacity').trim() || 'n/a';
+    const vignetteAlpha = styles.getPropertyValue('--pane-vignette-alpha').trim() || 'n/a';
     const reducedMotionActive = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (hero) {
@@ -53,14 +53,6 @@ export default function BrandLivePreview() {
         particlesOpacity = '0 (toggle off)';
       } else if (reducedMotionActive) {
         particlesOpacity = '0 (prefers-reduced-motion)';
-      }
-      const vignetteLayer = hero.querySelector<HTMLElement>('.vignette');
-      if (vignetteLayer) {
-        const background = getComputedStyle(vignetteLayer).backgroundImage;
-        const alphaMatches = Array.from(background.matchAll(/rgba\(\s*0\s*,\s*0\s*,\s*0\s*,\s*(0?\.\d+)/gi));
-        if (alphaMatches.length > 0) {
-          vignetteAlpha = alphaMatches[alphaMatches.length - 1][1];
-        }
       }
     }
 
@@ -144,24 +136,20 @@ export default function BrandLivePreview() {
         </span>
       </div>
 
-      <div className="max-w-4xl">
-        <div className="glass-pane" style={{ boxShadow: "var(--glass-box-shadow)" }}>
-          <div className="space-y-6 p-6">
-            <h2 className="font-serif text-2xl">Live brand diagnostics</h2>
-            {snapshot ? (
-              <dl className="grid gap-3 font-mono text-xs sm:text-sm">
-                {diagnostics.map(([label, value]) => (
-                  <div key={label} className="flex flex-wrap items-baseline justify-between gap-4">
-                    <dt className="uppercase tracking-[0.12em] text-[color:var(--smh-text-muted)]">{label}</dt>
-                    <dd className="flex-1 text-right text-[color:var(--smh-text)]">{value}</dd>
-                  </div>
-                ))}
-              </dl>
-            ) : (
-              <p aria-live="polite">Reading tokens…</p>
-            )}
-          </div>
-        </div>
+      <div className="sr-only">
+        <h2>Live brand diagnostics</h2>
+        {snapshot ? (
+          <dl>
+            {diagnostics.map(([label, value]) => (
+              <div key={label}>
+                <dt>{label}</dt>
+                <dd>{value}</dd>
+              </div>
+            ))}
+          </dl>
+        ) : (
+          <p aria-live="polite">Reading tokens…</p>
+        )}
       </div>
 
       <section
@@ -171,8 +159,6 @@ export default function BrandLivePreview() {
         className="champagne-surface relative mt-4 min-h-[28vh] overflow-hidden rounded-2xl"
       >
         <div className="particles" aria-hidden style={{ opacity: 0 }} />
-        <div className="vignette" aria-hidden />
-        <div className="sheen" aria-hidden />
         <div className="absolute inset-0 grid place-items-center text-center">
           <p className="max-w-md font-serif text-lg text-[color:var(--smh-text-strong, var(--smh-text))]">
             Reference surface with waves locked off. Sheen and vignette should feel calm and luminous.
@@ -191,8 +177,6 @@ export default function BrandLivePreview() {
         ) : (
           <div className="particles" aria-hidden style={{ opacity: 0 }} />
         )}
-        <div className="vignette" aria-hidden />
-        <div className="sheen" aria-hidden />
         <div className="absolute inset-0 grid place-items-center text-center">
           <p className="max-w-md font-serif text-lg text-[color:var(--smh-text-strong, var(--smh-text))]">
             Wave overlay is {waveOn ? "enabled" : "off"}. Toggle above to inspect layering and particle response.

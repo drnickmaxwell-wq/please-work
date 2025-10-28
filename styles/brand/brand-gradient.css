@@ -1,11 +1,3 @@
-:root {
-  /* DO NOT MODIFY – brand guard checks exact string */
-  --brand-gradient: linear-gradient(135deg, #D94BC6 0%, #00C2C7 100%);
-}
-
-/* Helper class for surfaces that should show the gradient */
-.champagne-gradient {
-  background: var(--brand-gradient);
-  background-attachment: fixed;
-  background-size: 140% 140%;
+:root{
+  --brand-gradient: var(--smh-gradient);
 }

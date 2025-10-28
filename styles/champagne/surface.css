@@ -1,50 +1,36 @@
-/* Layered surface – gradient → waves? → particles → grain → vignette → sheen → glass */
-.champagne-surface {
-  position: relative;
-  isolation: isolate;
+.champagne-surface{
+  position:relative;
+  isolation:isolate;
   background: var(--brand-gradient);
+  border-radius: 1.25rem;
+  --champagne-particles-opacity: var(--particles-opacity);
 }
 
-/* Optional wave mask: include only when data-wave="on" */
-.champagne-surface[data-wave="on"]::before {
+.champagne-surface[data-wave="on"]::before{
   content:"";
-  position:absolute; inset:0;
-  background: url(/assets/waves/waves-bg-1024.webp) center/cover no-repeat;
-  opacity:.22; pointer-events:none; z-index:1;
+  position:absolute; inset:0; z-index:0;
+  background-image: var(--wave-image, none);
+  background-size: cover; background-position: center;
+  opacity: .10; pointer-events:none;
 }
 
-.champagne-surface .particles {
-  position:absolute; inset:0; z-index:2; opacity:var(--champagne-particles-opacity, .08); pointer-events:none;
-}
-
-.champagne-surface::after { /* film grain */
+.champagne-surface::after{
+  /* film + vignette blend */
   content:"";
-  position:absolute; inset:0; z-index:3;
-  background: url(/assets/textures/home-hero-film-grain.webp) center/cover repeat;
-  opacity:.07; pointer-events:none;
+  position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:
+    radial-gradient(80% 60% at 50% 40%, rgba(0,0,0,var(--pane-vignette-alpha)) 0%, transparent 70%),
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0));
+  mix-blend-mode: soft-light;
 }
 
-/* Vignette */
-.champagne-surface .vignette {
-  position:absolute; inset:0; z-index:4; pointer-events:none;
-  background: radial-gradient(60% 45% at 50% 45%, transparent 0%, rgba(0,0,0,.18) 100%);
-}
-
-/* Subtle pearlescent sheen */
-.champagne-surface .sheen {
-  position:absolute; inset:0; z-index:5; pointer-events:none;
-  background: linear-gradient(180deg, rgba(255,255,255,.06), transparent 60%);
-}
-
-/* Glass pane – sits above all */
-.glass-pane {
-  position:relative; z-index:6;
-  background: var(--glass-bg-strong);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+.champagne-glass{
+  position:relative; z-index:2;
+  backdrop-filter: blur(18px) saturate(120%);
+  background: color-mix(in oklab, white 8%, transparent);
   box-shadow:
-    0 8px 24px rgba(0,0,0,.18),
-    inset 0 1px 0 rgba(255,255,255,.06);
-  border-radius: 18px;
+    0 0 0 1px color-mix(in oklab, var(--smh-accent-gold) 26%, transparent),
+    0 24px 72px rgba(0,0,0,.18) inset,
+    0 1px 0 rgba(255,255,255,.06) inset;
+  color: var(--ink-95);
 }

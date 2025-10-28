@@ -1,6 +1,9 @@
+import "@/styles/tokens/smh-champagne-tokens.css";
+import "@/styles/brand/brand-gradient.css";
+import "@/styles/champagne/surface.css";
+import "./globals.css";
 import type { CSSProperties } from 'react';
 import type { Metadata, Viewport } from "next";
-import "./globals.css";
 import PerformanceOptimizedLayout from '@/components/layout/performance-optimized-layout';
 import FooterLuxe from '@/components/layout/FooterLuxe';
 
