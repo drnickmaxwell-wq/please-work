@@ -21,8 +21,8 @@ This audit report verifies that both the **Luxury Home Hero** and **Smile Journe
 ### Visual Design Compliance
 
 #### Gradient Accuracy ✅
-- **Requirement:** Champagne gradient (#C2185B → #40C4B4 → #D4AF37) with 95%+ accuracy
-- **Implementation:** `linear-gradient(135deg, #C2185B 0%, #40C4B4 60%, #D4AF37 100%)`
+- **Requirement:** Champagne gradient (var(--smh-primary-magenta) → var(--smh-primary-teal) → var(--smh-accent-gold)) with 95%+ accuracy
+- **Implementation:** `linear-gradient(135deg, var(--smh-primary-magenta) 0%, var(--smh-primary-teal) 60%, var(--smh-accent-gold) 100%)`
 - **Result:** ✅ PASS - Gradient matches brand specification exactly
 - **Visual Verification:** Screenshots confirm accurate color transitions
 
@@ -81,7 +81,7 @@ This audit report verifies that both the **Luxury Home Hero** and **Smile Journe
 
 #### Secondary Button ✅
 - **Style:** Ghost button with frosted glass background
-- **Border:** 1px solid #D4AF37 (gold)
+- **Border:** 1px solid var(--smh-accent-gold) (gold)
 - **Interaction:** Gold tint on hover
 - **Result:** ✅ PASS - Secondary CTA styled correctly
 
@@ -93,7 +93,7 @@ This audit report verifies that both the **Luxury Home Hero** and **Smile Journe
 - **Result:** ✅ PASS - All text meets AA standards
 
 #### Focus Indicators ✅
-- **Requirement:** Gold ring (#D4AF37) with glow effect
+- **Requirement:** Gold ring (var(--smh-accent-gold)) with glow effect
 - **Implementation:** `box-shadow: 0 0 0 2px var(--brand-gold), var(--shadow-gold-glow);`
 - **Result:** ✅ PASS - Focus rings visible and accessible
 
@@ -157,7 +157,7 @@ This audit report verifies that both the **Luxury Home Hero** and **Smile Journe
 #### Icons ✅
 - **Container:** 48×48px with gradient background
 - **Icon Size:** 24×24px SVG
-- **Border:** 1px solid #D4AF37
+- **Border:** 1px solid var(--smh-accent-gold)
 - **Result:** ✅ PASS - Icons render correctly
 
 #### Connectors ✅
@@ -176,7 +176,7 @@ This audit report verifies that both the **Luxury Home Hero** and **Smile Journe
 
 #### Glass Card ✅
 - **Max Width:** 800px (centered)
-- **Border:** 1px solid #D4AF37 (gold keyline)
+- **Border:** 1px solid var(--smh-accent-gold) (gold keyline)
 - **Backdrop:** Frosted glass with blur(12px)
 - **Result:** ✅ PASS - CTA card styled correctly
 

@@ -6,6 +6,12 @@ export const SMH_BRAND_COLOR_TOKENS = {
 
 type BrandColorName = keyof typeof SMH_BRAND_COLOR_TOKENS;
 
+export const SMH_BRAND_COLOR_FALLBACKS: Record<BrandColorName, string> = {
+  magenta: `var(${SMH_BRAND_COLOR_TOKENS.magenta})`,
+  teal: `var(${SMH_BRAND_COLOR_TOKENS.teal})`,
+  gold: `var(${SMH_BRAND_COLOR_TOKENS.gold})`,
+};
+
 export const SMH_BRAND_COLOR_VARIABLES: Record<BrandColorName, string> = {
   magenta: `var(${SMH_BRAND_COLOR_TOKENS.magenta})`,
   teal: `var(${SMH_BRAND_COLOR_TOKENS.teal})`,

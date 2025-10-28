@@ -1,183 +1,31 @@
-/* styles/brand/brand-gradient.css
-   Champagne drift + sweep treatments for hero gradients. */
+/* styles/brand/brand-gradient.css — Champagne hero layers */
 
-:root {
-  --champagne-gradient-opacity-soft: 0.72;
-  --champagne-gradient-opacity-standard: 0.92;
-  --champagne-gradient-opacity-bold: 0.96;
-  --champagne-wave-opacity-soft: 0.14;
-  --champagne-wave-opacity-standard: 0.2;
-  --champagne-wave-opacity-bold: 0.28;
-  /* feature toggle for waves: 1=on, 0=off */
-  --hero-waves: 0;
-}
-
-section[data-hero="champagne"][data-page="home"] {
-  position: relative;
+section[data-hero="champagne"]{
+  position:relative;
+  isolation:isolate;
   background: var(--smh-gradient);
-  isolation: isolate;
+  background-attachment: fixed;
 }
-
-/* Soft vignette, not muddy */
-section[data-hero="champagne"][data-page="home"]::before {
-  content:"";
+section[data-hero="champagne"]::before{
+  content:'';
   position:absolute; inset:0;
-  background: radial-gradient(120% 70% at 50% 20%, transparent 0%, rgba(0,0,0,0.06) 55%, rgba(0,0,0,0.12) 100%);
-  pointer-events:none; z-index:0;
+  pointer-events:none;
+  background: radial-gradient(120% 70% at 50% 40%, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.06) 55%, transparent 75%);
+  mix-blend-mode: normal;
 }
-
-/* Optional wave mask (disabled by default) */
-section[data-hero="champagne"][data-page="home"]::after {
-  content:"";
+section[data-hero="champagne"][data-wave="on"]::after{
+  content:'';
   position:absolute; inset:0;
-  background-image: url("/waves/smh-wave-mask.svg");
-  background-repeat:no-repeat; background-size:cover; background-position:center;
-  opacity: calc(var(--hero-waves) * 0.18);
-  mix-blend-mode: soft-light;
-  pointer-events:none; z-index:0;
-}
-
-.hero-layer--gradient {
-  position: absolute;
-  inset: 0;
+  pointer-events:none;
   background:
-    radial-gradient(1200px 900px at 30% 10%, rgba(255, 255, 255, 0.06), transparent 55%),
-    linear-gradient(140deg, var(--smh-champagne-pink, color-mix(in srgb, var(--brand-magenta, var(--smh-primary-magenta)) 92%, white 8%)) 0%, var(--smh-champagne-teal, color-mix(in srgb, var(--brand-teal, var(--smh-primary-teal)) 92%, white 8%)) 60%, var(--smh-champagne-amber, color-mix(in srgb, var(--brand-gold, var(--smh-accent-gold)) 88%, white 12%)) 100%);
-  opacity: var(--champagne-gradient-opacity, var(--champagne-gradient-opacity-standard));
-  mix-blend-mode: normal;
-  transform: translate3d(var(--hero-drift-x, 0px), var(--hero-drift-y, 0px), 0)
-    rotate(var(--hero-drift-rotate, 0deg));
-  will-change: transform, filter;
+    url('/waves/smh-wave-mask.svg') center/cover no-repeat;
+  opacity:.22;
 }
-
-.hero-layer--gradient[data-intensity="soft"] {
-  --champagne-gradient-opacity: var(--champagne-gradient-opacity-soft);
-  filter: saturate(0.95);
-}
-
-.hero-layer--gradient[data-intensity="bold"] {
-  --champagne-gradient-opacity: var(--champagne-gradient-opacity-bold);
-  filter: saturate(1.08);
-}
-
-.hero-layer--wave {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(6, 14, 26, 0.32) 0%, rgba(6, 14, 26, 0.08) 55%, transparent 100%);
-  mix-blend-mode: normal;
-  opacity: var(--hero-wave-opacity, var(--champagne-wave-opacity-standard));
-  transform: translate3d(calc(var(--hero-drift-x, 0px) * 0.4), calc(var(--hero-drift-y, 0px) * 0.4), 0);
-  will-change: transform;
-}
-
-.hero-layer--particles {
-  position: absolute;
-  inset: 0;
-  --particlesOpacity: var(--hero-particles-opacity, 0.16);
-  transform: translate3d(calc(var(--hero-drift-x, 0px) * -0.15), calc(var(--hero-drift-y, 0px) * -0.15), 0);
-  will-change: transform;
-  mix-blend-mode: screen;
-}
-
-.hero-layer--particles[data-density="high"] {
-  --hero-particles-opacity: 0.24;
-}
-
-.hero-layer--particles[data-density="med"] {
-  --hero-particles-opacity: 0.18;
-}
-
-.hero-layer--particles[data-density="low"] {
-  --hero-particles-opacity: 0.12;
-}
-
-.hero-layer--gold-rim {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.hero-layer--gold-rim::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: color-mix(in srgb, var(--gold-rail, color-mix(in srgb, var(--brand-gold, var(--smh-accent-gold)) 68%, transparent)) 42%, transparent);
-  opacity: 0.8;
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  padding: 1px;
-}
-
-.hero-layer--gold-rim[data-glow="true"]::before {
-  box-shadow: 0 0 32px color-mix(in srgb, var(--brand-gold, var(--smh-accent-gold)) 38%, transparent);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .hero-layer--gradient[data-motion="true"] {
-    animation:
-      champagne-drift 42s ease-in-out infinite alternate,
-      champagne-sweep 90s linear infinite;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-layer--gradient,
-  .hero-layer--wave,
-  .hero-layer--particles {
-    animation: none !important;
-    transform: none !important;
-  }
-}
-
-@keyframes champagne-drift {
-  0% {
-    background-position: 0% 0%, 100% 4%, 40% 40%;
-  }
-  50% {
-    background-position: 6% 4%, 94% 6%, 58% 58%;
-  }
-  100% {
-    background-position: 2% 2%, 98% 4%, 32% 52%;
-  }
-}
-
-@keyframes champagne-sweep {
-  0% {
-    filter: hue-rotate(-3deg) saturate(1);
-  }
-  50% {
-    filter: hue-rotate(3deg) saturate(1.06);
-  }
-  100% {
-    filter: hue-rotate(-3deg) saturate(1);
-  }
-}
-
-/* Gold flecks — extremely subtle */
-section[data-hero="champagne"][data-page="home"] .gold-flecks {
-  position:absolute; inset:0; z-index:1; pointer-events:none;
+.gold-flecks{
+  position:absolute; inset:0; pointer-events:none;
   background:
-    radial-gradient(2px 2px at 20% 30%, color-mix(in srgb, var(--brand-gold) 22%, transparent) 0%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 70% 55%, color-mix(in srgb, var(--brand-gold) 18%, transparent) 0%, transparent 100%),
-    radial-gradient(1.8px 1.8px at 40% 80%, color-mix(in srgb, var(--brand-gold) 16%, transparent) 0%, transparent 100%);
-  opacity:0.12;
-  filter: blur(0.2px);
-}
-
-footer[data-brand="champagne"]{
-  background:
-    radial-gradient(120% 160% at 15% 0%, color-mix(in srgb,#000 70%, var(--brand-teal) 30%) 0%, transparent 55%),
-    radial-gradient(120% 160% at 85% 0%, color-mix(in srgb,#000 70%, var(--brand-magenta) 30%) 0%, transparent 55%),
-    linear-gradient(180deg, color-mix(in srgb, #000 82%, transparent) 0%, color-mix(in srgb, #000 96%, transparent) 100%);
-  color: var(--smh-text);
-}
-footer[data-brand="champagne"] .keyline-gold{
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--brand-gold) 60%, transparent 40%) inset;
+    radial-gradient(2px 2px at 20% 30%, color-mix(in srgb, var(--brand-gold) 80%, transparent 20%) 0%, transparent 100%),
+    radial-gradient(2px 2px at 70% 60%, color-mix(in srgb, var(--brand-gold) 70%, transparent 30%) 0%, transparent 100%);
+  opacity:.06;
+  filter: blur(.6px);
 }
