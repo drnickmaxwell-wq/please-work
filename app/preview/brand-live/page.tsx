@@ -165,7 +165,7 @@ export default function BrandLivePreview() {
       </div>
 
       <div className="max-w-4xl">
-        <div className="glass-pane" style={{ boxShadow: "var(--glass-box-shadow)" }}>
+        <div className="champagne-glass rounded-3xl">
           <div className="space-y-6 p-6">
             <h2 className="font-serif text-2xl">Live brand diagnostics</h2>
             {snapshot ? (
@@ -188,40 +188,27 @@ export default function BrandLivePreview() {
         data-hero="champagne"
         data-wave="off"
         data-particles="off"
-        className="champagne-surface champagne-sheen relative mt-4 min-h-[28vh] overflow-hidden rounded-2xl"
+        className="champagne-surface relative mt-4 min-h-[28vh] overflow-hidden rounded-2xl"
       >
-        <div className="gradient-layer" aria-hidden />
-        <div className="wave-layer" aria-hidden data-state="off" />
-        <canvas className="particles-layer" aria-hidden data-state="off" />
-        <div className="vignette-layer" aria-hidden />
-        <div className="sheen-layer" aria-hidden />
-        <div className="absolute inset-0 grid place-items-center text-center">
-          <p className="max-w-md font-serif text-lg text-[color:var(--smh-text-strong, var(--smh-text))]">
-            Reference surface with waves locked off. Sheen and vignette should feel calm and luminous.
-          </p>
-        </div>
+        <p className="sr-only">
+          Reference surface with waves locked off. Sheen and vignette should feel calm and luminous.
+        </p>
       </section>
 
       <section
         data-hero="champagne"
         data-wave={waveOn ? "on" : "off"}
         data-particles={particlesOn ? "on" : "off"}
-        className="champagne-surface champagne-sheen relative min-h-[32vh] overflow-hidden rounded-2xl"
+        className="champagne-surface relative min-h-[32vh] overflow-hidden rounded-2xl"
       >
-        <div className="gradient-layer" aria-hidden />
-        <div className="wave-layer" aria-hidden data-state={waveOn ? "on" : "off"} />
         {particlesOn ? (
-          <Particles className="particles-layer" data-state="on" aria-hidden />
+          <Particles className="particles-layer pointer-events-none absolute inset-0" data-state="on" aria-hidden />
         ) : (
-          <canvas className="particles-layer" aria-hidden data-state="off" />
+          <canvas className="particles-layer pointer-events-none absolute inset-0" aria-hidden data-state="off" />
         )}
-        <div className="vignette-layer" aria-hidden />
-        <div className="sheen-layer" aria-hidden />
-        <div className="absolute inset-0 grid place-items-center text-center">
-          <p className="max-w-md font-serif text-lg text-[color:var(--smh-text-strong, var(--smh-text))]">
-            Wave overlay is {waveOn ? "enabled" : "off"}. Toggle above to inspect layering and particle response.
-          </p>
-        </div>
+        <p className="sr-only">
+          Wave overlay is {waveOn ? "enabled" : "off"}. Toggle above to inspect layering and particle response.
+        </p>
       </section>
     </main>
   );

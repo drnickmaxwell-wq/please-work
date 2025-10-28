@@ -6,11 +6,8 @@ const repoRoot = path.resolve(__dirname, '..');
 const ignored = new Set(['.git', 'node_modules', '.next', 'out', 'dist', '.turbo', '.vercel']);
 const binaryPattern = /\.(?:png|jpe?g|gif|mp4|mov|mp3|webm|avi|mkv|ico|icns|pdf|zip|gz|bz2|7z|tar|woff2?|ttf|eot|otf|heic|heif|avif|glb|gltf|wasm)$/i;
 const gradientTarget = 'linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%)';
-const gradientFiles = [
-  path.join('styles', 'tokens.css'),
-  path.join('styles', 'brand', 'brand-gradient.css'),
-  path.join('styles', 'tokens', 'smh-champagne-tokens.css'),
-];
+const canonicalGradientNormalised = gradientTarget.replace(/\s+/g, '').toLowerCase();
+const gradientFiles = [path.join('styles', 'tokens', 'smh-champagne-tokens.css')];
 
 const bannedHexes = ['#d94bc6', '#00c2c7', '#d4af37'];
 
@@ -37,12 +34,7 @@ async function verifyGradientStrings() {
 }
 
 function isAllowedHexFile(relativePath) {
-  return (
-    relativePath.startsWith('styles/tokens/') ||
-    relativePath === 'styles/tokens.css' ||
-    relativePath === 'styles/brand/brand-gradient.css' ||
-    relativePath === 'scripts/brand-guard.cjs'
-  );
+  return relativePath.startsWith('styles/tokens/') || relativePath === 'scripts/brand-guard.cjs';
 }
 
 function shouldValidateSvg(relativePath) {
@@ -80,8 +72,24 @@ async function inspectFile(filePath) {
     }
   }
 
+  validateGradientStrings(relativePath, contents);
+
   if (relativePath.endsWith('.svg') && shouldValidateSvg(relativePath)) {
     validateSvg(relativePath, contents);
+  }
+}
+
+function validateGradientStrings(relativePath, source) {
+  const gradientRegex = /linear-gradient\([^)]*\)/gi;
+  let match;
+  while ((match = gradientRegex.exec(source)) !== null) {
+    const normalised = match[0].replace(/\s+/g, '').toLowerCase();
+    if (
+      (normalised.includes('#d94bc6') || normalised.includes('#00c2c7')) &&
+      normalised !== canonicalGradientNormalised
+    ) {
+      errors.push(`Non-canonical champagne gradient in ${relativePath}: ${match[0]}`);
+    }
   }
 }
 

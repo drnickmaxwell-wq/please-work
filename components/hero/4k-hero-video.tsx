@@ -35,21 +35,17 @@ export default function Hero4KVideo({
       data-wave={showWave ? 'on' : 'off'}
       data-particles={particlesActive ? 'on' : 'off'}
       data-reduced-motion={prefersReducedMotion ? 'true' : 'false'}
-      className="champagne-surface champagne-sheen relative overflow-hidden"
+      className="champagne-surface relative min-h-[56vh] overflow-hidden md:min-h-[62vh]"
       {...overlayDataAttributes}
     >
-      <div className="gradient-layer" aria-hidden />
-      <div className="wave-layer" aria-hidden data-state={showWave ? 'on' : 'off'} />
       {particlesActive ? (
-        <Particles className="particles-layer" data-state="on" aria-hidden />
+        <Particles className="particles-layer pointer-events-none absolute inset-0" data-state="on" aria-hidden />
       ) : (
-        <canvas className="particles-layer" data-state="off" aria-hidden />
+        <canvas className="particles-layer pointer-events-none absolute inset-0" data-state="off" aria-hidden />
       )}
-      <div className="vignette-layer" aria-hidden />
-      <div className="sheen-layer" aria-hidden />
 
-      <div className="relative mx-auto max-w-5xl px-6 py-12 sm:px-10">
-        <div className="glass-pane rounded-[28px]">
+      <div className="relative mx-auto flex h-full max-w-5xl items-center px-6 py-12 sm:px-10">
+        <div className="champagne-glass w-full rounded-[28px]">
           <div className="space-y-6 p-8 sm:p-10">
             <div className="relative aspect-[16/9] overflow-hidden rounded-2xl">
               <div aria-hidden className="absolute inset-0" style={{ background: 'var(--smh-gradient)' }} />

@@ -1,8 +1,6 @@
 /* styles/tokens.css — Canonical aliases & helpers for Champagne */
 
 :root{
-  --smh-gradient: linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
-
   --brand-magenta: var(--smh-primary-magenta);
   --brand-teal: var(--smh-primary-teal);
   --brand-gold: var(--smh-accent-gold);
