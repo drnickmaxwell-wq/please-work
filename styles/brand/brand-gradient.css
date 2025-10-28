@@ -8,43 +8,33 @@
   --champagne-wave-opacity-soft: 0.14;
   --champagne-wave-opacity-standard: 0.2;
   --champagne-wave-opacity-bold: 0.28;
+  /* feature toggle for waves: 1=on, 0=off */
+  --hero-waves: 0;
 }
 
-/* Base Champagne gradient */
-section[data-hero="champagne"] {
+section[data-hero="champagne"][data-page="home"] {
   position: relative;
   background: var(--smh-gradient);
   isolation: isolate;
 }
 
-/* Soft vignette – corners only, very light */
-section[data-hero="champagne"]::before {
+/* Soft vignette, not muddy */
+section[data-hero="champagne"][data-page="home"]::before {
   content:"";
   position:absolute; inset:0;
-  pointer-events:none;
-  background:
-    radial-gradient(130% 90% at 50% -10%, transparent 55%, rgba(0,0,0,.06) 90%),
-    radial-gradient(100% 100% at -10% 110%, transparent 60%, rgba(0,0,0,.06) 95%),
-    radial-gradient(100% 100% at 110% 110%, transparent 60%, rgba(0,0,0,.06) 95%);
-  z-index:0;
+  background: radial-gradient(120% 70% at 50% 20%, transparent 0%, rgba(0,0,0,0.06) 55%, rgba(0,0,0,0.12) 100%);
+  pointer-events:none; z-index:0;
 }
 
-/* Legacy guard compatibility: retains historical rule signature */
-section[data-hero="champagne"][data-page="home"]::after {
-  content: none;
-}
-
-/* Wave mask – subtle luminance band, home only */
+/* Optional wave mask (disabled by default) */
 section[data-hero="champagne"][data-page="home"]::after {
   content:"";
   position:absolute; inset:0;
-  pointer-events:none;
   background-image: url("/waves/smh-wave-mask.svg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: .06;
-  z-index: 0;
+  background-repeat:no-repeat; background-size:cover; background-position:center;
+  opacity: calc(var(--hero-waves) * 0.18);
+  mix-blend-mode: soft-light;
+  pointer-events:none; z-index:0;
 }
 
 .hero-layer--gradient {
@@ -170,16 +160,24 @@ section[data-hero="champagne"][data-page="home"]::after {
   }
 }
 
-/* Gold flecks layer – CSS fallback (no binaries). Looks like sparse champagne dust with screen-like lift. */
-section[data-hero="champagne"] .gold-flecks {
-  position:absolute; inset:0; pointer-events:none; z-index:0;
-  mix-blend-mode: screen;
-  opacity:.08;
+/* Gold flecks — extremely subtle */
+section[data-hero="champagne"][data-page="home"] .gold-flecks {
+  position:absolute; inset:0; z-index:1; pointer-events:none;
   background:
-    radial-gradient(2px 2px at 12% 18%, rgba(249,232,195,.35) 40%, transparent 41%) repeat,
-    radial-gradient(1.6px 1.6px at 62% 28%, rgba(249,232,195,.30) 40%, transparent 41%) repeat,
-    radial-gradient(1.8px 1.8px at 36% 72%, rgba(249,232,195,.28) 40%, transparent 41%) repeat,
-    radial-gradient(1.4px 1.4px at 82% 66%, rgba(249,232,195,.26) 40%, transparent 41%) repeat;
-  background-size: 420px 320px, 520px 380px, 560px 420px, 640px 520px;
-  filter: blur(.2px);
+    radial-gradient(2px 2px at 20% 30%, color-mix(in srgb, var(--brand-gold) 22%, transparent) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 70% 55%, color-mix(in srgb, var(--brand-gold) 18%, transparent) 0%, transparent 100%),
+    radial-gradient(1.8px 1.8px at 40% 80%, color-mix(in srgb, var(--brand-gold) 16%, transparent) 0%, transparent 100%);
+  opacity:0.12;
+  filter: blur(0.2px);
+}
+
+footer[data-brand="champagne"]{
+  background:
+    radial-gradient(120% 160% at 15% 0%, color-mix(in srgb,#000 70%, var(--brand-teal) 30%) 0%, transparent 55%),
+    radial-gradient(120% 160% at 85% 0%, color-mix(in srgb,#000 70%, var(--brand-magenta) 30%) 0%, transparent 55%),
+    linear-gradient(180deg, color-mix(in srgb, #000 82%, transparent) 0%, color-mix(in srgb, #000 96%, transparent) 100%);
+  color: var(--smh-text);
+}
+footer[data-brand="champagne"] .keyline-gold{
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--brand-gold) 60%, transparent 40%) inset;
 }
