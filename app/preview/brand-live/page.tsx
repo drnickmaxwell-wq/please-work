@@ -1,9 +1,9 @@
 "use client";
-
 import { useCallback, useEffect, useMemo, useState } from "react";
+import type { CSSProperties } from "react";
 
-import Hero4KVideo from "@/components/hero/4k-hero-video";
 import Particles from "@/components/brand/Particles";
+import Hero4KVideo from "@/components/hero/4k-hero-video";
 
 export const dynamic = "force-dynamic";
 
@@ -11,7 +11,7 @@ type Diagnostics = {
   gradient: string;
   magenta: string;
   teal: string;
-  surfaceCount: string;
+  surfaces: string;
   heroWave: string;
   particlesOpacity: string;
   vignetteAlpha: string;
@@ -19,15 +19,25 @@ type Diagnostics = {
 };
 
 const TOKEN_KEYS = {
-  gradient: "--brand-gradient",
+  gradient: "--smh-gradient",
   magenta: "--smh-primary-magenta",
   teal: "--smh-primary-teal",
 } as const;
+
+const WAVE_STYLE: CSSProperties = {
+  "--champagne-wave": "url('/waves/smh-wave-mask.svg') center / cover no-repeat",
+};
 
 export default function BrandLivePreview() {
   const [waveOn, setWaveOn] = useState(false);
   const [particlesOn, setParticlesOn] = useState(true);
   const [snapshot, setSnapshot] = useState<Diagnostics | null>(null);
+  const dynamicSurfaceClass = [
+    "champagne-surface relative min-h-[32vh] overflow-hidden rounded-2xl",
+    waveOn ? "has-wave" : null,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   const captureSnapshot = useCallback((): Diagnostics => {
     const root = document.documentElement;
@@ -36,40 +46,41 @@ export default function BrandLivePreview() {
     const gradient = styles.getPropertyValue(TOKEN_KEYS.gradient).trim();
     const magenta = styles.getPropertyValue(TOKEN_KEYS.magenta).trim().toUpperCase();
     const teal = styles.getPropertyValue(TOKEN_KEYS.teal).trim().toUpperCase();
+    const vignetteAlpha = styles.getPropertyValue("--champagne-vignette-alpha").trim() || "n/a";
 
-    const surfaces = Array.from(document.querySelectorAll<HTMLElement>('.champagne-surface'));
+    const surfaces = Array.from(document.querySelectorAll<HTMLElement>(".champagne-surface"));
     const hero = document.querySelector<HTMLElement>('section[data-hero="champagne"]');
-    const surfaceCount = surfaces.length > 0 ? `${surfaces.length} surface(s)` : 'none';
-
-    let particlesOpacity = styles.getPropertyValue('--particles-opacity').trim() || 'n/a';
-    const vignetteAlpha = styles.getPropertyValue('--pane-vignette-alpha').trim() || 'n/a';
     const reducedMotionActive = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+    const heroWave = hero?.classList.contains("has-wave") ? "on" : "off";
+    let particlesOpacity = "0";
+
     if (hero) {
-      const particlesLayer = hero.querySelector<HTMLElement>('.particles');
+      const particlesLayer = hero.querySelector<HTMLElement>(".champagne-particles");
       if (particlesLayer) {
         particlesOpacity = getComputedStyle(particlesLayer).opacity;
-      } else if (!particlesOn) {
-        particlesOpacity = '0 (toggle off)';
-      } else if (reducedMotionActive) {
-        particlesOpacity = '0 (prefers-reduced-motion)';
       }
     }
 
-    const heroWave = hero?.dataset.wave ?? 'n/a';
-    const reducedMotion = reducedMotionActive ? "yes" : "no";
+    const surfaceSummaries = surfaces.map((surface) => {
+      const label = surface.dataset.hero ?? surface.dataset.surface ?? surface.tagName.toLowerCase();
+      const waveState = surface.classList.contains("has-wave") ? "wave:on" : "wave:off";
+      const particlesLayer = surface.querySelector<HTMLElement>(".champagne-particles");
+      const particlesState = particlesLayer?.dataset.state ?? "off";
+      return `${label} (${waveState}, particles:${particlesState})`;
+    });
 
     return {
       gradient,
       magenta,
       teal,
-      surfaceCount,
+      surfaces: surfaceSummaries.length ? surfaceSummaries.join(" | ") : "none",
       heroWave,
       particlesOpacity,
       vignetteAlpha,
-      reducedMotion,
+      reducedMotion: reducedMotionActive ? "yes" : "no",
     };
-  }, [particlesOn]);
+  }, []);
 
   useEffect(() => {
     setSnapshot(captureSnapshot());
@@ -99,8 +110,8 @@ export default function BrandLivePreview() {
             ["Gradient", snapshot.gradient],
             ["Magenta", snapshot.magenta],
             ["Teal", snapshot.teal],
-            ["Champagne surfaces", snapshot.surfaceCount],
-            ["Hero data-wave", snapshot.heroWave],
+            ["Champagne surfaces", snapshot.surfaces],
+            ["Hero wave", snapshot.heroWave],
             ["Particles opacity (computed)", snapshot.particlesOpacity],
             ["Vignette alpha", snapshot.vignetteAlpha],
             ["Reduced motion active", snapshot.reducedMotion],
@@ -116,70 +127,72 @@ export default function BrandLivePreview() {
       <div className="flex flex-wrap items-center gap-3">
         <button
           type="button"
-          className="rounded-full border border-[color:var(--glass-border)] px-4 py-2 text-sm"
+          className="rounded-full border border-[color:var(--champagne-glass-border)] px-4 py-2 text-sm"
           onClick={() => setWaveOn((value) => !value)}
         >
           Toggle wave (currently {waveOn ? "on" : "off"})
         </button>
         <button
           type="button"
-          className="rounded-full border border-[color:var(--glass-border)] px-4 py-2 text-sm"
+          className="rounded-full border border-[color:var(--champagne-glass-border)] px-4 py-2 text-sm"
           onClick={() => setParticlesOn((value) => !value)}
         >
           Toggle particles (currently {particlesOn ? "on" : "off"})
         </button>
-        <span className="text-sm text-[color:var(--smh-text-muted)]">
-          Wave overlay stays off unless you opt in.
-        </span>
-        <span className="text-sm text-[color:var(--smh-text-muted)]">
+        <span className="text-sm text-[color:var(--smh-text-subtle)]">
           Reduced motion: {snapshot?.reducedMotion === "yes" ? "active" : "off"}
         </span>
       </div>
 
-      <div className="sr-only">
-        <h2>Live brand diagnostics</h2>
-        {snapshot ? (
-          <dl>
+      <section aria-live="polite" className="rounded-2xl border border-[color:var(--champagne-glass-border)] bg-[color:var(--champagne-glass-bg)] p-6">
+        <h2 className="mb-3 font-serif text-2xl">Live diagnostics</h2>
+        {diagnostics.length > 0 ? (
+          <dl className="grid gap-3 text-sm sm:grid-cols-2">
             {diagnostics.map(([label, value]) => (
-              <div key={label}>
-                <dt>{label}</dt>
-                <dd>{value}</dd>
+              <div key={label} className="flex flex-col gap-1 rounded-lg border border-[color:var(--champagne-glass-border)] bg-[color:var(--champagne-glass-bg)]/60 p-3">
+                <dt className="font-semibold text-[color:var(--smh-text)]">{label}</dt>
+                <dd className="font-mono text-xs text-[color:var(--smh-text-subtle)]">{value}</dd>
               </div>
             ))}
           </dl>
         ) : (
-          <p aria-live="polite">Reading tokens…</p>
+          <p className="text-sm text-[color:var(--smh-text-subtle)]">Reading tokens…</p>
         )}
-      </div>
+      </section>
 
       <section
-        data-hero="champagne"
-        data-wave="off"
-        data-particles="off"
-        className="champagne-surface relative mt-4 min-h-[28vh] overflow-hidden rounded-2xl"
+        data-hero="preview-static"
+        data-surface="static"
+        className="champagne-surface relative min-h-[28vh] overflow-hidden rounded-2xl"
+        style={WAVE_STYLE}
       >
-        <div className="particles" aria-hidden style={{ opacity: 0 }} />
+        <div aria-hidden className="absolute inset-0 z-0" />
+        <div aria-hidden className="champagne-vignette" />
+        <div aria-hidden className="champagne-sheen" />
         <div className="absolute inset-0 grid place-items-center text-center">
-          <p className="max-w-md font-serif text-lg text-[color:var(--smh-text-strong, var(--smh-text))]">
-            Reference surface with waves locked off. Sheen and vignette should feel calm and luminous.
+          <p className="max-w-md font-serif text-lg text-[color:var(--smh-text)]">
+            Reference surface with waves and particles disabled. Sheen and vignette remain luminous.
           </p>
         </div>
       </section>
 
       <section
-        data-hero="champagne"
-        data-wave={waveOn ? "on" : "off"}
-        data-particles={particlesOn ? "on" : "off"}
-        className="champagne-surface relative min-h-[32vh] overflow-hidden rounded-2xl"
+        data-hero="preview-dynamic"
+        data-surface="dynamic"
+        className={dynamicSurfaceClass}
+        style={WAVE_STYLE}
       >
+        <div aria-hidden className="absolute inset-0 z-0" />
         {particlesOn ? (
-          <Particles className="particles" data-state="on" aria-hidden />
+          <Particles className="champagne-particles" data-state="on" aria-hidden />
         ) : (
-          <div className="particles" aria-hidden style={{ opacity: 0 }} />
+          <div className="champagne-particles" data-state="off" aria-hidden style={{ opacity: 0 }} />
         )}
+        <div aria-hidden className="champagne-vignette" />
+        <div aria-hidden className="champagne-sheen" />
         <div className="absolute inset-0 grid place-items-center text-center">
-          <p className="max-w-md font-serif text-lg text-[color:var(--smh-text-strong, var(--smh-text))]">
-            Wave overlay is {waveOn ? "enabled" : "off"}. Toggle above to inspect layering and particle response.
+          <p className="max-w-md font-serif text-lg text-[color:var(--smh-text)]">
+            Wave overlay is {waveOn ? "enabled" : "off"}. Particles are {particlesOn ? "rendering" : "disabled"}.
           </p>
         </div>
       </section>

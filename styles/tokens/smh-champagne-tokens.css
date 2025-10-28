@@ -2,29 +2,26 @@
   --smh-primary-magenta:#C2185B;
   --smh-primary-teal:#40C4B4;
   --smh-accent-gold:#D4AF37;
-
-  /* locked gradient for guard */
-  --smh-gradient: linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
-
-  /* glass & ink */
-  --ink:#0B0E10;
-  --ink-95:#F2F2F2;
-  --pane-vignette-alpha:0.12;  /* subtle */
-  --particles-opacity:0.08;    /* subtle */
-}
-
-:root{
-  --smh-ink:var(--ink);
-  --smh-ink-95:var(--ink-95);
-  --smh-ink-80:color-mix(in oklab, var(--ink-95) 80%, transparent);
-
-  --smh-bg:var(--ink);
-  --smh-text:var(--ink-95);
-  --smh-text-strong:var(--ink-95);
-  --smh-text-subtle:color-mix(in oklab, var(--ink-95) 84%, transparent);
-  --smh-text-muted:color-mix(in oklab, var(--ink-95) 68%, transparent);
-
-  --glass-bg-strong:color-mix(in oklab, var(--ink) 72%, transparent);
-  --glass-bg-weak:color-mix(in oklab, var(--ink) 60%, transparent);
-  --glass-border:color-mix(in oklab, var(--smh-accent-gold) 26%, transparent);
+  --smh-ink:#0B0D0F;
+  --smh-ink-90: color-mix(in srgb,var(--smh-ink) 90%, transparent);
+  --smh-ink-95: color-mix(in srgb,var(--smh-ink) 5%, white 95%);
+  --smh-ink-80: color-mix(in srgb,var(--smh-ink) 20%, white 80%);
+  --smh-text:#F7F7F5;
+  --smh-text-strong: var(--smh-text);
+  --smh-text-subtle: color-mix(in srgb,var(--smh-text) 85%, transparent);
+  --smh-text-muted: color-mix(in srgb,var(--smh-text) 70%, transparent);
+  --smh-bg: var(--smh-ink);
+  --smh-gradient: linear-gradient(135deg, #D94BC6 0%, #00C2C7 100%);
+  --champagne-vignette-alpha: 0.08; /* keep subtle so hues stay vivid */
+  --champagne-sheen-opacity: 0.07;
+  --champagne-glass-bg: color-mix(in srgb, white 8%, transparent);
+  --champagne-glass-border: color-mix(in srgb, #F9E8C3 30%, transparent);
+  --glass-bg-strong: var(--champagne-glass-bg);
+  --glass-bg-weak: var(--champagne-glass-bg);
+  --glass-border: var(--champagne-glass-border);
+  --glass-box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  --glass-shadow: var(--glass-box-shadow);
+  --radius-pill: 999px;
+  --shadow-cta-rest: 0 12px 32px rgba(0, 0, 0, 0.25);
+  --shadow-cta: 0 16px 48px rgba(0, 0, 0, 0.3);
 }

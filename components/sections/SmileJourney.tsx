@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo } from "react";
+import type { CSSProperties } from "react";
 
 import Particles from "@/components/brand/Particles";
 import { usePrefersReducedMotion } from "@/lib/hooks/usePrefersReducedMotion";
@@ -61,6 +62,10 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
 
   const prefersReducedMotion = usePrefersReducedMotion();
   const particlesActive = !prefersReducedMotion;
+  const waveStyle = useMemo(
+    () => ({ "--champagne-wave": "url('/waves/smh-wave-mask.svg') center / cover no-repeat" } as CSSProperties),
+    []
+  );
 
   return (
     <section
@@ -68,74 +73,69 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
       data-hero="champagne"
       data-particles={particlesActive ? "on" : "off"}
       data-reduced-motion={prefersReducedMotion ? "true" : "false"}
-      className="relative"
+      className="champagne-surface journey-surface relative overflow-hidden has-wave"
+      style={waveStyle}
     >
-      <section
-        className="champagne-surface journey-surface overflow-hidden"
-        data-wave="on"
-        data-particles={particlesActive ? "on" : "off"}
-      >
-        {particlesActive ? (
-          <Particles className="particles" data-state="on" aria-hidden />
-        ) : (
-          <div className="particles" data-state="off" aria-hidden style={{ opacity: 0 }} />
-        )}
+      <div aria-hidden className="absolute inset-0 z-0" />
+      {particlesActive ? (
+        <Particles className="champagne-particles" data-state="on" aria-hidden />
+      ) : (
+        <div className="champagne-particles" data-state="off" aria-hidden style={{ opacity: 0 }} />
+      )}
+      <div aria-hidden className="champagne-vignette" />
+      <div aria-hidden className="champagne-sheen" />
 
-        <div className="journey-inner">
-          <header className="journey-header" id="journey-hero-title">
-            <h2>Your Smile Journey</h2>
-            <p>Discover the path to your perfect smile</p>
-            <Link href="/ai-smile-quiz" className="journey-cta">
-              Start Your Journey
-            </Link>
-          </header>
+      <div className="journey-inner">
+        <header className="journey-header" id="journey-hero-title">
+          <h2>Your Smile Journey</h2>
+          <p>Discover the path to your perfect smile</p>
+          <Link href="/ai-smile-quiz" className="journey-cta">
+            Start Your Journey
+          </Link>
+        </header>
 
-          <div className="journey-grid" aria-label="Patient journey timeline">
-            {steps.map((step) => {
-              const iconPath = step.icon ? iconMap[step.icon] : undefined;
-              return (
-                <article key={step.title} role="group" tabIndex={0} className="journey-card champagne-glass">
-                  {iconPath && (
-                    <div className="journey-card-icon">
-                      <img src={iconPath} alt="" aria-hidden="true" />
-                    </div>
-                  )}
-                  <h3>{step.title}</h3>
-                  <p>{step.body}</p>
-                </article>
-              );
-            })}
-          </div>
+        <div className="journey-grid" aria-label="Patient journey timeline">
+          {steps.map((step) => {
+            const iconPath = step.icon ? iconMap[step.icon] : undefined;
+            return (
+              <article key={step.title} role="group" tabIndex={0} className="journey-card champagne-glass">
+                {iconPath && (
+                  <div className="journey-card-icon">
+                    <img src={iconPath} alt="" aria-hidden="true" />
+                  </div>
+                )}
+                <h3>{step.title}</h3>
+                <p>{step.body}</p>
+              </article>
+            );
+          })}
+        </div>
 
-          <div className="journey-callout champagne-glass">
-            <span className="journey-callout-veil" aria-hidden="true" />
-            <div className="journey-callout-content">
-              <h3>Ready to Begin?</h3>
-              <p>Take the first step toward your perfect smile.</p>
-              <div className="journey-callout-actions">
-                <Link href="/contact" className="journey-cta-primary">
-                  Book a consultation
-                </Link>
-                <Link href="/treatments" className="journey-cta-secondary">
-                  See treatment options
-                </Link>
-              </div>
+        <div className="journey-callout champagne-glass">
+          <div className="journey-callout-content">
+            <h3>Ready to Begin?</h3>
+            <p>Take the first step toward your perfect smile.</p>
+            <div className="journey-callout-actions">
+              <Link href="/contact" className="journey-cta-primary">
+                Book a consultation
+              </Link>
+              <Link href="/treatments" className="journey-cta-secondary">
+                See treatment options
+              </Link>
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
       <style jsx>{`
         .journey-surface {
-          position: relative;
-          overflow: hidden;
           padding-block: clamp(96px, 14vw, 168px);
-          color: var(--smh-text-strong, var(--smh-text));
+          color: var(--smh-text);
         }
 
         .journey-inner {
           position: relative;
-          z-index: 6;
+          z-index: 5;
           width: 100%;
           max-width: min(1180px, 92vw);
           margin-inline: auto;
@@ -165,7 +165,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
         .journey-header p {
           margin: 0;
           font-family: var(--font-body);
-          color: var(--smh-text-subtle, var(--smh-text));
+          color: var(--smh-text-subtle);
           font-size: clamp(16px, 2vw, 20px);
           line-height: 1.6;
           max-width: 40ch;
@@ -182,8 +182,8 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           font-weight: 600;
           font-size: 1rem;
           text-decoration: none;
-          color: var(--ink);
-          background: var(--cta-gradient);
+          color: var(--smh-ink);
+          background: var(--smh-gradient);
           box-shadow: var(--shadow-cta-rest);
           transition:
             transform var(--motion-duration-normal) var(--motion-easing-smooth),
@@ -212,7 +212,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           gap: 1.1rem;
           padding: clamp(28px, 4.5vw, 40px);
           border-radius: 22px;
-          color: var(--smh-text-strong, var(--smh-text));
+          color: var(--smh-text);
           box-shadow: var(--journey-card-shadow), inset 0 1px 0 rgba(255,255,255,.06);
           transition:
             transform var(--motion-duration-normal) var(--motion-easing-smooth),
@@ -255,8 +255,8 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           border-radius: 0.75rem;
           display: grid;
           place-items: center;
-          background: var(--glass-bg-weak);
-          border: 1px solid var(--glass-border);
+          background: var(--champagne-glass-bg);
+          border: 1px solid var(--champagne-glass-border);
         }
 
         .journey-card-icon img {
@@ -274,7 +274,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
         .journey-card p {
           margin: 0;
           font-family: var(--font-body);
-          color: var(--smh-text-subtle, var(--smh-text));
+          color: var(--smh-text-subtle);
           line-height: 1.6;
         }
 
@@ -291,16 +291,9 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           position: absolute;
           inset: 0;
           border-radius: inherit;
-          background: linear-gradient(160deg, rgba(255, 246, 224, 0.22), rgba(255, 255, 255, 0));
+          background: linear-gradient(160deg, rgba(255, 246, 224, 0.08), rgba(255, 255, 255, 0));
           mix-blend-mode: screen;
-          opacity: 0.4;
-          pointer-events: none;
-        }
-
-        .journey-callout-veil {
-          position: absolute;
-          inset: 0;
-          background: color-mix(in srgb, black 28%, transparent);
+          opacity: 0.6;
           pointer-events: none;
         }
 
@@ -310,7 +303,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           gap: clamp(16px, 3vw, 24px);
           justify-items: center;
           text-align: center;
-          color: var(--smh-text-strong, var(--smh-text));
+          color: var(--smh-text);
         }
 
         .journey-callout-content h3 {
@@ -323,7 +316,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
         .journey-callout-content p {
           margin: 0;
           font-family: var(--font-body);
-          color: var(--smh-text-subtle, var(--smh-text));
+          color: var(--smh-text-subtle);
           line-height: 1.6;
         }
 
@@ -352,15 +345,15 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
         }
 
         .journey-cta-primary {
-          color: var(--ink);
-          background: var(--cta-gradient);
+          color: var(--smh-ink);
+          background: var(--smh-gradient);
           box-shadow: var(--shadow-cta-rest);
         }
 
         .journey-cta-secondary {
-          color: var(--smh-text-strong, var(--smh-text));
-          background: var(--glass-bg-weak);
-          border: 1px solid var(--glass-border);
+          color: var(--smh-text);
+          background: var(--champagne-glass-bg);
+          border: 1px solid var(--champagne-glass-border);
           box-shadow: var(--shadow-cta-rest);
         }
 
