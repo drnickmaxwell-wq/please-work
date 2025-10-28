@@ -4,23 +4,22 @@ import Particles from '@/components/brand/Particles';
 
 export interface Hero4KVideoProps {
   poster?: string;
+  showParticles?: boolean;
   [key: string]: unknown;
 }
 
-export default function Hero4KVideo({ poster, ..._ }: Hero4KVideoProps) {
+export default function Hero4KVideo({ poster, showParticles = true, ..._ }: Hero4KVideoProps) {
   return (
-    <section data-hero="champagne" data-wave="off" className="relative isolate">
-      <Particles className="absolute inset-0" style={{ opacity: 0.08 }} />
+    <section data-hero="champagne" data-page="home" data-wave="off" className="relative isolate">
       <div className="gold-flecks" aria-hidden="true" />
       <div className="relative mx-auto max-w-5xl px-6 py-12 sm:px-10">
         <div className="glass-pane">
           <div className="space-y-6 p-8 sm:p-10">
             <div className="relative aspect-[16/9] overflow-hidden rounded-xl">
-              {/* Fallback gradient under video */}
-              <div aria-hidden className="absolute inset-0" style={{ background: 'var(--smh-gradient)', zIndex: -1 }} />
-              {/* Video (progressive enhance) */}
+              <div aria-hidden className="absolute inset-0" style={{ background: 'var(--smh-gradient)' }} />
+              {showParticles ? <Particles className="absolute inset-0" aria-hidden /> : null}
               <video
-                className="absolute inset-0 h-full w-full object-cover"
+                className="absolute inset-0 z-[1] h-full w-full object-cover"
                 playsInline
                 autoPlay
                 muted

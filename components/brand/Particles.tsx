@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { CanvasHTMLAttributes } from 'react';
 
 type ParticlesProps = CanvasHTMLAttributes<HTMLCanvasElement>;
@@ -14,8 +14,8 @@ type Particle = {
   alpha: number;
 };
 
-const PARTICLE_COUNT = 20;
-const SPEED = 0.18;
+const PARTICLE_COUNT = 18;
+const SPEED = 0.14;
 
 function parseHexToRgb(input: string) {
   const hex = input.trim().replace('#', '');
@@ -31,14 +31,36 @@ function parseHexToRgb(input: string) {
 
 export default function Particles({ className, style, ...rest }: ParticlesProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setShouldRender(!motionQuery.matches);
+    update();
+
+    if (motionQuery.addEventListener) {
+      motionQuery.addEventListener('change', update);
+    } else {
+      motionQuery.addListener(update);
+    }
+
+    return () => {
+      if (motionQuery.removeEventListener) {
+        motionQuery.removeEventListener('change', update);
+      } else {
+        motionQuery.removeListener(update);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!shouldRender) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const context = canvas.getContext('2d');
     if (!context) return;
 
-    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const rootStyles = getComputedStyle(document.documentElement);
     const gold = parseHexToRgb(rootStyles.getPropertyValue('--smh-accent-gold'));
 
@@ -47,15 +69,14 @@ export default function Particles({ className, style, ...rest }: ParticlesProps)
     let dpr = window.devicePixelRatio || 1;
     let particles: Particle[] = [];
     let rafId: number | null = null;
-    let active = false;
 
     const createParticle = (): Particle => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      radius: 0.6 + Math.random() * 1.4,
+      radius: 0.6 + Math.random() * 1.1,
       velocityX: (Math.random() - 0.5) * SPEED,
       velocityY: (Math.random() - 0.5) * SPEED,
-      alpha: 0.15 + Math.random() * 0.3,
+      alpha: 0.04 + Math.random() * 0.04,
     });
 
     const resize = () => {
@@ -75,7 +96,6 @@ export default function Particles({ className, style, ...rest }: ParticlesProps)
 
     const step = () => {
       context.clearRect(0, 0, width, height);
-      context.globalCompositeOperation = 'lighter';
       for (const particle of particles) {
         particle.x += particle.velocityX;
         particle.y += particle.velocityY;
@@ -90,69 +110,40 @@ export default function Particles({ className, style, ...rest }: ParticlesProps)
         context.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
         context.fill();
       }
-      context.globalCompositeOperation = 'source-over';
     };
 
     const render = () => {
-      if (!active) return;
       step();
       rafId = window.requestAnimationFrame(render);
     };
 
-    const start = () => {
-      if (active) return;
-      resize();
-      initParticles();
-      active = true;
-      render();
-    };
-
-    const stop = () => {
-      active = false;
-      if (rafId !== null) {
-        window.cancelAnimationFrame(rafId);
-        rafId = null;
-      }
-      context.clearRect(0, 0, width, height);
-    };
-
     const handleResize = () => {
-      if (!active) return;
       resize();
       initParticles();
     };
 
-    const handleMotionChange = () => {
-      if (motionQuery.matches) {
-        stop();
-      } else {
-        start();
-      }
-    };
-
+    handleResize();
+    render();
     window.addEventListener('resize', handleResize);
-    if (motionQuery.addEventListener) {
-      motionQuery.addEventListener('change', handleMotionChange);
-    } else {
-      motionQuery.addListener(handleMotionChange);
-    }
-
-    if (!motionQuery.matches) {
-      start();
-    }
 
     return () => {
-      stop();
-      window.removeEventListener('resize', handleResize);
-      if (motionQuery.removeEventListener) {
-        motionQuery.removeEventListener('change', handleMotionChange);
-      } else {
-        motionQuery.removeListener(handleMotionChange);
+      if (rafId !== null) {
+        window.cancelAnimationFrame(rafId);
       }
+      window.removeEventListener('resize', handleResize);
+      context.clearRect(0, 0, width, height);
     };
-  }, []);
+  }, [shouldRender]);
 
-  const mergedStyle = { ...(style ?? {}), pointerEvents: 'none' as const };
+  if (!shouldRender) {
+    return null;
+  }
+
+  const mergedStyle = {
+    opacity: 0.08,
+    pointerEvents: 'none' as const,
+    ...(style ?? {}),
+  };
 
   return <canvas ref={canvasRef} aria-hidden className={className} style={mergedStyle} {...rest} />;
 }
