@@ -12,4 +12,4 @@ jobs:
           node-version: '20'
       - run: corepack enable
       - run: pnpm install --frozen-lockfile
-      - run: node scripts/brand-guard.mjs
+      - run: node scripts/brand-guard.cjs

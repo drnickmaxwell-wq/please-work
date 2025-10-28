@@ -1,16 +1,10 @@
 /* styles/brand/brand-gradient.css — Champagne hero layers */
 
 @import "./champagne-sheen.css";
-@import "./hero-stack.css";
+@import "../champagne/surface.css";
 
-@supports (background: color(from #000 srgb r g b)) {
-  :root {
-    --smh-gradient: linear-gradient(
-      135deg,
-      color(from #D94BC6 srgb to oklab l 0.60 a 0.35 b -0.10) 0%,
-      color(from #00C2C7 srgb to oklab l 0.68 a -0.18 b -0.05) 100%
-    );
-  }
+:root {
+  --smh-gradient: linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
 }
 
 section[data-hero="champagne"] {
@@ -19,38 +13,11 @@ section[data-hero="champagne"] {
   overflow: hidden;
 }
 
+section[data-hero="champagne"] .gradient-layer,
 section[data-hero="champagne"] .wave-layer,
 section[data-hero="champagne"] .particles-layer,
-section[data-hero="champagne"] .vignette-layer {
-  border-radius: inherit;
-}
-
-section[data-hero="champagne"] canvas.particles-layer {
-  opacity: 0.08;
-  transition: opacity 200ms ease;
-}
-
-section[data-hero="champagne"] canvas.particles-layer[data-state="off"] {
-  opacity: 0;
-}
-
+section[data-hero="champagne"] .vignette-layer,
+section[data-hero="champagne"] .sheen-layer,
 section[data-hero="champagne"] .glass-pane {
   border-radius: inherit;
-}
-
-.gold-flecks {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(2px 2px at 20% 30%, color-mix(in srgb, var(--brand-gold, var(--smh-accent-gold)) 80%, transparent 20%) 0%, transparent 100%),
-    radial-gradient(2px 2px at 70% 60%, color-mix(in srgb, var(--brand-gold, var(--smh-accent-gold)) 70%, transparent 30%) 0%, transparent 100%);
-  opacity: 0.06;
-  filter: blur(0.6px);
-}
-
-.fixed.top-8.left-0.right-0.z-40 {
-  background: color-mix(in srgb, white 85%, transparent);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
 }
