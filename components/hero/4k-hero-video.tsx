@@ -1,6 +1,7 @@
 'use client';
 
 import type { CSSProperties } from 'react';
+
 import Particles from '@/components/brand/Particles';
 import { usePrefersReducedMotion } from '@/lib/hooks/usePrefersReducedMotion';
 
@@ -21,8 +22,13 @@ export default function Hero4KVideo({
   const waveStyle = {
     '--champagne-wave': "url('/waves/smh-wave-mask.svg') center / cover no-repeat",
   } as CSSProperties;
+  const surfaceStyle = {
+    ...waveStyle,
+    width: '100vw',
+    marginInline: 'calc(50% - 50vw)',
+  } as CSSProperties;
   const surfaceClass = [
-    'champagne-surface relative w-full max-w-none rounded-none overflow-hidden min-h-[clamp(520px,75vh,880px)]',
+    'champagne-surface relative w-screen overflow-hidden min-h-[clamp(520px,70vh,880px)]',
     showWave ? 'has-wave' : null,
   ]
     .filter(Boolean)
@@ -36,9 +42,10 @@ export default function Hero4KVideo({
       data-particles={particlesActive ? 'on' : 'off'}
       data-reduced-motion={prefersReducedMotion ? 'true' : 'false'}
       className={surfaceClass}
-      style={waveStyle}
+      style={surfaceStyle}
     >
       <div aria-hidden className="absolute inset-0 z-0" />
+      <div aria-hidden className="wave" />
       {particlesActive ? (
         <Particles className="champagne-particles" data-state="on" aria-hidden />
       ) : (
@@ -48,10 +55,14 @@ export default function Hero4KVideo({
       <div aria-hidden className="champagne-sheen" />
 
       <div className="relative mx-auto flex h-full w-full max-w-6xl flex-col px-6 py-12 sm:px-10">
-        <div className="champagne-glass rounded-[28px]">
-          <div className="space-y-6 p-8 sm:p-10">
+        <div className="champagne-glass rounded-3xl">
+          <div className="space-y-8 p-8 sm:p-12">
             <div className="relative aspect-[16/9] overflow-hidden rounded-2xl">
-              <div aria-hidden className="absolute inset-0" style={{ background: 'transparent' }} />
+              <div
+                aria-hidden
+                className="absolute inset-0 bg-[var(--smh-gradient)]"
+                style={{ opacity: 0.65 }}
+              />
               <video
                 className="absolute inset-0 z-[1] h-full w-full object-cover"
                 playsInline
@@ -65,18 +76,22 @@ export default function Hero4KVideo({
               </video>
             </div>
 
-            <div className="space-y-4 text-[color:var(--smh-text)]">
-              <h1 className="font-serif text-5xl md:text-6xl">Going the Extra Smile</h1>
-              <p className="opacity-90">Private dental care with calm precision</p>
+            <div className="space-y-6 text-white">
+              <h1 className="font-serif text-4xl leading-tight sm:text-5xl md:text-6xl">
+                Going the Extra Smile
+              </h1>
+              <p className="max-w-xl text-lg text-white/90">
+                Private dental care with calm precision
+              </p>
               <div className="flex flex-wrap gap-4">
                 <a
-                  className="rounded-full bg-[var(--smh-gradient)] px-5 py-3 text-[color:var(--smh-ink)]"
+                  className="rounded-full bg-[var(--smh-gradient)] px-6 py-3 font-semibold text-black"
                   href="/contact"
                 >
                   Book a consultation
                 </a>
                 <a
-                  className="rounded-full border border-[color:var(--champagne-glass-border)] px-5 py-3 text-[color:var(--smh-text)]"
+                  className="rounded-full border border-[var(--champagne-keyline-gold)] px-6 py-3 font-semibold text-white"
                   href="/treatments"
                 >
                   Explore treatments

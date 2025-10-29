@@ -66,17 +66,28 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
     () => ({ "--champagne-wave": "url('/waves/smh-wave-mask.svg') center / cover no-repeat" } as CSSProperties),
     []
   );
+  const surfaceStyle = useMemo(
+    () =>
+      ({
+        ...waveStyle,
+        width: "100vw",
+        marginInline: "calc(50% - 50vw)",
+      }) as CSSProperties,
+    [waveStyle]
+  );
 
   return (
     <section
       aria-labelledby="journey-hero-title"
       data-hero="champagne"
       data-particles={particlesActive ? "on" : "off"}
+      data-wave="on"
       data-reduced-motion={prefersReducedMotion ? "true" : "false"}
-      className="champagne-surface journey-surface relative overflow-hidden has-wave"
-      style={waveStyle}
+      className="champagne-surface relative overflow-hidden text-white"
+      style={surfaceStyle}
     >
       <div aria-hidden className="absolute inset-0 z-0" />
+      <div aria-hidden className="wave" />
       {particlesActive ? (
         <Particles className="champagne-particles" data-state="on" aria-hidden />
       ) : (
@@ -84,316 +95,66 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
       )}
       <div aria-hidden className="champagne-vignette" />
       <div aria-hidden className="champagne-sheen" />
-
-      <div className="journey-inner">
-        <header className="journey-header" id="journey-hero-title">
-          <h2>Your Smile Journey</h2>
-          <p>Discover the path to your perfect smile</p>
-          <Link href="/ai-smile-quiz" className="journey-cta">
+      <div className="relative z-[1] mx-auto flex w-full max-w-6xl flex-col gap-16 px-6 py-24 sm:px-10 lg:py-32">
+        <header className="mx-auto flex max-w-2xl flex-col items-center gap-4 text-center" id="journey-hero-title">
+          <h2 className="font-serif text-4xl leading-tight sm:text-5xl">Your Smile Journey</h2>
+          <p className="text-base text-white/85 sm:text-lg">
+            Discover the path to your perfect smile
+          </p>
+          <Link
+            href="/ai-smile-quiz"
+            className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-[var(--smh-gradient)] px-6 py-3 font-semibold text-black shadow-lg shadow-black/30 transition-transform duration-300 ease-out hover:-translate-y-1"
+          >
             Start Your Journey
           </Link>
         </header>
 
-        <div className="journey-grid" aria-label="Patient journey timeline">
+        <div
+          className="grid gap-6 md:grid-cols-2 xl:grid-cols-3"
+          aria-label="Patient journey timeline"
+        >
           {steps.map((step) => {
             const iconPath = step.icon ? iconMap[step.icon] : undefined;
             return (
-              <article key={step.title} role="group" tabIndex={0} className="journey-card champagne-glass">
+              <article
+                key={step.title}
+                role="group"
+                tabIndex={0}
+                className="champagne-glass flex h-full flex-col gap-4 p-8 text-white/90 transition-transform duration-300 ease-out hover:-translate-y-1 focus:outline-none focus-visible:-translate-y-1"
+              >
                 {iconPath && (
-                  <div className="journey-card-icon">
-                    <img src={iconPath} alt="" aria-hidden="true" />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
+                    <img src={iconPath} alt="" aria-hidden="true" className="h-6 w-6" />
                   </div>
                 )}
-                <h3>{step.title}</h3>
-                <p>{step.body}</p>
+                <h3 className="font-serif text-2xl text-white">{step.title}</h3>
+                <p className="text-base leading-relaxed">{step.body}</p>
               </article>
             );
           })}
         </div>
 
-        <div className="journey-callout champagne-glass">
-          <div className="journey-callout-content">
-            <h3>Ready to Begin?</h3>
-            <p>Take the first step toward your perfect smile.</p>
-            <div className="journey-callout-actions">
-              <Link href="/contact" className="journey-cta-primary">
-                Book a consultation
-              </Link>
-              <Link href="/treatments" className="journey-cta-secondary">
-                See treatment options
-              </Link>
-            </div>
+        <div className="champagne-glass flex flex-col gap-6 p-10 text-center text-white">
+          <div className="space-y-3">
+            <h3 className="font-serif text-3xl">Ready to Begin?</h3>
+            <p className="text-white/85">Take the first step toward your perfect smile.</p>
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Link
+              href="/contact"
+              className="rounded-full bg-[var(--smh-gradient)] px-6 py-3 font-semibold text-black shadow-lg shadow-black/30 transition-transform duration-300 ease-out hover:-translate-y-1"
+            >
+              Book a consultation
+            </Link>
+            <Link
+              href="/treatments"
+              className="rounded-full border border-[var(--champagne-keyline-gold)] px-6 py-3 font-semibold text-white/90 transition-transform duration-300 ease-out hover:-translate-y-1"
+            >
+              See treatment options
+            </Link>
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        .journey-surface {
-          padding-block: clamp(96px, 14vw, 168px);
-          color: var(--smh-text);
-        }
-
-        .journey-inner {
-          position: relative;
-          z-index: 5;
-          width: 100%;
-          max-width: min(1180px, 92vw);
-          margin-inline: auto;
-          padding-inline: clamp(20px, 6vw, 56px);
-          display: grid;
-          gap: clamp(64px, 8vw, 96px);
-          --journey-card-shadow: 0 18px 48px rgba(13, 14, 16, 0.42);
-          --journey-card-shadow-hover: 0 24px 62px rgba(13, 14, 16, 0.5);
-          --journey-card-focus: 0 0 0 1px color-mix(in srgb, var(--smh-accent-gold) 46%, transparent);
-          --journey-card-glow: 0 0 24px rgba(0, 194, 199, 0.28);
-        }
-
-        .journey-header {
-          display: grid;
-          gap: 1rem;
-          justify-items: center;
-          text-align: center;
-        }
-
-        .journey-header h2 {
-          margin: 0;
-          font-family: var(--font-display);
-          font-size: clamp(32px, 5vw, 48px);
-          font-weight: 600;
-        }
-
-        .journey-header p {
-          margin: 0;
-          font-family: var(--font-body);
-          color: var(--smh-text-subtle);
-          font-size: clamp(16px, 2vw, 20px);
-          line-height: 1.6;
-          max-width: 40ch;
-        }
-
-        .journey-cta {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          min-height: 48px;
-          padding: 0.85rem 2.25rem;
-          border-radius: var(--radius-pill);
-          font-family: var(--font-body);
-          font-weight: 600;
-          font-size: 1rem;
-          text-decoration: none;
-          color: var(--smh-ink);
-          background: var(--smh-gradient);
-          box-shadow: var(--shadow-cta-rest);
-          transition:
-            transform var(--motion-duration-normal) var(--motion-easing-smooth),
-            box-shadow var(--motion-duration-normal) var(--motion-easing-smooth);
-        }
-
-        .journey-cta:hover {
-          transform: translateY(-1px);
-          box-shadow: var(--shadow-cta);
-        }
-
-        .journey-cta:focus-visible {
-          outline: none;
-          box-shadow: var(--journey-card-focus), var(--shadow-cta-rest);
-        }
-
-        .journey-grid {
-          display: grid;
-          gap: clamp(24px, 4vw, 40px);
-          grid-template-columns: repeat(auto-fit, minmax(288px, 1fr));
-        }
-
-        .journey-card {
-          position: relative;
-          display: grid;
-          gap: 1.1rem;
-          padding: clamp(28px, 4.5vw, 40px);
-          border-radius: 22px;
-          color: var(--smh-text);
-          box-shadow: var(--journey-card-shadow), inset 0 1px 0 rgba(255,255,255,.06);
-          transition:
-            transform var(--motion-duration-normal) var(--motion-easing-smooth),
-            box-shadow var(--motion-duration-normal) var(--motion-easing-smooth),
-            filter var(--motion-duration-fast) var(--motion-easing-smooth);
-        }
-
-        .journey-card::before {
-          content: "";
-          position: absolute;
-          inset: 10px;
-          border-radius: inherit;
-          border: 1px solid color-mix(in srgb, var(--smh-accent-gold) 18%, transparent);
-          opacity: 0.45;
-          pointer-events: none;
-          transition: opacity var(--motion-duration-fast) var(--motion-easing-smooth);
-        }
-
-        .journey-card:hover {
-          transform: translateY(-4px);
-          box-shadow: var(--journey-card-shadow-hover), var(--journey-card-glow), inset 0 1px 0 rgba(255,255,255,.06);
-        }
-
-        .journey-card:hover::before {
-          opacity: 0.7;
-        }
-
-        .journey-card:focus-visible {
-          outline: none;
-          box-shadow: var(--journey-card-focus), var(--journey-card-shadow), inset 0 1px 0 rgba(255,255,255,.06);
-        }
-
-        .journey-card:focus-visible::before {
-          opacity: 0.82;
-        }
-
-        .journey-card-icon {
-          width: 3rem;
-          height: 3rem;
-          border-radius: 0.75rem;
-          display: grid;
-          place-items: center;
-          background: var(--champagne-glass-bg);
-          border: 1px solid var(--champagne-glass-border);
-        }
-
-        .journey-card-icon img {
-          width: 1.5rem;
-          height: 1.5rem;
-        }
-
-        .journey-card h3 {
-          margin: 0;
-          font-family: var(--font-display);
-          font-size: 1.35rem;
-          font-weight: 600;
-        }
-
-        .journey-card p {
-          margin: 0;
-          font-family: var(--font-body);
-          color: var(--smh-text-subtle);
-          line-height: 1.6;
-        }
-
-        .journey-callout {
-          position: relative;
-          border-radius: 26px;
-          padding: clamp(36px, 6vw, 52px);
-          box-shadow: var(--journey-card-shadow), inset 0 1px 0 rgba(255,255,255,.06);
-          overflow: hidden;
-        }
-
-        .journey-callout::before {
-          content: "";
-          position: absolute;
-          inset: 0;
-          border-radius: inherit;
-          background: linear-gradient(160deg, rgba(255, 246, 224, 0.08), rgba(255, 255, 255, 0));
-          mix-blend-mode: screen;
-          opacity: 0.6;
-          pointer-events: none;
-        }
-
-        .journey-callout-content {
-          position: relative;
-          display: grid;
-          gap: clamp(16px, 3vw, 24px);
-          justify-items: center;
-          text-align: center;
-          color: var(--smh-text);
-        }
-
-        .journey-callout-content h3 {
-          margin: 0;
-          font-family: var(--font-display);
-          font-size: clamp(28px, 4vw, 36px);
-          font-weight: 600;
-        }
-
-        .journey-callout-content p {
-          margin: 0;
-          font-family: var(--font-body);
-          color: var(--smh-text-subtle);
-          line-height: 1.6;
-        }
-
-        .journey-callout-actions {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 16px;
-          justify-content: center;
-        }
-
-        .journey-cta-primary,
-        .journey-cta-secondary {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          min-height: 48px;
-          padding: 0.85rem 2.25rem;
-          border-radius: var(--radius-pill);
-          font-family: var(--font-body);
-          font-weight: 600;
-          font-size: 1rem;
-          text-decoration: none;
-          transition:
-            transform var(--motion-duration-normal) var(--motion-easing-smooth),
-            box-shadow var(--motion-duration-normal) var(--motion-easing-smooth);
-        }
-
-        .journey-cta-primary {
-          color: var(--smh-ink);
-          background: var(--smh-gradient);
-          box-shadow: var(--shadow-cta-rest);
-        }
-
-        .journey-cta-secondary {
-          color: var(--smh-text);
-          background: var(--champagne-glass-bg);
-          border: 1px solid var(--champagne-glass-border);
-          box-shadow: var(--shadow-cta-rest);
-        }
-
-        .journey-cta-primary:hover,
-        .journey-cta-secondary:hover {
-          transform: translateY(-1px);
-          box-shadow: var(--shadow-cta);
-        }
-
-        .journey-cta-primary:focus-visible,
-        .journey-cta-secondary:focus-visible {
-          outline: none;
-          box-shadow: var(--journey-card-focus), var(--shadow-cta-rest);
-        }
-
-        @media (max-width: 768px) {
-          .journey-card {
-            padding: clamp(20px, 6vw, 28px);
-          }
-
-          .journey-callout {
-            padding: clamp(28px, 10vw, 40px);
-          }
-
-          .journey-cta,
-          .journey-cta-primary,
-          .journey-cta-secondary {
-            width: 100%;
-          }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .journey-cta,
-          .journey-card,
-          .journey-cta-primary,
-          .journey-cta-secondary {
-            transition-duration: 0ms !important;
-          }
-        }
-      `}</style>
     </section>
   );
 }
