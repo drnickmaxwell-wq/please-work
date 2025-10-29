@@ -4,12 +4,17 @@ const fs = require('fs');
 const champagne = fs.readFileSync('styles/tokens/smh-champagne-tokens.css', 'utf8');
 
 function extractOpacity(varName) {
-  const re = new RegExp(`${varName}\\s*:\\s*color-mix\\([^;]+)`, 'i');
+  const re = new RegExp(`${varName}\\s*:\\s*(color-mix\\([^;]+\\))`, 'i');
   const match = champagne.match(re);
   if (!match) return null;
-  const [, body] = match;
-  const percMatch = body.match(/\s(\d+)%/);
-  return percMatch ? parseInt(percMatch[1], 10) : null;
+  const body = match[1];
+  const darkMixMatch = body.match(/#0b0d0f\s*(\d+)%/i);
+  if (darkMixMatch) {
+    return parseInt(darkMixMatch[1], 10);
+  }
+
+  const percMatches = body.match(/(\d+)%/);
+  return percMatches ? parseInt(percMatches[1], 10) : null;
 }
 
 const glassOpacity = extractOpacity('--champagne-glass-bg');

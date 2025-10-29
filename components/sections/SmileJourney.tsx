@@ -65,19 +65,19 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
   return (
     <section
       aria-labelledby="journey-hero-title"
-      className="champagne-surface relative overflow-hidden py-24 md:py-32"
+      className="champagne-surface py-24 md:py-32"
       data-particles={particlesActive ? "on" : "off"}
       data-wave="off"
       data-reduced-motion={prefersReducedMotion ? "true" : "false"}
     >
-      {particlesActive ? (
-        <Particles className="champagne-particles" data-state="on" aria-hidden />
-      ) : (
-        <div className="champagne-particles" data-state="off" aria-hidden style={{ opacity: 0 }} />
-      )}
+      <div className="relative">
+        {particlesActive ? (
+          <Particles className="champagne-particles" data-state="on" aria-hidden />
+        ) : (
+          <div className="champagne-particles" data-state="off" aria-hidden style={{ opacity: 0 }} />
+        )}
 
-      <div className="relative z-[1]">
-        <div className="container mx-auto px-4">
+        <div className="relative z-[1] mx-auto max-w-7xl px-4 md:px-6">
           <h2 id="journey-hero-title" className="font-serif text-4xl tracking-tight text-white/95 md:text-5xl">
             Your Smile Journey
           </h2>
@@ -85,13 +85,13 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
             Discover the path to your perfect smile with a guided experience curated by Manus AI.
           </p>
 
-          <div className="mt-12 grid grid-cols-1 gap-6 text-white/90 md:grid-cols-2 md:gap-8">
+          <div className="mt-12 grid gap-8 text-white/90 md:grid-cols-2 lg:grid-cols-3">
             {steps.map((step) => {
               const iconPath = step.icon ? iconMap[step.icon] : undefined;
               return (
                 <article
                   key={step.title}
-                  className="champagne-glass flex h-full flex-col gap-5 p-6 text-white/92 shadow-lg shadow-black/20 transition-transform duration-300 ease-out hover:-translate-y-1 focus-within:-translate-y-1 focus:outline-none"
+                  className="champagne-glass p-6 md:p-7 text-white/92"
                   tabIndex={0}
                 >
                   {iconPath && (
@@ -106,7 +106,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
             })}
           </div>
 
-          <div className="champagne-glass mt-16 p-8 text-center text-white/92 shadow-xl shadow-black/20 md:p-10">
+          <div className="champagne-glass text-center p-8 md:p-10 mt-16 md:mt-20 text-white/92">
             <div className="space-y-3">
               <h3 className="font-serif text-3xl tracking-tight text-white">Ready to Begin?</h3>
               <p className="text-white/80">Take the first step toward your perfect smile.</p>
