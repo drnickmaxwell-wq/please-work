@@ -1,30 +1,21 @@
 /** SMH Champagne Lock */
 const safelist = [
-  "champagne-surface",
-  "champagne-glass",
-  "rounded-champagne",
-  "shadow-champagne",
-  "backdrop-blur-md",
-  "bg-ink/40",
-  "grid",
-  "md:grid-cols-2",
-  "lg:grid-cols-3",
-  "gap-8",
-  "max-w-7xl",
-  "mx-auto",
-  "px-4",
-  "md:px-6",
-  "py-24",
-  "md:py-32",
-  "rounded-full",
-  "border",
+  'champagne-surface',
+  'champagne-glass',
+  'rounded-lg',
+  'rounded-xl',
+  'rounded-2xl',
+  'rounded-3xl',
+  'grid',
+  'md:grid-cols-2',
+  'lg:grid-cols-3',
 ];
 
 module.exports = {
   content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./styles/**/*.{css,scss}",
+    './app/**/*.{ts,tsx,mdx}',
+    './components/**/*.{ts,tsx}',
+    './styles/**/*.{css}',
   ],
   safelist,
   theme: {

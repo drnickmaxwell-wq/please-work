@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { easeInOutCubic } from '@/lib/motion/easing';
 import Link from 'next/link';
 import InteractiveToothModel from '@/components/3d/interactive-tooth-model';
+import { TOKENS as NEUTRAL_TOKENS } from '@/styles/tokens/neutrals';
 import {
   Circle,
   Shield,
@@ -258,8 +259,8 @@ export default function ImplantsPageContent() {
               treatmentType="implant"
               title="Complete Dental Implant System"
               description="See how titanium implants integrate with bone to create a permanent tooth replacement"
-              beforeColor="#F5F5DC"
-              afterColor="#FFFFFF"
+              beforeColor={NEUTRAL_TOKENS.champagne}
+              afterColor={NEUTRAL_TOKENS.white}
             />
           </motion.div>
         </div>

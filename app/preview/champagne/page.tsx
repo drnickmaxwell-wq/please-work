@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState } from 'react';
 import type { CSSProperties } from 'react';
 
 import BrandHeroGradient, { type BrandHeroGradientProps } from '@/components/brand/BrandHeroGradient';
-import '@/styles/tokens/smh-champagne-tokens.css';
 
 import styles from './champagne-preview.module.css';
 

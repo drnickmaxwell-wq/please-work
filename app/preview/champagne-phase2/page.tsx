@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState } from 'react';
 
 import BrandHeroGradient from '@/components/brand/BrandHeroGradient';
 import FaqAccordion from '@/components/faq/FaqAccordion';
-import '@/styles/tokens/smh-champagne-tokens.css';
 import '@/styles/brand/brand-motion.css';
 import '@/styles/brand/lux-glass.css';
 

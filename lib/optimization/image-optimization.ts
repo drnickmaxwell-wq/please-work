@@ -1,6 +1,7 @@
 // Image optimization utilities for St Mary's House Dental Care
 // Maintains brand consistency across all image loading states
 import { SMH_BRAND_COLOR_FALLBACKS, SMH_BRAND_COLOR_TOKENS } from '@/lib/brand/palette';
+import { TOKENS as NEUTRAL_TOKENS } from '@/styles/tokens/neutrals';
 
 export interface OptimizedImageConfig {
   src: string;
@@ -26,25 +27,10 @@ export const BRAND_COLORS = {
   magenta: `var(${SMH_BRAND_COLOR_TOKENS.magenta})`,
   turquoise: `var(${SMH_BRAND_COLOR_TOKENS.teal})`,
   gold: `var(${SMH_BRAND_COLOR_TOKENS.gold})`,
-  slate: {
-    50: '#f8fafc',
-    100: '#f1f5f9',
-    200: '#e2e8f0',
-    300: '#cbd5e1',
-    600: '#475569',
-    800: '#1e293b',
-  },
-  pink: {
-    25: '#fef7f7',
-    50: '#fdf2f8',
-    100: '#fce7f3',
-    200: '#fbcfe8',
-  },
-  teal: {
-    25: '#f0fdfa',
-    50: '#f0fdfa',
-    100: '#ccfbf1',
-    200: '#99f6e4',
+  neutrals: {
+    surface: NEUTRAL_TOKENS.graySubtle,
+    base: NEUTRAL_TOKENS.white,
+    depth: NEUTRAL_TOKENS.navy,
   },
 };
 
@@ -58,6 +44,32 @@ function resolveBrandColor(color: BrandCoreColor): string {
     .trim();
 
   return value || BRAND_COLOR_METADATA[color].fallback;
+}
+
+function resolveNeutralValue(tokenValue: string): string {
+  const fallbackMatch = tokenValue.match(/#([0-9a-f]{6})/i);
+  const fallback = fallbackMatch ? `#${fallbackMatch[1]}` : tokenValue;
+
+  if (typeof window === 'undefined') {
+    return fallback;
+  }
+
+  if (!tokenValue.startsWith('var(')) {
+    return tokenValue;
+  }
+
+  const varBody = tokenValue.slice(4, -1);
+  const [variable, fallbackValue = fallback] = varBody.split(',').map((part) => part.trim());
+
+  if (!variable) {
+    return fallback;
+  }
+
+  const value = getComputedStyle(document.documentElement)
+    .getPropertyValue(variable)
+    .trim();
+
+  return value || fallbackValue || fallback;
 }
 
 function hexWithAlpha(hex: string, alpha: number): string {
@@ -92,13 +104,13 @@ export function generateBrandBlurDataURL(type: 'gradient' | 'solid' | 'pattern' 
       break;
 
     case 'solid':
-      ctx.fillStyle = `${BRAND_COLORS.slate[100]}`;
+      ctx.fillStyle = resolveNeutralValue(BRAND_COLORS.neutrals.base);
       ctx.fillRect(0, 0, 40, 40);
       break;
-      
+
     case 'pattern':
       // Create a subtle pattern with brand colors
-      ctx.fillStyle = BRAND_COLORS.slate[50];
+      ctx.fillStyle = resolveNeutralValue(BRAND_COLORS.neutrals.surface);
       ctx.fillRect(0, 0, 40, 40);
       
       // Add dots pattern
@@ -125,6 +137,8 @@ export function generateBrandSVGPlaceholder(
   const magenta = resolveBrandColor('magenta');
   const turquoise = resolveBrandColor('turquoise');
   const gold = resolveBrandColor('gold');
+  const neutralSurface = resolveNeutralValue(BRAND_COLORS.neutrals.surface);
+  const neutralDepth = resolveNeutralValue(BRAND_COLORS.neutrals.depth);
 
   return `data:image/svg+xml;base64,${btoa(`
     <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
@@ -135,9 +149,9 @@ export function generateBrandSVGPlaceholder(
           <stop offset="100%" style="stop-color:${gold};stop-opacity:0.05" />
         </linearGradient>
         <linearGradient id="shimmer" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" style="stop-color:${BRAND_COLORS.slate[200]};stop-opacity:0" />
-          <stop offset="50%" style="stop-color:${BRAND_COLORS.slate[200]};stop-opacity:0.5" />
-          <stop offset="100%" style="stop-color:${BRAND_COLORS.slate[200]};stop-opacity:0" />
+          <stop offset="0%" style="stop-color:${neutralSurface};stop-opacity:0" />
+          <stop offset="50%" style="stop-color:${neutralSurface};stop-opacity:0.5" />
+          <stop offset="100%" style="stop-color:${neutralSurface};stop-opacity:0" />
           <animateTransform attributeName="transform" type="translate" 
                            values="-${width};0;${width};0" dur="2s" repeatCount="indefinite"/>
         </linearGradient>
@@ -154,7 +168,7 @@ export function generateBrandSVGPlaceholder(
       <!-- Loading text -->
       <text x="${width/2}" y="${height/2 + 20}" text-anchor="middle" 
             font-family="var(--font-inter), system-ui, Arial" font-size="14" font-weight="600" 
-            fill="${BRAND_COLORS.slate[600]}">${text}</text>
+            fill="${neutralDepth}">${text}</text>
       
       <!-- Decorative elements -->
       <circle cx="${width * 0.2}" cy="${height * 0.3}" r="3" fill="${magenta}" opacity="0.3">

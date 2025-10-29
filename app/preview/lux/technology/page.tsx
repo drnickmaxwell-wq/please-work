@@ -3,7 +3,6 @@
 import StickyHeader from '@/components/layout/sticky-header';
 import { FooterLuxe } from '@/components/footer-luxe';
 
-import '@/styles/tokens/smh-champagne-tokens.css';
 
 export default function Technology() {
   return (
