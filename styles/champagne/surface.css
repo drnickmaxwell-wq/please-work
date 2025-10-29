@@ -64,7 +64,7 @@
 
 /* Glass card utility */
 .champagne-glass{
-  background:color-mix(in oklab, transparent 100%, transparent 0%);
+  background:color-mix(in oklab, var(--smh-ink) 42%, transparent 58%);
   backdrop-filter:blur(12px);
   border:1px solid color-mix(in oklab, var(--smh-accent-gold) 24%, transparent);
   border-radius:16px;
