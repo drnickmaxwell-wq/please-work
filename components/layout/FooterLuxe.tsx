@@ -27,7 +27,7 @@ const FooterLuxe = () => {
   const feedbackId = useMemo(() => 'newsletter-feedback', []);
 
   const footerStyle: CSSProperties = {
-    background: 'var(--smh-ink)',
+    background: 'color-mix(in oklab, var(--smh-ink) 90%, var(--smh-text) 10%)',
     color: 'var(--smh-text)',
   };
 
@@ -48,11 +48,7 @@ const FooterLuxe = () => {
   };
 
   return (
-    <footer
-      className="footer-luxe bg-[var(--smh-ink)] text-[var(--smh-text)] border-t border-[var(--smh-accent-gold)]"
-      data-footer
-      style={footerStyle}
-    >
+    <footer className="footer-luxe text-[var(--smh-text)]" data-footer style={footerStyle}>
       <div className="footer-luxe__rim" aria-hidden="true" />
       <div className="footer-luxe__inner">
         <div className="footer-luxe__grid">
@@ -146,8 +142,10 @@ const FooterLuxe = () => {
           isolation: isolate;
           background: inherit;
           color: inherit;
-          --footer-keyline-rest: color-mix(in srgb, var(--smh-accent-gold) 35%, transparent);
-          --footer-keyline-strong: color-mix(in srgb, var(--smh-accent-gold) 60%, transparent);
+          border-top: 2px solid color-mix(in oklab, var(--footer-gold-lift) 55%, transparent 45%);
+          --footer-gold-lift: color-mix(in oklab, var(--smh-accent-gold) 90%, var(--smh-white) 10%);
+          --footer-keyline-rest: color-mix(in oklab, var(--footer-gold-lift) 35%, transparent);
+          --footer-keyline-strong: color-mix(in oklab, var(--footer-gold-lift) 65%, transparent);
           --footer-surface-strong: color-mix(in srgb, var(--smh-ink) 68%, transparent 32%);
           --footer-surface-soft: color-mix(in srgb, var(--smh-ink) 54%, transparent 46%);
           --footer-surface-muted: color-mix(in srgb, var(--smh-ink) 42%, transparent 58%);
@@ -164,11 +162,11 @@ const FooterLuxe = () => {
 
         [data-footer] a:hover,
         [data-footer] a:focus-visible {
-          color: var(--smh-accent-gold);
+          color: var(--footer-gold-lift);
           text-decoration: underline;
           text-decoration-thickness: 1px;
           text-underline-offset: 2px;
-          text-decoration-color: var(--smh-accent-gold);
+          text-decoration-color: var(--footer-gold-lift);
         }
 
         .footer-luxe::before {
@@ -177,9 +175,9 @@ const FooterLuxe = () => {
           inset: -12%;
           pointer-events: none;
           background:
-            radial-gradient(8px 8px at 18% 24%, color-mix(in srgb, var(--smh-accent-gold) 32%, transparent) 0 60%, transparent 61%) no-repeat,
-            radial-gradient(6px 6px at 64% 70%, color-mix(in srgb, var(--smh-accent-gold) 26%, transparent) 0 60%, transparent 61%) no-repeat,
-            radial-gradient(4px 4px at 84% 32%, color-mix(in srgb, var(--smh-accent-gold) 22%, transparent) 0 60%, transparent 61%) no-repeat;
+            radial-gradient(8px 8px at 18% 24%, color-mix(in oklab, var(--footer-gold-lift) 32%, transparent) 0 60%, transparent 61%) no-repeat,
+            radial-gradient(6px 6px at 64% 70%, color-mix(in oklab, var(--footer-gold-lift) 26%, transparent) 0 60%, transparent 61%) no-repeat,
+            radial-gradient(4px 4px at 84% 32%, color-mix(in oklab, var(--footer-gold-lift) 22%, transparent) 0 60%, transparent 61%) no-repeat;
           filter: blur(0.4px);
           opacity: 0.12;
           z-index: 0;
@@ -339,15 +337,15 @@ const FooterLuxe = () => {
           height: 2.5rem;
           border-radius: 999px;
           box-shadow: 0 0 0 1px var(--footer-keyline-rest) inset;
-          color: color-mix(in srgb, var(--smh-accent-gold) 80%, transparent 20%);
+          color: color-mix(in oklab, var(--footer-gold-lift) 80%, transparent 20%);
           transition: background-color var(--motion-duration-normal, 160ms) var(--motion-easing-smooth, ease),
             color var(--motion-duration-normal, 160ms) var(--motion-easing-smooth, ease);
         }
 
         .footer-luxe__social a:hover,
         .footer-luxe__social a:focus-visible {
-          background: color-mix(in srgb, var(--smh-accent-gold) 30%, transparent 70%);
-          color: var(--smh-accent-gold);
+          background: color-mix(in oklab, var(--footer-gold-lift) 30%, transparent 70%);
+          color: var(--footer-gold-lift);
         }
 
         .footer-luxe__links {
