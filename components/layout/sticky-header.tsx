@@ -99,7 +99,7 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
           scale: headerScale,
         }}
         className={[
-          'absolute top-0 left-0 right-0 z-[60] w-full border border-transparent transition-all duration-300',
+          'sticky top-0 z-50 w-full border border-transparent bg-transparent transition-all duration-300',
           isScrolled ? 'backdrop-blur-md bg-ink/40' : null,
           className,
         ]

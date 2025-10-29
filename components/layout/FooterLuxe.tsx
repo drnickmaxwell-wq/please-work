@@ -48,7 +48,11 @@ const FooterLuxe = () => {
   };
 
   return (
-    <footer className="footer-luxe" data-footer style={footerStyle}>
+    <footer
+      className="footer-luxe bg-[var(--smh-ink)] text-[var(--smh-text)] border-t border-[var(--smh-gold,#D4AF37)]"
+      data-footer
+      style={footerStyle}
+    >
       <div className="footer-luxe__rim" aria-hidden="true" />
       <div className="footer-luxe__inner">
         <div className="footer-luxe__grid">

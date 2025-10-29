@@ -2,7 +2,8 @@ import "./globals.css";
 import type { CSSProperties } from 'react';
 import type { Metadata, Viewport } from "next";
 import PerformanceOptimizedLayout from '@/components/layout/performance-optimized-layout';
-import FooterLuxe from '@/components/layout/FooterLuxe';
+import StickyHeader from '@/components/layout/sticky-header';
+import Footer from '@/components/layout/footer';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL ?? 'https://www.stmaryshousedental.co.uk';
 
@@ -166,12 +167,15 @@ export default function RootLayout({
         </a>
         
         {/* Main content wrapper */}
-        <div id="main-content" className="relative">
+        <StickyHeader />
+
+        <main id="main-content" className="relative pt-16">
           <PerformanceOptimizedLayout>
             {children}
           </PerformanceOptimizedLayout>
-          <FooterLuxe />
-        </div>
+        </main>
+
+        <Footer />
         
         {/* Performance monitoring script */}
         <script

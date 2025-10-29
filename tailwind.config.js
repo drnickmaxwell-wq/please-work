@@ -5,7 +5,20 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
     "./styles/**/*.{css}"
   ],
-  theme: { extend: {} },
+  theme: {
+    extend: {
+      fontFamily: {
+        playfair: ['"Playfair Display"', 'serif'],
+        inter: ['Inter', 'sans-serif']
+      },
+      spacing: {
+        8: '2rem',
+        12: '3rem',
+        16: '4rem',
+        24: '6rem'
+      }
+    }
+  },
   safelist: [
     "champagne-surface","champagne-glass","backdrop-blur",
     "md:grid-cols-2","rounded-none","rounded-3xl",
