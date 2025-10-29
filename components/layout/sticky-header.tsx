@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import { MAIN_NAV, TREATMENTS, RESOURCES, type NavLink } from '@/lib/nav';
@@ -34,7 +34,7 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 40);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -67,20 +67,6 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
       : []),
   ];
 
-  const headerStyle = useMemo(
-    () => ({
-      background: isScrolled
-        ? 'color-mix(in oklab, #0b0d0f 36%, transparent 64%)'
-        : 'transparent',
-      borderColor: isScrolled
-        ? 'color-mix(in srgb, var(--smh-accent-gold) 22%, transparent 78%)'
-        : 'transparent',
-      boxShadow: isScrolled ? '0 18px 40px rgba(11,13,15,0.28)' : 'none',
-      backdropFilter: isScrolled ? 'blur(10px)' : 'blur(0px)',
-    }),
-    [isScrolled]
-  );
-
   return (
     <>
       {/* Emergency Banner */}
@@ -111,9 +97,14 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
         style={{
           opacity: headerOpacity,
           scale: headerScale,
-          ...headerStyle,
         }}
-        className={`fixed top-0 left-0 right-0 z-[60] border border-transparent transition-all duration-300 ${className}`}
+        className={[
+          'absolute top-0 left-0 right-0 z-[60] w-full border border-transparent transition-all duration-300',
+          isScrolled ? 'backdrop-blur-md bg-ink/40' : null,
+          className,
+        ]
+          .filter(Boolean)
+          .join(' ')}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">

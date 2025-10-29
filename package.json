@@ -14,6 +14,10 @@
     "guard:preflight": "tsx tools/guard/preflight.ts",
     "brand:verify": "tsx scripts/verify-brand-tokens.ts",
     "brand:guard": "node scripts/brand-guard.cjs",
+    "brand:hue-guard": "node scripts/brand-lock-guard.cjs",
+    "brand:structure": "node scripts/brand-structure-guard.cjs",
+    "brand:report": "node scripts/brand-report.cjs",
+    "build:locked": "npm run brand:hue-guard && npm run brand:structure && next build && npm run brand:report",
     "prebuild": "node scripts/brand-guard.cjs"
   },
   "dependencies": {

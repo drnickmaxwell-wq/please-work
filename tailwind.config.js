@@ -5,6 +5,18 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}"
   ],
+  safelist: [
+    "backdrop-blur-md",
+    "bg-ink/40",
+    "grid",
+    "md:grid-cols-2",
+    "lg:grid-cols-3",
+    "gap-8",
+    "max-w-7xl",
+    "mx-auto",
+    "px-4",
+    "md:px-6",
+  ],
   theme: {
     extend: {
       fontFamily: {
