@@ -73,18 +73,19 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
       <motion.div
         initial={{ y: -24, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="relative z-[61] bg-white/10 px-4 py-2 text-center text-xs font-medium text-white/90 backdrop-blur-sm md:text-sm"
+        className="relative z-[61] bg-white/10 px-4 py-2 text-center text-xs font-medium backdrop-blur-sm md:text-sm"
+        style={{ color: 'var(--smh-text)' }}
       >
         <div className="flex flex-wrap items-center justify-center gap-4">
-          <div className="flex items-center gap-2 text-white/85">
+          <div className="flex items-center gap-2" style={{ opacity: 0.85 }}>
             <Phone className="h-4 w-4" />
             <span style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>Emergency: 01273 453109</span>
           </div>
-          <div className="hidden items-center gap-2 text-white/70 md:flex">
+          <div className="hidden items-center gap-2 md:flex" style={{ opacity: 0.7 }}>
             <MapPin className="h-4 w-4" />
             <span style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>Shoreham-by-Sea, West Sussex</span>
           </div>
-          <div className="hidden items-center gap-2 text-white/70 lg:flex">
+          <div className="hidden items-center gap-2 lg:flex" style={{ opacity: 0.7 }}>
             <Clock className="h-4 w-4" />
             <span style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>24/7 Emergency Care</span>
           </div>
@@ -97,6 +98,7 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
         style={{
           opacity: headerOpacity,
           scale: headerScale,
+          color: 'var(--smh-text)',
         }}
         className={[
           'sticky top-0 z-50 w-full border border-transparent bg-transparent transition-all duration-300',
@@ -116,15 +118,21 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
             >
               <Link href="/" className="flex items-center space-x-3">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--smh-gradient)]">
-                  <span className="text-lg font-bold text-white" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
+                  <span
+                    className="text-lg font-bold"
+                    style={{ color: 'var(--smh-text)', fontFamily: 'var(--font-inter), system-ui, Arial' }}
+                  >
                     SMH
                   </span>
                 </div>
                 <div className="hidden sm:block">
-                  <h1 className="text-lg font-bold text-white" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
+                  <h1
+                    className="text-lg font-bold"
+                    style={{ color: 'var(--smh-text)', fontFamily: 'var(--font-playfair), Georgia, serif' }}
+                  >
                     St Mary’s House
                   </h1>
-                  <p className="text-sm text-white/70" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
+                  <p className="text-sm opacity-70" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                     Dental Care
                   </p>
                 </div>
@@ -142,8 +150,8 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
                 >
                   <Link
                     href={item.href}
-                    className="flex items-center space-x-1 text-white/80 transition-colors duration-200 hover:text-white"
-                    style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
+                    className="flex items-center space-x-1 transition-opacity duration-200 hover:opacity-100"
+                    style={{ fontFamily: 'var(--font-inter), system-ui, Arial', opacity: 0.8 }}
                   >
                     <span>{item.name}</span>
                     {item.dropdown && <ChevronDown className="w-4 h-4" />}
@@ -157,14 +165,15 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute top-full left-0 z-50 mt-2 w-64 rounded-xl border border-[color:var(--champagne-keyline-gold)] bg-[color:var(--champagne-glass-bg)]/90 py-2 text-white/90 shadow-2xl backdrop-blur-xl"
+                        className="absolute top-full left-0 z-50 mt-2 w-64 rounded-xl border border-[color:var(--champagne-keyline-gold)] bg-[color:var(--champagne-glass-bg)]/90 py-2 shadow-2xl backdrop-blur-xl"
+                        style={{ color: 'var(--smh-text)', opacity: 0.9 }}
                       >
                         {item.dropdown.map((dropdownItem) => (
                           <Link
                             key={dropdownItem.name}
                             href={dropdownItem.href}
-                            className="block px-4 py-3 text-sm text-white/85 transition-colors duration-200 hover:bg-white/10 hover:text-white"
-                            style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
+                            className="block px-4 py-3 text-sm transition-colors duration-200 hover:bg-white/10"
+                            style={{ fontFamily: 'var(--font-inter), system-ui, Arial', color: 'var(--smh-text)', opacity: 0.85 }}
                           >
                             {dropdownItem.name}
                           </Link>
@@ -182,7 +191,8 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
                 href="tel:01273453109"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative inline-flex items-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-transparent px-4 py-2 text-white/90 transition-transform duration-300 ease-out hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)]"
+                className="relative inline-flex items-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-transparent px-4 py-2 transition-transform duration-300 ease-out hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)]"
+                style={{ color: 'var(--smh-text)', opacity: 0.9 }}
               >
                 <Phone className="h-4 w-4" />
                 <span className="font-medium" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
@@ -207,7 +217,8 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden rounded-full border border-[color:var(--champagne-keyline-gold)] bg-[color:var(--champagne-glass-bg)]/80 p-2 text-white transition-colors duration-200"
+              className="lg:hidden rounded-full border border-[color:var(--champagne-keyline-gold)] bg-[color:var(--champagne-glass-bg)]/80 p-2 transition-colors duration-200"
+              style={{ color: 'var(--smh-text)' }}
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </motion.button>
@@ -224,13 +235,16 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
               transition={{ duration: 0.25 }}
               className="fixed inset-0 z-[70] overflow-y-auto bg-[color:var(--champagne-glass-bg)]/92 backdrop-blur-xl lg:hidden"
             >
-              <div className="px-6 py-24 space-y-8 text-white/90">
+              <div className="px-6 py-24 space-y-8" style={{ color: 'var(--smh-text)', opacity: 0.9 }}>
                 <div className="flex items-center justify-between">
-                  <span className="text-xs uppercase tracking-[0.4em] text-white/60">Menu</span>
+                  <span className="text-xs uppercase tracking-[0.4em]" style={{ opacity: 0.6 }}>
+                    Menu
+                  </span>
                   <button
                     type="button"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--champagne-keyline-gold)] bg-transparent text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)]"
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--champagne-keyline-gold)] bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)]"
+                    style={{ color: 'var(--smh-text)' }}
                   >
                     <X className="h-5 w-5" />
                     <span className="sr-only">Close navigation</span>
@@ -241,20 +255,20 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
                     <Link
                       href={item.href}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="block py-2 text-lg font-medium text-white/85 transition-colors duration-200 hover:text-white"
-                      style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
+                      className="block py-2 text-lg font-medium transition-opacity duration-200 hover:opacity-100"
+                      style={{ fontFamily: 'var(--font-inter), system-ui, Arial', color: 'var(--smh-text)', opacity: 0.85 }}
                     >
                       {item.name}
                     </Link>
                     {item.dropdown && (
-                      <div className="ml-4 mt-2 space-y-2 text-sm text-white/70">
+                      <div className="ml-4 mt-2 space-y-2 text-sm" style={{ opacity: 0.7 }}>
                         {item.dropdown.map((dropdownItem) => (
                           <Link
                             key={dropdownItem.name}
                             href={dropdownItem.href}
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="block py-1 transition-colors duration-200 hover:text-white"
-                            style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
+                            className="block py-1 transition-opacity duration-200 hover:opacity-100"
+                            style={{ fontFamily: 'var(--font-inter), system-ui, Arial', color: 'var(--smh-text)' }}
                           >
                             {dropdownItem.name}
                           </Link>
@@ -269,7 +283,8 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
                   <motion.a
                     href="tel:01273453109"
                     whileTap={{ scale: 0.95 }}
-                    className="relative inline-flex w-full items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-transparent px-6 py-3 text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)]"
+                    className="relative inline-flex w-full items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-transparent px-6 py-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)]"
+                    style={{ color: 'var(--smh-text)', opacity: 0.9 }}
                   >
                     <Phone className="w-4 h-4" />
                     <span className="font-medium" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>

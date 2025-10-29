@@ -70,6 +70,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
       data-particles={particlesActive ? "on" : "off"}
       data-wave="off"
       data-reduced-motion={prefersReducedMotion ? "true" : "false"}
+      style={{ color: "var(--smh-text)" }}
     >
       <div className="relative">
         {particlesActive ? (
@@ -81,15 +82,15 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
         <div className="relative z-[20] mx-auto max-w-7xl px-4 md:px-6">
           <h2
             id="journey-hero-title"
-            className="text-center text-3xl font-serif font-semibold tracking-tight text-white md:text-4xl"
+            className="text-center text-3xl font-serif font-semibold tracking-tight md:text-4xl"
           >
             Your Smile Journey
           </h2>
-          <p className="mt-3 mx-auto max-w-3xl text-center text-base opacity-90 text-white md:text-lg">
+          <p className="mt-3 mx-auto max-w-3xl text-center text-base opacity-90 md:text-lg">
             Discover the path to your perfect smile with a guided experience curated by Manus AI.
           </p>
 
-          <div className="mt-12 grid gap-8 text-white/90 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {steps.map((step, index) => {
               const iconPath = step.icon ? iconMap[step.icon] : undefined;
               const connectorClass =
@@ -100,11 +101,12 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
                 <article
                   key={step.title}
                   className={[
-                    "champagne-glass relative overflow-hidden rounded-champagne p-6 text-white/92 shadow-champagne md:p-7",
+                    "champagne-glass relative overflow-hidden rounded-champagne p-6 shadow-champagne md:p-7",
                     connectorClass,
                   ]
                     .filter(Boolean)
                     .join(" ")}
+                  style={{ color: "var(--smh-text)" }}
                   tabIndex={0}
                 >
                   {iconPath && (
@@ -118,17 +120,22 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
                       />
                     </div>
                   )}
-                  <h3 className="font-serif text-2xl tracking-tight text-white">{step.title}</h3>
-                  <p className="text-base leading-relaxed text-white/85">{step.body}</p>
+                  <h3 className="font-serif text-2xl tracking-tight">{step.title}</h3>
+                  <p className="text-base leading-relaxed" style={{ opacity: 0.85 }}>
+                    {step.body}
+                  </p>
                 </article>
               );
             })}
           </div>
 
-          <div className="champagne-glass mt-16 rounded-champagne border border-[color:var(--champagne-keyline-gold)] p-8 text-center text-white/92 shadow-champagne md:mt-20 md:p-10">
+          <div
+            className="champagne-glass mt-16 rounded-champagne border border-[color:var(--champagne-keyline-gold)] p-8 text-center shadow-champagne md:mt-20 md:p-10"
+            style={{ color: "var(--smh-text)" }}
+          >
             <div className="space-y-3">
-              <h3 className="font-serif text-3xl tracking-tight text-white">Ready to Begin?</h3>
-              <p className="text-white/80">Take the first step toward your perfect smile.</p>
+              <h3 className="font-serif text-3xl tracking-tight">Ready to Begin?</h3>
+              <p style={{ opacity: 0.8 }}>Take the first step toward your perfect smile.</p>
             </div>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
               <Link
@@ -139,7 +146,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
               </Link>
               <Link
                 href="/ai-smile-quiz"
-                className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-transparent px-6 py-3 font-semibold text-white/90 transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
+                className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-transparent px-6 py-3 font-semibold opacity-90 transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
               >
                 Start your AI smile preview
               </Link>

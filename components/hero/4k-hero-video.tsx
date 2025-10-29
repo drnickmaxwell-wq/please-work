@@ -26,7 +26,7 @@ export default function Hero4KVideo({
       } as CSSProperties)
     : undefined;
   const surfaceClass = [
-    'champagne-surface relative w-full min-h-[min(95vh,1100px)] overflow-hidden text-white',
+    'champagne-surface relative w-full min-h-[min(95vh,1100px)] overflow-hidden',
     showWave ? 'has-wave' : null,
   ]
     .filter(Boolean)
@@ -40,7 +40,7 @@ export default function Hero4KVideo({
       data-particles={particlesActive ? 'on' : 'off'}
       data-reduced-motion={prefersReducedMotion ? 'true' : 'false'}
       className={surfaceClass}
-      style={surfaceStyle}
+      style={{ ...(surfaceStyle ?? {}), color: 'var(--smh-text)' }}
     >
       <div aria-hidden className="absolute inset-0 z-0 overflow-hidden">
         <video
@@ -64,10 +64,13 @@ export default function Hero4KVideo({
       <div aria-hidden className="champagne-sheen-layer" />
 
       <div className="relative z-[40] w-full px-6 py-20 md:px-10 md:py-24">
-        <div className="champagne-glass relative mx-auto mt-20 max-w-[960px] rounded-champagne border border-[color:var(--champagne-keyline-gold)] bg-[color:var(--champagne-glass-bg)]/92 p-8 text-white shadow-champagne md:mt-28 md:p-10">
+        <div
+          className="champagne-glass relative mx-auto mt-20 max-w-[960px] rounded-champagne border border-[color:var(--champagne-keyline-gold)] bg-[color:var(--champagne-glass-bg)]/92 p-8 shadow-champagne md:mt-28 md:p-10"
+          style={{ color: 'var(--smh-text)' }}
+        >
           <div className="space-y-6 text-center">
-            <p className="text-sm uppercase tracking-[0.3em] text-white/70">St Mary’s House</p>
-            <h1 className="text-4xl font-serif font-semibold tracking-tight text-white md:text-6xl">Going the Extra Smile</h1>
+            <p className="text-sm uppercase tracking-[0.3em] opacity-70">St Mary’s House</p>
+            <h1 className="text-4xl font-serif font-semibold tracking-tight md:text-6xl">Going the Extra Smile</h1>
             <p className="mx-auto mt-4 max-w-prose text-base opacity-90 md:text-lg">
               Private dental care with calm precision, comfort-first technology, and a signature Manus AI finish.
             </p>
@@ -80,7 +83,7 @@ export default function Hero4KVideo({
               </Link>
               <Link
                 href="/treatments"
-                className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-transparent px-6 py-3 font-semibold text-white/90 transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
+                className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-transparent px-6 py-3 font-semibold opacity-90 transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
               >
                 Explore treatments
               </Link>
