@@ -77,11 +77,14 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           <div className="champagne-particles" data-state="off" aria-hidden style={{ opacity: 0 }} />
         )}
 
-        <div className="relative z-[1] mx-auto max-w-7xl px-4 md:px-6">
-          <h2 id="journey-hero-title" className="font-serif text-4xl tracking-tight text-white/95 md:text-5xl">
+        <div className="relative z-[20] mx-auto max-w-7xl px-4 md:px-6">
+          <h2
+            id="journey-hero-title"
+            className="text-center text-3xl font-serif font-semibold tracking-tight text-white md:text-4xl"
+          >
             Your Smile Journey
           </h2>
-          <p className="mt-2 max-w-2xl text-base text-white/80 md:text-lg">
+          <p className="mt-3 mx-auto max-w-3xl text-center text-base opacity-90 text-white md:text-lg">
             Discover the path to your perfect smile with a guided experience curated by Manus AI.
           </p>
 
@@ -91,12 +94,18 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
               return (
                 <article
                   key={step.title}
-                  className="champagne-glass p-6 md:p-7 text-white/92"
+                  className="champagne-glass rounded-champagne shadow-champagne p-6 md:p-7 text-white/92"
                   tabIndex={0}
                 >
                   {iconPath && (
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
-                      <img src={iconPath} alt="" aria-hidden="true" className="h-6 w-6" />
+                    <div className="mb-6 flex flex-col items-center text-[color:var(--champagne-keyline-gold)]">
+                      <span className="flex h-14 w-14 items-center justify-center rounded-full border border-[color:var(--champagne-keyline-gold)] bg-white/5">
+                        <img src={iconPath} alt="" aria-hidden="true" className="h-7 w-7" />
+                      </span>
+                      <span
+                        aria-hidden="true"
+                        className="mt-4 h-4 border-l border-[color:var(--champagne-keyline-gold)] opacity-60"
+                      />
                     </div>
                   )}
                   <h3 className="font-serif text-2xl tracking-tight text-white">{step.title}</h3>
@@ -106,7 +115,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
             })}
           </div>
 
-          <div className="champagne-glass text-center p-8 md:p-10 mt-16 md:mt-20 text-white/92">
+          <div className="champagne-glass mt-16 rounded-champagne p-8 text-center text-white/92 shadow-champagne md:mt-20 md:p-10">
             <div className="space-y-3">
               <h3 className="font-serif text-3xl tracking-tight text-white">Ready to Begin?</h3>
               <p className="text-white/80">Take the first step toward your perfect smile.</p>

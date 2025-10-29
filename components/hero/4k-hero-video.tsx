@@ -63,14 +63,14 @@ export default function Hero4KVideo({
       )}
 
       <div className="relative z-[20] w-full px-6 py-20 md:px-10 md:py-24">
-        <div className="champagne-glass relative z-[30] mx-auto max-w-[960px] p-8 md:p-10 mt-20 md:mt-28 text-white/92">
-          <div className="space-y-6">
+        <div className="champagne-glass relative z-[30] mx-auto mt-20 max-w-[960px] rounded-champagne p-8 text-white shadow-champagne md:mt-28 md:p-10">
+          <div className="space-y-6 text-center">
             <p className="text-sm uppercase tracking-[0.3em] text-white/70">St Mary’s House</p>
-            <h1 className="font-serif text-4xl tracking-tight text-white md:text-6xl">Going the Extra Smile</h1>
-            <p className="max-w-2xl text-lg text-white/85">
+            <h1 className="text-4xl font-serif font-semibold tracking-tight text-white md:text-6xl">Going the Extra Smile</h1>
+            <p className="mx-auto mt-4 max-w-prose text-base opacity-90 md:text-lg">
               Private dental care with calm precision, comfort-first technology, and a signature Manus AI finish.
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="mt-6 flex justify-center gap-3">
               <Link
                 href="/contact"
                 className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-[var(--smh-gradient)] px-6 py-3 font-semibold text-[#0b0d0f] transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"

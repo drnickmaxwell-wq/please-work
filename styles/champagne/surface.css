@@ -18,6 +18,7 @@
   background-size:2px 2px;
   opacity:var(--champagne-filmgrain-alpha);
   mix-blend-mode:soft-light;
+  z-index:2;
 }
 
 /* Vignette */
@@ -26,6 +27,7 @@
   position:absolute; inset:0;
   pointer-events:none;
   background:radial-gradient(60% 60% at 50% 45%, transparent 60%, rgba(0,0,0,var(--champagne-vignette-alpha)) 100%);
+  z-index:1;
 }
 
 /* Glass card utility */
