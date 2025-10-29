@@ -66,13 +66,13 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
   return (
     <section
       aria-labelledby="journey-hero-title"
-      className="champagne-surface relative overflow-hidden py-24 md:py-32"
+      className="champagne-surface"
       data-particles={particlesActive ? "on" : "off"}
       data-wave="off"
       data-reduced-motion={prefersReducedMotion ? "true" : "false"}
       style={{ color: "var(--smh-text)" }}
     >
-      <div className="relative">
+      <div className="relative overflow-hidden py-24 md:py-32">
         {particlesActive ? (
           <Particles className="champagne-particles" data-state="on" aria-hidden />
         ) : (
@@ -100,53 +100,56 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
               return (
                 <article
                   key={step.title}
-                  className={[
-                    "champagne-glass relative overflow-hidden p-6 md:p-7",
-                    connectorClass,
-                  ]
-                    .filter(Boolean)
-                    .join(" ")}
+                  className={connectorClass}
                   style={{ color: "var(--smh-text)" }}
                   tabIndex={0}
                 >
-                  {iconPath && (
-                    <div className="mb-6 flex flex-col items-center text-[color:var(--champagne-keyline-gold)]">
-                      <span className="flex h-14 w-14 items-center justify-center rounded-full border border-[color:var(--champagne-keyline-gold)] bg-white/5">
-                        <img src={iconPath} alt="" aria-hidden="true" className="h-7 w-7" />
-                      </span>
-                      <span
-                        aria-hidden="true"
-                        className="mt-4 h-4 border-l border-[color:var(--champagne-keyline-gold)] opacity-60"
-                      />
+                  <div className="champagne-glass">
+                    <div className="relative overflow-hidden p-6 md:p-7">
+                      {iconPath && (
+                        <div className="mb-6 flex flex-col items-center text-[color:var(--champagne-keyline-gold)]">
+                          <span className="flex h-14 w-14 items-center justify-center rounded-full border border-[color:var(--champagne-keyline-gold)] bg-white/5">
+                            <img src={iconPath} alt="" aria-hidden="true" className="h-7 w-7" />
+                          </span>
+                          <span
+                            aria-hidden="true"
+                            className="mt-4 h-4 border-l border-[color:var(--champagne-keyline-gold)] opacity-60"
+                          />
+                        </div>
+                      )}
+                      <h3 className="font-serif text-2xl tracking-tight">{step.title}</h3>
+                      <p className="text-base leading-relaxed" style={{ opacity: 0.85 }}>
+                        {step.body}
+                      </p>
                     </div>
-                  )}
-                  <h3 className="font-serif text-2xl tracking-tight">{step.title}</h3>
-                  <p className="text-base leading-relaxed" style={{ opacity: 0.85 }}>
-                    {step.body}
-                  </p>
+                  </div>
                 </article>
               );
             })}
           </div>
 
-          <div className="champagne-glass mt-16 p-8 text-center md:mt-20 md:p-10" style={{ color: "var(--smh-text)" }}>
-            <div className="space-y-3">
-              <h3 className="font-serif text-3xl tracking-tight">Ready to Begin?</h3>
-              <p style={{ opacity: 0.8 }}>Take the first step toward your perfect smile.</p>
-            </div>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
-              <Link
-                href="/contact"
-                className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-[var(--smh-gradient)] px-6 py-3 font-semibold transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
-              >
-                Book a consultation
-              </Link>
-              <Link
-                href="/ai-smile-quiz"
-                className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-transparent px-6 py-3 font-semibold opacity-90 transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
-              >
-                Start your AI smile preview
-              </Link>
+          <div className="mt-16 text-center md:mt-20" style={{ color: "var(--smh-text)" }}>
+            <div className="champagne-glass">
+              <div className="p-8 md:p-10">
+                <div className="space-y-3">
+                  <h3 className="font-serif text-3xl tracking-tight">Ready to Begin?</h3>
+                  <p style={{ opacity: 0.8 }}>Take the first step toward your perfect smile.</p>
+                </div>
+                <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
+                  <Link
+                    href="/contact"
+                    className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-[var(--smh-gradient)] px-6 py-3 font-semibold text-[var(--smh-text)] transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
+                  >
+                    Book a consultation
+                  </Link>
+                  <Link
+                    href="/ai-smile-quiz"
+                    className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-transparent px-6 py-3 font-semibold text-[var(--smh-text)] opacity-90 transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
+                  >
+                    Start your AI smile preview
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </div>

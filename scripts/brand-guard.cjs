@@ -15,13 +15,16 @@ const HEX_CODES = Object.freeze({
   INK: "#0B0D0F",
 });
 const CANONICAL_DISPLAY = `linear-gradient(135deg,${HEX_CODES.GRADIENT_MAGENTA} 0%,${HEX_CODES.GRADIENT_TEAL} 100%)`;
-const CANONICAL_GRAD = CANONICAL_DISPLAY.replace(/\s+/g, "").toLowerCase();
+const CANONICAL_GRAD = `linear-gradient(135deg,${HEX_CODES.GRADIENT_MAGENTA.toLowerCase()}0%,${HEX_CODES.GRADIENT_TEAL.toLowerCase()}100%)`;
 const HEXES = Object.values(HEX_CODES).map(hex=>new RegExp(hex.slice(1),"i"));
 
 const normalize = (value) => value.replace(/\s+/g, "").toLowerCase();
 
+const IGNORED_DIRS = new Set(["node_modules", ".next", "dist"]);
+
 function walk(dir){
   return readdirSync(dir).flatMap(f=>{
+    if(IGNORED_DIRS.has(f)) return [];
     const p=join(dir,f);
     const s=statSync(p);
     if(s.isDirectory()) return walk(p);
@@ -43,7 +46,9 @@ for(const file of files){
   if(
     file.includes("node_modules") ||
     file.includes(NEXT_SEGMENT) ||
-    file.includes("/.next/")
+    file.includes("/.next/") ||
+    file.includes(`${sep}dist${sep}`) ||
+    file.includes(".min.")
   ) continue;
   if(file === __filename) continue;
   if(file === TOKENS_FILE) continue;

@@ -15,7 +15,7 @@ export interface Hero4KVideoProps {
 
 export default function Hero4KVideo({
   poster,
-  showParticles = true,
+  showParticles = false,
   showWave = false,
 }: Hero4KVideoProps) {
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -25,12 +25,6 @@ export default function Hero4KVideo({
         '--champagne-wave': "url('/waves/smh-wave-mask.svg') center / cover no-repeat",
       } as CSSProperties)
     : undefined;
-  const surfaceClass = [
-    'champagne-surface relative w-full min-h-[min(95vh,1100px)] overflow-hidden',
-    showWave ? 'has-wave' : null,
-  ]
-    .filter(Boolean)
-    .join(' ');
 
   return (
     <section
@@ -39,55 +33,58 @@ export default function Hero4KVideo({
       data-wave={showWave ? 'on' : 'off'}
       data-particles={particlesActive ? 'on' : 'off'}
       data-reduced-motion={prefersReducedMotion ? 'true' : 'false'}
-      className={surfaceClass}
+      className="champagne-surface"
       style={{ ...(surfaceStyle ?? {}), color: 'var(--smh-text)' }}
     >
-      <div aria-hidden className="absolute inset-0 z-0 overflow-hidden">
-        <video
-          className="h-full w-full object-cover"
-          style={{ objectPosition: 'center 55%' }}
-          playsInline
-          autoPlay
-          muted
-          loop
-          preload="metadata"
-          poster={poster ?? '/videos/posters/hero-4k.jpg'}
-        >
-          <source src="/videos/dental-hero-4k.mp4" type="video/mp4" />
-        </video>
-      </div>
-      <div aria-hidden className="wave" />
-      {particlesActive ? (
-        <Particles className="champagne-particles" data-state="on" aria-hidden />
-      ) : (
-        <div className="champagne-particles" data-state="off" aria-hidden style={{ opacity: 0 }} />
-      )}
-      <div aria-hidden className="champagne-sheen-layer" />
+      <div className="relative w-full min-h-[min(95vh,1100px)] overflow-hidden">
+        <div aria-hidden className="absolute inset-0 z-0 overflow-hidden">
+          <video
+            className="h-full w-full object-cover"
+            style={{ objectPosition: 'center 55%' }}
+            playsInline
+            autoPlay
+            muted
+            loop
+            preload="metadata"
+            poster={poster ?? '/videos/posters/hero-4k.jpg'}
+          >
+            <source src="/videos/dental-hero-4k.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div aria-hidden className="wave" />
+        {particlesActive ? (
+          <Particles className="champagne-particles" data-state="on" aria-hidden />
+        ) : (
+          <div className="champagne-particles" data-state="off" aria-hidden style={{ opacity: 0 }} />
+        )}
+        <div aria-hidden className="champagne-sheen-layer" />
 
-      <div className="relative z-[40] w-full px-6 py-20 md:px-10 md:py-24">
-        <div
-          className="champagne-glass relative mx-auto mt-20 max-w-[960px] p-8 md:mt-28 md:p-10"
-          style={{ color: 'var(--smh-text)' }}
-        >
-          <div className="space-y-6 text-center">
-            <p className="text-sm uppercase tracking-[0.3em] opacity-70">St Mary’s House</p>
-            <h1 className="text-4xl font-serif font-semibold tracking-tight md:text-6xl">Going the Extra Smile</h1>
-            <p className="mx-auto mt-4 max-w-prose text-base opacity-90 md:text-lg">
-              Private dental care with calm precision, comfort-first technology, and a signature Manus AI finish.
-            </p>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
-              <Link
-                href="/contact"
-                className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-[var(--smh-gradient)] px-6 py-3 font-semibold transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
-              >
-                Book a consultation
-              </Link>
-              <Link
-                href="/treatments"
-                className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-transparent px-6 py-3 font-semibold opacity-90 transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
-              >
-                Explore treatments
-              </Link>
+        <div className="relative z-[40] w-full px-6 py-20 md:px-10 md:py-24">
+          <div className="mx-auto mt-20 max-w-[960px] md:mt-28">
+            <div className="champagne-glass">
+              <div className="relative p-8 text-[var(--smh-text)] md:p-10">
+                <div className="space-y-6 text-center">
+                  <p className="text-sm uppercase tracking-[0.3em] opacity-70">St Mary’s House</p>
+                  <h1 className="text-4xl font-serif font-semibold tracking-tight md:text-6xl">Going the Extra Smile</h1>
+                  <p className="mx-auto mt-4 max-w-prose text-base opacity-90 md:text-lg">
+                    Private dental care with calm precision, comfort-first technology, and a signature Manus AI finish.
+                  </p>
+                  <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
+                    <Link
+                      href="/contact"
+                      className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-[var(--smh-gradient)] px-6 py-3 font-semibold text-[var(--smh-text)] transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
+                    >
+                      Book a consultation
+                    </Link>
+                    <Link
+                      href="/treatments"
+                      className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-transparent px-6 py-3 font-semibold text-[var(--smh-text)] opacity-90 transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
+                    >
+                      Explore treatments
+                    </Link>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

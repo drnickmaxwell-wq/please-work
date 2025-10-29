@@ -44,7 +44,7 @@ const normalizeGradient = (value) => value.replace(/\s+/g, '').toLowerCase();
 const gradientRaw = gradientMatch[1].trim();
 const gradientNormalized = normalizeGradient(gradientRaw);
 const canonicalDisplay = `linear-gradient(135deg,${HEX_CODES.GRADIENT_MAGENTA} 0%,${HEX_CODES.GRADIENT_TEAL} 100%)`;
-const canonical = normalizeGradient(canonicalDisplay);
+const canonical = `linear-gradient(135deg,${HEX_CODES.GRADIENT_MAGENTA.toLowerCase()}0%,${HEX_CODES.GRADIENT_TEAL.toLowerCase()}100%)`;
 
 if (gradientNormalized !== canonical) {
   console.error(`✖ Gradient drifted. Expected "${canonicalDisplay}" but found "${gradientRaw}"`);

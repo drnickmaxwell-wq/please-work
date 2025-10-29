@@ -18,8 +18,8 @@ const PANES: PaneConfig[] = [
     id: 'hero',
     label: 'Hero Surface',
     description: 'Full-bleed hero baseline with motion-friendly layers.',
-    wave: true,
-    particles: true,
+    wave: false,
+    particles: false,
   },
   {
     id: 'journey',
@@ -38,6 +38,8 @@ type TokenDiagnostics = {
   ink: string;
   grain: string;
   vignette: string;
+  wave: string;
+  particles: string;
 };
 
 type RuntimeDiagnostics = {
@@ -61,6 +63,8 @@ const EMPTY_DIAGNOSTICS: TokenDiagnostics = {
   ink: '…',
   grain: '…',
   vignette: '…',
+  wave: '…',
+  particles: '…',
 };
 
 const EMPTY_ASSERTIONS: AssertionDiagnostics = {
@@ -147,16 +151,24 @@ export default function BrandLivePreviewPage() {
 
   useEffect(() => {
     const root = getComputedStyle(document.documentElement);
-    const read = (token: string) => root.getPropertyValue(token).trim();
+    const readRoot = (token: string) => root.getPropertyValue(token).trim();
+    const firstSurface = document.querySelector<HTMLElement>('.champagne-surface');
+    const surfaceStyle = firstSurface ? getComputedStyle(firstSurface) : null;
+    const readSurface = (token: string) => {
+      const raw = surfaceStyle?.getPropertyValue(token).trim() ?? '';
+      return raw || '0';
+    };
 
     setTokens({
-      gradient: read('--smh-gradient').replace(/\s+/g, ' '),
-      magenta: read('--smh-primary-magenta'),
-      teal: read('--smh-primary-teal'),
-      gold: read('--smh-accent-gold'),
-      ink: read('--smh-primary-ink'),
-      grain: read('--champagne-filmgrain-alpha'),
-      vignette: read('--champagne-vignette-alpha'),
+      gradient: readRoot('--smh-gradient').replace(/\s+/g, ' '),
+      magenta: readRoot('--smh-primary-magenta'),
+      teal: readRoot('--smh-primary-teal'),
+      gold: readRoot('--smh-accent-gold'),
+      ink: readRoot('--smh-primary-ink'),
+      grain: readSurface('--champagne-grain-alpha'),
+      vignette: readSurface('--champagne-vignette-alpha'),
+      wave: readSurface('--champagne-wave-alpha'),
+      particles: readSurface('--champagne-particles-alpha'),
     });
 
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -183,7 +195,12 @@ export default function BrandLivePreviewPage() {
 
   useEffect(() => {
     const root = getComputedStyle(document.documentElement);
-    const gradient = root.getPropertyValue('--smh-gradient').replace(/\s+/g, ' ').trim();
+    const surfaceTarget = document.querySelector<HTMLElement>('.champagne-surface');
+    const surfaceComputed = surfaceTarget ? getComputedStyle(surfaceTarget) : null;
+    const gradientCandidate = surfaceComputed?.getPropertyValue('background-image').trim();
+    const gradient = gradientCandidate && gradientCandidate !== 'none'
+      ? gradientCandidate
+      : root.getPropertyValue('--smh-gradient').replace(/\s+/g, ' ').trim();
 
     const heroSurface = document.querySelector<HTMLElement>('[data-surface="hero"].champagne-surface');
     let heroBorderRadius = '0px';
@@ -308,6 +325,14 @@ export default function BrandLivePreviewPage() {
               <span className="text-right">{tokens.grain}</span>
             </li>
             <li className="flex flex-wrap items-center justify-between gap-2 font-mono">
+              <span className="uppercase tracking-[0.35em] text-white/60">Wave α</span>
+              <span className="text-right">{tokens.wave}</span>
+            </li>
+            <li className="flex flex-wrap items-center justify-between gap-2 font-mono">
+              <span className="uppercase tracking-[0.35em] text-white/60">Particles α</span>
+              <span className="text-right">{tokens.particles}</span>
+            </li>
+            <li className="flex flex-wrap items-center justify-between gap-2 font-mono">
               <span className="uppercase tracking-[0.35em] text-white/60">Hero Radius</span>
               <span className="text-right">
                 {assertions.heroBorderRadius}
@@ -356,6 +381,14 @@ export default function BrandLivePreviewPage() {
             <div>
               <dt className="text-xs uppercase tracking-[0.35em] text-white/50">Vignette α</dt>
               <dd className="font-mono text-sm text-white">{tokens.vignette}</dd>
+            </div>
+            <div>
+              <dt className="text-xs uppercase tracking-[0.35em] text-white/50">Wave α</dt>
+              <dd className="font-mono text-sm text-white">{tokens.wave}</dd>
+            </div>
+            <div>
+              <dt className="text-xs uppercase tracking-[0.35em] text-white/50">Particles α</dt>
+              <dd className="font-mono text-sm text-white">{tokens.particles}</dd>
             </div>
           </dl>
           <div className="mt-8 grid gap-3 sm:grid-cols-2">
