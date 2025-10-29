@@ -203,7 +203,7 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative inline-flex items-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-[var(--smh-gradient)] px-6 py-2 font-medium text-[var(--smh-text)] transition-transform duration-300 ease-out hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] shadow-[0_12px_28px_rgba(11,13,15,0.25)]"
+                className="relative inline-flex items-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-[var(--smh-gradient)] px-6 py-2 font-medium transition-transform duration-300 ease-out hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] shadow-[0_12px_28px_rgba(11,13,15,0.25)]"
               >
                 <Calendar className="h-4 w-4" />
                 <span className="font-medium" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
@@ -294,7 +294,7 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
 
                   <motion.button
                     whileTap={{ scale: 0.95 }}
-                    className="relative inline-flex w-full items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-[var(--smh-gradient)] px-6 py-3 font-medium text-[var(--smh-text)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] shadow-[0_12px_24px_rgba(11,13,15,0.25)]"
+                    className="relative inline-flex w-full items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-[var(--smh-gradient)] px-6 py-3 font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] shadow-[0_12px_24px_rgba(11,13,15,0.25)]"
                   >
                     <Calendar className="w-4 h-4" />
                     <span className="font-medium" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>

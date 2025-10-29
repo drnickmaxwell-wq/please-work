@@ -28,7 +28,7 @@ const FooterLuxe = () => {
 
   const footerStyle: CSSProperties = {
     background: 'var(--smh-ink)',
-    color: 'var(--smh-ink-95)',
+    color: 'var(--smh-text)',
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
