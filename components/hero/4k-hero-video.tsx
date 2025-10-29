@@ -45,6 +45,7 @@ export default function Hero4KVideo({
       <div aria-hidden className="absolute inset-0 z-0 overflow-hidden">
         <video
           className="h-full w-full object-cover"
+          style={{ objectPosition: 'center 55%' }}
           playsInline
           autoPlay
           muted
@@ -65,7 +66,7 @@ export default function Hero4KVideo({
 
       <div className="relative z-[40] w-full px-6 py-20 md:px-10 md:py-24">
         <div
-          className="champagne-glass relative mx-auto mt-20 max-w-[960px] rounded-champagne border border-[color:var(--champagne-keyline-gold)] bg-[color:var(--champagne-glass-bg)]/92 p-8 shadow-champagne md:mt-28 md:p-10"
+          className="champagne-glass relative mx-auto mt-20 max-w-[960px] p-8 md:mt-28 md:p-10"
           style={{ color: 'var(--smh-text)' }}
         >
           <div className="space-y-6 text-center">
