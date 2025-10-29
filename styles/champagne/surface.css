@@ -9,14 +9,13 @@
 .champagne-surface{
   position:relative;
   background:var(--smh-gradient);
-  background-blend-mode:normal;
   isolation:isolate;
   border-radius:0px;
   color:var(--smh-text);
-  --champagne-vignette-alpha:0.06;
-  --champagne-grain-alpha:0.04;
-  --champagne-wave-alpha:0;
-  --champagne-particles-alpha:0;
+  --vignette-alpha:0.06;
+  --grain-alpha:0.04;
+  --champagne-vignette-alpha:var(--vignette-alpha);
+  --champagne-grain-alpha:var(--grain-alpha);
 }
 
 .champagne-surface.surface--rounded{
@@ -29,6 +28,13 @@
 .champagne-surface .champagne-particles{display:none;}
 .champagne-particles[data-state="on"]{display:block;}
 
+.champagne-particles{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:var(--z-surface);
+}
+
 /* Film grain (subtle) */
 .champagne-surface::after{
   content:"";
@@ -36,8 +42,8 @@
   pointer-events:none;
   background-image:radial-gradient(#000 1px, transparent 1px);
   background-size:2px 2px;
-  opacity:var(--champagne-grain-alpha);
-  mix-blend-mode:soft-light;
+  opacity:var(--grain-alpha);
+  mix-blend-mode:normal;
   z-index:var(--z-surface);
 }
 
@@ -46,37 +52,20 @@
   content:"";
   position:absolute; inset:0;
   pointer-events:none;
-  background:radial-gradient(60% 60% at 50% 45%, transparent 60%, rgba(0,0,0,var(--champagne-vignette-alpha)) 100%);
-  z-index:var(--z-surface);
-}
-
-/* Glass sheen overlay */
-.champagne-surface .champagne-sheen-layer{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background:linear-gradient(120deg, rgba(255,255,255,var(--champagne-sheen-alpha)) 0%, rgba(255,255,255,0) 65%);
-  mix-blend-mode:screen;
-  opacity:var(--champagne-sheen-alpha);
-  z-index:var(--z-surface);
-}
-
-.champagne-particles{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  mix-blend-mode:screen;
+  background:radial-gradient(60% 60% at 50% 45%, transparent 60%, #000 100%);
+  opacity:var(--vignette-alpha);
+  mix-blend-mode:normal;
   z-index:var(--z-surface);
 }
 
 /* Glass card utility */
 .champagne-glass{
   position:relative;
-  background:color-mix(in oklab, var(--smh-ink) 42%, transparent 58%);
+  background:color-mix(in oklab, var(--smh-ink) 35%, transparent 65%);
   backdrop-filter:blur(12px);
-  border:1px solid color-mix(in oklab, var(--smh-accent-gold) 24%, transparent);
+  border:1px solid var(--champagne-keyline-gold);
   border-radius:16px;
-  box-shadow:0 10px 30px rgba(0,0,0,.25);
+  box-shadow:var(--shadow-lg);
   color:var(--smh-text);
   z-index:var(--z-glass);
 }

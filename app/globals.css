@@ -29,6 +29,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+html {
+  background-color: var(--smh-ink);
+}
+
 a {
   color: inherit;
 }
