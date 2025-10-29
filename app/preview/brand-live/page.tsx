@@ -37,7 +37,9 @@ type TokenDiagnostics = {
   gold: string;
   ink: string;
   grain: string;
+  grainToken: string;
   vignette: string;
+  vignetteToken: string;
   wave: string;
   particles: string;
 };
@@ -62,7 +64,9 @@ const EMPTY_DIAGNOSTICS: TokenDiagnostics = {
   gold: '…',
   ink: '…',
   grain: '…',
+  grainToken: '…',
   vignette: '…',
+  vignetteToken: '…',
   wave: '…',
   particles: '…',
 };
@@ -166,7 +170,9 @@ export default function BrandLivePreviewPage() {
       gold: readRoot('--smh-accent-gold'),
       ink: readRoot('--smh-primary-ink'),
       grain: readSurface('--champagne-grain-alpha'),
+      grainToken: readRoot('--champagne-grain-alpha') || '0',
       vignette: readSurface('--champagne-vignette-alpha'),
+      vignetteToken: readRoot('--champagne-vignette-alpha') || '0',
       wave: readSurface('--champagne-wave-alpha'),
       particles: readSurface('--champagne-particles-alpha'),
     });
@@ -243,6 +249,33 @@ export default function BrandLivePreviewPage() {
   );
 
   const ctaStatus = assertions.ctaMatchesTextToken;
+  const beforeAfter = useMemo(
+    () => [
+      {
+        label: 'Gradient',
+        before: tokens.gradient,
+        after: assertions.computedGradient,
+      },
+      {
+        label: 'Vignette α',
+        before: tokens.vignetteToken,
+        after: tokens.vignette,
+      },
+      {
+        label: 'Grain α',
+        before: tokens.grainToken,
+        after: tokens.grain,
+      },
+    ],
+    [
+      assertions.computedGradient,
+      tokens.gradient,
+      tokens.grain,
+      tokens.grainToken,
+      tokens.vignette,
+      tokens.vignetteToken,
+    ]
+  );
 
   return (
     <main className="min-h-screen bg-black text-white">
@@ -346,6 +379,19 @@ export default function BrandLivePreviewPage() {
               </span>
             </li>
           </ul>
+        </section>
+
+        <section className="rounded-3xl border border-white/10 bg-white/5 p-8 text-left shadow-lg shadow-black/30 backdrop-blur">
+          <h2 className="font-serif text-2xl text-white">Before / After</h2>
+          <p className="mt-2 font-mono text-xs uppercase tracking-[0.35em] text-white/60">Token baseline vs computed surface</p>
+          <dl className="mt-6 space-y-3">
+            {beforeAfter.map((item) => (
+              <div key={item.label} className="flex flex-wrap items-center justify-between gap-2 font-mono text-sm text-white">
+                <dt className="uppercase tracking-[0.35em] text-white/60">{item.label}</dt>
+                <dd className="text-right">{item.before} → {item.after}</dd>
+              </div>
+            ))}
+          </dl>
         </section>
 
         <section className="rounded-3xl border border-white/10 bg-white/5 p-8 text-left shadow-lg shadow-black/30 backdrop-blur">

@@ -60,8 +60,8 @@ export default function Hero4KVideo({
         <div aria-hidden className="champagne-sheen-layer" />
 
         <div className="relative z-[40] w-full px-6 py-20 md:px-10 md:py-24">
-          <div className="mx-auto mt-20 max-w-[960px] md:mt-28">
-            <div className="champagne-glass">
+          <div className="mx-auto mt-20 flex justify-center md:mt-28">
+            <div className="champagne-glass w-full max-w-[min(640px,90vw)]">
               <div className="relative p-8 text-[var(--smh-text)] md:p-10">
                 <div className="space-y-6 text-center">
                   <p className="text-sm uppercase tracking-[0.3em] opacity-70">St Mary’s House</p>

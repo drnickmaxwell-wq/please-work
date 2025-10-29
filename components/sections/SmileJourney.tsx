@@ -79,18 +79,22 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           <div className="champagne-particles" data-state="off" aria-hidden style={{ opacity: 0 }} />
         )}
 
-        <div className="relative z-[20] mx-auto max-w-7xl px-4 md:px-6">
-          <h2
-            id="journey-hero-title"
-            className="text-center text-3xl font-serif font-semibold tracking-tight md:text-4xl"
-          >
-            Your Smile Journey
-          </h2>
-          <p className="mt-3 mx-auto max-w-3xl text-center text-base opacity-90 md:text-lg">
-            Discover the path to your perfect smile with a guided experience curated by Manus AI.
-          </p>
+        <div className="relative z-[20] mx-auto flex max-w-7xl flex-col gap-12 px-4 md:px-6">
+          <div className="champagne-glass mx-auto w-full max-w-[min(720px,92vw)]">
+            <div className="px-8 py-10 text-center md:px-10 md:py-12">
+              <h2
+                id="journey-hero-title"
+                className="text-3xl font-serif font-semibold tracking-tight md:text-4xl"
+              >
+                Your Smile Journey
+              </h2>
+              <p className="mt-4 text-base opacity-90 md:text-lg">
+                Discover the path to your perfect smile with a guided experience curated by Manus AI.
+              </p>
+            </div>
+          </div>
 
-          <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {steps.map((step, index) => {
               const iconPath = step.icon ? iconMap[step.icon] : undefined;
               const connectorClass =
@@ -104,7 +108,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
                   style={{ color: "var(--smh-text)" }}
                   tabIndex={0}
                 >
-                  <div className="champagne-glass">
+                  <div className="champagne-glass h-full">
                     <div className="relative overflow-hidden p-6 md:p-7">
                       {iconPath && (
                         <div className="mb-6 flex flex-col items-center text-[color:var(--champagne-keyline-gold)]">
@@ -128,8 +132,8 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
             })}
           </div>
 
-          <div className="mt-16 text-center md:mt-20" style={{ color: "var(--smh-text)" }}>
-            <div className="champagne-glass">
+          <div className="mt-4 text-center md:mt-8" style={{ color: "var(--smh-text)" }}>
+            <div className="champagne-glass mx-auto w-full max-w-[min(640px,92vw)]">
               <div className="p-8 md:p-10">
                 <div className="space-y-3">
                   <h3 className="font-serif text-3xl tracking-tight">Ready to Begin?</h3>
