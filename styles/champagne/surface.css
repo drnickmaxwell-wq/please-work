@@ -1,3 +1,10 @@
+:root{
+  --z-surface: 10;
+  --z-glass: 20;
+  --z-content: 30;
+  --z-header: 40;
+}
+
 /* Full-bleed gradient surface */
 .champagne-surface{
   position:relative;
@@ -31,7 +38,7 @@
   background-size:2px 2px;
   opacity:var(--champagne-grain-alpha);
   mix-blend-mode:soft-light;
-  z-index:2;
+  z-index:var(--z-surface);
 }
 
 /* Vignette */
@@ -40,7 +47,7 @@
   position:absolute; inset:0;
   pointer-events:none;
   background:radial-gradient(60% 60% at 50% 45%, transparent 60%, rgba(0,0,0,var(--champagne-vignette-alpha)) 100%);
-  z-index:1;
+  z-index:var(--z-surface);
 }
 
 /* Glass sheen overlay */
@@ -51,7 +58,7 @@
   background:linear-gradient(120deg, rgba(255,255,255,var(--champagne-sheen-alpha)) 0%, rgba(255,255,255,0) 65%);
   mix-blend-mode:screen;
   opacity:var(--champagne-sheen-alpha);
-  z-index:3;
+  z-index:var(--z-surface);
 }
 
 .champagne-particles{
@@ -59,15 +66,17 @@
   inset:0;
   pointer-events:none;
   mix-blend-mode:screen;
-  z-index:3;
+  z-index:var(--z-surface);
 }
 
 /* Glass card utility */
 .champagne-glass{
+  position:relative;
   background:color-mix(in oklab, var(--smh-ink) 42%, transparent 58%);
   backdrop-filter:blur(12px);
   border:1px solid color-mix(in oklab, var(--smh-accent-gold) 24%, transparent);
   border-radius:16px;
   box-shadow:0 10px 30px rgba(0,0,0,.25);
   color:var(--smh-text);
+  z-index:var(--z-glass);
 }
