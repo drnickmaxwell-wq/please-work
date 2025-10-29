@@ -49,7 +49,7 @@ const FooterLuxe = () => {
 
   return (
     <footer
-      className="footer-luxe bg-[var(--smh-ink)] text-[var(--smh-text)] border-t border-[var(--smh-gold,#D4AF37)]"
+      className="footer-luxe bg-[var(--smh-ink)] text-[var(--smh-text)] border-t border-[var(--smh-gold)]"
       data-footer
       style={footerStyle}
     >
