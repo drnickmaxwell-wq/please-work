@@ -36,13 +36,17 @@ if (!gradientMatch) {
   process.exit(1);
 }
 
-const gradient = gradientMatch[1].replace(/\s+/g, '');
-const canonical = 'linear-gradient(135deg,#D94BC60%,#00C2C7100%)';
+const normalizeGradient = (value) => value.replace(/\s+/g, '').toLowerCase();
+const gradientRaw = gradientMatch[1].trim();
+const gradientNormalized = normalizeGradient(gradientRaw);
+const canonicalDisplay = 'linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%)';
+const canonical = normalizeGradient(canonicalDisplay);
 
-if (gradient !== canonical) {
-  console.error(`✖ Gradient drifted. Expected "${canonical}" but found "${gradient}"`);
+if (gradientNormalized !== canonical) {
+  console.error(`✖ Gradient drifted. Expected "${canonicalDisplay}" but found "${gradientRaw}"`);
+  console.error(`  normalized expected: "${canonical}" vs found: "${gradientNormalized}"`);
   process.exit(1);
 }
 
 console.log(`✔ Glass translucency OK (${glassOpacity}%)`);
-console.log(`✔ Champagne gradient locked (${gradientMatch[1].trim()})`);
+console.log(`✔ Champagne gradient locked (${gradientRaw})`);

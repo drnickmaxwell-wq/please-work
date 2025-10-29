@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { easeInOutCubic } from '@/lib/motion/easing';
 import Link from 'next/link';
 import InteractiveToothModel from '@/components/3d/interactive-tooth-model';
+import { TOKENS as NEUTRAL_TOKENS } from '@/styles/tokens/neutrals';
 import {
   Sparkles,
   Star,
@@ -230,8 +231,8 @@ export default function VeneersPageContent() {
               treatmentType="veneer"
               title="Porcelain Veneer Transformation"
               description="See how ultra-thin porcelain shells create a perfect, natural-looking smile"
-              beforeColor="#F5F5DC"
-              afterColor="#FFFFFF"
+              beforeColor={NEUTRAL_TOKENS.champagne}
+              afterColor={NEUTRAL_TOKENS.white}
             />
           </motion.div>
         </div>

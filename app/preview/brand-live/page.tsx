@@ -156,6 +156,9 @@ export default function BrandLivePreviewPage() {
 
         <section className="rounded-3xl border border-white/10 bg-white/5 p-8 text-left shadow-lg shadow-black/30 backdrop-blur">
           <h2 className="font-serif text-2xl text-white">Token Diagnostics</h2>
+          <p className="mt-2 font-mono text-xs uppercase tracking-[0.3em] text-white/60">
+            {`documentComputed("--smh-gradient") → ${tokens.gradient}`}
+          </p>
           <dl className="mt-6 grid gap-3 sm:grid-cols-2">
             <div>
               <dt className="text-xs uppercase tracking-[0.35em] text-white/50">Gradient</dt>

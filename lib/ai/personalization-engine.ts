@@ -2,6 +2,8 @@
 // Brand Colors: Magenta var(--smh-primary-magenta), Turquoise var(--smh-primary-teal), Gold var(--smh-accent-gold)
 // Fonts: Montserrat headings, Lora body text
 
+import { TOKENS as NEUTRAL_TOKENS } from '@/styles/tokens/neutrals';
+
 export interface UserProfile {
   id: string;
   demographics: {
@@ -529,15 +531,15 @@ export function generateBrandConsistentStyling(context: string) {
       primary: 'var(--smh-primary-magenta)',
       secondary: 'var(--smh-primary-teal)',
       accent: 'var(--smh-accent-gold)',
-      background: '#FFFFFF',
-      text: '#1E293B'
+      background: NEUTRAL_TOKENS.white,
+      text: NEUTRAL_TOKENS.navy
     },
     fonts: {
       heading: 'var(--font-playfair), Georgia, serif',
       body: 'var(--font-inter), system-ui, Arial'
     },
-    effects: {
-      gradient: 'var(--gradient-cta)',
+      effects: {
+        gradient: 'var(--smh-gradient)',
       shadow: '0 10px 25px rgba(194, 24, 91, 0.15)',
       borderRadius: '12px',
       backdropBlur: 'blur(10px)'
@@ -552,16 +554,16 @@ export function generateBrandConsistentStyling(context: string) {
   // Context-specific adjustments while maintaining brand
   switch (context) {
     case 'emergency':
-      brandStyling.colors.primary = '#DC2626'; // Red for urgency
-      brandStyling.effects.gradient = 'linear-gradient(135deg, #DC2626 0%, var(--smh-primary-magenta) 50%, var(--smh-primary-teal) 100%)';
+      brandStyling.colors.primary = NEUTRAL_TOKENS.urgent; // Red for urgency
+      brandStyling.effects.gradient = 'var(--smh-gradient)';
       break;
     case 'luxury':
       brandStyling.colors.primary = 'var(--smh-accent-gold)'; // Gold for luxury
-      brandStyling.effects.gradient = 'linear-gradient(135deg, var(--smh-accent-gold) 0%, var(--smh-primary-magenta) 50%, var(--smh-primary-teal) 100%)';
+      brandStyling.effects.gradient = 'var(--smh-gradient)';
       break;
     case 'calming':
       brandStyling.colors.primary = 'var(--smh-primary-teal)'; // Turquoise for calm
-      brandStyling.effects.gradient = 'linear-gradient(135deg, var(--smh-primary-teal) 0%, var(--smh-accent-gold) 50%, var(--smh-primary-magenta) 100%)';
+      brandStyling.effects.gradient = 'var(--smh-gradient)';
       break;
   }
 

@@ -11,6 +11,7 @@ import {
   getBrandColor,
   SMH_BRAND_COLOR_FALLBACKS,
 } from '@/lib/brand/palette';
+import { TOKENS as NEUTRAL_TOKENS } from '@/styles/tokens/neutrals';
 
 // Brand Colors: Magenta var(--smh-primary-magenta), Turquoise var(--smh-primary-teal), Gold var(--smh-accent-gold)
 // Fonts: Montserrat headings, Lora body text
@@ -48,8 +49,8 @@ interface ToothModelProps {
 // Optimized 3D Tooth Component with lazy loading
 function ToothModel({
   treatmentType,
-  beforeColor = '#F5F5DC',
-  afterColor = '#FFFFFF',
+  beforeColor = NEUTRAL_TOKENS.champagne,
+  afterColor = NEUTRAL_TOKENS.white,
   showAfter = false,
 }: {
   treatmentType: string;
@@ -132,7 +133,7 @@ function ToothModel({
         <mesh position={[0, 0, 0.31]}>
           <planeGeometry args={[0.6, 1.2]} />
           <meshPhysicalMaterial
-            color="#FFFFFF"
+            color={afterColor}
             roughness={0.05}
             metalness={0.1}
             clearcoat={1}
@@ -146,7 +147,7 @@ function ToothModel({
         <mesh position={[0, -1, 0]}>
           <cylinderGeometry args={[0.1, 0.1, 0.8]} />
           <meshPhysicalMaterial
-            color="#C0C0C0"
+            color={NEUTRAL_TOKENS.silver}
             roughness={0.2}
             metalness={0.8}
           />

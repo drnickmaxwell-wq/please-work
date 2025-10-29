@@ -20,6 +20,19 @@ const eslintConfig = [
       "next-env.d.ts",
     ],
   },
+  ...compat.config({
+    overrides: [
+      {
+        files: ["scripts/**/*.cjs"],
+        env: { node: true },
+        rules: {
+          "@typescript-eslint/no-var-requires": "off",
+          "@typescript-eslint/no-require-imports": "off",
+          "import/no-commonjs": "off",
+        },
+      },
+    ],
+  }),
 ];
 
 export default eslintConfig;

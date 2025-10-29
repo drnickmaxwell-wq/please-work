@@ -1,5 +1,3 @@
-import "@/styles/tokens/smh-champagne-tokens.css";
-import "@/styles/champagne/surface.css";
 import "./globals.css";
 import type { CSSProperties } from 'react';
 import type { Metadata, Viewport } from "next";
