@@ -4,6 +4,7 @@
   background:var(--smh-gradient);
   isolation:isolate;
   border-radius:0;
+  color:var(--smh-surface-ink, #f6f6f4);
 }
 
 /* Optional wave layer slot (keep present, default hidden) */
@@ -30,10 +31,29 @@
   z-index:1;
 }
 
+/* Glass sheen overlay */
+.champagne-surface .champagne-sheen-layer{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(120deg, rgba(255,255,255,var(--champagne-sheen-alpha)) 0%, rgba(255,255,255,0) 65%);
+  mix-blend-mode:screen;
+  opacity:var(--champagne-sheen-alpha);
+  z-index:3;
+}
+
+.champagne-particles{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  mix-blend-mode:screen;
+  z-index:3;
+}
+
 /* Glass card utility */
 .champagne-glass{
   background:var(--champagne-glass-bg);
-  backdrop-filter:blur(12px);
+  backdrop-filter:blur(8px);
   border:1px solid var(--champagne-keyline-gold);
   border-radius:16px;
   box-shadow:0 8px 24px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.06);
