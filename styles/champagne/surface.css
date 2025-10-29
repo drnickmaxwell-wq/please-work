@@ -4,7 +4,7 @@
   background-image:var(--smh-gradient);
   isolation:isolate;
   border-radius:0;
-  color:var(--smh-surface-ink, #f6f6f4);
+  color:var(--smh-text);
 }
 
 .champagne-surface.surface--rounded{
