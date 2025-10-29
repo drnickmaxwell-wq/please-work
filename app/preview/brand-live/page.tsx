@@ -45,6 +45,14 @@ type RuntimeDiagnostics = {
   prefersReducedMotion: boolean;
 };
 
+type AssertionDiagnostics = {
+  computedGradient: string;
+  heroBorderRadius: string;
+  heroRadiusIsZero: boolean | null;
+  ctaColor: string;
+  ctaMatchesTextToken: boolean | null;
+};
+
 const EMPTY_DIAGNOSTICS: TokenDiagnostics = {
   gradient: '…',
   magenta: '…',
@@ -55,9 +63,87 @@ const EMPTY_DIAGNOSTICS: TokenDiagnostics = {
   vignette: '…',
 };
 
+const EMPTY_ASSERTIONS: AssertionDiagnostics = {
+  computedGradient: '…',
+  heroBorderRadius: '…',
+  heroRadiusIsZero: null,
+  ctaColor: '…',
+  ctaMatchesTextToken: null,
+};
+
+const normalizeColor = (value: string): string | null => {
+  const trimmed = value.trim().toLowerCase();
+  if (!trimmed) {
+    return null;
+  }
+
+  if (trimmed.startsWith('#')) {
+    const hex = trimmed.slice(1);
+    if (hex.length === 3) {
+      return `#${hex
+        .split('')
+        .map((char) => `${char}${char}`)
+        .join('')}`;
+    }
+    if (hex.length === 6) {
+      return `#${hex}`;
+    }
+    return null;
+  }
+
+  if (trimmed.startsWith('rgb')) {
+    const sanitized = trimmed
+      .replace(/rgba?|\(|\)|\//g, ' ')
+      .split(/[\s,]+/)
+      .filter(Boolean)
+      .slice(0, 3)
+      .map((component) => Math.round(Number(component)));
+
+    if (sanitized.length !== 3 || sanitized.some((component) => Number.isNaN(component))) {
+      return null;
+    }
+
+    return `#${sanitized
+      .map((component) => component.toString(16).padStart(2, '0'))
+      .join('')}`;
+  }
+
+  return trimmed;
+};
+
+const resolveCssVariable = (
+  variable: string,
+  root: CSSStyleDeclaration,
+  seen: Set<string> = new Set()
+): string => {
+  if (seen.has(variable)) {
+    return '';
+  }
+
+  seen.add(variable);
+  const raw = root.getPropertyValue(variable).trim();
+  if (!raw) {
+    return '';
+  }
+
+  const match = raw.match(/var\((--[^,\s)]+)(?:,\s*(.+))?\)/);
+  if (!match) {
+    return raw;
+  }
+
+  const [, next, fallback] = match;
+  const resolved = resolveCssVariable(next, root, seen);
+  if (resolved) {
+    return resolved;
+  }
+
+  return fallback ? fallback.trim() : raw;
+};
+
 export default function BrandLivePreviewPage() {
   const [tokens, setTokens] = useState<TokenDiagnostics>(EMPTY_DIAGNOSTICS);
   const [runtime, setRuntime] = useState<RuntimeDiagnostics>({ surfaces: 0, prefersReducedMotion: false });
+  const [assertions, setAssertions] = useState<AssertionDiagnostics>(EMPTY_ASSERTIONS);
 
   useEffect(() => {
     const root = getComputedStyle(document.documentElement);
@@ -93,6 +179,45 @@ export default function BrandLivePreviewPage() {
         motionQuery.removeListener(audit);
       }
     };
+  }, []);
+
+  useEffect(() => {
+    const root = getComputedStyle(document.documentElement);
+    const gradient = root.getPropertyValue('--smh-gradient').replace(/\s+/g, ' ').trim();
+
+    const heroSurface = document.querySelector<HTMLElement>('[data-surface="hero"].champagne-surface');
+    let heroBorderRadius = '0px';
+    let heroRadiusIsZero: boolean | null = null;
+    if (heroSurface) {
+      const heroStyle = getComputedStyle(heroSurface);
+      const radius = heroStyle.getPropertyValue('border-radius').trim();
+      heroBorderRadius = radius || '0px';
+      const numericRadius = parseFloat(radius || '0');
+      heroRadiusIsZero = Number.isFinite(numericRadius) ? numericRadius === 0 : null;
+    }
+
+    const cta = document.querySelector<HTMLElement>('[data-cta="primary"]');
+    let ctaColor = 'n/a';
+    let ctaMatchesTextToken: boolean | null = null;
+    if (cta) {
+      const computedColor = getComputedStyle(cta).color.trim();
+      const normalizedCTAColor = normalizeColor(computedColor);
+      const tokenColor = normalizeColor(resolveCssVariable('--smh-text', root));
+      ctaColor = normalizedCTAColor ?? computedColor;
+      if (normalizedCTAColor && tokenColor) {
+        ctaMatchesTextToken = normalizedCTAColor === tokenColor;
+      } else if (normalizedCTAColor) {
+        ctaMatchesTextToken = false;
+      }
+    }
+
+    setAssertions({
+      computedGradient: gradient,
+      heroBorderRadius,
+      heroRadiusIsZero,
+      ctaColor,
+      ctaMatchesTextToken,
+    });
   }, []);
 
   const surfaceStyle = useMemo(
@@ -144,6 +269,17 @@ export default function BrandLivePreviewPage() {
                   <h2 className="font-serif text-3xl">{pane.label}</h2>
                   <p className="text-white/80">{pane.description}</p>
                 </div>
+                {pane.id === 'hero' ? (
+                  <div className="flex flex-wrap items-center gap-4">
+                    <button
+                      type="button"
+                      data-cta="primary"
+                      className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-[var(--smh-gradient)] px-5 py-3 font-semibold text-[var(--smh-text)] shadow-[0_12px_24px_rgba(11,13,15,0.25)] transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
+                    >
+                      Diagnostic CTA
+                    </button>
+                  </div>
+                ) : null}
                 <div className="flex flex-wrap gap-4 text-[0.65rem] uppercase tracking-[0.45em] text-white/60">
                   <span>Wave: {pane.wave ? 'On' : 'Off'}</span>
                   <span>Particles: {pane.particles ? 'On' : 'Off'}</span>
@@ -161,8 +297,8 @@ export default function BrandLivePreviewPage() {
           </p>
           <dl className="mt-6 grid gap-3 sm:grid-cols-2">
             <div>
-              <dt className="text-xs uppercase tracking-[0.35em] text-white/50">Gradient</dt>
-              <dd className="font-mono text-sm text-white">{tokens.gradient}</dd>
+              <dt className="text-xs uppercase tracking-[0.35em] text-white/50">Computed gradient</dt>
+              <dd className="font-mono text-sm text-white">{assertions.computedGradient}</dd>
             </div>
             <div>
               <dt className="text-xs uppercase tracking-[0.35em] text-white/50">Magenta</dt>
@@ -197,6 +333,26 @@ export default function BrandLivePreviewPage() {
             <div>
               <dt className="text-xs uppercase tracking-[0.35em] text-white/50">Prefers Reduced Motion</dt>
               <dd className="font-mono text-sm text-white">{runtime.prefersReducedMotion ? 'true' : 'false'}</dd>
+            </div>
+          </div>
+          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+            <div>
+              <dt className="text-xs uppercase tracking-[0.35em] text-white/50">Hero border radius</dt>
+              <dd className="font-mono text-sm text-white">
+                {assertions.heroBorderRadius}
+                {assertions.heroRadiusIsZero === null ? ' (pending)' : assertions.heroRadiusIsZero ? ' (zero)' : ' (non-zero)'}
+              </dd>
+            </div>
+            <div>
+              <dt className="text-xs uppercase tracking-[0.35em] text-white/50">CTA text color</dt>
+              <dd className="font-mono text-sm text-white">
+                {assertions.ctaColor}
+                {assertions.ctaMatchesTextToken === null
+                  ? ' (pending)'
+                  : assertions.ctaMatchesTextToken
+                    ? ' (matches --smh-text)'
+                    : ' (mismatch)'}
+              </dd>
             </div>
           </div>
         </section>
