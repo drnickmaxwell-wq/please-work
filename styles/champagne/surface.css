@@ -1,22 +1,23 @@
 /* Full-bleed gradient surface */
 .champagne-surface{
-  position: relative;
-  background: var(--smh-gradient);
-  isolation: isolate;
+  position:relative;
+  background:var(--smh-gradient);
+  isolation:isolate;
+  border-radius:0;
 }
 
 /* Optional wave layer slot (keep present, default hidden) */
-.champagne-surface[data-wave="off"] .wave { display:none; }
+.champagne-surface[data-wave="off"] .wave{display:none;}
 
 /* Film grain (subtle) */
 .champagne-surface::after{
   content:"";
   position:absolute; inset:0;
   pointer-events:none;
-  background-image: radial-gradient(#000 1px, transparent 1px);
-  background-size: 2px 2px;
-  opacity: var(--champagne-filmgrain-alpha);
-  mix-blend-mode: soft-light;
+  background-image:radial-gradient(#000 1px, transparent 1px);
+  background-size:2px 2px;
+  opacity:var(--champagne-filmgrain-alpha);
+  mix-blend-mode:soft-light;
 }
 
 /* Vignette */
@@ -24,14 +25,14 @@
   content:"";
   position:absolute; inset:0;
   pointer-events:none;
-  background: radial-gradient(60% 60% at 50% 45%, transparent 60%, rgba(0,0,0,var(--champagne-vignette-alpha)) 100%);
+  background:radial-gradient(60% 60% at 50% 45%, transparent 60%, rgba(0,0,0,var(--champagne-vignette-alpha)) 100%);
 }
 
 /* Glass card utility */
 .champagne-glass{
-  background: var(--champagne-glass-bg);
-  backdrop-filter: blur(12px);
-  box-shadow: var(--tw-shadow,0 0 #0000), var(--tw-shadow-colored,0 0 #0000), var(--champagne-pane);
-  border: 1px solid var(--champagne-keyline-gold);
-  border-radius: 16px;
+  background:var(--champagne-glass-bg);
+  backdrop-filter:blur(12px);
+  border:1px solid var(--champagne-keyline-gold);
+  border-radius:16px;
+  box-shadow:0 8px 24px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.06);
 }
