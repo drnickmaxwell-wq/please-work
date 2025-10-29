@@ -2,6 +2,10 @@
 const fs = require('fs');
 
 const champagne = fs.readFileSync('styles/tokens/smh-champagne-tokens.css', 'utf8');
+const HEX_CODES = Object.freeze({
+  GRADIENT_MAGENTA: '#D94BC6',
+  GRADIENT_TEAL: '#00C2C7',
+});
 
 function extractOpacity(varName) {
   const re = new RegExp(`${varName}\\s*:\\s*(color-mix\\([^;]+\\))`, 'i');
@@ -39,7 +43,7 @@ if (!gradientMatch) {
 const normalizeGradient = (value) => value.replace(/\s+/g, '').toLowerCase();
 const gradientRaw = gradientMatch[1].trim();
 const gradientNormalized = normalizeGradient(gradientRaw);
-const canonicalDisplay = 'linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%)';
+const canonicalDisplay = `linear-gradient(135deg,${HEX_CODES.GRADIENT_MAGENTA} 0%,${HEX_CODES.GRADIENT_TEAL} 100%)`;
 const canonical = normalizeGradient(canonicalDisplay);
 
 if (gradientNormalized !== canonical) {

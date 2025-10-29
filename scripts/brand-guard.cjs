@@ -6,9 +6,17 @@ const { join, extname, sep } = require("path");
 
 const ROOT = process.cwd();
 const TOKENS_FILE = join(ROOT, "styles/tokens/smh-champagne-tokens.css");
-const CANONICAL_DISPLAY = "linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%)";
+const HEX_CODES = Object.freeze({
+  PRIMARY_MAGENTA: "#C2185B",
+  PRIMARY_TEAL: "#40C4B4",
+  GOLD: "#D4AF37",
+  GRADIENT_MAGENTA: "#D94BC6",
+  GRADIENT_TEAL: "#00C2C7",
+  INK: "#0B0D0F",
+});
+const CANONICAL_DISPLAY = `linear-gradient(135deg,${HEX_CODES.GRADIENT_MAGENTA} 0%,${HEX_CODES.GRADIENT_TEAL} 100%)`;
 const CANONICAL_GRAD = CANONICAL_DISPLAY.replace(/\s+/g, "").toLowerCase();
-const HEXES = [/C2185B/i,/40C4B4/i,/D4AF37/i,/D94BC6/i,/00C2C7/i,/0B0D0F/i];
+const HEXES = Object.values(HEX_CODES).map(hex=>new RegExp(hex.slice(1),"i"));
 
 const normalize = (value) => value.replace(/\s+/g, "").toLowerCase();
 
@@ -92,4 +100,4 @@ if(violations.length){
   }
   process.exit(1);
 }
-console.log("✅ Brand guard passed.");
+console.log("Brand lock OK");
