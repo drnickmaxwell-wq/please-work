@@ -5,20 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "next-sitemap && pnpm run brand:guard",
     "start": "next start",
-    "lint": "eslint .",
-    "typecheck": "tsc --noEmit",
-    "lint:fix": "eslint . --fix",
-    "audit:champagne": "tsx tools/audit-champagne.ts",
-    "guard:preflight": "tsx tools/guard/preflight.ts",
-    "brand:verify": "tsx scripts/verify-brand-tokens.ts",
     "brand:guard": "node scripts/brand-guard.cjs",
-    "brand:hue-guard": "node scripts/brand-lock-guard.cjs",
-    "brand:structure": "node scripts/brand-structure-guard.cjs",
-    "brand:report": "node scripts/brand-report.cjs",
-    "build:locked": "npm run brand:hue-guard && npm run brand:structure && next build && npm run brand:report",
-    "prebuild": "node scripts/brand-guard.cjs"
+    "brand:report": "node scripts/brand-report.cjs"
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.24",

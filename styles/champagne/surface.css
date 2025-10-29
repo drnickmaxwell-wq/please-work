@@ -1,10 +1,14 @@
 /* Full-bleed gradient surface */
 .champagne-surface{
   position:relative;
-  background:var(--smh-gradient);
+  background-image:var(--smh-gradient);
   isolation:isolate;
   border-radius:0;
   color:var(--smh-surface-ink, #f6f6f4);
+}
+
+.champagne-surface.surface--rounded{
+  border-radius:1.5rem;
 }
 
 /* Optional wave layer slot (keep present, default hidden) */
