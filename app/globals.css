@@ -1,27 +1,59 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* Glass helper */
-.glass-pane{
-  background: var(--glass-bg-strong);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 1px 0 var(--glass-border) inset, 0 8px 24px rgba(0,0,0,.18);
-  border-radius: 18px;
-}
+/* Load tokens & surface BEFORE any other brand CSS */
+@import "../styles/tokens/smh-champagne-tokens.css";
+@import "../styles/champagne/surface.css";
 
-/* app/globals.css — CANONICAL, DO NOT EDIT WITHOUT BRAND LOCK */
-
-/* Tailwind 4 design-token bridge → reads our CSS variables */
-@theme {
-  --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
-  --color-background: var(--smh-bg);
-  --color-foreground: var(--smh-text);
-}
-
-/* Root ties to champagne tokens */
 :root {
-  color-scheme: light dark;
-  background-color: var(--smh-bg);
-  color: var(--smh-text);
+  color-scheme: dark;
+  font-family: "Inter", system-ui, sans-serif;
+  background-color: #0b0d0f;
+  color: #f6f6f4;
+  --champagne-pane: 0 2px 30px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.08);
+  --sparkle-highlight: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.55) 45%, transparent 70%);
+  --subsurface-glow-light: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(212,175,55,0.02) 100%);
+  --subsurface-glow-dark: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(212,175,55,0.03) 100%);
+  --iridescent-gradient: linear-gradient(135deg, var(--smh-primary-magenta) 0%, var(--smh-primary-teal) 50%, var(--smh-accent-gold) 100%);
+  --card-reflection-gradient: linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.1) 50%, transparent 100%);
+  --card-reflection-gradient-dark: linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.15) 50%, transparent 100%);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #0b0d0f;
+  color: inherit;
+  font-family: inherit;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+.glass-pane {
+  background: var(--champagne-glass-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--champagne-keyline-gold);
+  border-radius: 18px;
+  box-shadow: var(--champagne-pane);
+}
+
+.wave {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--champagne-wave, none);
+  opacity: 0.35;
+  mix-blend-mode: screen;
+}
+
+[data-reduced-motion="true"] * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
 }

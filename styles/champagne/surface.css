@@ -1,34 +1,37 @@
+/* Full-bleed gradient surface */
 .champagne-surface{
   position: relative;
-  isolation: isolate;
   background: var(--smh-gradient);
+  isolation: isolate;
 }
-.champagne-surface::before{ /* wave (off by default) */
+
+/* Optional wave layer slot (keep present, default hidden) */
+.champagne-surface[data-wave="off"] .wave { display:none; }
+
+/* Film grain (subtle) */
+.champagne-surface::after{
   content:"";
   position:absolute; inset:0;
-  background: none; /* will be toggled by .has-wave */
-  opacity: .10; pointer-events:none;
-  z-index:0;
-}
-.champagne-surface.has-wave::before{
-  background: var(--champagne-wave, none);
-}
-.champagne-particles{
-  position:absolute; inset:0; z-index:1; pointer-events:none; opacity: .10;
-}
-.champagne-vignette{
-  position:absolute; inset:0; z-index:2; pointer-events:none;
-  background: radial-gradient(60% 60% at 50% 50%, rgba(0,0,0,0) 40%, rgba(0,0,0,var(--champagne-vignette-alpha)) 100%);
-}
-.champagne-sheen{
-  position:absolute; inset:0; z-index:3; pointer-events:none;
-  background: linear-gradient( to bottom right, rgba(255,255,255,var(--champagne-sheen-opacity)) 0%, transparent 40%, transparent 60%, rgba(255,255,255,var(--champagne-sheen-opacity)) 100% );
+  pointer-events:none;
+  background-image: radial-gradient(#000 1px, transparent 1px);
+  background-size: 2px 2px;
+  opacity: var(--champagne-filmgrain-alpha);
   mix-blend-mode: soft-light;
 }
+
+/* Vignette */
+.champagne-surface::before{
+  content:"";
+  position:absolute; inset:0;
+  pointer-events:none;
+  background: radial-gradient(60% 60% at 50% 45%, transparent 60%, rgba(0,0,0,var(--champagne-vignette-alpha)) 100%);
+}
+
+/* Glass card utility */
 .champagne-glass{
-  position:relative; z-index:4;
   background: var(--champagne-glass-bg);
-  border: 1px solid var(--champagne-glass-border);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--tw-shadow,0 0 #0000), var(--tw-shadow-colored,0 0 #0000), var(--champagne-pane);
+  border: 1px solid var(--champagne-keyline-gold);
+  border-radius: 16px;
 }

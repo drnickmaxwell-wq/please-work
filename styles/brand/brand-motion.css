@@ -11,7 +11,7 @@
   content: "";
   position: absolute;
   inset: -30% -50%;
-  background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.55) 45%, transparent 70%);
+  background: var(--sparkle-highlight);
   transform: translateX(-120%);
   opacity: 0;
   transition:

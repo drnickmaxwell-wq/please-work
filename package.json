@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "postbuild": "next-sitemap && pnpm run brand:guard",
     "start": "next start",
@@ -13,7 +13,8 @@
     "audit:champagne": "tsx tools/audit-champagne.ts",
     "guard:preflight": "tsx tools/guard/preflight.ts",
     "brand:verify": "tsx scripts/verify-brand-tokens.ts",
-    "brand:guard": "node scripts/brand-guard.cjs"
+    "brand:guard": "node scripts/brand-guard.cjs",
+    "prebuild": "node scripts/brand-guard.cjs"
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.24",
