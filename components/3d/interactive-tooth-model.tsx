@@ -11,6 +11,10 @@ import {
   getBrandColor,
   SMH_BRAND_COLOR_FALLBACKS,
 } from '@/lib/brand/palette';
+import {
+  TOKENS as NEUTRAL_TOKENS,
+  resolveNeutralColor,
+} from '@/styles/tokens/neutrals';
 
 // Brand Colors: Magenta var(--smh-primary-magenta), Turquoise var(--smh-primary-teal), Gold var(--smh-accent-gold)
 // Fonts: Montserrat headings, Lora body text
@@ -48,8 +52,8 @@ interface ToothModelProps {
 // Optimized 3D Tooth Component with lazy loading
 function ToothModel({
   treatmentType,
-  beforeColor = '#F5F5DC',
-  afterColor = '#FFFFFF',
+  beforeColor = NEUTRAL_TOKENS.graySubtle,
+  afterColor = NEUTRAL_TOKENS.white,
   showAfter = false,
 }: {
   treatmentType: string;
@@ -83,7 +87,35 @@ function ToothModel({
   };
 
   const geometry = createToothGeometry();
-  const currentColor = showAfter ? afterColor : beforeColor;
+
+  const resolveColor = (value: string) => {
+    const neutralEntry = Object.entries(NEUTRAL_TOKENS).find(([, token]) => token === value);
+    if (neutralEntry) {
+      return resolveNeutralColor(neutralEntry[0] as keyof typeof NEUTRAL_TOKENS);
+    }
+
+    if (value.startsWith('var(')) {
+      const variable = value.match(/var\(([^,\s)]+)/i)?.[1];
+      const fallback = value.match(/var\([^,]+,\s*([^)]+)\)/i)?.[1]?.trim();
+
+      if (typeof window !== 'undefined' && variable) {
+        const resolved = getComputedStyle(document.documentElement)
+          .getPropertyValue(variable)
+          .trim();
+        if (resolved) {
+          return resolved;
+        }
+      }
+
+      return fallback || value;
+    }
+
+    return value;
+  };
+
+  const resolvedBeforeColor = resolveColor(beforeColor);
+  const resolvedAfterColor = resolveColor(afterColor);
+  const currentColor = showAfter ? resolvedAfterColor : resolvedBeforeColor;
 
   return (
     <group>
@@ -132,7 +164,7 @@ function ToothModel({
         <mesh position={[0, 0, 0.31]}>
           <planeGeometry args={[0.6, 1.2]} />
           <meshPhysicalMaterial
-            color="#FFFFFF"
+            color={resolveColor(NEUTRAL_TOKENS.white)}
             roughness={0.05}
             metalness={0.1}
             clearcoat={1}
@@ -146,7 +178,7 @@ function ToothModel({
         <mesh position={[0, -1, 0]}>
           <cylinderGeometry args={[0.1, 0.1, 0.8]} />
           <meshPhysicalMaterial
-            color="#C0C0C0"
+            color={resolveColor(NEUTRAL_TOKENS.graySubtle)}
             roughness={0.2}
             metalness={0.8}
           />

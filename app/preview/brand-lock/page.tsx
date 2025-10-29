@@ -25,12 +25,19 @@ export default function BrandLock() {
   useEffect(() => {
     const root = document.documentElement;
     const cs = getComputedStyle(root);
-    const out = KEYS.reduce((acc, [k, v]) => {
-      const val = cs.getPropertyValue(v).trim();
-      (acc as any)[k] = val;
-      return acc;
-    }, {} as Snapshot);
-    setSnap(out);
+    const snapshot: Snapshot = {
+      gradient: '',
+      magenta: '',
+      teal: '',
+      gold: '',
+      glassStrong: '',
+    };
+
+    for (const [key, token] of KEYS) {
+      snapshot[key] = cs.getPropertyValue(token).trim();
+    }
+
+    setSnap(snapshot);
   }, []);
 
   return (

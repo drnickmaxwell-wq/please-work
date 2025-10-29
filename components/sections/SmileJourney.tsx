@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
+
 import Link from "next/link";
 import { useMemo } from "react";
 
@@ -65,7 +67,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
   return (
     <section
       aria-labelledby="journey-hero-title"
-      className="champagne-surface py-24 md:py-32"
+      className="champagne-surface relative overflow-hidden py-24 md:py-32"
       data-particles={particlesActive ? "on" : "off"}
       data-wave="off"
       data-reduced-motion={prefersReducedMotion ? "true" : "false"}
@@ -89,12 +91,21 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           </p>
 
           <div className="mt-12 grid gap-8 text-white/90 md:grid-cols-2 lg:grid-cols-3">
-            {steps.map((step) => {
+            {steps.map((step, index) => {
               const iconPath = step.icon ? iconMap[step.icon] : undefined;
+              const connectorClass =
+                index < 3
+                  ? "after:hidden lg:after:absolute lg:after:left-1/2 lg:after:bottom-[-48px] lg:after:block lg:after:h-12 lg:after:w-px lg:after:-translate-x-1/2 lg:after:bg-[color:var(--champagne-keyline-gold)] lg:after:opacity-40 lg:after:content-['']"
+                  : "";
               return (
                 <article
                   key={step.title}
-                  className="champagne-glass rounded-champagne shadow-champagne p-6 md:p-7 text-white/92"
+                  className={[
+                    "champagne-glass relative overflow-hidden rounded-champagne p-6 text-white/92 shadow-champagne md:p-7",
+                    connectorClass,
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
                   tabIndex={0}
                 >
                   {iconPath && (
@@ -115,7 +126,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
             })}
           </div>
 
-          <div className="champagne-glass mt-16 rounded-champagne p-8 text-center text-white/92 shadow-champagne md:mt-20 md:p-10">
+          <div className="champagne-glass mt-16 rounded-champagne border border-[color:var(--champagne-keyline-gold)] p-8 text-center text-white/92 shadow-champagne md:mt-20 md:p-10">
             <div className="space-y-3">
               <h3 className="font-serif text-3xl tracking-tight text-white">Ready to Begin?</h3>
               <p className="text-white/80">Take the first step toward your perfect smile.</p>
@@ -123,7 +134,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
             <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
               <Link
                 href="/contact"
-                className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-[var(--smh-gradient)] px-6 py-3 font-semibold text-[#0b0d0f] transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
+                className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-[var(--smh-gradient)] px-6 py-3 font-semibold text-[color:var(--smh-text)] transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
               >
                 Book a consultation
               </Link>
@@ -137,6 +148,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           </div>
         </div>
       </div>
+      <div aria-hidden className="champagne-sheen-layer" />
     </section>
   );
 }
