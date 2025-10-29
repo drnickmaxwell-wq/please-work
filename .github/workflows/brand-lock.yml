@@ -15,4 +15,7 @@ jobs:
         with:
           version: 9
       - run: pnpm install --frozen-lockfile
-      - run: pnpm run brand:guard
+      - name: Brand Guard
+        run: pnpm run brand:guard
+      - name: Build preview
+        run: pnpm run build
