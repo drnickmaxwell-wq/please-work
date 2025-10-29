@@ -207,6 +207,7 @@ export default function BrandLivePreviewPage() {
     const gradient = gradientCandidate && gradientCandidate !== 'none'
       ? gradientCandidate
       : root.getPropertyValue('--smh-gradient').replace(/\s+/g, ' ').trim();
+    const normalizedGradient = gradient.replace(/\s+/g, '');
 
     const heroSurface = document.querySelector<HTMLElement>('[data-surface="hero"].champagne-surface');
     let heroBorderRadius = '0px';
@@ -234,19 +235,6 @@ export default function BrandLivePreviewPage() {
       }
     }
 
-    const header = document.querySelector<HTMLElement>('[data-brand-header]');
-    const headerRect = header?.getBoundingClientRect();
-    const headerVisible = !!(
-      headerRect &&
-      headerRect.height > 0 &&
-      headerRect.width > 0 &&
-      headerRect.bottom > 0 &&
-      headerRect.top < window.innerHeight
-    );
-
-    const primaryNavLink = document.querySelector<HTMLElement>('[data-nav-link="primary"]');
-    const primaryNavColor = primaryNavLink ? getComputedStyle(primaryNavLink).color.trim() : 'n/a';
-
     setAssertions({
       computedGradient: gradient,
       heroBorderRadius,
@@ -255,11 +243,9 @@ export default function BrandLivePreviewPage() {
       ctaMatchesTextToken,
     });
 
-    console.log(`Header visible: ${headerVisible ? 'yes' : 'no'}`);
-    console.log(
-      `Computed color for the primary nav link (should equal var(--smh-text)): ${primaryNavColor}`
-    );
-    console.log(`Hero radius: ${heroBorderRadius}`);
+    console.log(`CTA text color: ${ctaColor}`);
+    console.log(`Hero border radius: ${heroBorderRadius || '0px'}`);
+    console.log(`Gradient string: ${normalizedGradient}`);
   }, []);
 
   const surfaceStyle = useMemo(
