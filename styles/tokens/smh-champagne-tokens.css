@@ -3,17 +3,18 @@
   --smh-primary-magenta:#C2185B;
   --smh-primary-teal:#40C4B4;
   --smh-accent-gold:#D4AF37;
+  --smh-primary-ink:#0B0D0F;
 
   /* Canonical gradient string — used everywhere */
-  --smh-gradient:linear-gradient(135deg, #D94BC6 0%, #00C2C7 100%);
+  --smh-gradient:linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
 
   /* Overlays */
-  --champagne-filmgrain-alpha:.07;
-  --champagne-vignette-alpha:.12;
+  --champagne-filmgrain-alpha:.05;
+  --champagne-vignette-alpha:.1;
   --champagne-sheen-alpha:.22;
 
-  /* Glass background must be LIGHTER than current: */
-  --champagne-glass-bg:color-mix(in oklab, #0b0d0f 12%, transparent 88%);
+  /* Glass background must be LIGHTER than current */
+  --champagne-glass-bg:color-mix(in oklab, var(--smh-primary-ink) 10%, transparent 90%);
   /* Gold keyline used for cards */
   --champagne-keyline-gold:color-mix(in srgb, var(--smh-accent-gold) 64%, transparent 36%);
 

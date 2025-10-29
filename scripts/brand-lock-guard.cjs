@@ -8,9 +8,9 @@ function extractOpacity(varName) {
   const match = champagne.match(re);
   if (!match) return null;
   const body = match[1];
-  const darkMixMatch = body.match(/#0b0d0f\s*(\d+)%/i);
+  const darkMixMatch = body.match(/#([0-9a-f]{6})\s*(\d+)%/i);
   if (darkMixMatch) {
-    return parseInt(darkMixMatch[1], 10);
+    return parseInt(darkMixMatch[2], 10);
   }
 
   const percMatches = body.match(/(\d+)%/);
@@ -36,8 +36,8 @@ if (!gradientMatch) {
   process.exit(1);
 }
 
-const gradient = gradientMatch[1].trim();
-const canonical = 'linear-gradient(135deg, #D94BC6 0%, #00C2C7 100%)';
+const gradient = gradientMatch[1].replace(/\s+/g, '');
+const canonical = 'linear-gradient(135deg,#D94BC60%,#00C2C7100%)';
 
 if (gradient !== canonical) {
   console.error(`✖ Gradient drifted. Expected "${canonical}" but found "${gradient}"`);
@@ -45,4 +45,4 @@ if (gradient !== canonical) {
 }
 
 console.log(`✔ Glass translucency OK (${glassOpacity}%)`);
-console.log(`✔ Champagne gradient locked (${gradient})`);
+console.log(`✔ Champagne gradient locked (${gradientMatch[1].trim()})`);

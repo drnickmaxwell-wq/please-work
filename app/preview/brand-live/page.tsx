@@ -35,8 +35,14 @@ type TokenDiagnostics = {
   magenta: string;
   teal: string;
   gold: string;
-  filmgrain: string;
+  ink: string;
+  grain: string;
   vignette: string;
+};
+
+type RuntimeDiagnostics = {
+  surfaces: number;
+  prefersReducedMotion: boolean;
 };
 
 const EMPTY_DIAGNOSTICS: TokenDiagnostics = {
@@ -44,12 +50,14 @@ const EMPTY_DIAGNOSTICS: TokenDiagnostics = {
   magenta: '…',
   teal: '…',
   gold: '…',
-  filmgrain: '…',
+  ink: '…',
+  grain: '…',
   vignette: '…',
 };
 
 export default function BrandLivePreviewPage() {
   const [tokens, setTokens] = useState<TokenDiagnostics>(EMPTY_DIAGNOSTICS);
+  const [runtime, setRuntime] = useState<RuntimeDiagnostics>({ surfaces: 0, prefersReducedMotion: false });
 
   useEffect(() => {
     const root = getComputedStyle(document.documentElement);
@@ -60,9 +68,31 @@ export default function BrandLivePreviewPage() {
       magenta: read('--smh-primary-magenta'),
       teal: read('--smh-primary-teal'),
       gold: read('--smh-accent-gold'),
-      filmgrain: read('--champagne-filmgrain-alpha'),
+      ink: read('--smh-primary-ink'),
+      grain: read('--champagne-filmgrain-alpha'),
       vignette: read('--champagne-vignette-alpha'),
     });
+
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const audit = () =>
+      setRuntime({
+        surfaces: document.querySelectorAll('.champagne-surface').length,
+        prefersReducedMotion: motionQuery.matches,
+      });
+
+    audit();
+    if (motionQuery.addEventListener) {
+      motionQuery.addEventListener('change', audit);
+    } else {
+      motionQuery.addListener(audit);
+    }
+    return () => {
+      if (motionQuery.removeEventListener) {
+        motionQuery.removeEventListener('change', audit);
+      } else {
+        motionQuery.removeListener(audit);
+      }
+    };
   }, []);
 
   const surfaceStyle = useMemo(
@@ -88,10 +118,9 @@ export default function BrandLivePreviewPage() {
               data-surface={pane.id}
               data-wave={pane.wave ? 'on' : 'off'}
               data-particles={pane.particles ? 'on' : 'off'}
-              className="champagne-surface relative overflow-hidden rounded-3xl"
-              style={surfaceStyle}
+              className="champagne-surface relative overflow-hidden"
+              style={pane.wave ? surfaceStyle : undefined}
             >
-              <div aria-hidden className="absolute inset-0" />
               <div aria-hidden className="wave" />
               {pane.particles ? (
                 <Particles
@@ -108,10 +137,9 @@ export default function BrandLivePreviewPage() {
                   style={{ opacity: 'var(--champagne-particles-opacity-m)' }}
                 />
               )}
-              <div aria-hidden className="champagne-vignette" />
-              <div aria-hidden className="champagne-sheen" />
+              <div aria-hidden className="champagne-sheen-layer" />
 
-              <div className="relative z-[1] flex min-h-[320px] flex-col justify-between gap-6 p-10">
+              <div className="relative z-[10] flex min-h-[320px] flex-col justify-between gap-6 p-10">
                 <div className="space-y-3">
                   <h2 className="font-serif text-3xl">{pane.label}</h2>
                   <p className="text-white/80">{pane.description}</p>
@@ -146,14 +174,28 @@ export default function BrandLivePreviewPage() {
               <dd className="font-mono text-sm text-white">{tokens.gold}</dd>
             </div>
             <div>
-              <dt className="text-xs uppercase tracking-[0.35em] text-white/50">Filmgrain α</dt>
-              <dd className="font-mono text-sm text-white">{tokens.filmgrain}</dd>
+              <dt className="text-xs uppercase tracking-[0.35em] text-white/50">Ink</dt>
+              <dd className="font-mono text-sm text-white">{tokens.ink}</dd>
+            </div>
+            <div>
+              <dt className="text-xs uppercase tracking-[0.35em] text-white/50">Grain α</dt>
+              <dd className="font-mono text-sm text-white">{tokens.grain}</dd>
             </div>
             <div>
               <dt className="text-xs uppercase tracking-[0.35em] text-white/50">Vignette α</dt>
               <dd className="font-mono text-sm text-white">{tokens.vignette}</dd>
             </div>
           </dl>
+          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+            <div>
+              <dt className="text-xs uppercase tracking-[0.35em] text-white/50">Champagne Surfaces</dt>
+              <dd className="font-mono text-sm text-white">{runtime.surfaces}</dd>
+            </div>
+            <div>
+              <dt className="text-xs uppercase tracking-[0.35em] text-white/50">Prefers Reduced Motion</dt>
+              <dd className="font-mono text-sm text-white">{runtime.prefersReducedMotion ? 'true' : 'false'}</dd>
+            </div>
+          </div>
         </section>
       </div>
     </main>

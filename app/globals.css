@@ -1,15 +1,14 @@
+@import "@/styles/tokens/smh-champagne-tokens.css";
+@import "@/styles/champagne/surface.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Load tokens & surface BEFORE any other brand CSS */
-@import "../styles/tokens/smh-champagne-tokens.css";
-@import "../styles/champagne/surface.css";
-
 :root {
   color-scheme: dark;
   font-family: "Inter", system-ui, sans-serif;
-  background-color: #0b0d0f;
+  background-color: var(--smh-primary-ink);
   color: #f6f6f4;
   --champagne-pane: 0 2px 30px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.08);
   --sparkle-highlight: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.55) 45%, transparent 70%);
@@ -23,7 +22,7 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: #0b0d0f;
+  background-color: var(--smh-primary-ink);
   color: inherit;
   font-family: inherit;
   text-rendering: optimizeLegibility;
