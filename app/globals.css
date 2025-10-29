@@ -1,10 +1,8 @@
+@import "@/styles/tokens/smh-champagne-tokens.css";
+@import "@/styles/champagne/surface.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Load tokens & surface BEFORE any other brand CSS */
-@import "../styles/tokens/smh-champagne-tokens.css";
-@import "../styles/champagne/surface.css";
 
 :root {
   color-scheme: dark;

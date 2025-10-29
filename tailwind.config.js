@@ -1,30 +1,24 @@
-/** SMH Champagne Lock */
+/** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: ['class', '[data-theme="dark"]'],
   content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}"
+    "./app/**/*.{ts,tsx,js,jsx,mdx}",
+    "./components/**/*.{ts,tsx,js,jsx,mdx}",
+    "./styles/**/*.{css}"
   ],
   theme: {
     extend: {
-      fontFamily: {
-        serif: ["Playfair Display","serif"],
-        sans: ["Inter","system-ui","sans-serif"],
-      },
       colors: {
-        smh: {
-          magenta: "var(--smh-primary-magenta)",
-          teal: "var(--smh-primary-teal)",
-          gold: "var(--smh-accent-gold)",
-        }
+        ink: "#0b0d0f",
+        gold: "#D4AF37"
       },
-      backgroundImage: {
-        "smh-gradient": "var(--smh-gradient)"
+      borderRadius: {
+        champagne: "var(--champagne-radius)"
       },
       boxShadow: {
-        "champagne-pane": "var(--champagne-pane)"
+        champagne: "var(--champagne-shadow)"
       }
     }
   },
   plugins: []
-};
+}

@@ -14,7 +14,10 @@
     "guard:preflight": "tsx tools/guard/preflight.ts",
     "brand:verify": "tsx scripts/verify-brand-tokens.ts",
     "brand:guard": "node scripts/brand-guard.cjs",
-    "prebuild": "node scripts/brand-guard.cjs"
+    "prebuild": "node scripts/brand-guard.cjs",
+    "brand:hue-guard": "node scripts/brand-hue-guard.cjs",
+    "brand:report": "node scripts/print-hue-report.cjs",
+    "build:locked": "npm run brand:hue-guard && next build && npm run brand:report"
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.24",

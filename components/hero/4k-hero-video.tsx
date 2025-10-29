@@ -1,70 +1,33 @@
 'use client';
 
-import type { CSSProperties } from 'react';
-
-import Particles from '@/components/brand/Particles';
-import { usePrefersReducedMotion } from '@/lib/hooks/usePrefersReducedMotion';
-
 export interface Hero4KVideoProps {
   poster?: string;
-  showParticles?: boolean;
-  showWave?: boolean;
-  [key: string]: unknown;
 }
 
-export default function Hero4KVideo({
-  poster,
-  showParticles = true,
-  showWave = false,
-}: Hero4KVideoProps) {
-  const prefersReducedMotion = usePrefersReducedMotion();
-  const particlesActive = showParticles && !prefersReducedMotion;
-  const waveStyle = {
-    '--champagne-wave': "url('/waves/smh-wave-mask.svg') center / cover no-repeat",
-  } as CSSProperties;
-  const surfaceStyle = {
-    ...waveStyle,
-    width: '100vw',
-    marginInline: 'calc(50% - 50vw)',
-  } as CSSProperties;
-  const surfaceClass = [
-    'champagne-surface relative w-screen overflow-hidden min-h-[clamp(520px,70vh,880px)]',
-    showWave ? 'has-wave' : null,
-  ]
-    .filter(Boolean)
-    .join(' ');
-
+export default function Hero4KVideo({ poster }: Hero4KVideoProps) {
   return (
-    <section
-      data-hero="champagne"
-      data-page="home"
-      data-wave={showWave ? 'on' : 'off'}
-      data-particles={particlesActive ? 'on' : 'off'}
-      data-reduced-motion={prefersReducedMotion ? 'true' : 'false'}
-      className={surfaceClass}
-      style={surfaceStyle}
-    >
-      <div aria-hidden className="absolute inset-0 z-0" />
-      <div aria-hidden className="wave" />
-      {particlesActive ? (
-        <Particles className="champagne-particles" data-state="on" aria-hidden />
-      ) : (
-        <div className="champagne-particles" data-state="off" aria-hidden style={{ opacity: 0 }} />
-      )}
-      <div aria-hidden className="champagne-vignette" />
-      <div aria-hidden className="champagne-sheen" />
+    <section className="champagne-surface relative flex w-full min-h-[min(95vh,1100px)] items-center justify-center overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <video
+          className="h-full w-full object-cover"
+          playsInline
+          autoPlay
+          muted
+          loop
+          preload="metadata"
+          poster={poster ?? '/videos/posters/hero-4k.jpg'}
+        >
+          <source src="/videos/dental-hero-4k.mp4" type="video/mp4" />
+        </video>
+      </div>
 
-      <div className="relative mx-auto flex h-full w-full max-w-6xl flex-col px-6 py-12 sm:px-10">
-        <div className="champagne-glass rounded-3xl">
-          <div className="space-y-8 p-8 sm:p-12">
-            <div className="relative aspect-[16/9] overflow-hidden rounded-2xl">
-              <div
-                aria-hidden
-                className="absolute inset-0 bg-[var(--smh-gradient)]"
-                style={{ opacity: 0.65 }}
-              />
+      <div className="relative z-[30] mx-auto w-full max-w-[960px] px-6 py-16 sm:px-8 md:px-10">
+        <div className="champagne-glass mx-auto max-w-none p-8 md:p-10">
+          <div className="space-y-8">
+            <div className="relative aspect-[16/9] overflow-hidden rounded-[calc(var(--champagne-radius)/1.5)]">
+              <div className="absolute inset-0 bg-[var(--smh-gradient)] opacity-60" aria-hidden />
               <video
-                className="absolute inset-0 z-[1] h-full w-full object-cover"
+                className="absolute inset-0 h-full w-full object-cover"
                 playsInline
                 autoPlay
                 muted
@@ -77,17 +40,10 @@ export default function Hero4KVideo({
             </div>
 
             <div className="space-y-6 text-white">
-              <h1 className="font-serif text-4xl leading-tight sm:text-5xl md:text-6xl">
-                Going the Extra Smile
-              </h1>
-              <p className="max-w-xl text-lg text-white/90">
-                Private dental care with calm precision
-              </p>
+              <h1 className="font-serif text-4xl leading-tight sm:text-5xl md:text-6xl">Going the Extra Smile</h1>
+              <p className="max-w-xl text-lg text-white/90">Private dental care with calm precision</p>
               <div className="flex flex-wrap gap-4">
-                <a
-                  className="rounded-full bg-[var(--smh-gradient)] px-6 py-3 font-semibold text-black"
-                  href="/contact"
-                >
+                <a className="rounded-full bg-[var(--smh-gradient)] px-6 py-3 font-semibold text-black" href="/contact">
                   Book a consultation
                 </a>
                 <a

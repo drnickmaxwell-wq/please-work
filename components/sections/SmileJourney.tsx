@@ -1,11 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo } from "react";
-import type { CSSProperties } from "react";
-
-import Particles from "@/components/brand/Particles";
-import { usePrefersReducedMotion } from "@/lib/hooks/usePrefersReducedMotion";
 
 export interface TimelineStep {
   title: string;
@@ -51,56 +46,18 @@ export interface SmileJourneyProps {
 }
 
 export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps) {
-  const iconMap = useMemo(
-    () => ({
-      scan: "/assets/manus/icons/scan.svg",
-      sparkle: "/assets/manus/icons/smile-curve.svg",
-      implant: "/assets/manus/icons/scan.svg",
-    }),
-    []
-  );
-
-  const prefersReducedMotion = usePrefersReducedMotion();
-  const particlesActive = !prefersReducedMotion;
-  const waveStyle = useMemo(
-    () => ({ "--champagne-wave": "url('/waves/smh-wave-mask.svg') center / cover no-repeat" } as CSSProperties),
-    []
-  );
-  const surfaceStyle = useMemo(
-    () =>
-      ({
-        ...waveStyle,
-        width: "100vw",
-        marginInline: "calc(50% - 50vw)",
-      }) as CSSProperties,
-    [waveStyle]
-  );
+  const iconMap = {
+    scan: "/assets/manus/icons/scan.svg",
+    sparkle: "/assets/manus/icons/smile-curve.svg",
+    implant: "/assets/manus/icons/scan.svg",
+  } as const;
 
   return (
-    <section
-      aria-labelledby="journey-hero-title"
-      data-hero="champagne"
-      data-particles={particlesActive ? "on" : "off"}
-      data-wave="on"
-      data-reduced-motion={prefersReducedMotion ? "true" : "false"}
-      className="champagne-surface relative overflow-hidden text-white"
-      style={surfaceStyle}
-    >
-      <div aria-hidden className="absolute inset-0 z-0" />
-      <div aria-hidden className="wave" />
-      {particlesActive ? (
-        <Particles className="champagne-particles" data-state="on" aria-hidden />
-      ) : (
-        <div className="champagne-particles" data-state="off" aria-hidden style={{ opacity: 0 }} />
-      )}
-      <div aria-hidden className="champagne-vignette" />
-      <div aria-hidden className="champagne-sheen" />
-      <div className="relative z-[1] mx-auto flex w-full max-w-6xl flex-col gap-16 px-6 py-24 sm:px-10 lg:py-32">
-        <header className="mx-auto flex max-w-2xl flex-col items-center gap-4 text-center" id="journey-hero-title">
+    <section className="champagne-surface py-24 md:py-32">
+      <div className="container mx-auto max-w-7xl px-4 md:px-6">
+        <header className="mx-auto flex max-w-2xl flex-col items-center gap-4 text-center text-white">
           <h2 className="font-serif text-4xl leading-tight sm:text-5xl">Your Smile Journey</h2>
-          <p className="text-base text-white/85 sm:text-lg">
-            Discover the path to your perfect smile
-          </p>
+          <p className="text-base text-white/85 sm:text-lg">Discover the path to your perfect smile</p>
           <Link
             href="/ai-smile-quiz"
             className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-[var(--smh-gradient)] px-6 py-3 font-semibold text-black shadow-lg shadow-black/30 transition-transform duration-300 ease-out hover:-translate-y-1"
@@ -109,18 +66,13 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           </Link>
         </header>
 
-        <div
-          className="grid gap-6 md:grid-cols-2 xl:grid-cols-3"
-          aria-label="Patient journey timeline"
-        >
+        <div className="mt-16 grid gap-8 text-white md:grid-cols-2 lg:grid-cols-3">
           {steps.map((step) => {
             const iconPath = step.icon ? iconMap[step.icon] : undefined;
             return (
               <article
                 key={step.title}
-                role="group"
-                tabIndex={0}
-                className="champagne-glass flex h-full flex-col gap-4 p-8 text-white/90 transition-transform duration-300 ease-out hover:-translate-y-1 focus:outline-none focus-visible:-translate-y-1"
+                className="champagne-glass flex h-full flex-col gap-4 p-6 text-white/90 transition-transform duration-300 ease-out hover:-translate-y-1 focus:outline-none focus-visible:-translate-y-1 md:p-7"
               >
                 {iconPath && (
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
@@ -134,7 +86,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           })}
         </div>
 
-        <div className="champagne-glass flex flex-col gap-6 p-10 text-center text-white">
+        <div className="champagne-glass mt-16 flex flex-col gap-6 p-8 text-center text-white md:mt-20 md:p-10">
           <div className="space-y-3">
             <h3 className="font-serif text-3xl">Ready to Begin?</h3>
             <p className="text-white/85">Take the first step toward your perfect smile.</p>

@@ -1,22 +1,30 @@
 :root{
-  /* Brand locks */
-  --smh-primary-magenta: #C2185B;
-  --smh-primary-teal:    #40C4B4;
-  --smh-accent-gold:     #D4AF37;
+  /* Brand primaries */
+  --smh-magenta:#C2185B;
+  --smh-teal:#40C4B4;
+  --smh-gold:#D4AF37;
+  --smh-ink:#0b0d0f;
 
-  /* Canonical gradient string — used everywhere */
+  /* Canonical gradient (never change) */
   --smh-gradient: linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
 
-  /* Overlays */
-  --champagne-filmgrain-alpha: .07;
-  --champagne-vignette-alpha: .12;
-  --champagne-sheen-alpha: .22;
+  /* Overlays (keep subtle) */
+  --champagne-glass-bg: color-mix(in oklab, var(--smh-ink) 45%, transparent 55%);
+  --champagne-vignette-alpha: 0.10;
+  --champagne-filmgrain-alpha: 0.05;
 
-  /* Particles */
-  --champagne-particles-opacity-d: .10;
-  --champagne-particles-opacity-m: .14;
+  /* Radii + shadows */
+  --champagne-radius: 24px;
+  --champagne-shadow: 0 6px 24px rgba(0,0,0,.18);
 
-  /* Cards / glass */
-  --champagne-glass-bg: color-mix(in oklab, #0b0d0f 72%, transparent 28%);
-  --champagne-keyline-gold: color-mix(in srgb, var(--smh-accent-gold) 68%, transparent 32%);
+  /* Legacy aliases */
+  --smh-primary-magenta: var(--smh-magenta);
+  --smh-primary-teal: var(--smh-teal);
+  --smh-accent-gold: var(--smh-gold);
+  --champagne-keyline-gold: color-mix(in oklab,var(--smh-gold) 28%, transparent 72%);
+}
+
+/* Dark theme baseline */
+:root.dark{
+  --smh-gradient: linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
 }

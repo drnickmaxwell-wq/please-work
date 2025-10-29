@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { MAIN_NAV, TREATMENTS, RESOURCES, type NavLink } from '@/lib/nav';
@@ -25,8 +25,6 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [navVeil, setNavVeil] = useState<'default' | 'champagne'>('default');
-  const headerRef = useRef<HTMLElement | null>(null);
 
   const { scrollY } = useScroll();
   const headerOpacity = useTransform(scrollY, [0, 100], [0.95, 1]);
@@ -35,24 +33,13 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 40);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    const node = headerRef.current;
-    if (node?.closest('.champagne-surface')) {
-      setNavVeil('champagne');
-      return;
-    }
-
-    if (document.querySelector('.champagne-surface')) {
-      setNavVeil('champagne');
-    }
-  }, []);
   const getEnabledLinks = (links: NavLink[]) => links.filter((link) => link.enabled !== false);
 
   const mainNavigation = getEnabledLinks(MAIN_NAV);
@@ -78,26 +65,6 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
         ]
       : []),
   ];
-
-  const veilStyle = useMemo(() => {
-    if (navVeil === 'champagne') {
-      return {
-        background: isScrolled
-          ? 'color-mix(in srgb, var(--ink) 56%, transparent 44%)'
-          : 'color-mix(in srgb, var(--ink) 42%, transparent 58%)',
-        borderColor: 'color-mix(in srgb, var(--smh-accent-gold) 28%, transparent 72%)',
-        boxShadow: '0 18px 46px rgba(13,14,16,0.38)',
-      } as const;
-    }
-
-    return {
-      background: isScrolled
-        ? 'color-mix(in srgb, #ffffff 82%, transparent 18%)'
-        : 'color-mix(in srgb, #ffffff 72%, transparent 28%)',
-      borderColor: 'color-mix(in srgb, #ffffff 22%, transparent 78%)',
-      boxShadow: '0 12px 34px rgba(0,0,0,0.12)',
-    } as const;
-  }, [isScrolled, navVeil]);
 
   return (
     <>
@@ -125,14 +92,11 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
 
       {/* Main Sticky Header */}
       <motion.header
-        ref={headerRef}
         style={{
           opacity: headerOpacity,
           scale: headerScale,
-          ...veilStyle,
         }}
-        data-nav-veil={navVeil}
-        className={`fixed top-8 left-0 right-0 z-40 border border-transparent backdrop-blur-lg transition-all duration-300 ${className}`}
+        className={`fixed top-0 left-0 right-0 z-[60] border-b border-transparent transition-all duration-300 ${isScrolled ? 'bg-ink/40 backdrop-blur-md' : ''} ${className}`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
