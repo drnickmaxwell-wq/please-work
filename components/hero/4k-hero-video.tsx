@@ -26,7 +26,7 @@ export default function Hero4KVideo({
       } as CSSProperties)
     : undefined;
   const surfaceClass = [
-    'champagne-surface relative w-screen min-h-[70vh] md:min-h-[78vh] overflow-hidden',
+    'champagne-surface relative w-full min-h-[min(95vh,1100px)] overflow-hidden',
     showWave ? 'has-wave' : null,
   ]
     .filter(Boolean)
@@ -42,7 +42,7 @@ export default function Hero4KVideo({
       className={surfaceClass}
       style={surfaceStyle}
     >
-      <div aria-hidden className="absolute inset-0 -z-[1] overflow-hidden">
+      <div aria-hidden className="absolute inset-0 z-0 overflow-hidden">
         <video
           className="h-full w-full object-cover"
           playsInline
@@ -62,8 +62,8 @@ export default function Hero4KVideo({
         <div className="champagne-particles" data-state="off" aria-hidden style={{ opacity: 0 }} />
       )}
 
-      <div className="relative z-[1] mx-auto flex w-full max-w-[1200px] flex-col items-start px-6 py-20 md:px-10 md:py-24">
-        <div className="champagne-glass mx-auto w-full max-w-[1200px] p-6 text-white/92 md:p-10">
+      <div className="relative z-[20] w-full px-6 py-20 md:px-10 md:py-24">
+        <div className="champagne-glass relative z-[30] mx-auto max-w-[960px] p-8 md:p-10 mt-20 md:mt-28 text-white/92">
           <div className="space-y-6">
             <p className="text-sm uppercase tracking-[0.3em] text-white/70">St Mary’s House</p>
             <h1 className="font-serif text-4xl tracking-tight text-white md:text-6xl">Going the Extra Smile</h1>

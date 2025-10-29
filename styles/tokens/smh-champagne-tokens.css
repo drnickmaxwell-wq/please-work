@@ -5,7 +5,7 @@
   --smh-accent-gold:#D4AF37;
 
   /* Canonical gradient string — used everywhere */
-  --smh-gradient:linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
+  --smh-gradient:linear-gradient(135deg, #D94BC6 0%, #00C2C7 100%);
 
   /* Overlays */
   --champagne-filmgrain-alpha:.07;
@@ -13,7 +13,7 @@
   --champagne-sheen-alpha:.22;
 
   /* Glass background must be LIGHTER than current: */
-  --champagne-glass-bg:color-mix(in oklab, #0b0d0f 60%, transparent 40%);
+  --champagne-glass-bg:color-mix(in oklab, #0b0d0f 12%, transparent 88%);
   /* Gold keyline used for cards */
   --champagne-keyline-gold:color-mix(in srgb, var(--smh-accent-gold) 64%, transparent 36%);
 
