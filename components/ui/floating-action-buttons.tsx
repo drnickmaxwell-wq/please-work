@@ -60,7 +60,7 @@ export default function FloatingActionButtons({ className = '' }: FloatingAction
   ];
 
   return (
-    <div className={`fixed bottom-6 right-6 z-40 ${className}`}>
+    <div className={`fixed bottom-6 right-6 z-[80] ${className}`}>
       {/* Main Action Buttons */}
       <div className="flex flex-col items-end space-y-3 mb-4">
         <AnimatePresence>

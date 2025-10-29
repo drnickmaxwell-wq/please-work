@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import type { CSSProperties } from 'react';
 
 import Particles from '@/components/brand/Particles';
@@ -19,16 +20,13 @@ export default function Hero4KVideo({
 }: Hero4KVideoProps) {
   const prefersReducedMotion = usePrefersReducedMotion();
   const particlesActive = showParticles && !prefersReducedMotion;
-  const waveStyle = {
-    '--champagne-wave': "url('/waves/smh-wave-mask.svg') center / cover no-repeat",
-  } as CSSProperties;
-  const surfaceStyle = {
-    ...waveStyle,
-    width: '100vw',
-    marginInline: 'calc(50% - 50vw)',
-  } as CSSProperties;
+  const surfaceStyle = showWave
+    ? ({
+        '--champagne-wave': "url('/waves/smh-wave-mask.svg') center / cover no-repeat",
+      } as CSSProperties)
+    : undefined;
   const surfaceClass = [
-    'champagne-surface relative w-screen overflow-hidden min-h-[clamp(520px,70vh,880px)]',
+    'champagne-surface relative w-screen min-h-[70vh] md:min-h-[78vh] overflow-hidden',
     showWave ? 'has-wave' : null,
   ]
     .filter(Boolean)
@@ -44,59 +42,47 @@ export default function Hero4KVideo({
       className={surfaceClass}
       style={surfaceStyle}
     >
-      <div aria-hidden className="absolute inset-0 z-0" />
+      <div aria-hidden className="absolute inset-0 -z-[1] overflow-hidden">
+        <video
+          className="h-full w-full object-cover"
+          playsInline
+          autoPlay
+          muted
+          loop
+          preload="metadata"
+          poster={poster ?? '/videos/posters/hero-4k.jpg'}
+        >
+          <source src="/videos/dental-hero-4k.mp4" type="video/mp4" />
+        </video>
+      </div>
       <div aria-hidden className="wave" />
       {particlesActive ? (
         <Particles className="champagne-particles" data-state="on" aria-hidden />
       ) : (
         <div className="champagne-particles" data-state="off" aria-hidden style={{ opacity: 0 }} />
       )}
-      <div aria-hidden className="champagne-vignette" />
-      <div aria-hidden className="champagne-sheen" />
 
-      <div className="relative mx-auto flex h-full w-full max-w-6xl flex-col px-6 py-12 sm:px-10">
-        <div className="champagne-glass rounded-3xl">
-          <div className="space-y-8 p-8 sm:p-12">
-            <div className="relative aspect-[16/9] overflow-hidden rounded-2xl">
-              <div
-                aria-hidden
-                className="absolute inset-0 bg-[var(--smh-gradient)]"
-                style={{ opacity: 0.65 }}
-              />
-              <video
-                className="absolute inset-0 z-[1] h-full w-full object-cover"
-                playsInline
-                autoPlay
-                muted
-                loop
-                preload="metadata"
-                poster={poster ?? '/videos/posters/hero-4k.jpg'}
+      <div className="relative z-[1] mx-auto flex w-full max-w-[1200px] flex-col items-start px-6 py-20 md:px-10 md:py-24">
+        <div className="champagne-glass mx-auto w-full max-w-[1200px] p-6 text-white/92 md:p-10">
+          <div className="space-y-6">
+            <p className="text-sm uppercase tracking-[0.3em] text-white/70">St Mary’s House</p>
+            <h1 className="font-serif text-4xl tracking-tight text-white md:text-6xl">Going the Extra Smile</h1>
+            <p className="max-w-2xl text-lg text-white/85">
+              Private dental care with calm precision, comfort-first technology, and a signature Manus AI finish.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link
+                href="/contact"
+                className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-[var(--smh-gradient)] px-6 py-3 font-semibold text-[#0b0d0f] transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
               >
-                <source src="/videos/dental-hero-4k.mp4" type="video/mp4" />
-              </video>
-            </div>
-
-            <div className="space-y-6 text-white">
-              <h1 className="font-serif text-4xl leading-tight sm:text-5xl md:text-6xl">
-                Going the Extra Smile
-              </h1>
-              <p className="max-w-xl text-lg text-white/90">
-                Private dental care with calm precision
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <a
-                  className="rounded-full bg-[var(--smh-gradient)] px-6 py-3 font-semibold text-black"
-                  href="/contact"
-                >
-                  Book a consultation
-                </a>
-                <a
-                  className="rounded-full border border-[var(--champagne-keyline-gold)] px-6 py-3 font-semibold text-white"
-                  href="/treatments"
-                >
-                  Explore treatments
-                </a>
-              </div>
+                Book a consultation
+              </Link>
+              <Link
+                href="/treatments"
+                className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-transparent px-6 py-3 font-semibold text-white/90 transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
+              >
+                Explore treatments
+              </Link>
             </div>
           </div>
         </div>

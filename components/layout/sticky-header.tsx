@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useMemo, useRef } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import { MAIN_NAV, TREATMENTS, RESOURCES, type NavLink } from '@/lib/nav';
 import {
@@ -25,7 +25,6 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [navVeil, setNavVeil] = useState<'default' | 'champagne'>('default');
   const headerRef = useRef<HTMLElement | null>(null);
 
   const { scrollY } = useScroll();
@@ -42,17 +41,6 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    const node = headerRef.current;
-    if (node?.closest('.champagne-surface')) {
-      setNavVeil('champagne');
-      return;
-    }
-
-    if (document.querySelector('.champagne-surface')) {
-      setNavVeil('champagne');
-    }
-  }, []);
   const getEnabledLinks = (links: NavLink[]) => links.filter((link) => link.enabled !== false);
 
   const mainNavigation = getEnabledLinks(MAIN_NAV);
@@ -79,45 +67,39 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
       : []),
   ];
 
-  const veilStyle = useMemo(() => {
-    if (navVeil === 'champagne') {
-      return {
-        background: isScrolled
-          ? 'color-mix(in srgb, var(--ink) 56%, transparent 44%)'
-          : 'color-mix(in srgb, var(--ink) 42%, transparent 58%)',
-        borderColor: 'color-mix(in srgb, var(--smh-accent-gold) 28%, transparent 72%)',
-        boxShadow: '0 18px 46px rgba(13,14,16,0.38)',
-      } as const;
-    }
-
-    return {
+  const headerStyle = useMemo(
+    () => ({
       background: isScrolled
-        ? 'color-mix(in srgb, #ffffff 82%, transparent 18%)'
-        : 'color-mix(in srgb, #ffffff 72%, transparent 28%)',
-      borderColor: 'color-mix(in srgb, #ffffff 22%, transparent 78%)',
-      boxShadow: '0 12px 34px rgba(0,0,0,0.12)',
-    } as const;
-  }, [isScrolled, navVeil]);
+        ? 'color-mix(in oklab, #0b0d0f 36%, transparent 64%)'
+        : 'transparent',
+      borderColor: isScrolled
+        ? 'color-mix(in srgb, var(--smh-accent-gold) 22%, transparent 78%)'
+        : 'transparent',
+      boxShadow: isScrolled ? '0 18px 40px rgba(11,13,15,0.28)' : 'none',
+      backdropFilter: isScrolled ? 'blur(10px)' : 'blur(0px)',
+    }),
+    [isScrolled]
+  );
 
   return (
     <>
       {/* Emergency Banner */}
-      <motion.div 
-        initial={{ y: -50, opacity: 0 }}
+      <motion.div
+        initial={{ y: -24, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="bg-gradient-to-r from-red-500 to-red-600 text-white py-2 px-4 text-center text-sm relative z-50"
+        className="relative z-[61] bg-white/10 px-4 py-2 text-center text-xs font-medium text-white/90 backdrop-blur-sm md:text-sm"
       >
-        <div className="flex items-center justify-center space-x-4">
-          <div className="flex items-center space-x-2">
-            <Phone className="w-4 h-4" />
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          <div className="flex items-center gap-2 text-white/85">
+            <Phone className="h-4 w-4" />
             <span style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>Emergency: 01273 453109</span>
           </div>
-          <div className="hidden md:flex items-center space-x-2">
-            <MapPin className="w-4 h-4" />
+          <div className="hidden items-center gap-2 text-white/70 md:flex">
+            <MapPin className="h-4 w-4" />
             <span style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>Shoreham-by-Sea, West Sussex</span>
           </div>
-          <div className="hidden lg:flex items-center space-x-2">
-            <Clock className="w-4 h-4" />
+          <div className="hidden items-center gap-2 text-white/70 lg:flex">
+            <Clock className="h-4 w-4" />
             <span style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>24/7 Emergency Care</span>
           </div>
         </div>
@@ -129,10 +111,9 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
         style={{
           opacity: headerOpacity,
           scale: headerScale,
-          ...veilStyle,
+          ...headerStyle,
         }}
-        data-nav-veil={navVeil}
-        className={`fixed top-8 left-0 right-0 z-40 border border-transparent backdrop-blur-lg transition-all duration-300 ${className}`}
+        className={`fixed top-0 left-0 right-0 z-[60] border border-transparent transition-all duration-300 ${className}`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -143,16 +124,16 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
               className="flex items-center space-x-3"
             >
               <Link href="/" className="flex items-center space-x-3">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-teal-500 flex items-center justify-center">
-                  <span className="text-white font-bold text-lg" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--smh-gradient)]">
+                  <span className="text-lg font-bold text-white" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                     SMH
                   </span>
                 </div>
                 <div className="hidden sm:block">
-                  <h1 className="text-lg font-bold text-slate-800" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
+                  <h1 className="text-lg font-bold text-white" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
                     St Mary’s House
                   </h1>
-                  <p className="text-sm text-slate-600" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
+                  <p className="text-sm text-white/70" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                     Dental Care
                   </p>
                 </div>
@@ -170,7 +151,7 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
                 >
                   <Link
                     href={item.href}
-                    className="flex items-center space-x-1 text-slate-700 hover:text-pink-600 transition-colors duration-200 font-medium"
+                    className="flex items-center space-x-1 text-white/80 transition-colors duration-200 hover:text-white"
                     style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                   >
                     <span>{item.name}</span>
@@ -185,13 +166,13 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute top-full left-0 mt-2 w-64 bg-white/95 backdrop-blur-lg rounded-xl shadow-2xl border border-pink-100 py-2 z-50"
+                        className="absolute top-full left-0 z-50 mt-2 w-64 rounded-xl border border-[color:var(--champagne-keyline-gold)] bg-[color:var(--champagne-glass-bg)]/90 py-2 text-white/90 shadow-2xl backdrop-blur-xl"
                       >
                         {item.dropdown.map((dropdownItem) => (
                           <Link
                             key={dropdownItem.name}
                             href={dropdownItem.href}
-                            className="block px-4 py-3 text-slate-700 hover:text-pink-600 hover:bg-pink-50/50 transition-all duration-200"
+                            className="block px-4 py-3 text-sm text-white/85 transition-colors duration-200 hover:bg-white/10 hover:text-white"
                             style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                           >
                             {dropdownItem.name}
@@ -205,14 +186,14 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
             </nav>
 
             {/* CTA Buttons */}
-            <div className="hidden md:flex items-center space-x-4">
+            <div className="hidden items-center space-x-4 md:flex">
               <motion.a
                 href="tel:01273453109"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-slate-100 to-slate-200 text-slate-700 rounded-full hover:from-slate-200 hover:to-slate-300 transition-all duration-200 border border-slate-300"
+                className="relative inline-flex items-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-transparent px-4 py-2 text-white/90 transition-transform duration-300 ease-out hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)]"
               >
-                <Phone className="w-4 h-4" />
+                <Phone className="h-4 w-4" />
                 <span className="font-medium" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                   Call Now
                 </span>
@@ -221,9 +202,9 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="flex items-center space-x-2 px-6 py-2 bg-gradient-to-r from-pink-500 to-teal-500 text-white rounded-full hover:from-pink-600 hover:to-teal-600 transition-all duration-200 shadow-lg"
+                className="relative inline-flex items-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-[var(--smh-gradient)] px-6 py-2 font-medium text-[#0b0d0f] transition-transform duration-300 ease-out hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] shadow-[0_12px_28px_rgba(11,13,15,0.25)]"
               >
-                <Calendar className="w-4 h-4" />
+                <Calendar className="h-4 w-4" />
                 <span className="font-medium" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
                   Book Free Consultation
                 </span>
@@ -235,7 +216,7 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 rounded-lg bg-gradient-to-r from-pink-500 to-teal-500 text-white"
+              className="lg:hidden rounded-full border border-[color:var(--champagne-keyline-gold)] bg-[color:var(--champagne-glass-bg)]/80 p-2 text-white transition-colors duration-200"
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </motion.button>
@@ -246,31 +227,42 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="lg:hidden bg-white/95 backdrop-blur-lg border-t border-pink-100"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="fixed inset-0 z-[70] overflow-y-auto bg-[color:var(--champagne-glass-bg)]/92 backdrop-blur-xl lg:hidden"
             >
-              <div className="px-4 py-6 space-y-4">
+              <div className="px-6 py-24 space-y-8 text-white/90">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs uppercase tracking-[0.4em] text-white/60">Menu</span>
+                  <button
+                    type="button"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--champagne-keyline-gold)] bg-transparent text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)]"
+                  >
+                    <X className="h-5 w-5" />
+                    <span className="sr-only">Close navigation</span>
+                  </button>
+                </div>
                 {navigationItems.map((item) => (
                   <div key={item.name}>
                     <Link
                       href={item.href}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="block py-2 text-slate-700 hover:text-pink-600 transition-colors duration-200 font-medium"
+                      className="block py-2 text-lg font-medium text-white/85 transition-colors duration-200 hover:text-white"
                       style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                     >
                       {item.name}
                     </Link>
                     {item.dropdown && (
-                      <div className="ml-4 mt-2 space-y-2">
+                      <div className="ml-4 mt-2 space-y-2 text-sm text-white/70">
                         {item.dropdown.map((dropdownItem) => (
                           <Link
                             key={dropdownItem.name}
                             href={dropdownItem.href}
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="block py-1 text-sm text-slate-600 hover:text-pink-600 transition-colors duration-200"
+                            className="block py-1 transition-colors duration-200 hover:text-white"
                             style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}
                           >
                             {dropdownItem.name}
@@ -282,11 +274,11 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
                 ))}
                 
                 {/* Mobile CTA Buttons */}
-                <div className="pt-4 space-y-3">
+                <div className="pt-8 space-y-3">
                   <motion.a
                     href="tel:01273453109"
                     whileTap={{ scale: 0.95 }}
-                    className="flex items-center justify-center space-x-2 w-full py-3 bg-gradient-to-r from-slate-100 to-slate-200 text-slate-700 rounded-full"
+                    className="relative inline-flex w-full items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-transparent px-6 py-3 text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)]"
                   >
                     <Phone className="w-4 h-4" />
                     <span className="font-medium" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>
@@ -296,7 +288,7 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
 
                   <motion.button
                     whileTap={{ scale: 0.95 }}
-                    className="flex items-center justify-center space-x-2 w-full py-3 bg-gradient-to-r from-pink-500 to-teal-500 text-white rounded-full"
+                    className="relative inline-flex w-full items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-[var(--smh-gradient)] px-6 py-3 font-medium text-[#0b0d0f] focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] shadow-[0_12px_24px_rgba(11,13,15,0.25)]"
                   >
                     <Calendar className="w-4 h-4" />
                     <span className="font-medium" style={{ fontFamily: 'var(--font-inter), system-ui, Arial' }}>

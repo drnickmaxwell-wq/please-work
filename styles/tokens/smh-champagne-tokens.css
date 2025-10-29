@@ -1,22 +1,23 @@
 :root{
   /* Brand locks */
-  --smh-primary-magenta: #C2185B;
-  --smh-primary-teal:    #40C4B4;
-  --smh-accent-gold:     #D4AF37;
+  --smh-primary-magenta:#C2185B;
+  --smh-primary-teal:#40C4B4;
+  --smh-accent-gold:#D4AF37;
 
   /* Canonical gradient string — used everywhere */
-  --smh-gradient: linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
+  --smh-gradient:linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
 
   /* Overlays */
-  --champagne-filmgrain-alpha: .07;
-  --champagne-vignette-alpha: .12;
-  --champagne-sheen-alpha: .22;
+  --champagne-filmgrain-alpha:.07;
+  --champagne-vignette-alpha:.12;
+  --champagne-sheen-alpha:.22;
 
-  /* Particles */
-  --champagne-particles-opacity-d: .10;
-  --champagne-particles-opacity-m: .14;
+  /* Glass background must be LIGHTER than current: */
+  --champagne-glass-bg:color-mix(in oklab, #0b0d0f 60%, transparent 40%);
+  /* Gold keyline used for cards */
+  --champagne-keyline-gold:color-mix(in srgb, var(--smh-accent-gold) 64%, transparent 36%);
 
-  /* Cards / glass */
-  --champagne-glass-bg: color-mix(in oklab, #0b0d0f 72%, transparent 28%);
-  --champagne-keyline-gold: color-mix(in srgb, var(--smh-accent-gold) 68%, transparent 32%);
+  /* Particles (keep low so they don't mute hue) */
+  --champagne-particles-opacity-d:.08;
+  --champagne-particles-opacity-m:.12;
 }
