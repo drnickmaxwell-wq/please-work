@@ -1,12 +1,15 @@
 /* Full-bleed gradient surface */
 .champagne-surface{
   position:relative;
-  background-image:var(--smh-gradient);
+  background:var(--smh-gradient);
+  background-blend-mode:normal;
   isolation:isolate;
-  border-radius:0;
+  border-radius:0px;
   color:var(--smh-text);
-  --champagne-filmgrain-alpha:0.04;
   --champagne-vignette-alpha:0.06;
+  --champagne-grain-alpha:0.04;
+  --champagne-wave-alpha:0;
+  --champagne-particles-alpha:0;
 }
 
 .champagne-surface.surface--rounded{
@@ -26,7 +29,7 @@
   pointer-events:none;
   background-image:radial-gradient(#000 1px, transparent 1px);
   background-size:2px 2px;
-  opacity:var(--champagne-filmgrain-alpha);
+  opacity:var(--champagne-grain-alpha);
   mix-blend-mode:soft-light;
   z-index:2;
 }
@@ -61,9 +64,10 @@
 
 /* Glass card utility */
 .champagne-glass{
-  background:var(--champagne-glass-bg);
-  backdrop-filter:blur(8px);
-  border:1px solid var(--champagne-keyline-gold);
+  background:color-mix(in oklab, transparent 100%, transparent 0%);
+  backdrop-filter:blur(12px);
+  border:1px solid color-mix(in oklab, var(--smh-accent-gold) 24%, transparent);
   border-radius:16px;
-  box-shadow:0 8px 24px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.06);
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+  color:var(--smh-text);
 }

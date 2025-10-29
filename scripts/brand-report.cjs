@@ -18,7 +18,7 @@ function hueReport() {
   const tealMatch = tokens.match(/--smh-primary-teal:\s*([^;]+);/i);
   const goldMatch = tokens.match(/--smh-accent-gold:\s*([^;]+);/i);
   const inkMatch = tokens.match(/--smh-primary-ink:\s*([^;]+);/i);
-  const grainMatch = tokens.match(/--champagne-filmgrain-alpha:\s*([^;]+);/i);
+  const grainMatch = tokens.match(/--champagne-grain-alpha:\s*([^;]+);/i);
   const vignetteMatch = tokens.match(/--champagne-vignette-alpha:\s*([^;]+);/i);
   const glassMixMatch = tokens.match(/--champagne-glass-bg:\s*color-mix\([^)]*?(\d+)%/i);
 
