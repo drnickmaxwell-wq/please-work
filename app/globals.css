@@ -1,5 +1,5 @@
-@import "@/styles/tokens/smh-champagne-tokens.css";
-@import "@/styles/champagne/surface.css";
+@import "../styles/tokens/smh-champagne-tokens.css";
+@import "../styles/champagne/surface.css";
 
 @tailwind base;
 @tailwind components;
@@ -8,8 +8,8 @@
 :root {
   color-scheme: dark;
   font-family: "Inter", system-ui, sans-serif;
-  background-color: var(--smh-primary-ink);
-  color: #f6f6f4;
+  background-color: var(--smh-ink);
+  color: var(--smh-text);
   --champagne-pane: 0 2px 30px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.08);
   --sparkle-highlight: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.55) 45%, transparent 70%);
   --subsurface-glow-light: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(212,175,55,0.02) 100%);
@@ -22,7 +22,7 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: var(--smh-primary-ink);
+  background-color: var(--smh-ink);
   color: inherit;
   font-family: inherit;
   text-rendering: optimizeLegibility;

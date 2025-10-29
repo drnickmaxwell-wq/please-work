@@ -7,10 +7,10 @@
   --smh-white:#FFFFFF;
   --smh-gray-200:#E5E7EB;
   --smh-ink:#0b0d0f;
-  --smh-text:var(--smh-ink);
+  --smh-text:#0b0d0f;
 
   /* Canonical gradient string — used everywhere */
-  --smh-gradient:linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
+  --smh-gradient: linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
 
   /* Overlays */
   --champagne-filmgrain-alpha:.05;
