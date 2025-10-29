@@ -5,6 +5,8 @@
   isolation:isolate;
   border-radius:0;
   color:var(--smh-text);
+  --champagne-filmgrain-alpha:0.04;
+  --champagne-vignette-alpha:0.06;
 }
 
 .champagne-surface.surface--rounded{
@@ -12,7 +14,10 @@
 }
 
 /* Optional wave layer slot (keep present, default hidden) */
-.champagne-surface[data-wave="off"] .wave{display:none;}
+.champagne-surface .wave{display:none;}
+.champagne-surface[data-wave="on"] .wave{display:block;}
+.champagne-surface .champagne-particles{display:none;}
+.champagne-particles[data-state="on"]{display:block;}
 
 /* Film grain (subtle) */
 .champagne-surface::after{

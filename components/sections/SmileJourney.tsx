@@ -101,7 +101,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
                 <article
                   key={step.title}
                   className={[
-                    "champagne-glass relative overflow-hidden rounded-champagne p-6 shadow-champagne md:p-7",
+                    "champagne-glass relative overflow-hidden p-6 md:p-7",
                     connectorClass,
                   ]
                     .filter(Boolean)
@@ -129,10 +129,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
             })}
           </div>
 
-          <div
-            className="champagne-glass mt-16 rounded-champagne border border-[color:var(--champagne-keyline-gold)] p-8 text-center shadow-champagne md:mt-20 md:p-10"
-            style={{ color: "var(--smh-text)" }}
-          >
+          <div className="champagne-glass mt-16 p-8 text-center md:mt-20 md:p-10" style={{ color: "var(--smh-text)" }}>
             <div className="space-y-3">
               <h3 className="font-serif text-3xl tracking-tight">Ready to Begin?</h3>
               <p style={{ opacity: 0.8 }}>Take the first step toward your perfect smile.</p>

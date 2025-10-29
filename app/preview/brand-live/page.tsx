@@ -225,6 +225,8 @@ export default function BrandLivePreviewPage() {
     []
   );
 
+  const ctaStatus = assertions.ctaMatchesTextToken;
+
   return (
     <main className="min-h-screen bg-black text-white">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-6 py-16 sm:px-10 lg:py-24">
@@ -289,6 +291,37 @@ export default function BrandLivePreviewPage() {
             </section>
           ))}
         </div>
+
+        <section className="rounded-3xl border border-white/10 bg-white/5 p-8 text-left shadow-lg shadow-black/30 backdrop-blur">
+          <h2 className="font-serif text-2xl text-white">Runtime Checks</h2>
+          <ul className="mt-6 space-y-3 text-sm text-white">
+            <li className="flex flex-wrap items-center justify-between gap-2 font-mono">
+              <span className="uppercase tracking-[0.35em] text-white/60">Gradient</span>
+              <span className="text-right">{assertions.computedGradient}</span>
+            </li>
+            <li className="flex flex-wrap items-center justify-between gap-2 font-mono">
+              <span className="uppercase tracking-[0.35em] text-white/60">Vignette α</span>
+              <span className="text-right">{tokens.vignette}</span>
+            </li>
+            <li className="flex flex-wrap items-center justify-between gap-2 font-mono">
+              <span className="uppercase tracking-[0.35em] text-white/60">Grain α</span>
+              <span className="text-right">{tokens.grain}</span>
+            </li>
+            <li className="flex flex-wrap items-center justify-between gap-2 font-mono">
+              <span className="uppercase tracking-[0.35em] text-white/60">Hero Radius</span>
+              <span className="text-right">
+                {assertions.heroBorderRadius}
+                {assertions.heroRadiusIsZero === null ? ' (pending)' : assertions.heroRadiusIsZero ? ' (zero)' : ' (non-zero)'}
+              </span>
+            </li>
+            <li className="flex flex-wrap items-center justify-between gap-2 font-mono">
+              <span className="uppercase tracking-[0.35em] text-white/60">CTA text equals var(--smh-text)</span>
+              <span className="text-right">
+                {ctaStatus === null ? 'PENDING' : ctaStatus ? 'PASS' : 'FAIL'}
+              </span>
+            </li>
+          </ul>
+        </section>
 
         <section className="rounded-3xl border border-white/10 bg-white/5 p-8 text-left shadow-lg shadow-black/30 backdrop-blur">
           <h2 className="font-serif text-2xl text-white">Token Diagnostics</h2>
