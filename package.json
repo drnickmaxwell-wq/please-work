@@ -3,11 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "lint": "eslint . --max-warnings=0",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "brand:guard": "node scripts/brand-guard.cjs",
-    "brand:report": "node scripts/brand-report.cjs"
+    "brand:report": "node scripts/brand-report.cjs",
+    "verify:visual": "pnpm run brand:guard && pnpm run brand:report",
+    "prepare": "husky"
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.24",
@@ -42,7 +45,8 @@
     "postcss": "^8.4.47",
     "tailwindcss": "^4",
     "tsx": "^4.19.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "husky": "^9.1.7"
   },
   "engines": {
     "node": ">=20"
