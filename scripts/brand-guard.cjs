@@ -58,6 +58,19 @@ for(const file of files){
   for(const h of HEXES){
     if(h.test(txt)) violations.push({file, hex: h});
   }
+  if(
+    file !== TOKENS_FILE &&
+    /background\s*:\s*linear-gradient[^;]*#d94bc6[^;]*#00c2c7/i.test(txt)
+  ){
+    violations.push({ file, hex: 'background-linear-gradient-outside-tokens' });
+  }
+  const glassBlocks = txt.match(/\.champagne-glass\s*\{[^}]*\}/gs) || [];
+  for(const block of glassBlocks){
+    if(/color-mix[^}]*var\(\s*--smh-ink\s*\)/i.test(block)){
+      violations.push({ file, hex: 'champagne-glass-ink-mix' });
+      break;
+    }
+  }
   if(file.includes("brand") && normalized.includes("linear-gradient(") && !normalized.includes(CANONICAL_GRAD)){
     const gradientMatch = txt.match(/linear-gradient\([^)]*\)/i);
     const raw = gradientMatch ? gradientMatch[0].trim() : "";

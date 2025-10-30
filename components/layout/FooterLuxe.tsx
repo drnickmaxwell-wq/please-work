@@ -28,7 +28,8 @@ const FooterLuxe = () => {
 
   const footerStyle: CSSProperties = {
     background: 'var(--smh-ink)',
-    boxShadow: '0 -6px 24px rgba(0,0,0,.22) inset',
+    color: 'var(--smh-text)',
+    borderTop: '1px solid color-mix(in oklab, var(--smh-accent-gold) 26%, transparent)',
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
