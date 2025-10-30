@@ -76,6 +76,26 @@ for(const file of files){
       violations.push({ file, hex: 'champagne-glass-ink-mix' });
       break;
     }
+    if(/mix-blend-mode/i.test(block)){
+      violations.push({ file, hex: 'champagne-glass-mix-blend' });
+      break;
+    }
+    const bgMatch = block.match(/background-color\s*:\s*([^;]+);/i);
+    if(bgMatch && !/transparent/i.test(bgMatch[1])){
+      violations.push({ file, hex: 'champagne-glass-tinted' });
+      break;
+    }
+  }
+  const surfaceBlocks = txt.match(/\.champagne-surface[^\{]*\{[^}]*\}/gs) || [];
+  for(const block of surfaceBlocks){
+    if(/mix-blend-mode/i.test(block)){
+      violations.push({ file, hex: 'champagne-surface-mix-blend' });
+      break;
+    }
+    if(/linear-gradient\(|radial-gradient\(/i.test(block)){
+      violations.push({ file, hex: 'champagne-surface-inline-gradient' });
+      break;
+    }
   }
   if(isHeroJourneyFile){
     if(/bg-(?:white|black|ink)\//i.test(txt)){

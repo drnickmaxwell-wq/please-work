@@ -2,10 +2,6 @@
   --champ-vignette-alpha: 0;
   --champ-grain-alpha: .02;
   --champ-particles-alpha: 0;
-  --smh-gradient-zoom-x: 140%;
-  --smh-gradient-zoom-y: 140%;
-  --smh-gradient-pos-x: 28%;
-  --smh-gradient-pos-y: 38%;
 }
 
 .champagne-surface{
@@ -14,9 +10,8 @@
   background-color: transparent;
   background-image: var(--smh-gradient);
   background-repeat: no-repeat;
-  background-size: var(--smh-gradient-zoom-x) var(--smh-gradient-zoom-y);
-  background-position: var(--smh-gradient-pos-x) var(--smh-gradient-pos-y);
-  background-blend-mode: normal;
+  background-size: 165% 165%;
+  background-position: 18% 38%;
   --champagne-vignette-alpha: var(--champ-vignette-alpha);
   --champagne-grain-alpha: var(--champ-grain-alpha);
   --champagne-particles-alpha: var(--champ-particles-alpha);
@@ -32,16 +27,25 @@
   z-index: var(--z-glass, 20);
 }
 
-@media (max-width: 640px){
-  :root{
-    --smh-gradient-pos-x: 32%;
-    --smh-gradient-pos-y: 42%;
+@media (max-width: 1024px){
+  .champagne-surface{
+    background-size: 180% 180%;
+    background-position: 22% 42%;
   }
 }
 
-.journey-surface{
-  background-size: 160% 160%;
-  background-position: 24% 46%;
+@media (max-width: 640px){
+  .champagne-surface{
+    background-size: 200% 200%;
+    background-position: 26% 46%;
+  }
+}
+
+.champagne-surface.hero,
+.champagne-surface.journey{
+  --champ-vignette-alpha: 0;
+  --champ-grain-alpha: 0;
+  --champ-particles-alpha: 0;
 }
 
 .footer-luxe{

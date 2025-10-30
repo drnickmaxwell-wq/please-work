@@ -3,57 +3,67 @@
 
 import { useEffect, useState } from "react";
 
-type Snapshot = {
+type Diagnostics = {
   gradient: string;
-  magenta: string;
-  teal: string;
-  gold: string;
-  glassStrong: string;
+  tokenGradient: string;
+  glassBg: string;
+  backgroundSize: string;
+  backgroundPosition: string;
 };
 
-const KEYS: Array<[keyof Snapshot, string]> = [
-  ["gradient",   "--smh-gradient"],
-  ["magenta",    "--smh-primary-magenta"],
-  ["teal",       "--smh-primary-teal"],
-  ["gold",       "--smh-accent-gold"],
-  ["glassStrong","--glass-bg-strong"],
-];
-
 export default function BrandLock() {
-  const [snap, setSnap] = useState<Snapshot | null>(null);
+  const [diagnostics, setDiagnostics] = useState<Diagnostics | null>(null);
 
   useEffect(() => {
-    const root = document.documentElement;
-    const cs = getComputedStyle(root);
-    const out = KEYS.reduce<Snapshot>((acc, [key, token]) => {
-      acc[key] = cs.getPropertyValue(token).trim();
-      return acc;
-    }, {
-      gradient: '',
-      magenta: '',
-      teal: '',
-      gold: '',
-      glassStrong: '',
+    const surface = document.querySelector<HTMLElement>(".champagne-surface");
+    const glass = document.querySelector<HTMLElement>(".champagne-glass");
+    if (!surface || !glass) return;
+
+    const surfaceStyles = getComputedStyle(surface);
+    const glassStyles = getComputedStyle(glass);
+    const rootStyles = getComputedStyle(document.documentElement);
+
+    const gradient = surfaceStyles.backgroundImage.replace(/\s+/g, "");
+    const tokenGradient = rootStyles.getPropertyValue("--smh-gradient").replace(/\s+/g, "");
+    console.log("gradient=", gradient);
+    console.log("glassBg=", glassStyles.backgroundColor);
+    console.log(
+      "bgSize/Pos=",
+      surfaceStyles.backgroundSize,
+      surfaceStyles.backgroundPosition,
+    );
+
+    setDiagnostics({
+      gradient,
+      tokenGradient,
+      glassBg: glassStyles.backgroundColor,
+      backgroundSize: surfaceStyles.backgroundSize,
+      backgroundPosition: surfaceStyles.backgroundPosition,
     });
-    setSnap(out);
   }, []);
 
   return (
-    <main className="min-h-[60vh] flex items-center justify-center bg-[color:var(--smh-bg)] text-[color:var(--smh-text)] p-6">
-      <div className="glass-pane max-w-3xl w-full">
-        <h2 className="font-serif text-2xl mb-4">Brand tokens are live</h2>
-        {snap ? (
-          <pre className="font-mono text-sm whitespace-pre-wrap">
-{`gradient: ${snap.gradient}
-magenta: ${snap.magenta}
-teal:    ${snap.teal}
-gold:    ${snap.gold}
-glassStrong: ${snap.glassStrong}`}
-          </pre>
-        ) : (
-          <p aria-live="polite">Reading tokens…</p>
-        )}
-      </div>
+    <main className="min-h-screen bg-[color:var(--smh-bg)] text-[color:var(--smh-text)]">
+      <section className="champagne-surface hero flex min-h-screen items-center justify-center p-6">
+        <div className="champagne-glass w-full max-w-2xl p-8">
+          <h2 className="font-serif text-2xl">Brand lock diagnostics</h2>
+          <p className="mt-2 text-sm opacity-80">
+            Values below reflect live computed styles for the champagne surface stack.
+          </p>
+          <div className="mt-6 space-y-2 font-mono text-sm">
+            {diagnostics ? (
+              <>
+                <p>gradient={diagnostics.gradient}</p>
+                <p>tokenGradient={diagnostics.tokenGradient}</p>
+                <p>glassBg={diagnostics.glassBg}</p>
+                <p>bgSize/Pos={diagnostics.backgroundSize} | {diagnostics.backgroundPosition}</p>
+              </>
+            ) : (
+              <p aria-live="polite">Sampling surface…</p>
+            )}
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
