@@ -63,9 +63,9 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
   return (
     <section
       aria-labelledby="journey-hero-title"
-      className="champagne-surface champagne-warm-lift use-weighted-gradient saturation-lift journey relative z-0"
+      className="champagne-surface champagne-warm-lift journey"
       data-particles="off"
-      data-wave="off"
+      data-wave="on"
       data-reduced-motion={prefersReducedMotion ? "true" : "false"}
     >
       <div className="relative isolate w-screen py-16 md:py-24">
