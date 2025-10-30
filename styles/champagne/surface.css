@@ -10,9 +10,9 @@
 
 .champagne-vignette{
   position:absolute; inset:0; pointer-events:none;
-  /* transparent center → darker edges */
+  /* transparent center → dark only at edges */
   background: radial-gradient(closest-side at 50% 50%,
-             rgba(0,0,0,0) 58%,
+             rgba(0,0,0,0) 72%,
              rgba(0,0,0,var(--smh-vignette-alpha, .06)) 100%);
 }
 

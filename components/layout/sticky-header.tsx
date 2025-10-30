@@ -96,13 +96,14 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
       <motion.header
         ref={headerRef}
         data-brand-header
+        data-scrolled={isScrolled ? 'true' : 'false'}
         style={{
           opacity: headerOpacity,
           scale: headerScale,
         }}
         className={[
-          'sticky top-0 z-40 w-full border-b border-transparent bg-transparent text-[color:var(--smh-text)] transition-colors duration-300',
-          isScrolled ? 'backdrop-blur-md bg-ink/40 border-white/10' : 'bg-transparent',
+          'sticky-header sticky top-0 z-40 w-full border-b border-transparent text-[color:var(--smh-text)] transition-colors duration-300',
+          isScrolled ? 'border-white/10' : '',
           className,
         ]
           .filter(Boolean)

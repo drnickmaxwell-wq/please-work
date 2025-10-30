@@ -41,7 +41,7 @@ export default function Hero4KVideo({
         <div aria-hidden className="absolute inset-0 z-0 overflow-hidden">
           <video
             className="h-full w-full object-cover"
-            style={{ objectPosition: 'center 55%' }}
+            style={{ objectPosition: '60% 50%' }}
             playsInline
             autoPlay
             muted
