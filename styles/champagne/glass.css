@@ -1,4 +1,5 @@
 .champagne-glass{
+  position: relative;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   /* lighten ink so the gradient breathes */
@@ -7,4 +8,18 @@
   border: 1px solid color-mix(in oklab, var(--smh-ink) 8%, transparent);
   box-shadow: 0 6px 28px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.06);
   border-radius: var(--radius-champagne, 18px);
+}
+
+.champagne-glass::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  /* Soft interior reflection from top; fades out before midline */
+  background: radial-gradient(
+    ellipse at top,
+    rgba(255,255,255,.06) 0%,
+    rgba(255,255,255,0) 70%
+  );
+  pointer-events: none;
 }
