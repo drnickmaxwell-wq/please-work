@@ -8,13 +8,27 @@
   position: relative;
   isolation: isolate;
   background-color: transparent;
+  --smh-surface-bg-size: 135% 135%;
+  --smh-surface-bg-position: 10% 50%;
   background-image: var(--smh-gradient);
   background-repeat: no-repeat;
-  background-size: 165% 165%;
-  background-position: 18% 38%;
+  background-size: var(--smh-surface-bg-size);
+  background-position: var(--smh-surface-bg-position);
   --champagne-vignette-alpha: var(--champ-vignette-alpha);
   --champagne-grain-alpha: var(--champ-grain-alpha);
   --champagne-particles-alpha: var(--champ-particles-alpha);
+}
+
+.champagne-surface[data-variant="hero"],
+.champagne-surface.hero{
+  --smh-surface-bg-size: 130% 130%;
+  --smh-surface-bg-position: 8% 52%;
+}
+
+.champagne-surface[data-variant="journey"],
+.champagne-surface.journey{
+  --smh-surface-bg-size: 140% 140%;
+  --smh-surface-bg-position: 12% 58%;
 }
 
 .champagne-surface::before,
@@ -29,15 +43,15 @@
 
 @media (max-width: 1024px){
   .champagne-surface{
-    background-size: 180% 180%;
-    background-position: 22% 42%;
+    --smh-surface-bg-size: 180% 180%;
+    --smh-surface-bg-position: 22% 42%;
   }
 }
 
 @media (max-width: 640px){
   .champagne-surface{
-    background-size: 200% 200%;
-    background-position: 26% 46%;
+    --smh-surface-bg-size: 200% 200%;
+    --smh-surface-bg-position: 26% 46%;
   }
 }
 
@@ -46,6 +60,25 @@
   --champ-vignette-alpha: 0;
   --champ-grain-alpha: 0;
   --champ-particles-alpha: 0;
+}
+
+/* Optional: gentle saturation lift using the SAME token gradient */
+.saturation-lift{
+  position: relative;
+  isolation: isolate;
+}
+
+.saturation-lift::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: saturation;
+  opacity: .04;
+  background-image: var(--smh-gradient);
+  background-size: var(--smh-surface-bg-size, 130% 130%);
+  background-position: var(--smh-surface-bg-position, 10% 50%);
+  z-index: 0;
 }
 
 .footer-luxe{

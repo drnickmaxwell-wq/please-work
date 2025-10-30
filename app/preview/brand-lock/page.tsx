@@ -23,8 +23,16 @@ export default function BrandLock() {
     const glassStyles = getComputedStyle(glass);
     const rootStyles = getComputedStyle(document.documentElement);
 
-    const gradient = surfaceStyles.backgroundImage.replace(/\s+/g, "");
-    const tokenGradient = rootStyles.getPropertyValue("--smh-gradient").replace(/\s+/g, "");
+    const normalizeGradient = (value: string) =>
+      value
+        .replace(/\s*,\s*/g, ",")
+        .replace(/\s*\(\s*/g, "(")
+        .replace(/\s*\)\s*/g, ")")
+        .replace(/\s+/g, " ")
+        .trim();
+
+    const gradient = normalizeGradient(surfaceStyles.backgroundImage);
+    const tokenGradient = normalizeGradient(rootStyles.getPropertyValue("--smh-gradient"));
     console.log("gradient=", gradient);
     console.log("glassBg=", glassStyles.backgroundColor);
     console.log(
@@ -44,7 +52,7 @@ export default function BrandLock() {
 
   return (
     <main className="min-h-screen bg-[color:var(--smh-bg)] text-[color:var(--smh-text)]">
-      <section className="champagne-surface hero flex min-h-screen items-center justify-center p-6">
+      <section className="champagne-surface saturation-lift hero flex min-h-screen items-center justify-center p-6">
         <div className="champagne-glass w-full max-w-2xl p-8">
           <h2 className="font-serif text-2xl">Brand lock diagnostics</h2>
           <p className="mt-2 text-sm opacity-80">
