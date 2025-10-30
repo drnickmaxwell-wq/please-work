@@ -33,9 +33,9 @@
   /* Warm-lift control (0 | 1). Leave default off for safety. */
   --smh-warm-lift: 0;
 
-  /* Intensity knobs (feel-safe ranges noted). */
-  --smh-warm-lift-magenta-alpha: 0.18; /* 0.12–0.22 */
-  --smh-warm-lift-gold-alpha:    0.06; /* 0.04–0.08 */
+  /* Intensity knobs tuned for Manus hue balance. */
+  --smh-warm-lift-magenta-alpha: 0.08;
+  --smh-warm-lift-gold-alpha:    0.03;
 
   /* Perceptual warm hues (fallbacks only) — keep as tokens. */
   --smh-warm-magenta: var(--smh-primary-magenta, #C2185B);
