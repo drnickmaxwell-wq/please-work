@@ -1,7 +1,10 @@
 @import "./glass.css";
 
 .champagne-surface{
-  background: var(--smh-gradient);
+  /* Lock the hero surface to the brand gradient with no additional veil */
+  background-image: var(--smh-gradient);
+  background-color: transparent !important;
+  opacity: 1;
 }
 
 .champagne-wave{
@@ -12,17 +15,17 @@
   position:absolute; inset:0; pointer-events:none;
   background: radial-gradient(
     closest-side at 50% 50%,
-    rgba(0,0,0,0) 78%,
-    rgba(0,0,0, var(--smh-vignette-alpha, .05)) 100%
+    rgba(0,0,0,0) 80%,
+    rgba(0,0,0, var(--smh-vignette-alpha, .045)) 100%
   );
 }
 
 .champagne-grain{
   position:absolute; inset:0; pointer-events:none;
-  opacity: var(--smh-grain-alpha, .05);
+  opacity: var(--smh-grain-alpha, .03);
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='256' height='256'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(#n)' opacity='0.9'/></svg>");
   background-size: 256px 256px;
-  filter: contrast(1.08) brightness(1.02);
+  filter: contrast(1.06) brightness(1.01);
   mix-blend-mode: soft-light;
 }
 
