@@ -78,9 +78,11 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           ) : (
             <div className="champagne-particles" data-state="off" aria-hidden style={{ opacity: 0 }} />
           )}
+          <div aria-hidden className="champagne-grain" />
+          <div aria-hidden className="champagne-vignette" />
 
           <div className="relative z-[var(--z-content)] flex flex-col gap-12">
-            <div className="journey-heading champagne-glass rounded-champagne mx-auto mb-8 max-w-[960px] p-6 md:p-8">
+            <div className="champagne-glass rounded-champagne mx-auto mb-8 max-w-[960px] p-6 md:p-8">
               <div className="space-y-4 text-center">
                 <h2
                   id="journey-hero-title"
@@ -103,7 +105,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
                     : "";
                 return (
                   <div key={step.title} className={connectorClass ? `relative ${connectorClass}` : undefined}>
-                    <article className="journey-tile champagne-glass rounded-champagne p-6 md:p-8" tabIndex={0}>
+                    <article className="champagne-glass rounded-champagne p-6 md:p-8" tabIndex={0}>
                       {iconPath && (
                         <div className="mb-6 flex flex-col items-center text-[color:var(--champagne-keyline-gold)]">
                           <span className="flex h-14 w-14 items-center justify-center rounded-full border border-[color:var(--champagne-keyline-gold)] bg-white/5">
@@ -150,7 +152,6 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           </div>
         </div>
       </div>
-      <div aria-hidden className="champagne-sheen-layer" style={{ zIndex: "var(--z-surface-grain)" }} />
     </section>
   );
 }
