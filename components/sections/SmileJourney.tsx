@@ -66,99 +66,91 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
   return (
     <section
       aria-labelledby="journey-hero-title"
-      className="champagne-surface relative isolate w-screen py-16 md:py-24"
+      className="champagne-surface"
       data-particles={particlesActive ? "on" : "off"}
       data-wave="off"
       data-reduced-motion={prefersReducedMotion ? "true" : "false"}
     >
-      <div className="relative mx-auto w-full max-w-7xl px-4 md:px-6">
-        {particlesActive ? (
-          <Particles
-            className="champagne-particles"
-            data-state="on"
-            aria-hidden
-            style={{ zIndex: "var(--z-surface)" }}
-          />
-        ) : (
-          <div
-            className="champagne-particles"
-            data-state="off"
-            aria-hidden
-            style={{ opacity: 0, zIndex: "var(--z-surface)" }}
-          />
-        )}
+      <div className="relative isolate w-screen py-16 md:py-24">
+        <div className="relative mx-auto w-full max-w-7xl px-4 md:px-6">
+          {particlesActive ? (
+            <Particles className="champagne-particles" data-state="on" aria-hidden />
+          ) : (
+            <div className="champagne-particles" data-state="off" aria-hidden style={{ opacity: 0 }} />
+          )}
 
-        <div className="relative z-[var(--z-content)] flex flex-col gap-12">
-          <div className="journey-heading champagne-glass mx-auto max-w-[960px] mb-8 p-6 md:p-8">
-            <div className="space-y-4 text-center">
-              <h2
-                id="journey-hero-title"
-                className="text-3xl font-serif font-semibold tracking-tight md:text-4xl"
-              >
-                Your Smile Journey
-              </h2>
-              <p className="text-base opacity-90 md:text-lg">
-                Discover the path to your perfect smile with a guided experience curated by Manus AI.
-              </p>
-            </div>
-          </div>
-
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {steps.map((step, index) => {
-              const iconPath = step.icon ? iconMap[step.icon] : undefined;
-              const connectorClass =
-                index < 3
-                  ? "after:hidden lg:after:absolute lg:after:left-1/2 lg:after:bottom-[-48px] lg:after:block lg:after:h-12 lg:after:w-px lg:after:-translate-x-1/2 lg:after:bg-[color:var(--champagne-keyline-gold)] lg:after:opacity-40 lg:after:content-['']"
-                  : "";
-              return (
-                <div key={step.title} className={connectorClass ? `relative ${connectorClass}` : undefined}>
-                  <article className="journey-tile champagne-glass p-6 md:p-8" tabIndex={0}>
-                    {iconPath && (
-                      <div className="mb-6 flex flex-col items-center text-[color:var(--champagne-keyline-gold)]">
-                        <span className="flex h-14 w-14 items-center justify-center rounded-full border border-[color:var(--champagne-keyline-gold)] bg-white/5">
-                          <img src={iconPath} alt="" aria-hidden="true" className="h-7 w-7" />
-                        </span>
-                        <span
-                          aria-hidden="true"
-                          className="mt-4 h-4 border-l border-[color:var(--champagne-keyline-gold)] opacity-60"
-                        />
-                      </div>
-                    )}
-                    <h3 className="font-serif text-2xl tracking-tight">{step.title}</h3>
-                    <p className="text-base leading-relaxed" style={{ opacity: 0.85 }}>
-                      {step.body}
-                    </p>
-                  </article>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="relative z-[var(--z-content)] text-center">
-            <div className="champagne-glass p-6 md:p-8">
-              <div className="space-y-3">
-                <h3 className="font-serif text-3xl tracking-tight">Ready to Begin?</h3>
-                <p style={{ opacity: 0.8 }}>Take the first step toward your perfect smile.</p>
+          <div className="relative z-[var(--z-content)] flex flex-col gap-12">
+            <div className="journey-heading champagne-glass rounded-champagne mx-auto mb-8 max-w-[960px] p-6 md:p-8">
+              <div className="space-y-4 text-center">
+                <h2
+                  id="journey-hero-title"
+                  className="text-3xl font-serif font-semibold tracking-tight md:text-4xl"
+                >
+                  Your Smile Journey
+                </h2>
+                <p className="text-base opacity-90 md:text-lg">
+                  Discover the path to your perfect smile with a guided experience curated by Manus AI.
+                </p>
               </div>
-              <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
-                <Link
-                  href="/contact"
-                  className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-[var(--smh-gradient)] px-6 py-3 font-semibold transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
-                >
-                  Book a consultation
-                </Link>
-                <Link
-                  href="/ai-smile-quiz"
-                  className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-transparent px-6 py-3 font-semibold opacity-90 transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
-                >
-                  Start your AI smile preview
-                </Link>
+            </div>
+
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {steps.map((step, index) => {
+                const iconPath = step.icon ? iconMap[step.icon] : undefined;
+                const connectorClass =
+                  index < 3
+                    ? "after:hidden lg:after:absolute lg:after:left-1/2 lg:after:bottom-[-48px] lg:after:block lg:after:h-12 lg:after:w-px lg:after:-translate-x-1/2 lg:after:bg-[color:var(--champagne-keyline-gold)] lg:after:opacity-40 lg:after:content-['']"
+                    : "";
+                return (
+                  <div key={step.title} className={connectorClass ? `relative ${connectorClass}` : undefined}>
+                    <article className="journey-tile champagne-glass rounded-champagne p-6 md:p-8" tabIndex={0}>
+                      {iconPath && (
+                        <div className="mb-6 flex flex-col items-center text-[color:var(--champagne-keyline-gold)]">
+                          <span className="flex h-14 w-14 items-center justify-center rounded-full border border-[color:var(--champagne-keyline-gold)] bg-white/5">
+                            <img src={iconPath} alt="" aria-hidden="true" className="h-7 w-7" />
+                          </span>
+                          <span
+                            aria-hidden="true"
+                            className="mt-4 h-4 border-l border-[color:var(--champagne-keyline-gold)] opacity-60"
+                          />
+                        </div>
+                      )}
+                      <h3 className="font-serif text-2xl tracking-tight">{step.title}</h3>
+                      <p className="text-base leading-relaxed" style={{ opacity: 0.85 }}>
+                        {step.body}
+                      </p>
+                    </article>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="relative z-[var(--z-content)] text-center">
+              <div className="champagne-glass rounded-champagne p-6 md:p-8">
+                <div className="space-y-3">
+                  <h3 className="font-serif text-3xl tracking-tight">Ready to Begin?</h3>
+                  <p style={{ opacity: 0.8 }}>Take the first step toward your perfect smile.</p>
+                </div>
+                <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
+                  <Link
+                    href="/contact"
+                    className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-[var(--smh-gradient)] px-6 py-3 font-semibold transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
+                  >
+                    Book a consultation
+                  </Link>
+                  <Link
+                    href="/ai-smile-quiz"
+                    className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-transparent px-6 py-3 font-semibold opacity-90 transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
+                  >
+                    Start your AI smile preview
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div aria-hidden className="champagne-sheen-layer" style={{ zIndex: "var(--z-surface)" }} />
+      <div aria-hidden className="champagne-sheen-layer" style={{ zIndex: "var(--z-surface-grain)" }} />
     </section>
   );
 }

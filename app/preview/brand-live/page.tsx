@@ -300,47 +300,39 @@ export default function BrandLivePreviewPage() {
               data-surface={pane.id}
               data-wave={pane.wave ? 'on' : 'off'}
               data-particles={pane.particles ? 'on' : 'off'}
-              className="champagne-surface relative overflow-hidden"
+              className="champagne-surface"
               style={pane.wave ? surfaceStyle : undefined}
             >
-              <div aria-hidden className="wave" />
-              {pane.particles ? (
-                <Particles
-                  aria-hidden
-                  className="champagne-particles"
-                  data-state="on"
-                  style={{ opacity: 'var(--champagne-particles-opacity-d)' }}
-                />
-              ) : (
-                <div
-                  aria-hidden
-                  className="champagne-particles"
-                  data-state="off"
-                  style={{ opacity: 'var(--champagne-particles-opacity-m)' }}
-                />
-              )}
-              <div aria-hidden className="champagne-sheen-layer" />
+              <div className="relative isolate overflow-hidden">
+                <div aria-hidden className="wave" />
+                {pane.particles ? (
+                  <Particles aria-hidden className="champagne-particles" data-state="on" />
+                ) : (
+                  <div className="champagne-particles" data-state="off" aria-hidden style={{ opacity: 0 }} />
+                )}
+                <div aria-hidden className="champagne-sheen-layer" style={{ zIndex: 'var(--z-surface-grain)' }} />
 
-              <div className="relative z-[10] flex min-h-[320px] flex-col justify-between gap-6 p-10">
-                <div className="space-y-3">
-                  <h2 className="font-serif text-3xl">{pane.label}</h2>
-                  <p className="text-white/80">{pane.description}</p>
-                </div>
-                {pane.id === 'hero' ? (
-                  <div className="flex flex-wrap items-center gap-4">
-                    <button
-                      type="button"
-                      data-cta="primary"
-                      className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-[var(--smh-gradient)] px-5 py-3 font-semibold text-[var(--smh-text)] shadow-[0_12px_24px_rgba(11,13,15,0.25)] transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
-                    >
-                      Diagnostic CTA
-                    </button>
+                <div className="relative z-[var(--z-content)] flex min-h-[320px] flex-col justify-between gap-6 p-10">
+                  <div className="space-y-3">
+                    <h2 className="font-serif text-3xl">{pane.label}</h2>
+                    <p className="text-white/80">{pane.description}</p>
                   </div>
-                ) : null}
-                <div className="flex flex-wrap gap-4 text-[0.65rem] uppercase tracking-[0.45em] text-white/60">
-                  <span>Wave: {pane.wave ? 'On' : 'Off'}</span>
-                  <span>Particles: {pane.particles ? 'On' : 'Off'}</span>
-                  <span>Gradient: Locked</span>
+                  {pane.id === 'hero' ? (
+                    <div className="flex flex-wrap items-center gap-4">
+                      <button
+                        type="button"
+                        data-cta="primary"
+                        className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-[var(--smh-gradient)] px-5 py-3 font-semibold text-[var(--smh-text)] shadow-[0_12px_24px_rgba(11,13,15,0.25)] transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
+                      >
+                        Diagnostic CTA
+                      </button>
+                    </div>
+                  ) : null}
+                  <div className="flex flex-wrap gap-4 text-[0.65rem] uppercase tracking-[0.45em] text-white/60">
+                    <span>Wave: {pane.wave ? 'On' : 'Off'}</span>
+                    <span>Particles: {pane.particles ? 'On' : 'Off'}</span>
+                    <span>Gradient: Locked</span>
+                  </div>
                 </div>
               </div>
             </section>
