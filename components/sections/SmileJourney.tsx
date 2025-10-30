@@ -66,7 +66,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
   return (
     <section
       aria-labelledby="journey-hero-title"
-      className="champagne-surface"
+      className="champagne-surface relative"
       data-particles={particlesActive ? "on" : "off"}
       data-wave="off"
       data-reduced-motion={prefersReducedMotion ? "true" : "false"}

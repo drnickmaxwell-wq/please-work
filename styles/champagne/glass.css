@@ -1,8 +1,9 @@
 .champagne-glass{
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  background: color-mix(in oklab, var(--smh-ink) 12%, transparent);
-  border: 1px solid color-mix(in oklab, var(--smh-ink) 14%, transparent);
-  box-shadow: 0 4px 24px rgba(0,0,0,.20) inset, 0 1px 0 rgba(255,255,255,.06);
+  /* was ~12% — lower to 8% so color shows through */
+  background: color-mix(in oklab, var(--smh-ink) 8%, transparent);
+  border: 1px solid color-mix(in oklab, var(--smh-ink) 12%, transparent);
+  box-shadow: 0 4px 24px rgba(0,0,0,.18) inset, 0 1px 0 rgba(255,255,255,.06);
   border-radius: var(--radius-champagne, 18px);
 }

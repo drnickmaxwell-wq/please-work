@@ -34,7 +34,7 @@ export default function Hero4KVideo({
       data-wave={showWave ? 'on' : 'off'}
       data-particles={particlesActive ? 'on' : 'off'}
       data-reduced-motion={prefersReducedMotion ? 'true' : 'false'}
-      className="champagne-surface"
+      className="champagne-surface relative"
       style={surfaceStyle}
     >
       <div className="relative isolate w-full min-h-[85vh] overflow-hidden md:min-h-[min(95vh,1100px)]">
