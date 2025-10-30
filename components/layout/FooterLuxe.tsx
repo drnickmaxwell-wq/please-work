@@ -28,7 +28,8 @@ const FooterLuxe = () => {
 
   const footerStyle: CSSProperties = {
     background: 'var(--smh-ink)',
-    color: 'var(--smh-text)',
+    borderTop: '1px solid color-mix(in oklab, var(--smh-gold) 80%, transparent)',
+    boxShadow: '0 -1px 0 color-mix(in oklab, var(--smh-gold) 18%, transparent) inset',
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -48,89 +49,91 @@ const FooterLuxe = () => {
   };
 
   return (
-    <footer className="footer-luxe text-[var(--smh-text)]" data-footer style={footerStyle}>
-      <div className="footer-luxe__rim" aria-hidden="true" />
-      <div className="footer-luxe__inner">
-        <div className="footer-luxe__grid">
-          <div className="footer-luxe__brand">
-            <h3>St Mary’s House Dental</h3>
-            <p>Calm, contemporary care using precision technology and a lifetime approach to oral health.</p>
+    <footer className="relative" data-footer style={footerStyle}>
+      <div className="footer-luxe text-[var(--smh-text)]">
+        <div className="footer-luxe__rim" aria-hidden="true" />
+        <div className="footer-luxe__inner">
+          <div className="footer-luxe__grid">
+            <div className="footer-luxe__brand">
+              <h3>St Mary’s House Dental</h3>
+              <p>Calm, contemporary care using precision technology and a lifetime approach to oral health.</p>
+            </div>
+
+            <div>
+              <h4>Main</h4>
+              <ul>
+                {mainLinks.map((item) => (
+                  <li key={item.href}>
+                    <Link href={item.href}>{item.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h4>Resources</h4>
+              <ul>
+                {resourceLinks.map((item) => (
+                  <li key={item.href}>
+                    <Link href={item.href}>{item.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="footer-luxe__newsletter keyline-gold">
+              <h4>Join our newsletter</h4>
+              <p>Receive quarterly stories and gentle reminders curated by our clinical team.</p>
+              <form className="footer-luxe__form" onSubmit={handleSubmit} noValidate>
+                <label className="sr-only" htmlFor="footer-email">
+                  Email address
+                </label>
+                <div className="footer-luxe__field">
+                  <input
+                    id="footer-email"
+                    className="footer-luxe__input"
+                    type="email"
+                    inputMode="email"
+                    name="email"
+                    value={email}
+                    onChange={(event) => {
+                      setEmail(event.target.value);
+                      if (status !== 'idle') {
+                        setStatus('idle');
+                        setMessage('');
+                      }
+                    }}
+                    aria-invalid={status === 'error'}
+                    aria-describedby={message ? feedbackId : undefined}
+                    placeholder="you@example.com"
+                    required
+                  />
+                </div>
+                <button type="submit" className="smh-btn footer-luxe__button">
+                  Subscribe
+                </button>
+                <p className="footer-luxe__feedback" data-status={status} id={feedbackId} aria-live="polite">
+                  {message}
+                </p>
+              </form>
+            </div>
           </div>
 
-          <div>
-            <h4>Main</h4>
-            <ul>
-              {mainLinks.map((item) => (
-                <li key={item.href}>
-                  <Link href={item.href}>{item.label}</Link>
-                </li>
+          <div className="footer-luxe__meta">
+            <p>© {new Date().getFullYear()} St Mary’s House Dental Care. All rights reserved.</p>
+            <div className="footer-luxe__social">
+              {SOCIAL_LINKS.map((social) => (
+                <a key={social.href} href={social.href} target="_blank" rel="noreferrer noopener" aria-label={social.label}>
+                  <span aria-hidden="true">{social.short}</span>
+                </a>
               ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4>Resources</h4>
-            <ul>
-              {resourceLinks.map((item) => (
-                <li key={item.href}>
-                  <Link href={item.href}>{item.label}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="footer-luxe__newsletter keyline-gold">
-            <h4>Join our newsletter</h4>
-            <p>Receive quarterly stories and gentle reminders curated by our clinical team.</p>
-            <form className="footer-luxe__form" onSubmit={handleSubmit} noValidate>
-              <label className="sr-only" htmlFor="footer-email">
-                Email address
-              </label>
-              <div className="footer-luxe__field">
-                <input
-                  id="footer-email"
-                  className="footer-luxe__input"
-                  type="email"
-                  inputMode="email"
-                  name="email"
-                  value={email}
-                  onChange={(event) => {
-                    setEmail(event.target.value);
-                    if (status !== 'idle') {
-                      setStatus('idle');
-                      setMessage('');
-                    }
-                  }}
-                  aria-invalid={status === 'error'}
-                  aria-describedby={message ? feedbackId : undefined}
-                  placeholder="you@example.com"
-                  required
-                />
-              </div>
-              <button type="submit" className="smh-btn footer-luxe__button">
-                Subscribe
-              </button>
-              <p className="footer-luxe__feedback" data-status={status} id={feedbackId} aria-live="polite">
-                {message}
-              </p>
-            </form>
-          </div>
-        </div>
-
-        <div className="footer-luxe__meta">
-          <p>© {new Date().getFullYear()} St Mary’s House Dental Care. All rights reserved.</p>
-          <div className="footer-luxe__social">
-            {SOCIAL_LINKS.map((social) => (
-              <a key={social.href} href={social.href} target="_blank" rel="noreferrer noopener" aria-label={social.label}>
-                <span aria-hidden="true">{social.short}</span>
-              </a>
-            ))}
-          </div>
-          <div className="footer-luxe__links">
-            <Link href="/privacy">Privacy</Link>
-            <Link href="/cookies">Cookies</Link>
-            <Link href="/accessibility">Accessibility</Link>
-            <Link href="/terms">Terms of Use</Link>
+            </div>
+            <div className="footer-luxe__links">
+              <Link href="/privacy">Privacy</Link>
+              <Link href="/cookies">Cookies</Link>
+              <Link href="/accessibility">Accessibility</Link>
+              <Link href="/terms">Terms of Use</Link>
+            </div>
           </div>
         </div>
       </div>
@@ -142,8 +145,6 @@ const FooterLuxe = () => {
           isolation: isolate;
           background: inherit;
           color: inherit;
-          border-top: 1px solid var(--smh-gold);
-          box-shadow: inset 0 1px 0 color-mix(in oklab, var(--smh-gold) 22%, transparent);
           --footer-gold: var(--smh-gold);
           --footer-keyline-rest: color-mix(in oklab, var(--footer-gold) 36%, transparent);
           --footer-keyline-strong: color-mix(in oklab, var(--footer-gold) 60%, transparent);
@@ -162,11 +163,10 @@ const FooterLuxe = () => {
 
         [data-footer] a:hover,
         [data-footer] a:focus-visible {
-          color: var(--smh-gold);
           text-decoration: underline;
-          text-decoration-thickness: 1.5px;
-          text-underline-offset: 2px;
-          text-decoration-color: var(--smh-gold);
+          text-underline-offset: 0.15em;
+          text-decoration-thickness: 0.08em;
+          text-shadow: 0 0 0.01px color-mix(in oklab, var(--smh-gold) 40%, transparent);
         }
 
         .footer-luxe__rim {

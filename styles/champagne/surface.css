@@ -1,108 +1,49 @@
-:root{
-  --z-surface-gradient:0;
-  --z-surface-wave:1;
-  --z-surface-particles:2;
-  --z-surface-grain:3;
-  --z-surface-vignette:4;
-  --z-glass:20;
-  --z-content:30;
-  --z-header:40;
-  --champagne-glass-radius:16px;
-}
+@import "./glass.css";
 
-/* Full-bleed gradient surface */
+/* Champagne Surface — full-bleed gradient, gentle overlays */
 .champagne-surface{
-  position:relative;
-  isolation:isolate;
-  background:var(--smh-gradient);
-  border-radius:0;
-  color:var(--smh-text);
-  --champagne-vignette-alpha:var(--smh-vignette-alpha,0.06);
-  --champagne-grain-alpha:var(--smh-grain-alpha,0.04);
-  --champagne-particles-alpha:var(--smh-particles-alpha,0.06);
-  --champagne-wave-alpha:0;
+  position: relative;
+  isolation: isolate;
+  background: var(--smh-gradient); /* canonical lock */
+  border-radius: 0; /* hero/journey are full-bleed */
 }
 
-.champagne-surface.surface--rounded{
-  border-radius:1.5rem;
-}
+/* Layer order:
+   gradient (0) < wave (1) < particles (2) < grain (3) < vignette (4) < glass (20) < header (40) */
 
-/* Optional wave layer slot (keep present, default hidden) */
-.champagne-surface .wave{display:none;}
-.champagne-surface[data-wave="on"] .wave{display:block;}
-.champagne-surface .champagne-particles{display:none;}
-.champagne-particles[data-state="on"]{display:block;}
-
-.champagne-surface .wave{
-  z-index:var(--z-surface-wave);
-}
-
-.champagne-sheen-layer{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  z-index:var(--z-surface-grain);
+.champagne-wave{
+  position:absolute; inset:0; z-index:1;
 }
 
 .champagne-particles{
-  position:absolute;
-  inset:0;
+  position:absolute; inset:0; z-index:2;
+  opacity: var(--smh-particles-alpha, .06);
+  mix-blend-mode: screen;
   pointer-events:none;
-  opacity:var(--champagne-particles-alpha);
-  mix-blend-mode:screen;
-  z-index:var(--z-surface-particles);
 }
 
-/* Film grain (subtle) */
-.champagne-surface::after{
-  content:"";
-  position:absolute;
-  inset:0;
+.champagne-grain{
+  position:absolute; inset:0; z-index:3;
+  opacity: var(--smh-grain-alpha, .04);
+  mix-blend-mode: soft-light;
+  background-image: radial-gradient(color-mix(in oklab, var(--smh-ink) 84%, transparent) 1px, transparent 1px);
+  background-size: 2px 2px;
   pointer-events:none;
-  background-image:radial-gradient(color-mix(in oklab, var(--smh-ink) 85%, transparent) 1px, transparent 1px);
-  background-size:2px 2px;
-  opacity:var(--champagne-grain-alpha);
-  mix-blend-mode:soft-light;
-  z-index:var(--z-surface-grain);
 }
 
-/* Vignette */
-.champagne-surface::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  --vig-inner:58%;
-  --vig-outer:88%;
-  background:radial-gradient(
+.champagne-vignette{
+  position:absolute; inset:0; z-index:4;
+  opacity: var(--smh-vignette-alpha, .06);
+  mix-blend-mode: multiply;
+  --champagne-vignette-inner: var(--smh-vignette-inner, 58%);
+  --champagne-vignette-outer: var(--smh-vignette-outer, 88%);
+  background: radial-gradient(
     circle at 50% 42%,
-    transparent var(--vig-inner),
-    color-mix(in oklab, var(--smh-ink) 92%, transparent) var(--vig-outer)
+    transparent var(--champagne-vignette-inner),
+    color-mix(in oklab, var(--smh-ink) 92%, transparent) var(--champagne-vignette-outer)
   );
-  opacity:var(--champagne-vignette-alpha);
-  mix-blend-mode:multiply;
-  z-index:var(--z-surface-vignette);
+  pointer-events:none;
 }
 
-/* Glass card utility */
-.champagne-glass{
-  position:relative;
-  background:color-mix(in oklab, var(--smh-ink) 12%, transparent);
-  backdrop-filter:blur(16px) saturate(110%);
-  border:1px solid var(--champagne-keyline-gold);
-  border-radius:var(--champagne-glass-radius);
-  box-shadow:var(--champagne-pane);
-  color:var(--smh-text);
-  z-index:var(--z-glass);
-}
-
-.rounded-champagne{
-  border-radius:var(--champagne-glass-radius);
-}
-
-@media (max-width: 480px){
-  .hero .champagne-glass{
-    margin-top:1.25rem;
-    padding:0.9rem 1rem;
-  }
-}
+/* Any glass panel sits above overlays */
+.champagne-surface .champagne-glass{ position:relative; z-index:20; }

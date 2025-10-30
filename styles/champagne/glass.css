@@ -1,0 +1,18 @@
+/* Champagne Glass — airy, luxe, token-driven only */
+:root{
+  /* soften haze; add life via saturation */
+  --glass-ink-mix: 8%;
+  --glass-blur: 16px;
+  --glass-sat: 1.15;
+}
+
+.champagne-glass{
+  background: color-mix(in oklab, var(--smh-ink) var(--glass-ink-mix), transparent);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  border: 1px solid color-mix(in oklab, var(--smh-gold) 26%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--smh-gold) 14%, transparent) inset,
+    0 10px 28px rgba(0,0,0,.16);
+  border-radius: var(--radius-champagne, 24px);
+}
