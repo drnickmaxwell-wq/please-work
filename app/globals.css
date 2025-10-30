@@ -1,5 +1,6 @@
 @import "../styles/tokens/smh-champagne-tokens.css";
 @import "../styles/champagne/surface.css";
+@import "../styles/champagne/glass.css";
 
 @tailwind base;
 @tailwind components;

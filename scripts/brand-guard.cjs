@@ -22,6 +22,11 @@ const normalize = (value) => value.replace(/\s+/g, "").toLowerCase();
 
 const IGNORED_DIRS = new Set(["node_modules", ".next", "dist"]);
 
+const HERO_JOURNEY_FILES = new Set([
+  join(ROOT, "components/hero/4k-hero-video.tsx"),
+  join(ROOT, "components/sections/SmileJourney.tsx"),
+]);
+
 function walk(dir){
   return readdirSync(dir).flatMap(f=>{
     if(IGNORED_DIRS.has(f)) return [];
@@ -55,6 +60,7 @@ for(const file of files){
 
   const txt = readFileSync(file,"utf8");
   const normalized = normalize(txt);
+  const isHeroJourneyFile = HERO_JOURNEY_FILES.has(file);
   for(const h of HEXES){
     if(h.test(txt)) violations.push({file, hex: h});
   }
@@ -69,6 +75,17 @@ for(const file of files){
     if(/color-mix[^}]*var\(\s*--smh-ink\s*\)/i.test(block)){
       violations.push({ file, hex: 'champagne-glass-ink-mix' });
       break;
+    }
+  }
+  if(isHeroJourneyFile){
+    if(/bg-(?:white|black|ink)\//i.test(txt)){
+      violations.push({ file, hex: 'hero-journey-bg-tint' });
+    }
+    if(/background\s*:\s*(?:radial-gradient|linear-gradient)\(/i.test(txt)){
+      violations.push({ file, hex: 'hero-journey-background-gradient' });
+    }
+    if(/opacity\s*:\s*0\.\d+/i.test(txt)){
+      violations.push({ file, hex: 'hero-journey-opacity' });
     }
   }
   if(file.includes("brand") && normalized.includes("linear-gradient(") && !normalized.includes(CANONICAL_GRAD)){

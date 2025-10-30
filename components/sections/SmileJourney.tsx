@@ -4,7 +4,6 @@
 import Link from "next/link";
 import { useMemo } from "react";
 
-import Particles from "@/components/brand/Particles";
 import { usePrefersReducedMotion } from "@/lib/hooks/usePrefersReducedMotion";
 
 export interface TimelineStep {
@@ -61,24 +60,16 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
   );
 
   const prefersReducedMotion = usePrefersReducedMotion();
-  const particlesActive = !prefersReducedMotion;
-
   return (
     <section
       aria-labelledby="journey-hero-title"
-      className="champagne-surface relative"
-      data-particles={particlesActive ? "on" : "off"}
+      className="champagne-surface relative z-0"
+      data-particles="off"
       data-wave="off"
       data-reduced-motion={prefersReducedMotion ? "true" : "false"}
     >
       <div className="relative isolate w-screen py-16 md:py-24">
         <div className="relative mx-auto w-full max-w-7xl px-4 md:px-6">
-          {particlesActive ? (
-            <Particles className="champagne-particles" data-state="on" aria-hidden />
-          ) : (
-            <div className="champagne-particles" data-state="off" aria-hidden style={{ opacity: 0 }} />
-          )}
-
           <div className="relative z-[var(--z-content)] flex flex-col gap-12" style={{ color: "var(--smh-text)" }}>
             <div className="champagne-glass relative z-20 mx-auto mb-8 max-w-[960px] p-6 md:p-8">
               <div className="space-y-4 text-center">
@@ -88,7 +79,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
                 >
                   Your Smile Journey
                 </h2>
-                <p className="text-base opacity-90 md:text-lg">
+                <p className="text-base md:text-lg">
                   Discover the path to your perfect smile with a guided experience curated by Manus AI.
                 </p>
               </div>
@@ -116,7 +107,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
                         </div>
                       )}
                       <h3 className="font-serif text-2xl tracking-tight">{step.title}</h3>
-                      <p className="text-base leading-relaxed" style={{ opacity: 0.85 }}>
+                      <p className="text-base leading-relaxed">
                         {step.body}
                       </p>
                     </article>
@@ -129,7 +120,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
               <div className="champagne-glass relative z-20 p-6 md:p-8">
                 <div className="space-y-3">
                   <h3 className="font-serif text-3xl tracking-tight">Ready to Begin?</h3>
-                  <p style={{ opacity: 0.8 }}>Take the first step toward your perfect smile.</p>
+                  <p>Take the first step toward your perfect smile.</p>
                 </div>
                 <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
                   <Link
@@ -142,7 +133,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
                   </Link>
                   <Link
                     href="/ai-smile-quiz"
-                    className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-transparent px-6 py-3 font-semibold opacity-90 transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
+                    className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-transparent px-6 py-3 font-semibold transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
                     style={{ color: "var(--smh-text)" }}
                   >
                     Start your AI smile preview
