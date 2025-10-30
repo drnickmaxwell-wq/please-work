@@ -52,7 +52,10 @@ export default function BrandLock() {
 
   return (
     <main className="min-h-screen bg-[color:var(--smh-bg)] text-[color:var(--smh-text)]">
-      <section className="champagne-surface saturation-lift hero flex min-h-screen items-center justify-center p-6">
+      <section
+        className="champagne-surface champagne-warm-lift saturation-lift hero flex min-h-screen items-center justify-center p-6"
+        style={{ ["--smh-warm-lift" as any]: 1 }}
+      >
         <div className="champagne-glass w-full max-w-2xl p-8">
           <h2 className="font-serif text-2xl">Brand lock diagnostics</h2>
           <p className="mt-2 text-sm opacity-80">

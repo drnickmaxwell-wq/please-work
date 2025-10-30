@@ -20,7 +20,7 @@ export default function Hero4KVideo({ poster }: Hero4KVideoProps) {
       data-wave="off"
       data-particles="off"
       data-reduced-motion={prefersReducedMotion ? 'true' : 'false'}
-      className="champagne-surface use-weighted-gradient saturation-lift hero relative z-0"
+      className="champagne-surface champagne-warm-lift use-weighted-gradient saturation-lift hero relative z-0"
     >
       <div className="relative isolate w-full min-h-[85vh] overflow-hidden md:min-h-[min(95vh,1100px)]">
         <div aria-hidden className="absolute inset-0 z-0 overflow-hidden">

@@ -63,7 +63,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
   return (
     <section
       aria-labelledby="journey-hero-title"
-      className="champagne-surface use-weighted-gradient saturation-lift journey relative z-0"
+      className="champagne-surface champagne-warm-lift use-weighted-gradient saturation-lift journey relative z-0"
       data-particles="off"
       data-wave="off"
       data-reduced-motion={prefersReducedMotion ? "true" : "false"}

@@ -19,6 +19,47 @@
   --champagne-particles-alpha: var(--champ-particles-alpha);
 }
 
+/* Optional warmth overlay that preserves the locked base gradient. */
+.champagne-warm-lift {
+  position: relative;
+  isolation: isolate; /* keep overlay inside the surface */
+}
+
+/* Paint an artist-tuned perceptual warm bias using only tokens. */
+.champagne-warm-lift::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0; /* sits above base gradient but below glass content */
+  opacity: calc(var(--smh-warm-lift, 0) * 1); /* master toggle */
+
+  /* Two-stop radial mix:
+     - inner: rose-biased magenta, off-center to top-left (matches your bgPos ~18%/38%)
+     - outer: transparent gold to add coastal warmth at edges
+  */
+  background:
+    radial-gradient(
+      120% 120% at 18% 38%,
+      color-mix(in oklab, var(--smh-warm-rose) 100%, var(--smh-warm-magenta) 0%)
+        calc(var(--smh-warm-lift-magenta-alpha, 0.18) * 100%),
+      transparent 50%
+    ),
+    radial-gradient(
+      130% 130% at 60% 80%,
+      color-mix(in oklab, var(--smh-warm-gold) 100%, transparent 0%)
+        calc(var(--smh-warm-lift-gold-alpha, 0.06) * 100%),
+      transparent 70%
+    );
+
+  mix-blend-mode: soft-light; /* perceptual lift without tinting edges */
+}
+
+/* Respect user settings — if reduced motion/contrast, just show base gradient */
+@media (prefers-contrast: more){
+  .champagne-warm-lift::before { opacity: 0; }
+}
+
 .champagne-surface[data-variant="hero"],
 .champagne-surface.hero{
   --smh-surface-bg-size: 118% 118%;
