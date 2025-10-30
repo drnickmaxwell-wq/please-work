@@ -188,6 +188,21 @@ export default function BrandLivePreviewPage() {
     console.log(
       `Vignette alpha: ${vignetteAlpha || '0'}  Grain alpha: ${grainAlpha || '0'}  Particles: ${particlesState}`
     );
+    const parsedVignette = Number.parseFloat(vignetteAlpha || '0');
+    const parsedGrain = Number.parseFloat(grainAlpha || '0');
+    const parsedParticles = Number.parseFloat(particlesAlpha || '0');
+    console.assert(
+      Number.isFinite(parsedVignette) && parsedVignette === 0,
+      `Expected vignette alpha 0, received ${vignetteAlpha || 'unset'}`
+    );
+    console.assert(
+      Number.isFinite(parsedGrain) && Math.abs(parsedGrain - 0.02) < 0.001,
+      `Expected grain alpha 0.02, received ${grainAlpha || 'unset'}`
+    );
+    console.assert(
+      Number.isFinite(parsedParticles) && parsedParticles === 0,
+      `Expected particles alpha 0, received ${particlesAlpha || 'unset'}`
+    );
 
     if (Number.isFinite(glassZ)) {
       document.documentElement.style.setProperty('--z-glass', String(glassZ));
@@ -223,6 +238,9 @@ export default function BrandLivePreviewPage() {
     const surfaceTarget = document.querySelector<HTMLElement>('.champagne-surface');
     const surfaceComputed = surfaceTarget ? getComputedStyle(surfaceTarget) : null;
     const gradientCandidate = surfaceComputed?.getPropertyValue('background-image').trim();
+    if (gradientCandidate) {
+      console.log(`Surface background image: ${gradientCandidate}`);
+    }
     const gradient =
       gradientCandidate && gradientCandidate !== 'none'
         ? gradientCandidate
@@ -264,6 +282,23 @@ export default function BrandLivePreviewPage() {
       ctaColor,
       ctaMatchesTextToken,
     });
+
+    const canonicalGradientToken = root.getPropertyValue('--smh-gradient').replace(/\s+/g, '');
+    const canonicalGradientLock = root.getPropertyValue('--smh-gradient').trim() || 'unset';
+    const normalizedSurfaceGradient = gradientCandidate ? gradientCandidate.replace(/\s+/g, '') : '';
+    console.assert(
+      normalizedSurfaceGradient === canonicalGradientToken,
+      `Expected surface background ${canonicalGradientLock}, received ${gradientCandidate || 'unset'}`
+    );
+    const glassTarget = document.querySelector<HTMLElement>('.champagne-glass');
+    if (glassTarget) {
+      const glassColor = getComputedStyle(glassTarget).backgroundColor.trim();
+      console.log(`Glass background color: ${glassColor}`);
+      console.assert(
+        glassColor === 'rgba(0, 0, 0, 0)',
+        `Expected transparent glass background, received ${glassColor}`
+      );
+    }
 
     console.log(`Computed gradient: ${canonicalGradient}`);
     console.log(`CTA color: ${ctaColor}`);

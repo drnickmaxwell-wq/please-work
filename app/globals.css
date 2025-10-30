@@ -44,8 +44,9 @@ a {
   transition: background 200ms ease, border-color 200ms ease;
 }
 
+.header.scrolled,
 .sticky-header[data-scrolled="true"]{
-  background: color-mix(in oklab, var(--smh-ink) 8%, transparent);
+  background: color-mix(in oklab, var(--smh-ink) 72%, transparent);
 }
 
 .glass-pane {

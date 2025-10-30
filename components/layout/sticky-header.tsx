@@ -102,8 +102,8 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
           scale: headerScale,
         }}
         className={[
-          'sticky-header sticky top-0 z-40 w-full border-b border-transparent text-[color:var(--smh-text)] transition-colors duration-300',
-          isScrolled ? 'border-white/10' : '',
+          'sticky-header header sticky top-0 z-50 w-full border-b border-transparent text-[color:var(--smh-text)] transition-colors duration-300',
+          isScrolled ? 'scrolled' : '',
           className,
         ]
           .filter(Boolean)

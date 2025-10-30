@@ -78,8 +78,6 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           ) : (
             <div className="champagne-particles" data-state="off" aria-hidden style={{ opacity: 0 }} />
           )}
-          <div aria-hidden className="champagne-grain" />
-          <div aria-hidden className="champagne-vignette" />
 
           <div className="relative z-[var(--z-content)] flex flex-col gap-12" style={{ color: "var(--smh-text)" }}>
             <div className="champagne-glass relative z-20 mx-auto mb-8 max-w-[960px] p-6 md:p-8">
@@ -108,7 +106,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
                     <article className="champagne-glass relative z-20 p-6 md:p-8" tabIndex={0}>
                       {iconPath && (
                         <div className="mb-6 flex flex-col items-center text-[color:var(--champagne-keyline-gold)]">
-                          <span className="flex h-14 w-14 items-center justify-center rounded-full border border-[color:var(--champagne-keyline-gold)] bg-white/5">
+                          <span className="flex h-14 w-14 items-center justify-center rounded-full border border-[color:var(--champagne-keyline-gold)]">
                             <img src={iconPath} alt="" aria-hidden="true" className="h-7 w-7" />
                           </span>
                           <span
