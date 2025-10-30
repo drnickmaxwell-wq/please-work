@@ -13,6 +13,7 @@ type Diagnostics = {
 
 export default function BrandLock() {
   const [diagnostics, setDiagnostics] = useState<Diagnostics | null>(null);
+  const [warmLiftEnabled, setWarmLiftEnabled] = useState(false);
 
   useEffect(() => {
     const surface = document.querySelector<HTMLElement>(".champagne-surface");
@@ -52,12 +53,23 @@ export default function BrandLock() {
 
   return (
     <main className="min-h-screen bg-[color:var(--smh-bg)] text-[color:var(--smh-text)]">
-      <section className="champagne-surface saturation-lift hero flex min-h-screen items-center justify-center p-6">
+      <section
+        className="champagne-surface champagne-warm-lift saturation-lift hero flex min-h-screen items-center justify-center p-6"
+        style={{ ["--smh-warm-lift" as const]: warmLiftEnabled ? 1 : 0 }}
+      >
         <div className="champagne-glass w-full max-w-2xl p-8">
           <h2 className="font-serif text-2xl">Brand lock diagnostics</h2>
           <p className="mt-2 text-sm opacity-80">
             Values below reflect live computed styles for the champagne surface stack.
           </p>
+          <label className="mt-4 inline-flex items-center gap-2 text-sm">
+            <input
+              type="checkbox"
+              checked={warmLiftEnabled}
+              onChange={(event) => setWarmLiftEnabled(event.target.checked)}
+            />
+            Warm lift overlay
+          </label>
           <div className="mt-6 space-y-2 font-mono text-sm">
             {diagnostics ? (
               <>
