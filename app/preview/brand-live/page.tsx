@@ -119,6 +119,12 @@ const normalizeColor = (value: string): string | null => {
   return trimmed;
 };
 
+const normalizeGradientStops = (value: string): string =>
+  value.replace(/rgb\(([^)]+)\)/gi, (match) => {
+    const normalized = normalizeColor(match);
+    return normalized ? normalized.toUpperCase() : match;
+  });
+
 const resolveCssVariable = (
   variable: string,
   root: CSSStyleDeclaration,
@@ -230,20 +236,43 @@ export default function BrandLivePreviewPage() {
       .replace(/\s*,\s*/g, ',')
       .replace(/#([0-9a-f]{6})/gi, (_, hex) => `#${hex.toUpperCase()}`)
       .trim();
-    const normalizedGradient = gradient
-      .replace(/\s+/g, ' ')
-      .replace(/\(\s*/g, '(')
-      .replace(/\s*\)/g, ')')
-      .replace(/\s*,\s*/g, ',')
-      .replace(/#([0-9a-f]{6})/gi, (_, hex) => `#${hex.toUpperCase()}`)
-      .trim();
+    const normalizedGradient = normalizeGradientStops(
+      gradient
+        .replace(/\s+/g, ' ')
+        .replace(/\(\s*/g, '(')
+        .replace(/\s*\)/g, ')')
+        .replace(/\s*,\s*/g, ',')
+        .replace(/#([0-9a-f]{6})/gi, (_, hex) => `#${hex.toUpperCase()}`)
+        .trim()
+    );
     console.log(`surfaceComputed.backgroundImage → ${normalizedGradient}`);
+    const surfaceBackgroundSize = surfaceComputed?.getPropertyValue('background-size').trim() || 'unset';
+    const surfaceBackgroundPosition = surfaceComputed?.getPropertyValue('background-position').trim() || 'unset';
+    console.log(`surfaceComputed.backgroundSize → ${surfaceBackgroundSize}`);
+    console.log(`surfaceComputed.backgroundPosition → ${surfaceBackgroundPosition}`);
     console.assert(
       normalizedGradient === canonicalGradient,
       `Expected ${canonicalGradient} but received ${normalizedGradient || 'none'}`
     );
 
-    const glassTarget = document.querySelector<HTMLElement>('.champagne-glass');
+    let glassTarget = document.querySelector<HTMLElement>('.champagne-glass');
+    let disposeGlass: (() => void) | undefined;
+    if (!glassTarget) {
+      const probe = document.createElement('div');
+      probe.className = 'champagne-glass';
+      probe.style.position = 'absolute';
+      probe.style.opacity = '0';
+      probe.style.pointerEvents = 'none';
+      probe.style.width = '0';
+      probe.style.height = '0';
+      document.body.appendChild(probe);
+      glassTarget = probe;
+      disposeGlass = () => {
+        if (probe.parentElement) {
+          probe.parentElement.removeChild(probe);
+        }
+      };
+    }
     const glassComputed = glassTarget ? getComputedStyle(glassTarget) : null;
     const glassBackground = glassComputed?.getPropertyValue('background-color').trim() || 'unset';
     console.log(`glassComputed.backgroundColor → ${glassBackground}`);
@@ -278,6 +307,18 @@ export default function BrandLivePreviewPage() {
       glassBefore === 'none' && glassAfter === 'none',
       `Expected no pseudo content on .champagne-glass but received before=${glassBefore} after=${glassAfter}`
     );
+    if (disposeGlass) {
+      disposeGlass();
+    }
+
+    const journeySurface = document.querySelector<HTMLElement>('.journey-surface');
+    if (journeySurface) {
+      const journeyComputed = getComputedStyle(journeySurface);
+      const journeyBackgroundSize = journeyComputed.getPropertyValue('background-size').trim() || 'unset';
+      const journeyBackgroundPosition = journeyComputed.getPropertyValue('background-position').trim() || 'unset';
+      console.log(`journeySurface.backgroundSize → ${journeyBackgroundSize}`);
+      console.log(`journeySurface.backgroundPosition → ${journeyBackgroundPosition}`);
+    }
 
     const heroSurface = document.querySelector<HTMLElement>('[data-surface="hero"].champagne-surface');
     let heroBorderRadius = '0px';
@@ -368,7 +409,7 @@ export default function BrandLivePreviewPage() {
               data-surface={pane.id}
               data-wave={pane.wave ? 'on' : 'off'}
               data-particles={pane.particles ? 'on' : 'off'}
-              className="champagne-surface"
+              className={`champagne-surface${pane.id === 'journey' ? ' journey-surface' : ''}`}
               style={pane.wave ? surfaceStyle : undefined}
             >
               <div className="relative isolate overflow-hidden">
