@@ -163,19 +163,34 @@ export default function BrandLivePreviewPage() {
       return raw || '0';
     };
 
+    const gradientToken = readRoot('--smh-gradient');
+    const gradientNormalized = gradientToken.replace(/\s+/g, '');
+    const grainAlpha = readSurface('--champagne-grain-alpha');
+    const vignetteAlpha = readSurface('--champagne-vignette-alpha');
+    const particlesAlpha = readSurface('--champagne-particles-alpha');
+    const glassZ = Number.parseFloat(readRoot('--z-glass') || '0');
+    const headerZ = Number.parseFloat(readRoot('--z-header') || '0');
+
     setTokens({
-      gradient: readRoot('--smh-gradient').replace(/\s+/g, ' '),
+      gradient: gradientToken.replace(/\s+/g, ' '),
       magenta: readRoot('--smh-primary-magenta'),
       teal: readRoot('--smh-primary-teal'),
       gold: readRoot('--smh-accent-gold'),
       ink: readRoot('--smh-primary-ink'),
-      grain: readSurface('--champagne-grain-alpha'),
+      grain: grainAlpha,
       grainToken: readRoot('--champagne-grain-alpha') || '0',
-      vignette: readSurface('--champagne-vignette-alpha'),
+      vignette: vignetteAlpha,
       vignetteToken: readRoot('--champagne-vignette-alpha') || '0',
       wave: readSurface('--champagne-wave-alpha'),
-      particles: readSurface('--champagne-particles-alpha'),
+      particles: particlesAlpha,
     });
+
+    console.log(`[brand-live] gradient_string:${gradientNormalized}`);
+    console.log(`[brand-live] grain_alpha:${grainAlpha}`);
+    console.log(`[brand-live] vignette_alpha:${vignetteAlpha}`);
+    console.log(`[brand-live] particles_alpha:${particlesAlpha}`);
+    console.log(`[brand-live] z_index_glass:${Number.isFinite(glassZ) ? glassZ : 'n/a'}`);
+    console.log(`[brand-live] z_index_header:${Number.isFinite(headerZ) ? headerZ : 'n/a'}`);
 
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const audit = () =>
@@ -243,9 +258,9 @@ export default function BrandLivePreviewPage() {
       ctaMatchesTextToken,
     });
 
-    console.log(`CTA text color: ${ctaColor}`);
-    console.log(`Hero border radius: ${heroBorderRadius || '0px'}`);
-    console.log(`Gradient string: ${normalizedGradient}`);
+    console.log(`[brand-live] cta_text_color:${ctaColor}`);
+    console.log(`[brand-live] hero_border_radius:${heroBorderRadius || '0px'}`);
+    console.log(`[brand-live] runtime_gradient_string:${normalizedGradient}`);
   }, []);
 
   const surfaceStyle = useMemo(
@@ -300,47 +315,39 @@ export default function BrandLivePreviewPage() {
               data-surface={pane.id}
               data-wave={pane.wave ? 'on' : 'off'}
               data-particles={pane.particles ? 'on' : 'off'}
-              className="champagne-surface relative overflow-hidden"
+              className="champagne-surface"
               style={pane.wave ? surfaceStyle : undefined}
             >
-              <div aria-hidden className="wave" />
-              {pane.particles ? (
-                <Particles
-                  aria-hidden
-                  className="champagne-particles"
-                  data-state="on"
-                  style={{ opacity: 'var(--champagne-particles-opacity-d)' }}
-                />
-              ) : (
-                <div
-                  aria-hidden
-                  className="champagne-particles"
-                  data-state="off"
-                  style={{ opacity: 'var(--champagne-particles-opacity-m)' }}
-                />
-              )}
-              <div aria-hidden className="champagne-sheen-layer" />
+              <div className="relative isolate overflow-hidden">
+                <div aria-hidden className="wave" />
+                {pane.particles ? (
+                  <Particles aria-hidden className="champagne-particles" data-state="on" />
+                ) : (
+                  <div className="champagne-particles" data-state="off" aria-hidden style={{ opacity: 0 }} />
+                )}
+                <div aria-hidden className="champagne-sheen-layer" style={{ zIndex: 'var(--z-surface-grain)' }} />
 
-              <div className="relative z-[10] flex min-h-[320px] flex-col justify-between gap-6 p-10">
-                <div className="space-y-3">
-                  <h2 className="font-serif text-3xl">{pane.label}</h2>
-                  <p className="text-white/80">{pane.description}</p>
-                </div>
-                {pane.id === 'hero' ? (
-                  <div className="flex flex-wrap items-center gap-4">
-                    <button
-                      type="button"
-                      data-cta="primary"
-                      className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-[var(--smh-gradient)] px-5 py-3 font-semibold text-[var(--smh-text)] shadow-[0_12px_24px_rgba(11,13,15,0.25)] transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
-                    >
-                      Diagnostic CTA
-                    </button>
+                <div className="relative z-[var(--z-content)] flex min-h-[320px] flex-col justify-between gap-6 p-10">
+                  <div className="space-y-3">
+                    <h2 className="font-serif text-3xl">{pane.label}</h2>
+                    <p className="text-white/80">{pane.description}</p>
                   </div>
-                ) : null}
-                <div className="flex flex-wrap gap-4 text-[0.65rem] uppercase tracking-[0.45em] text-white/60">
-                  <span>Wave: {pane.wave ? 'On' : 'Off'}</span>
-                  <span>Particles: {pane.particles ? 'On' : 'Off'}</span>
-                  <span>Gradient: Locked</span>
+                  {pane.id === 'hero' ? (
+                    <div className="flex flex-wrap items-center gap-4">
+                      <button
+                        type="button"
+                        data-cta="primary"
+                        className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-[var(--smh-gradient)] px-5 py-3 font-semibold text-[var(--smh-text)] shadow-[0_12px_24px_rgba(11,13,15,0.25)] transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
+                      >
+                        Diagnostic CTA
+                      </button>
+                    </div>
+                  ) : null}
+                  <div className="flex flex-wrap gap-4 text-[0.65rem] uppercase tracking-[0.45em] text-white/60">
+                    <span>Wave: {pane.wave ? 'On' : 'Off'}</span>
+                    <span>Particles: {pane.particles ? 'On' : 'Off'}</span>
+                    <span>Gradient: Locked</span>
+                  </div>
                 </div>
               </div>
             </section>

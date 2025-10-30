@@ -27,7 +27,7 @@ const FooterLuxe = () => {
   const feedbackId = useMemo(() => 'newsletter-feedback', []);
 
   const footerStyle: CSSProperties = {
-    background: 'color-mix(in oklab, var(--smh-ink) 90%, var(--smh-text) 10%)',
+    background: 'var(--smh-ink)',
     color: 'var(--smh-text)',
   };
 
@@ -142,14 +142,13 @@ const FooterLuxe = () => {
           isolation: isolate;
           background: inherit;
           color: inherit;
-          border-top: 2px solid var(--smh-accent-gold);
-          box-shadow: 0 -6px 24px -24px color-mix(in oklab, var(--smh-accent-gold) 35%, transparent);
-          --footer-gold-lift: color-mix(in oklab, var(--smh-accent-gold) 90%, var(--smh-white) 10%);
-          --footer-keyline-rest: color-mix(in oklab, var(--footer-gold-lift) 35%, transparent);
-          --footer-keyline-strong: color-mix(in oklab, var(--footer-gold-lift) 65%, transparent);
-          --footer-surface-strong: color-mix(in srgb, var(--smh-ink) 68%, transparent 32%);
-          --footer-surface-soft: color-mix(in srgb, var(--smh-ink) 54%, transparent 46%);
-          --footer-surface-muted: color-mix(in srgb, var(--smh-ink) 42%, transparent 58%);
+          border-top: 1px solid var(--smh-gold);
+          box-shadow: inset 0 1px 0 color-mix(in oklab, var(--smh-gold) 22%, transparent);
+          --footer-gold: var(--smh-gold);
+          --footer-keyline-rest: color-mix(in oklab, var(--footer-gold) 36%, transparent);
+          --footer-keyline-strong: color-mix(in oklab, var(--footer-gold) 60%, transparent);
+          --footer-surface-strong: color-mix(in oklab, var(--smh-ink) 68%, transparent 32%);
+          --footer-surface-soft: color-mix(in oklab, var(--smh-ink) 54%, transparent 46%);
         }
 
         [data-footer] a {
@@ -163,25 +162,11 @@ const FooterLuxe = () => {
 
         [data-footer] a:hover,
         [data-footer] a:focus-visible {
-          color: var(--footer-gold-lift);
+          color: var(--smh-gold);
           text-decoration: underline;
           text-decoration-thickness: 1.5px;
           text-underline-offset: 2px;
-          text-decoration-color: var(--smh-accent-gold);
-        }
-
-        .footer-luxe::before {
-          content: '';
-          position: absolute;
-          inset: -12%;
-          pointer-events: none;
-          background:
-            radial-gradient(8px 8px at 18% 24%, color-mix(in oklab, var(--footer-gold-lift) 32%, transparent) 0 60%, transparent 61%) no-repeat,
-            radial-gradient(6px 6px at 64% 70%, color-mix(in oklab, var(--footer-gold-lift) 26%, transparent) 0 60%, transparent 61%) no-repeat,
-            radial-gradient(4px 4px at 84% 32%, color-mix(in oklab, var(--footer-gold-lift) 22%, transparent) 0 60%, transparent 61%) no-repeat;
-          filter: blur(0.4px);
-          opacity: 0.12;
-          z-index: 0;
+          text-decoration-color: var(--smh-gold);
         }
 
         .footer-luxe__rim {
@@ -218,7 +203,7 @@ const FooterLuxe = () => {
           margin: 0;
           font-size: 1.6rem;
           font-family: var(--font-display, 'Playfair Display', serif);
-          color: var(--smh-ink-95);
+          color: color-mix(in oklab, var(--smh-text) 92%, var(--smh-white) 8%);
         }
 
         h4 {
@@ -226,12 +211,12 @@ const FooterLuxe = () => {
           text-transform: uppercase;
           letter-spacing: 0.14em;
           font-size: 0.85rem;
-          color: var(--smh-ink-80);
+          color: color-mix(in oklab, var(--smh-text) 78%, var(--smh-white) 22%);
         }
 
         p {
           margin: 0;
-          color: var(--smh-ink-80);
+          color: color-mix(in oklab, var(--smh-text) 80%, var(--smh-white) 20%);
         }
 
         ul {
@@ -275,12 +260,12 @@ const FooterLuxe = () => {
           outline: none;
           border-radius: inherit;
           background: var(--footer-surface-soft);
-          color: var(--smh-ink-95);
+          color: color-mix(in oklab, var(--smh-text) 88%, var(--smh-white) 12%);
           font-family: var(--font-body, 'Inter', sans-serif);
         }
 
         .footer-luxe__input::placeholder {
-          color: color-mix(in srgb, var(--smh-ink-95) 68%, transparent 32%);
+          color: color-mix(in oklab, var(--smh-text) 62%, transparent 38%);
         }
 
         .footer-luxe__field:focus-within {
@@ -304,7 +289,7 @@ const FooterLuxe = () => {
         .footer-luxe__feedback {
           font-size: 0.9rem;
           min-height: 1.2rem;
-          color: color-mix(in srgb, var(--smh-ink-95) 76%, transparent 24%);
+          color: color-mix(in oklab, var(--smh-text) 76%, transparent 24%);
         }
 
         .footer-luxe__feedback[data-status='error'] {
@@ -338,15 +323,15 @@ const FooterLuxe = () => {
           height: 2.5rem;
           border-radius: 999px;
           box-shadow: 0 0 0 1px var(--footer-keyline-rest) inset;
-          color: color-mix(in oklab, var(--footer-gold-lift) 80%, transparent 20%);
+          color: color-mix(in oklab, var(--footer-gold) 72%, transparent 28%);
           transition: background-color var(--motion-duration-normal, 160ms) var(--motion-easing-smooth, ease),
             color var(--motion-duration-normal, 160ms) var(--motion-easing-smooth, ease);
         }
 
         .footer-luxe__social a:hover,
         .footer-luxe__social a:focus-visible {
-          background: color-mix(in oklab, var(--footer-gold-lift) 30%, transparent 70%);
-          color: var(--footer-gold-lift);
+          background: color-mix(in oklab, var(--footer-gold) 28%, transparent 72%);
+          color: var(--footer-gold);
         }
 
         .footer-luxe__links {
@@ -382,11 +367,6 @@ const FooterLuxe = () => {
           }
         }
 
-        @media (prefers-reduced-motion: reduce) {
-          .footer-luxe::before {
-            animation: none;
-          }
-        }
       `}</style>
     </footer>
   );

@@ -1,27 +1,26 @@
 :root{
-  --z-surface: 10;
-  --z-surface-grain: 11;
-  --z-surface-particles: 12;
-  --z-glass: 20;
-  --z-content: 30;
-  --z-header: 40;
+  --z-surface-gradient:0;
+  --z-surface-wave:1;
+  --z-surface-particles:2;
+  --z-surface-grain:3;
+  --z-surface-vignette:4;
+  --z-glass:20;
+  --z-content:30;
+  --z-header:40;
+  --champagne-glass-radius:16px;
 }
 
 /* Full-bleed gradient surface */
 .champagne-surface{
   position:relative;
-  background:var(--smh-gradient);
   isolation:isolate;
-  border-radius:0px;
+  background:var(--smh-gradient);
+  border-radius:0;
   color:var(--smh-text);
-  --vignette-alpha:0.06;
-  --grain-alpha:0.055;
-  --champagne-vignette-alpha:var(--vignette-alpha);
-  --champagne-grain-alpha:var(--grain-alpha);
-  --champagne-particles-opacity:0.22;
-  --champagne-particles-alpha:var(--champagne-particles-opacity);
-  --particle-density:0.0085;
-  --particle-size:1px;
+  --champagne-vignette-alpha:var(--smh-vignette-alpha,0.06);
+  --champagne-grain-alpha:var(--smh-grain-alpha,0.04);
+  --champagne-particles-alpha:var(--smh-particles-alpha,0.06);
+  --champagne-wave-alpha:0;
 }
 
 .champagne-surface.surface--rounded{
@@ -34,11 +33,22 @@
 .champagne-surface .champagne-particles{display:none;}
 .champagne-particles[data-state="on"]{display:block;}
 
+.champagne-surface .wave{
+  z-index:var(--z-surface-wave);
+}
+
+.champagne-sheen-layer{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:var(--z-surface-grain);
+}
+
 .champagne-particles{
   position:absolute;
   inset:0;
   pointer-events:none;
-  opacity:var(--champagne-particles-opacity);
+  opacity:var(--champagne-particles-alpha);
   mix-blend-mode:screen;
   z-index:var(--z-surface-particles);
 }
@@ -46,9 +56,10 @@
 /* Film grain (subtle) */
 .champagne-surface::after{
   content:"";
-  position:absolute; inset:0;
+  position:absolute;
+  inset:0;
   pointer-events:none;
-  background-image:radial-gradient(#000 1px, transparent 1px);
+  background-image:radial-gradient(color-mix(in oklab, var(--smh-ink) 85%, transparent) 1px, transparent 1px);
   background-size:2px 2px;
   opacity:var(--champagne-grain-alpha);
   mix-blend-mode:soft-light;
@@ -58,40 +69,35 @@
 /* Vignette */
 .champagne-surface::before{
   content:"";
-  position:absolute; inset:0;
+  position:absolute;
+  inset:0;
   pointer-events:none;
   --vig-inner:58%;
   --vig-outer:88%;
   background:radial-gradient(
     circle at 50% 42%,
-    rgba(0,0,0,0) var(--vig-inner),
-    rgba(0,0,0,1) var(--vig-outer)
+    transparent var(--vig-inner),
+    color-mix(in oklab, var(--smh-ink) 92%, transparent) var(--vig-outer)
   );
   opacity:var(--champagne-vignette-alpha);
   mix-blend-mode:multiply;
-  z-index:var(--z-surface);
+  z-index:var(--z-surface-vignette);
 }
 
 /* Glass card utility */
 .champagne-glass{
   position:relative;
-  background:color-mix(in oklab, var(--smh-ink) 22%, transparent 78%);
-  backdrop-filter:blur(18px) saturate(1.02);
+  background:color-mix(in oklab, var(--smh-ink) 12%, transparent);
+  backdrop-filter:blur(16px) saturate(110%);
   border:1px solid var(--champagne-keyline-gold);
-  border-radius:16px;
-  box-shadow:
-    inset 0 0 0 1px color-mix(in oklab, var(--smh-text) 12%, transparent),
-    0 10px 24px -14px color-mix(in oklab, var(--smh-ink) 55%, transparent);
+  border-radius:var(--champagne-glass-radius);
+  box-shadow:var(--champagne-pane);
   color:var(--smh-text);
   z-index:var(--z-glass);
 }
 
-.journey-heading.champagne-glass{
-  background:color-mix(in oklab, var(--smh-ink) 18%, transparent 82%);
-}
-
-.journey-tile.champagne-glass{
-  background:color-mix(in oklab, var(--smh-ink) 24%, transparent 76%);
+.rounded-champagne{
+  border-radius:var(--champagne-glass-radius);
 }
 
 @media (max-width: 480px){
