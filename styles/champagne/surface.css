@@ -2,6 +2,10 @@
   --champ-vignette-alpha: 0;
   --champ-grain-alpha: .02;
   --champ-particles-alpha: 0;
+  --smh-gradient-zoom-x: 140%;
+  --smh-gradient-zoom-y: 140%;
+  --smh-gradient-pos-x: 28%;
+  --smh-gradient-pos-y: 38%;
 }
 
 .champagne-surface{
@@ -9,6 +13,9 @@
   isolation: isolate;
   background-color: transparent;
   background-image: var(--smh-gradient);
+  background-repeat: no-repeat;
+  background-size: var(--smh-gradient-zoom-x) var(--smh-gradient-zoom-y);
+  background-position: var(--smh-gradient-pos-x) var(--smh-gradient-pos-y);
   background-blend-mode: normal;
   --champagne-vignette-alpha: var(--champ-vignette-alpha);
   --champagne-grain-alpha: var(--champ-grain-alpha);
@@ -23,4 +30,23 @@
 .champagne-surface .champagne-glass{
   position: relative;
   z-index: var(--z-glass, 20);
+}
+
+@media (max-width: 640px){
+  :root{
+    --smh-gradient-pos-x: 32%;
+    --smh-gradient-pos-y: 42%;
+  }
+}
+
+.journey-surface{
+  background-size: 160% 160%;
+  background-position: 24% 46%;
+}
+
+.footer-luxe{
+  background: var(--smh-ink);
+  color: var(--smh-text);
+  border-top: 1.5px solid color-mix(in oklab, var(--smh-accent-gold) 68%, transparent);
+  box-shadow: 0 -1px 0 rgba(255,255,255,.02) inset;
 }

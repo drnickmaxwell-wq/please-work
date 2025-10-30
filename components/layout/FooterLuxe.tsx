@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState, type CSSProperties } from 'react';
+import { useMemo, useState } from 'react';
 import Link from 'next/link';
 
 import { MAIN_NAV, RESOURCES } from '@/lib/nav';
@@ -26,12 +26,6 @@ const FooterLuxe = () => {
 
   const feedbackId = useMemo(() => 'newsletter-feedback', []);
 
-  const footerStyle: CSSProperties = {
-    background: 'var(--smh-ink)',
-    color: 'var(--smh-text)',
-    borderTop: '1px solid color-mix(in oklab, var(--smh-accent-gold) 26%, transparent)',
-  };
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const trimmed = email.trim();
@@ -49,7 +43,7 @@ const FooterLuxe = () => {
   };
 
   return (
-    <footer className="footer-luxe relative" data-footer style={footerStyle}>
+    <footer className="footer-luxe relative bg-[var(--smh-ink)] text-[var(--smh-text)]" data-footer>
       <div className="footer-luxe__surface text-[var(--smh-text)]">
         <div className="footer-luxe__rim" aria-hidden="true" />
         <div className="footer-luxe__inner">
