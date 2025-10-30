@@ -12,6 +12,9 @@ const config: Config = {
         playfair: ['"Playfair Display"', 'serif'],
         inter: ['Inter', 'sans-serif'],
       },
+      colors: {
+        ink: 'var(--smh-ink)',
+      },
       spacing: {
         8: '2rem',
         12: '3rem',

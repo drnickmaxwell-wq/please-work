@@ -101,10 +101,8 @@ export default function StickyHeader({ className = '' }: StickyHeaderProps) {
           scale: headerScale,
         }}
         className={[
-          'sticky top-0 z-[var(--z-header)] w-full border-b border-transparent bg-transparent text-[color:var(--smh-text)] transition-colors duration-300',
-          isScrolled
-            ? 'backdrop-blur-xl bg-[color-mix(in oklab,var(--smh-ink) 14%,transparent)] border-[color-mix(in oklab,var(--smh-accent-gold) 18%,transparent)]'
-            : null,
+          'sticky top-0 z-40 w-full border-b border-transparent bg-transparent text-[color:var(--smh-text)] transition-colors duration-300',
+          isScrolled ? 'backdrop-blur-md bg-ink/40 border-white/10' : 'bg-transparent',
           className,
         ]
           .filter(Boolean)

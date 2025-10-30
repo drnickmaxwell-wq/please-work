@@ -169,7 +169,7 @@ export default function RootLayout({
         {/* Main content wrapper */}
         <StickyHeader />
 
-        <main id="main-content" className="relative pt-16">
+        <main id="main-content" className="relative pt-[56px]">
           <PerformanceOptimizedLayout>
             {children}
           </PerformanceOptimizedLayout>

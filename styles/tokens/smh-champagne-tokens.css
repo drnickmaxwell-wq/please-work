@@ -12,9 +12,9 @@
   --smh-gray-200:#E5E7EB;
 
   /* Overlays */
-  --smh-grain-alpha:.04;
+  --smh-grain-alpha:.035;
   --smh-vignette-alpha:.06;
-  --smh-particles-alpha:.06;
+  --smh-particles-alpha:.08;
   --champagne-grain-alpha:var(--smh-grain-alpha);
   --champagne-vignette-alpha:var(--smh-vignette-alpha);
   --champagne-sheen-alpha:.22;
