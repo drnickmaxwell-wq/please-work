@@ -15,10 +15,13 @@
   border-radius:0px;
   color:var(--smh-text);
   --vignette-alpha:0.06;
-  --grain-alpha:0.04;
+  --grain-alpha:0.055;
   --champagne-vignette-alpha:var(--vignette-alpha);
   --champagne-grain-alpha:var(--grain-alpha);
-  --champagne-particles-opacity:0.2;
+  --champagne-particles-opacity:0.22;
+  --champagne-particles-alpha:var(--champagne-particles-opacity);
+  --particle-density:0.0085;
+  --particle-size:1px;
 }
 
 .champagne-surface.surface--rounded{
@@ -57,7 +60,13 @@
   content:"";
   position:absolute; inset:0;
   pointer-events:none;
-  background:radial-gradient(60% 60% at 50% 45%, transparent 60%, #000 100%);
+  --vig-inner:58%;
+  --vig-outer:88%;
+  background:radial-gradient(
+    circle at 50% 42%,
+    rgba(0,0,0,0) var(--vig-inner),
+    rgba(0,0,0,1) var(--vig-outer)
+  );
   opacity:var(--champagne-vignette-alpha);
   mix-blend-mode:multiply;
   z-index:var(--z-surface);
@@ -66,11 +75,28 @@
 /* Glass card utility */
 .champagne-glass{
   position:relative;
-  background:color-mix(in oklab, var(--smh-ink) 25%, transparent 75%);
-  backdrop-filter:blur(16px);
+  background:color-mix(in oklab, var(--smh-ink) 22%, transparent 78%);
+  backdrop-filter:blur(18px) saturate(1.02);
   border:1px solid var(--champagne-keyline-gold);
   border-radius:16px;
-  box-shadow:inset 0 0 0 1px color-mix(in oklab, var(--champagne-keyline-gold) 40%, transparent 60%), var(--shadow-lg);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in oklab, var(--smh-text) 12%, transparent),
+    0 10px 24px -14px color-mix(in oklab, var(--smh-ink) 55%, transparent);
   color:var(--smh-text);
   z-index:var(--z-glass);
+}
+
+.journey-heading.champagne-glass{
+  background:color-mix(in oklab, var(--smh-ink) 18%, transparent 82%);
+}
+
+.journey-tile.champagne-glass{
+  background:color-mix(in oklab, var(--smh-ink) 24%, transparent 76%);
+}
+
+@media (max-width: 480px){
+  .hero .champagne-glass{
+    margin-top:1.25rem;
+    padding:0.9rem 1rem;
+  }
 }

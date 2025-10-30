@@ -89,7 +89,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
         )}
 
         <div className="relative z-[var(--z-content)] flex flex-col gap-12">
-          <div className="champagne-glass mx-auto max-w-[960px] mb-8 p-6 md:p-8">
+          <div className="journey-heading champagne-glass mx-auto max-w-[960px] mb-8 p-6 md:p-8">
             <div className="space-y-4 text-center">
               <h2
                 id="journey-hero-title"
@@ -112,7 +112,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
                   : "";
               return (
                 <div key={step.title} className={connectorClass ? `relative ${connectorClass}` : undefined}>
-                  <article className="champagne-glass p-6 md:p-8" tabIndex={0}>
+                  <article className="journey-tile champagne-glass p-6 md:p-8" tabIndex={0}>
                     {iconPath && (
                       <div className="mb-6 flex flex-col items-center text-[color:var(--champagne-keyline-gold)]">
                         <span className="flex h-14 w-14 items-center justify-center rounded-full border border-[color:var(--champagne-keyline-gold)] bg-white/5">
