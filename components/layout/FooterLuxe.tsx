@@ -28,8 +28,8 @@ const FooterLuxe = () => {
 
   const footerStyle: CSSProperties = {
     background: 'var(--smh-ink)',
-    borderTop: '1px solid color-mix(in oklab, var(--smh-gold) 80%, transparent)',
-    boxShadow: '0 -1px 0 color-mix(in oklab, var(--smh-gold) 18%, transparent) inset',
+    borderTop: '1px solid color-mix(in oklab, var(--smh-accent-gold) 35%, transparent)',
+    boxShadow: '0 -6px 24px rgba(0,0,0,.22) inset',
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -145,7 +145,7 @@ const FooterLuxe = () => {
           isolation: isolate;
           background: inherit;
           color: inherit;
-          --footer-gold: var(--smh-gold);
+          --footer-gold: var(--smh-accent-gold);
           --footer-keyline-rest: color-mix(in oklab, var(--footer-gold) 36%, transparent);
           --footer-keyline-strong: color-mix(in oklab, var(--footer-gold) 60%, transparent);
           --footer-surface-strong: color-mix(in oklab, var(--smh-ink) 68%, transparent 32%);
@@ -164,9 +164,9 @@ const FooterLuxe = () => {
         [data-footer] a:hover,
         [data-footer] a:focus-visible {
           text-decoration: underline;
-          text-underline-offset: 0.15em;
-          text-decoration-thickness: 0.08em;
-          text-shadow: 0 0 0.01px color-mix(in oklab, var(--smh-gold) 40%, transparent);
+          text-decoration-color: var(--smh-accent-gold);
+          text-underline-offset: 3px;
+          text-decoration-thickness: 2px;
         }
 
         .footer-luxe__rim {

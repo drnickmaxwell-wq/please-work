@@ -37,6 +37,17 @@ a {
   color: inherit;
 }
 
+.sticky-header{
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: color-mix(in oklab, var(--smh-ink) 4%, transparent);
+  transition: background 200ms ease, border-color 200ms ease;
+}
+
+.sticky-header[data-scrolled="true"]{
+  background: color-mix(in oklab, var(--smh-ink) 8%, transparent);
+}
+
 .glass-pane {
   background: var(--champagne-glass-bg);
   backdrop-filter: blur(12px);
