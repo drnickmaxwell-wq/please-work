@@ -1,6 +1,8 @@
 :root{
   /* Brand locks */
   --smh-gradient: linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
+  --smh-surface-bg-size: 165% 165%;
+  --smh-surface-bg-position: 18% 38%;
   --smh-ink: #0b0d0f;
   --smh-text: #0b0d0f;
   --smh-accent-gold: #D4AF37;

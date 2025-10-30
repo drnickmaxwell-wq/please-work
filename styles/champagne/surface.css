@@ -8,27 +8,13 @@
   position: relative;
   isolation: isolate;
   background-color: transparent;
-  --smh-surface-bg-size: 120% 120%;
-  --smh-surface-bg-position: 6% 52%;
   background-image: var(--smh-gradient);
   background-repeat: no-repeat;
-  background-size: var(--smh-surface-bg-size);
-  background-position: var(--smh-surface-bg-position);
+  background-size: var(--smh-surface-bg-size, 165% 165%);
+  background-position: var(--smh-surface-bg-position, 18% 38%);
   --champagne-vignette-alpha: var(--champ-vignette-alpha);
   --champagne-grain-alpha: var(--champ-grain-alpha);
   --champagne-particles-alpha: var(--champ-particles-alpha);
-}
-
-.champagne-surface[data-variant="hero"],
-.champagne-surface.hero{
-  --smh-surface-bg-size: 118% 118%;
-  --smh-surface-bg-position: 5% 52%;
-}
-
-.champagne-surface[data-variant="journey"],
-.champagne-surface.journey{
-  --smh-surface-bg-size: 122% 122%;
-  --smh-surface-bg-position: 8% 56%;
 }
 
 .champagne-surface::before,
@@ -39,20 +25,6 @@
 .champagne-surface .champagne-glass{
   position: relative;
   z-index: var(--z-glass, 20);
-}
-
-@media (max-width: 1024px){
-  .champagne-surface{
-    --smh-surface-bg-size: 180% 180%;
-    --smh-surface-bg-position: 22% 42%;
-  }
-}
-
-@media (max-width: 640px){
-  .champagne-surface{
-    --smh-surface-bg-size: 200% 200%;
-    --smh-surface-bg-position: 26% 46%;
-  }
 }
 
 .champagne-surface.hero,
@@ -76,8 +48,8 @@
   mix-blend-mode: saturation;
   opacity: .04;
   background-image: var(--smh-gradient);
-  background-size: var(--smh-surface-bg-size, 130% 130%);
-  background-position: var(--smh-surface-bg-position, 10% 50%);
+  background-size: var(--smh-surface-bg-size, 165% 165%);
+  background-position: var(--smh-surface-bg-position, 18% 38%);
   z-index: 0;
 }
 

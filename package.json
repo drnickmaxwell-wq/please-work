@@ -12,6 +12,8 @@
     "brand:report": "node scripts/brand-report.cjs",
     "verify:hue": "node scripts/brand-report.cjs && echo 'Hue OK'",
     "verify:visual": "playwright test preview/brand-live.spec.ts",
+    "hue:capture": "node scripts/capture-gradient.cjs",
+    "hue:lock": "node scripts/lock-gradient.cjs",
     "prepush": "pnpm run brand:guard && pnpm run verify:hue",
     "prepare": "husky"
   },
