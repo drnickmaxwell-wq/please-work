@@ -142,7 +142,8 @@ const FooterLuxe = () => {
           isolation: isolate;
           background: inherit;
           color: inherit;
-          border-top: 2px solid color-mix(in oklab, var(--footer-gold-lift) 55%, transparent 45%);
+          border-top: 2px solid var(--smh-accent-gold);
+          box-shadow: 0 -6px 24px -24px color-mix(in oklab, var(--smh-accent-gold) 35%, transparent);
           --footer-gold-lift: color-mix(in oklab, var(--smh-accent-gold) 90%, var(--smh-white) 10%);
           --footer-keyline-rest: color-mix(in oklab, var(--footer-gold-lift) 35%, transparent);
           --footer-keyline-strong: color-mix(in oklab, var(--footer-gold-lift) 65%, transparent);
@@ -164,9 +165,9 @@ const FooterLuxe = () => {
         [data-footer] a:focus-visible {
           color: var(--footer-gold-lift);
           text-decoration: underline;
-          text-decoration-thickness: 1px;
+          text-decoration-thickness: 1.5px;
           text-underline-offset: 2px;
-          text-decoration-color: var(--footer-gold-lift);
+          text-decoration-color: var(--smh-accent-gold);
         }
 
         .footer-luxe::before {
