@@ -163,19 +163,34 @@ export default function BrandLivePreviewPage() {
       return raw || '0';
     };
 
+    const gradientToken = readRoot('--smh-gradient');
+    const gradientNormalized = gradientToken.replace(/\s+/g, '');
+    const grainAlpha = readSurface('--champagne-grain-alpha');
+    const vignetteAlpha = readSurface('--champagne-vignette-alpha');
+    const particlesAlpha = readSurface('--champagne-particles-alpha');
+    const glassZ = Number.parseFloat(readRoot('--z-glass') || '0');
+    const headerZ = Number.parseFloat(readRoot('--z-header') || '0');
+
     setTokens({
-      gradient: readRoot('--smh-gradient').replace(/\s+/g, ' '),
+      gradient: gradientToken.replace(/\s+/g, ' '),
       magenta: readRoot('--smh-primary-magenta'),
       teal: readRoot('--smh-primary-teal'),
       gold: readRoot('--smh-accent-gold'),
       ink: readRoot('--smh-primary-ink'),
-      grain: readSurface('--champagne-grain-alpha'),
+      grain: grainAlpha,
       grainToken: readRoot('--champagne-grain-alpha') || '0',
-      vignette: readSurface('--champagne-vignette-alpha'),
+      vignette: vignetteAlpha,
       vignetteToken: readRoot('--champagne-vignette-alpha') || '0',
       wave: readSurface('--champagne-wave-alpha'),
-      particles: readSurface('--champagne-particles-alpha'),
+      particles: particlesAlpha,
     });
+
+    console.log(`[brand-live] gradient_string:${gradientNormalized}`);
+    console.log(`[brand-live] grain_alpha:${grainAlpha}`);
+    console.log(`[brand-live] vignette_alpha:${vignetteAlpha}`);
+    console.log(`[brand-live] particles_alpha:${particlesAlpha}`);
+    console.log(`[brand-live] z_index_glass:${Number.isFinite(glassZ) ? glassZ : 'n/a'}`);
+    console.log(`[brand-live] z_index_header:${Number.isFinite(headerZ) ? headerZ : 'n/a'}`);
 
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const audit = () =>
@@ -243,9 +258,9 @@ export default function BrandLivePreviewPage() {
       ctaMatchesTextToken,
     });
 
-    console.log(`CTA text color: ${ctaColor}`);
-    console.log(`Hero border radius: ${heroBorderRadius || '0px'}`);
-    console.log(`Gradient string: ${normalizedGradient}`);
+    console.log(`[brand-live] cta_text_color:${ctaColor}`);
+    console.log(`[brand-live] hero_border_radius:${heroBorderRadius || '0px'}`);
+    console.log(`[brand-live] runtime_gradient_string:${normalizedGradient}`);
   }, []);
 
   const surfaceStyle = useMemo(

@@ -12,8 +12,11 @@
   --smh-gray-200:#E5E7EB;
 
   /* Overlays */
-  --champagne-grain-alpha:.055;
-  --champagne-vignette-alpha:.06;
+  --smh-grain-alpha:.04;
+  --smh-vignette-alpha:.06;
+  --smh-particles-alpha:.06;
+  --champagne-grain-alpha:var(--smh-grain-alpha);
+  --champagne-vignette-alpha:var(--smh-vignette-alpha);
   --champagne-sheen-alpha:.22;
 
   /* Glass background must be LIGHTER than current */
@@ -22,6 +25,6 @@
   --champagne-keyline-gold:color-mix(in srgb, var(--smh-accent-gold) 64%, transparent 36%);
 
   /* Particles (keep low so they don't mute hue) */
-  --champagne-particles-opacity-d:.22;
-  --champagne-particles-opacity-m:.22;
+  --champagne-particles-opacity-d:var(--smh-particles-alpha);
+  --champagne-particles-opacity-m:var(--smh-particles-alpha);
 }
