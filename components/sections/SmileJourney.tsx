@@ -81,8 +81,8 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
           <div aria-hidden className="champagne-grain" />
           <div aria-hidden className="champagne-vignette" />
 
-          <div className="relative z-[var(--z-content)] flex flex-col gap-12">
-            <div className="champagne-glass rounded-champagne mx-auto mb-8 max-w-[960px] p-6 md:p-8">
+          <div className="relative z-[var(--z-content)] flex flex-col gap-12" style={{ color: "var(--smh-text)" }}>
+            <div className="champagne-glass relative z-20 mx-auto mb-8 max-w-[960px] p-6 md:p-8">
               <div className="space-y-4 text-center">
                 <h2
                   id="journey-hero-title"
@@ -105,7 +105,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
                     : "";
                 return (
                   <div key={step.title} className={connectorClass ? `relative ${connectorClass}` : undefined}>
-                    <article className="champagne-glass rounded-champagne p-6 md:p-8" tabIndex={0}>
+                    <article className="champagne-glass relative z-20 p-6 md:p-8" tabIndex={0}>
                       {iconPath && (
                         <div className="mb-6 flex flex-col items-center text-[color:var(--champagne-keyline-gold)]">
                           <span className="flex h-14 w-14 items-center justify-center rounded-full border border-[color:var(--champagne-keyline-gold)] bg-white/5">
@@ -128,7 +128,7 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
             </div>
 
             <div className="relative z-[var(--z-content)] text-center">
-              <div className="champagne-glass rounded-champagne p-6 md:p-8">
+              <div className="champagne-glass relative z-20 p-6 md:p-8">
                 <div className="space-y-3">
                   <h3 className="font-serif text-3xl tracking-tight">Ready to Begin?</h3>
                   <p style={{ opacity: 0.8 }}>Take the first step toward your perfect smile.</p>
@@ -136,13 +136,16 @@ export default function SmileJourney({ steps = defaultSteps }: SmileJourneyProps
                 <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
                   <Link
                     href="/contact"
+                    data-cta="primary"
                     className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-[var(--smh-gradient)] px-6 py-3 font-semibold transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
+                    style={{ color: "var(--smh-text)" }}
                   >
                     Book a consultation
                   </Link>
                   <Link
                     href="/ai-smile-quiz"
                     className="relative inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--champagne-keyline-gold)] bg-transparent px-6 py-3 font-semibold opacity-90 transition-transform duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--champagne-keyline-gold)] hover:-translate-y-0.5"
+                    style={{ color: "var(--smh-text)" }}
                   >
                     Start your AI smile preview
                   </Link>

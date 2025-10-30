@@ -164,7 +164,6 @@ export default function BrandLivePreviewPage() {
     };
 
     const gradientToken = readRoot('--smh-gradient');
-    const gradientNormalized = gradientToken.replace(/\s+/g, '');
     const grainAlpha = readSurface('--champagne-grain-alpha');
     const vignetteAlpha = readSurface('--champagne-vignette-alpha');
     const particlesAlpha = readSurface('--champagne-particles-alpha');
@@ -185,12 +184,17 @@ export default function BrandLivePreviewPage() {
       particles: particlesAlpha,
     });
 
-    console.log(`[brand-live] gradient_string:${gradientNormalized}`);
-    console.log(`[brand-live] grain_alpha:${grainAlpha}`);
-    console.log(`[brand-live] vignette_alpha:${vignetteAlpha}`);
-    console.log(`[brand-live] particles_alpha:${particlesAlpha}`);
-    console.log(`[brand-live] z_index_glass:${Number.isFinite(glassZ) ? glassZ : 'n/a'}`);
-    console.log(`[brand-live] z_index_header:${Number.isFinite(headerZ) ? headerZ : 'n/a'}`);
+    const particlesState = document.querySelector('.champagne-particles[data-state="on"]') ? 'on' : 'off';
+    console.log(
+      `Vignette alpha: ${vignetteAlpha || '0'}  Grain alpha: ${grainAlpha || '0'}  Particles: ${particlesState}`
+    );
+
+    if (Number.isFinite(glassZ)) {
+      document.documentElement.style.setProperty('--z-glass', String(glassZ));
+    }
+    if (Number.isFinite(headerZ)) {
+      document.documentElement.style.setProperty('--z-header', String(headerZ));
+    }
 
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const audit = () =>
@@ -219,10 +223,12 @@ export default function BrandLivePreviewPage() {
     const surfaceTarget = document.querySelector<HTMLElement>('.champagne-surface');
     const surfaceComputed = surfaceTarget ? getComputedStyle(surfaceTarget) : null;
     const gradientCandidate = surfaceComputed?.getPropertyValue('background-image').trim();
-    const gradient = gradientCandidate && gradientCandidate !== 'none'
-      ? gradientCandidate
-      : root.getPropertyValue('--smh-gradient').replace(/\s+/g, ' ').trim();
+    const gradient =
+      gradientCandidate && gradientCandidate !== 'none'
+        ? gradientCandidate
+        : root.getPropertyValue('--smh-gradient').replace(/\s+/g, ' ').trim();
     const normalizedGradient = gradient.replace(/\s+/g, '');
+    const canonicalGradient = normalizedGradient.replace(/#([0-9a-f]{6})/gi, (_, hex) => `#${hex.toUpperCase()}`);
 
     const heroSurface = document.querySelector<HTMLElement>('[data-surface="hero"].champagne-surface');
     let heroBorderRadius = '0px';
@@ -242,9 +248,10 @@ export default function BrandLivePreviewPage() {
       const computedColor = getComputedStyle(cta).color.trim();
       const normalizedCTAColor = normalizeColor(computedColor);
       const tokenColor = normalizeColor(resolveCssVariable('--smh-text', root));
-      ctaColor = normalizedCTAColor ?? computedColor;
-      if (normalizedCTAColor && tokenColor) {
-        ctaMatchesTextToken = normalizedCTAColor === tokenColor;
+      const lowerCTAColor = normalizedCTAColor?.toLowerCase();
+      ctaColor = lowerCTAColor ?? computedColor;
+      if (lowerCTAColor && tokenColor) {
+        ctaMatchesTextToken = lowerCTAColor === tokenColor.toLowerCase();
       } else if (normalizedCTAColor) {
         ctaMatchesTextToken = false;
       }
@@ -258,9 +265,9 @@ export default function BrandLivePreviewPage() {
       ctaMatchesTextToken,
     });
 
-    console.log(`[brand-live] cta_text_color:${ctaColor}`);
-    console.log(`[brand-live] hero_border_radius:${heroBorderRadius || '0px'}`);
-    console.log(`[brand-live] runtime_gradient_string:${normalizedGradient}`);
+    console.log(`Computed gradient: ${canonicalGradient}`);
+    console.log(`CTA color: ${ctaColor}`);
+    console.log(`Hero radius: ${heroBorderRadius || '0px'}`);
   }, []);
 
   const surfaceStyle = useMemo(
