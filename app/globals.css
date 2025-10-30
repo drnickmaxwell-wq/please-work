@@ -40,7 +40,7 @@ a {
 .sticky-header{
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  background: color-mix(in oklab, var(--smh-ink) 4%, transparent);
+  background: transparent;
   transition: background 200ms ease, border-color 200ms ease;
 }
 

@@ -56,7 +56,7 @@ export default function Hero4KVideo({
         {particlesActive ? (
           <Particles className="champagne-particles" data-state="on" aria-hidden />
         ) : (
-          <div className="champagne-particles" data-state="off" aria-hidden style={{ opacity: 0 }} />
+          <div className="champagne-particles" data-state="off" aria-hidden />
         )}
         <div aria-hidden className="champagne-grain" />
         <div aria-hidden className="champagne-vignette" />
