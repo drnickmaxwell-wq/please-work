@@ -28,7 +28,6 @@ const FooterLuxe = () => {
 
   const footerStyle: CSSProperties = {
     background: 'var(--smh-ink)',
-    borderTop: '1px solid color-mix(in oklab, var(--smh-accent-gold) 35%, transparent)',
     boxShadow: '0 -6px 24px rgba(0,0,0,.22) inset',
   };
 
@@ -49,8 +48,8 @@ const FooterLuxe = () => {
   };
 
   return (
-    <footer className="relative" data-footer style={footerStyle}>
-      <div className="footer-luxe text-[var(--smh-text)]">
+    <footer className="footer-luxe relative" data-footer style={footerStyle}>
+      <div className="footer-luxe__surface text-[var(--smh-text)]">
         <div className="footer-luxe__rim" aria-hidden="true" />
         <div className="footer-luxe__inner">
           <div className="footer-luxe__grid">
@@ -138,7 +137,7 @@ const FooterLuxe = () => {
         </div>
       </div>
       <style jsx>{`
-        .footer-luxe {
+        .footer-luxe__surface {
           position: relative;
           overflow: hidden;
           padding: clamp(4rem, 7.5vw, 5.5rem) clamp(1.75rem, 5.5vw, 4.75rem) clamp(3rem, 4.5vw, 4.25rem);
