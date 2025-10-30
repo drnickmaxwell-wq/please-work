@@ -311,7 +311,7 @@ export default function BrandLivePreviewPage() {
       disposeGlass();
     }
 
-    const journeySurface = document.querySelector<HTMLElement>('.journey-surface');
+    const journeySurface = document.querySelector<HTMLElement>('.champagne-surface.journey');
     if (journeySurface) {
       const journeyComputed = getComputedStyle(journeySurface);
       const journeyBackgroundSize = journeyComputed.getPropertyValue('background-size').trim() || 'unset';
@@ -409,7 +409,7 @@ export default function BrandLivePreviewPage() {
               data-surface={pane.id}
               data-wave={pane.wave ? 'on' : 'off'}
               data-particles={pane.particles ? 'on' : 'off'}
-              className={`champagne-surface${pane.id === 'journey' ? ' journey-surface' : ''}`}
+              className={`champagne-surface ${pane.id === 'journey' ? 'journey' : 'hero'}`}
               style={pane.wave ? surfaceStyle : undefined}
             >
               <div className="relative isolate overflow-hidden">
