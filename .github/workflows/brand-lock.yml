@@ -17,6 +17,14 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - name: Brand Guard
         run: pnpm brand:guard
+      - name: Install Playwright (official)
+        uses: microsoft/playwright-github-action@v1
+        with:
+          with-deps: true
+      - name: Force install Playwright Chromium only
+        run: pnpm exec playwright install chromium
+      - name: Wait for browser cache to settle
+        run: sleep 3
       - name: Verify Hue
         run: pnpm verify:hue
       - name: Brand Tests
