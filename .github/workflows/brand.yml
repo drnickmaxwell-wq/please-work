@@ -1,0 +1,49 @@
+name: brand
+on:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch: {}
+
+jobs:
+  brand:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node (v20) + Corepack
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: corepack enable
+      - run: corepack prepare pnpm@9 --activate
+
+      - name: Install deps (pnpm)
+        run: pnpm install --frozen-lockfile
+
+      # Cache Playwright browsers between runs
+      - name: Cache Playwright browsers
+        id: cache-pw
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: pw-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - name: Install Playwright browsers (with deps)
+        if: steps.cache-pw.outputs.cache-hit != 'true'
+        run: pnpm exec playwright install --with-deps
+
+      # ---- Brand checks ----
+      - name: Brand Guard (no rogue hexes)
+        run: pnpm run brand:guard
+
+      - name: Verify Hue (canonical gradient + gold)
+        run: pnpm run verify:hue
+
+      - name: Verify brand lock (surface diagnostics)
+        run: pnpm run verify:brand
+
+      # Sanity build for Vercel preview (does not deploy)
+      - name: Build preview (sanity)
+        run: pnpm run build
