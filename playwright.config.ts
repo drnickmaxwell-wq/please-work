@@ -1,25 +1,21 @@
 import { defineConfig } from '@playwright/test';
 
-const PORT = Number(process.env.PLAYWRIGHT_PORT ?? 3000);
-const HOST = process.env.PLAYWRIGHT_HOST ?? '127.0.0.1';
-const BASE_URL = process.env.PLAYWRIGHT_BASE_URL ?? `http://${HOST}:${PORT}`;
-const WEB_COMMAND = process.env.PLAYWRIGHT_WEB_SERVER_COMMAND ?? `pnpm dev --hostname ${HOST} --port ${PORT}`;
-
 export default defineConfig({
-  testDir: '.',
-  timeout: 60_000,
-  expect: {
-    timeout: 5_000,
-  },
+  testDir: 'tests',
+  reporter: 'list',
+  timeout: 30_000,
   use: {
-    baseURL: BASE_URL,
-    trace: 'off',
+    headless: true,
+    viewport: { width: 1280, height: 800 },
+    // helps if tests fetch your local preview route:
+    baseURL: 'http://localhost:3000',
   },
-  webServer: {
-    command: WEB_COMMAND,
-    url: BASE_URL,
-    reuseExistingServer: !process.env.CI,
-    stdout: 'ignore',
-    stderr: 'pipe',
-  },
+  // If your specs do not need a dev server, keep webServer commented out.
+  // If they do, uncomment and adjust:
+  // webServer: {
+  //   command: 'pnpm run dev',
+  //   url: 'http://localhost:3000/preview/brand-lock',
+  //   reuseExistingServer: true,
+  //   timeout: 60_000
+  // }
 });

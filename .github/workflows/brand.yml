@@ -1,0 +1,60 @@
+name: Brand Guard & Lux Checks
+
+on:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  brand:
+    runs-on: ubuntu-latest
+
+    env:
+      PLAYWRIGHT_BROWSERS_PATH: ${{ runner.temp }}/pw-browsers
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+
+      - name: Install deps (frozen lockfile)
+        run: pnpm install --frozen-lockfile
+
+      # --- Playwright browsers + system deps (Chromium) ---
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.PLAYWRIGHT_BROWSERS_PATH }}
+          key: pw-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - name: Install Playwright browsers (with deps)
+        run: |
+          pnpm exec playwright install --with-deps chromium
+          echo "PW_INSTALLED=1" >> $GITHUB_ENV
+
+      # --- Brand guard: no rogue hex outside tokens ---
+      - name: Brand Guard
+        run: pnpm run brand:guard
+
+      # --- Verify hue: playwright test asserting canon gradient + gold ---
+      - name: Verify Hue (canonical gradient + keyline gold)
+        run: pnpm run verify:hue
+
+      # --- Optional extra brand tests (keep if present) ---
+      - name: Brand Tests (Playwright suite)
+        run: pnpm run brand:test
+
+      # --- Build sanity (does not deploy) ---
+      - name: Build preview (sanity)
+        run: pnpm run build
