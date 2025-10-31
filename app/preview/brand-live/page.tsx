@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { CSSProperties } from 'react';
 
+import tokenHexMap from '@/brand/token-hex-map.json';
 import Particles from '@/components/brand/Particles';
 
 type PaneConfig = {
@@ -79,6 +80,17 @@ const EMPTY_ASSERTIONS: AssertionDiagnostics = {
   ctaMatchesTextToken: null,
 };
 
+const TOKEN_HEX_MAP: Record<string, string> = tokenHexMap;
+
+const tokeniseHex = (hex: string): string => {
+  const normalized = hex.toLowerCase();
+  const token = TOKEN_HEX_MAP[normalized];
+  return token ?? normalized.toUpperCase();
+};
+
+const replaceHexWithTokens = (value: string): string =>
+  value.replace(/#([0-9a-f]{6})/gi, (match) => tokeniseHex(match));
+
 const normalizeColor = (value: string): string | null => {
   const trimmed = value.trim().toLowerCase();
   if (!trimmed) {
@@ -88,13 +100,14 @@ const normalizeColor = (value: string): string | null => {
   if (trimmed.startsWith('#')) {
     const hex = trimmed.slice(1);
     if (hex.length === 3) {
-      return `#${hex
+      const full = `#${hex
         .split('')
         .map((char) => `${char}${char}`)
         .join('')}`;
+      return tokeniseHex(full);
     }
     if (hex.length === 6) {
-      return `#${hex}`;
+      return tokeniseHex(`#${hex}`);
     }
     return null;
   }
@@ -111,9 +124,11 @@ const normalizeColor = (value: string): string | null => {
       return null;
     }
 
-    return `#${sanitized
+    const hex = `#${sanitized
       .map((component) => component.toString(16).padStart(2, '0'))
       .join('')}`;
+
+    return tokeniseHex(hex);
   }
 
   return trimmed;
@@ -122,8 +137,19 @@ const normalizeColor = (value: string): string | null => {
 const normalizeGradientStops = (value: string): string =>
   value.replace(/rgb\(([^)]+)\)/gi, (match) => {
     const normalized = normalizeColor(match);
-    return normalized ? normalized.toUpperCase() : match;
+    return normalized ?? match;
   });
+
+const normalizeGradientFormat = (value: string): string =>
+  value
+    .replace(/\s+/g, ' ')
+    .replace(/\(\s*/g, '(')
+    .replace(/\s*\)/g, ')')
+    .replace(/\s*,\s*/g, ',')
+    .trim();
+
+const normalizeGradientExpression = (value: string): string =>
+  replaceHexWithTokens(normalizeGradientStops(normalizeGradientFormat(value)));
 
 const resolveCssVariable = (
   variable: string,
@@ -233,24 +259,10 @@ export default function BrandLivePreviewPage() {
     const surfaceComputed = surfaceTarget ? getComputedStyle(surfaceTarget) : null;
     const backgroundImage = surfaceComputed?.getPropertyValue('background-image').trim() ?? '';
     const gradientMatch = backgroundImage.match(/linear-gradient\([^)]*\)/i);
-    const gradientToken = root.getPropertyValue('--smh-gradient').replace(/\s+/g, ' ').trim();
+    const gradientToken = root.getPropertyValue('--smh-gradient');
     const gradient = gradientMatch ? gradientMatch[0] : gradientToken;
-    const canonicalGradient = gradientToken
-      .replace(/\s+/g, ' ')
-      .replace(/\(\s*/g, '(')
-      .replace(/\s*\)/g, ')')
-      .replace(/\s*,\s*/g, ',')
-      .replace(/#([0-9a-f]{6})/gi, (_, hex) => `#${hex.toUpperCase()}`)
-      .trim();
-    const normalizedGradient = normalizeGradientStops(
-      gradient
-        .replace(/\s+/g, ' ')
-        .replace(/\(\s*/g, '(')
-        .replace(/\s*\)/g, ')')
-        .replace(/\s*,\s*/g, ',')
-        .replace(/#([0-9a-f]{6})/gi, (_, hex) => `#${hex.toUpperCase()}`)
-        .trim()
-    );
+    const canonicalGradient = normalizeGradientExpression(gradientToken);
+    const normalizedGradient = normalizeGradientExpression(gradient);
     console.log(`surfaceComputed.backgroundImage → ${normalizedGradient}`);
     const surfaceBackgroundSize = surfaceComputed?.getPropertyValue('background-size').trim() || 'unset';
     const surfaceBackgroundPosition = surfaceComputed?.getPropertyValue('background-position').trim() || 'unset';

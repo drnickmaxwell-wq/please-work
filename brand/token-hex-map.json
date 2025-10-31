@@ -1,0 +1,7 @@
+{
+  "#c2185b": "var(--smh-primary-magenta)",
+  "#40c4b4": "var(--smh-primary-teal)",
+  "#d4af37": "var(--smh-accent-gold)",
+  "#d94bc6": "var(--smh-grad-magenta-3)",
+  "#00c2c7": "var(--smh-grad-teal-3)"
+}

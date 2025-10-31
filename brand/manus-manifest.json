@@ -1,0 +1,4 @@
+{
+  "gradient": "linear-gradient(135deg,var(--smh-primary-magenta) 0%,var(--smh-primary-teal) 60%,var(--smh-accent-gold) 100%)",
+  "gradientNeon": "linear-gradient(135deg,var(--smh-grad-magenta-3) 0%,var(--smh-grad-teal-3) 100%)"
+}

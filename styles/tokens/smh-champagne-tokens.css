@@ -8,8 +8,12 @@
   /* ===== Canonical Gradient (LAW) ===== */
   --smh-gradient: linear-gradient(135deg, var(--brand-magenta) 0%, var(--brand-teal) 60%, var(--brand-gold) 100%);
 
+  /* Manus 3-stop anchors (aliases for the “neon” variant used in hero/journey) */
+  --smh-grad-magenta-3: #D94BC6;
+  --smh-grad-teal-3:    #00C2C7;
+
   /* Legacy (diagnostics/rollback only — do not use in new UI) */
-  --smh-gradient-legacy: linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);
+  --smh-gradient-legacy: linear-gradient(135deg, var(--smh-grad-magenta-3) 0%, var(--smh-grad-teal-3) 100%);
 
   /* Support gradients derived from canon (avoid raw hex outside tokens) */
   --iridescent-gradient: linear-gradient(
