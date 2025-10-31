@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  brand:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # ---- Playwright: cache browsers for speed ----
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            playwright-${{ runner.os }}-
+
+      # ---- Playwright: download browsers + system deps ----
+      - name: Install Playwright browsers (with deps)
+        run: |
+          pnpm exec playwright install --with-deps
+        env:
+          PLAYWRIGHT_BROWSERS_PATH: ~/.cache/ms-playwright
+
+      # ---- Brand checks (these depend on Chromium being present) ----
+      - name: Brand Guard
+        run: pnpm run brand:guard
+
+      - name: Verify Hue
+        run: pnpm run verify:hue
+
+      - name: Brand Tests
+        run: pnpm run brand:test
+
+      - name: Build preview (sanity)
+        run: pnpm run build
