@@ -1,0 +1,60 @@
+name: brand
+
+on:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  brand:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Node + Corepack so pnpm is available
+      - name: Setup Node (v20) + Corepack
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+      - name: Enable Corepack (pnpm)
+        run: corepack enable
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+
+      - name: Install deps (frozen)
+        run: pnpm install --frozen-lockfile
+
+      # --- Playwright cache + install browsers ---
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-ms-playwright-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-ms-playwright-
+
+      - name: Install Playwright browsers (with system deps)
+        run: pnpm exec playwright install --with-deps
+
+      # --- Brand checks ---
+      - name: Brand Guard (no rogue hex outside tokens)
+        run: pnpm run brand:guard
+
+      - name: Verify Hue (canonical gradient + keyline gold)
+        env:
+          # Allow rgb() formatting in CSS comparisons
+          VERIFY_HUE_FORMAT: "rgb"
+        run: pnpm run verify:hue
+
+      - name: Brand Tests (Playwright suite)
+        run: pnpm run test:brand
+
+      # Optional quick build sanity (doesn't deploy)
+      - name: Build preview (sanity)
+        run: pnpm run build
