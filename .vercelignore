@@ -1,3 +1,9 @@
 # Manus AI design and preview assets are not required in production builds.
 public/assets/manus
 app/preview/manus
+
+.github/
+tests/
+playwright.config.ts
+brand-guard.cjs
+scripts/verify-hue.cjs

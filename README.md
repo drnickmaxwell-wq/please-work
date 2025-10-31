@@ -34,3 +34,9 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Brand CI
+
+- Brand browsers are provisioned in CI with [`microsoft/playwright-github-action@v1`](https://github.com/microsoft/playwright-github-action), which installs Chromium and required system dependencies before running our checks.
+- Vercel deployments only install dependencies and build via `pnpm build`; brand guards and tests stay in GitHub Actions.
+- Brand Guard temporarily skips preview gradients and the technology treatment CSS until those files are normalized to the shared token set.
