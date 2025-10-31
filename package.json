@@ -7,17 +7,19 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "pretest:brand": "pnpm exec playwright install --with-deps chromium",
     "brand:guard": "node brand-guard.cjs",
     "brand:audit": "node scripts/brand-audit.cjs",
     "brand:report": "node scripts/brand-report.cjs",
     "verify:hue": "node scripts/verify-hue.cjs",
+    "test:brand": "pnpm exec playwright test -c playwright.config.ts",
     "verify:brand": "pnpm exec playwright test tests/brand-lock.spec.ts",
     "verify:visual": "pnpm exec playwright test preview/brand-live.spec.ts",
     "hue:capture": "node scripts/capture-gradient.cjs",
     "hue:lock": "node scripts/lock-gradient.cjs",
+    "brand:check": "pnpm run pretest:brand && pnpm run verify:hue && pnpm run brand:guard",
     "prepush": "pnpm run brand:guard && pnpm run verify:hue && pnpm test:brand",
-    "prepare": "husky",
-    "test:brand": "pnpm exec playwright test tests/brand-lux.spec.ts"
+    "prepare": "husky"
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.24",
@@ -41,6 +43,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@playwright/test": "^1.51.1",
+    "playwright": "^1.51.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
