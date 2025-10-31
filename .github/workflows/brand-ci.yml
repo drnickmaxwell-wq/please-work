@@ -1,0 +1,21 @@
+name: Brand CI
+
+on:
+  - pull_request
+
+jobs:
+  brand:
+    runs-on: ubuntu-latest
+    env:
+      PLAYWRIGHT_BROWSERS_PATH: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run brand:guard
+      - run: pnpm run brand:check:ci

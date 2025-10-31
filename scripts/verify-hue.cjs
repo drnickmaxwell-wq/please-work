@@ -1,4 +1,9 @@
 #!/usr/bin/env node
+if (process.env.VERCEL === '1' || process.env.PLAYWRIGHT_SKIP === '1') {
+  console.log('[playwright] Skipping (Vercel/PLAYWRIGHT_SKIP set).');
+  process.exit(0);
+}
+
 const { spawn } = require('node:child_process');
 const { CANON_GRADIENT } = require('./brand-report.cjs');
 
