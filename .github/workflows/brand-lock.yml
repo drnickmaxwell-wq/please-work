@@ -25,10 +25,12 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Brand Guard
         run: pnpm brand:guard
-      # ✅ Manual Playwright install for Ubuntu Noble
-      - name: Install Playwright browsers manually
-        run: |
-          npx playwright install --with-deps
+      - name: Install Playwright (official)
+        uses: microsoft/playwright-github-action@v1
+        with:
+          with-deps: true
+      - name: Force install Playwright browsers
+        run: pnpm exec playwright install --with-deps
       - name: Verify Hue
         run: pnpm verify:hue
       - name: Brand Tests
