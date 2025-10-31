@@ -1,186 +1,128 @@
-:root{
-  --champ-vignette-alpha: 0;
-  --champ-grain-alpha: .02;
-  --champ-particles-alpha: 0;
-  --smh-wave-url: url('/brand/waves-bg.webp');
-  --champagne-wave-image: var(--smh-wave-url);
-  --champagne-wave: var(--smh-wave-url) center / cover no-repeat;
-  --champagne-wave-layer: var(--champagne-wave-image, var(--smh-wave-url));
-  --champagne-particles-layer:
-    radial-gradient(
-      140% 140% at 45% 30%,
-      color-mix(in oklab, var(--smh-primary-teal) 32%, transparent)
-        calc(var(--champagne-particles-alpha, 0) * 100%),
-      transparent 68%
-    );
-  --champagne-grain-layer:
-    radial-gradient(
-      160% 160% at 50% 50%,
-      rgba(255,255,255,var(--champagne-grain-alpha, 0)) 0%,
-      transparent 100%
-    );
-  --champagne-vignette-layer:
-    radial-gradient(
-      150% 150% at 50% 50%,
-      transparent 0%,
-      rgba(0,0,0,var(--champagne-vignette-alpha, 0)) 75%
-    );
-}
+/* Champagne surface lux stack */
 
-.champagne-surface{
+.champagne-surface-lux {
+  --_grad: linear-gradient(
+    var(--smh-grad-angle),
+    var(--smh-grad-stop1) 0%,
+    var(--smh-grad-stop2) 42%,
+    var(--smh-grad-stop3) 100%
+  );
+
+  --_gold-shoulder: radial-gradient(
+    120% 120% at 70% 70%,
+    color-mix(in oklab, var(--smh-gold-shoulder), transparent 82%) 0%,
+    transparent 60%
+  );
+
+  --_wave-arcs: url("/brand/waves/wave-field.svg");
+  --_wave-dots: url("/brand/waves/wave-dots.svg");
+
+  background-image:
+    var(--_grad),
+    var(--_gold-shoulder),
+    var(--_wave-arcs),
+    var(--_wave-dots);
+
+  background-size:
+    var(--smh-bg-size),
+    var(--smh-bg-size),
+    cover,
+    cover;
+
+  background-position:
+    var(--smh-bg-pos),
+    var(--smh-bg-pos),
+    center,
+    center;
+
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+  background-blend-mode:
+    normal,
+    soft-light,
+    soft-light,
+    overlay;
+
   position: relative;
   isolation: isolate;
-  background-color: transparent;
-  --champagne-vignette-alpha: var(--champ-vignette-alpha);
-  --champagne-grain-alpha: var(--champ-grain-alpha);
-  --champagne-particles-alpha: var(--champ-particles-alpha);
-  /* Background stack (top → bottom): gradient wash → wave → particles → grain → vignette → locked gradient */
-  background-image:
-    var(--smh-gradient),
-    var(--champagne-wave-layer),
-    var(--champagne-particles-layer),
-    var(--champagne-grain-layer),
-    var(--champagne-vignette-layer),
-    var(--smh-gradient);
-  background-blend-mode:
-    color,
-    soft-light,
-    screen,
-    soft-light,
-    multiply,
-    normal;
-  background-repeat: no-repeat;
-  background-size:
-    var(--smh-surface-bg-size, 165% 165%),
-    cover,
-    140% 140%,
-    120% 120%,
-    100% 100%,
-    var(--smh-surface-bg-size, 165% 165%);
-  background-position:
-    var(--smh-surface-bg-position, 18% 38%),
-    center,
-    42% 32%,
-    center,
-    center,
-    var(--smh-surface-bg-position, 18% 38%);
 }
 
-/* Optional warmth overlay that preserves the locked base gradient. */
-.champagne-surface.champagne-warm-lift {
-  position: relative;
-  isolation: isolate; /* keep overlay inside the surface */
+.champagne-surface-lux.waves-detached {
+  --_wave-arcs: none;
+  --_wave-dots: none;
 }
 
-.champagne-surface[data-wave="off"]{
-  --champagne-wave-layer: none;
-}
-
-.champagne-surface[data-particles="off"]{
-  --champagne-particles-layer: none;
-}
-
-/* Paint an artist-tuned perceptual warm bias using only tokens. */
-.champagne-warm-lift::before {
+.champagne-surface-lux::before,
+.champagne-surface-lux::after {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 0; /* sits above base gradient but below glass content */
-  opacity: calc(var(--smh-warm-lift, 0) * 0.6); /* master toggle */
-
-  /* Two-stop radial mix:
-     - inner: rose-biased magenta, off-center to top-left (matches your bgPos ~18%/38%)
-     - outer: transparent gold to add coastal warmth at edges
-  */
-  background:
-    radial-gradient(
-      120% 120% at 18% 38%,
-      color-mix(in oklab, var(--smh-warm-rose) 100%, var(--smh-warm-magenta) 0%)
-        calc(var(--smh-warm-lift-magenta-alpha, 0.08) * 100%),
-      transparent 50%
-    ),
-    radial-gradient(
-      130% 130% at 60% 80%,
-      color-mix(in oklab, var(--smh-warm-gold) 100%, transparent 0%)
-        calc(var(--smh-warm-lift-gold-alpha, 0.03) * 100%),
-      transparent 70%
-    );
-
-  mix-blend-mode: color-dodge; /* perceptual lift without tinting edges */
+  z-index: 0;
 }
 
-/* Respect user settings — if reduced motion/contrast, just show base gradient */
-@media (prefers-contrast: more){
-  .champagne-warm-lift::before { opacity: 0; }
+.champagne-surface-lux::before {
+  background: radial-gradient(
+    120% 120% at 50% 50%,
+    transparent 55%,
+    rgba(0, 0, 0, var(--smh-vignette-alpha)) 100%
+  );
+  mix-blend-mode: multiply;
 }
 
-.champagne-surface::before,
-.champagne-surface::after{
-  content: none !important;
+.champagne-surface-lux::after {
+  background-image: var(--smh-grain-img, url("/brand/textures/film-grain.png"));
+  background-size: 512px 512px;
+  opacity: var(--smh-grain-alpha);
+  mix-blend-mode: soft-light;
 }
 
-.champagne-surface .champagne-glass{
+.champagne-surface-lux.particles::after {
+  background-image:
+    var(--smh-grain-img, url("/brand/textures/film-grain.png")),
+    var(--smh-particles-img, url("/brand/particles/particles.webm"));
+  background-size:
+    512px 512px,
+    cover;
+  background-repeat: repeat, no-repeat;
+  background-position: center;
+  opacity: calc(var(--smh-grain-alpha) + var(--smh-particles-alpha));
+}
+
+.champagne-surface-lux .wave-layer {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  transform: translate3d(var(--parallax-x, 0), var(--parallax-y, 0), 0);
+  transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.champagne-surface-lux .wave-layer[data-wave="arcs"] {
+  background-image: url("/brand/waves/wave-field.svg");
+  mix-blend-mode: soft-light;
+}
+
+.champagne-surface-lux .wave-layer[data-wave="dots"] {
+  background-image: url("/brand/waves/wave-dots.svg");
+  mix-blend-mode: overlay;
+}
+
+.champagne-surface-lux[data-motion="static"] .wave-layer {
+  transform: translate3d(0, 0, 0);
+  transition: none;
+}
+
+.champagne-surface-lux .champagne-glass {
   position: relative;
   z-index: var(--z-glass, 20);
 }
 
-.champagne-surface.hero,
-.champagne-surface.journey{
-  --champ-vignette-alpha: 0;
-  --champ-grain-alpha: 0;
-  --champ-particles-alpha: 0;
-}
-
-/* Optional: gentle saturation lift using the SAME token gradient */
-.saturation-lift{
-  position: relative;
-  isolation: isolate;
-}
-
-.saturation-lift::after{
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  mix-blend-mode: saturation;
-  opacity: .04;
-  background-image: var(--smh-gradient);
-  background-size: var(--smh-surface-bg-size, 165% 165%);
-  background-position: var(--smh-surface-bg-position, 18% 38%);
-  z-index: 0;
-}
-
-.footer-luxe{
-  background: var(--smh-ink);
-  color: var(--smh-text);
-  border-top: 1.5px solid color-mix(in oklab, var(--smh-accent-gold) 68%, transparent);
-  box-shadow: 0 -1px 0 rgba(255,255,255,.02) inset;
-}
-
-/* Weighted gradient derived from the same tokens.
-   We bias the visible blend toward magenta by shaping intermediate stops.
-   Uses color-mix so it remains token-based. */
-:root{
-  --smh-magenta: var(--smh-primary-magenta);
-  --smh-teal:    var(--smh-primary-teal);
-}
-
-/* Utility that replaces background-image with a stop-weighted version */
-.use-weighted-gradient {
-  --smh-weighted-gradient:
-    linear-gradient(
-      135deg,
-      var(--smh-magenta) 0%,
-      color-mix(in oklab, var(--smh-magenta) 85%, var(--smh-teal) 15%) 28%,
-      color-mix(in oklab, var(--smh-magenta) 60%, var(--smh-teal) 40%) 42%,
-      color-mix(in oklab, var(--smh-magenta) 40%, var(--smh-teal) 60%) 58%,
-      color-mix(in oklab, var(--smh-magenta) 15%, var(--smh-teal) 85%) 72%,
-      var(--smh-teal) 100%
-    );
-}
-
-/* When present, use the weighted gradient but keep everything else identical */
-.champagne-surface.use-weighted-gradient {
-  background-image: var(--smh-weighted-gradient);
+@media (prefers-reduced-motion: reduce) {
+  .champagne-surface-lux {
+    background-attachment: initial;
+  }
 }

@@ -162,7 +162,7 @@ export default function BrandLivePreviewPage() {
   useEffect(() => {
     const root = getComputedStyle(document.documentElement);
     const readRoot = (token: string) => root.getPropertyValue(token).trim();
-    const firstSurface = document.querySelector<HTMLElement>('.champagne-surface');
+    const firstSurface = document.querySelector<HTMLElement>('.champagne-surface-lux');
     const surfaceStyle = firstSurface ? getComputedStyle(firstSurface) : null;
     const readSurface = (token: string) => {
       const raw = surfaceStyle?.getPropertyValue(token).trim() ?? '';
@@ -170,11 +170,19 @@ export default function BrandLivePreviewPage() {
     };
 
     const gradientToken = readRoot('--smh-gradient');
-    const grainAlpha = readSurface('--champagne-grain-alpha');
-    const vignetteAlpha = readSurface('--champagne-vignette-alpha');
-    const particlesAlpha = readSurface('--champagne-particles-alpha');
+    const grainAlpha = readSurface('--smh-grain-alpha');
+    const vignetteAlpha = readSurface('--smh-vignette-alpha');
+    const particlesAlpha = readSurface('--smh-particles-alpha');
     const glassZ = Number.parseFloat(readRoot('--z-glass') || '0');
     const headerZ = Number.parseFloat(readRoot('--z-header') || '0');
+
+    const backgroundImage = surfaceStyle?.backgroundImage ?? '';
+    const waveStack = backgroundImage
+      ? [backgroundImage.includes('wave-field.svg'), backgroundImage.includes('wave-dots.svg')]
+          .map((flag, index) => (flag ? (index === 0 ? 'wave-field.svg' : 'wave-dots.svg') : null))
+          .filter(Boolean)
+          .join(' + ') || 'none'
+      : 'none';
 
     setTokens({
       gradient: gradientToken.replace(/\s+/g, ' '),
@@ -183,10 +191,10 @@ export default function BrandLivePreviewPage() {
       gold: readRoot('--smh-accent-gold'),
       ink: readRoot('--smh-primary-ink'),
       grain: grainAlpha,
-      grainToken: readRoot('--champagne-grain-alpha') || '0',
+      grainToken: readRoot('--smh-grain-alpha') || '0',
       vignette: vignetteAlpha,
-      vignetteToken: readRoot('--champagne-vignette-alpha') || '0',
-      wave: readSurface('--champagne-wave-alpha'),
+      vignetteToken: readRoot('--smh-vignette-alpha') || '0',
+      wave: waveStack,
       particles: particlesAlpha,
     });
 
@@ -200,7 +208,7 @@ export default function BrandLivePreviewPage() {
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const audit = () =>
       setRuntime({
-        surfaces: document.querySelectorAll('.champagne-surface').length,
+        surfaces: document.querySelectorAll('.champagne-surface-lux').length,
         prefersReducedMotion: motionQuery.matches,
       });
 
@@ -221,14 +229,12 @@ export default function BrandLivePreviewPage() {
 
   useEffect(() => {
     const root = getComputedStyle(document.documentElement);
-    const surfaceTarget = document.querySelector<HTMLElement>('.champagne-surface');
+    const surfaceTarget = document.querySelector<HTMLElement>('.champagne-surface-lux');
     const surfaceComputed = surfaceTarget ? getComputedStyle(surfaceTarget) : null;
-    const gradientCandidate = surfaceComputed?.getPropertyValue('background-image').trim();
+    const backgroundImage = surfaceComputed?.getPropertyValue('background-image').trim() ?? '';
+    const gradientMatch = backgroundImage.match(/linear-gradient\([^)]*\)/i);
     const gradientToken = root.getPropertyValue('--smh-gradient').replace(/\s+/g, ' ').trim();
-    const gradient =
-      gradientCandidate && gradientCandidate !== 'none'
-        ? gradientCandidate
-        : gradientToken;
+    const gradient = gradientMatch ? gradientMatch[0] : gradientToken;
     const canonicalGradient = gradientToken
       .replace(/\s+/g, ' ')
       .replace(/\(\s*/g, '(')
@@ -300,8 +306,8 @@ export default function BrandLivePreviewPage() {
       `surface/glass pseudos → surface:before=${surfaceBefore} surface:after=${surfaceAfter} glass:before=${glassBefore} glass:after=${glassAfter}`
     );
     console.assert(
-      surfaceBefore === 'none' && surfaceAfter === 'none',
-      `Expected no pseudo content on .champagne-surface but received before=${surfaceBefore} after=${surfaceAfter}`
+      surfaceBefore === '' && surfaceAfter === '',
+      `Expected vignette/grain pseudos on .champagne-surface-lux but received before=${surfaceBefore} after=${surfaceAfter}`
     );
     console.assert(
       glassBefore === 'none' && glassAfter === 'none',
@@ -311,7 +317,7 @@ export default function BrandLivePreviewPage() {
       disposeGlass();
     }
 
-    const journeySurface = document.querySelector<HTMLElement>('.champagne-surface.journey');
+    const journeySurface = document.querySelector<HTMLElement>('.champagne-surface-lux.journey');
     if (journeySurface) {
       const journeyComputed = getComputedStyle(journeySurface);
       const journeyBackgroundSize = journeyComputed.getPropertyValue('background-size').trim() || 'unset';
@@ -320,7 +326,7 @@ export default function BrandLivePreviewPage() {
       console.log(`journeySurface.backgroundPosition → ${journeyBackgroundPosition}`);
     }
 
-    const heroSurface = document.querySelector<HTMLElement>('[data-surface="hero"].champagne-surface');
+    const heroSurface = document.querySelector<HTMLElement>('[data-surface="hero"].champagne-surface-lux');
     let heroBorderRadius = '0px';
     let heroRadiusIsZero: boolean | null = null;
     if (heroSurface) {
@@ -358,7 +364,7 @@ export default function BrandLivePreviewPage() {
   }, []);
 
   const surfaceStyle = useMemo(
-    () => ({ '--champagne-wave': "url('/waves/smh-wave-mask.svg') center / cover no-repeat" }) as CSSProperties,
+    () => ({ '--_wave-arcs': 'none', '--_wave-dots': 'none' }) as CSSProperties,
     []
   );
 
@@ -409,8 +415,8 @@ export default function BrandLivePreviewPage() {
               data-surface={pane.id}
               data-wave={pane.wave ? 'on' : 'off'}
               data-particles={pane.particles ? 'on' : 'off'}
-              className={`champagne-surface ${pane.id === 'journey' ? 'journey' : 'hero'}`}
-              style={pane.wave ? surfaceStyle : undefined}
+              className={`champagne-surface-lux ${pane.id === 'journey' ? 'journey' : 'hero'}${pane.particles ? ' particles' : ''}`}
+              style={pane.wave ? undefined : surfaceStyle}
             >
               <div className="relative isolate overflow-hidden">
                 <div aria-hidden className="wave" />
@@ -464,7 +470,7 @@ export default function BrandLivePreviewPage() {
               <span className="text-right">{tokens.grain}</span>
             </li>
             <li className="flex flex-wrap items-center justify-between gap-2 font-mono">
-              <span className="uppercase tracking-[0.35em] text-white/60">Wave α</span>
+              <span className="uppercase tracking-[0.35em] text-white/60">Wave stack</span>
               <span className="text-right">{tokens.wave}</span>
             </li>
             <li className="flex flex-wrap items-center justify-between gap-2 font-mono">
@@ -535,7 +541,7 @@ export default function BrandLivePreviewPage() {
               <dd className="font-mono text-sm text-white">{tokens.vignette}</dd>
             </div>
             <div>
-              <dt className="text-xs uppercase tracking-[0.35em] text-white/50">Wave α</dt>
+              <dt className="text-xs uppercase tracking-[0.35em] text-white/50">Wave stack</dt>
               <dd className="font-mono text-sm text-white">{tokens.wave}</dd>
             </div>
             <div>
