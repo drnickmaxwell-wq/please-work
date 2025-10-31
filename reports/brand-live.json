@@ -1,0 +1,18 @@
+{
+  "home": {
+    "gradient": "linear-gradient(135deg,#C2185B 0%,#40C4B4 60%,#D4AF37 100%)",
+    "bgSize": "auto",
+    "bgPos": "0% 0%",
+    "waves": [],
+    "particles": "http://127.0.0.1:3005/assets/champagne/home-hero-particles.webp",
+    "grain": "http://127.0.0.1:3005/assets/champagne/film-grain-desktop.webp"
+  },
+  "brandLock": {
+    "gradient": "linear-gradient(135deg,#C2185B 0%,#40C4B4 60%,#D4AF37 100%)",
+    "bgSize": "auto",
+    "bgPos": "0% 0%",
+    "waves": [],
+    "particles": "http://127.0.0.1:3005/assets/champagne/home-hero-particles.webp",
+    "grain": "http://127.0.0.1:3005/assets/champagne/film-grain-desktop.webp"
+  }
+}

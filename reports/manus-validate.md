@@ -1,0 +1,24 @@
+# Manus Validation Report
+
+- ✅ home.gradient matches Manus manifest
+  - expected: linear-gradient(135deg,#C2185B 0%,#40C4B4 60%,#D4AF37 100%)
+  - actual: linear-gradient(135deg,#C2185B 0%,#40C4B4 60%,#D4AF37 100%)
+- ✅ brandLock.gradient matches Manus manifest
+  - expected: linear-gradient(135deg,#C2185B 0%,#40C4B4 60%,#D4AF37 100%)
+  - actual: linear-gradient(135deg,#C2185B 0%,#40C4B4 60%,#D4AF37 100%)
+- ⚠️ home.backgroundSize is cover
+  - expected: cover
+  - actual: auto
+- ⚠️ home.backgroundPosition is center
+  - expected: center
+  - actual: 0% 0%
+- ⚠️ home includes wave field and mask assets
+  - wave field detected: no
+  - mask detected: no
+  - waves: none
+- ✅ home particles reference matches manifest
+  - expected contains: home-hero/assets/manus/particles/home-hero-particles.webp
+  - actual: http://127.0.0.1:3005/assets/champagne/home-hero-particles.webp
+- ⚠️ home grain reference matches manifest
+  - expected contains: home-hero/assets/manus/textures/home-hero-film-grain.webp
+  - actual: http://127.0.0.1:3005/assets/champagne/film-grain-desktop.webp

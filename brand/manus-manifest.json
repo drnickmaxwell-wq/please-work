@@ -1,0 +1,94 @@
+{
+  "sections": {
+    "hero": {
+      "gradient": "linear-gradient(135deg,#C2185B 0%,#40C4B4 60%,#D4AF37 100%)",
+      "bgSize": "cover",
+      "bgPos": "center",
+      "waves": [
+        {
+          "file": "home-hero/assets/manus/waves/waves-bg-2560.webp",
+          "blend": "overlay",
+          "opacity": 0.40,
+          "size": "cover",
+          "pos": "cover"
+        },
+        {
+          "file": "home-hero/assets/manus/waves/home-hero-mask-desktop.webp",
+          "blend": "soft-light",
+          "opacity": 0.18,
+          "size": "cover",
+          "pos": "cover"
+        }
+      ],
+      "particles": {
+        "file": "home-hero/assets/manus/particles/home-hero-particles.webp",
+        "blend": "screen",
+        "opacity": 0.08
+      },
+      "grain": {
+        "file": "home-hero/assets/manus/textures/home-hero-film-grain.webp",
+        "blend": "overlay",
+        "opacity": 0.07
+      },
+      "motion": { "maxPx": 6, "wavePx": 4, "particlePx": 3 },
+      "notes": "Include gold shoulder radial lift"
+    },
+    "smileJourney": {
+      "gradient": "linear-gradient(135deg,#C2185B 0%,#40C4B4 60%,#D4AF37 100%)",
+      "bgSize": "cover",
+      "bgPos": "center",
+      "waves": [
+        {
+          "file": "smile-journey/assets/manus/waves/waves-bg-2560.webp",
+          "blend": "overlay",
+          "opacity": 0.35,
+          "size": "cover",
+          "pos": "cover"
+        },
+        {
+          "file": "smile-journey/assets/manus/waves/home-hero-mask-desktop.webp",
+          "blend": "soft-light",
+          "opacity": 0.15,
+          "size": "cover",
+          "pos": "cover"
+        }
+      ],
+      "particles": {
+        "file": "smile-journey/assets/manus/particles/home-hero-particles.webp",
+        "blend": "screen",
+        "opacity": 0.06
+      },
+      "grain": {
+        "file": "smile-journey/assets/manus/textures/home-hero-film-grain.webp",
+        "blend": "overlay",
+        "opacity": 0.07
+      },
+      "motion": { "maxPx": 5, "wavePx": 3, "particlePx": 2 },
+      "notes": "Maintain gradient continuation and dot-field phase alignment"
+    },
+    "footer": {
+      "gradient": "linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%)",
+      "bgSize": "cover",
+      "bgPos": "center",
+      "waves": [],
+      "particles": {
+        "file": "home-hero/assets/manus/particles/home-hero-particles.webp",
+        "blend": "screen",
+        "opacity": 0.05
+      },
+      "grain": {
+        "file": "home-hero/assets/manus/textures/home-hero-film-grain.webp",
+        "blend": "overlay",
+        "opacity": 0.06
+      },
+      "motion": { "maxPx": 0, "wavePx": 0, "particlePx": 0 },
+      "notes": "Glass or keyline overlays may be applied in CSS; keep static in footer."
+    }
+  },
+  "framework": "Next.js",
+  "tokens": {
+    "--smh-primary-magenta": "#C2185B",
+    "--smh-primary-teal": "#40C4B4",
+    "--smh-accent-gold": "#D4AF37"
+  }
+}
