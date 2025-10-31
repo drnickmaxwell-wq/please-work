@@ -1,6 +1,8 @@
 'use client';
 
 import Link from 'next/link';
+import { useEffect, useRef } from 'react';
+import type { CSSProperties } from 'react';
 
 import { usePrefersReducedMotion } from '@/lib/hooks/usePrefersReducedMotion';
 
@@ -9,8 +11,60 @@ export interface Hero4KVideoProps {
   [key: string]: unknown;
 }
 
+const PARALLAX_STRENGTH = 22;
+
 export default function Hero4KVideo({ poster }: Hero4KVideoProps) {
   const prefersReducedMotion = usePrefersReducedMotion();
+  const surfaceRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const surface = surfaceRef.current;
+    if (!surface) return;
+
+    surface.style.setProperty('--parallax-x', '0px');
+    surface.style.setProperty('--parallax-y', '0px');
+
+    const hoverMedia = window.matchMedia('(hover: hover) and (pointer: fine)');
+    if (prefersReducedMotion || !hoverMedia.matches) {
+      return;
+    }
+
+    let frame = 0;
+
+    const updateParallax = (event: PointerEvent) => {
+      const rect = surface.getBoundingClientRect();
+      const relativeX = (event.clientX - rect.left) / rect.width - 0.5;
+      const relativeY = (event.clientY - rect.top) / rect.height - 0.5;
+      const targetX = `${relativeX * PARALLAX_STRENGTH}px`;
+      const targetY = `${relativeY * PARALLAX_STRENGTH}px`;
+
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        surface.style.setProperty('--parallax-x', targetX);
+        surface.style.setProperty('--parallax-y', targetY);
+      });
+    };
+
+    const resetParallax = () => {
+      cancelAnimationFrame(frame);
+      surface.style.setProperty('--parallax-x', '0px');
+      surface.style.setProperty('--parallax-y', '0px');
+    };
+
+    surface.addEventListener('pointermove', updateParallax);
+    surface.addEventListener('pointerleave', resetParallax);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      surface.removeEventListener('pointermove', updateParallax);
+      surface.removeEventListener('pointerleave', resetParallax);
+    };
+  }, [prefersReducedMotion]);
+
+  const parallaxStyle = {
+    '--parallax-x': '0px',
+    '--parallax-y': '0px',
+  } as CSSProperties;
 
   return (
     <section
@@ -20,9 +74,21 @@ export default function Hero4KVideo({ poster }: Hero4KVideoProps) {
       data-wave="on"
       data-particles="off"
       data-reduced-motion={prefersReducedMotion ? 'true' : 'false'}
-      className="champagne-surface champagne-warm-lift hero"
+      className="champagne-surface-lux champagne-surface-lux--parallax champagne-warm-lift hero"
     >
-      <div className="relative isolate w-full min-h-[85vh] overflow-hidden md:min-h-[min(95vh,1100px)]">
+      <div
+        ref={surfaceRef}
+        className="relative isolate w-full min-h-[85vh] overflow-hidden md:min-h-[min(95vh,1100px)]"
+        style={parallaxStyle}
+      >
+        <div
+          aria-hidden
+          className="champagne-surface-lux__wave champagne-surface-lux__wave--arcs"
+        />
+        <div
+          aria-hidden
+          className="champagne-surface-lux__wave champagne-surface-lux__wave--dots"
+        />
         <div aria-hidden className="absolute inset-0 z-0 overflow-hidden">
           <video
             className="h-full w-full object-cover"

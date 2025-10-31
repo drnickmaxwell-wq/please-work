@@ -17,5 +17,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - name: Brand Guard
         run: pnpm run brand:guard
+      - name: Brand Verification
+        run: pnpm run verify:brand
       - name: Build preview
         run: pnpm run build

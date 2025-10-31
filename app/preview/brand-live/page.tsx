@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import type { CSSProperties } from 'react';
 
 import Particles from '@/components/brand/Particles';
 
@@ -9,7 +8,6 @@ type PaneConfig = {
   id: string;
   label: string;
   description: string;
-  wave: boolean;
   particles: boolean;
 };
 
@@ -18,14 +16,12 @@ const PANES: PaneConfig[] = [
     id: 'hero',
     label: 'Hero Surface',
     description: 'Full-bleed hero baseline with motion-friendly layers.',
-    wave: false,
     particles: false,
   },
   {
     id: 'journey',
     label: 'Smile Journey',
     description: 'Card grid atop the gradient surface without animated flourishes.',
-    wave: false,
     particles: false,
   },
 ];
@@ -40,7 +36,8 @@ type TokenDiagnostics = {
   grainToken: string;
   vignette: string;
   vignetteToken: string;
-  wave: string;
+  bgSize: string;
+  bgPosition: string;
   particles: string;
 };
 
@@ -67,7 +64,8 @@ const EMPTY_DIAGNOSTICS: TokenDiagnostics = {
   grainToken: '…',
   vignette: '…',
   vignetteToken: '…',
-  wave: '…',
+  bgSize: '…',
+  bgPosition: '…',
   particles: '…',
 };
 
@@ -162,7 +160,7 @@ export default function BrandLivePreviewPage() {
   useEffect(() => {
     const root = getComputedStyle(document.documentElement);
     const readRoot = (token: string) => root.getPropertyValue(token).trim();
-    const firstSurface = document.querySelector<HTMLElement>('.champagne-surface');
+    const firstSurface = document.querySelector<HTMLElement>('.champagne-surface-lux');
     const surfaceStyle = firstSurface ? getComputedStyle(firstSurface) : null;
     const readSurface = (token: string) => {
       const raw = surfaceStyle?.getPropertyValue(token).trim() ?? '';
@@ -186,7 +184,8 @@ export default function BrandLivePreviewPage() {
       grainToken: readRoot('--champagne-grain-alpha') || '0',
       vignette: vignetteAlpha,
       vignetteToken: readRoot('--champagne-vignette-alpha') || '0',
-      wave: readSurface('--champagne-wave-alpha'),
+      bgSize: readRoot('--smh-bg-size'),
+      bgPosition: readRoot('--smh-bg-pos'),
       particles: particlesAlpha,
     });
 
@@ -200,7 +199,7 @@ export default function BrandLivePreviewPage() {
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const audit = () =>
       setRuntime({
-        surfaces: document.querySelectorAll('.champagne-surface').length,
+        surfaces: document.querySelectorAll('.champagne-surface-lux').length,
         prefersReducedMotion: motionQuery.matches,
       });
 
@@ -221,7 +220,7 @@ export default function BrandLivePreviewPage() {
 
   useEffect(() => {
     const root = getComputedStyle(document.documentElement);
-    const surfaceTarget = document.querySelector<HTMLElement>('.champagne-surface');
+    const surfaceTarget = document.querySelector<HTMLElement>('.champagne-surface-lux');
     const surfaceComputed = surfaceTarget ? getComputedStyle(surfaceTarget) : null;
     const gradientCandidate = surfaceComputed?.getPropertyValue('background-image').trim();
     const gradientToken = root.getPropertyValue('--smh-gradient').replace(/\s+/g, ' ').trim();
@@ -301,7 +300,7 @@ export default function BrandLivePreviewPage() {
     );
     console.assert(
       surfaceBefore === 'none' && surfaceAfter === 'none',
-      `Expected no pseudo content on .champagne-surface but received before=${surfaceBefore} after=${surfaceAfter}`
+      `Expected no pseudo content on .champagne-surface-lux but received before=${surfaceBefore} after=${surfaceAfter}`
     );
     console.assert(
       glassBefore === 'none' && glassAfter === 'none',
@@ -311,7 +310,7 @@ export default function BrandLivePreviewPage() {
       disposeGlass();
     }
 
-    const journeySurface = document.querySelector<HTMLElement>('.champagne-surface.journey');
+    const journeySurface = document.querySelector<HTMLElement>('.champagne-surface-lux.journey');
     if (journeySurface) {
       const journeyComputed = getComputedStyle(journeySurface);
       const journeyBackgroundSize = journeyComputed.getPropertyValue('background-size').trim() || 'unset';
@@ -320,7 +319,7 @@ export default function BrandLivePreviewPage() {
       console.log(`journeySurface.backgroundPosition → ${journeyBackgroundPosition}`);
     }
 
-    const heroSurface = document.querySelector<HTMLElement>('[data-surface="hero"].champagne-surface');
+    const heroSurface = document.querySelector<HTMLElement>('[data-surface="hero"].champagne-surface-lux');
     let heroBorderRadius = '0px';
     let heroRadiusIsZero: boolean | null = null;
     if (heroSurface) {
@@ -356,11 +355,6 @@ export default function BrandLivePreviewPage() {
     });
 
   }, []);
-
-  const surfaceStyle = useMemo(
-    () => ({ '--champagne-wave': "url('/waves/smh-wave-mask.svg') center / cover no-repeat" }) as CSSProperties,
-    []
-  );
 
   const ctaStatus = assertions.ctaMatchesTextToken;
   const beforeAfter = useMemo(
@@ -407,13 +401,10 @@ export default function BrandLivePreviewPage() {
             <section
               key={pane.id}
               data-surface={pane.id}
-              data-wave={pane.wave ? 'on' : 'off'}
               data-particles={pane.particles ? 'on' : 'off'}
-              className={`champagne-surface ${pane.id === 'journey' ? 'journey' : 'hero'}`}
-              style={pane.wave ? surfaceStyle : undefined}
+              className={`champagne-surface-lux ${pane.id === 'journey' ? 'journey' : 'hero'}`}
             >
               <div className="relative isolate overflow-hidden">
-                <div aria-hidden className="wave" />
                 {pane.particles ? (
                   <Particles aria-hidden className="champagne-particles" data-state="on" />
                 ) : (
@@ -438,7 +429,7 @@ export default function BrandLivePreviewPage() {
                     </div>
                   ) : null}
                   <div className="flex flex-wrap gap-4 text-[0.65rem] uppercase tracking-[0.45em] text-white/60">
-                    <span>Wave: {pane.wave ? 'On' : 'Off'}</span>
+                    <span>Waves: Dual</span>
                     <span>Particles: {pane.particles ? 'On' : 'Off'}</span>
                     <span>Gradient: Locked</span>
                   </div>
@@ -464,8 +455,12 @@ export default function BrandLivePreviewPage() {
               <span className="text-right">{tokens.grain}</span>
             </li>
             <li className="flex flex-wrap items-center justify-between gap-2 font-mono">
-              <span className="uppercase tracking-[0.35em] text-white/60">Wave α</span>
-              <span className="text-right">{tokens.wave}</span>
+              <span className="uppercase tracking-[0.35em] text-white/60">BG Size Token</span>
+              <span className="text-right">{tokens.bgSize}</span>
+            </li>
+            <li className="flex flex-wrap items-center justify-between gap-2 font-mono">
+              <span className="uppercase tracking-[0.35em] text-white/60">BG Position Token</span>
+              <span className="text-right">{tokens.bgPosition}</span>
             </li>
             <li className="flex flex-wrap items-center justify-between gap-2 font-mono">
               <span className="uppercase tracking-[0.35em] text-white/60">Particles α</span>
@@ -535,8 +530,12 @@ export default function BrandLivePreviewPage() {
               <dd className="font-mono text-sm text-white">{tokens.vignette}</dd>
             </div>
             <div>
-              <dt className="text-xs uppercase tracking-[0.35em] text-white/50">Wave α</dt>
-              <dd className="font-mono text-sm text-white">{tokens.wave}</dd>
+              <dt className="text-xs uppercase tracking-[0.35em] text-white/50">BG Size Token</dt>
+              <dd className="font-mono text-sm text-white">{tokens.bgSize}</dd>
+            </div>
+            <div>
+              <dt className="text-xs uppercase tracking-[0.35em] text-white/50">BG Position Token</dt>
+              <dd className="font-mono text-sm text-white">{tokens.bgPosition}</dd>
             </div>
             <div>
               <dt className="text-xs uppercase tracking-[0.35em] text-white/50">Particles α</dt>

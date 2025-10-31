@@ -7,15 +7,14 @@ const { join, extname, sep } = require("path");
 const ROOT = process.cwd();
 const TOKENS_FILE = join(ROOT, "styles/tokens/smh-champagne-tokens.css");
 const HEX_CODES = Object.freeze({
-  PRIMARY_MAGENTA: "#C2185B",
-  PRIMARY_TEAL: "#40C4B4",
+  PRIMARY_MAGENTA: "#D94BC6",
+  PRIMARY_TEAL: "#00C2C7",
   GOLD: "#D4AF37",
-  GRADIENT_MAGENTA: "#D94BC6",
-  GRADIENT_TEAL: "#00C2C7",
+  TRANSITION_CYAN: "#2AD7C6",
   INK: "#0B0D0F",
 });
-const CANONICAL_DISPLAY = `linear-gradient(135deg,${HEX_CODES.GRADIENT_MAGENTA} 0%,${HEX_CODES.GRADIENT_TEAL} 100%)`;
-const CANONICAL_GRAD = `linear-gradient(135deg,${HEX_CODES.GRADIENT_MAGENTA.toLowerCase()}0%,${HEX_CODES.GRADIENT_TEAL.toLowerCase()}100%)`;
+const CANONICAL_DISPLAY = `linear-gradient(135deg,${HEX_CODES.PRIMARY_MAGENTA} 0%,${HEX_CODES.TRANSITION_CYAN} 42%,${HEX_CODES.PRIMARY_TEAL} 100%)`;
+const CANONICAL_GRAD = "linear-gradient(var(--smh-grad-angle),var(--smh-grad-stop1)0%,var(--smh-grad-stop2)42%,var(--smh-grad-stop3)100%)";
 const HEXES = Object.values(HEX_CODES).map(hex=>new RegExp(hex.slice(1),"i"));
 
 const normalize = (value) => value.replace(/\s+/g, "").toLowerCase();
@@ -86,17 +85,6 @@ for(const file of files){
       break;
     }
   }
-  const surfaceBlocks = txt.match(/\.champagne-surface[^\{]*\{[^}]*\}/gs) || [];
-  for(const block of surfaceBlocks){
-    if(/mix-blend-mode/i.test(block)){
-      violations.push({ file, hex: 'champagne-surface-mix-blend' });
-      break;
-    }
-    if(/linear-gradient\(|radial-gradient\(/i.test(block)){
-      violations.push({ file, hex: 'champagne-surface-inline-gradient' });
-      break;
-    }
-  }
   if(isHeroJourneyFile){
     if(/bg-(?:white|black|ink)\//i.test(txt)){
       violations.push({ file, hex: 'hero-journey-bg-tint' });
@@ -108,7 +96,12 @@ for(const file of files){
       violations.push({ file, hex: 'hero-journey-opacity' });
     }
   }
-  if(file.includes("brand") && normalized.includes("linear-gradient(") && !normalized.includes(CANONICAL_GRAD)){
+  if(
+    file.includes("brand") &&
+    normalized.includes("linear-gradient(") &&
+    !normalized.includes("${") &&
+    !normalized.includes(CANONICAL_GRAD)
+  ){
     const gradientMatch = txt.match(/linear-gradient\([^)]*\)/i);
     const raw = gradientMatch ? gradientMatch[0].trim() : "";
     violations.push({

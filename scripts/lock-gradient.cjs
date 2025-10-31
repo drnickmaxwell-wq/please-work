@@ -62,8 +62,8 @@ async function updateTokens(payload) {
 
   let content = fs.readFileSync(TOKENS_PATH, 'utf8');
   content = replaceToken(content, '--smh-gradient', gradientValue);
-  content = replaceToken(content, '--smh-surface-bg-size', sizeValue);
-  content = replaceToken(content, '--smh-surface-bg-position', positionValue);
+  content = replaceToken(content, '--smh-bg-size', sizeValue);
+  content = replaceToken(content, '--smh-bg-pos', positionValue);
   if (!content.endsWith('\n')) {
     content += '\n';
   }

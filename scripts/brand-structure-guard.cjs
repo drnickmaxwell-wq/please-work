@@ -25,8 +25,8 @@ const heroContent = read('hero');
 const journeyContent = read('journey');
 
 function ensureChampagneSurface(name, content) {
-  if (!content.includes('champagne-surface')) {
-    errors.push(`${name} must include at least one 'champagne-surface' class.`);
+  if (!content.includes('champagne-surface-lux')) {
+    errors.push(`${name} must include at least one 'champagne-surface-lux' class.`);
   }
 }
 
