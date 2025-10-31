@@ -68,7 +68,7 @@ function structureReport() {
   const surfaceCss = readFile(surfacePath);
   const glassCss = readFile(glassPath);
 
-  const surfaceBlockMatch = surfaceCss.match(/\.champagne-surface\s*\{([^}]*)\}/i);
+  const surfaceBlockMatch = surfaceCss.match(/\.champagne-surface-lux\s*\{([^}]*)\}/i);
   const glassBlockMatch = glassCss.match(/\.champagne-glass\s*\{([^}]*)\}/i);
   const surfaceBlock = surfaceBlockMatch ? surfaceBlockMatch[1] : '';
   const glassBlock = glassBlockMatch ? glassBlockMatch[1] : '';
@@ -84,8 +84,8 @@ function structureReport() {
   const normalizedTokenGradient = tokenGradient ? normalize(tokenGradient) : null;
   const normalizedSurfaceGradient = backgroundImage ? normalize(backgroundImage) : null;
 
-  const heroHasSurface = hero.includes('champagne-surface');
-  const journeyHasSurface = journey.includes('champagne-surface');
+  const heroHasSurface = hero.includes('champagne-surface-lux');
+  const journeyHasSurface = journey.includes('champagne-surface-lux');
   const hasMdGrid = journey.includes('md:grid-cols-2');
   const hasLgGrid = journey.includes('lg:grid-cols-3');
   const heroHasGlassPanel = /className="[^"]*champagne-glass/.test(hero);

@@ -95,20 +95,20 @@ if (driftOffenders.length === 0) {
 
 const gradientDeclaration = extractDeclaration(tokensContent, '--smh-gradient') || '';
 const gradientString = gradientDeclaration.replace(/\s+/g, '');
-const heroRadiusMatch = surfaceContent.match(/\.champagne-surface\s*{[^}]*border-radius:([^;]+);/s);
+const heroRadiusMatch = surfaceContent.match(/\.champagne-surface-lux\s*{[^}]*border-radius:([^;]+);/s);
 const heroRadiusRaw = heroRadiusMatch ? heroRadiusMatch[1].trim() : 'unknown';
 const heroRadius = heroRadiusRaw === '0' ? '0px' : heroRadiusRaw;
 const textToken = extractDeclaration(tokensContent, '--smh-text')
   || extractDeclaration(tokensContent, '--smh-primary-ink')
   || 'unknown';
 const grainToken = extractDeclaration(tokensContent, '--smh-grain-alpha')
-  || extractFallback(surfaceContent, '--champagne-grain-alpha')
+  || extractFallback(surfaceContent, '--smh-grain-alpha')
   || '0';
 const vignetteToken = extractDeclaration(tokensContent, '--smh-vignette-alpha')
-  || extractFallback(surfaceContent, '--champagne-vignette-alpha')
+  || extractFallback(surfaceContent, '--smh-vignette-alpha')
   || '0';
 const particlesToken = extractDeclaration(tokensContent, '--smh-particles-alpha')
-  || extractFallback(surfaceContent, '--champagne-particles-alpha')
+  || extractFallback(surfaceContent, '--smh-particles-alpha')
   || '0';
 const glassZRaw = extractDeclaration(surfaceContent, '--z-glass');
 const headerZRaw = extractDeclaration(surfaceContent, '--z-header');

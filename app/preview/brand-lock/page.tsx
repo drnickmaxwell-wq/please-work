@@ -1,62 +1,68 @@
 // app/preview/brand-lock/page.tsx — Runtime brand probe (read-only)
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Diagnostics = {
   gradient: string;
-  tokenGradient: string;
-  glassBg: string;
+  waves: string;
   backgroundSize: string;
   backgroundPosition: string;
 };
 
+const normalizeGradient = (value: string) =>
+  value
+    .replace(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/g, (_, r, g, b) => {
+      const toHex = (channel: string) => {
+        const hex = Number(channel).toString(16).padStart(2, "0");
+        return hex.toUpperCase();
+      };
+      return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+    })
+    .replace(/\s+/g, "");
+
 export default function BrandLock() {
-  const [diagnostics, setDiagnostics] = useState<Diagnostics | null>(null);
-  const [warmLiftEnabled, setWarmLiftEnabled] = useState(false);
+  const surfaceRef = useRef<HTMLElement | null>(null);
+  const [particlesEnabled, setParticlesEnabled] = useState(false);
+  const [liveDiagnostics, setLiveDiagnostics] = useState<Diagnostics | null>(null);
 
   useEffect(() => {
-    const surface = document.querySelector<HTMLElement>(".champagne-surface");
-    const glass = document.querySelector<HTMLElement>(".champagne-glass");
-    if (!surface || !glass) return;
+    const surface = surfaceRef.current;
+    if (!surface) return;
 
     const surfaceStyles = getComputedStyle(surface);
-    const glassStyles = getComputedStyle(glass);
-    const rootStyles = getComputedStyle(document.documentElement);
 
-    const normalizeGradient = (value: string) =>
-      value
-        .replace(/\s*,\s*/g, ",")
-        .replace(/\s*\(\s*/g, "(")
-        .replace(/\s*\)\s*/g, ")")
-        .replace(/\s+/g, " ")
-        .trim();
+    const backgroundImage = surfaceStyles.backgroundImage;
+    const gradientMatch = backgroundImage.match(/linear-gradient\([^)]*\)/i);
+    const gradient = gradientMatch ? normalizeGradient(gradientMatch[0]) : "";
 
-    const gradient = normalizeGradient(surfaceStyles.backgroundImage);
-    const tokenGradient = normalizeGradient(rootStyles.getPropertyValue("--smh-gradient"));
-    console.log("gradient=", gradient);
-    console.log("glassBg=", glassStyles.backgroundColor);
-    console.log(
-      "bgSize/Pos=",
-      surfaceStyles.backgroundSize,
-      surfaceStyles.backgroundPosition,
-    );
+    const wavesField = backgroundImage.includes("wave-field.svg");
+    const wavesDots = backgroundImage.includes("wave-dots.svg");
+    const waves = wavesField && wavesDots
+      ? "wave-field.svg + wave-dots.svg"
+      : [wavesField ? "wave-field.svg" : null, wavesDots ? "wave-dots.svg" : null]
+          .filter(Boolean)
+          .join(" | ");
 
-    setDiagnostics({
+    console.log(`gradient=${gradient}`);
+    console.log(`waves=${waves}`);
+    console.log(`bgSize/Pos=${surfaceStyles.backgroundSize} | ${surfaceStyles.backgroundPosition}`);
+
+    setLiveDiagnostics({
       gradient,
-      tokenGradient,
-      glassBg: glassStyles.backgroundColor,
+      waves,
       backgroundSize: surfaceStyles.backgroundSize,
       backgroundPosition: surfaceStyles.backgroundPosition,
     });
-  }, []);
+  }, [particlesEnabled]);
+
+  const surfaceClassName = `champagne-surface-lux hero flex min-h-screen items-center justify-center p-6${
+    particlesEnabled ? " particles" : ""
+  }`;
 
   return (
     <main className="min-h-screen bg-[color:var(--smh-bg)] text-[color:var(--smh-text)]">
-      <section
-        className="champagne-surface champagne-warm-lift saturation-lift hero flex min-h-screen items-center justify-center p-6"
-        style={{ ["--smh-warm-lift" as const]: warmLiftEnabled ? 1 : 0 }}
-      >
+      <section ref={surfaceRef} className={surfaceClassName}>
         <div className="champagne-glass w-full max-w-2xl p-8">
           <h2 className="font-serif text-2xl">Brand lock diagnostics</h2>
           <p className="mt-2 text-sm opacity-80">
@@ -65,18 +71,19 @@ export default function BrandLock() {
           <label className="mt-4 inline-flex items-center gap-2 text-sm">
             <input
               type="checkbox"
-              checked={warmLiftEnabled}
-              onChange={(event) => setWarmLiftEnabled(event.target.checked)}
+              checked={particlesEnabled}
+              onChange={(event) => setParticlesEnabled(event.target.checked)}
             />
-            Warm lift overlay
+            Particles overlay
           </label>
           <div className="mt-6 space-y-2 font-mono text-sm">
-            {diagnostics ? (
+            {liveDiagnostics ? (
               <>
-                <p>gradient={diagnostics.gradient}</p>
-                <p>tokenGradient={diagnostics.tokenGradient}</p>
-                <p>glassBg={diagnostics.glassBg}</p>
-                <p>bgSize/Pos={diagnostics.backgroundSize} | {diagnostics.backgroundPosition}</p>
+                <p>gradient={liveDiagnostics.gradient}</p>
+                <p>waves={liveDiagnostics.waves}</p>
+                <p>
+                  bgSize/Pos={liveDiagnostics.backgroundSize} | {liveDiagnostics.backgroundPosition}
+                </p>
               </>
             ) : (
               <p aria-live="polite">Sampling surface…</p>

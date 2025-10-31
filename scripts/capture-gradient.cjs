@@ -56,9 +56,9 @@ async function captureWithPlaywright(playwright) {
       if (response && response.status() === 404) {
         continue;
       }
-      await page.waitForSelector('.champagne-surface', { state: 'visible', timeout: WAIT_TIMEOUT });
+      await page.waitForSelector('.champagne-surface-lux', { state: 'visible', timeout: WAIT_TIMEOUT });
       const data = await page.evaluate(() => {
-        const el = document.querySelector('.champagne-surface');
+        const el = document.querySelector('.champagne-surface-lux');
         if (!el) return null;
         const style = window.getComputedStyle(el);
         return {
@@ -107,9 +107,9 @@ function captureWithPuppeteerViaNpx() {
     `      if (response && response.status() === 404) {\n` +
     `        continue;\n` +
     `      }\n` +
-    `      await page.waitForSelector('.champagne-surface', { visible: true, timeout: WAIT_TIMEOUT });\n` +
+    `      await page.waitForSelector('.champagne-surface-lux', { visible: true, timeout: WAIT_TIMEOUT });\n` +
     `      const data = await page.evaluate(() => {\n` +
-    `        const el = document.querySelector('.champagne-surface');\n` +
+    `        const el = document.querySelector('.champagne-surface-lux');\n` +
     `        if (!el) return null;\n` +
     `        const style = window.getComputedStyle(el);\n` +
     `        return {\n` +
