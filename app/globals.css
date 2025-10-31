@@ -1,6 +1,8 @@
-@import "../styles/tokens/smh-champagne-tokens.css";
-@import "../styles/champagne/surface.css";
-@import "../styles/champagne/glass.css";
+@import "@/styles/tokens/smh-champagne-tokens.css";
+@import "@/styles/champagne/surface.css";
+/* glass & motion layers should come after surface */
+@import "@/styles/champagne/glass.css";
+@import "@/styles/brand/brand-motion.css";
 
 @tailwind base;
 @tailwind components;
@@ -15,7 +17,11 @@
   --sparkle-highlight: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.55) 45%, transparent 70%);
   --subsurface-glow-light: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(212,175,55,0.02) 100%);
   --subsurface-glow-dark: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(212,175,55,0.03) 100%);
-  --iridescent-gradient: linear-gradient(135deg, var(--smh-primary-magenta) 0%, var(--smh-primary-teal) 50%, var(--smh-accent-gold) 100%);
+  --iridescent-gradient: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--brand-teal, var(--smh-primary-teal)) 70%, white) 0%,
+    color-mix(in oklab, var(--brand-magenta, var(--smh-primary-magenta)) 70%, white) 100%
+  );
   --card-reflection-gradient: linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.1) 50%, transparent 100%);
   --card-reflection-gradient-dark: linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.15) 50%, transparent 100%);
 }

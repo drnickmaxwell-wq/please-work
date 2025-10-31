@@ -1,21 +1,22 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Brand lock surface diagnostics', () => {
-  test('gradient stack and waves are locked', async ({ page }) => {
+  test('gradient stack and assets align with Manus Lux canon', async ({ page }) => {
     await page.goto('/preview/brand-lock');
 
     const diagnostics = await page.evaluate(() => {
-      const surface = document.querySelector<HTMLElement>('.champagne-surface-lux');
+      const surface = document.querySelector<HTMLElement>('.champagne-surface, .champagne-surface-lux');
       if (!surface) {
         throw new Error('Champagne surface not found');
       }
       const surfaceStyles = getComputedStyle(surface);
       const rootStyles = getComputedStyle(document.documentElement);
-      const gradientImage = surfaceStyles.backgroundImage;
+      const gradientImage = surfaceStyles.backgroundImage.trim();
+      const normalizedSurfaceGradient = gradientImage.replace(/\s+/g, '').toLowerCase();
       const normalizedTokenGradient = rootStyles
         .getPropertyValue('--smh-gradient')
         .replace(/\s+/g, '')
-        .trim();
+        .toLowerCase();
 
       const resolveToken = (name: string): string => {
         const value = rootStyles.getPropertyValue(name).trim();
@@ -30,32 +31,27 @@ test.describe('Brand lock surface diagnostics', () => {
       const stopTokens = ['--smh-grad-stop1', '--smh-grad-stop2', '--smh-grad-stop3'] as const;
       const stopValues = stopTokens.map((token, index) => {
         const resolved = resolveToken(token).replace(/\s+/g, '').toLowerCase();
-        const suffix = index === 0 ? '0%' : index === 1 ? '42%' : '100%';
+        const suffix = index === 0 ? '0%' : index === 1 ? '60%' : '100%';
         return `${resolved}${suffix}`;
       });
 
       return {
-        gradientImage,
+        normalizedSurfaceGradient,
         normalizedTokenGradient,
         stopValues,
-        waveField: gradientImage.includes('wave-field.svg'),
-        waveDots: gradientImage.includes('wave-dots.svg'),
+        waveMask: rootStyles.getPropertyValue('--wave-mask').trim(),
+        particles: rootStyles.getPropertyValue('--particles').trim(),
+        grainDesktop: rootStyles.getPropertyValue('--grain-desktop').trim(),
       };
     });
 
-    expect(diagnostics.gradientImage).toContain('linear-gradient');
-    const gradientString = diagnostics.normalizedTokenGradient.toLowerCase();
+    expect(diagnostics.normalizedSurfaceGradient).toContain('linear-gradient(');
+    expect(diagnostics.normalizedSurfaceGradient).toBe(diagnostics.normalizedTokenGradient);
     diagnostics.stopValues.forEach((stop) => {
-      expect(gradientString).toContain(stop);
+      expect(diagnostics.normalizedTokenGradient).toContain(stop);
     });
-    expect(gradientString.indexOf(diagnostics.stopValues[0])).toBeLessThan(
-      gradientString.indexOf(diagnostics.stopValues[1]),
-    );
-    expect(gradientString.indexOf(diagnostics.stopValues[1])).toBeLessThan(
-      gradientString.indexOf(diagnostics.stopValues[2]),
-    );
-
-    expect(diagnostics.waveField).toBeTruthy();
-    expect(diagnostics.waveDots).toBeTruthy();
+    expect(diagnostics.waveMask).toContain('/assets/champagne/wave-mask-desktop.webp');
+    expect(diagnostics.particles).toContain('/assets/champagne/home-hero-particles.webp');
+    expect(diagnostics.grainDesktop).toContain('/assets/champagne/film-grain-desktop.webp');
   });
 });

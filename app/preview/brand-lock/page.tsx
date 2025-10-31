@@ -56,7 +56,7 @@ export default function BrandLock() {
     });
   }, [particlesEnabled]);
 
-  const surfaceClassName = `champagne-surface-lux hero flex min-h-screen items-center justify-center p-6${
+  const surfaceClassName = `champagne-surface champagne-surface-lux hero flex min-h-screen items-center justify-center p-6${
     particlesEnabled ? " particles" : ""
   }`;
 

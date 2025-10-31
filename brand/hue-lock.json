@@ -1,7 +1,1 @@
-{
-  "capturedAt": "2025-10-30T13:09:57.799Z",
-  "source": "/preview/brand-lock",
-  "gradient": "linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%)",
-  "bgSize": "165% 165%",
-  "bgPosition": "18% 38%"
-}
+{ "gradient": "linear-gradient(135deg,#C2185B 0%,#40C4B4 60%,#D4AF37 100%)" }

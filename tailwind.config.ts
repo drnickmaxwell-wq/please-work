@@ -24,6 +24,7 @@ const config: Config = {
     },
   },
   safelist: [
+    'champagne-surface',
     'champagne-surface-lux',
     'champagne-glass',
     'rounded-2xl',

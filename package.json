@@ -7,16 +7,17 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "brand:guard": "node scripts/brand-guard.cjs",
+    "brand:guard": "node brand-guard.cjs",
     "brand:audit": "node scripts/brand-audit.cjs",
     "brand:report": "node scripts/brand-report.cjs",
-    "verify:hue": "node scripts/brand-report.cjs && echo 'Hue OK'",
+    "verify:hue": "node scripts/verify-hue.cjs",
     "verify:brand": "pnpm exec playwright test tests/brand-lock.spec.ts",
     "verify:visual": "pnpm exec playwright test preview/brand-live.spec.ts",
     "hue:capture": "node scripts/capture-gradient.cjs",
     "hue:lock": "node scripts/lock-gradient.cjs",
-    "prepush": "pnpm run brand:guard && pnpm run verify:hue",
-    "prepare": "husky"
+    "prepush": "pnpm run brand:guard && pnpm run verify:hue && pnpm test:brand",
+    "prepare": "husky",
+    "test:brand": "pnpm exec playwright test tests/brand-lux.spec.ts"
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.24",
