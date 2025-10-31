@@ -29,8 +29,8 @@ jobs:
         uses: microsoft/playwright-github-action@v1
         with:
           with-deps: true
-      - name: Force install Playwright browsers
-        run: pnpm exec playwright install --with-deps
+      - name: Force install Playwright Chromium only
+        run: pnpm exec playwright install chromium
       - name: Verify Hue
         run: pnpm verify:hue
       - name: Brand Tests
