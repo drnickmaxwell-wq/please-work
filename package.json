@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "playwright:install": "playwright install --with-deps",
+    "playwright:install:ci": "pnpm exec playwright install --with-deps",
     "lint": "eslint . --max-warnings=0",
     "dev": "next dev",
     "build": "next build",
@@ -11,13 +13,14 @@
     "brand:audit": "node scripts/brand-audit.cjs",
     "brand:report": "node scripts/brand-report.cjs",
     "verify:hue": "node scripts/verify-hue.cjs",
-    "verify:brand": "pnpm exec playwright test tests/brand-lock.spec.ts",
+    "verify:brand": "pnpm exec playwright test tests/brand-lock.pw.ts",
     "verify:visual": "pnpm exec playwright test preview/brand-live.spec.ts",
     "hue:capture": "node scripts/capture-gradient.cjs",
     "hue:lock": "node scripts/lock-gradient.cjs",
     "prepush": "pnpm run brand:guard && pnpm run verify:hue && pnpm test:brand",
     "prepare": "husky",
-    "test:brand": "pnpm exec playwright test tests/brand-lux.spec.ts"
+    "test:brand": "vitest run --config tests/vitest.brand.config.ts",
+    "brand:check:ci": "pnpm run brand:guard && pnpm run verify:hue && pnpm run test:brand"
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.24",
@@ -54,7 +57,8 @@
     "tailwindcss": "^4",
     "tsx": "^4.19.0",
     "typescript": "^5",
-    "husky": "^9.1.7"
+    "husky": "^9.1.7",
+    "vitest": "^2.1.8"
   },
   "engines": {
     "node": ">=20"

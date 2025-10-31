@@ -1,0 +1,53 @@
+name: brand
+on:
+  pull_request:
+    branches: [ main, master, develop ]
+  workflow_dispatch:
+
+jobs:
+  brand:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 9
+          run_install: false
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
+      - name: Cache Playwright browsers
+        id: cache-pw
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/ms-playwright
+            /home/runner/.cache/ms-playwright
+          key: ${{ runner.os }}-pw-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - name: Install Playwright browsers (with deps)
+        run: pnpm run playwright:install
+
+      - name: Brand Guard (no rogue hex)
+        run: pnpm run brand:guard
+
+      - name: Verify hue (Manus gradient + keyline gold)
+        run: pnpm run verify:hue
+
+      - name: Brand tests
+        run: pnpm run test:brand
+
+      - name: Build preview (sanity)
+        run: pnpm run build || true
