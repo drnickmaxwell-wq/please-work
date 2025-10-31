@@ -7,16 +7,17 @@ const { join, extname, sep } = require("path");
 const ROOT = process.cwd();
 const TOKENS_FILE = join(ROOT, "styles/tokens/smh-champagne-tokens.css");
 const HEX_CODES = Object.freeze({
-  PRIMARY_MAGENTA: "#D94BC6",
-  PRIMARY_TEAL: "#00C2C7",
+  PRIMARY_MAGENTA: "#C2185B",
+  PRIMARY_TEAL: "#40C4B4",
   GOLD: "#D4AF37",
-  GRADIENT_MAGENTA: "#D94BC6",
-  GRADIENT_CYAN: "#2AD7C6",
-  GRADIENT_TEAL: "#00C2C7",
+  KEYLINE: "#F9E8C3",
+  GRADIENT_MAGENTA: "#C2185B",
+  GRADIENT_TEAL: "#40C4B4",
+  GRADIENT_GOLD: "#D4AF37",
   INK: "#0B0D0F",
 });
-const CANONICAL_DISPLAY = 'linear-gradient(var(--smh-grad-angle), var(--smh-grad-stop1) 0%, var(--smh-grad-stop2) 42%, var(--smh-grad-stop3) 100%)';
-const CANONICAL_GRAD = 'linear-gradient(var(--smh-grad-angle),var(--smh-grad-stop1)0%,var(--smh-grad-stop2)42%,var(--smh-grad-stop3)100%)';
+const CANONICAL_DISPLAY = 'linear-gradient(var(--smh-grad-angle), var(--smh-grad-stop1) 0%, var(--smh-grad-stop2) 60%, var(--smh-grad-stop3) 100%)';
+const CANONICAL_GRAD = 'linear-gradient(var(--smh-grad-angle),var(--smh-grad-stop1)0%,var(--smh-grad-stop2)60%,var(--smh-grad-stop3)100%)';
 const HEXES = Object.values(HEX_CODES).map(hex=>new RegExp(hex.slice(1),"i"));
 
 const normalize = (value) => value.replace(/\s+/g, "").toLowerCase();
@@ -39,6 +40,7 @@ function walk(dir){
 }
 
 const files = walk(ROOT).filter(p=>{
+  if (p.includes(`${sep}tests${sep}`)) return false;
   const e = extname(p).toLowerCase();
   // limit to code & styles
   return [".js",".ts",".jsx",".tsx",".css",".scss",".mdx"].includes(e);
@@ -67,7 +69,7 @@ for(const file of files){
   }
   if(
     file !== TOKENS_FILE &&
-    /background\s*:\s*linear-gradient[^;]*#d94bc6[^;]*#2ad7c6[^;]*#00c2c7/i.test(txt)
+    /background\s*:\s*linear-gradient[^;]*#c2185b[^;]*#40c4b4[^;]*#d4af37/i.test(txt)
   ){
     violations.push({ file, hex: 'background-linear-gradient-outside-tokens' });
   }
@@ -87,7 +89,7 @@ for(const file of files){
       break;
     }
   }
-  const surfaceBlocks = txt.match(/\.champagne-surface-lux\s*\{[^}]*\}/g) || [];
+  const surfaceBlocks = txt.match(/\.champagne-surface(?:-lux)?\s*\{[^}]*\}/g) || [];
   for(const block of surfaceBlocks){
     const inlineGradientMatch = block.match(/background(?:-image)?\s*:\s*[^;]*(linear-gradient|radial-gradient)/i);
     if(inlineGradientMatch){

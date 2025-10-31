@@ -16,7 +16,11 @@ jobs:
           version: 9
       - run: pnpm install --frozen-lockfile
       - name: Brand Guard
-        run: pnpm run brand:guard
+        run: pnpm brand:guard
+      - name: Verify Hue
+        run: pnpm verify:hue
+      - name: Brand Tests
+        run: pnpm test:brand
       - name: Verify brand lock
         run: pnpm run verify:brand
       - name: Build preview

@@ -3,8 +3,9 @@ const fs = require('fs');
 
 const champagne = fs.readFileSync('styles/tokens/smh-champagne-tokens.css', 'utf8');
 const HEX_CODES = Object.freeze({
-  GRADIENT_MAGENTA: '#D94BC6',
-  GRADIENT_TEAL: '#00C2C7',
+  GRADIENT_MAGENTA: '#C2185B',
+  GRADIENT_TEAL: '#40C4B4',
+  GRADIENT_GOLD: '#D4AF37',
 });
 
 function extractOpacity(varName) {
@@ -43,8 +44,8 @@ if (!gradientMatch) {
 const normalizeGradient = (value) => value.replace(/\s+/g, '').toLowerCase();
 const gradientRaw = gradientMatch[1].trim();
 const gradientNormalized = normalizeGradient(gradientRaw);
-const canonicalDisplay = `linear-gradient(135deg,${HEX_CODES.GRADIENT_MAGENTA} 0%,${HEX_CODES.GRADIENT_TEAL} 100%)`;
-const canonical = `linear-gradient(135deg,${HEX_CODES.GRADIENT_MAGENTA.toLowerCase()}0%,${HEX_CODES.GRADIENT_TEAL.toLowerCase()}100%)`;
+const canonicalDisplay = `linear-gradient(135deg,${HEX_CODES.GRADIENT_MAGENTA} 0%,${HEX_CODES.GRADIENT_TEAL} 60%,${HEX_CODES.GRADIENT_GOLD} 100%)`;
+const canonical = `linear-gradient(135deg,${HEX_CODES.GRADIENT_MAGENTA.toLowerCase()}0%,${HEX_CODES.GRADIENT_TEAL.toLowerCase()}60%,${HEX_CODES.GRADIENT_GOLD.toLowerCase()}100%)`;
 
 if (gradientNormalized !== canonical) {
   console.error(`✖ Gradient drifted. Expected "${canonicalDisplay}" but found "${gradientRaw}"`);

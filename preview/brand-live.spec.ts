@@ -6,7 +6,7 @@ test.describe('SMH Champagne surface lock', () => {
 
     const diagnostics = await page.evaluate(() => {
       const root = getComputedStyle(document.documentElement);
-      const surface = document.querySelector('.champagne-surface-lux') as HTMLElement | null;
+      const surface = document.querySelector('.champagne-surface, .champagne-surface-lux') as HTMLElement | null;
       const glass = document.querySelector('.champagne-glass') as HTMLElement | null;
       const surfaceStyles = surface ? getComputedStyle(surface) : null;
       const computedSurface = surfaceStyles?.backgroundImage.trim() ?? '';

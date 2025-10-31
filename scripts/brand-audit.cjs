@@ -95,7 +95,7 @@ if (driftOffenders.length === 0) {
 
 const gradientDeclaration = extractDeclaration(tokensContent, '--smh-gradient') || '';
 const gradientString = gradientDeclaration.replace(/\s+/g, '');
-const heroRadiusMatch = surfaceContent.match(/\.champagne-surface-lux\s*{[^}]*border-radius:([^;]+);/s);
+const heroRadiusMatch = surfaceContent.match(/\.champagne-surface(?:-lux)?\s*{[^}]*border-radius:([^;]+);/s);
 const heroRadiusRaw = heroRadiusMatch ? heroRadiusMatch[1].trim() : 'unknown';
 const heroRadius = heroRadiusRaw === '0' ? '0px' : heroRadiusRaw;
 const textToken = extractDeclaration(tokensContent, '--smh-text')

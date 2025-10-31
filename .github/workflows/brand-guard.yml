@@ -12,4 +12,11 @@ jobs:
           node-version: '20'
       - run: corepack enable
       - run: pnpm install --frozen-lockfile
-      - run: node scripts/brand-guard.cjs
+      - name: Brand Guard
+        run: pnpm brand:guard
+
+      - name: Verify Hue
+        run: pnpm verify:hue
+
+      - name: Brand Tests
+        run: pnpm test:brand

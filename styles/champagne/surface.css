@@ -1,128 +1,50 @@
-/* Champagne surface lux stack */
+:root {
+  /* Canonical surface assets (paths stable; binaries uploaded separately) */
+  --grain-desktop: url("/assets/champagne/film-grain-desktop.webp");
+  --grain-mobile:  url("/assets/champagne/film-grain-mobile.webp");
+  --particles:     url("/assets/champagne/home-hero-particles.webp");
+  --wave-mask:     url("/assets/champagne/wave-mask-desktop.webp");
+}
 
+@media (max-width: 640px) {
+  :root { --wave-mask: url("/assets/champagne/wave-mask-mobile.webp"); }
+}
+
+/* Layer order: gradient → wave mask → particles → grain → glass → content */
+.champagne-surface,
 .champagne-surface-lux {
-  --_grad: linear-gradient(
-    var(--smh-grad-angle),
-    var(--smh-grad-stop1) 0%,
-    var(--smh-grad-stop2) 42%,
-    var(--smh-grad-stop3) 100%
-  );
-
-  --_gold-shoulder: radial-gradient(
-    120% 120% at 70% 70%,
-    color-mix(in oklab, var(--smh-gold-shoulder), transparent 82%) 0%,
-    transparent 60%
-  );
-
-  --_wave-arcs: url("/brand/waves/wave-field.svg");
-  --_wave-dots: url("/brand/waves/wave-dots.svg");
-
-  background-image:
-    var(--_grad),
-    var(--_gold-shoulder),
-    var(--_wave-arcs),
-    var(--_wave-dots);
-
-  background-size:
-    var(--smh-bg-size),
-    var(--smh-bg-size),
-    cover,
-    cover;
-
-  background-position:
-    var(--smh-bg-pos),
-    var(--smh-bg-pos),
-    center,
-    center;
-
-  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
-  background-blend-mode:
-    normal,
-    soft-light,
-    soft-light,
-    overlay;
-
+  background-image: var(--smh-gradient);
   position: relative;
   isolation: isolate;
 }
 
-.champagne-surface-lux.waves-detached {
-  --_wave-arcs: none;
-  --_wave-dots: none;
-}
-
-.champagne-surface-lux::before,
-.champagne-surface-lux::after {
+.champagne-surface::before,
+.champagne-surface-lux::before { /* wave mask */
   content: "";
-  position: absolute;
-  inset: 0;
+  position: absolute; inset: 0;
+  mask-image: var(--wave-mask);
+  -webkit-mask-image: var(--wave-mask);
+  mask-size: cover; -webkit-mask-size: cover;
+  background: currentColor;
+  opacity: 1;
   pointer-events: none;
-  z-index: 0;
 }
 
-.champagne-surface-lux::before {
-  background: radial-gradient(
-    120% 120% at 50% 50%,
-    transparent 55%,
-    rgba(0, 0, 0, var(--smh-vignette-alpha)) 100%
-  );
-  mix-blend-mode: multiply;
-}
-
-.champagne-surface-lux::after {
-  background-image: var(--smh-grain-img, url("/brand/textures/film-grain.png"));
-  background-size: 512px 512px;
-  opacity: var(--smh-grain-alpha);
+.champagne-surface::after,
+.champagne-surface-lux::after { /* particles + grain */
+  content: "";
+  position: absolute; inset: 0;
+  background-image: var(--particles), var(--grain-desktop);
+  background-repeat: no-repeat, repeat;
+  background-size: cover, cover;
   mix-blend-mode: soft-light;
-}
-
-.champagne-surface-lux.particles::after {
-  background-image:
-    var(--smh-grain-img, url("/brand/textures/film-grain.png")),
-    var(--smh-particles-img, url("/brand/particles/particles.webm"));
-  background-size:
-    512px 512px,
-    cover;
-  background-repeat: repeat, no-repeat;
-  background-position: center;
-  opacity: calc(var(--smh-grain-alpha) + var(--smh-particles-alpha));
-}
-
-.champagne-surface-lux .wave-layer {
-  position: absolute;
-  inset: 0;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  transform: translate3d(var(--parallax-x, 0), var(--parallax-y, 0), 0);
-  transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
+  opacity: 0.14;
   pointer-events: none;
-  z-index: 1;
 }
 
-.champagne-surface-lux .wave-layer[data-wave="arcs"] {
-  background-image: url("/brand/waves/wave-field.svg");
-  mix-blend-mode: soft-light;
-}
-
-.champagne-surface-lux .wave-layer[data-wave="dots"] {
-  background-image: url("/brand/waves/wave-dots.svg");
-  mix-blend-mode: overlay;
-}
-
-.champagne-surface-lux[data-motion="static"] .wave-layer {
-  transform: translate3d(0, 0, 0);
-  transition: none;
-}
-
-.champagne-surface-lux .champagne-glass {
-  position: relative;
-  z-index: var(--z-glass, 20);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .champagne-surface-lux {
-    background-attachment: initial;
+@media (max-width: 640px) {
+  .champagne-surface::after,
+  .champagne-surface-lux::after {
+    background-image: var(--particles), var(--grain-mobile);
   }
 }

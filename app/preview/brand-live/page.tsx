@@ -162,7 +162,7 @@ export default function BrandLivePreviewPage() {
   useEffect(() => {
     const root = getComputedStyle(document.documentElement);
     const readRoot = (token: string) => root.getPropertyValue(token).trim();
-    const firstSurface = document.querySelector<HTMLElement>('.champagne-surface-lux');
+    const firstSurface = document.querySelector<HTMLElement>('.champagne-surface, .champagne-surface-lux');
     const surfaceStyle = firstSurface ? getComputedStyle(firstSurface) : null;
     const readSurface = (token: string) => {
       const raw = surfaceStyle?.getPropertyValue(token).trim() ?? '';
@@ -208,7 +208,7 @@ export default function BrandLivePreviewPage() {
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const audit = () =>
       setRuntime({
-        surfaces: document.querySelectorAll('.champagne-surface-lux').length,
+        surfaces: document.querySelectorAll('.champagne-surface, .champagne-surface-lux').length,
         prefersReducedMotion: motionQuery.matches,
       });
 
@@ -229,7 +229,7 @@ export default function BrandLivePreviewPage() {
 
   useEffect(() => {
     const root = getComputedStyle(document.documentElement);
-    const surfaceTarget = document.querySelector<HTMLElement>('.champagne-surface-lux');
+    const surfaceTarget = document.querySelector<HTMLElement>('.champagne-surface, .champagne-surface-lux');
     const surfaceComputed = surfaceTarget ? getComputedStyle(surfaceTarget) : null;
     const backgroundImage = surfaceComputed?.getPropertyValue('background-image').trim() ?? '';
     const gradientMatch = backgroundImage.match(/linear-gradient\([^)]*\)/i);
@@ -307,7 +307,7 @@ export default function BrandLivePreviewPage() {
     );
     console.assert(
       surfaceBefore === '' && surfaceAfter === '',
-      `Expected vignette/grain pseudos on .champagne-surface-lux but received before=${surfaceBefore} after=${surfaceAfter}`
+      `Expected vignette/grain pseudos on .champagne-surface but received before=${surfaceBefore} after=${surfaceAfter}`
     );
     console.assert(
       glassBefore === 'none' && glassAfter === 'none',
@@ -317,7 +317,7 @@ export default function BrandLivePreviewPage() {
       disposeGlass();
     }
 
-    const journeySurface = document.querySelector<HTMLElement>('.champagne-surface-lux.journey');
+    const journeySurface = document.querySelector<HTMLElement>('.champagne-surface.journey, .champagne-surface-lux.journey');
     if (journeySurface) {
       const journeyComputed = getComputedStyle(journeySurface);
       const journeyBackgroundSize = journeyComputed.getPropertyValue('background-size').trim() || 'unset';
@@ -326,7 +326,7 @@ export default function BrandLivePreviewPage() {
       console.log(`journeySurface.backgroundPosition → ${journeyBackgroundPosition}`);
     }
 
-    const heroSurface = document.querySelector<HTMLElement>('[data-surface="hero"].champagne-surface-lux');
+    const heroSurface = document.querySelector<HTMLElement>('[data-surface="hero"].champagne-surface, [data-surface="hero"].champagne-surface-lux');
     let heroBorderRadius = '0px';
     let heroRadiusIsZero: boolean | null = null;
     if (heroSurface) {
@@ -415,7 +415,7 @@ export default function BrandLivePreviewPage() {
               data-surface={pane.id}
               data-wave={pane.wave ? 'on' : 'off'}
               data-particles={pane.particles ? 'on' : 'off'}
-              className={`champagne-surface-lux ${pane.id === 'journey' ? 'journey' : 'hero'}${pane.particles ? ' particles' : ''}`}
+              className={`champagne-surface champagne-surface-lux ${pane.id === 'journey' ? 'journey' : 'hero'}${pane.particles ? ' particles' : ''}`}
               style={pane.wave ? undefined : surfaceStyle}
             >
               <div className="relative isolate overflow-hidden">
