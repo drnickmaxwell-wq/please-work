@@ -10,15 +10,30 @@ jobs:
   guard:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
         with:
           version: 9
-      - run: pnpm install --frozen-lockfile
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Confirm pnpm
+        run: pnpm --version
+      - name: Install deps (frozen lockfile)
+        run: pnpm install --frozen-lockfile
       - name: Brand Guard
         run: pnpm brand:guard
+
+      # ✅ Manual Playwright install for Ubuntu Noble
+      - name: Install Playwright browsers manually
+        run: |
+          npx playwright install --with-deps
       - name: Verify Hue
         run: pnpm verify:hue
+
       - name: Brand Tests
         run: pnpm test:brand
       - name: Verify brand lock
