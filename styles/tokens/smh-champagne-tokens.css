@@ -27,7 +27,12 @@
   --smh-ink: var(--ink);
   --smh-text: var(--text);
   --smh-primary-ink: var(--ink);
-  --smh-white: #FFFFFF;
+  --smh-white: #ffffff;         /* neutral for masks/glass */
+  --smh-ink-920: #1c1412;       /* deep ink for dark surfaces */
+  --smh-ink-950: #060607;       /* near-black ink */
+  /* derived teal lift that replaces #0fc0c0 without hard-coding a hex */
+  --smh-teal-boost: color-mix(in oklab, var(--smh-primary-teal) 92%, white);
+  /* fallback if color-mix unsupported will be provided by layered rgba below */
   --smh-gray-200: #E5E7EB;
   --smh-primary-magenta: var(--brand-magenta);
   --smh-primary-teal: var(--brand-teal);

@@ -6,6 +6,10 @@ const ROOT = process.cwd();
 const SELF = path.join(ROOT, 'brand-guard.cjs');
 const BLOCKED = ['#D94BC6', '#00C2C7']; // legacy two-stop drift
 const TOKENS_ALLOWLIST_DIRS = ['styles/tokens'];
+const BLOCKED_PATTERNS = BLOCKED.map(hex => ({
+  hex,
+  regex: new RegExp(hex.replace('#', '\\#'), 'ig'),
+}));
 
 function walk(dir, files=[]) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -26,19 +30,36 @@ function isInAllowlistedTokens(file) {
   return TOKENS_ALLOWLIST_DIRS.some(d => file.replace(/\\/g,'/').includes(d + '/'));
 }
 
+function isInsideVarReference(line, matchIndex) {
+  const openIdx = line.lastIndexOf('var(', matchIndex);
+  if (openIdx === -1) return false;
+  const closeIdx = line.indexOf(')', openIdx);
+  return closeIdx !== -1 && closeIdx > matchIndex;
+}
+
 let failures = [];
 for (const file of walk(ROOT)) {
   if (file === SELF) continue;
   const txt = fs.readFileSync(file, 'utf8');
-  for (const hex of BLOCKED) {
-    if (txt.includes(hex) && !isInAllowlistedTokens(file)) {
-      failures.push(`${file}: legacy hex ${hex}`);
+  if (isInAllowlistedTokens(file)) continue;
+  const lines = txt.split(/\r?\n/);
+  lines.forEach((line, idx) => {
+    for (const { hex, regex } of BLOCKED_PATTERNS) {
+      regex.lastIndex = 0;
+      for (const match of line.matchAll(regex)) {
+        const index = match.index ?? -1;
+        if (index === -1) continue;
+        if (isInsideVarReference(line, index)) continue;
+        failures.push({ file, line: idx + 1, hex });
+      }
     }
-  }
+  });
 }
 if (failures.length) {
-  console.error('Brand Guard failed (legacy two-stop hex detected outside tokens):');
-  for (const f of failures) console.error(' - ' + f);
+  console.error('Brand Guard failed (legacy brand hex detected outside tokens):');
+  for (const failure of failures) {
+    console.error(` - ${failure.file}:${failure.line} -> ${failure.hex.toLowerCase()} (use tokens, rgba(), or color-mix())`);
+  }
   process.exit(1);
 }
 console.log('Brand Guard passed.');
