@@ -11,10 +11,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
         with:
           version: 9
-      - run: pnpm install --frozen-lockfile
+          run_install: false
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - name: Confirm pnpm installed
+        run: pnpm -v
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
       - name: Brand Guard
         run: pnpm brand:guard
       - name: Verify Hue
