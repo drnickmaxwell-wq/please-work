@@ -1,0 +1,46 @@
+name: Brand
+
+on: [pull_request]
+
+jobs:
+  brand:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # ✅ Setup pnpm first so the binary exists for later Node cache steps
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+
+      # ✅ Now setup Node AFTER pnpm
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Confirm pnpm
+        run: pnpm -v
+
+      - name: Install deps (frozen lockfile)
+        run: pnpm install --frozen-lockfile
+
+      - name: Brand Guard
+        run: pnpm run brand:guard
+
+      - name: Install Playwright (browsers + deps)
+        uses: microsoft/playwright-github-action@v1
+
+      - name: Verify Hue (canonical gradient + gold)
+        run: pnpm run verify:hue
+
+      - name: Brand tests
+        run: pnpm run test:brand
+
+      - name: Verify brand lock
+        run: pnpm run verify:brand
