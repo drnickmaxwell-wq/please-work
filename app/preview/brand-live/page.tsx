@@ -412,6 +412,7 @@ export default function BrandLivePreviewPage() {
           {PANES.map((pane) => (
             <section
               key={pane.id}
+              data-brand-surface
               data-surface={pane.id}
               data-wave={pane.wave ? 'on' : 'off'}
               data-particles={pane.particles ? 'on' : 'off'}

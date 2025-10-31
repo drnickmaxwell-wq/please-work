@@ -62,7 +62,7 @@ export default function BrandLock() {
 
   return (
     <main className="min-h-screen bg-[color:var(--smh-bg)] text-[color:var(--smh-text)]">
-      <section ref={surfaceRef} className={surfaceClassName}>
+      <section ref={surfaceRef} data-brand-surface className={surfaceClassName}>
         <div className="champagne-glass w-full max-w-2xl p-8">
           <h2 className="font-serif text-2xl">Brand lock diagnostics</h2>
           <p className="mt-2 text-sm opacity-80">
