@@ -6,7 +6,7 @@ test.describe('SMH Champagne surface lock', () => {
 
     const diagnostics = await page.evaluate(() => {
       const root = getComputedStyle(document.documentElement);
-      const surface = document.querySelector('.champagne-surface-lux') as HTMLElement | null;
+      const surface = document.querySelector('.champagne-surface') as HTMLElement | null;
       const glass = document.querySelector('.champagne-glass') as HTMLElement | null;
       const surfaceStyles = surface ? getComputedStyle(surface) : null;
       const computedSurface = surfaceStyles?.backgroundImage.trim() ?? '';
@@ -18,17 +18,24 @@ test.describe('SMH Champagne surface lock', () => {
       const particles = surfaceStyles?.getPropertyValue('--smh-particles-alpha').trim() ?? '';
 
       return {
-        gradient: root.getPropertyValue('--smh-gradient').replace(/\s+/g, ''),
-        surfaceGradient: firstGradient,
+        gradient: root.getPropertyValue('--smh-gradient').replace(/\s+/g, ' ').trim(),
+        surfaceGradient: firstGradient ?? '',
         surface: computedSurface,
         glass: computedGlass,
         grain,
         vignette,
         particles,
+        magenta: root.getPropertyValue('--smh-magenta').trim(),
+        teal: root.getPropertyValue('--smh-teal').trim(),
       };
     });
 
-    expect(diagnostics.surfaceGradient).toBe(diagnostics.gradient);
+    expect(diagnostics.gradient).toBe('linear-gradient(135deg, var(--smh-magenta) 0%, var(--smh-teal) 100%)');
+    expect(diagnostics.surfaceGradient).toContain('linear-gradient(135deg');
+    expect(diagnostics.surfaceGradient).toMatch(/rgb\(206,\s*75,\s*149\)/);
+    expect(diagnostics.surfaceGradient).toMatch(/rgb\(85,\s*171,\s*168\)/);
+    expect(diagnostics.magenta.toLowerCase()).toBe('#ce4b95');
+    expect(diagnostics.teal.toLowerCase()).toBe('#55aba8');
     expect(diagnostics.glass).toBe('rgba(0, 0, 0, 0)');
     expect(Math.abs(Number.parseFloat(diagnostics.vignette || '0') - 0.06)).toBeLessThan(0.001);
     expect(Math.abs(Number.parseFloat(diagnostics.grain || '0') - 0.04)).toBeLessThan(0.001);

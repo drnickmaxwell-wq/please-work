@@ -1,94 +1,71 @@
-/* Champagne surface lux stack */
+/* Champagne surface luminescence stack */
 
-.champagne-surface-lux {
-  --_grad: linear-gradient(
-    var(--smh-grad-angle),
-    var(--smh-grad-stop1) 0%,
-    var(--smh-grad-stop2) 42%,
-    var(--smh-grad-stop3) 100%
-  );
+/* Base surface wrapper used by hero + journey sections */
+.champagne-surface {
+  position: relative;
+  isolation: isolate; /* keep blend/local effects bounded */
 
-  --_gold-shoulder: radial-gradient(
-    120% 120% at 70% 70%,
-    color-mix(in oklab, var(--smh-gold-shoulder), transparent 82%) 0%,
-    transparent 60%
-  );
-
-  --_wave-arcs: url("/brand/waves/wave-field.svg");
-  --_wave-dots: url("/brand/waves/wave-dots.svg");
-
+  /* 1) Base gradient + dual waves */
   background-image:
-    var(--_grad),
-    var(--_gold-shoulder),
-    var(--_wave-arcs),
-    var(--_wave-dots);
+    var(--smh-gradient),
+    url('/waves/wave-field.svg'),
+    url('/waves/wave-dots.svg');
+  background-repeat: no-repeat, no-repeat, no-repeat;
 
+  /* Geometry locked to Manus diagnostics */
   background-size:
-    var(--smh-bg-size),
-    var(--smh-bg-size),
+    var(--smh-bg-size-x) var(--smh-bg-size-y),
     cover,
     cover;
-
   background-position:
-    var(--smh-bg-pos),
-    var(--smh-bg-pos),
-    center,
-    center;
+    var(--smh-bg-pos-x) var(--smh-bg-pos-y),
+    50% 50%,
+    50% 50%;
 
-  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+  /* Blend recipe: Manus-like luminous waves */
   background-blend-mode:
-    normal,
-    soft-light,
-    soft-light,
-    overlay;
+    normal,       /* gradient */
+    soft-light,   /* field waves */
+    overlay;      /* dotted waves */
 
-  position: relative;
-  isolation: isolate;
+  /* Subtle saturation lift to keep things vivid but calm */
+  filter: saturate(1.02);
+
+  /* Wave opacity controls when SVGs leverage currentColor */
+  --wave-field-alpha: var(--smh-wave-field-alpha);
+  --wave-dots-alpha: var(--smh-wave-dots-alpha);
 }
 
-.champagne-surface-lux.waves-detached {
-  --_wave-arcs: none;
-  --_wave-dots: none;
-}
-
-.champagne-surface-lux::before,
-.champagne-surface-lux::after {
+/* 2) Champagne shoulder (gold lift) */
+.champagne-surface::before {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 0;
+  background: var(--smh-shoulder);
+  mix-blend-mode: color-dodge; /* that Manus “glow” */
+  z-index: 0; /* sits above background layers */
 }
 
-.champagne-surface-lux::before {
-  background: radial-gradient(
-    120% 120% at 50% 50%,
-    transparent 55%,
-    rgba(0, 0, 0, var(--smh-vignette-alpha)) 100%
-  );
-  mix-blend-mode: multiply;
-}
-
-.champagne-surface-lux::after {
-  background-image: var(--smh-grain-img, url("/brand/textures/film-grain.png"));
-  background-size: 512px 512px;
+/* 3) Film grain (very gentle) */
+.champagne-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url('/textures/film-grain-desktop.webp');
+  background-size: cover;
   opacity: var(--smh-grain-alpha);
-  mix-blend-mode: soft-light;
+  z-index: 1;
 }
 
-.champagne-surface-lux.particles::after {
-  background-image:
-    var(--smh-grain-img, url("/brand/textures/film-grain.png")),
-    var(--smh-particles-img, url("/brand/particles/particles.webm"));
-  background-size:
-    512px 512px,
-    cover;
-  background-repeat: repeat, no-repeat;
-  background-position: center;
-  opacity: calc(var(--smh-grain-alpha) + var(--smh-particles-alpha));
+/* Optional: particle overlay toggle class (attach when needed) */
+.champagne-surface.particles::after {
+  box-shadow: inset 0 0 0 1px transparent; /* no-op to keep selector */
 }
 
-.champagne-surface-lux .wave-layer {
+/* Detached wave layers for parallax (hero retains them) */
+.champagne-surface .wave-layer {
   position: absolute;
   inset: 0;
   background-repeat: no-repeat;
@@ -98,31 +75,40 @@
   transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform;
   pointer-events: none;
-  z-index: 1;
+  z-index: 2;
 }
 
-.champagne-surface-lux .wave-layer[data-wave="arcs"] {
-  background-image: url("/brand/waves/wave-field.svg");
+.champagne-surface .wave-layer[data-wave="arcs"] {
+  background-image: url('/waves/wave-field.svg');
   mix-blend-mode: soft-light;
+  opacity: var(--wave-field-alpha);
 }
 
-.champagne-surface-lux .wave-layer[data-wave="dots"] {
-  background-image: url("/brand/waves/wave-dots.svg");
+.champagne-surface .wave-layer[data-wave="dots"] {
+  background-image: url('/waves/wave-dots.svg');
   mix-blend-mode: overlay;
+  opacity: var(--wave-dots-alpha);
 }
 
-.champagne-surface-lux[data-motion="static"] .wave-layer {
+.champagne-surface[data-motion="static"] .wave-layer {
   transform: translate3d(0, 0, 0);
   transition: none;
 }
 
-.champagne-surface-lux .champagne-glass {
+.champagne-surface .champagne-glass {
   position: relative;
   z-index: var(--z-glass, 20);
 }
 
+/* Motion safety */
 @media (prefers-reduced-motion: reduce) {
-  .champagne-surface-lux {
-    background-attachment: initial;
+  .champagne-surface,
+  .champagne-surface * {
+    transition-duration: 0ms !important;
+  }
+  .parallax,
+  .parallax * {
+    transform: none !important;
+    transition: none !important;
   }
 }

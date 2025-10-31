@@ -5,57 +5,33 @@ test.describe('Brand lock surface diagnostics', () => {
     await page.goto('/preview/brand-lock');
 
     const diagnostics = await page.evaluate(() => {
-      const surface = document.querySelector<HTMLElement>('.champagne-surface-lux');
+      const surface = document.querySelector<HTMLElement>('.champagne-surface');
       if (!surface) {
         throw new Error('Champagne surface not found');
       }
       const surfaceStyles = getComputedStyle(surface);
       const rootStyles = getComputedStyle(document.documentElement);
-      const gradientImage = surfaceStyles.backgroundImage;
-      const normalizedTokenGradient = rootStyles
-        .getPropertyValue('--smh-gradient')
-        .replace(/\s+/g, '')
-        .trim();
-
-      const resolveToken = (name: string): string => {
-        const value = rootStyles.getPropertyValue(name).trim();
-        if (!value) return '';
-        const match = value.match(/^var\(([^)]+)\)$/);
-        if (match) {
-          return resolveToken(match[1].trim());
-        }
-        return value;
-      };
-
-      const stopTokens = ['--smh-grad-stop1', '--smh-grad-stop2', '--smh-grad-stop3'] as const;
-      const stopValues = stopTokens.map((token, index) => {
-        const resolved = resolveToken(token).replace(/\s+/g, '').toLowerCase();
-        const suffix = index === 0 ? '0%' : index === 1 ? '42%' : '100%';
-        return `${resolved}${suffix}`;
-      });
-
       return {
-        gradientImage,
-        normalizedTokenGradient,
-        stopValues,
-        waveField: gradientImage.includes('wave-field.svg'),
-        waveDots: gradientImage.includes('wave-dots.svg'),
+        backgroundImage: surfaceStyles.backgroundImage,
+        backgroundSize: surfaceStyles.backgroundSize,
+        backgroundPosition: surfaceStyles.backgroundPosition,
+        gradientToken: rootStyles.getPropertyValue('--smh-gradient').replace(/\s+/g, ' ').trim(),
+        magenta: rootStyles.getPropertyValue('--smh-magenta').trim(),
+        teal: rootStyles.getPropertyValue('--smh-teal').trim(),
       };
     });
 
-    expect(diagnostics.gradientImage).toContain('linear-gradient');
-    const gradientString = diagnostics.normalizedTokenGradient.toLowerCase();
-    diagnostics.stopValues.forEach((stop) => {
-      expect(gradientString).toContain(stop);
-    });
-    expect(gradientString.indexOf(diagnostics.stopValues[0])).toBeLessThan(
-      gradientString.indexOf(diagnostics.stopValues[1]),
-    );
-    expect(gradientString.indexOf(diagnostics.stopValues[1])).toBeLessThan(
-      gradientString.indexOf(diagnostics.stopValues[2]),
-    );
+    expect(diagnostics.backgroundImage).toContain('linear-gradient(135deg');
+    expect(diagnostics.backgroundImage).toMatch(/rgb\(206,\s*75,\s*149\)/);
+    expect(diagnostics.backgroundImage).toMatch(/rgb\(85,\s*171,\s*168\)/);
+    expect(diagnostics.backgroundImage).toContain('wave-field.svg');
+    expect(diagnostics.backgroundImage).toContain('wave-dots.svg');
 
-    expect(diagnostics.waveField).toBeTruthy();
-    expect(diagnostics.waveDots).toBeTruthy();
+    expect(diagnostics.backgroundSize.replace(/\s+/g, ' ')).toContain('165% 165%');
+    expect(diagnostics.backgroundPosition.replace(/\s+/g, ' ')).toContain('18% 38%');
+
+    expect(diagnostics.gradientToken).toBe('linear-gradient(135deg, var(--smh-magenta) 0%, var(--smh-teal) 100%)');
+    expect(diagnostics.magenta.toLowerCase()).toBe('#ce4b95');
+    expect(diagnostics.teal.toLowerCase()).toBe('#55aba8');
   });
 });

@@ -162,7 +162,7 @@ export default function BrandLivePreviewPage() {
   useEffect(() => {
     const root = getComputedStyle(document.documentElement);
     const readRoot = (token: string) => root.getPropertyValue(token).trim();
-    const firstSurface = document.querySelector<HTMLElement>('.champagne-surface-lux');
+    const firstSurface = document.querySelector<HTMLElement>('.champagne-surface');
     const surfaceStyle = firstSurface ? getComputedStyle(firstSurface) : null;
     const readSurface = (token: string) => {
       const raw = surfaceStyle?.getPropertyValue(token).trim() ?? '';
@@ -186,8 +186,8 @@ export default function BrandLivePreviewPage() {
 
     setTokens({
       gradient: gradientToken.replace(/\s+/g, ' '),
-      magenta: readRoot('--smh-primary-magenta'),
-      teal: readRoot('--smh-primary-teal'),
+      magenta: readRoot('--smh-magenta'),
+      teal: readRoot('--smh-teal'),
       gold: readRoot('--smh-accent-gold'),
       ink: readRoot('--smh-primary-ink'),
       grain: grainAlpha,
@@ -208,7 +208,7 @@ export default function BrandLivePreviewPage() {
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const audit = () =>
       setRuntime({
-        surfaces: document.querySelectorAll('.champagne-surface-lux').length,
+        surfaces: document.querySelectorAll('.champagne-surface').length,
         prefersReducedMotion: motionQuery.matches,
       });
 
@@ -229,28 +229,29 @@ export default function BrandLivePreviewPage() {
 
   useEffect(() => {
     const root = getComputedStyle(document.documentElement);
-    const surfaceTarget = document.querySelector<HTMLElement>('.champagne-surface-lux');
+    const surfaceTarget = document.querySelector<HTMLElement>('.champagne-surface');
     const surfaceComputed = surfaceTarget ? getComputedStyle(surfaceTarget) : null;
     const backgroundImage = surfaceComputed?.getPropertyValue('background-image').trim() ?? '';
     const gradientMatch = backgroundImage.match(/linear-gradient\([^)]*\)/i);
-    const gradientToken = root.getPropertyValue('--smh-gradient').replace(/\s+/g, ' ').trim();
-    const gradient = gradientMatch ? gradientMatch[0] : gradientToken;
-    const canonicalGradient = gradientToken
+    const magentaToken = (root.getPropertyValue('--smh-magenta').trim() || '#CE4B95').toUpperCase();
+    const tealToken = (root.getPropertyValue('--smh-teal').trim() || '#55ABA8').toUpperCase();
+    const canonicalGradient = `linear-gradient(135deg, ${magentaToken} 0%, ${tealToken} 100%)`
       .replace(/\s+/g, ' ')
       .replace(/\(\s*/g, '(')
       .replace(/\s*\)/g, ')')
       .replace(/\s*,\s*/g, ',')
-      .replace(/#([0-9a-f]{6})/gi, (_, hex) => `#${hex.toUpperCase()}`)
       .trim();
+    const gradientRaw = gradientMatch ? gradientMatch[0] : canonicalGradient;
     const normalizedGradient = normalizeGradientStops(
-      gradient
+      gradientRaw
         .replace(/\s+/g, ' ')
         .replace(/\(\s*/g, '(')
         .replace(/\s*\)/g, ')')
         .replace(/\s*,\s*/g, ',')
-        .replace(/#([0-9a-f]{6})/gi, (_, hex) => `#${hex.toUpperCase()}`)
         .trim()
-    );
+    )
+      .replace(/#([0-9a-f]{6})/gi, (_, hex) => `#${hex.toUpperCase()}`)
+      .trim();
     console.log(`surfaceComputed.backgroundImage → ${normalizedGradient}`);
     const surfaceBackgroundSize = surfaceComputed?.getPropertyValue('background-size').trim() || 'unset';
     const surfaceBackgroundPosition = surfaceComputed?.getPropertyValue('background-position').trim() || 'unset';
@@ -295,7 +296,8 @@ export default function BrandLivePreviewPage() {
       if (!element) return 'none';
       const value = getComputedStyle(element, pseudo).getPropertyValue('content').trim();
       if (!value || value === 'none') return 'none';
-      return value.replace(/^"|"$/g, '') || 'none';
+      const stripped = value.replace(/^"|"$/g, '');
+      return stripped;
     };
 
     const surfaceBefore = readPseudoContent(surfaceTarget, '::before');
@@ -307,7 +309,7 @@ export default function BrandLivePreviewPage() {
     );
     console.assert(
       surfaceBefore === '' && surfaceAfter === '',
-      `Expected vignette/grain pseudos on .champagne-surface-lux but received before=${surfaceBefore} after=${surfaceAfter}`
+      `Expected vignette/grain pseudos on .champagne-surface but received before=${surfaceBefore} after=${surfaceAfter}`
     );
     console.assert(
       glassBefore === 'none' && glassAfter === 'none',
@@ -317,7 +319,7 @@ export default function BrandLivePreviewPage() {
       disposeGlass();
     }
 
-    const journeySurface = document.querySelector<HTMLElement>('.champagne-surface-lux.journey');
+    const journeySurface = document.querySelector<HTMLElement>('.champagne-surface.journey');
     if (journeySurface) {
       const journeyComputed = getComputedStyle(journeySurface);
       const journeyBackgroundSize = journeyComputed.getPropertyValue('background-size').trim() || 'unset';
@@ -326,7 +328,7 @@ export default function BrandLivePreviewPage() {
       console.log(`journeySurface.backgroundPosition → ${journeyBackgroundPosition}`);
     }
 
-    const heroSurface = document.querySelector<HTMLElement>('[data-surface="hero"].champagne-surface-lux');
+    const heroSurface = document.querySelector<HTMLElement>('[data-surface="hero"].champagne-surface');
     let heroBorderRadius = '0px';
     let heroRadiusIsZero: boolean | null = null;
     if (heroSurface) {
@@ -354,7 +356,7 @@ export default function BrandLivePreviewPage() {
     }
 
     setAssertions({
-      computedGradient: gradient,
+      computedGradient: normalizedGradient,
       heroBorderRadius,
       heroRadiusIsZero,
       ctaColor,
@@ -415,7 +417,7 @@ export default function BrandLivePreviewPage() {
               data-surface={pane.id}
               data-wave={pane.wave ? 'on' : 'off'}
               data-particles={pane.particles ? 'on' : 'off'}
-              className={`champagne-surface-lux ${pane.id === 'journey' ? 'journey' : 'hero'}${pane.particles ? ' particles' : ''}`}
+              className={`champagne-surface ${pane.id === 'journey' ? 'journey' : 'hero'}${pane.particles ? ' particles' : ''}`}
               style={pane.wave ? undefined : surfaceStyle}
             >
               <div className="relative isolate overflow-hidden">

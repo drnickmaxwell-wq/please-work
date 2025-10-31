@@ -4,22 +4,11 @@
 import { useEffect, useRef, useState } from "react";
 
 type Diagnostics = {
-  gradient: string;
+  backgroundImage: string;
   waves: string;
   backgroundSize: string;
   backgroundPosition: string;
 };
-
-const normalizeGradient = (value: string) =>
-  value
-    .replace(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/g, (_, r, g, b) => {
-      const toHex = (channel: string) => {
-        const hex = Number(channel).toString(16).padStart(2, "0");
-        return hex.toUpperCase();
-      };
-      return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
-    })
-    .replace(/\s+/g, "");
 
 export default function BrandLock() {
   const surfaceRef = useRef<HTMLElement | null>(null);
@@ -33,9 +22,6 @@ export default function BrandLock() {
     const surfaceStyles = getComputedStyle(surface);
 
     const backgroundImage = surfaceStyles.backgroundImage;
-    const gradientMatch = backgroundImage.match(/linear-gradient\([^)]*\)/i);
-    const gradient = gradientMatch ? normalizeGradient(gradientMatch[0]) : "";
-
     const wavesField = backgroundImage.includes("wave-field.svg");
     const wavesDots = backgroundImage.includes("wave-dots.svg");
     const waves = wavesField && wavesDots
@@ -44,19 +30,19 @@ export default function BrandLock() {
           .filter(Boolean)
           .join(" | ");
 
-    console.log(`gradient=${gradient}`);
+    console.log(`background-image=${backgroundImage}`);
     console.log(`waves=${waves}`);
     console.log(`bgSize/Pos=${surfaceStyles.backgroundSize} | ${surfaceStyles.backgroundPosition}`);
 
     setLiveDiagnostics({
-      gradient,
+      backgroundImage,
       waves,
       backgroundSize: surfaceStyles.backgroundSize,
       backgroundPosition: surfaceStyles.backgroundPosition,
     });
   }, [particlesEnabled]);
 
-  const surfaceClassName = `champagne-surface-lux hero flex min-h-screen items-center justify-center p-6${
+  const surfaceClassName = `champagne-surface hero flex min-h-screen items-center justify-center p-6${
     particlesEnabled ? " particles" : ""
   }`;
 
@@ -79,7 +65,7 @@ export default function BrandLock() {
           <div className="mt-6 space-y-2 font-mono text-sm">
             {liveDiagnostics ? (
               <>
-                <p>gradient={liveDiagnostics.gradient}</p>
+                <p>background-image={liveDiagnostics.backgroundImage}</p>
                 <p>waves={liveDiagnostics.waves}</p>
                 <p>
                   bgSize/Pos={liveDiagnostics.backgroundSize} | {liveDiagnostics.backgroundPosition}

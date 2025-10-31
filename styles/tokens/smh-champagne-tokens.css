@@ -1,59 +1,69 @@
 :root{
-  /* Brand locks */
-  --smh-gradient: linear-gradient(var(--smh-grad-angle),var(--smh-grad-stop1) 0%,var(--smh-grad-stop2) 42%,var(--smh-grad-stop3) 100%);
-  --smh-surface-bg-size: 165% 165%;
-  --smh-surface-bg-position: 18% 38%;
-  --smh-ink: #0b0d0f;
-  --smh-text: #0b0d0f;
-  --smh-accent-gold: #D4AF37;
-  --smh-primary-magenta:#D94BC6;
-  --smh-primary-teal:#00C2C7;
-  --smh-gold:#D4AF37;
-  --smh-primary-ink:#0B0D0F;
-  --smh-white:#FFFFFF;
-  --smh-gray-200:#E5E7EB;
+  /* === Manus-aligned brand hues (measured from screenshots) === */
+  --smh-magenta: #CE4B95;    /* was too lavender (#D94BC6) */
+  --smh-teal:    #55ABA8;    /* was too cyan (#00C2C7)     */
 
-  /* Overlays */
-  --smh-grain-alpha:.04;
-  --smh-vignette-alpha:.06;
-  --smh-particles-alpha:.06;
-  --champagne-grain-alpha:var(--smh-grain-alpha);
-  --champagne-vignette-alpha:var(--smh-vignette-alpha);
-  --champagne-sheen-alpha:.22;
+  --smh-primary-magenta: var(--smh-magenta);
+  --smh-primary-teal:    var(--smh-teal);
 
-  /* Glass background must be LIGHTER than current */
-  --champagne-glass-bg:color-mix(in oklab, var(--smh-primary-ink) 22%, transparent 78%);
-  /* Gold keyline used for cards */
-  --champagne-keyline-gold:color-mix(in srgb, var(--smh-accent-gold) 64%, transparent 36%);
+  --smh-ink: #0B0D0F;
+  --smh-primary-ink: var(--smh-ink);
+  --smh-text: var(--smh-ink);
+  --smh-white: #FFFFFF;
+  --smh-gray-200: #E5E7EB;
 
-  /* Particles (keep low so they don't mute hue) */
-  --champagne-particles-opacity-d:var(--smh-particles-alpha);
-  --champagne-particles-opacity-m:var(--smh-particles-alpha);
+  /* Shoulder glow + keyline accent */
+  --smh-accent-gold: #F9E8C3; /* keyline/accent gold */
+  --smh-gold: var(--smh-accent-gold);
 
-  /* Warm-lift control (0 | 1). Leave default off for safety. */
-  --smh-warm-lift: 0;
+  /* Canonical gradient built from tokens */
+  --smh-gradient: linear-gradient(135deg, var(--smh-magenta) 0%, var(--smh-teal) 100%);
 
-  /* Intensity knobs tuned for Manus hue balance. */
-  --smh-warm-lift-magenta-alpha: 0.08;
-  --smh-warm-lift-gold-alpha:    0.03;
-
-  /* Perceptual warm hues (fallbacks only) — keep as tokens. */
-  --smh-warm-magenta: var(--smh-primary-magenta, #D94BC6);
-  --smh-warm-rose:    #E24DAA; /* used only inside overlay gradient as var fallback */
-  --smh-warm-gold:    var(--smh-accent-gold, #D4AF37);
-
-  /* Manus hero gradient geometry */
-  --smh-grad-angle: 135deg;
-  --smh-grad-stop1: var(--smh-primary-magenta);
-  --smh-grad-stop2: var(--smh-cyan-lift);
-  --smh-grad-stop3: var(--smh-primary-teal);
-  --smh-gold-shoulder: var(--smh-gold-soft);
-  --smh-bg-size: 165% 165%;
-  --smh-bg-pos: 18% 38%;
+  /* Geometry that matches brand-lock diagnostics */
+  --smh-bg-size-x: 165%;
+  --smh-bg-size-y: 165%;
+  --smh-bg-pos-x: 18%;
+  --smh-bg-pos-y: 38%;
+  --smh-bg-size: var(--smh-bg-size-x) var(--smh-bg-size-y);
+  --smh-bg-pos: var(--smh-bg-pos-x) var(--smh-bg-pos-y);
   --smh-surface-bg-size: var(--smh-bg-size);
   --smh-surface-bg-position: var(--smh-bg-pos);
 
-  /* Derived helpers */
-  --smh-cyan-lift: color-mix(in oklab, var(--smh-primary-teal) 80%, #66fff0 20%);
-  --smh-gold-soft: color-mix(in oklab, var(--smh-accent-gold) 65%, white 35%);
+  /* Gentle polish layers (tunable but locked by guard) */
+  --smh-grain-alpha: 0.04;
+  --smh-vignette-alpha: 0.06;
+  --smh-particles-alpha: 0.06;
+
+  /* Dual waves (present in Manus visual language) */
+  --smh-wave-field-alpha: 0.10; /* broad arcs */
+  --smh-wave-dots-alpha: 0.08;  /* dotted sheet */
+
+  /* Shoulder glow: a subtle “champagne” gold lift */
+  --smh-shoulder:
+    radial-gradient(60% 40% at 35% 25%,
+      color-mix(in oklab, var(--smh-accent-gold) 16%, transparent) 0%,
+      transparent 60%);
+
+  /* Safety: keep motion small and respect reduced motion */
+  --smh-parallax-max: 6px;
+
+  /* Legacy aliases + overlays */
+  --champagne-grain-alpha: var(--smh-grain-alpha);
+  --champagne-vignette-alpha: var(--smh-vignette-alpha);
+  --champagne-sheen-alpha: 0.22;
+  --champagne-particles-opacity-d: var(--smh-particles-alpha);
+  --champagne-particles-opacity-m: var(--smh-particles-alpha);
+
+  /* Glass background must stay lighter than surface */
+  --champagne-glass-bg: color-mix(in oklab, var(--smh-primary-ink) 22%, transparent 78%);
+  /* Gold keyline used for cards */
+  --champagne-keyline-gold: color-mix(in srgb, var(--smh-accent-gold) 64%, transparent 36%);
+
+  /* Warm lift controls */
+  --smh-warm-lift: 0;
+  --smh-warm-lift-magenta-alpha: 0.08;
+  --smh-warm-lift-gold-alpha: 0.03;
+  --smh-warm-magenta: var(--smh-magenta);
+  --smh-warm-rose: #E24DAA; /* used only inside overlay gradient as var fallback */
+  --smh-warm-gold: var(--smh-accent-gold);
 }

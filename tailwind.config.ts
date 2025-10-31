@@ -24,7 +24,7 @@ const config: Config = {
     },
   },
   safelist: [
-    'champagne-surface-lux',
+    'champagne-surface',
     'champagne-glass',
     'rounded-2xl',
     'md:grid-cols-2',

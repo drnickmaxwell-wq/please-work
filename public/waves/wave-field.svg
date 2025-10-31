@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="fieldGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="white" stop-opacity="0" />
+      <stop offset="45%" stop-color="white" stop-opacity="0.35" />
+      <stop offset="70%" stop-color="white" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="white" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="fieldGradientSoft" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="white" stop-opacity="0" />
+      <stop offset="50%" stop-color="white" stop-opacity="0.22" />
+      <stop offset="100%" stop-color="white" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke-linecap="round">
+    <path
+      d="M-200 620C120 520 420 520 720 600s600 80 960-60"
+      stroke="url(#fieldGradient)"
+      stroke-width="220"
+    />
+    <path
+      d="M-120 820C240 700 520 700 800 780s540 60 880-120"
+      stroke="url(#fieldGradientSoft)"
+      stroke-width="160"
+    />
+  </g>
+</svg>
