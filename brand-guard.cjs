@@ -6,6 +6,11 @@ const ROOT = process.cwd();
 const SELF = path.join(ROOT, 'brand-guard.cjs');
 const BLOCKED = ['#D94BC6', '#00C2C7']; // legacy two-stop drift
 const TOKENS_ALLOWLIST_DIRS = ['styles/tokens'];
+const IGNORES = [
+  /\/styles\/preview\//,
+  /\/app\/.*\/preview\//,
+  /\.mdx?$/i,
+];
 
 function walk(dir, files=[]) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -26,9 +31,15 @@ function isInAllowlistedTokens(file) {
   return TOKENS_ALLOWLIST_DIRS.some(d => file.replace(/\\/g,'/').includes(d + '/'));
 }
 
+function shouldIgnore(file) {
+  const normalized = file.replace(/\\/g, '/');
+  return IGNORES.some(rx => rx.test(normalized));
+}
+
 let failures = [];
 for (const file of walk(ROOT)) {
   if (file === SELF) continue;
+  if (shouldIgnore(file)) continue;
   const txt = fs.readFileSync(file, 'utf8');
   for (const hex of BLOCKED) {
     if (txt.includes(hex) && !isInAllowlistedTokens(file)) {

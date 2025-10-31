@@ -1,0 +1,41 @@
+name: Brand CI Checks
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  brand:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright Chromium (with deps)
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Brand Guard (no rogue hex)
+        run: pnpm run brand:guard
+
+      - name: Verify Hue (canonical gradient + keyline gold)
+        run: pnpm run verify:hue
+
+      - name: Brand Tests (Playwright)
+        run: pnpm run test:brand
+
+      - name: Build (sanity)
+        run: pnpm run build

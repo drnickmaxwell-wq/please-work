@@ -12,11 +12,27 @@ test.describe('Brand lock surface diagnostics', () => {
       const surfaceStyles = getComputedStyle(surface);
       const rootStyles = getComputedStyle(document.documentElement);
       const gradientImage = surfaceStyles.backgroundImage.trim();
-      const normalizedSurfaceGradient = gradientImage.replace(/\s+/g, '').toLowerCase();
-      const normalizedTokenGradient = rootStyles
-        .getPropertyValue('--smh-gradient')
-        .replace(/\s+/g, '')
-        .toLowerCase();
+      const toHex = (value: string) => {
+        const match = value.match(/rgb\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/i);
+        if (!match) return value;
+        const [, r, g, b] = match;
+        const hex = [r, g, b]
+          .map(component => Number.parseInt(component, 10).toString(16).padStart(2, '0'))
+          .join('')
+          .toUpperCase();
+        return `#${hex}`;
+      };
+
+      const canonicalizeGradient = (value: string) =>
+        value
+          .replace(/rgb\([^)]*\)/gi, match => toHex(match))
+          .replace(/\s+/g, '')
+          .toUpperCase();
+
+      const canonicalizeColor = (value: string) => toHex(value).replace(/\s+/g, '').toUpperCase();
+
+      const normalizedSurfaceGradient = canonicalizeGradient(gradientImage);
+      const normalizedTokenGradient = canonicalizeGradient(rootStyles.getPropertyValue('--smh-gradient'));
 
       const resolveToken = (name: string): string => {
         const value = rootStyles.getPropertyValue(name).trim();
@@ -30,7 +46,7 @@ test.describe('Brand lock surface diagnostics', () => {
 
       const stopTokens = ['--smh-grad-stop1', '--smh-grad-stop2', '--smh-grad-stop3'] as const;
       const stopValues = stopTokens.map((token, index) => {
-        const resolved = resolveToken(token).replace(/\s+/g, '').toLowerCase();
+        const resolved = canonicalizeColor(resolveToken(token));
         const suffix = index === 0 ? '0%' : index === 1 ? '60%' : '100%';
         return `${resolved}${suffix}`;
       });
@@ -45,7 +61,7 @@ test.describe('Brand lock surface diagnostics', () => {
       };
     });
 
-    expect(diagnostics.normalizedSurfaceGradient).toContain('linear-gradient(');
+    expect(diagnostics.normalizedSurfaceGradient).toContain('LINEAR-GRADIENT(');
     expect(diagnostics.normalizedSurfaceGradient).toBe(diagnostics.normalizedTokenGradient);
     diagnostics.stopValues.forEach((stop) => {
       expect(diagnostics.normalizedTokenGradient).toContain(stop);
