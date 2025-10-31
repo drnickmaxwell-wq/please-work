@@ -1,0 +1,71 @@
+name: Brand CI Debug
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    env:
+      CI: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: pnpm 9
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+
+      - name: Print toolchain
+        run: |
+          node -v || true
+          pnpm -v || true
+          cat package.json | head -n 80 || true
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
+      - name: Install browsers (official)
+        uses: microsoft/playwright-github-action@v1
+        with:
+          with-deps: true
+          version: 1.46.1
+
+      - name: Install browsers (CLI fallback)
+        run: |
+          npx playwright --version || true
+          npx playwright install --with-deps
+          npx playwright install chromium
+
+      - name: Print browsers dir
+        run: |
+          echo "PW_BROWSERS_PATH=$PW_BROWSERS_PATH"
+          ls -la $HOME/.cache/ms-playwright || true
+          find $HOME/.cache/ms-playwright -maxdepth 2 -type d || true
+
+      - name: Run hue test (don’t fail)
+        continue-on-error: true
+        run: pnpm run verify:hue
+
+      - name: Run brand tests (don’t fail)
+        continue-on-error: true
+        run: pnpm run test:brand || true
+
+      - name: Collect artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: brand-debug-artifacts
+          path: |
+            test-results/**
+            reports/**
+            **/error-context.md
+          if-no-files-found: ignore

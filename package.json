@@ -17,7 +17,7 @@
     "hue:lock": "node scripts/lock-gradient.cjs",
     "prepush": "pnpm run brand:guard && pnpm run verify:hue && pnpm test:brand",
     "prepare": "husky",
-    "test:brand": "pnpm exec playwright test tests/brand-lux.spec.ts"
+    "test:brand": "playwright test -c playwright.config.ts"
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.24",
