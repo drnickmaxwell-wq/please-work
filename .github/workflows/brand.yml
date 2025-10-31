@@ -1,0 +1,75 @@
+name: brand
+on:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  brand:
+    name: Brand CI (jammy + Playwright Chromium)
+    runs-on: ubuntu-22.04  # pin to jammy, NOT noble
+    timeout-minutes: 20
+
+    env:
+      NODE_ENV: test
+      PLAYWRIGHT_BROWSERS_PATH: ~/.cache/ms-playwright
+      CI: "true"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+
+      - name: Print toolchain
+        run: |
+          node -v
+          pnpm -v
+
+      - name: Install deps (frozen lockfile)
+        run: pnpm install --frozen-lockfile
+
+      # Cache Playwright browsers
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
+      # Install only Chromium with system deps (works on jammy)
+      - name: Install Playwright Chromium (with deps)
+        run: |
+          npx playwright install --with-deps chromium
+          npx playwright --version
+        env:
+          # Make sure it installs into the same path we cache
+          PLAYWRIGHT_BROWSERS_PATH: ~/.cache/ms-playwright
+
+      # ---- Brand checks (your existing scripts) ----
+      - name: Brand Guard / guard (no rogue hex)
+        run: pnpm brand:guard
+
+      - name: Verify Hue (canonical gradient + gold)
+        run: pnpm verify:hue
+
+      - name: Brand Tests (Playwright suite)
+        run: pnpm brand:test
+
+      - name: Verify brand lock (surface diagnostics)
+        run: pnpm verify:brand
+
+      # Build-only sanity (doesn't deploy)
+      - name: Build preview (sanity)
+        run: pnpm build
