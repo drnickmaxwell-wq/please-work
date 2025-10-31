@@ -1,0 +1,46 @@
+name: brand
+on:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  brand:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20 + pnpm
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install deps (frozen lockfile)
+        run: pnpm install --frozen-lockfile
+
+      # 🔒 Brand guard (rogue hex etc.)
+      - name: Brand Guard
+        run: pnpm run brand:guard
+
+      # ✅ Install Playwright browsers using the official action (with system deps)
+      - name: Install Playwright (browsers + deps)
+        uses: microsoft/playwright-github-action@v1
+
+      # 🔎 Verify hue (Manus gradient + keyline gold)
+      - name: Verify Hue (canonical gradient + gold)
+        run: pnpm run verify:hue
+
+      # 🧪 Brand tests (don’t skip)
+      - name: Brand tests
+        run: pnpm run test:brand
+
+      # 🧪 Brand lock diagnostics (optional but useful)
+      - name: Verify brand lock
+        run: pnpm run verify:brand

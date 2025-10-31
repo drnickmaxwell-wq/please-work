@@ -11,7 +11,7 @@
     "brand:audit": "node scripts/brand-audit.cjs",
     "brand:report": "node scripts/brand-report.cjs",
     "verify:hue": "node scripts/verify-hue.cjs",
-    "verify:brand": "pnpm exec playwright test tests/brand-lock.spec.ts",
+    "verify:brand": "pnpm exec playwright test tests/brand-lock.pw.ts",
     "verify:visual": "pnpm exec playwright test preview/brand-live.spec.ts",
     "hue:capture": "node scripts/capture-gradient.cjs",
     "hue:lock": "node scripts/lock-gradient.cjs",
