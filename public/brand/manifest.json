@@ -20,10 +20,12 @@
     "body": "Inter"
   },
   "textures": {
+    "filmGrain": "/public/brand/textures/film-grain-2560x1440.webp",
     "grain": "/public/brand/textures/film-grain-2560x1440.webp",
     "glass": "/public/brand/textures/glass-soft.webp"
   },
   "particles": {
+    "soft": "/public/brand/particles/particles-soft.webm",
     "light": "/public/brand/particles/particles-soft.webm",
     "alpha": true
   },

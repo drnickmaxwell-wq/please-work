@@ -1,7 +1,7 @@
 'use client';
 
-import Hero4KVideo from '@/components/hero/4k-hero-video';
+import HeroLuxury from '@/components/home/HeroLuxury';
 
 export default function HeroBand() {
-  return <Hero4KVideo />;
+  return <HeroLuxury />;
 }

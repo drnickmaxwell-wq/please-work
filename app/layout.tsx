@@ -5,8 +5,15 @@ import type { Metadata, Viewport } from "next";
 import PerformanceOptimizedLayout from '@/components/layout/performance-optimized-layout';
 import StickyHeader from '@/components/layout/sticky-header';
 import Footer from '@/components/layout/footer';
+import { loadBrandManifest } from '@/lib/brand/manifest';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL ?? 'https://www.stmaryshousedental.co.uk';
+const brandManifest = loadBrandManifest();
+const brandBootstrap = JSON.stringify(brandManifest)
+  .replace(/</g, '\\u003c')
+  .replace(/>/g, '\\u003e')
+  .replace(/&/g, '\\u0026')
+  .replace(/\\u2028|\\u2029/g, '');
 
 const rootFontStyle = {
   '--font-inter': 'Inter, system-ui, Arial',
@@ -129,9 +136,15 @@ export default function RootLayout({
         {/* DNS Prefetch */}
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
         <link rel="dns-prefetch" href="//www.googletagmanager.com" />
-        
+
         {/* Preload critical resources */}
         <link rel="preload" href="/waves-bg-2560.jpg" as="image" type="image/jpeg" />
+
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.__SMH_BRAND_MANIFEST__ = window.__SMH_BRAND_MANIFEST__ || ${brandBootstrap};`,
+          }}
+        />
         
         {/* Service Worker Registration */}
         <script
