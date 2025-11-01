@@ -8,10 +8,11 @@ test('canonical gradient and keyline gold are present', async ({ page }) => {
     return g.replace(/\s+/g, ' ');
   });
   // rgb() canonical equivalent for #C2185B, #40C4B4, #D4AF37
+  // Allow hex or rgb() to match Manifest parity for canonical gradient stops
   expect(resolved).toContain('linear-gradient(135deg');
-  expect(resolved).toMatch(/rgb\(\s*194,\s*24,\s*91\s*\)\s*0%/);
-  expect(resolved).toMatch(/rgb\(\s*64,\s*196,\s*180\s*\)\s*60%/);
-  expect(resolved).toMatch(/rgb\(\s*212,\s*175,\s*55\s*\)\s*100%/);
+  expect(resolved).toMatch(
+    /(linear-gradient\(135deg,(#C2185B|rgb\(194,\s*24,\s*91\))\s*0%,\s*(#40C4B4|rgb\(64,\s*196,\s*180\))\s*60%,\s*(#D4AF37|rgb\(212,\s*175,\s*55\))\s*100%\))/
+  );
 
   // Check a CTA border uses keyline gold #F9E8C3
   await page.goto('/preview/brand-live');
