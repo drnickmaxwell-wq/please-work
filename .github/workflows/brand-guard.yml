@@ -1,22 +1,17 @@
-name: Brand Guard
+name: Brand Guard (PR)
 
 on: [pull_request]
 
 jobs:
-  verify:
-    runs-on: ubuntu-latest
+  guard:
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - run: corepack enable
-      - run: pnpm install --frozen-lockfile
-      - name: Brand Guard
-        run: pnpm brand:guard
-
-      - name: Verify Hue
-        run: pnpm verify:hue
-
-      - name: Brand Tests
-        run: pnpm test:brand
+        with: { node-version: '20.x', cache: 'pnpm' }
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+      - name: Install deps (lockfile)
+        run: pnpm install --frozen-lockfile
+      - name: Brand Guard (no rogue hex outside tokens)
+        run: pnpm run brand:guard

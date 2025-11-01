@@ -1,0 +1,43 @@
+name: Brand Nightly (Hue + Playwright)
+
+on:
+  schedule:
+    - cron: '0 2 * * *' # nightly 02:00 UTC
+  workflow_dispatch:
+
+jobs:
+  hue:
+    runs-on: ubuntu-22.04   # jammy is known-good for Playwright deps
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20.x', cache: 'pnpm' }
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
+      # Playwright install (jammy supports --with-deps)
+      - name: Install Playwright (Chromium + deps)
+        run: |
+          pnpm exec playwright install-deps chromium
+          pnpm exec playwright install chromium
+
+      - name: Verify Hue (canonical gradient + keyline gold)
+        env: { PLAYWRIGHT_BROWSERS_PATH: 0 }
+        run: pnpm run verify:hue
+
+      - name: Brand tests (Playwright suite)
+        env: { PLAYWRIGHT_BROWSERS_PATH: 0 }
+        run: pnpm run brand:test
+
+      - name: Upload artifacts on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: brand-nightly-artifacts
+          path: |
+            test-results/**
+            reports/**
+            playwright-report/**
+          if-no-files-found: ignore
