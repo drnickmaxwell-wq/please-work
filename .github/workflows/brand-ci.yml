@@ -1,0 +1,53 @@
+name: Brand CI (playwright container)
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  brand:
+    # 🎯 Browsers are already inside this image
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.46.0-jammy
+
+    env:
+      CI: true
+      PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
+      NODE_ENV: test
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node 20 + pnpm
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Enable corepack (pnpm)
+        run: corepack enable
+
+      - name: Install deps (frozen)
+        run: pnpm install --frozen-lockfile
+
+      - name: Print toolchain
+        run: |
+          node -v
+          pnpm -v
+          npx playwright --version
+
+      # 🔒 Static brand guards — super fast, no browser needed
+      - name: Brand Guard (no rogue hex)
+        run: pnpm run brand:guard
+
+      - name: Manifest validate (tokens vs manifest)
+        run: pnpm run brand:manifest:validate
+
+      # 🖥️ Visual checks — now safe in the container
+      - name: Verify Hue (canonical gradient + gold)
+        run: pnpm run verify:hue
+
+      - name: Brand Tests (Playwright suite)
+        run: pnpm run brand:test
+
+      - name: Build preview (sanity)
+        run: pnpm run build
