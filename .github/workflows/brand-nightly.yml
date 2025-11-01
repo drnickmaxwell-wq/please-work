@@ -1,0 +1,43 @@
+name: Brand Nightly (Hue + Playwright)
+
+on:
+  schedule:
+    - cron: '0 2 * * *'   # nightly at 2am UTC
+  workflow_dispatch:
+
+jobs:
+  hue:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          standalone: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+      - name: Install Playwright Chromium
+        run: |
+          pnpm exec playwright install-deps chromium
+          pnpm exec playwright install chromium
+      - name: Verify Hue (canonical gradient + gold)
+        env:
+          PLAYWRIGHT_BROWSERS_PATH: 0
+        run: pnpm run verify:hue
+      - name: Brand Tests (Playwright suite)
+        env:
+          PLAYWRIGHT_BROWSERS_PATH: 0
+        run: pnpm run brand:test
+      - name: Upload artifacts on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: brand-nightly-artifacts
+          path: |
+            test-results/**
+            reports/**
+            playwright-report/**
+          if-no-files-found: ignore
