@@ -4,6 +4,7 @@
 @import "@/styles/champagne/glass.css";
 @import "@/styles/brand/brand-motion.css";
 @import "@/styles/brand/home-hero.css";
+@import "@/styles/champagne/hero.css";
 
 @tailwind base;
 @tailwind components;

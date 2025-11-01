@@ -72,7 +72,10 @@ function resolveManifestUrl() {
   const { NEXT_PUBLIC_SITE_URL, VERCEL_URL } = process.env;
 
   if (NEXT_PUBLIC_SITE_URL) {
-    return new URL(MANIFEST_PATH, ensureProtocol(NEXT_PUBLIC_SITE_URL)).toString();
+    return new URL(
+      MANIFEST_PATH,
+      ensureProtocol(NEXT_PUBLIC_SITE_URL),
+    ).toString();
   }
 
   if (VERCEL_URL) {
