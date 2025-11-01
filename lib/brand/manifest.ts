@@ -1,28 +1,20 @@
+import fs from "node:fs";
+import path from "node:path";
+
 export type BrandManifest = {
-  static: {
-    textures: { filmGrain: string; glassSoft: string };
-    waves: { background: string; mask: string };
-  };
-  dynamic?: {
-    particles?: Array<{
-      id: string;
-      src: string;
-      codec: string;
-      duration: number;
-      fps: number;
-      loop: boolean;
-      intensity: "subtle" | "ultra-subtle";
-    }>;
-  };
+  name: string;
+  version: string;
+  tokens: string;
+  gradient: { angle: number; stops: { color: string; pos: number }[]; css: string };
+  gold: { hex: string; usage: string };
+  typography: { headings: string; body: string };
+  textures: { grain: string; glass: string };
+  particles: { light: string; alpha: boolean };
+  waves: { mask: string; background: string };
 };
 
-let cache: BrandManifest | null = null;
-
-export async function loadBrandManifest(): Promise<BrandManifest> {
-  if (cache) return cache;
-  // dynamic import so it works in both node & edge builds
-  const res = await import("../../public/brand/manifest.json");
-  const m = res.default as BrandManifest;
-  cache = m;
-  return m;
+export function loadBrandManifest(): BrandManifest {
+  const p = path.join(process.cwd(), "public/brand/manifest.json");
+  const raw = fs.readFileSync(p, "utf8");
+  return JSON.parse(raw) as BrandManifest;
 }

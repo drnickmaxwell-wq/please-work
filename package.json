@@ -7,8 +7,6 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "format": "prettier --write public/brand/manifest.json lib/brand/manifest.ts app/brand.ts components/sections/HeroLuxury.tsx tests/brand-manifest.spec.ts",
-    "test": "tsx --test tests/brand-manifest.spec.ts",
     "brand:guard": "node brand-guard.cjs",
     "brand:audit": "node scripts/brand-audit.cjs",
     "brand:report": "node scripts/brand-report.cjs",
@@ -57,8 +55,7 @@
     "tailwindcss": "^4",
     "tsx": "^4.19.0",
     "typescript": "^5",
-    "husky": "^9.1.7",
-    "prettier": "^3.4.2"
+    "husky": "^9.1.7"
   },
   "engines": {
     "node": ">=20"
