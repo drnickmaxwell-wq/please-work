@@ -1,0 +1,50 @@
+name: Brand CI
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  brand:
+    runs-on: ubuntu-latest
+    env:
+      PLAYWRIGHT_BROWSERS_PATH: ~/.cache/ms-playwright
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Enable corepack (pnpm)
+        run: corepack enable
+
+      - name: Install deps (frozen)
+        run: pnpm install --frozen-lockfile
+
+      # 🟢 Add this BEFORE running any brand checks
+      - name: Ensure Playwright browsers installed
+        run: |
+          echo "Installing Playwright Chromium headless browsers..."
+          pnpm exec playwright install chromium
+          pnpm exec playwright install-deps || true
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: pw-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - name: Brand Guard
+        run: pnpm run brand:guard
+
+      - name: Verify Hue (canonical gradient + gold)
+        run: pnpm run verify:hue
+
+      - name: Brand Tests (Playwright suite)
+        run: pnpm run brand:test
+
+      - name: Build preview
+        run: pnpm run build
