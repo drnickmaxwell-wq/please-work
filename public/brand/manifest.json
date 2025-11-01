@@ -30,5 +30,55 @@
   "waves": {
     "mask": "/public/brand/waves/wave-mask.svg",
     "background": "/public/brand/waves/wave-bg.webp"
+  },
+  "static": {
+    "textures": {
+      "filmGrain": "/brand/textures/film-grain-2560x1440.webp",
+      "glassSoft": "/brand/textures/glass-soft.webp"
+    },
+    "waves": {
+      "background": "/brand/waves/wave-bg.webp",
+      "mask": "/brand/waves/wave-mask.svg"
+    }
+  },
+  "dynamic": {
+    "particles": [
+      {
+        "id": "particles-soft",
+        "src": "/brand/particles/particles-soft.webm",
+        "codec": "vp9-alpha",
+        "duration": 8,
+        "fps": 24,
+        "loop": true,
+        "intensity": "subtle"
+      },
+      {
+        "id": "shimmer-waves",
+        "src": "/brand/particles/shimmer-waves.webm",
+        "codec": "vp9-alpha",
+        "duration": 8,
+        "fps": 24,
+        "loop": true,
+        "intensity": "subtle"
+      },
+      {
+        "id": "iridescent-glow",
+        "src": "/brand/particles/iridescent-glow.webm",
+        "codec": "vp9-alpha",
+        "duration": 8,
+        "fps": 24,
+        "loop": true,
+        "intensity": "subtle"
+      },
+      {
+        "id": "grain-motion",
+        "src": "/brand/particles/grain-motion.webm",
+        "codec": "vp9-alpha",
+        "duration": 8,
+        "fps": 24,
+        "loop": true,
+        "intensity": "ultra-subtle"
+      }
+    ]
   }
 }
