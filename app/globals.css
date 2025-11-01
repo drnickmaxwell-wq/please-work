@@ -3,6 +3,7 @@
 /* glass & motion layers should come after surface */
 @import "@/styles/champagne/glass.css";
 @import "@/styles/brand/brand-motion.css";
+@import "@/styles/brand/home-hero.css";
 
 @tailwind base;
 @tailwind components;
