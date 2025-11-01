@@ -1,14 +1,35 @@
-import { loadBrandManifest } from "@/lib/brand/manifest";
+import {
+  getBrandManifest,
+  getParticles as loadParticles,
+  getTextures as loadTextures,
+  getWaves as loadWaves,
+} from "@/lib/brand/manifest";
 
-export { loadBrandManifest };
+export {
+  getBrandManifest,
+  loadParticles as getParticles,
+  loadTextures as getTextures,
+  loadWaves as getWaves,
+};
 
 export async function getHeroLayers() {
-  const m = await loadBrandManifest();
+  const [textures, waves, particles] = await Promise.all([
+    loadTextures(),
+    loadWaves(),
+    loadParticles(),
+  ]);
+
+  const particleSources: Array<{ src: string; poster?: string }> = [];
+
+  if (particles?.soft) {
+    particleSources.push({ src: particles.soft, poster: particles.poster });
+  }
+
   return {
-    filmGrain: m.static.textures.filmGrain,
-    glassSoft: m.static.textures.glassSoft,
-    waveBg: m.static.waves.background,
-    waveMask: m.static.waves.mask,
-    particles: m.dynamic?.particles ?? [],
+    filmGrain: textures.filmGrain,
+    glassSoft: textures.glassSoft,
+    waveBg: waves.background ?? textures.glassSoft,
+    waveMask: waves.mask,
+    particles: particleSources,
   };
 }

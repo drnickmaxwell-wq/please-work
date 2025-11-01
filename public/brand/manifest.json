@@ -2,6 +2,8 @@
   "name": "SMH Champagne Canon",
   "version": "1.0.0",
   "tokens": "/styles/tokens/smh-champagne-tokens.css",
+  "gradientVar": "--smh-gradient",
+  "goldVar": "--smh-accent-gold",
   "gradient": {
     "angle": 135,
     "stops": [
@@ -19,17 +21,21 @@
     "headings": "Playfair Display",
     "body": "Inter"
   },
+  "waves": {
+    "mask": "/brand/waves/wave-mask.svg",
+    "background": "/brand/waves/wave-bg.webp"
+  },
   "textures": {
-    "grain": "/public/brand/textures/film-grain-2560x1440.webp",
-    "glass": "/public/brand/textures/glass-soft.webp"
+    "filmGrain": "/brand/textures/film-grain-2560x1440.webp",
+    "glassSoft": "/brand/textures/glass-soft.webp",
+    "grain": "/brand/textures/film-grain-2560x1440.webp",
+    "glass": "/brand/textures/glass-soft.webp"
   },
   "particles": {
-    "light": "/public/brand/particles/particles-soft.webm",
+    "soft": "/brand/particles/particles-soft.webm",
+    "poster": "/brand/particles/particles-soft-poster.webp",
+    "light": "/brand/particles/particles-soft.webm",
     "alpha": true
-  },
-  "waves": {
-    "mask": "/public/brand/waves/wave-mask.svg",
-    "background": "/public/brand/waves/wave-bg.webp"
   },
   "static": {
     "textures": {
