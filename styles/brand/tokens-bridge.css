@@ -1,0 +1,8 @@
+:root {
+  --smh-brand-magenta: var(--brand-magenta);
+  --smh-brand-teal: var(--brand-teal);
+  --smh-brand-gold: var(--brand-gold);
+  --smh-brand-keyline-gold: var(--champagne-keyline-gold);
+  --smh-brand-gradient: var(--smh-gradient);
+  --smh-card-border: color-mix(in oklab, var(--smh-accent-gold) 40%, transparent);
+}
