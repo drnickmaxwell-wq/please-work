@@ -2,6 +2,7 @@ import "./globals.css";
 import "@/styles/legacy.css"; // TEMP shim — remove after treatments migrate
 import type { CSSProperties } from 'react';
 import type { Metadata, Viewport } from "next";
+import { headers } from "next/headers";
 import PerformanceOptimizedLayout from '@/components/layout/performance-optimized-layout';
 import StickyHeader from '@/components/layout/sticky-header';
 import Footer from '@/components/layout/footer';
@@ -94,6 +95,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headersList = headers();
+  const resolvedPath =
+    headersList.get("x-matched-path") ??
+    headersList.get("x-invoke-path") ??
+    headersList.get("next-url") ??
+    "";
+  const isChampagnePreview = resolvedPath.startsWith("/champagne-preview");
+
   return (
     <html lang="en-GB" style={rootFontStyle} className="font-sans">
       <head>
@@ -166,18 +175,29 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        
-        {/* Main content wrapper */}
-        <StickyHeader />
 
-        <main id="main-content" className="relative pt-[56px]">
-          <PerformanceOptimizedLayout>
+        {isChampagnePreview ? (
+          <div
+            id="main-content"
+            className="min-h-screen bg-[var(--smh-bg)] text-[var(--smh-text)]"
+          >
             {children}
-          </PerformanceOptimizedLayout>
-        </main>
+          </div>
+        ) : (
+          <>
+            {/* Main content wrapper */}
+            <StickyHeader />
 
-        <Footer />
-        
+            <main id="main-content" className="relative pt-[56px]">
+              <PerformanceOptimizedLayout>
+                {children}
+              </PerformanceOptimizedLayout>
+            </main>
+
+            <Footer />
+          </>
+        )}
+
         {/* Performance monitoring script */}
         <script
           dangerouslySetInnerHTML={{
