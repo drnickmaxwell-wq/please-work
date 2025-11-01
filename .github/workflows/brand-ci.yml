@@ -1,0 +1,52 @@
+name: Brand CI (jammy-proof)
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  brand:
+    runs-on: ubuntu-latest
+    env:
+      PLAYWRIGHT_BROWSERS_PATH: ~/.cache/ms-playwright
+    steps:
+      - uses: actions/checkout@v4
+
+      # Node + pnpm via corepack (fixes "pnpm not found")
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Enable corepack (pnpm)
+        run: corepack enable
+
+      - name: Print toolchain
+        run: |
+          node -v
+          corepack -v
+          pnpm -v || true
+
+      - name: Install deps (frozen)
+        run: pnpm install --frozen-lockfile
+
+      # Cache Playwright browsers
+      - name: Cache Playwright
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: pw-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+
+      # Install Chromium only (no OS deps; works on noble)
+      - name: Install Playwright Chromium
+        run: pnpm exec playwright install chromium
+
+      # --- Brand guards & tests ---
+      - name: Brand Guard (no rogue hex)
+        run: pnpm run brand:guard
+
+      - name: Verify Hue (canonical gradient + gold)
+        run: pnpm run verify:hue
+
+      - name: Brand tests (Playwright suite)
+        run: pnpm run brand:test
+
+      - name: Build preview (sanity)
+        run: pnpm run build

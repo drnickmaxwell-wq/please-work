@@ -11,6 +11,7 @@
     "brand:audit": "node scripts/brand-audit.cjs",
     "brand:report": "node scripts/brand-report.cjs",
     "verify:hue": "node scripts/verify-hue.cjs",
+    "brand:test": "playwright test",
     "verify:brand": "pnpm exec playwright test tests/brand-lock.spec.ts",
     "verify:visual": "pnpm exec playwright test preview/brand-live.spec.ts",
     "hue:capture": "node scripts/capture-gradient.cjs",
@@ -40,7 +41,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@playwright/test": "^1.51.1",
+    "@playwright/test": "1.46.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
