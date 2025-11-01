@@ -17,7 +17,8 @@
     "hue:lock": "node scripts/lock-gradient.cjs",
     "prepush": "pnpm run brand:guard && pnpm run verify:hue && pnpm test:brand",
     "prepare": "husky",
-    "test:brand": "pnpm exec playwright test tests/brand-lux.spec.ts"
+    "test:brand": "pnpm exec playwright test tests/brand-lux.spec.ts",
+    "postinstall": "playwright install --browser=chromium"
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.24",
@@ -40,7 +41,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@playwright/test": "^1.51.1",
+    "@playwright/test": "^1.46.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

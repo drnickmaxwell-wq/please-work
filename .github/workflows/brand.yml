@@ -1,0 +1,59 @@
+name: Brand CI (jammy + Playwright Chromium)
+
+on: [pull_request]
+
+jobs:
+  brand:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      # Node + pnpm
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'pnpm'
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install deps (frozen lockfile)
+        run: pnpm install --frozen-lockfile
+
+      # Ensure Playwright downloads a browser into node_modules (no apt)
+      - name: Install Playwright Chromium
+        env:
+          PLAYWRIGHT_BROWSERS_PATH: 0
+        run: pnpm exec playwright install --browser=chromium
+
+      # Sanity print of what was installed (helps debugging)
+      - name: Print browsers dir
+        run: |
+          echo "Browsers in node_modules/.cache/ms-playwright"
+          ls -la node_modules/.cache/ms-playwright || true
+
+      # Brand checks (keep order)
+      - name: Brand Guard (no rogue hex)
+        run: pnpm run brand:guard
+
+      - name: Verify Hue (canonical gradient + keyline gold)
+        env:
+          PLAYWRIGHT_BROWSERS_PATH: 0
+        run: pnpm run verify:hue
+
+      - name: Brand tests (Playwright suite)
+        env:
+          PLAYWRIGHT_BROWSERS_PATH: 0
+        run: pnpm run brand:test
+
+      # Always upload failure artifacts
+      - name: Collect artifacts on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: brand-artifacts
+          path: |
+            test-results/**
+            reports/**
+            playwright-report/**
+          if-no-files-found: ignore
