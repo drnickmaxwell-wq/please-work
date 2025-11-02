@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { getHeroLayers } from "@/app/brand";
+import "@/styles/preview/hero-gilded.css";
 
 type HeroLayers = Awaited<ReturnType<typeof getHeroLayers>>;
 
@@ -122,11 +123,13 @@ export default function ChampagneHeroGilded() {
   return (
     <section
       ref={heroRef}
-      className="champagne-hero champagne-hero--gilded preview-hero-gilded"
+      className="champagne-hero champagne-hero--gilded preview-hero-gilded gilded-hero"
       aria-labelledby="hero-gilded-title"
       data-smoothing="preview"
     >
       <div className="hero-gradient-base gradient-base" />
+      {/* Waves overlay (uses global CSS vars; no imports) */}
+      <div className="gilded-waves" aria-hidden="true" />
 
       <div
         className="hero-wave-mask parallax-1"
@@ -139,7 +142,7 @@ export default function ChampagneHeroGilded() {
 
       {!reduceMotion && (
         <>
-          <div className="hero-wave-caustics parallax-1">
+          <div className="hero-wave-caustics parallax-1 gilded-motion">
             <video autoPlay loop muted playsInline preload="auto">
               <source
                 src="/assets/champagne/motion/wave-caustics.webm"
@@ -148,7 +151,7 @@ export default function ChampagneHeroGilded() {
             </video>
           </div>
 
-          <div className="hero-glass-shimmer">
+          <div className="hero-glass-shimmer gilded-motion">
             <video autoPlay loop muted playsInline preload="auto">
               <source
                 src="/assets/champagne/motion/glass-shimmer.webm"
@@ -157,7 +160,7 @@ export default function ChampagneHeroGilded() {
             </video>
           </div>
 
-          <div className="hero-particles-drift">
+          <div className="hero-particles-drift gilded-motion">
             <video autoPlay loop muted playsInline preload="auto">
               <source
                 src="/assets/champagne/motion/particles-drift.webm"
@@ -166,7 +169,7 @@ export default function ChampagneHeroGilded() {
             </video>
           </div>
 
-          <div className="hero-gold-dust-drift parallax-2 lux-gold">
+          <div className="hero-gold-dust-drift parallax-2 lux-gold gilded-motion">
             <video autoPlay loop muted playsInline preload="auto">
               <source
                 src="/assets/champagne/particles/gold-dust-drift.webm"
@@ -176,7 +179,7 @@ export default function ChampagneHeroGilded() {
           </div>
 
           {particleSources.map(({ src, poster }) => (
-            <div className="hero-particles-drift" key={src}>
+            <div className="hero-particles-drift gilded-motion" key={src}>
               <video
                 autoPlay
                 loop
@@ -192,10 +195,10 @@ export default function ChampagneHeroGilded() {
         </>
       )}
 
-      <div className="hero-particles-static" />
+      <div className="hero-particles-static gilded-motion" />
 
       <div
-        className="hero-film-grain"
+        className="hero-film-grain gilded-grain"
         style={{
           backgroundImage: layers?.filmGrain
             ? `url(${layers.filmGrain})`
