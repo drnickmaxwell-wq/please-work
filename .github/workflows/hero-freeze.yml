@@ -1,22 +1,19 @@
 name: Hero Freeze Guard
-
 on:
   pull_request:
-    paths:
-      - "public/assets/champagne/**"
-      - "public/brand/**"
-      - "public/assets/champagne/manifest.json"
-      - "scripts/hero-freeze.hashes.json"
-      - "scripts/guard-hero-freeze.mjs"
-
+    branches: [ main ]
 jobs:
-  freeze:
+  guard:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - run: corepack enable
+          cache: 'pnpm'
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
       - run: pnpm install --frozen-lockfile
-      - run: pnpm run guard:hero
+      - name: Run hero freeze guard
+        run: pnpm run guard:hero
