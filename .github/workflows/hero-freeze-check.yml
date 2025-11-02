@@ -1,39 +1,30 @@
-name: Hero Freeze Guard
+name: Guard hero assets
 
 on:
   pull_request:
+    branches: [ main ]
 
 jobs:
-  hero-freeze:
-    name: Guard hero assets
+  guard:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: pnpm
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 10.5.2
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Run hero freeze guard
         run: |
-          set -uo pipefail
-          if output=$(pnpm run --silent guard:hero 2>&1); then
-            printf '%s\n' "$output"
-            printf '%s\n' "$output" >> "$GITHUB_STEP_SUMMARY"
-          else
-            status=$?
-            printf '%s\n' "$output"
-            printf '%s\n' "$output" >> "$GITHUB_STEP_SUMMARY"
-            exit "$status"
-          fi
+          set -o pipefail
+          pnpm run guard:hero | tee -a "$GITHUB_STEP_SUMMARY"
