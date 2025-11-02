@@ -1,0 +1,84 @@
+.gilded-hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 70vh;
+  display: grid;
+  align-items: center;
+  padding: 8rem 6vw;
+  color: var(--smh-text);
+  background-color: var(--smh-ink);
+  --wave-bg: none;
+  --wave-mask: none;
+  --film-grain: none;
+  background-image: var(--wave-bg);
+  background-size: cover;
+  background-position: center;
+  -webkit-mask-image: var(--wave-mask);
+  mask-image: var(--wave-mask);
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+.gilded-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: var(--film-grain);
+  background-size: cover;
+  background-position: center;
+  opacity: 0.08;
+  mix-blend-mode: soft-light;
+}
+
+.gilded-hero__content {
+  position: relative;
+  z-index: 2;
+  max-width: 45rem;
+}
+
+.gilded-hero__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--champagne-keyline-gold) 35%, transparent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.cta--primary {
+  background: color-mix(in srgb, var(--smh-accent-gold) 20%, transparent);
+}
+
+.cta--ghost {
+  background: transparent;
+}
+
+@media (max-width: 768px) {
+  .gilded-hero {
+    padding: 6rem 5vw;
+  }
+
+  .gilded-hero__content {
+    max-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gilded-hero::after {
+    mix-blend-mode: normal;
+  }
+}
