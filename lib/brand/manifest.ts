@@ -49,6 +49,8 @@ export async function getBrandManifest(): Promise<BrandManifest> {
   return manifestPromise;
 }
 
+export const getChampagneManifest = getBrandManifest;
+
 export async function getWaves(): Promise<ManifestWaves> {
   const manifest = await getBrandManifest();
   return manifest.waves;
