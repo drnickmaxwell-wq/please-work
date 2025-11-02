@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { getHeroLayers } from "@/lib/brand/manifest";
@@ -14,6 +15,9 @@ type MotionSource = {
 function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);
 }
+
+const WAVE_BG_FALLBACK = "/assets/champagne/waves/wave-bg.webp";
+const WAVE_MASK_FALLBACK = "/assets/champagne/waves/wave-mask-desktop.webp";
 
 export default function ChampagneHeroGilded() {
   const heroRef = useRef<HTMLElement | null>(null);
@@ -182,6 +186,11 @@ export default function ChampagneHeroGilded() {
     return [{ src: soft, poster: layers?.particles?.poster }];
   }, [layers]);
 
+  const waveBgUrl =
+    layers?.waves?.background || layers?.waveBg || WAVE_BG_FALLBACK;
+
+  const waveMaskUrl = layers?.waves?.mask || layers?.waveMask || WAVE_MASK_FALLBACK;
+
   return (
     <section
       ref={heroRef}
@@ -192,12 +201,15 @@ export default function ChampagneHeroGilded() {
       <div className="hero-gradient-base gradient-base" />
 
       <div
-        className="hero-wave-mask parallax-1"
-        style={{
-          backgroundImage: layers?.waves?.background
-            ? `url('${layers.waves.background}')`
-            : undefined,
-        }}
+        className="hero-wave-bg"
+        aria-hidden
+        style={{ ["--wave-bg" as any]: `url("${waveBgUrl}")` }}
+      />
+
+      <div
+        className="hero-wave-mask"
+        aria-hidden
+        style={{ ["--wave-mask" as any]: `url("${waveMaskUrl}")` }}
       />
 
       {!reduceMotion && (

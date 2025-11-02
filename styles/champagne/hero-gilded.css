@@ -58,3 +58,64 @@
     transform: none !important;
   }
 }
+
+/* === Gilded preview fixes === */
+
+/* Variables come from inline style */
+.preview-hero-gilded .hero-wave-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image: var(--wave-bg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: translateZ(0);
+  overflow: hidden;
+}
+
+/* The mask rides above early motion but below static particles */
+.preview-hero-gilded .hero-wave-mask {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background-image: var(--wave-mask);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  mix-blend-mode: soft-light;
+  opacity: 0.75;
+  transform: translateZ(0);
+}
+
+/* Right-edge “line” prevention on videos (off-by-1px cover) */
+.preview-hero-gilded video.hero-wave-caustics,
+.preview-hero-gilded video.hero-glass-shimmer,
+.preview-hero-gilded video.hero-particles-drift,
+.preview-hero-gilded video.gilded-gold-shimmer {
+  position: absolute;
+  inset: -0.5px;
+  width: calc(100% + 1px);
+  height: calc(100% + 1px);
+  object-fit: cover;
+}
+
+/* Tame gold flecks density/size without new media */
+.preview-hero-gilded .gilded-gold-shimmer,
+.preview-hero-gilded .hero-particles-drift {
+  opacity: 0.28;
+  filter: saturate(1.05) brightness(1.02) blur(0.1px);
+  transform: scale(0.94);
+  mix-blend-mode: color-dodge;
+}
+
+/* Keep film grain elegant */
+.preview-hero-gilded .hero-film-grain {
+  opacity: 0.7;
+  mix-blend-mode: soft-light;
+}
+
+/* Ensure stacking matches the home hero expectations */
+.preview-hero-gilded .hero-gradient-base {
+  z-index: 0;
+}
