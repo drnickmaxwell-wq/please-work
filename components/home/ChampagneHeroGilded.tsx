@@ -100,6 +100,21 @@ export default function ChampagneHeroGilded() {
     };
   }, []);
 
+  // Subtle parallax tied to scroll
+  useEffect(() => {
+    const hero = document.querySelector(".preview-hero-gilded");
+    if (!hero) return;
+
+    const onScroll = () => {
+      const y = window.scrollY * 0.05;
+      (hero as HTMLElement).style.transform = `translateY(${y}px)`;
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   useEffect(() => {
     if (typeof window === "undefined") {
       return;
@@ -210,6 +225,19 @@ export default function ChampagneHeroGilded() {
               />
             </video>
           </div>
+
+          {/* Gold shimmer lift (preview-only) */}
+          <video
+            className="gilded-gold-shimmer"
+            src={
+              layers?.motion?.goldDust ??
+              "/assets/champagne/motion/gold-dust-drift.webm"
+            }
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
 
           <div className="hero-glass-shimmer">
             <video autoPlay loop muted playsInline preload="auto">

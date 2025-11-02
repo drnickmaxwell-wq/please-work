@@ -58,3 +58,55 @@
     transform: none !important;
   }
 }
+
+/* === Gilded Enhancements === */
+
+/* Add depth shimmer using token gold */
+.gilded-gold-shimmer {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  mix-blend-mode: color-dodge;
+  opacity: 0.35;
+  filter: saturate(1.15) brightness(1.1);
+  pointer-events: none;
+}
+
+/* Smoother motion loop handling */
+video.gilded-gold-shimmer,
+video.hero-glass-shimmer,
+video.hero-wave-caustics {
+  animation: shimmerFade 16s ease-in-out infinite alternate;
+}
+
+/* Gentle pulse animation */
+@keyframes shimmerFade {
+  0% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+}
+
+/* Slight parallax depth for layers */
+.preview-hero-gilded .hero-wave-mask {
+  transform: translateY(0);
+  transition: transform 0.3s ease-out;
+}
+.preview-hero-gilded .hero-glass-shimmer {
+  transform: translateY(-2px);
+}
+.preview-hero-gilded .hero-particles-drift {
+  transform: translateY(2px);
+}
+.preview-hero-gilded .hero-film-grain {
+  opacity: 0.8;
+  mix-blend-mode: soft-light;
+}
