@@ -7,6 +7,34 @@
   filter: saturate(1.07) contrast(1.03);
 }
 
+/* Preview-only wave background */
+.preview-hero-gilded .hero-wave-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  mix-blend-mode: overlay;
+  opacity: 0.40;
+  pointer-events: none;
+}
+
+/* Preview-only wave mask using existing SVG */
+.preview-hero-gilded .hero-wave-mask {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  -webkit-mask-image: var(--wave-mask-url);
+  mask-image: var(--wave-mask-url);
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  -webkit-mask-position: center;
+  mask-position: center;
+  background: transparent;
+  pointer-events: none;
+}
+
 .preview-hero-gilded .parallax-1 {
   transform: translate3d(0, calc(var(--parallax-1, 0) * 1px), 0);
   transition: transform 180ms ease-out;

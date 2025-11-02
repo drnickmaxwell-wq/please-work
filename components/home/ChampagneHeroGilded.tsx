@@ -1,6 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
 
 import { getHeroLayers } from "@/app/brand";
 
@@ -20,6 +26,19 @@ export default function ChampagneHeroGilded() {
   const [layers, setLayers] = useState<HeroLayers | null>(null);
   const [reduceMotion, setReduceMotion] = useState(false);
 
+  const manifestWaves =
+    (layers as { waves?: { mask?: string; background?: string } } | null)?.
+      waves;
+
+  const waveMaskUrl =
+    manifestWaves?.mask ||
+    layers?.waveMask ||
+    "/waves/smh-wave-mask.svg";
+  const waveBgUrl =
+    manifestWaves?.background ||
+    layers?.waveBg ||
+    "/assets/champagne/waves/wave-bg.webp";
+
   useEffect(() => {
     let isMounted = true;
 
@@ -37,6 +56,10 @@ export default function ChampagneHeroGilded() {
       isMounted = false;
     };
   }, []);
+
+  useEffect(() => {
+    console.log("[hero-gilded] waveBg:", waveBgUrl, "waveMask:", waveMaskUrl);
+  }, [waveBgUrl, waveMaskUrl]);
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -129,12 +152,19 @@ export default function ChampagneHeroGilded() {
       <div className="hero-gradient-base gradient-base" />
 
       <div
+        className="hero-wave-bg parallax-1"
+        data-layer="wave-bg"
+        style={{ backgroundImage: `url('${waveBgUrl}')` }}
+      />
+
+      <div
         className="hero-wave-mask parallax-1"
-        style={{
-          backgroundImage: layers?.waveMask
-            ? `url(${layers.waveMask})`
-            : undefined,
-        }}
+        data-layer="wave-mask"
+        style={
+          {
+            "--wave-mask-url": `url('${waveMaskUrl}')`,
+          } as CSSProperties
+        }
       />
 
       {!reduceMotion && (

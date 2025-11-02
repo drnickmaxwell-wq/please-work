@@ -22,7 +22,7 @@
     "body": "Inter"
   },
   "waves": {
-    "mask": "/brand/waves/wave-mask.svg",
+    "mask": "/waves/smh-wave-mask.svg",
     "background": "/brand/waves/wave-bg.webp"
   },
   "textures": {
@@ -44,7 +44,7 @@
     },
     "waves": {
       "background": "/brand/waves/wave-bg.webp",
-      "mask": "/brand/waves/wave-mask.svg"
+      "mask": "/waves/smh-wave-mask.svg"
     }
   },
   "dynamic": {
