@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 import { getHeroLayers } from "@/lib/brand/manifest";
 
@@ -10,6 +10,99 @@ type MotionSource = {
   src: string;
   poster?: string;
 };
+
+type CFVProps = {
+  src: string;
+  className?: string;
+  fadeSec?: number; // default 0.6s
+};
+
+function CrossFadeVideo({ src, className, fadeSec = 0.6 }: CFVProps) {
+  const refA = React.useRef<HTMLVideoElement>(null);
+  const refB = React.useRef<HTMLVideoElement>(null);
+  const [onA, setOnA] = React.useState(true);
+  const fadeMs = Math.max(120, Math.floor(fadeSec * 1000));
+
+  // ensure autoplay when ready
+  React.useEffect(() => {
+    const a = refA.current,
+      b = refB.current;
+    if (!a || !b) return;
+
+    const start = () => {
+      a.play().catch(() => {});
+      b.play().catch(() => {});
+    };
+    a.addEventListener("canplay", start, { once: true });
+    b.addEventListener("canplay", start, { once: true });
+
+    let timer: number | undefined;
+
+    const sync = () => {
+      const d = a.duration || b.duration || 0;
+      if (!d || Number.isNaN(d)) return; // metadata not ready yet
+      // Pre-roll B near the end of A
+      b.currentTime = Math.max(0, d - fadeMs / 1000);
+      b.muted = true;
+      a.muted = true;
+    };
+
+    const onEndedA = () => {
+      // swap to B; instantly seek A to 0 for next cycle
+      setOnA(false);
+      a.currentTime = 0;
+      // when B nears end, pre-roll A
+      const d = b.duration || 0;
+      if (d) a.currentTime = Math.max(0, d - fadeMs / 1000);
+    };
+
+    const onEndedB = () => {
+      setOnA(true);
+      b.currentTime = 0;
+      const d = a.duration || 0;
+      if (d) b.currentTime = Math.max(0, d - fadeMs / 1000);
+    };
+
+    a.addEventListener("loadedmetadata", sync);
+    b.addEventListener("loadedmetadata", sync);
+    a.addEventListener("ended", onEndedA);
+    b.addEventListener("ended", onEndedB);
+
+    return () => {
+      a.removeEventListener("loadedmetadata", sync);
+      b.removeEventListener("loadedmetadata", sync);
+      a.removeEventListener("ended", onEndedA);
+      b.removeEventListener("ended", onEndedB);
+      if (timer) window.clearTimeout(timer);
+    };
+  }, [fadeMs]);
+
+  return (
+    <div
+      className={`cfv ${className ?? ""}`}
+      style={{ ["--cfv-fade" as any]: `${fadeMs}ms` }}
+    >
+      <video
+        ref={refA}
+        className={`cfv-vid a ${onA ? "cfv-on" : ""}`}
+        playsInline
+        muted
+        preload="auto"
+        loop
+        src={src}
+      />
+      <video
+        ref={refB}
+        className={`cfv-vid b ${!onA ? "cfv-on" : ""}`}
+        playsInline
+        muted
+        preload="auto"
+        loop
+        src={src}
+      />
+    </div>
+  );
+}
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);
@@ -202,23 +295,17 @@ export default function ChampagneHeroGilded() {
 
       {!reduceMotion && (
         <>
-          <div className="hero-wave-caustics parallax-1">
-            <video autoPlay loop muted playsInline preload="auto">
-              <source
-                src="/assets/champagne/motion/wave-caustics.webm"
-                type="video/webm"
-              />
-            </video>
-          </div>
+          <CrossFadeVideo
+            src="/assets/champagne/motion/wave-caustics.webm"
+            className="hero-wave-caustics parallax-1"
+            fadeSec={0.6}
+          />
 
-          <div className="hero-glass-shimmer">
-            <video autoPlay loop muted playsInline preload="auto">
-              <source
-                src="/assets/champagne/motion/glass-shimmer.webm"
-                type="video/webm"
-              />
-            </video>
-          </div>
+          <CrossFadeVideo
+            src="/assets/champagne/motion/glass-shimmer.webm"
+            className="hero-glass-shimmer"
+            fadeSec={0.6}
+          />
 
           <div className="hero-particles-drift">
             <video autoPlay loop muted playsInline preload="auto">
@@ -229,14 +316,11 @@ export default function ChampagneHeroGilded() {
             </video>
           </div>
 
-          <div className="hero-gold-dust-drift parallax-2 lux-gold">
-            <video autoPlay loop muted playsInline preload="auto">
-              <source
-                src="/assets/champagne/particles/gold-dust-drift.webm"
-                type="video/webm"
-              />
-            </video>
-          </div>
+          <CrossFadeVideo
+            src="/assets/champagne/motion/gold-dust-drift.webm"
+            className="hero-gold-dust-drift parallax-2 lux-gold"
+            fadeSec={0.6}
+          />
 
           {particleSources.map(({ src, poster }) => (
             <div className="hero-particles-drift" key={src}>

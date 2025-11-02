@@ -58,3 +58,44 @@
     transform: none !important;
   }
 }
+
+/* Cross-fade container — preview only */
+.cfv {
+  position: absolute;
+  inset: 0;
+}
+.cfv-vid {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity var(--cfv-fade, 600ms) ease;
+  will-change: opacity;
+}
+.cfv-vid.cfv-on {
+  opacity: 1;
+}
+
+/* Keep waves elegant & always visible in preview */
+.champagne-hero--gilded .hero-wave-mask {
+  background-repeat: no-repeat;
+  background-size: cover;
+  mix-blend-mode: soft-light;
+  opacity: 0.75;
+  backface-visibility: hidden;
+}
+
+/* Subtle gold richness without increasing particle size */
+.champagne-hero--gilded .hero-gold-dust-drift {
+  filter: saturate(1.12) brightness(1.06);
+  opacity: clamp(0.12, 2vw, 0.22);
+  mix-blend-mode: screen;
+}
+
+/* Safety: ensure content on top */
+.champagne-hero--gilded .hero-content {
+  position: relative;
+  z-index: 10;
+}
