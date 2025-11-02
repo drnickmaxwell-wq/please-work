@@ -9,6 +9,8 @@
     "start": "next start",
     "format": "prettier --write public/brand/manifest.json lib/brand/manifest.ts app/brand.ts components/sections/HeroLuxury.tsx tests/brand-manifest.spec.ts",
     "test": "tsx --test tests/brand-manifest.spec.ts",
+    "guard:hero": "node scripts/guard-hero-freeze.mjs",
+    "guard:hero:baseline": "node scripts/guard-hero-freeze.mjs --write-baseline",
     "brand:guard": "node brand-guard.cjs",
     "brand:audit": "node scripts/brand-audit.cjs",
     "brand:report": "node scripts/brand-report.cjs",
