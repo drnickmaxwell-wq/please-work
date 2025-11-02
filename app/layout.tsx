@@ -101,7 +101,9 @@ export default function RootLayout({
     headersList.get("x-invoke-path") ??
     headersList.get("next-url") ??
     "";
-  const isChampagnePreview = resolvedPath.startsWith("/champagne-preview");
+  const isChampagnePreview =
+    resolvedPath.startsWith("/champagne-preview") ||
+    resolvedPath.startsWith("/champagne/hero");
 
   return (
     <html lang="en-GB" style={rootFontStyle} className="font-sans">
