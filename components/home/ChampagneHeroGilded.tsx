@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 
-import { getHeroLayers } from "@/app/brand";
+import { getHeroLayers } from "@/lib/brand/manifest";
 
 type HeroLayers = Awaited<ReturnType<typeof getHeroLayers>>;
 
@@ -23,15 +23,77 @@ export default function ChampagneHeroGilded() {
   useEffect(() => {
     let isMounted = true;
 
-    getHeroLayers()
-      .then((heroLayers) => {
+    (async () => {
+      try {
+        const data = await getHeroLayers();
+
+        const verify = async (url?: string | null) => {
+          if (!url) return null;
+
+          try {
+            const res = await fetch(url, { method: "HEAD" });
+            return res.ok ? url : null;
+          } catch {
+            return null;
+          }
+        };
+
+        const verifiedWavesMask =
+          (await verify(data.waves?.mask)) ??
+          "/assets/champagne/waves/wave-mask-desktop.webp";
+        const verifiedWavesBackground =
+          (await verify(data.waves?.background)) ??
+          "/assets/champagne/waves/wave-bg.webp";
+        const verifiedFilmGrain =
+          (await verify(data.textures?.filmGrain)) ??
+          "/assets/champagne/textures/home-hero-film-grain.webp";
+        const verifiedSoftParticles =
+          (await verify(data.particles?.soft)) ??
+          "/assets/champagne/particles/home-hero-particles.webp";
+
+        const verifiedLayers: HeroLayers = {
+          waves: {
+            ...data.waves,
+            mask: verifiedWavesMask,
+            background: verifiedWavesBackground,
+          },
+          textures: {
+            ...data.textures,
+            filmGrain: verifiedFilmGrain,
+          },
+          particles: data.particles
+            ? {
+                ...data.particles,
+                soft: verifiedSoftParticles,
+              }
+            : {
+                soft: verifiedSoftParticles,
+              },
+          motion: data.motion,
+        };
+
         if (isMounted) {
-          setLayers(heroLayers);
+          setLayers(verifiedLayers);
+          console.log("[hero-gilded] verified layers", verifiedLayers);
         }
-      })
-      .catch(() => {
-        /* no-op: preview should remain functional with static fallbacks */
-      });
+      } catch {
+        if (isMounted) {
+          setLayers({
+            waves: {
+              mask: "/assets/champagne/waves/wave-mask-desktop.webp",
+              background: "/assets/champagne/waves/wave-bg.webp",
+            },
+            textures: {
+              filmGrain: "/assets/champagne/textures/home-hero-film-grain.webp",
+            },
+            particles: {
+              soft: "/assets/champagne/particles/home-hero-particles.webp",
+            },
+            motion: undefined,
+          } as HeroLayers);
+        }
+      }
+    })();
 
     return () => {
       isMounted = false;
@@ -112,11 +174,12 @@ export default function ChampagneHeroGilded() {
   }, [reduceMotion]);
 
   const particleSources = useMemo<MotionSource[]>(() => {
-    if (!layers?.particles) {
+    const soft = layers?.particles?.soft;
+    if (!soft || !soft.endsWith(".webm")) {
       return [];
     }
 
-    return layers.particles.map(({ src, poster }) => ({ src, poster }));
+    return [{ src: soft, poster: layers?.particles?.poster }];
   }, [layers]);
 
   return (
@@ -131,8 +194,8 @@ export default function ChampagneHeroGilded() {
       <div
         className="hero-wave-mask parallax-1"
         style={{
-          backgroundImage: layers?.waveMask
-            ? `url(${layers.waveMask})`
+          backgroundImage: layers?.waves?.background
+            ? `url('${layers.waves.background}')`
             : undefined,
         }}
       />
@@ -197,8 +260,8 @@ export default function ChampagneHeroGilded() {
       <div
         className="hero-film-grain"
         style={{
-          backgroundImage: layers?.filmGrain
-            ? `url(${layers.filmGrain})`
+          backgroundImage: layers?.textures?.filmGrain
+            ? `url(${layers.textures.filmGrain})`
             : undefined,
         }}
       />
