@@ -2,3 +2,6 @@
 /public/brand/**              @drnickmaxwell-wq
 /scripts/hero-freeze.hashes.json  @drnickmaxwell-wq
 /public/assets/champagne/manifest.json  @drnickmaxwell-wq
+public/assets/champagne/**   @drnickmaxwell-wq
+public/brand/**              @drnickmaxwell-wq
+scripts/hero-freeze.*        @drnickmaxwell-wq
