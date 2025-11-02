@@ -51,3 +51,46 @@
     transform: none !important;
   }
 }
+
+/* Anchor for absolute layers */
+.hero-root {
+  position: relative;
+}
+
+/* Base gradient stays at z-index:1 in existing CSS */
+
+/* Preview-only wave background layer */
+.hero-wave-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  mix-blend-mode: overlay;
+  opacity: 0.42;
+  pointer-events: none;
+}
+
+/* Preview-only SVG mask layer */
+.hero-wave-mask {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  -webkit-mask-image: var(--wave-mask-url);
+  mask-image: var(--wave-mask-url);
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  -webkit-mask-position: center;
+  mask-position: center;
+  background: transparent;
+  pointer-events: none;
+}
+
+/* Optional: quick debug border when ?debug=waves is present */
+:root:has(body[data-debug-waves="1"]) .hero-wave-bg {
+  outline: 1px dashed currentColor;
+}
+:root:has(body[data-debug-waves="1"]) .hero-wave-mask {
+  outline: 1px dotted currentColor;
+}

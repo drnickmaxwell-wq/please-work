@@ -1,6 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
 
 import { getHeroLayers } from "@/app/brand";
 
@@ -19,6 +25,22 @@ export default function ChampagneHeroGilded() {
   const heroRef = useRef<HTMLElement | null>(null);
   const [layers, setLayers] = useState<HeroLayers | null>(null);
   const [reduceMotion, setReduceMotion] = useState(false);
+
+  const extendedLayers = layers as
+    | (HeroLayers & {
+        waves?: {
+          mask?: string;
+          background?: string;
+        };
+      })
+    | null;
+
+  const waveMaskUrl =
+    extendedLayers?.waves?.mask ?? extendedLayers?.waveMask ?? "/waves/smh-wave-mask.svg";
+
+  const waveBgUrl =
+    extendedLayers?.waves?.background ?? extendedLayers?.waveBg ??
+    "/assets/champagne/waves/wave-bg.webp";
 
   useEffect(() => {
     let isMounted = true;
@@ -111,6 +133,43 @@ export default function ChampagneHeroGilded() {
     };
   }, [reduceMotion]);
 
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const check = async (url: string) => {
+      try {
+        const res = await fetch(url, { method: "HEAD" });
+        console.log("[hero-gilded] HEAD", url, res.status, res.ok ? "OK" : "FAIL");
+      } catch (e) {
+        console.warn("[hero-gilded] HEAD error", url, e);
+      }
+    };
+
+    console.log("[hero-gilded] waveBg:", waveBgUrl, "waveMask:", waveMaskUrl);
+    void check(waveBgUrl);
+    void check(waveMaskUrl);
+  }, [waveBgUrl, waveMaskUrl]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const body = document.body;
+    const u = new URL(window.location.href);
+    if (u.searchParams.get("debug") === "waves") {
+      body.setAttribute("data-debug-waves", "1");
+    } else {
+      body.removeAttribute("data-debug-waves");
+    }
+
+    return () => {
+      body.removeAttribute("data-debug-waves");
+    };
+  }, []);
+
   const particleSources = useMemo<MotionSource[]>(() => {
     if (!layers?.particles) {
       return [];
@@ -122,19 +181,24 @@ export default function ChampagneHeroGilded() {
   return (
     <section
       ref={heroRef}
-      className="champagne-hero champagne-hero--gilded preview-hero-gilded"
+      className="champagne-hero champagne-hero--gilded preview-hero-gilded hero-root"
       aria-labelledby="hero-gilded-title"
       data-smoothing="preview"
     >
       <div className="hero-gradient-base gradient-base" />
 
+      {/* Wave background (preview-only) */}
       <div
-        className="hero-wave-mask parallax-1"
-        style={{
-          backgroundImage: layers?.waveMask
-            ? `url(${layers.waveMask})`
-            : undefined,
-        }}
+        className="hero-wave-bg"
+        data-layer="wave-bg"
+        style={{ backgroundImage: `url('${waveBgUrl}')` }}
+      />
+
+      {/* Wave mask (preview-only) */}
+      <div
+        className="hero-wave-mask"
+        data-layer="wave-mask"
+        style={{ "--wave-mask-url": `url('${waveMaskUrl}')` } as CSSProperties}
       />
 
       {!reduceMotion && (
