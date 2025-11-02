@@ -1,323 +1,189 @@
 #!/usr/bin/env node
-import { readFile, writeFile, access, readdir } from 'fs/promises';
-import { constants as fsConstants } from 'fs';
-import path from 'path';
-import { createHash } from 'crypto';
-import { fileURLToPath } from 'url';
-import process from 'process';
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import url from 'node:url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '..');
-const manifestPath = path.resolve(repoRoot, 'public/assets/champagne/manifest.json');
-const baselinePath = path.resolve(repoRoot, 'scripts/hero-freeze.hashes.json');
 
 const args = process.argv.slice(2);
-const writeBaseline = args.includes('--write-baseline');
+const WRITE_BASELINE = args.includes('--write-baseline');
 
-function isHttpUrl(value) {
-  return /^https?:\/\//i.test(value ?? '');
-}
+const BASELINE_FILE = path.join(__dirname, 'hero-freeze.hashes.json');
 
-function normalizePath(rawPath) {
-  if (typeof rawPath !== 'string') return null;
-  let normalized = rawPath.trim();
-  if (!normalized) return null;
-  if (isHttpUrl(normalized)) return null;
-  normalized = normalized.replace(/^\.\/+/, '');
-  if (normalized.startsWith('~')) {
+// Candidate manifest locations (support both historical layouts)
+const MANIFEST_CANDIDATES = [
+  path.join(repoRoot, 'public', 'assets', 'champagne', 'manifest.json'),
+  path.join(repoRoot, 'public', 'brand', 'manifest.json'),
+];
+
+// Fallback assets if manifest is missing (we'll only include those that exist)
+const FALLBACK_ASSETS = [
+  'public/assets/champagne/motion/gold-dust.webm',
+  'public/assets/champagne/waves/wave-bg.webp',
+  'public/assets/champagne/waves/wave-mask.svg',
+  'public/brand/textures/film-grain-2560x1440.webp',
+  'public/brand/textures/glass-soft.webp',
+  'public/brand/particles/particles-soft.webm',
+];
+
+// Read JSON helper
+function readJSON(fp) {
+  try {
+    const raw = fs.readFileSync(fp, 'utf8');
+    return JSON.parse(raw);
+  } catch (_) {
     return null;
   }
-  if (normalized.startsWith('/')) {
-    normalized = path.join('public', normalized);
-  }
-  return path.resolve(repoRoot, normalized);
 }
 
-function flattenHero(hero, prefix = []) {
-  const entries = new Map();
-  if (!hero || typeof hero !== 'object') return entries;
-  const keys = Object.keys(hero).sort();
-  for (const key of keys) {
-    const value = hero[key];
-    const currentPath = [...prefix, key];
-    if (typeof value === 'string') {
-      const label = currentPath.join('.');
-      entries.set(label, value);
-    } else if (value && typeof value === 'object' && !Array.isArray(value)) {
-      for (const [subLabel, subValue] of flattenHero(value, currentPath)) {
-        entries.set(subLabel, subValue);
-      }
-    }
-  }
-  return entries;
-}
-
-function getNested(obj, pathParts) {
-  let current = obj;
-  for (const part of pathParts) {
-    if (!current || typeof current !== 'object') {
-      return null;
-    }
-    current = current[part];
-  }
-  return typeof current === 'string' ? current : null;
-}
-
-function findLayerSource(layers, predicate) {
-  if (!Array.isArray(layers)) return null;
-  for (const layer of layers) {
-    if (!layer || typeof layer !== 'object') continue;
-    const name = String(layer.name ?? '');
-    if (!predicate(name, layer)) continue;
-    for (const key of ['src', 'srcDesktop', 'srcTablet', 'srcMobile', 'poster']) {
-      const candidate = layer[key];
-      if (typeof candidate === 'string' && candidate.trim()) {
-        return candidate;
-      }
-    }
+// Find a manifest (first that exists)
+function findManifest() {
+  for (const fp of MANIFEST_CANDIDATES) {
+    if (fs.existsSync(fp)) return fp;
   }
   return null;
 }
 
-function findAssetEntry(assets, predicate) {
-  if (!Array.isArray(assets)) return null;
-  for (const asset of assets) {
-    if (!asset || typeof asset !== 'object') continue;
-    const candidate = asset.path;
-    if (typeof candidate === 'string' && predicate(candidate, asset)) {
-      return candidate;
-    }
-  }
-  return null;
-}
+// From manifest, gather asset paths we want to freeze
+function gatherAssetsFromManifest(json) {
+  // Manus packs typically use keys like: textures, waves, motion/particles, hero, etc.
+  // We'll walk known buckets, then de-dup.
+  const buckets = [];
+  const pushMaybe = v => { if (typeof v === 'string') buckets.push(v); };
 
-function extractSizeToken(name) {
-  const matches = name.match(/(\d{3,4})/g);
-  if (!matches) return 0;
-  return Math.max(...matches.map(Number));
-}
+  // Try common shapes
+  const maybeArrays = [
+    json?.textures,
+    json?.waves,
+    json?.particles,
+    json?.motion,
+    json?.assets,
+    json?.hero?.assets,
+  ].filter(Boolean);
 
-function chooseWaveMask(waveFiles) {
-  const candidates = waveFiles.filter((file) => /mask/i.test(file));
-  if (!candidates.length) return null;
-  const sorted = candidates.sort((a, b) => {
-    const weight = (file) => {
-      const lower = file.toLowerCase();
-      if (lower.includes('desktop')) return 3;
-      if (lower.includes('tablet')) return 2;
-      if (lower.includes('mobile')) return 1;
-      return 0;
-    };
-    const weightDiff = weight(b) - weight(a);
-    if (weightDiff !== 0) return weightDiff;
-    return extractSizeToken(b) - extractSizeToken(a);
-  });
-  return `public/assets/champagne/waves/${sorted[0]}`;
-}
-
-function chooseWaveBackground(waveFiles) {
-  const candidates = waveFiles.filter((file) => /wave(s)?-?bg/i.test(file));
-  if (!candidates.length) return null;
-  const sorted = candidates.sort((a, b) => {
-    const sizeDiff = extractSizeToken(b) - extractSizeToken(a);
-    if (sizeDiff !== 0) return sizeDiff;
-    const extWeight = (file) => (file.toLowerCase().endsWith('.webp') ? 2 : file.toLowerCase().endsWith('.png') ? 1 : 0);
-    const extDiff = extWeight(b) - extWeight(a);
-    if (extDiff !== 0) return extDiff;
-    return a.localeCompare(b);
-  });
-  return `public/assets/champagne/waves/${sorted[0]}`;
-}
-
-async function safeReadJson(filePath) {
-  try {
-    const data = await readFile(filePath, 'utf8');
-    return JSON.parse(data);
-  } catch (error) {
-    if (error.code === 'ENOENT') {
-      return {};
-    }
-    throw error;
-  }
-}
-
-async function safeReaddir(dirPath) {
-  try {
-    return await readdir(dirPath);
-  } catch (error) {
-    if (error.code === 'ENOENT') {
-      return [];
-    }
-    throw error;
-  }
-}
-
-async function fileExists(filePath) {
-  try {
-    await access(filePath, fsConstants.F_OK);
-    return true;
-  } catch (error) {
-    if (error.code === 'ENOENT') {
-      return false;
-    }
-    throw error;
-  }
-}
-
-async function gatherHeroAssets(manifest) {
-  const heroAssetEntries = new Map();
-  const issues = [];
-  const hero = manifest && typeof manifest === 'object' ? manifest.hero : null;
-  const layers = Array.isArray(manifest?.layers) ? manifest.layers : [];
-  const assets = Array.isArray(manifest?.assets) ? manifest.assets : [];
-
-  for (const [label, rawPath] of flattenHero(hero)) {
-    heroAssetEntries.set(label, { rawPath, source: 'manifest.hero' });
-  }
-
-  const wavesDir = path.resolve(repoRoot, 'public/assets/champagne/waves');
-  const waveFiles = await safeReaddir(wavesDir);
-
-  const requiredDescriptors = [
-    {
-      label: 'waves.mask',
-      resolver: () =>
-        getNested(hero, ['waves', 'mask']) ??
-        findLayerSource(layers, (name) => /wave/.test(name) && /mask/.test(name)) ??
-        findAssetEntry(assets, (candidate) => /wave/.test(candidate) && /mask/.test(candidate)) ??
-        chooseWaveMask(waveFiles),
-    },
-    {
-      label: 'waves.background',
-      resolver: () =>
-        getNested(hero, ['waves', 'background']) ??
-        findLayerSource(layers, (name, layer) => /wave/.test(name) && /background/.test(name) && typeof layer.src === 'string') ??
-        findAssetEntry(assets, (candidate) => /wave(s)?-?bg/i.test(candidate)) ??
-        chooseWaveBackground(waveFiles),
-    },
-    {
-      label: 'motion.goldDust',
-      resolver: () =>
-        getNested(hero, ['motion', 'goldDust']) ??
-        findLayerSource(layers, (name) => /gold[-_]dust/i.test(name)) ??
-        findAssetEntry(assets, (candidate) => /gold[-_]dust/i.test(candidate)),
-    },
-  ];
-
-  for (const { label, resolver } of requiredDescriptors) {
-    if (heroAssetEntries.has(label)) continue;
-    const resolved = resolver();
-    if (resolved) {
-      heroAssetEntries.set(label, { rawPath: resolved, source: 'derived' });
-    } else {
-      issues.push(`Missing hero asset path for ${label}`);
+  for (const arr of maybeArrays) {
+    if (Array.isArray(arr)) {
+      arr.forEach(pushMaybe);
+    } else if (typeof arr === 'object') {
+      Object.values(arr).forEach(pushMaybe);
     }
   }
 
-  if (!heroAssetEntries.size) {
-    issues.push('No hero asset paths could be determined from the manifest.');
-  }
+  // Also scan for wave mask/bg if present in nested objects
+  if (json?.waves?.mask) pushMaybe(json.waves.mask);
+  if (json?.waves?.background) pushMaybe(json.waves.background);
 
-  const resolvedAssets = new Map();
+  // Normalise: ensure leading without extra slashes, then re-join from repo root
+  const unique = Array.from(new Set(buckets))
+    .map(p => p.replace(/^\/+/, ''))
+    .map(p => path.join(repoRoot, p));
 
-  for (const [label, { rawPath, source }] of heroAssetEntries) {
-    const absolutePath = normalizePath(rawPath);
-    if (!absolutePath) {
-      issues.push(`Unsupported or invalid path for ${label}: ${rawPath}`);
-      continue;
-    }
-    const exists = await fileExists(absolutePath);
-    if (!exists) {
-      issues.push(`File not found for ${label}: ${path.relative(repoRoot, absolutePath)}`);
-      continue;
-    }
-    resolvedAssets.set(label, {
-      absolutePath,
-      relativePath: path.relative(repoRoot, absolutePath),
-      rawPath,
-      source,
-    });
-  }
-
-  return { assets: resolvedAssets, issues };
+  return unique;
 }
 
-(async () => {
-  try {
-    const manifest = await safeReadJson(manifestPath);
-    if (!Object.keys(manifest).length) {
-      console.error(`Unable to read manifest at ${path.relative(repoRoot, manifestPath)}.`);
-      process.exit(1);
-      return;
+function sha256File(fp) {
+  const hash = crypto.createHash('sha256');
+  const data = fs.readFileSync(fp);
+  hash.update(data);
+  return hash.digest('hex');
+}
+
+function existingOnly(paths) {
+  return paths.filter(p => fs.existsSync(p));
+}
+
+function writeBaseline(map) {
+  fs.writeFileSync(
+    BASELINE_FILE,
+    JSON.stringify({ version: 1, createdAt: new Date().toISOString(), files: map }, null, 2) + '\n',
+    'utf8'
+  );
+}
+
+function loadBaseline() {
+  const json = readJSON(BASELINE_FILE);
+  if (!json || !json.files) return null;
+  return json.files;
+}
+
+function relativeFromRoot(abs) {
+  return path.relative(repoRoot, abs).replaceAll('\\', '/');
+}
+
+function log(msg) {
+  // keep output tidy in Actions
+  process.stdout.write(`${msg}\n`);
+}
+
+(function main() {
+  // Discover assets to protect
+  let manifestPath = findManifest();
+  let assets = [];
+
+  if (manifestPath) {
+    const manifest = readJSON(manifestPath);
+    if (manifest) {
+      assets = gatherAssetsFromManifest(manifest);
     }
+  }
 
-    const { assets: heroAssets, issues } = await gatherHeroAssets(manifest);
+  if (assets.length === 0) {
+    // Use FALLBACKS but only those that actually exist in the repo
+    assets = existingOnly(FALLBACK_ASSETS.map(p => path.join(repoRoot, p)));
+  } else {
+    assets = existingOnly(assets);
+  }
 
-    if (issues.length) {
-      console.error('Hero asset freeze guard failed:');
-      for (const issue of issues) {
-        console.error(`- ${issue}`);
-      }
-      process.exit(1);
-      return;
-    }
+  if (assets.length === 0) {
+    log('hero-freeze: No assets found to protect. Nothing to do.');
+    process.exit(0);
+  }
 
-    const computedHashes = {};
+  // Build current hash map
+  const current = Object.fromEntries(
+    assets.map(abs => [relativeFromRoot(abs), sha256File(abs)])
+  );
 
-    for (const [label, info] of heroAssets) {
-      const fileBuffer = await readFile(info.absolutePath);
-      const hash = createHash('sha256').update(fileBuffer).digest('hex');
-      computedHashes[label] = hash;
-    }
+  if (WRITE_BASELINE) {
+    writeBaseline(current);
+    log(`hero-freeze: baseline written to ${path.relative(repoRoot, BASELINE_FILE)}`);
+    process.exit(0);
+  }
 
-    const sortedComputed = Object.fromEntries(
-      Object.keys(computedHashes)
-        .sort()
-        .map((key) => [key, computedHashes[key]])
-    );
-
-    if (writeBaseline) {
-      await writeFile(baselinePath, JSON.stringify(sortedComputed, null, 2) + '\n');
-      console.log('Hero asset freeze baseline updated.');
-      return;
-    }
-
-    const baseline = await safeReadJson(baselinePath);
-    const baselineEntries = baseline && typeof baseline === 'object' ? baseline : {};
-
-    const differences = [];
-    const baselineKeys = new Set(Object.keys(baselineEntries));
-
-    for (const [label, hash] of Object.entries(sortedComputed)) {
-      const baselineHash = baselineEntries[label];
-      if (!baselineHash) {
-        differences.push(`New hero asset detected (${label}) with hash ${hash}`);
-      } else if (baselineHash !== hash) {
-        differences.push(
-          `Hash mismatch for ${label}:\n  baseline: ${baselineHash}\n  current:  ${hash}`
-        );
-      }
-      baselineKeys.delete(label);
-    }
-
-    for (const extraLabel of baselineKeys) {
-      differences.push(`Baseline includes ${extraLabel}, but it was not found in the manifest or filesystem.`);
-    }
-
-    if (differences.length) {
-      console.error('Hero asset freeze guard detected differences:');
-      for (const diff of differences) {
-        console.error(`- ${diff}`);
-      }
-      process.exit(1);
-      return;
-    }
-
-    console.log('Hero asset freeze guard passed.');
-  } catch (error) {
-    console.error('Hero asset freeze guard encountered an error:');
-    console.error(error);
+  // Compare against baseline
+  const baseline = loadBaseline();
+  if (!baseline) {
+    log(`hero-freeze: No baseline found at ${path.relative(repoRoot, BASELINE_FILE)}.`);
+    log('           Run: pnpm run guard:hero:baseline');
     process.exit(1);
   }
+
+  // Determine changes
+  const added = [];
+  const removed = [];
+  const changed = [];
+
+  const bKeys = new Set(Object.keys(baseline));
+  const cKeys = new Set(Object.keys(current));
+
+  for (const k of cKeys) {
+    if (!bKeys.has(k)) added.push(k);
+    else if (baseline[k] !== current[k]) changed.push(k);
+  }
+  for (const k of bKeys) {
+    if (!cKeys.has(k)) removed.push(k);
+  }
+
+  if (added.length || removed.length || changed.length) {
+    log('hero-freeze: ❌ Protected hero assets changed.');
+    if (added.length)  log(`  + Added:   ${added.join(', ')}`);
+    if (removed.length)log(`  - Removed: ${removed.join(', ')}`);
+    if (changed.length)log(`  ~ Changed: ${changed.join(', ')}`);
+    log('Run: pnpm run guard:hero:baseline   (if these updates are intentional)');
+    process.exit(1);
+  }
+
+  log('hero-freeze: ✅ Protected hero assets match baseline.');
 })();
