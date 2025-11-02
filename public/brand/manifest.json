@@ -22,20 +22,22 @@
     "body": "Inter"
   },
   "waves": {
-    "mask": "/brand/waves/wave-mask.svg",
-    "background": "/brand/waves/wave-bg.webp"
+    "mask": "/assets/champagne/waves/wave-mask-desktop.webp",
+    "background": "/assets/champagne/waves/wave-bg.webp"
   },
   "textures": {
-    "filmGrain": "/brand/textures/film-grain-2560x1440.webp",
-    "glassSoft": "/brand/textures/glass-soft.webp",
-    "grain": "/brand/textures/film-grain-2560x1440.webp",
-    "glass": "/brand/textures/glass-soft.webp"
+    "filmGrain": "/assets/champagne/textures/home-hero-film-grain.webp",
+    "glass": "/assets/champagne/textures/glass-soft.webp",
+    "glassSoft": "/assets/champagne/textures/glass-soft.webp"
   },
   "particles": {
-    "soft": "/brand/particles/particles-soft.webm",
-    "poster": "/brand/particles/particles-soft-poster.webp",
-    "light": "/brand/particles/particles-soft.webm",
-    "alpha": true
+    "soft": "/assets/champagne/particles/home-hero-particles.webp"
+  },
+  "motion": {
+    "waveCaustics": "/assets/champagne/motion/wave-caustics.webm",
+    "glassShimmer": "/assets/champagne/motion/glass-shimmer.webm",
+    "particlesDrift": "/assets/champagne/motion/particles-drift.webm",
+    "goldDust": "/assets/champagne/motion/gold-dust-drift.webm"
   },
   "static": {
     "textures": {

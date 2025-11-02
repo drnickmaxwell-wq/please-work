@@ -1,6 +1,13 @@
-.preview-hero-gilded {
+.preview-hero-gilded { 
   --parallax-1: 0;
   --parallax-2: 0;
+}
+
+.preview-hero-gilded .hero-wave-mask {
+  background-size: cover;
+  background-position: center;
+  mix-blend-mode: overlay;
+  opacity: 0.4;
 }
 
 .preview-hero-gilded .gradient-base {

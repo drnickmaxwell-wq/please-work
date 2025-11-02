@@ -5,6 +5,7 @@ export type BrandManifest = {
   waves: ManifestWaves;
   textures: ManifestTextures;
   particles?: ManifestParticles;
+  motion?: ManifestMotion;
   gradient?: unknown;
   gold?: unknown;
   typography?: unknown;
@@ -29,6 +30,10 @@ type ManifestTextures = {
 type ManifestParticles = {
   soft?: string;
   poster?: string;
+  [key: string]: string | undefined;
+};
+
+type ManifestMotion = {
   [key: string]: string | undefined;
 };
 
@@ -62,6 +67,17 @@ export async function getTextures(): Promise<ManifestTextures> {
 export async function getParticles(): Promise<ManifestParticles | undefined> {
   const manifest = await getBrandManifest();
   return manifest.particles;
+}
+
+export async function getHeroLayers() {
+  const manifest = await getBrandManifest();
+
+  return {
+    waves: manifest.waves,
+    textures: manifest.textures,
+    particles: manifest.particles,
+    motion: manifest.motion,
+  };
 }
 
 function resolveManifestUrl() {
