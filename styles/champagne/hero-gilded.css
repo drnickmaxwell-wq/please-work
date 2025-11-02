@@ -1,0 +1,221 @@
+.champagne-hero-gilded {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  min-height: clamp(72vh, 82vh, 96vh);
+  padding: clamp(88px, 12vw, 144px) clamp(20px, 6vw, 64px);
+  overflow: hidden;
+  color: var(--smh-white);
+  background: transparent;
+  --hero-gradient: var(--smh-gradient);
+  --wave-mask-url: url("/brand/waves/wave-mask.svg");
+  --wave-background-url: url("/brand/waves/wave-bg.webp");
+  --hero-glass-url: url("/brand/textures/glass-soft.webp");
+  --hero-grain-url: url("/brand/textures/film-grain-2560x1440.webp");
+  --parallax-1: 0;
+  --parallax-2: 0;
+}
+
+.champagne-hero-gilded .hero-gradient-base {
+  position: absolute;
+  inset: 0;
+  background: var(--hero-gradient, var(--smh-gradient));
+  filter: saturate(1.07) contrast(1.03);
+  transform: translateZ(0);
+  pointer-events: none;
+}
+
+.champagne-hero-gilded .hero-wave-mask {
+  position: absolute;
+  inset: 0;
+  background-image: var(--wave-background-url);
+  background-size: cover;
+  background-position: center;
+  mask-image: var(--wave-mask-url);
+  -webkit-mask-image: var(--wave-mask-url);
+  mask-size: cover;
+  -webkit-mask-size: cover;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-position: bottom center;
+  -webkit-mask-position: bottom center;
+  opacity: 0.55;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+.champagne-hero-gilded .hero-motion {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.champagne-hero-gilded .hero-wave-caustics,
+.champagne-hero-gilded .hero-glass-shimmer,
+.champagne-hero-gilded .hero-particles-drift,
+.champagne-hero-gilded .lux-gold {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.champagne-hero-gilded .hero-wave-caustics {
+  opacity: 0.16;
+  mix-blend-mode: screen;
+}
+
+.champagne-hero-gilded .hero-glass-shimmer {
+  opacity: 0.18;
+  mix-blend-mode: screen;
+}
+
+.champagne-hero-gilded .hero-particles-drift {
+  opacity: 0.12;
+  mix-blend-mode: screen;
+}
+
+.champagne-hero-gilded .lux-gold {
+  mix-blend-mode: screen;
+  opacity: var(--lux-gold-opacity, 0.14);
+}
+
+.champagne-hero-gilded .hero-motion-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.champagne-hero-gilded .hero-particles-static {
+  position: absolute;
+  inset: 0;
+  background-image: url("/assets/champagne/particles/home-hero-particles.webp");
+  background-size: 1024px 1024px;
+  background-repeat: repeat;
+  opacity: 0.08;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.champagne-hero-gilded .hero-film-grain {
+  position: absolute;
+  inset: 0;
+  background-image: var(--hero-grain-url);
+  background-size: cover;
+  background-position: center;
+  opacity: 0.08;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.champagne-hero-gilded .hero-content {
+  position: relative;
+  z-index: 10;
+  width: min(92vw, 960px);
+  margin-inline: auto;
+  text-align: center;
+  color: var(--smh-white);
+}
+
+.champagne-hero-gilded .hero-content-wrapper {
+  display: grid;
+  gap: clamp(12px, 2.5vw, 20px);
+}
+
+.champagne-hero-gilded .hero-eyebrow {
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--smh-white) 88%, transparent);
+}
+
+.champagne-hero-gilded h1 {
+  margin: 0;
+  font-family: var(--font-display, "Playfair Display", serif);
+  font-size: clamp(2.75rem, 4vw + 1.25rem, 4rem);
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.champagne-hero-gilded .hero-subtitle {
+  margin: 0;
+  font-size: clamp(1.1rem, 1.4vw + 0.75rem, 1.5rem);
+  line-height: 1.6;
+  color: color-mix(in oklab, var(--smh-white) 82%, transparent);
+}
+
+.champagne-hero-gilded .hero-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(12px, 3vw, 16px);
+}
+
+.champagne-hero-gilded .hero-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.75rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  max-width: min(100%, 26ch);
+  min-width: 180px;
+  min-height: 48px;
+  line-height: 1.25;
+  text-align: center;
+  white-space: normal;
+}
+
+.champagne-hero-gilded .hero-cta-primary {
+  background: var(--smh-gradient);
+  color: var(--smh-ink);
+  box-shadow: 0 18px 46px color-mix(in oklab, var(--smh-accent-gold) 28%, transparent);
+}
+
+.champagne-hero-gilded .hero-cta-secondary {
+  background: color-mix(in oklab, var(--smh-white) 14%, transparent);
+  border: 1px solid var(--smh-accent-gold);
+  color: var(--smh-white);
+  backdrop-filter: blur(14px);
+}
+
+.parallax-1 {
+  transform: translate3d(0, calc(var(--parallax-1, 0) * 1px), 0);
+}
+
+.parallax-2 {
+  transform: translate3d(0, calc(var(--parallax-2, 0) * 1px), 0);
+}
+
+@media (max-width: 768px) {
+  .champagne-hero-gilded {
+    padding-block: clamp(72px, 14vw, 112px);
+  }
+
+  .champagne-hero-gilded .hero-content {
+    width: min(94vw, 640px);
+  }
+}
+
+@media (max-width: 420px) {
+  .champagne-hero-gilded h1 {
+    font-size: clamp(2.4rem, 8vw, 3.3rem);
+  }
+
+  .champagne-hero-gilded .hero-cta {
+    min-width: 0;
+    width: min(100%, 260px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .champagne-hero-gilded {
+    --parallax-1: 0;
+    --parallax-2: 0;
+  }
+
+  .champagne-hero-gilded [data-motion="true"] {
+    display: none !important;
+  }
+}
