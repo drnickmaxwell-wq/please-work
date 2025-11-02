@@ -33,7 +33,12 @@ type CrossFadeLoopProps = {
 };
 
 function CrossFadeLoop({ src, className, zIndexClass }: CrossFadeLoopProps) {
-  const containerClassName = ["loop-pair", className, zIndexClass]
+  const containerClassName = [
+    "loop-pair",
+    "hero-motion",
+    className,
+    zIndexClass,
+  ]
     .filter(Boolean)
     .join(" ");
   const baseVideoRef = useRef<HTMLVideoElement | null>(null);
@@ -481,6 +486,42 @@ export default function PreviewHeroGilded() {
     };
   }, [reduceMotion]);
 
+  useEffect(() => {
+    if (reduceMotion) {
+      return;
+    }
+
+    let cancelled = false;
+
+    void (async () => {
+      const node = heroRef.current;
+      if (!node) {
+        return;
+      }
+
+      const { smoothLoop } = await import("@/scripts/hero-smooth-loop.mjs");
+      if (cancelled) {
+        return;
+      }
+
+      node
+        .querySelectorAll<HTMLVideoElement>(".hero-motion video")
+        .forEach((video) => {
+          if (
+            video.parentElement?.querySelector(":scope > video.fade-mirror")
+          ) {
+            return;
+          }
+
+          smoothLoop(video);
+        });
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [reduceMotion]);
+
   const particleSources = useMemo<MotionSource[]>(() => {
     const soft = layers?.particles?.soft;
     if (!soft || !soft.endsWith(".webm")) {
@@ -535,7 +576,7 @@ export default function PreviewHeroGilded() {
           />
 
           {particleSources.map(({ src, poster }) => (
-            <div className="hero-particles-drift" key={src}>
+            <div className="hero-particles-drift hero-motion" key={src}>
               <video
                 autoPlay
                 loop
