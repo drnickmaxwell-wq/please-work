@@ -552,9 +552,18 @@ export default function PreviewHeroGilded() {
     return [{ src: soft, poster: layers?.particles?.poster }];
   }, [layers]);
 
-  const waveMaskUrl =
+  const waveMask =
     layers?.waveMask ?? "/assets/champagne/waves/wave-mask-desktop.webp";
-  const waveBgUrl = layers?.waveBg ?? "/assets/champagne/waves/wave-bg.webp";
+  const waveBg = layers?.waveBg ?? "/assets/champagne/waves/wave-bg.webp";
+
+  useEffect(() => {
+    const root = document.querySelector(
+      ".preview-hero-gilded .champagne-hero",
+    ) as HTMLElement | null;
+    if (!root) return;
+    root.style.setProperty("--hero-wave-bg", `url("${waveBg}")`);
+    root.style.setProperty("--hero-wave-mask", `url("${waveMask}")`);
+  }, [waveBg, waveMask]);
 
   return (
     <section
@@ -566,10 +575,14 @@ export default function PreviewHeroGilded() {
       <div className="hero-gradient-base gradient-base" />
 
       <div
+        className="hero-waves-bg"
+        aria-hidden="true"
+        data-url={waveBg}
+      />
+      <div
         className="hero-wave-mask parallax-1"
-        style={{
-          backgroundImage: `url(${waveBgUrl}), url(${waveMaskUrl})`,
-        }}
+        aria-hidden="true"
+        data-url={waveMask}
       />
 
       {!reduceMotion && (

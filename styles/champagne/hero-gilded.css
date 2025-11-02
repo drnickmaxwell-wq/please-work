@@ -58,3 +58,22 @@
     transform: none !important;
   }
 }
+.preview-hero-gilded .hero-waves-bg,
+.preview-hero-gilded .hero-wave-mask {
+  position:absolute; inset:0; pointer-events:none;
+  background-size:cover; background-position:center;
+}
+
+.preview-hero-gilded .hero-waves-bg {
+  /* bg image is set inline via style or dataset */
+  mix-blend-mode:overlay; opacity:0.28;
+}
+
+.preview-hero-gilded .hero-wave-mask {
+  /* mask or overlay; we support both */
+  mix-blend-mode:soft-light; opacity:0.18;
+}
+
+/* JS hooks */
+.preview-hero-gilded .hero-waves-bg[data-url]{ background-image: var(--hero-wave-bg, none); }
+.preview-hero-gilded .hero-wave-mask[data-url]{ background-image: var(--hero-wave-mask, none); }
