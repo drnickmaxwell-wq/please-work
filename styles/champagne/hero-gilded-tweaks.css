@@ -1,0 +1,6 @@
+.preview-hero-gilded .hero-wave-mask {
+  background-repeat: no-repeat, no-repeat;
+  background-position: center, center;
+  background-size: cover, cover;
+  /* keep existing blend/mix rules from hero.css */
+}

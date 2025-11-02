@@ -1,4 +1,5 @@
-import ChampagneHeroGilded from "@/components/home/ChampagneHeroGilded";
+import PreviewHeroGilded from "@/components/preview/HeroGilded";
+import "@/styles/champagne/hero-gilded-tweaks.css";
 
 export const metadata = {
   title: "Preview: Gilded Champagne Hero",
@@ -13,7 +14,7 @@ export default function Page() {
         color: "var(--smh-text)",
       }}
     >
-      <ChampagneHeroGilded />
+      <PreviewHeroGilded />
     </main>
   );
 }
