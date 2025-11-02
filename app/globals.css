@@ -6,6 +6,7 @@
 @import "@/styles/champagne/hero-core.css";
 @import "@/styles/brand/home-hero.css";
 @import "@/styles/champagne/hero.css";
+@import "@/styles/champagne/hero-gilded.css";
 
 @tailwind base;
 @tailwind components;

@@ -1,0 +1,53 @@
+.preview-hero-gilded {
+  --parallax-1: 0;
+  --parallax-2: 0;
+}
+
+.preview-hero-gilded .gradient-base {
+  filter: saturate(1.07) contrast(1.03);
+}
+
+.preview-hero-gilded .parallax-1 {
+  transform: translate3d(0, calc(var(--parallax-1, 0) * 1px), 0);
+  transition: transform 180ms ease-out;
+  will-change: transform;
+}
+
+.preview-hero-gilded .parallax-2 {
+  transform: translate3d(0, calc(var(--parallax-2, 0) * 1px), 0);
+  transition: transform 220ms ease-out;
+  will-change: transform;
+}
+
+.preview-hero-gilded .lux-gold {
+  mix-blend-mode: screen;
+  opacity: var(--lux-gold-opacity, 0.14);
+}
+
+.preview-hero-gilded .hero-cta-group {
+  gap: clamp(0.75rem, 3vw, 1rem);
+  width: min(100%, 32rem);
+}
+
+.preview-hero-gilded .hero-cta-group > a {
+  flex: 1 1 12rem;
+  inline-size: min(100%, 18rem);
+}
+
+@media (max-width: 420px) {
+  .preview-hero-gilded h1 {
+    font-size: 0.92em;
+    line-height: 1.05;
+  }
+
+  .preview-hero-gilded .hero-cta-group {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preview-hero-gilded .parallax-1,
+  .preview-hero-gilded .parallax-2 {
+    transform: none !important;
+  }
+}
