@@ -4,3 +4,43 @@
   background-size: cover, cover;
   /* keep existing blend/mix rules from hero.css */
 }
+
+.preview-hero-gilded .loop-pair {
+  position: absolute;
+  inset: 0;
+}
+
+.preview-hero-gilded .loop-pair video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 280ms ease-in-out;
+}
+
+.preview-hero-gilded .loop-top {
+  opacity: 0;
+}
+
+.preview-hero-gilded .loop-top.is-active {
+  opacity: 1;
+}
+
+/* Gold shimmer polish without changing particle size */
+.preview-hero-gilded .hero-gold-dust-drift {
+  mix-blend-mode: screen; /* keep light, not chalky */
+  filter: saturate(1.08) brightness(1.06);
+  opacity: 0.18; /* make it visible but not gaudy */
+}
+
+/* Slight overall chroma lift for the preview */
+.preview-hero-gilded .champagne-hero {
+  filter: saturate(1.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preview-hero-gilded .loop-pair video {
+    transition: none;
+  }
+}

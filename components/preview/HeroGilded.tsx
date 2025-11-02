@@ -1,6 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type SyntheticEvent,
+} from "react";
 
 import { getHeroLayers } from "@/lib/brand/manifest";
 
@@ -18,6 +24,299 @@ type MotionSource = {
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);
+}
+
+type CrossFadeLoopProps = {
+  src: string;
+  className: string;
+  zIndexClass?: string;
+};
+
+function CrossFadeLoop({ src, className, zIndexClass }: CrossFadeLoopProps) {
+  const containerClassName = ["loop-pair", className, zIndexClass]
+    .filter(Boolean)
+    .join(" ");
+  const baseVideoRef = useRef<HTMLVideoElement | null>(null);
+  const staggeredVideoRef = useRef<HTMLVideoElement | null>(null);
+  const resetTimeoutRef = useRef<number | null>(null);
+  const intervalRef = useRef<number | null>(null);
+  const startTimeoutRef = useRef<number | null>(null);
+  const [duration, setDuration] = useState<number | null>(null);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [isTopActive, setIsTopActive] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updatePreference = () => {
+      setPrefersReducedMotion(mediaQuery.matches);
+    };
+
+    updatePreference();
+
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", updatePreference);
+
+      return () => {
+        mediaQuery.removeEventListener("change", updatePreference);
+      };
+    }
+
+    mediaQuery.addListener(updatePreference);
+
+    return () => {
+      mediaQuery.removeListener(updatePreference);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!prefersReducedMotion) {
+      return;
+    }
+
+    setIsTopActive(false);
+
+    if (resetTimeoutRef.current) {
+      window.clearTimeout(resetTimeoutRef.current);
+      resetTimeoutRef.current = null;
+    }
+
+    if (startTimeoutRef.current) {
+      window.clearTimeout(startTimeoutRef.current);
+      startTimeoutRef.current = null;
+    }
+
+    if (intervalRef.current) {
+      window.clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+
+    const base = baseVideoRef.current;
+    const staggered = staggeredVideoRef.current;
+
+    base?.pause();
+    staggered?.pause();
+
+    if (base) {
+      base.currentTime = 0;
+    }
+
+    if (staggered) {
+      staggered.currentTime = 0;
+    }
+  }, [prefersReducedMotion]);
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      return;
+    }
+
+    if (resetTimeoutRef.current) {
+      window.clearTimeout(resetTimeoutRef.current);
+      resetTimeoutRef.current = null;
+    }
+
+    if (startTimeoutRef.current) {
+      window.clearTimeout(startTimeoutRef.current);
+      startTimeoutRef.current = null;
+    }
+
+    if (intervalRef.current) {
+      window.clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+
+    setDuration(null);
+    setIsTopActive(false);
+
+    const base = baseVideoRef.current;
+    const staggered = staggeredVideoRef.current;
+
+    base?.pause();
+    staggered?.pause();
+
+    if (base) {
+      try {
+        base.currentTime = 0;
+      } catch {
+        // Ignore seek errors while metadata is refreshed.
+      }
+    }
+
+    if (staggered) {
+      try {
+        staggered.currentTime = 0;
+      } catch {
+        // Ignore seek errors while metadata is refreshed.
+      }
+    }
+  }, [prefersReducedMotion, src]);
+
+  useEffect(() => {
+    if (prefersReducedMotion || !duration) {
+      return;
+    }
+
+    const intervalMs = Math.max((duration - 0.25) * 1000, 250);
+
+    startTimeoutRef.current = window.setTimeout(() => {
+      setIsTopActive((prev) => !prev);
+
+      intervalRef.current = window.setInterval(() => {
+        setIsTopActive((prev) => !prev);
+      }, intervalMs);
+    }, intervalMs);
+
+    return () => {
+      if (startTimeoutRef.current) {
+        window.clearTimeout(startTimeoutRef.current);
+        startTimeoutRef.current = null;
+      }
+
+      if (intervalRef.current) {
+        window.clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
+  }, [duration, prefersReducedMotion]);
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      return;
+    }
+
+    const activeVideo = isTopActive
+      ? staggeredVideoRef.current
+      : baseVideoRef.current;
+    const inactiveVideo = isTopActive
+      ? baseVideoRef.current
+      : staggeredVideoRef.current;
+
+    if (activeVideo) {
+      try {
+        activeVideo.currentTime = 0;
+      } catch {
+        // Safari may throw during seeks when metadata is not ready; ignore.
+      }
+
+      const playPromise = activeVideo.play();
+      if (playPromise && typeof playPromise.catch === "function") {
+        playPromise.catch(() => {});
+      }
+    }
+
+    if (inactiveVideo) {
+      if (resetTimeoutRef.current) {
+        window.clearTimeout(resetTimeoutRef.current);
+      }
+
+      resetTimeoutRef.current = window.setTimeout(() => {
+        inactiveVideo.pause();
+        try {
+          inactiveVideo.currentTime = 0;
+        } catch {
+          // Ignore seek errors on partially loaded media.
+        }
+      }, 280);
+    }
+
+    return () => {
+      if (resetTimeoutRef.current) {
+        window.clearTimeout(resetTimeoutRef.current);
+        resetTimeoutRef.current = null;
+      }
+    };
+  }, [isTopActive, prefersReducedMotion]);
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      return;
+    }
+
+    const base = baseVideoRef.current;
+    if (!base) {
+      return;
+    }
+
+    const playPromise = base.play();
+    if (playPromise && typeof playPromise.catch === "function") {
+      playPromise.catch(() => {});
+    }
+  }, [prefersReducedMotion, src]);
+
+  useEffect(() => {
+    return () => {
+      if (resetTimeoutRef.current) {
+        window.clearTimeout(resetTimeoutRef.current);
+      }
+
+      if (startTimeoutRef.current) {
+        window.clearTimeout(startTimeoutRef.current);
+      }
+
+      if (intervalRef.current) {
+        window.clearInterval(intervalRef.current);
+      }
+    };
+  }, []);
+
+  const handleMetadata = (event: SyntheticEvent<HTMLVideoElement, Event>) => {
+    if (prefersReducedMotion) {
+      return;
+    }
+
+    const video = event.currentTarget;
+    if (Number.isFinite(video.duration) && video.duration > 0) {
+      setDuration(video.duration);
+    }
+  };
+
+  if (prefersReducedMotion) {
+    return (
+      <div className={containerClassName}>
+        <video
+          className="loop-top is-active"
+          muted
+          playsInline
+          loop
+          preload="metadata"
+        >
+          <source src={src} type="video/webm" />
+        </video>
+      </div>
+    );
+  }
+
+  return (
+    <div className={containerClassName}>
+      <video
+        ref={baseVideoRef}
+        autoPlay
+        muted
+        playsInline
+        loop
+        preload="auto"
+        onLoadedMetadata={handleMetadata}
+      >
+        <source src={src} type="video/webm" />
+      </video>
+      <video
+        ref={staggeredVideoRef}
+        className={`loop-top${isTopActive ? " is-active" : ""}`}
+        autoPlay
+        muted
+        playsInline
+        loop
+        preload="auto"
+        onLoadedMetadata={handleMetadata}
+      >
+        <source src={src} type="video/webm" />
+      </video>
+    </div>
+  );
 }
 
 export default function PreviewHeroGilded() {
@@ -213,41 +512,27 @@ export default function PreviewHeroGilded() {
 
       {!reduceMotion && (
         <>
-          <div className="hero-wave-caustics parallax-1">
-            <video autoPlay loop muted playsInline preload="auto">
-              <source
-                src="/assets/champagne/motion/wave-caustics.webm"
-                type="video/webm"
-              />
-            </video>
-          </div>
+          <CrossFadeLoop
+            className="hero-wave-caustics"
+            zIndexClass="parallax-1"
+            src="/assets/champagne/motion/wave-caustics.webm"
+          />
 
-          <div className="hero-glass-shimmer">
-            <video autoPlay loop muted playsInline preload="auto">
-              <source
-                src="/assets/champagne/motion/glass-shimmer.webm"
-                type="video/webm"
-              />
-            </video>
-          </div>
+          <CrossFadeLoop
+            className="hero-glass-shimmer"
+            src="/assets/champagne/motion/glass-shimmer.webm"
+          />
 
-          <div className="hero-particles-drift">
-            <video autoPlay loop muted playsInline preload="auto">
-              <source
-                src="/assets/champagne/motion/particles-drift.webm"
-                type="video/webm"
-              />
-            </video>
-          </div>
+          <CrossFadeLoop
+            className="hero-particles-drift"
+            src="/assets/champagne/motion/particles-drift.webm"
+          />
 
-          <div className="hero-gold-dust-drift parallax-2 lux-gold">
-            <video autoPlay loop muted playsInline preload="auto">
-              <source
-                src="/assets/champagne/particles/gold-dust-drift.webm"
-                type="video/webm"
-              />
-            </video>
-          </div>
+          <CrossFadeLoop
+            className="hero-gold-dust-drift lux-gold"
+            zIndexClass="parallax-2"
+            src="/assets/champagne/particles/gold-dust-drift.webm"
+          />
 
           {particleSources.map(({ src, poster }) => (
             <div className="hero-particles-drift" key={src}>
