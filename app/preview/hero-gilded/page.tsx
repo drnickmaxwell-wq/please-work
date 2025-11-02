@@ -1,19 +1,7 @@
-import ChampagneHeroGilded from "@/components/home/ChampagneHeroGilded";
+import GildedWavesHero from "@/components/preview/GildedWavesHero";
 
-export const metadata = {
-  title: "Preview: Gilded Champagne Hero",
-};
+export const metadata = { title: "Hero Gilded Preview · Champagne" };
 
 export default function Page() {
-  return (
-    <main
-      className="min-h-screen"
-      style={{
-        backgroundColor: "var(--smh-ink)",
-        color: "var(--smh-text)",
-      }}
-    >
-      <ChampagneHeroGilded />
-    </main>
-  );
+  return <GildedWavesHero />;
 }

@@ -1,0 +1,126 @@
+:root {
+  /* rely on existing tokens; no hard hexes */
+}
+
+.gilded-hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 72vh;
+  display: grid;
+  align-items: center;
+  padding: clamp(24px, 8vw, 80px);
+  background: var(--smh-gradient);
+  overflow: hidden;
+}
+
+.gilded-waves {
+  position: absolute;
+  inset: 0;
+  background-image: var(--wave-bg);
+  background-size: cover;
+  background-position: center;
+  -webkit-mask-image: var(--wave-mask);
+  mask-image: var(--wave-mask);
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.gilded-motion {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: screen;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.gilded-grain {
+  position: absolute;
+  inset: 0;
+  background-image: var(--grain);
+  background-size: cover;
+  mix-blend-mode: soft-light;
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.gilded-content {
+  position: relative;
+  z-index: 2;
+  color: var(--smh-text);
+  max-width: 58ch;
+  filter: drop-shadow(0 4px 24px rgba(0, 0, 0, 0.25));
+}
+
+.gilded-content h1 {
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  font-family: var(--font-playfair, "Playfair Display"), Georgia, serif;
+}
+
+.gilded-content p {
+  margin-top: 16px;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  font-family: var(--font-inter, "Inter"), system-ui, sans-serif;
+}
+
+.gilded-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.cta-primary {
+  background: var(--smh-gradient);
+  color: var(--smh-white);
+}
+
+.cta-ghost {
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(6px);
+  color: var(--smh-white);
+}
+
+.cta:hover {
+  transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+  .gilded-hero {
+    padding: clamp(24px, 6vw, 48px);
+  }
+
+  .gilded-content {
+    text-align: center;
+    align-self: center;
+  }
+
+  .gilded-ctas {
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gilded-motion {
+    display: none;
+  }
+}
