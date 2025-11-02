@@ -1,19 +1,11 @@
-import ChampagneHeroGilded from "@/components/home/ChampagneHeroGilded";
+import dynamic from "next/dynamic";
 
-export const metadata = {
-  title: "Preview: Gilded Champagne Hero",
-};
+const HeroGilded = dynamic(() => import("@/components/preview/HeroGilded"), {
+  ssr: false,
+});
+
+export const metadata = { title: "Hero Gilded Preview • Champagne" };
 
 export default function Page() {
-  return (
-    <main
-      className="min-h-screen"
-      style={{
-        backgroundColor: "var(--smh-ink)",
-        color: "var(--smh-text)",
-      }}
-    >
-      <ChampagneHeroGilded />
-    </main>
-  );
+  return <HeroGilded />;
 }

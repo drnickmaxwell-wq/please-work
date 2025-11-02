@@ -24,6 +24,43 @@
   opacity: var(--lux-gold-opacity, 0.14);
 }
 
+/* PREVIEW waves, sits under motion but above gradient */
+.preview-hero .waves-bg {
+  position: absolute;
+  inset: 0;
+  background-image: var(--waves-bg);
+  background-size: cover;
+  background-position: center;
+  opacity: 0.28;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.preview-hero .waves-mask {
+  position: absolute;
+  inset: 0;
+  -webkit-mask-image: var(--waves-mask);
+  mask-image: var(--waves-mask);
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  background: linear-gradient(
+    135deg,
+    var(--smh-primary-magenta) 0%,
+    var(--smh-primary-teal) 60%,
+    var(--smh-accent-gold) 100%
+  );
+  mix-blend-mode: soft-light;
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* keep existing motion layers above this (z 3+) and grain above content (z 4+) */
+
 .preview-hero-gilded .hero-cta-group {
   gap: clamp(0.75rem, 3vw, 1rem);
   width: min(100%, 32rem);
