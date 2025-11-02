@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 import { getHeroLayers } from "@/lib/brand/manifest";
 
@@ -11,6 +11,99 @@ type MotionSource = {
   poster?: string;
 };
 
+function useReducedMotionPref() {
+  const [reduced, setReduced] = React.useState(false);
+
+  React.useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReduced(!!mq.matches);
+    update();
+    mq.addEventListener?.("change", update);
+    return () => mq.removeEventListener?.("change", update);
+  }, []);
+
+  return reduced;
+}
+
+function CrossFadeVideo({
+  src,
+  className,
+  fadeSec = 0.6,
+}: {
+  src: string;
+  className?: string;
+  fadeSec?: number;
+}) {
+  const a = React.useRef<HTMLVideoElement>(null);
+  const b = React.useRef<HTMLVideoElement>(null);
+  const [onA, setOnA] = React.useState(true);
+  const fade = Math.max(120, Math.floor(fadeSec * 1000));
+
+  React.useEffect(() => {
+    const A = a.current;
+    const B = b.current;
+    if (!A || !B) return;
+
+    const prime = (vid: HTMLVideoElement, d: number) => {
+      vid.currentTime = Math.max(0, d - fade / 1000);
+      vid.muted = true;
+    };
+
+    const sync = (vid: HTMLVideoElement) => {
+      const d = vid.duration || 0;
+      if (d) prime(vid, d);
+    };
+
+    const onEndedA = () => {
+      setOnA(false);
+      if (B.duration) A.currentTime = 0;
+    };
+
+    const onEndedB = () => {
+      setOnA(true);
+      if (A.duration) B.currentTime = 0;
+    };
+
+    A.addEventListener("loadedmetadata", () => sync(B));
+    B.addEventListener("loadedmetadata", () => sync(A));
+    A.addEventListener("ended", onEndedA);
+    B.addEventListener("ended", onEndedB);
+    A.play().catch(() => {});
+    B.play().catch(() => {});
+
+    return () => {
+      A.removeEventListener("ended", onEndedA);
+      B.removeEventListener("ended", onEndedB);
+    };
+  }, [fade]);
+
+  return (
+    <div
+      className={`cfv ${className ?? ""}`}
+      style={{ ["--cfv-fade" as const]: `${fade}ms` }}
+    >
+      <video
+        ref={a}
+        className={`cfv-vid ${onA ? "on" : ""}`}
+        playsInline
+        muted
+        preload="auto"
+        loop
+        src={src}
+      />
+      <video
+        ref={b}
+        className={`cfv-vid ${!onA ? "on" : ""}`}
+        playsInline
+        muted
+        preload="auto"
+        loop
+        src={src}
+      />
+    </div>
+  );
+}
+
 function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);
 }
@@ -19,6 +112,7 @@ export default function ChampagneHeroGilded() {
   const heroRef = useRef<HTMLElement | null>(null);
   const [layers, setLayers] = useState<HeroLayers | null>(null);
   const [reduceMotion, setReduceMotion] = useState(false);
+  const reduced = useReducedMotionPref();
 
   useEffect(() => {
     let isMounted = true;
@@ -192,7 +286,7 @@ export default function ChampagneHeroGilded() {
       <div className="hero-gradient-base gradient-base" />
 
       <div
-        className="hero-wave-mask parallax-1"
+        className="hero-waves-bg"
         style={{
           backgroundImage: layers?.waves?.background
             ? `url('${layers.waves.background}')`
@@ -200,25 +294,28 @@ export default function ChampagneHeroGilded() {
         }}
       />
 
-      {!reduceMotion && (
-        <>
-          <div className="hero-wave-caustics parallax-1">
-            <video autoPlay loop muted playsInline preload="auto">
-              <source
-                src="/assets/champagne/motion/wave-caustics.webm"
-                type="video/webm"
-              />
-            </video>
-          </div>
+      <div
+        className="hero-wave-mask parallax-1"
+        style={{
+          backgroundImage: layers?.waves?.mask
+            ? `url('${layers.waves.mask}')`
+            : undefined,
+        }}
+      />
 
-          <div className="hero-glass-shimmer">
-            <video autoPlay loop muted playsInline preload="auto">
-              <source
-                src="/assets/champagne/motion/glass-shimmer.webm"
-                type="video/webm"
-              />
-            </video>
-          </div>
+      {!reduceMotion && !reduced && (
+        <>
+          <CrossFadeVideo
+            className="hero-wave-caustics parallax-1"
+            src="/assets/champagne/motion/wave-caustics.webm"
+            fadeSec={0.6}
+          />
+
+          <CrossFadeVideo
+            className="hero-glass-shimmer"
+            src="/assets/champagne/motion/glass-shimmer.webm"
+            fadeSec={0.6}
+          />
 
           <div className="hero-particles-drift">
             <video autoPlay loop muted playsInline preload="auto">
@@ -229,14 +326,11 @@ export default function ChampagneHeroGilded() {
             </video>
           </div>
 
-          <div className="hero-gold-dust-drift parallax-2 lux-gold">
-            <video autoPlay loop muted playsInline preload="auto">
-              <source
-                src="/assets/champagne/particles/gold-dust-drift.webm"
-                type="video/webm"
-              />
-            </video>
-          </div>
+          <CrossFadeVideo
+            className="hero-gold-dust-drift parallax-2 lux-gold"
+            src="/assets/champagne/motion/gold-dust-drift.webm"
+            fadeSec={0.6}
+          />
 
           {particleSources.map(({ src, poster }) => (
             <div className="hero-particles-drift" key={src}>

@@ -58,3 +58,65 @@
     transform: none !important;
   }
 }
+
+/* Ensure both layers fill and never show seams */
+.champagne-hero--gilded .hero-waves-bg,
+.champagne-hero--gilded .hero-wave-mask {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  pointer-events: none;
+  backface-visibility: hidden;
+}
+
+/* Background arc texture (sits under motion) */
+.champagne-hero--gilded .hero-waves-bg {
+  background-image: url("/assets/champagne/waves/wave-bg.webp");
+  opacity: 0.85;
+  mix-blend-mode: soft-light;
+  z-index: 2; /* below mask, above gradient */
+}
+
+/* Mask overlay (matches home look) */
+.champagne-hero--gilded .hero-wave-mask {
+  background-image: url("/assets/champagne/waves/wave-mask-desktop.webp");
+  opacity: 0.9;
+  mix-blend-mode: soft-light;
+  z-index: 3;
+}
+
+/* Seam guard on some GPUs (avoids the 1px right-edge line) */
+.champagne-hero--gilded .hero-waves-bg,
+.champagne-hero--gilded .hero-wave-mask {
+  transform: translateZ(0); /* create a stable layer */
+}
+
+/* Cross-fade visuals */
+.cfv {
+  position: absolute;
+  inset: 0;
+}
+
+.cfv-vid {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity var(--cfv-fade, 600ms) ease-in-out;
+  will-change: opacity;
+}
+
+.cfv-vid.on {
+  opacity: 1;
+}
+
+/* Gold enrichment without changing particle size */
+.champagne-hero--gilded .hero-gold-dust-drift {
+  filter: saturate(1.12) brightness(1.06);
+  opacity: clamp(0.12, 2vw, 0.22);
+  mix-blend-mode: screen;
+}
