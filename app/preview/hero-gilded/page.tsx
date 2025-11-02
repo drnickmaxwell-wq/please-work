@@ -1,19 +1,8 @@
-import ChampagneHeroGilded from "@/components/home/ChampagneHeroGilded";
+import HeroGildedPreview from "@/components/preview/HeroGildedPreview";
 
-export const metadata = {
-  title: "Preview: Gilded Champagne Hero",
-};
+export const metadata = { title: "Hero Gilded Preview · Champagne" };
 
 export default function Page() {
-  return (
-    <main
-      className="min-h-screen"
-      style={{
-        backgroundColor: "var(--smh-ink)",
-        color: "var(--smh-text)",
-      }}
-    >
-      <ChampagneHeroGilded />
-    </main>
-  );
+  // Server component can return a client component directly.
+  return <HeroGildedPreview />;
 }

@@ -2,7 +2,20 @@
 
 import React from "react";
 
-export default function ChampagneHero() {
+export type ChampagneHeroProps = {
+  previewOverride?: boolean;
+};
+
+export default function ChampagneHero({
+  previewOverride,
+}: ChampagneHeroProps = {}) {
+  const enabled =
+    previewOverride === true ||
+    process.env.NEXT_PUBLIC_FEATURE_BRAND_HERO === "true";
+
+  if (!enabled) {
+    return null;
+  }
   const reduceMotion =
     typeof window !== "undefined" &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
