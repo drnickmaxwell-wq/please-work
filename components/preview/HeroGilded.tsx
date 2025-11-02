@@ -555,6 +555,11 @@ export default function PreviewHeroGilded() {
   const waveMaskUrl =
     layers?.waveMask ?? "/assets/champagne/waves/wave-mask-desktop.webp";
   const waveBgUrl = layers?.waveBg ?? "/assets/champagne/waves/wave-bg.webp";
+  const safeUrl = (u?: string) => (u && u.startsWith("/")) ? u : undefined;
+  const resolvedMask =
+    safeUrl(waveMaskUrl) ?? "/assets/champagne/waves/wave-mask-desktop.webp";
+  const resolvedBg =
+    safeUrl(waveBgUrl) ?? "/assets/champagne/waves/wave-bg.webp";
 
   return (
     <section
@@ -564,13 +569,6 @@ export default function PreviewHeroGilded() {
       data-smoothing="preview"
     >
       <div className="hero-gradient-base gradient-base" />
-
-      <div
-        className="hero-wave-mask parallax-1"
-        style={{
-          backgroundImage: `url(${waveBgUrl}), url(${waveMaskUrl})`,
-        }}
-      />
 
       {!reduceMotion && (
         <>
@@ -612,6 +610,17 @@ export default function PreviewHeroGilded() {
           ))}
         </>
       )}
+
+      <div
+        className="hero-waves-bg"
+        aria-hidden="true"
+        style={{ backgroundImage: `url("${resolvedBg}")` }}
+      />
+      <div
+        className="hero-wave-mask parallax-1"
+        aria-hidden="true"
+        style={{ backgroundImage: `url("${resolvedMask}")` }}
+      />
 
       <div className="hero-particles-static" />
 

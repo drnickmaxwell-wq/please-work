@@ -58,3 +58,29 @@
     transform: none !important;
   }
 }
+
+/* Keep it append-only. Preview-only selectors. */
+.preview-hero-gilded .hero-waves-bg,
+.preview-hero-gilded .hero-wave-mask {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Gentle overlay for the wave background image */
+.preview-hero-gilded .hero-waves-bg {
+  mix-blend-mode: overlay;
+  opacity: 0.26; /* subtle but visible; adjustable later via tuning panel */
+  z-index: 2;    /* sits above gradient base */
+}
+
+/* Soft-light mask for extra structure */
+.preview-hero-gilded .hero-wave-mask {
+  mix-blend-mode: soft-light;
+  opacity: 0.18;
+  z-index: 3;    /* above bg and below motion */
+}
+
+/* Do not scale particles here; keep their existing size. */
