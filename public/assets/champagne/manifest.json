@@ -5,7 +5,19 @@
   "designSystem": "St Mary's House Champagne Design System",
   "lastUpdated": "2025-11-01",
   "author": "Manus AI",
-  
+
+  "waves": {
+    "bg": "/assets/champagne/waves/waves-bg-2560.webp",
+    "mask": "/assets/champagne/waves/wave-mask-desktop.webp"
+  },
+  "motion": {
+    "goldDust": "/assets/champagne/motion/gold-dust-drift.webm",
+    "particles": "/assets/champagne/motion/particles-drift.webm"
+  },
+  "textures": {
+    "filmGrain": "/assets/champagne/textures/home-hero-film-grain.webp"
+  },
+
   "tokens": {
     "colors": {
       "brandMagenta": "#C2185B",

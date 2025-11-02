@@ -1,0 +1,6 @@
+/* No hard hex. Everything inherits brand tokens. */
+.smh-gold-button {
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--smh-accent-gold), transparent 10%),
+    0 0 24px color-mix(in oklab, var(--smh-accent-gold), transparent 82%);
+}

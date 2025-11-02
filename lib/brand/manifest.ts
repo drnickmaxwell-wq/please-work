@@ -1,44 +1,20 @@
-export type BrandManifest = {
-  name: string;
-  gradientVar?: string;
-  goldVar?: string;
-  waves: ManifestWaves;
-  textures: ManifestTextures;
-  particles?: ManifestParticles;
-  gradient?: unknown;
-  gold?: unknown;
-  typography?: unknown;
-  tokens?: string;
-  version?: string;
-  static?: unknown;
-  dynamic?: unknown;
+export type ChampagneManifest = {
+  gradient?: string;
+  waves: { bg: string; mask: string };
+  motion: { particles?: string; goldDust?: string };
+  textures?: { filmGrain?: string; glassSoft?: string };
 };
 
-type ManifestWaves = {
-  mask: string;
-  background?: string;
-  [key: string]: string | undefined;
-};
+const MANIFEST_PATH = "/assets/champagne/manifest.json";
 
-type ManifestTextures = {
-  filmGrain: string;
-  glassSoft: string;
-  [key: string]: string;
-};
+let manifestCache: ChampagneManifest | null = null;
+let manifestPromise: Promise<ChampagneManifest> | null = null;
 
-type ManifestParticles = {
-  soft?: string;
-  poster?: string;
-  [key: string]: string | undefined;
-};
+export async function loadBrandManifest(): Promise<ChampagneManifest> {
+  if (manifestCache) {
+    return manifestCache;
+  }
 
-const MANIFEST_PATH = "/brand/manifest.json";
-
-let manifestCache: BrandManifest | null = null;
-let manifestPromise: Promise<BrandManifest> | null = null;
-
-export async function getBrandManifest(): Promise<BrandManifest> {
-  if (manifestCache) return manifestCache;
   if (!manifestPromise) {
     manifestPromise = fetchManifest().then((manifest) => {
       manifestCache = manifest;
@@ -47,21 +23,6 @@ export async function getBrandManifest(): Promise<BrandManifest> {
   }
 
   return manifestPromise;
-}
-
-export async function getWaves(): Promise<ManifestWaves> {
-  const manifest = await getBrandManifest();
-  return manifest.waves;
-}
-
-export async function getTextures(): Promise<ManifestTextures> {
-  const manifest = await getBrandManifest();
-  return manifest.textures;
-}
-
-export async function getParticles(): Promise<ManifestParticles | undefined> {
-  const manifest = await getBrandManifest();
-  return manifest.particles;
 }
 
 function resolveManifestUrl() {
@@ -82,6 +43,7 @@ function resolveManifestUrl() {
     const base = VERCEL_URL.includes("://")
       ? VERCEL_URL
       : `https://${VERCEL_URL}`;
+
     return new URL(MANIFEST_PATH, base).toString();
   }
 
@@ -92,13 +54,13 @@ function ensureProtocol(url: string) {
   return url.includes("://") ? url : `https://${url}`;
 }
 
-async function fetchManifest(): Promise<BrandManifest> {
+async function fetchManifest(): Promise<ChampagneManifest> {
   const manifestUrl = resolveManifestUrl();
-  const response = await fetch(manifestUrl);
+  const response = await fetch(manifestUrl, { cache: "force-cache" });
 
   if (!response.ok) {
     throw new Error(`Failed to load brand manifest from ${manifestUrl}`);
   }
 
-  return (await response.json()) as BrandManifest;
+  return (await response.json()) as ChampagneManifest;
 }

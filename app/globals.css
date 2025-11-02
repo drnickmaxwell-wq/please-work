@@ -1,4 +1,5 @@
 @import "@/styles/tokens/smh-champagne-tokens.css";
+@import "@/styles/champagne/hero-core.css";
 @import "@/styles/champagne/surface.css";
 /* glass & motion layers should come after surface */
 @import "@/styles/champagne/glass.css";
