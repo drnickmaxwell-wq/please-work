@@ -20,6 +20,8 @@
     "verify:visual": "pnpm exec playwright test preview/brand-live.spec.ts",
     "hue:capture": "node scripts/capture-gradient.cjs",
     "hue:lock": "node scripts/lock-gradient.cjs",
+    "guard:hero": "node scripts/guard-hero-freeze.mjs",
+    "guard:hero:baseline": "node scripts/guard-hero-freeze.mjs --write-baseline",
     "prepush": "pnpm run brand:guard && pnpm run verify:hue && pnpm test:brand",
     "prepare": "husky",
     "test:brand": "pnpm exec playwright test tests/brand-lux.spec.ts"
