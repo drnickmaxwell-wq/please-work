@@ -439,6 +439,27 @@ export default function PreviewHeroGilded() {
   }, []);
 
   useEffect(() => {
+    const root = document.querySelector<HTMLElement>(".champagne-hero");
+    if (!root) {
+      return;
+    }
+
+    const onScroll = () => {
+      const y = window.scrollY;
+      const fade = Math.min(1, y / 300);
+      root.style.setProperty("--scroll-fade", fade.toFixed(2));
+    };
+
+    window.addEventListener("scroll", onScroll);
+    onScroll();
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      root.style.removeProperty("--scroll-fade");
+    };
+  }, []);
+
+  useEffect(() => {
     if (reduceMotion) {
       const node = heroRef.current;
       node?.style.removeProperty("--parallax-1");
@@ -508,7 +529,7 @@ export default function PreviewHeroGilded() {
         .querySelectorAll<HTMLVideoElement>(".hero-motion video")
         .forEach((video) => {
           if (
-            video.parentElement?.querySelector(":scope > video.fade-mirror")
+            video.parentElement?.querySelector(":scope > video.fade-clone")
           ) {
             return;
           }
@@ -602,6 +623,8 @@ export default function PreviewHeroGilded() {
             : undefined,
         }}
       />
+
+      <div className="hero-caustic-reflection" aria-hidden="true" />
 
       <div className="hero-content">
         <div className="hero-content-wrapper">
