@@ -5,6 +5,7 @@
   "scripts": {
     "guard:hero": "node scripts/guard-hero-freeze.mjs",
     "guard:hero:baseline": "node scripts/guard-hero-freeze.mjs --write-baseline",
+    "hero:check": "node scripts/hero-layer-audit.mjs",
     "lint": "eslint . --max-warnings=0",
     "dev": "next dev",
     "build": "next build",
