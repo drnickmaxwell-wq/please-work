@@ -1,35 +1,38 @@
 import {
-  getBrandManifest,
-  getParticles as loadParticles,
+  loadBrandManifest,
+  getMotion as loadMotion,
   getTextures as loadTextures,
   getWaves as loadWaves,
+  type ChampagneManifest,
 } from "@/lib/brand/manifest";
 
+export type { ChampagneManifest };
+
 export {
-  getBrandManifest,
-  loadParticles as getParticles,
+  loadBrandManifest as getBrandManifest,
+  loadMotion as getMotion,
   loadTextures as getTextures,
   loadWaves as getWaves,
 };
 
 export async function getHeroLayers() {
-  const [textures, waves, particles] = await Promise.all([
-    loadTextures(),
-    loadWaves(),
-    loadParticles(),
-  ]);
+  const manifest = await loadBrandManifest();
+  const textures = manifest.textures ?? {};
+  const waves = manifest.waves ?? { bg: "", mask: "" };
+  const motion = manifest.motion ?? {};
 
-  const particleSources: Array<{ src: string; poster?: string }> = [];
-
-  if (particles?.soft) {
-    particleSources.push({ src: particles.soft, poster: particles.poster });
-  }
+  const primaryMotion =
+    typeof motion.goldDust === "string"
+      ? motion.goldDust
+      : typeof motion.particles === "string"
+        ? motion.particles
+        : null;
 
   return {
-    filmGrain: textures.filmGrain,
-    glassSoft: textures.glassSoft,
-    waveBg: waves.background ?? textures.glassSoft,
-    waveMask: waves.mask,
-    particles: particleSources,
+    filmGrain: textures.filmGrain ?? "",
+    glassSoft: textures.glassSoft ?? "",
+    waveBg: waves.bg ?? "",
+    waveMask: waves.mask ?? "",
+    particles: primaryMotion ? [{ src: primaryMotion }] : [],
   };
 }

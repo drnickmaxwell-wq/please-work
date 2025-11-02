@@ -32,7 +32,32 @@
       "goldGlow": "0 0 12px rgba(212, 175, 55, 0.4), 0 0 24px rgba(212, 175, 55, 0.2)"
     }
   },
-  
+
+  "gradient": "var(--smh-gradient)",
+  "waves": {
+    "bg": "/assets/champagne/waves/waves-bg-2560.webp",
+    "mask": "/assets/champagne/waves/wave-mask-desktop.webp",
+    "mobileMask": "/assets/champagne/waves/wave-mask-mobile.webp"
+  },
+  "motion": {
+    "goldDust": "/assets/champagne/motion/gold-dust-drift.webm",
+    "particles": "/assets/champagne/motion/particles-drift.webm",
+    "settings": {
+      "videoFormat": "webm",
+      "codec": "vp9",
+      "alphaChannel": true,
+      "maxFileSize": "4MB",
+      "fps": 24,
+      "loop": true,
+      "autoplay": true,
+      "muted": true,
+      "playsInline": true
+    }
+  },
+  "textures": {
+    "filmGrain": "/assets/champagne/textures/home-hero-film-grain.webp"
+  },
+
   "layers": [
     {
       "id": 1,
@@ -147,17 +172,7 @@
     "easing": "cubic-bezier(0.65, 0, 0.35, 1)"
   },
   
-  "motion": {
-    "videoFormat": "webm",
-    "codec": "vp9",
-    "alphaChannel": true,
-    "maxFileSize": "4MB",
-    "fps": 24,
-    "loop": true,
-    "autoplay": true,
-    "muted": true,
-    "playsInline": true
-  },
+
   
   "accessibility": {
     "contrast": "AA",

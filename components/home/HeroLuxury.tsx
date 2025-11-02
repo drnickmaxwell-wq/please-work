@@ -1,41 +1,24 @@
 "use client";
 
-import type { CSSProperties } from "react";
-import { useEffect, useMemo, useState } from "react";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
-import { getBrandManifest } from "@/app/brand";
-
-type HeroAssets = {
-  waveMask?: string;
-  filmGrain?: string;
-  glassSoft?: string;
-};
-
-const BRAND_HERO_ENABLED = Boolean(process.env.NEXT_PUBLIC_FEATURE_BRAND_HERO);
+import { loadBrandManifest, type ChampagneManifest } from "@/lib/brand/manifest";
 
 export default function HeroLuxury() {
-  const [assets, setAssets] = useState<HeroAssets>({});
+  const [m, setM] = useState<ChampagneManifest | null>(null);
 
   useEffect(() => {
-    if (!BRAND_HERO_ENABLED) {
-      return;
-    }
-
     let mounted = true;
 
-    getBrandManifest()
+    loadBrandManifest()
       .then((manifest) => {
         if (!mounted) return;
-        setAssets({
-          waveMask: manifest.waves?.mask,
-          filmGrain: manifest.textures?.filmGrain,
-          glassSoft: manifest.textures?.glassSoft,
-        });
+        setM(manifest);
       })
-      .catch((error) => {
-        if (process.env.NODE_ENV !== "production") {
-          console.error("Failed to load brand manifest", error);
-        }
+      .catch(() => {
+        if (!mounted) return;
+        setM(null);
       });
 
     return () => {
@@ -43,56 +26,105 @@ export default function HeroLuxury() {
     };
   }, []);
 
-  const waveMaskStyle = useMemo(() => {
-    if (!assets.waveMask) return undefined;
-
-    return {
-      "--wave-mask-url": `url(${assets.waveMask})`,
-    } as CSSProperties;
-  }, [assets.waveMask]);
-
-  const glassStyle = useMemo(() => {
-    if (!assets.glassSoft) return undefined;
-
-    return {
-      "--hero-glass-url": `url(${assets.glassSoft})`,
-    } as CSSProperties;
-  }, [assets.glassSoft]);
-
-  const grainStyle = useMemo(() => {
-    if (!assets.filmGrain) return undefined;
-
-    return {
-      "--hero-grain-url": `url(${assets.filmGrain})`,
-    } as CSSProperties;
-  }, [assets.filmGrain]);
-
-  if (!BRAND_HERO_ENABLED) {
-    return null;
-  }
+  const motionSrc = m?.motion?.goldDust ?? m?.motion?.particles ?? null;
 
   return (
-    <section className="heroRoot">
-      <div className="heroWaveMask" style={waveMaskStyle} />
-      <div className="heroGlass" style={glassStyle} />
-      <div className="heroGrain" style={grainStyle} />
-      <div className="heroContent">
-        <div className="card">
-          <h1>Going the Extra Smile</h1>
-          <p>
-            Private dental care with calm precision, comfort-first technology,
-            and a signature Manus AI finish.
+    <section
+      aria-label="Champagne Hero"
+      className="relative overflow-hidden min-h-[72vh] md:min-h-[78vh] flex items-center"
+    >
+      <div
+        className="absolute inset-0"
+        style={{
+          background: "var(--smh-gradient)",
+        }}
+        aria-hidden="true"
+      />
+
+      {m?.waves?.bg && (
+        <Image
+          src={m.waves.bg}
+          alt=""
+          fill
+          priority
+          className="object-cover pointer-events-none"
+        />
+      )}
+
+      {m?.waves?.mask && (
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            WebkitMaskImage: `url(${m.waves.mask})`,
+            maskImage: `url(${m.waves.mask})`,
+            WebkitMaskSize: "cover",
+            maskSize: "cover",
+            WebkitMaskRepeat: "no-repeat",
+            maskRepeat: "no-repeat",
+            WebkitMaskPosition: "center",
+            maskPosition: "center",
+            opacity: 0.9,
+          }}
+          aria-hidden="true"
+        />
+      )}
+
+      {motionSrc ? (
+        <video
+          className="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-25"
+          autoPlay
+          muted
+          loop
+          playsInline
+          aria-hidden="true"
+        >
+          <source src={motionSrc} type="video/webm" />
+        </video>
+      ) : null}
+
+      {m?.textures?.filmGrain && (
+        <Image
+          src={m.textures.filmGrain}
+          alt=""
+          fill
+          priority={false}
+          className="object-cover opacity-[.08] mix-blend-soft-light pointer-events-none"
+        />
+      )}
+
+      <div className="relative mx-auto w-full max-w-5xl px-6 sm:px-8">
+        <div className="max-w-2xl">
+          <p className="tracking-[.2em] text-xs font-medium text-[color:var(--smh-text)]/80 mb-2">
+            ST MARY’S HOUSE
           </p>
-          <nav className="ctaRow">
-            <a className="btnPrimary" href="/contact">
+          <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl leading-tight text-[color:var(--smh-text)] drop-shadow-[0_1px_0_rgba(0,0,0,.2)]">
+            Your Luxury Smile Awaits
+          </h1>
+          <p className="mt-3 text-[15px] sm:text-base text-[color:var(--smh-text)]/85 max-w-xl">
+            Private dental care with calm precision, comfort-first technology, and a signature Manus AI finish.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3 sm:gap-4">
+            <a
+              className="smh-gold-button inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium bg-white/80 hover:bg-white transition"
+              href="/contact"
+            >
               Book a consultation
             </a>
-            <a className="btnGhost" href="/treatments">
+            <a
+              className="smh-gold-button inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium bg-transparent backdrop-blur-md hover:bg-white/20 transition"
+              href="/treatments"
+            >
               Explore treatments
             </a>
-          </nav>
+          </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @media (prefers-reduced-motion: reduce) {
+          video { display: none; }
+        }
+      `}</style>
     </section>
   );
 }
