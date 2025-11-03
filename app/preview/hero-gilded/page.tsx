@@ -1,5 +1,6 @@
 import PreviewHeroGilded from "@/components/preview/HeroGilded";
 import "@/styles/champagne/hero-gilded-tweaks.css";
+import "@/styles/champagne/hero-polish.css";
 
 export const metadata = {
   title: "Preview: Gilded Champagne Hero",

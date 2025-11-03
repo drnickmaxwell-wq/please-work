@@ -1,0 +1,9 @@
+/* Preview-only polish hooks — append-only. */
+.preview-hero-gilded .lux-gold,
+.preview-hero-gilded .hero-gold-dust-drift,
+.preview-hero-gilded .hero-particles-drift,
+.preview-hero-gilded .hero-film-grain,
+.preview-hero-gilded .hero-waves-bg,
+.preview-hero-gilded .hero-wave-mask {
+  /* reserved for polish */
+}
