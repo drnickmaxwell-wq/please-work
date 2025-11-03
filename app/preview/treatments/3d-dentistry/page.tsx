@@ -1,6 +1,7 @@
 // Preview-only clone. No hard hexes. Do not edit production pages.
 import Link from 'next/link';
 
+import TreatmentBanner from '@/components/preview/TreatmentBanner';
 import '@/styles/treatments/preview-light.css';
 
 const benefits = [
@@ -75,19 +76,11 @@ export default function ThreeDDentistryPreviewPage() {
           </ol>
         </nav>
 
-        <header className="space-y-4">
-          <p className="text-sm uppercase tracking-[0.3em] text-[var(--champagne-ink-muted)]">Treatments</p>
-          <h1
-            className="text-4xl font-semibold leading-tight sm:text-5xl"
-            style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
-          >
-            3D digital dentistry
-          </h1>
-          <p className="max-w-3xl text-lg leading-relaxed t-muted">
-            Experience contactless scanning, AI-guided planning, and on-site 3D printing that deliver a smoother, faster
-            appointment. Every stage is choreographed for precision and calm.
-          </p>
-        </header>
+        <TreatmentBanner
+          label="Treatments"
+          subtitle="Experience contactless scanning, AI-guided planning, and on-site 3D printing that deliver a smoother, faster appointment. Every stage is choreographed for precision and calm."
+          title="3D digital dentistry"
+        />
 
         <section className="t-section rounded-3xl p-8 shadow-sm">
           <div className="flex flex-col gap-6">

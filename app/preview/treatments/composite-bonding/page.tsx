@@ -1,6 +1,7 @@
 // Preview-only clone. No hard hexes. Do not edit production pages.
 import Link from 'next/link';
 
+import TreatmentBanner from '@/components/preview/TreatmentBanner';
 import '@/styles/treatments/preview-light.css';
 
 const highlights = [
@@ -75,19 +76,11 @@ export default function CompositeBondingPreviewPage() {
           </ol>
         </nav>
 
-        <header className="space-y-4">
-          <p className="text-sm uppercase tracking-[0.3em] text-[var(--champagne-ink-muted)]">Treatments</p>
-          <h1
-            className="text-4xl font-semibold leading-tight sm:text-5xl"
-            style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
-          >
-            Composite bonding artistry
-          </h1>
-          <p className="max-w-3xl text-lg leading-relaxed t-muted">
-            Guided artistry layered over a calm coastal setting. Every detail—gloss, hue, texture—is tuned to your natural tooth
-            anatomy for a luminous, camera-ready finish.
-          </p>
-        </header>
+        <TreatmentBanner
+          label="Treatments"
+          subtitle="Guided artistry layered over a calm coastal setting. Every detail—gloss, hue, texture—is tuned to your natural tooth anatomy for a luminous, camera-ready finish."
+          title="Composite bonding artistry"
+        />
 
         <section className="t-section rounded-3xl p-8 shadow-sm">
           <div className="flex flex-col gap-6">

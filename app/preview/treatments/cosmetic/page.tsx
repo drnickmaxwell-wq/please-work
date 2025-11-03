@@ -1,6 +1,7 @@
 // Preview-only clone. No hard hexes. Do not edit production pages.
 import Link from 'next/link';
 
+import TreatmentBanner from '@/components/preview/TreatmentBanner';
 import '@/styles/treatments/preview-light.css';
 
 export default function CosmeticPreviewPage() {
@@ -27,19 +28,11 @@ export default function CosmeticPreviewPage() {
           </ol>
         </nav>
 
-        <header className="space-y-4">
-          <p className="text-sm uppercase tracking-[0.3em] text-[var(--champagne-ink-muted)]">Treatments</p>
-          <h1
-            className="text-4xl font-semibold leading-tight sm:text-5xl"
-            style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
-          >
-            Cosmetic dentistry preview
-          </h1>
-          <p className="max-w-3xl text-lg leading-relaxed t-muted">
-            Scaffold content for the upcoming cosmetic dentistry journey. The production route remains untouched while this
-            preview hosts copy, imagery, and schema experiments in the Champagne palette.
-          </p>
-        </header>
+        <TreatmentBanner
+          label="Treatments"
+          subtitle="Scaffold content for the upcoming cosmetic dentistry journey. The production route remains untouched while this preview hosts copy, imagery, and schema experiments in the Champagne palette."
+          title="Cosmetic dentistry preview"
+        />
 
         <section className="t-section rounded-3xl p-8 shadow-sm">
           <p className="leading-relaxed t-muted">
