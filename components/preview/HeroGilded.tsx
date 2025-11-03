@@ -634,22 +634,6 @@ export default function PreviewHeroGilded() {
       <div className="hero-caustic-reflection" aria-hidden="true" />
 
       <div className="hero-content">
-        {/* Preview-only control, no SSR impact */}
-        <div className="preview-toggles" aria-hidden="true">
-          <label className="gold-boost-toggle">
-            <input
-              type="checkbox"
-              id="goldBoost"
-              onChange={(e) =>
-                document.documentElement.style.setProperty(
-                  "--gold-boost",
-                  e.target.checked ? "1" : "0",
-                )
-              }
-            />
-            <span>Gold boost</span>
-          </label>
-        </div>
         <div className="hero-content-wrapper">
           <h1 id="hero-gilded-title">Gilded Light, Calm Precision</h1>
           <p>
