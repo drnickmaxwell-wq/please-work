@@ -585,6 +585,8 @@ export default function PreviewHeroGilded() {
             src="/assets/champagne/motion/glass-shimmer.webm"
           />
 
+          <div className="lux-gold-tint" aria-hidden="true" />
+
           <CrossFadeLoop
             className="hero-particles-drift"
             src="/assets/champagne/motion/particles-drift.webm"
