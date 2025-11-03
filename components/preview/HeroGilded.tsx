@@ -596,6 +596,11 @@ export default function PreviewHeroGilded() {
             src="/assets/champagne/particles/gold-dust-drift.webm"
           />
 
+          <div
+            className="hero-gold-dust-drift hero-gold-dust-drift--alt lux-gold"
+            aria-hidden="true"
+          />
+
           {particleSources.map(({ src, poster }) => (
             <div className="hero-particles-drift hero-motion" key={src}>
               <video

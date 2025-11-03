@@ -7,3 +7,47 @@
 .preview-hero-gilded .hero-wave-mask {
   /* reserved for polish */
 }
+
+/* Crossfade the two gold layers so loop seams are less visible */
+@keyframes goldCrossfadeA {
+  0%,
+  45% {
+    opacity: 0.08;
+  }
+
+  50%,
+  95% {
+    opacity: 0.02;
+  }
+
+  100% {
+    opacity: 0.08;
+  }
+}
+
+@keyframes goldCrossfadeB {
+  0%,
+  45% {
+    opacity: 0.02;
+  }
+
+  50%,
+  95% {
+    opacity: 0.08;
+  }
+
+  100% {
+    opacity: 0.02;
+  }
+}
+
+.preview-hero-gilded .hero-gold-dust-drift {
+  animation: goldCrossfadeA 8s ease-in-out infinite both;
+  /* never scale particles; just modulate presence */
+}
+
+.preview-hero-gilded .hero-gold-dust-drift--alt {
+  animation: goldCrossfadeB 8s ease-in-out infinite both;
+  mix-blend-mode: screen;
+  /* keep sheen, don’t over-brighten */
+}
