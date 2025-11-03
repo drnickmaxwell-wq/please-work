@@ -94,25 +94,25 @@ function MessageBubble({ message, isUser }: { message: ChatMessage; isUser: bool
         <div
           className={`px-4 py-3 rounded-2xl ${
             isUser
-              ? 'bg-gradient-to-r from-teal-500 to-teal-600 text-white ml-4'
-              : 'bg-white/90 backdrop-blur-sm text-gray-800 mr-4 shadow-lg border border-white/20'
+              ? 'lux-chat-user-bubble ml-4'
+              : 'lux-chat-assistant-bubble mr-4 text-[color:var(--chat-text)]'
           }`}
         >
           <p className="text-sm leading-relaxed">{message.content}</p>
-          <div className={`text-xs mt-2 ${isUser ? 'text-teal-100' : 'text-gray-500'}`}>
-            {new Date(message.timestamp).toLocaleTimeString([], { 
-              hour: '2-digit', 
-              minute: '2-digit' 
+          <div className={`text-xs mt-2 ${isUser ? 'lux-chat-user-meta' : 'lux-chat-assistant-meta'}`}>
+            {new Date(message.timestamp).toLocaleTimeString([], {
+              hour: '2-digit',
+              minute: '2-digit'
             })}
           </div>
         </div>
       </div>
-      
+
       {/* Avatar */}
       <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm ${
-        isUser 
-          ? 'bg-gradient-to-r from-teal-400 to-teal-500 text-white order-1 mr-2' 
-          : 'bg-gradient-to-r from-pink-400 to-pink-500 text-white order-2 ml-2'
+        isUser
+          ? 'lux-chat-avatar-user order-1 mr-2'
+          : 'lux-chat-avatar-assistant order-2 ml-2'
       }`}>
         {isUser ? '👤' : '🦷'}
       </div>
@@ -133,10 +133,10 @@ function QuickActionButton({
   color?: string;
 }) {
   const colorClasses = {
-    teal: 'from-teal-500 to-teal-600 hover:from-teal-400 hover:to-teal-500',
-    pink: 'from-pink-500 to-pink-600 hover:from-pink-400 hover:to-pink-500',
-    yellow: 'from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500',
-    purple: 'from-purple-500 to-purple-600 hover:from-purple-400 hover:to-purple-500',
+    teal: 'lux-chat-quick-action--teal',
+    pink: 'lux-chat-quick-action--pink',
+    yellow: 'lux-chat-quick-action--yellow',
+    purple: 'lux-chat-quick-action--purple',
   };
 
   return (
@@ -144,7 +144,7 @@ function QuickActionButton({
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       onClick={onClick}
-      className={`flex items-center gap-2 px-3 py-2 bg-gradient-to-r ${colorClasses[color as keyof typeof colorClasses]} text-white rounded-full text-xs font-medium shadow-lg transition-all duration-300`}
+      className={`flex items-center gap-2 px-3 py-2 lux-chat-quick-action ${colorClasses[color as keyof typeof colorClasses]} rounded-full text-xs font-medium transition-all duration-300`}
     >
       <Icon className="w-3 h-3" />
       {label}
@@ -267,7 +267,7 @@ export default function LuxuryChatbot() {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-gradient-to-r from-teal-500 to-pink-500 rounded-full shadow-2xl flex items-center justify-center text-white hover:shadow-3xl transition-all duration-300 overflow-hidden group"
+        className="lux-chat-launch-button fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 overflow-hidden group"
         style={{ display: isOpen ? 'none' : 'flex' }}
       >
         {/* Sparkle Effects */}
@@ -301,10 +301,11 @@ export default function LuxuryChatbot() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 100 }}
             transition={{ duration: 0.3, ease: easeOutCubic }}
-            className="fixed bottom-6 right-6 z-50 w-96 h-[600px] bg-gradient-to-br from-slate-50 to-teal-50 rounded-3xl shadow-2xl border border-white/20 backdrop-blur-sm overflow-hidden"
+            className="lux-chat-window fixed bottom-6 right-6 z-50 w-96 h-[600px] rounded-3xl overflow-hidden"
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-teal-500 via-pink-500 to-yellow-500 p-4 text-white relative overflow-hidden">
+            <div className="lux-chat-window-header p-4 relative overflow-hidden">
+              <div className="lux-chat-header-sheen" aria-hidden="true" />
               {/* Animated Wave Background */}
               <div className="absolute inset-0 opacity-30">
                 <svg viewBox="0 0 400 100" className="w-full h-full">
@@ -352,7 +353,7 @@ export default function LuxuryChatbot() {
             </div>
 
             {/* Messages Area */}
-            <div className="flex-1 p-4 overflow-y-auto h-[400px] bg-gradient-to-b from-transparent to-white/50">
+            <div className="lux-chat-scroll-sheen flex-1 p-4 overflow-y-auto h-[400px]">
               {messages.map((message) => (
                 <MessageBubble
                   key={message.id}
@@ -387,7 +388,7 @@ export default function LuxuryChatbot() {
             </div>
 
             {/* Quick Actions */}
-            <div className="px-4 py-2 bg-white/50">
+            <div className="px-4 py-2 bg-[color:color-mix(in oklab,var(--smh-bg, #0f172a) 82%, transparent 18%)]">
               <div className="flex gap-2 flex-wrap">
                 <QuickActionButton
                   icon={Calendar}
@@ -417,7 +418,7 @@ export default function LuxuryChatbot() {
             </div>
 
             {/* Input Area */}
-            <div className="p-4 bg-white/80 backdrop-blur-sm border-t border-white/20">
+            <div className="p-4 bg-[color:color-mix(in oklab,var(--smh-bg, #0f172a) 86%, transparent 14%)] backdrop-blur-sm border-t border-[color:color-mix(in oklab,var(--smh-accent-gold) 26%, transparent)]">
               <div className="flex items-center gap-2">
                 <div className="flex-1 relative">
                   <input
@@ -427,7 +428,7 @@ export default function LuxuryChatbot() {
                     onChange={(e) => setInputMessage(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && sendMessage(inputMessage)}
                     placeholder="Type your message..."
-                    className="w-full px-4 py-3 bg-white/90 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent text-sm"
+                    className="w-full px-4 py-3 bg-[color:color-mix(in oklab,var(--smh-bg, #0f172a) 94%, transparent 6%)] border border-[color:color-mix(in oklab,var(--smh-accent-gold) 18%, transparent)] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[color:var(--smh-accent-gold)] focus:border-transparent text-sm text-[color:var(--chat-text)]"
                     disabled={isLoading}
                   />
                 </div>
@@ -450,7 +451,7 @@ export default function LuxuryChatbot() {
                   whileTap={{ scale: 0.95 }}
                   onClick={() => sendMessage(inputMessage)}
                   disabled={!inputMessage.trim() || isLoading}
-                  className="p-3 bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-full hover:from-teal-400 hover:to-teal-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+                  className="p-3 lux-chat-send-button rounded-full transition-all duration-300"
                 >
                   <Send className="w-5 h-5" />
                 </motion.button>
