@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect } from 'react';
+
 import LuxuryChatbot from '@/components/ai/luxury-chatbot';
 import Dock from '@/components/chat/Dock';
 
@@ -19,6 +21,19 @@ function mergeClasses(base: string, extra?: string) {
 }
 
 export default function ChatPreviewClient({ luxury, dock }: ChatPreviewClientProps) {
+  useEffect(() => {
+    import('@/lib/brand/chat-ui').then(async (m) => {
+      try {
+        const man = await m.loadChatUiManifest();
+        document.documentElement.style.setProperty('--chat-panel-bg', man.panel.bg);
+        document.documentElement.style.setProperty('--chat-panel-glass', man.panel.glass);
+        document.documentElement.style.setProperty('--chat-accent', man.accent.color);
+      } catch {
+        /* silent preview */
+      }
+    });
+  }, []);
+
   const isApiConfigured = Boolean(process.env.NEXT_PUBLIC_CHAT_API);
 
   const statusLabel = isApiConfigured ? 'Live API' : 'Preview mode';
