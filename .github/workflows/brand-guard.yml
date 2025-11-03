@@ -25,3 +25,6 @@ jobs:
 
       - name: Brand Guard (no rogue hex outside tokens)
         run: pnpm run brand:guard
+
+      - name: Brand structure guard
+        run: pnpm run brand:guard:structure
