@@ -94,3 +94,33 @@
 
 /* --- DO NOT TOUCH wave layers --- */
 /* (Intentionally no selectors for .hero-waves-bg or .hero-wave-mask here) */
+
+/* Default: off */
+:root { --gold-boost: 0; }
+
+/* Stronger gold when boost is on (preview only) */
+.preview-hero-gilded .lux-gold-tint {
+  /* base (from earlier pass) remains */
+}
+
+/* Additive boost: gently increase warmth + presence without touching waves */
+.preview-hero-gilded[style*="--gold-boost: 1"],
+:root:has(#goldBoost:checked) .preview-hero-gilded {
+  /* slightly richer radial washes */
+  --_goldA: color-mix(in oklab, var(--smh-accent-gold) 28%, transparent);
+  --_goldB: color-mix(in oklab, var(--smh-accent-gold) 22%, transparent);
+}
+
+:root:has(#goldBoost:checked) .preview-hero-gilded .lux-gold-tint {
+  background:
+    radial-gradient(120% 120% at 12% 8%, var(--_goldA, color-mix(in oklab, var(--smh-accent-gold) 24%, transparent)) 0%, transparent 55%),
+    radial-gradient(140% 140% at 88% 92%, var(--_goldB, color-mix(in oklab, var(--smh-accent-gold) 18%, transparent)) 0%, transparent 60%);
+  opacity: .12;               /* was .08; safe but visible */
+  mix-blend-mode: color-dodge; /* keeps “gold”, not grey */
+}
+
+/* Guardrails: keep particle scale & waves intact */
+.preview-hero-gilded .hero-particles-drift,
+.preview-hero-gilded .hero-particles-static { transform: none; }
+
+/* NO selectors for .hero-waves-bg or .hero-wave-mask in this file */
