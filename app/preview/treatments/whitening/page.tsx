@@ -121,7 +121,7 @@ export default function WhiteningPreviewPage() {
               </Link>
             </li>
             <li aria-hidden="true">/</li>
-            <li aria-current="page" className="font-medium text-[color:var(--champagne-ink)]">
+            <li aria-current="page" className="font-medium text-[var(--champagne-ink)]">
               Teeth whitening
             </li>
           </ol>
@@ -206,7 +206,7 @@ export default function WhiteningPreviewPage() {
                     ))}
                   </ul>
                   <p className="mt-4 leading-relaxed t-muted">{type.approach}</p>
-                  <p className="mt-2 text-sm font-medium text-[color:var(--champagne-ink)]">{type.success}</p>
+                  <p className="mt-2 text-sm font-medium text-[var(--champagne-ink)]">{type.success}</p>
                 </article>
               ))}
             </div>

@@ -135,7 +135,7 @@ export default function DentalImplantsPreviewPage() {
               </Link>
             </li>
             <li aria-hidden="true">/</li>
-            <li aria-current="page" className="font-medium text-[color:var(--champagne-ink)]">
+            <li aria-current="page" className="font-medium text-[var(--champagne-ink)]">
               Dental implants
             </li>
           </ol>
@@ -277,12 +277,12 @@ export default function DentalImplantsPreviewPage() {
               feels indistinguishable from natural teeth.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link className="rounded-full border border-[color:var(--champagne-keyline)] px-6 py-3 text-sm font-semibold"
+              <Link className="rounded-full border border-[var(--champagne-keyline)] px-6 py-3 text-sm font-semibold"
                 href="/contact"
               >
                 Book a consultation
               </Link>
-              <Link className="rounded-full border border-[color:var(--champagne-keyline)] px-6 py-3 text-sm font-semibold"
+              <Link className="rounded-full border border-[var(--champagne-keyline)] px-6 py-3 text-sm font-semibold"
                 href="/treatments"
               >
                 View all treatments

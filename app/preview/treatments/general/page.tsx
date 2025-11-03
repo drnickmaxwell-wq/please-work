@@ -21,7 +21,7 @@ export default function GeneralDentistryPreviewPage() {
               </Link>
             </li>
             <li aria-hidden="true">/</li>
-            <li aria-current="page" className="font-medium text-[color:var(--champagne-ink)]">
+            <li aria-current="page" className="font-medium text-[var(--champagne-ink)]">
               General dentistry
             </li>
           </ol>

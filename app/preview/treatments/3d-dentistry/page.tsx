@@ -69,7 +69,7 @@ export default function ThreeDDentistryPreviewPage() {
               </Link>
             </li>
             <li aria-hidden="true">/</li>
-            <li aria-current="page" className="font-medium text-[color:var(--champagne-ink)]">
+            <li aria-current="page" className="font-medium text-[var(--champagne-ink)]">
               3D digital dentistry
             </li>
           </ol>
@@ -160,12 +160,12 @@ export default function ThreeDDentistryPreviewPage() {
               guide you through every digital step.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link className="rounded-full border border-[color:var(--champagne-keyline)] px-6 py-3 text-sm font-semibold"
+              <Link className="rounded-full border border-[var(--champagne-keyline)] px-6 py-3 text-sm font-semibold"
                 href="/contact"
               >
                 Book a 3D consultation
               </Link>
-              <Link className="rounded-full border border-[color:var(--champagne-keyline)] px-6 py-3 text-sm font-semibold"
+              <Link className="rounded-full border border-[var(--champagne-keyline)] px-6 py-3 text-sm font-semibold"
                 href="/treatments"
               >
                 View all treatments
