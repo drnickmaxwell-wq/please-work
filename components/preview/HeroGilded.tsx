@@ -35,6 +35,7 @@ type CrossFadeLoopProps = {
 function CrossFadeLoop({ src, className, zIndexClass }: CrossFadeLoopProps) {
   const containerClassName = [
     "loop-pair",
+    "loop-wrap",
     "hero-motion",
     className,
     zIndexClass,
@@ -288,9 +289,8 @@ function CrossFadeLoop({ src, className, zIndexClass }: CrossFadeLoopProps) {
           playsInline
           loop
           preload="metadata"
-        >
-          <source src={src} type="video/webm" />
-        </video>
+          src={src}
+        />
       </div>
     );
   }
@@ -299,27 +299,26 @@ function CrossFadeLoop({ src, className, zIndexClass }: CrossFadeLoopProps) {
     <div className={containerClassName}>
       <video
         ref={baseVideoRef}
+        className="loopA"
         autoPlay
         muted
         playsInline
         loop
         preload="auto"
         onLoadedMetadata={handleMetadata}
-      >
-        <source src={src} type="video/webm" />
-      </video>
+        src={src}
+      />
       <video
         ref={staggeredVideoRef}
-        className={`loop-top${isTopActive ? " is-active" : ""}`}
+        className={`loopB loop-top${isTopActive ? " is-active" : ""}`}
         autoPlay
         muted
         playsInline
         loop
         preload="auto"
         onLoadedMetadata={handleMetadata}
-      >
-        <source src={src} type="video/webm" />
-      </video>
+        src={src}
+      />
     </div>
   );
 }

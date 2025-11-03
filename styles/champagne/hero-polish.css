@@ -124,3 +124,23 @@
 .preview-hero-gilded .hero-particles-static { transform: none; }
 
 /* NO selectors for .hero-waves-bg or .hero-wave-mask in this file */
+
+/* 12s cycle to match our export brief; easy to retime later */
+@keyframes seamFadeA { 0%,49% { opacity: 1; } 51%,100% { opacity: 0; } }
+@keyframes seamFadeB { 0%,49% { opacity: 0; } 51%,100% { opacity: 1; } }
+
+.preview-hero-gilded .loop-wrap { position: absolute; inset: 0; }
+.preview-hero-gilded .loop-wrap .loopA,
+.preview-hero-gilded .loop-wrap .loopB {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation-duration: 12s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: opacity;
+}
+.preview-hero-gilded .loop-wrap .loopA { animation-name: seamFadeA; }
+.preview-hero-gilded .loop-wrap .loopB { animation-name: seamFadeB; }
