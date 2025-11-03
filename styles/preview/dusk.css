@@ -1,0 +1,40 @@
+[data-theme="preview-dusk"] {
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--smh-ink);
+  color: var(--smh-text);
+  color-scheme: dark;
+}
+
+[data-theme="preview-dusk"] a {
+  color: inherit;
+}
+
+[data-theme="preview-dusk"] .sticky-header {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: transparent;
+  transition: background 200ms ease, border-color 200ms ease;
+}
+
+[data-theme="preview-dusk"] .header.scrolled,
+[data-theme="preview-dusk"] .sticky-header[data-scrolled="true"] {
+  background: color-mix(in oklab, var(--smh-ink) 72%, transparent);
+}
+
+[data-theme="preview-dusk"] .glass-pane {
+  background: var(--champagne-glass-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--champagne-keyline-gold);
+  border-radius: 18px;
+  box-shadow: var(--champagne-pane);
+}
+
+[data-theme="preview-dusk"] .wave {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--champagne-wave, none);
+  opacity: 0.35;
+  mix-blend-mode: screen;
+}
