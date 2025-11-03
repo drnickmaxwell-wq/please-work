@@ -1,6 +1,7 @@
 // Preview-only clone. No hard hexes. Do not edit production pages.
 import Link from 'next/link';
 
+import TreatmentBanner from '@/components/preview/TreatmentBanner';
 import '@/styles/treatments/preview-light.css';
 
 const workflowSteps = [
@@ -81,19 +82,11 @@ export default function TechnologyPreviewPage() {
           </ol>
         </nav>
 
-        <header className="space-y-4">
-          <p className="text-sm uppercase tracking-[0.3em] text-[var(--champagne-ink-muted)]">Treatments</p>
-          <h1
-            className="text-4xl font-semibold leading-tight sm:text-5xl"
-            style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
-          >
-            Precision technology, calmer appointments
-          </h1>
-          <p className="max-w-3xl text-lg leading-relaxed t-muted">
-            Guided implants, 3D printing, and laser refinements make every appointment efficient and comfortable while delivering
-            studio-ready results.
-          </p>
-        </header>
+        <TreatmentBanner
+          label="Treatments"
+          subtitle="Guided implants, 3D printing, and laser refinements make every appointment efficient and comfortable while delivering studio-ready results."
+          title="Precision technology, calmer appointments"
+        />
 
         <section className="t-section rounded-3xl p-8 shadow-sm">
           <div className="flex flex-col gap-6">

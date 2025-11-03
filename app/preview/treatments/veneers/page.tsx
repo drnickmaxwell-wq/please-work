@@ -2,6 +2,7 @@
 import Link from 'next/link';
 
 import InteractiveToothModel from '@/components/3d/interactive-tooth-model';
+import TreatmentBanner from '@/components/preview/TreatmentBanner';
 import { TOKENS as NEUTRAL_TOKENS } from '@/styles/tokens/neutrals';
 
 import '@/styles/treatments/preview-light.css';
@@ -90,19 +91,11 @@ export default function VeneersPreviewPage() {
           </ol>
         </nav>
 
-        <header className="space-y-4">
-          <p className="text-sm uppercase tracking-[0.3em] text-[var(--champagne-ink-muted)]">Treatments</p>
-          <h1
-            className="text-4xl font-semibold leading-tight sm:text-5xl"
-            style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
-          >
-            Porcelain veneers in Shoreham-by-Sea
-          </h1>
-          <p className="max-w-3xl text-lg leading-relaxed t-muted">
-            Redesign your smile with feather-light porcelain crafted for your features. We blend digital design with artisanal
-            finishing so every veneer feels luminous, balanced, and entirely yours.
-          </p>
-        </header>
+        <TreatmentBanner
+          label="Treatments"
+          subtitle="Redesign your smile with feather-light porcelain crafted for your features. We blend digital design with artisanal finishing so every veneer feels luminous, balanced, and entirely yours."
+          title="Porcelain veneers in Shoreham-by-Sea"
+        />
 
         <section className="t-section rounded-3xl p-8 shadow-sm">
           <div className="flex flex-col gap-6">
