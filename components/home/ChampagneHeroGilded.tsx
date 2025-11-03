@@ -188,6 +188,14 @@ export default function ChampagneHeroGilded() {
       className="champagne-hero champagne-hero--gilded preview-hero-gilded"
       aria-labelledby="hero-gilded-title"
       data-smoothing="preview"
+      data-tune="gilded"
+      style={{
+        "--gold-dust-opacity": 0.18,
+        "--gold-dust-blend": "color-dodge",
+        "--glass-shimmer-opacity": 0.22,
+        "--particles-drift-opacity": 0.1,
+        "--parallax-cap-px": "6",
+      }}
     >
       <div className="hero-gradient-base gradient-base" />
 

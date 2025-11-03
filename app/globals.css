@@ -7,6 +7,7 @@
 @import "@/styles/brand/home-hero.css";
 @import "@/styles/champagne/hero.css";
 @import "@/styles/champagne/hero-gilded.css";
+@import "@/styles/champagne/hero-gilded-tune.css";
 @import "@/styles/champagne/footer-preview.css";
 
 @tailwind base;
