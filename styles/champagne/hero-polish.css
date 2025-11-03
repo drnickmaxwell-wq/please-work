@@ -51,3 +51,45 @@
   mix-blend-mode: screen;
   /* keep sheen, don’t over-brighten */
 }
+/* Liquid glass vibe: very subtle breathing on the glass shimmer layer only */
+@keyframes glassPulse { 0%,100%{filter:saturate(1) brightness(1)} 50%{filter:saturate(1.05) brightness(1.03)} }
+
+.preview-hero-gilded .hero-glass-shimmer {
+  animation: glassPulse 9s ease-in-out infinite;
+  will-change: filter;
+}
+
+/* Micro-glints overlay: a faint, gold-tinted sheen using color-mix and grain as a mask */
+.preview-hero-gilded .champagne-hero::after {
+  content: "";
+  position: absolute; inset: 0;
+  pointer-events: none;
+  /* gold tint using tokens, no hex */
+  background:
+    radial-gradient(120% 120% at 0% 0%,
+      color-mix(in oklab, var(--smh-accent-gold) 22%, transparent) 0%,
+      transparent 60%),
+    radial-gradient(120% 120% at 100% 100%,
+      color-mix(in oklab, var(--smh-accent-gold) 16%, transparent) 0%,
+      transparent 65%);
+  mix-blend-mode: color-dodge;
+  opacity: .06; /* subtle by default */
+  z-index: 4; /* above mask/waves (z2/3), below particles/glass if needed */
+  animation: glintDrift 12s ease-in-out infinite;
+}
+
+/* Slow drift to avoid “static” look */
+@keyframes glintDrift {
+  0%,100% { transform: translate3d(0,0,0); }
+  50%     { transform: translate3d(1.5%, -1.5%, 0); }
+}
+
+/* Ensure waves remain present and unmodified */
+.preview-hero-gilded .hero-waves-bg { opacity: .26; mix-blend-mode: overlay; }
+.preview-hero-gilded .hero-wave-mask { opacity: .18; mix-blend-mode: soft-light; }
+
+/* Keep particle scale steady (no big dots) */
+.preview-hero-gilded .hero-particles-drift,
+.preview-hero-gilded .hero-particles-static {
+  transform: none; /* prevent scale-ups */
+}
