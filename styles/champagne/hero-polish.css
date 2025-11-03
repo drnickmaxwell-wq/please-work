@@ -51,3 +51,46 @@
   mix-blend-mode: screen;
   /* keep sheen, don’t over-brighten */
 }
+
+/* --- Liquid glass pulse on glass layer (subtle; preview only) --- */
+@keyframes polishGlassPulse {
+  0%,100% { filter: saturate(1) brightness(1); }
+  50%     { filter: saturate(1.06) brightness(1.04); }
+}
+.preview-hero-gilded .hero-glass-shimmer {
+  animation: polishGlassPulse 9s ease-in-out infinite;
+  will-change: filter;
+}
+
+/* --- Dual gold crossfade (kept from earlier if present; safe to re-declare) --- */
+@keyframes goldCrossfadeA { 0%,45%{opacity:.08} 50%,95%{opacity:.02} 100%{opacity:.08} }
+@keyframes goldCrossfadeB { 0%,45%{opacity:.02} 50%,95%{opacity:.08} 100%{opacity:.02} }
+.preview-hero-gilded .hero-gold-dust-drift { animation: goldCrossfadeA 8s ease-in-out infinite both; }
+.preview-hero-gilded .hero-gold-dust-drift--alt { animation: goldCrossfadeB 8s ease-in-out infinite both; mix-blend-mode: screen; }
+
+/* --- Gold tint helper: adds real gold tonality without changing particle size --- */
+@keyframes goldSheenDrift {
+  0%,100% { transform: translate3d(0,0,0) }
+  50%     { transform: translate3d(1.2%, -1.2%, 0) }
+}
+.preview-hero-gilded .lux-gold-tint {
+  position: absolute; inset: 0; pointer-events: none; z-index: 4;
+  /* Two faint radial gold washes using tokens only */
+  background:
+    radial-gradient(120% 120% at 12% 8%,
+      color-mix(in oklab, var(--smh-accent-gold) 24%, transparent) 0%,
+      transparent 55%),
+    radial-gradient(140% 140% at 88% 92%,
+      color-mix(in oklab, var(--smh-accent-gold) 18%, transparent) 0%,
+      transparent 60%);
+  mix-blend-mode: color-dodge;
+  opacity: .08;
+  animation: goldSheenDrift 12s ease-in-out infinite;
+}
+
+/* --- Keep particle scale steady (no chunky dots) --- */
+.preview-hero-gilded .hero-particles-drift,
+.preview-hero-gilded .hero-particles-static { transform: none; }
+
+/* --- DO NOT TOUCH wave layers --- */
+/* (Intentionally no selectors for .hero-waves-bg or .hero-wave-mask here) */
