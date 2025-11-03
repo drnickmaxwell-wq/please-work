@@ -12,6 +12,7 @@
     "format": "prettier --write public/brand/manifest.json lib/brand/manifest.ts app/brand.ts components/sections/HeroLuxury.tsx tests/brand-manifest.spec.ts",
     "test": "tsx --test tests/brand-manifest.spec.ts",
     "brand:guard": "node brand-guard.cjs",
+    "brand:guard:structure": "node scripts/brand-guard-structure.cjs",
     "brand:audit": "node scripts/brand-audit.cjs",
     "brand:report": "node scripts/brand-report.cjs",
     "brand:manifest": "node -e \"console.log(require('fs').readFileSync('public/brand/manifest.json','utf8'))\"",
