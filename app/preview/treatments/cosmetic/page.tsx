@@ -21,7 +21,7 @@ export default function CosmeticPreviewPage() {
               </Link>
             </li>
             <li aria-hidden="true">/</li>
-            <li aria-current="page" className="font-medium text-[color:var(--champagne-ink)]">
+            <li aria-current="page" className="font-medium text-[var(--champagne-ink)]">
               Cosmetic dentistry
             </li>
           </ol>

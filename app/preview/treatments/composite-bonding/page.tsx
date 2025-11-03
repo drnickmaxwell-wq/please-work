@@ -69,7 +69,7 @@ export default function CompositeBondingPreviewPage() {
               </Link>
             </li>
             <li aria-hidden="true">/</li>
-            <li aria-current="page" className="font-medium text-[color:var(--champagne-ink)]">
+            <li aria-current="page" className="font-medium text-[var(--champagne-ink)]">
               Composite bonding
             </li>
           </ol>
@@ -152,12 +152,12 @@ export default function CompositeBondingPreviewPage() {
               Reserve a single-visit appointment where we refine edges, layer composite, and polish to a glass-smooth glow.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link className="rounded-full border border-[color:var(--champagne-keyline)] px-6 py-3 text-sm font-semibold"
+              <Link className="rounded-full border border-[var(--champagne-keyline)] px-6 py-3 text-sm font-semibold"
                 href="/contact"
               >
                 Reserve a consultation
               </Link>
-              <Link className="rounded-full border border-[color:var(--champagne-keyline)] px-6 py-3 text-sm font-semibold"
+              <Link className="rounded-full border border-[var(--champagne-keyline)] px-6 py-3 text-sm font-semibold"
                 href="/treatments"
               >
                 View all treatments

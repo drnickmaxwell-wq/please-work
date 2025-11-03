@@ -84,7 +84,7 @@ export default function VeneersPreviewPage() {
               </Link>
             </li>
             <li aria-hidden="true">/</li>
-            <li aria-current="page" className="font-medium text-[color:var(--champagne-ink)]">
+            <li aria-current="page" className="font-medium text-[var(--champagne-ink)]">
               Porcelain veneers
             </li>
           </ol>
@@ -215,12 +215,12 @@ export default function VeneersPreviewPage() {
               polished to perfection.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link className="rounded-full border border-[color:var(--champagne-keyline)] px-6 py-3 text-sm font-semibold"
+              <Link className="rounded-full border border-[var(--champagne-keyline)] px-6 py-3 text-sm font-semibold"
                 href="/contact"
               >
                 Reserve a consultation
               </Link>
-              <Link className="rounded-full border border-[color:var(--champagne-keyline)] px-6 py-3 text-sm font-semibold"
+              <Link className="rounded-full border border-[var(--champagne-keyline)] px-6 py-3 text-sm font-semibold"
                 href="/treatments"
               >
                 View all treatments
