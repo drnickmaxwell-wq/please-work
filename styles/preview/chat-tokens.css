@@ -1,0 +1,25 @@
+.chat-preview-theme {
+  --chat-panel-bg: color-mix(in oklab, var(--smh-bg) 88%, black 12%);
+  --chat-panel-glass: color-mix(in oklab, var(--smh-bg) 65%, black 35%);
+  --chat-accent: var(--smh-accent-gold);
+  --chat-gradient: linear-gradient(135deg, var(--smh-primary-magenta) 0%, var(--smh-primary-teal) 60%, var(--smh-accent-gold) 100%);
+  --chat-text: var(--smh-text);
+  --chat-ring: color-mix(in oklab, var(--smh-accent-gold) 40%, transparent);
+  --chat-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+}
+
+.chat-preview-theme .chat-card {
+  background: var(--chat-panel-bg);
+  box-shadow: var(--chat-shadow);
+  border: 1px solid color-mix(in oklab, var(--chat-accent) 28%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+.chat-preview-theme .chat-gradient {
+  background-image: var(--chat-gradient);
+}
+
+.chat-preview-theme .chat-accent {
+  border-color: var(--chat-accent);
+  color: var(--chat-accent);
+}
