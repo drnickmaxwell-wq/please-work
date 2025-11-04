@@ -4,8 +4,8 @@
 const { readFileSync, readdirSync, existsSync } = require("fs");
 const { join, extname, sep } = require("path");
 
-const ROOT = process.cwd();
-const TOKENS_FILE = join(ROOT, "styles/tokens/smh-champagne-tokens.css");
+const SCAN_ROOT = process.env.BRAND_GUARD_ROOT || process.cwd();
+const TOKENS_FILE = join(SCAN_ROOT, "styles/tokens/smh-champagne-tokens.css");
 const HEX_CODES = Object.freeze({
   PRIMARY_MAGENTA: "#C2185B",
   PRIMARY_TEAL: "#40C4B4",
@@ -27,12 +27,12 @@ const SCAN_EXTENSIONS = new Set([".ts", ".tsx", ".js", ".jsx", ".css"]);
 const EXCLUDED_SEGMENTS = new Set(["scripts", "tests", ".github", "node_modules", ".next", "dist"]);
 
 const HERO_JOURNEY_FILES = new Set([
-  join(ROOT, "components/hero/4k-hero-video.tsx"),
-  join(ROOT, "components/sections/SmileJourney.tsx"),
+  join(SCAN_ROOT, "components/hero/4k-hero-video.tsx"),
+  join(SCAN_ROOT, "components/sections/SmileJourney.tsx"),
 ]);
 const LEGACY_GRADIENT_HEXES = [/#d94bc6/i, /#00c2c7/i];
 const HEX_FILE_ALLOWLIST = new Set([
-  join(ROOT, "styles/champagne/hero.css"),
+  join(SCAN_ROOT, "styles/champagne/hero.css"),
 ]);
 
 function shouldSkip(relPath){
@@ -42,11 +42,11 @@ function shouldSkip(relPath){
 }
 
 function walk(dir){
-  const rel = dir === ROOT ? "" : dir.slice(ROOT.length + 1);
+  const rel = dir === SCAN_ROOT ? "" : dir.slice(SCAN_ROOT.length + 1);
   if(shouldSkip(rel)) return [];
   return readdirSync(dir, { withFileTypes: true }).flatMap(entry => {
     const fullPath = join(dir, entry.name);
-    const relative = fullPath.slice(ROOT.length + 1);
+    const relative = fullPath.slice(SCAN_ROOT.length + 1);
     if(shouldSkip(relative)) return [];
     if(entry.isDirectory()){
       return walk(fullPath);
@@ -57,18 +57,18 @@ function walk(dir){
 }
 
 const files = SCAN_ROOTS.flatMap(base => {
-  const dir = join(ROOT, base);
+  const dir = join(SCAN_ROOT, base);
   if(!existsSync(dir)) return [];
   return walk(dir);
 });
 
 function walkManifests(dir){
   if(!existsSync(dir)) return [];
-  const rel = dir === ROOT ? "" : dir.slice(ROOT.length + 1);
+  const rel = dir === SCAN_ROOT ? "" : dir.slice(SCAN_ROOT.length + 1);
   if(shouldSkip(rel)) return [];
   return readdirSync(dir, { withFileTypes: true }).flatMap(entry => {
     const fullPath = join(dir, entry.name);
-    const relative = fullPath.slice(ROOT.length + 1);
+    const relative = fullPath.slice(SCAN_ROOT.length + 1);
     if(entry.isDirectory()){
       if(shouldSkip(relative)) return [];
       return walkManifests(fullPath);
@@ -77,7 +77,7 @@ function walkManifests(dir){
   });
 }
 
-const manifestFiles = ["public", "styles"].flatMap(base => walkManifests(join(ROOT, base)));
+const manifestFiles = ["public", "styles"].flatMap(base => walkManifests(join(SCAN_ROOT, base)));
 const manifestWarnings = [];
 
 let violations = [];
