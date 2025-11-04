@@ -1,7 +1,7 @@
 /**
  * Blocks stray brand hex usage outside tokens and enforces gradient string.
  */
-const { readFileSync, readdirSync, statSync } = require("fs");
+const { readFileSync, readdirSync, statSync, existsSync } = require("fs");
 const { join, extname, sep } = require("path");
 
 const ROOT = process.cwd();
@@ -21,6 +21,8 @@ const CANONICAL_GRAD = 'linear-gradient(var(--smh-grad-angle),var(--smh-grad-sto
 const HEXES = Object.values(HEX_CODES).map(hex=>new RegExp(hex.slice(1),"i"));
 
 const normalize = (value) => value.replace(/\s+/g, "").toLowerCase();
+const toRelative = (value) =>
+  value.startsWith(`${ROOT}${sep}`) ? value.slice(ROOT.length + 1) : value;
 
 const IGNORED_DIRS = new Set(["node_modules", ".next", "dist"]);
 
@@ -28,6 +30,14 @@ const HERO_JOURNEY_FILES = new Set([
   join(ROOT, "components/hero/4k-hero-video.tsx"),
   join(ROOT, "components/sections/SmileJourney.tsx"),
 ]);
+
+const BRAND_MANIFEST_DIR = join(ROOT, "brand");
+const PRIMARY_MANIFEST_TOKENS = [
+  HEX_CODES.PRIMARY_MAGENTA,
+  HEX_CODES.PRIMARY_TEAL,
+  HEX_CODES.GOLD,
+];
+const LEGACY_GRADIENT_REGEX = /#d94bc6[\s\S]*#00c2c7/i;
 
 function walk(dir){
   return readdirSync(dir).flatMap(f=>{
@@ -47,6 +57,11 @@ const files = walk(ROOT).filter(p=>{
 });
 
 let violations = [];
+
+let manifestCount = 0;
+let manifestWarnCount = 0;
+let manifestOkCount = 0;
+const manifestLogs = [];
 
 const NEXT_SEGMENT = `${sep}.next${sep}`;
 
@@ -122,6 +137,34 @@ for(const file of files){
   }
 }
 
+if (existsSync(BRAND_MANIFEST_DIR) && statSync(BRAND_MANIFEST_DIR).isDirectory()) {
+  const manifestFiles = readdirSync(BRAND_MANIFEST_DIR)
+    .filter((file) => extname(file).toLowerCase() === ".json")
+    .map((file) => join(BRAND_MANIFEST_DIR, file));
+
+  for (const manifestPath of manifestFiles) {
+    manifestCount += 1;
+    const body = readFileSync(manifestPath, "utf8");
+    const bodyLower = body.toLowerCase();
+    const hasLegacyGradient = LEGACY_GRADIENT_REGEX.test(bodyLower);
+    if (hasLegacyGradient) {
+      manifestWarnCount += 1;
+      manifestLogs.push(
+        `WARN ${toRelative(manifestPath)}: legacy gradient #D94BC6 → #00C2C7 detected`
+      );
+    }
+
+    for (const token of PRIMARY_MANIFEST_TOKENS) {
+      if (bodyLower.includes(token.toLowerCase())) {
+        manifestOkCount += 1;
+        manifestLogs.push(
+          `OK ${toRelative(manifestPath)}: contains primary token ${token}`
+        );
+      }
+    }
+  }
+}
+
 const tokensBody = readFileSync(TOKENS_FILE, "utf8");
 const gradientMatch = tokensBody.match(/--smh-gradient:\s*([^;]+);/i);
 if(!gradientMatch){
@@ -141,6 +184,12 @@ if(!gradientMatch){
   }
 }
 
+for (const log of manifestLogs) {
+  console.log(log);
+}
+
+const manifestSummary = `Manifests scanned: ${manifestCount} | WARN: ${manifestWarnCount} | OK: ${manifestOkCount}`;
+
 if(violations.length){
   console.error("❌ Brand guard failed. Move brand hexes/gradient into tokens only.");
   for(const v of violations){
@@ -153,6 +202,8 @@ if(violations.length){
       console.error("-", v.file, String(v.hex));
     }
   }
+  console.log(manifestSummary);
   process.exit(1);
 }
 console.log("Brand lock OK");
+console.log(manifestSummary);
