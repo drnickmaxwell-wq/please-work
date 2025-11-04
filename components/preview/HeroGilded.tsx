@@ -8,9 +8,12 @@ import {
   type SyntheticEvent,
 } from "react";
 
-import { getHeroLayers } from "@/lib/brand/manifest";
+import {
+  getBrandManifestClient,
+  type BrandManifest,
+} from "@/lib/brand/manifest";
 
-type HeroLayers = Awaited<ReturnType<typeof getHeroLayers>>;
+type HeroLayers = Pick<BrandManifest, "waves" | "textures" | "particles" | "motion">;
 
 type PreviewHeroLayers = HeroLayers & {
   waveMask?: string;
@@ -334,7 +337,7 @@ export default function PreviewHeroGilded() {
 
     (async () => {
       try {
-        const data = await getHeroLayers();
+        const manifest = await getBrandManifestClient();
 
         const verify = async (url?: string | null) => {
           if (!url) return null;
@@ -348,37 +351,37 @@ export default function PreviewHeroGilded() {
         };
 
         const verifiedWavesMask =
-          (await verify(data.waves?.mask)) ??
+          (await verify(manifest.waves?.mask)) ??
           "/assets/champagne/waves/wave-mask-desktop.webp";
         const verifiedWavesBackground =
-          (await verify(data.waves?.background)) ??
+          (await verify(manifest.waves?.background)) ??
           "/assets/champagne/waves/wave-bg.webp";
         const verifiedFilmGrain =
-          (await verify(data.textures?.filmGrain)) ??
+          (await verify(manifest.textures?.filmGrain)) ??
           "/assets/champagne/textures/home-hero-film-grain.webp";
         const verifiedSoftParticles =
-          (await verify(data.particles?.soft)) ??
+          (await verify(manifest.particles?.soft)) ??
           "/assets/champagne/particles/home-hero-particles.webp";
 
         const verifiedLayers: PreviewHeroLayers = {
-          ...data,
           waves: {
-            ...data.waves,
+            ...manifest.waves,
             mask: verifiedWavesMask,
             background: verifiedWavesBackground,
           },
           textures: {
-            ...data.textures,
+            ...manifest.textures,
             filmGrain: verifiedFilmGrain,
           },
-          particles: data.particles
+          particles: manifest.particles
             ? {
-                ...data.particles,
+                ...manifest.particles,
                 soft: verifiedSoftParticles,
               }
             : {
                 soft: verifiedSoftParticles,
               },
+          motion: manifest.motion,
           waveMask: verifiedWavesMask,
           waveBg: verifiedWavesBackground,
         };

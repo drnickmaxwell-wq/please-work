@@ -37,21 +37,61 @@ type ManifestMotion = {
   [key: string]: string | undefined;
 };
 
-const MANIFEST_PATH = "/brand/manifest.json";
+const MANIFEST_PRIMARY_PATH = "/brand/manifest.json";
+const MANIFEST_FALLBACK_PATH = "/assets/champagne/manifest.json";
 
 let manifestCache: BrandManifest | null = null;
 let manifestPromise: Promise<BrandManifest> | null = null;
 
-export async function getBrandManifest(): Promise<BrandManifest> {
-  if (manifestCache) return manifestCache;
-  if (!manifestPromise) {
-    manifestPromise = fetchManifest().then((manifest) => {
-      manifestCache = manifest;
-      return manifest;
-    });
+export async function getBrandManifestClient(): Promise<BrandManifest> {
+  return loadWithCache(loadClientManifest);
+}
+
+export async function getBrandManifestServer(
+  root = process.cwd(),
+): Promise<BrandManifest> {
+  if (typeof window !== "undefined") {
+    throw new Error("Server-only");
   }
 
-  return manifestPromise;
+  return loadWithCache(async () => {
+    const [{ readFile }, { join }] = await Promise.all([
+      import(/* webpackIgnore: true */ "node:fs/promises"),
+      import(/* webpackIgnore: true */ "node:path"),
+    ]);
+
+    const manifestFiles = [
+      join(root, "public", "brand", "manifest.json"),
+      join(root, "public", "assets", "champagne", "manifest.json"),
+    ];
+
+    for (const manifestPath of manifestFiles) {
+      try {
+        const fileContents = await readFile(manifestPath, "utf8");
+        return JSON.parse(fileContents) as BrandManifest;
+      } catch (error) {
+        const errorWithCode = error as { code?: string; message?: string };
+
+        if (errorWithCode.code === "ENOENT") {
+          continue;
+        }
+
+        throw new Error(
+          `Failed to load brand manifest from ${manifestPath}: ${errorWithCode.message ?? "unknown error"}`,
+        );
+      }
+    }
+
+    throw new Error("Brand manifest not found");
+  });
+}
+
+export async function getBrandManifest(): Promise<BrandManifest> {
+  if (typeof window !== "undefined") {
+    return getBrandManifestClient();
+  }
+
+  return getBrandManifestServer();
 }
 
 export async function getWaves(): Promise<ManifestWaves> {
@@ -80,41 +120,64 @@ export async function getHeroLayers() {
   };
 }
 
-function resolveManifestUrl() {
-  if (typeof window !== "undefined") {
-    return MANIFEST_PATH;
+function loadWithCache(
+  loader: () => Promise<BrandManifest>,
+): Promise<BrandManifest> {
+  if (manifestCache) {
+    return Promise.resolve(manifestCache);
   }
 
-  const { NEXT_PUBLIC_SITE_URL, VERCEL_URL } = process.env;
-
-  if (NEXT_PUBLIC_SITE_URL) {
-    return new URL(
-      MANIFEST_PATH,
-      ensureProtocol(NEXT_PUBLIC_SITE_URL),
-    ).toString();
+  if (!manifestPromise) {
+    manifestPromise = loader()
+      .then((manifest) => {
+        manifestCache = manifest;
+        return manifest;
+      })
+      .catch((error) => {
+        manifestPromise = null;
+        throw error;
+      });
   }
 
-  if (VERCEL_URL) {
-    const base = VERCEL_URL.includes("://")
-      ? VERCEL_URL
-      : `https://${VERCEL_URL}`;
-    return new URL(MANIFEST_PATH, base).toString();
-  }
-
-  return `http://localhost:3000${MANIFEST_PATH}`;
+  return manifestPromise!;
 }
 
-function ensureProtocol(url: string) {
-  return url.includes("://") ? url : `https://${url}`;
-}
+async function loadClientManifest(): Promise<BrandManifest> {
+  try {
+    const response = await fetch(MANIFEST_PRIMARY_PATH, {
+      cache: "force-cache",
+    });
 
-async function fetchManifest(): Promise<BrandManifest> {
-  const manifestUrl = resolveManifestUrl();
-  const response = await fetch(manifestUrl);
+    if (response.ok) {
+      return (await response.json()) as BrandManifest;
+    }
 
-  if (!response.ok) {
-    throw new Error(`Failed to load brand manifest from ${manifestUrl}`);
+    if (response.status !== 404) {
+      throw new Error(`Brand manifest request failed (${response.status})`);
+    }
+  } catch (error) {
+    const isTypeError = error instanceof Error && error.name === "TypeError";
+
+    if (!isTypeError) {
+      throw error;
+    }
   }
 
-  return (await response.json()) as BrandManifest;
+  try {
+    const fallbackResponse = await fetch(MANIFEST_FALLBACK_PATH, {
+      cache: "force-cache",
+    });
+
+    if (fallbackResponse.ok) {
+      return (await fallbackResponse.json()) as BrandManifest;
+    }
+  } catch (error) {
+    const isTypeError = error instanceof Error && error.name === "TypeError";
+
+    if (!isTypeError) {
+      throw error;
+    }
+  }
+
+  throw new Error("Brand manifest unavailable");
 }
