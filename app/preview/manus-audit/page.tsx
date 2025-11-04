@@ -1,7 +1,6 @@
 // This page reads manifests from /public/brand so Vercel can serve them.
 // Keep champagne_machine_manifest_full.json and manus_import_unified_manifest_20251104.json mirrored here.
 import Link from "next/link";
-import { headers } from "next/headers";
 import path from "node:path";
 import { promises as fs } from "node:fs";
 
@@ -26,14 +25,39 @@ type ManifestLoadResult = {
   error?: string;
 };
 
-async function loadChampagneComponents(): Promise<ManifestLoadResult> {
-  const manifest = await readManifestJson<unknown>(CHAMPAGNE_MANIFEST_PATH);
+type FetchJsonResult<T = unknown> =
+  | { ok: true; json: T; url: string; status: number; statusText: string }
+  | { ok: false; status: number; statusText: string; url: string };
+
+async function fetchJson<T = unknown>(url: string): Promise<FetchJsonResult<T>> {
+  try {
+    const res = await fetch(url, { cache: "no-store" });
+
+    if (!res.ok) {
+      return { ok: false, status: res.status, statusText: res.statusText, url };
+    }
+
+    const json = (await res.json()) as T;
+    return { ok: true, json, url, status: res.status, statusText: res.statusText };
+  } catch (error) {
+    const statusText = error instanceof Error ? error.message : "Fetch error";
+    return { ok: false, status: 0, statusText, url };
+  }
+}
+
+const champagneUrl = CHAMPAGNE_MANIFEST_PATH;
+const manusUrl = MANUS_MANIFEST_PATH;
+
+async function loadChampagneComponents(
+  response: FetchJsonResult<unknown>,
+): Promise<ManifestLoadResult> {
+  const { manifest, error } = await resolveManifest<unknown>(response, CHAMPAGNE_MANIFEST_PATH);
 
   if (!manifest) {
     return {
       ids: new Set(),
       total: 0,
-      error: "missing",
+      error: error ?? "missing",
     };
   }
 
@@ -59,6 +83,7 @@ async function loadChampagneComponents(): Promise<ManifestLoadResult> {
   return {
     ids,
     total: ids.size,
+    error,
   };
 }
 
@@ -74,14 +99,19 @@ function getSectionKey(section: ChampagneSection): string {
   return "unknown";
 }
 
-async function loadManusComponents(): Promise<ManifestLoadResult> {
-  const manifest = await readManifestJson<{ components?: unknown }>(MANUS_MANIFEST_PATH);
+async function loadManusComponents(
+  response: FetchJsonResult<{ components?: unknown }>,
+): Promise<ManifestLoadResult> {
+  const { manifest, error } = await resolveManifest<{ components?: unknown }>(
+    response,
+    MANUS_MANIFEST_PATH,
+  );
 
   if (!manifest) {
     return {
       ids: new Set(),
       total: 0,
-      error: "missing",
+      error: error ?? "missing",
     };
   }
 
@@ -96,10 +126,12 @@ async function loadManusComponents(): Promise<ManifestLoadResult> {
     }
   }
 
+  const manifestError = components.length === 0 ? "Manus manifest contained no component entries" : undefined;
+
   return {
     ids,
     total: ids.size,
-    error: components.length === 0 ? "Manus manifest contained no component entries" : undefined,
+    error: combineErrors(error, manifestError),
   };
 }
 
@@ -136,55 +168,62 @@ function pickString(record: ManusComponent, keys: string[]): string | null {
   return null;
 }
 
-async function readManifestJson<T>(relativePath: string): Promise<T | null> {
-  const url = createAbsoluteUrl(relativePath);
+async function resolveManifest<T>(
+  response: FetchJsonResult<T>,
+  relativePath: string,
+): Promise<{ manifest: T | null; error?: string }> {
+  if (response.ok) {
+    return { manifest: response.json };
+  }
+
+  const statusLabel = formatStatus(response.status, response.statusText);
+
+  if (process.env.NODE_ENV !== "production") {
+    const fallback = await readManifestFromFs<T>(relativePath);
+
+    if (fallback) {
+      return { manifest: fallback, error: `Fetch failed (${statusLabel}); using local file` };
+    }
+  }
+
+  console.error(`Manifest load failed for ${relativePath}: ${statusLabel}`);
+  return { manifest: null, error: `Fetch failed (${statusLabel})` };
+}
+
+async function readManifestFromFs<T>(relativePath: string): Promise<T | null> {
+  const localPath = relativePath.startsWith("/") ? relativePath.slice(1) : relativePath;
+  const filePath = path.join(process.cwd(), "public", localPath);
 
   try {
-    const response = await fetch(url, { cache: "no-store" });
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch manifest: ${response.status}`);
-    }
-
-    return (await response.json()) as T;
-  } catch (error) {
-    if (process.env.NODE_ENV !== "production") {
-      const localPath = relativePath.startsWith("/") ? relativePath.slice(1) : relativePath;
-      const filePath = path.join(process.cwd(), "public", localPath);
-
-      try {
-        const raw = await fs.readFile(filePath, "utf8");
-        return JSON.parse(raw) as T;
-      } catch {
-        // Ignore and fall through to return null.
-      }
-    }
-
-    console.error(`Manifest load failed for ${relativePath}:`, error);
+    const raw = await fs.readFile(filePath, "utf8");
+    return JSON.parse(raw) as T;
+  } catch {
     return null;
   }
 }
 
-function createAbsoluteUrl(pathname: string): string {
-  let headersList: ReturnType<typeof headers> | null = null;
+function formatStatus(status: number, statusText: string): string {
+  const parts: string[] = [];
 
-  try {
-    headersList = headers();
-  } catch {
-    headersList = null;
+  if (Number.isFinite(status)) {
+    parts.push(String(status));
   }
 
-  const host = headersList?.get("x-forwarded-host") ?? headersList?.get("host");
-  const protocol = headersList?.get("x-forwarded-proto") ?? (host?.includes("localhost") ? "http" : "https");
-
-  if (host) {
-    return new URL(pathname, `${protocol}://${host}`).toString();
+  if (statusText) {
+    parts.push(statusText);
   }
 
-  const fallbackBase =
-    process.env.NEXT_PUBLIC_SITE_URL ?? (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+  return parts.join(" ").trim();
+}
 
-  return new URL(pathname, fallbackBase).toString();
+function combineErrors(...messages: Array<string | undefined>): string | undefined {
+  const filtered = messages.filter((message): message is string => Boolean(message));
+
+  if (filtered.length === 0) {
+    return undefined;
+  }
+
+  return filtered.join(" — ");
 }
 
 async function getReportAvailability(root = process.cwd()): Promise<boolean> {
@@ -200,10 +239,14 @@ async function getReportAvailability(root = process.cwd()): Promise<boolean> {
 
 export default async function ManusAuditPage() {
   const root = process.cwd();
-  const [champagne, manus, reportExists] = await Promise.all([
-    loadChampagneComponents(),
-    loadManusComponents(),
+  const [champagneResponse, manusResponse, reportExists] = await Promise.all([
+    fetchJson<unknown>(champagneUrl),
+    fetchJson<{ components?: unknown }>(manusUrl),
     getReportAvailability(root),
+  ]);
+  const [champagne, manus] = await Promise.all([
+    loadChampagneComponents(champagneResponse),
+    loadManusComponents(manusResponse),
   ]);
 
   const missingInManus = Array.from(champagne.ids).filter((id) => !manus.ids.has(id)).sort();
@@ -235,6 +278,21 @@ export default async function ManusAuditPage() {
           </div>
         </dl>
       </section>
+
+      {/* Diagnostics panel */}
+      <div className="space-y-3 rounded-lg border border-white/10 bg-white/5 p-6 text-sm">
+        <h3 className="font-semibold">Diagnostics</h3>
+        <ul className="ml-5 list-disc">
+          <li>
+            Champagne: {champagneResponse.ok ? "OK" : `Fetch failed (${formatStatus(champagneResponse.status, champagneResponse.statusText)})`} —
+            {" "}
+            {champagneUrl}
+          </li>
+          <li>
+            Manus: {manusResponse.ok ? "OK" : `Fetch failed (${formatStatus(manusResponse.status, manusResponse.statusText)})`} — {manusUrl}
+          </li>
+        </ul>
+      </div>
 
       <section className="space-y-3 rounded-lg border border-white/10 bg-white/5 p-6">
         <h2 className="text-xl font-medium">Missing from Manus</h2>
