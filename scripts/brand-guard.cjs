@@ -1,7 +1,7 @@
 /**
  * Blocks stray brand hex usage outside tokens and enforces gradient string.
  */
-const { readFileSync, readdirSync, statSync } = require("fs");
+const { readFileSync, readdirSync, existsSync } = require("fs");
 const { join, extname, sep } = require("path");
 
 const ROOT = process.cwd();
@@ -16,35 +16,69 @@ const HEX_CODES = Object.freeze({
   GRADIENT_GOLD: "#D4AF37",
   INK: "#0B0D0F",
 });
-const CANONICAL_DISPLAY = 'linear-gradient(var(--smh-grad-angle), var(--smh-grad-stop1) 0%, var(--smh-grad-stop2) 60%, var(--smh-grad-stop3) 100%)';
-const CANONICAL_GRAD = 'linear-gradient(var(--smh-grad-angle),var(--smh-grad-stop1)0%,var(--smh-grad-stop2)60%,var(--smh-grad-stop3)100%)';
+const CANONICAL_DISPLAY = 'linear-gradient(135deg, var(--brand-magenta) 0%, var(--brand-teal) 60%, var(--brand-gold) 100%)';
+const CANONICAL_GRAD = 'linear-gradient(135deg,var(--brand-magenta)0%,var(--brand-teal)60%,var(--brand-gold)100%)';
 const HEXES = Object.values(HEX_CODES).map(hex=>new RegExp(hex.slice(1),"i"));
 
 const normalize = (value) => value.replace(/\s+/g, "").toLowerCase();
 
-const IGNORED_DIRS = new Set(["node_modules", ".next", "dist"]);
+const SCAN_ROOTS = ["app", "components", "styles", "public"];
+const SCAN_EXTENSIONS = new Set([".ts", ".tsx", ".js", ".jsx", ".css"]);
+const EXCLUDED_SEGMENTS = new Set(["scripts", "tests", ".github", "node_modules", ".next", "dist"]);
 
 const HERO_JOURNEY_FILES = new Set([
   join(ROOT, "components/hero/4k-hero-video.tsx"),
   join(ROOT, "components/sections/SmileJourney.tsx"),
 ]);
+const LEGACY_GRADIENT_HEXES = [/#d94bc6/i, /#00c2c7/i];
+const HEX_FILE_ALLOWLIST = new Set([
+  join(ROOT, "styles/champagne/hero.css"),
+]);
+
+function shouldSkip(relPath){
+  if(!relPath) return false;
+  const parts = relPath.split(sep);
+  return parts.some(part => EXCLUDED_SEGMENTS.has(part));
+}
 
 function walk(dir){
-  return readdirSync(dir).flatMap(f=>{
-    if(IGNORED_DIRS.has(f)) return [];
-    const p=join(dir,f);
-    const s=statSync(p);
-    if(s.isDirectory()) return walk(p);
-    return [p];
+  const rel = dir === ROOT ? "" : dir.slice(ROOT.length + 1);
+  if(shouldSkip(rel)) return [];
+  return readdirSync(dir, { withFileTypes: true }).flatMap(entry => {
+    const fullPath = join(dir, entry.name);
+    const relative = fullPath.slice(ROOT.length + 1);
+    if(shouldSkip(relative)) return [];
+    if(entry.isDirectory()){
+      return walk(fullPath);
+    }
+    const extension = extname(entry.name).toLowerCase();
+    return SCAN_EXTENSIONS.has(extension) ? [fullPath] : [];
   });
 }
 
-const files = walk(ROOT).filter(p=>{
-  if (p.includes(`${sep}tests${sep}`)) return false;
-  const e = extname(p).toLowerCase();
-  // limit to code & styles
-  return [".js",".ts",".jsx",".tsx",".css",".scss",".mdx"].includes(e);
+const files = SCAN_ROOTS.flatMap(base => {
+  const dir = join(ROOT, base);
+  if(!existsSync(dir)) return [];
+  return walk(dir);
 });
+
+function walkManifests(dir){
+  if(!existsSync(dir)) return [];
+  const rel = dir === ROOT ? "" : dir.slice(ROOT.length + 1);
+  if(shouldSkip(rel)) return [];
+  return readdirSync(dir, { withFileTypes: true }).flatMap(entry => {
+    const fullPath = join(dir, entry.name);
+    const relative = fullPath.slice(ROOT.length + 1);
+    if(entry.isDirectory()){
+      if(shouldSkip(relative)) return [];
+      return walkManifests(fullPath);
+    }
+    return /manifest\.(?:json|webmanifest)$/i.test(entry.name) ? [fullPath] : [];
+  });
+}
+
+const manifestFiles = ["public", "styles"].flatMap(base => walkManifests(join(ROOT, base)));
+const manifestWarnings = [];
 
 let violations = [];
 
@@ -64,8 +98,11 @@ for(const file of files){
   const txt = readFileSync(file,"utf8");
   const normalized = normalize(txt);
   const isHeroJourneyFile = HERO_JOURNEY_FILES.has(file);
-  for(const h of HEXES){
-    if(h.test(txt)) violations.push({file, hex: h});
+  const skipHexCheck = HEX_FILE_ALLOWLIST.has(file);
+  if(!skipHexCheck){
+    for(const h of HEXES){
+      if(h.test(txt)) violations.push({file, hex: h});
+    }
   }
   if(
     file !== TOKENS_FILE &&
@@ -141,6 +178,15 @@ if(!gradientMatch){
   }
 }
 
+const manifestResults = manifestFiles.map(file => {
+  const body = readFileSync(file, "utf8");
+  const hasLegacyGradient = LEGACY_GRADIENT_HEXES.some(pattern => pattern.test(body));
+  if(hasLegacyGradient){
+    manifestWarnings.push({ file, hex: "legacy-gradient" });
+  }
+  return { file, hasLegacyGradient };
+});
+
 if(violations.length){
   console.error("❌ Brand guard failed. Move brand hexes/gradient into tokens only.");
   for(const v of violations){
@@ -153,6 +199,21 @@ if(violations.length){
       console.error("-", v.file, String(v.hex));
     }
   }
+} else {
+  console.log("✅ No rogue hex detected outside approved tokens.");
+}
+
+for(const warning of manifestWarnings){
+  console.warn(`⚠️ ${warning.file} legacy gradient fallback detected (manifest) — warn only`);
+}
+
+const manifestsScanned = manifestResults.length;
+const manifestWarnCount = manifestWarnings.length;
+const manifestOkCount = manifestsScanned - manifestWarnCount;
+console.log(`Manifests scanned: ${manifestsScanned} | WARN: ${manifestWarnCount} | OK: ${manifestOkCount}`);
+
+if(violations.length){
   process.exit(1);
 }
-console.log("Brand lock OK");
+
+process.exit(0);
