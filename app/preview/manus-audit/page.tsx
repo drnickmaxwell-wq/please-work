@@ -21,24 +21,41 @@ type ManifestLoadResult = {
 };
 
 async function loadChampagneComponents(root = process.cwd()): Promise<ManifestLoadResult> {
-  const filePath = path.join(root, "brand", "champagne_machine_manifest_full.json");
+  const relativePath = path.join("public", "assets", "champagne", "manifest.json");
+  const filePath = path.join(root, relativePath);
 
   try {
     const raw = await fs.readFile(filePath, "utf8");
-    const startIndex = raw.indexOf("[");
+    let pages: ChampagnePage[] | null = null;
 
-    if (startIndex === -1) {
-      return {
-        ids: new Set(),
-        total: 0,
-        error: "Champagne manifest missing JSON payload",
-      };
+    try {
+      const parsed = JSON.parse(raw) as unknown;
+
+      if (Array.isArray(parsed)) {
+        pages = parsed as ChampagnePage[];
+      } else if (parsed && typeof parsed === "object" && Array.isArray((parsed as { pages?: unknown }).pages)) {
+        pages = (parsed as { pages: ChampagnePage[] }).pages;
+      }
+    } catch {
+      // Fall back to extracting the JSON array from within non-standard manifests.
     }
 
-    const jsonText = raw.slice(startIndex);
-    const endIndex = jsonText.lastIndexOf("]");
-    const trimmed = endIndex >= 0 ? jsonText.slice(0, endIndex + 1) : jsonText;
-    const pages = JSON.parse(trimmed) as ChampagnePage[];
+    if (!pages) {
+      const startIndex = raw.indexOf("[");
+
+      if (startIndex === -1) {
+        return {
+          ids: new Set(),
+          total: 0,
+          error: "Champagne manifest missing JSON payload",
+        };
+      }
+
+      const jsonText = raw.slice(startIndex);
+      const endIndex = jsonText.lastIndexOf("]");
+      const trimmed = endIndex >= 0 ? jsonText.slice(0, endIndex + 1) : jsonText;
+      pages = JSON.parse(trimmed) as ChampagnePage[];
+    }
 
     const ids = new Set<string>();
 
@@ -56,6 +73,14 @@ async function loadChampagneComponents(root = process.cwd()): Promise<ManifestLo
       total: ids.size,
     };
   } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") {
+      return {
+        ids: new Set(),
+        total: 0,
+        error: "missing",
+      };
+    }
+
     return {
       ids: new Set(),
       total: 0,
@@ -77,7 +102,8 @@ function getSectionKey(section: ChampagneSection): string {
 }
 
 async function loadManusComponents(root = process.cwd()): Promise<ManifestLoadResult> {
-  const filePath = path.join(root, "brand", "manus_import_unified_manifest_20251104.json");
+  const relativePath = path.join("public", "brand", "manus_import_unified_manifest_20251104.json");
+  const filePath = path.join(root, relativePath);
 
   try {
     const raw = await fs.readFile(filePath, "utf8");
@@ -99,6 +125,14 @@ async function loadManusComponents(root = process.cwd()): Promise<ManifestLoadRe
       error: components.length === 0 ? "Manus manifest contained no component entries" : undefined,
     };
   } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") {
+      return {
+        ids: new Set(),
+        total: 0,
+        error: "missing",
+      };
+    }
+
     return {
       ids: new Set(),
       total: 0,
@@ -169,6 +203,9 @@ export default async function ManusAuditPage() {
         <h1 className="text-3xl font-semibold">Manus audit overview</h1>
         <p className="text-sm text-neutral-500">
           Quick comparison between the Manus delivery package and the Champagne canon manifest.
+        </p>
+        <p className="text-xs text-neutral-500">
+          Audit loaded manifests from /public/assets/champagne and /public/brand.
         </p>
       </header>
 
