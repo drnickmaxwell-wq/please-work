@@ -1,4 +1,7 @@
+// This page reads manifests from /public/brand so Vercel can serve them.
+// Keep champagne_machine_manifest_full.json and manus_import_unified_manifest_20251104.json mirrored here.
 import Link from "next/link";
+import { headers } from "next/headers";
 import path from "node:path";
 import { promises as fs } from "node:fs";
 
@@ -14,79 +17,49 @@ type ChampagnePage = {
 
 type ManusComponent = Record<string, unknown>;
 
+const CHAMPAGNE_MANIFEST_PATH = "/brand/champagne_machine_manifest_full.json";
+const MANUS_MANIFEST_PATH = "/brand/manus_import_unified_manifest_20251104.json";
+
 type ManifestLoadResult = {
   ids: Set<string>;
   total: number;
   error?: string;
 };
 
-async function loadChampagneComponents(root = process.cwd()): Promise<ManifestLoadResult> {
-  const relativePath = path.join("public", "assets", "champagne", "manifest.json");
-  const filePath = path.join(root, relativePath);
+async function loadChampagneComponents(): Promise<ManifestLoadResult> {
+  const manifest = await readManifestJson<unknown>(CHAMPAGNE_MANIFEST_PATH);
 
-  try {
-    const raw = await fs.readFile(filePath, "utf8");
-    let pages: ChampagnePage[] | null = null;
-
-    try {
-      const parsed = JSON.parse(raw) as unknown;
-
-      if (Array.isArray(parsed)) {
-        pages = parsed as ChampagnePage[];
-      } else if (parsed && typeof parsed === "object" && Array.isArray((parsed as { pages?: unknown }).pages)) {
-        pages = (parsed as { pages: ChampagnePage[] }).pages;
-      }
-    } catch {
-      // Fall back to extracting the JSON array from within non-standard manifests.
-    }
-
-    if (!pages) {
-      const startIndex = raw.indexOf("[");
-
-      if (startIndex === -1) {
-        return {
-          ids: new Set(),
-          total: 0,
-          error: "Champagne manifest missing JSON payload",
-        };
-      }
-
-      const jsonText = raw.slice(startIndex);
-      const endIndex = jsonText.lastIndexOf("]");
-      const trimmed = endIndex >= 0 ? jsonText.slice(0, endIndex + 1) : jsonText;
-      pages = JSON.parse(trimmed) as ChampagnePage[];
-    }
-
-    const ids = new Set<string>();
-
-    for (const page of pages) {
-      const pageId = typeof page.page_guess === "string" && page.page_guess.length > 0 ? page.page_guess : "unknown";
-
-      for (const section of page.sections ?? []) {
-        const sectionKey = getSectionKey(section);
-        ids.add(`${pageId}::${sectionKey}`);
-      }
-    }
-
-    return {
-      ids,
-      total: ids.size,
-    };
-  } catch (error) {
-    if ((error as NodeJS.ErrnoException).code === "ENOENT") {
-      return {
-        ids: new Set(),
-        total: 0,
-        error: "missing",
-      };
-    }
-
+  if (!manifest) {
     return {
       ids: new Set(),
       total: 0,
-      error: `Failed to load Champagne manifest: ${(error as Error).message}`,
+      error: "missing",
     };
   }
+
+  let pages: ChampagnePage[] = [];
+
+  if (Array.isArray(manifest)) {
+    pages = manifest as ChampagnePage[];
+  } else if (typeof manifest === "object" && manifest && Array.isArray((manifest as { pages?: unknown }).pages)) {
+    pages = (manifest as { pages: ChampagnePage[] }).pages;
+  }
+
+  const ids = new Set<string>();
+
+  for (const page of pages) {
+    const pageId = typeof page.page_guess === "string" && page.page_guess.length > 0 ? page.page_guess : "unknown";
+
+    for (const section of page.sections ?? []) {
+      const sectionKey = getSectionKey(section);
+      ids.add(`${pageId}::${sectionKey}`);
+    }
+  }
+
+  return {
+    ids,
+    total: ids.size,
+  };
 }
 
 function getSectionKey(section: ChampagneSection): string {
@@ -101,44 +74,33 @@ function getSectionKey(section: ChampagneSection): string {
   return "unknown";
 }
 
-async function loadManusComponents(root = process.cwd()): Promise<ManifestLoadResult> {
-  const relativePath = path.join("public", "brand", "manus_import_unified_manifest_20251104.json");
-  const filePath = path.join(root, relativePath);
+async function loadManusComponents(): Promise<ManifestLoadResult> {
+  const manifest = await readManifestJson<{ components?: unknown }>(MANUS_MANIFEST_PATH);
 
-  try {
-    const raw = await fs.readFile(filePath, "utf8");
-    const json = JSON.parse(raw) as { components?: unknown };
-    const components = Array.isArray(json.components) ? (json.components as ManusComponent[]) : [];
-    const ids = new Set<string>();
-
-    for (const component of components) {
-      const id = getManusComponentId(component);
-
-      if (id) {
-        ids.add(id);
-      }
-    }
-
-    return {
-      ids,
-      total: ids.size,
-      error: components.length === 0 ? "Manus manifest contained no component entries" : undefined,
-    };
-  } catch (error) {
-    if ((error as NodeJS.ErrnoException).code === "ENOENT") {
-      return {
-        ids: new Set(),
-        total: 0,
-        error: "missing",
-      };
-    }
-
+  if (!manifest) {
     return {
       ids: new Set(),
       total: 0,
-      error: `Failed to load Manus manifest: ${(error as Error).message}`,
+      error: "missing",
     };
   }
+
+  const components = Array.isArray(manifest.components) ? (manifest.components as ManusComponent[]) : [];
+  const ids = new Set<string>();
+
+  for (const component of components) {
+    const id = getManusComponentId(component);
+
+    if (id) {
+      ids.add(id);
+    }
+  }
+
+  return {
+    ids,
+    total: ids.size,
+    error: components.length === 0 ? "Manus manifest contained no component entries" : undefined,
+  };
 }
 
 function getManusComponentId(component: ManusComponent): string | null {
@@ -174,6 +136,57 @@ function pickString(record: ManusComponent, keys: string[]): string | null {
   return null;
 }
 
+async function readManifestJson<T>(relativePath: string): Promise<T | null> {
+  const url = createAbsoluteUrl(relativePath);
+
+  try {
+    const response = await fetch(url, { cache: "no-store" });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch manifest: ${response.status}`);
+    }
+
+    return (await response.json()) as T;
+  } catch (error) {
+    if (process.env.NODE_ENV !== "production") {
+      const localPath = relativePath.startsWith("/") ? relativePath.slice(1) : relativePath;
+      const filePath = path.join(process.cwd(), "public", localPath);
+
+      try {
+        const raw = await fs.readFile(filePath, "utf8");
+        return JSON.parse(raw) as T;
+      } catch {
+        // Ignore and fall through to return null.
+      }
+    }
+
+    console.error(`Manifest load failed for ${relativePath}:`, error);
+    return null;
+  }
+}
+
+function createAbsoluteUrl(pathname: string): string {
+  let headersList: ReturnType<typeof headers> | null = null;
+
+  try {
+    headersList = headers();
+  } catch {
+    headersList = null;
+  }
+
+  const host = headersList?.get("x-forwarded-host") ?? headersList?.get("host");
+  const protocol = headersList?.get("x-forwarded-proto") ?? (host?.includes("localhost") ? "http" : "https");
+
+  if (host) {
+    return new URL(pathname, `${protocol}://${host}`).toString();
+  }
+
+  const fallbackBase =
+    process.env.NEXT_PUBLIC_SITE_URL ?? (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+
+  return new URL(pathname, fallbackBase).toString();
+}
+
 async function getReportAvailability(root = process.cwd()): Promise<boolean> {
   const reportPath = path.join(root, "scripts", "reports", "compare-manus-to-champagne.json");
 
@@ -188,8 +201,8 @@ async function getReportAvailability(root = process.cwd()): Promise<boolean> {
 export default async function ManusAuditPage() {
   const root = process.cwd();
   const [champagne, manus, reportExists] = await Promise.all([
-    loadChampagneComponents(root),
-    loadManusComponents(root),
+    loadChampagneComponents(),
+    loadManusComponents(),
     getReportAvailability(root),
   ]);
 
@@ -204,9 +217,7 @@ export default async function ManusAuditPage() {
         <p className="text-sm text-neutral-500">
           Quick comparison between the Manus delivery package and the Champagne canon manifest.
         </p>
-        <p className="text-xs text-neutral-500">
-          Audit loaded manifests from /public/assets/champagne and /public/brand.
-        </p>
+        <p className="text-xs text-neutral-500">Audit loads manifests from /public/brand.</p>
       </header>
 
       <section className="space-y-3 rounded-lg border border-white/10 bg-white/5 p-6">
