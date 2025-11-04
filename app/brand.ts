@@ -3,6 +3,8 @@ import {
   getParticles as loadParticles,
   getTextures as loadTextures,
   getWaves as loadWaves,
+  loadChampagneSpec,
+  loadManusImport,
 } from "@/lib/brand/manifest";
 
 export {
@@ -10,6 +12,8 @@ export {
   loadParticles as getParticles,
   loadTextures as getTextures,
   loadWaves as getWaves,
+  loadChampagneSpec,
+  loadManusImport,
 };
 
 export async function getHeroLayers() {

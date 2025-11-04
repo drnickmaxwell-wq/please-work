@@ -1,3 +1,6 @@
+import { readFile } from "node:fs/promises";
+import path from "node:path";
+
 export type BrandManifest = {
   name: string;
   gradientVar?: string;
@@ -37,7 +40,34 @@ type ManifestMotion = {
   [key: string]: string | undefined;
 };
 
+export type ChampagneSpecEntry = Record<string, unknown>;
+
+export type ChampagneSpec = {
+  spec?: string;
+  entries: ChampagneSpecEntry[];
+  [key: string]: unknown;
+};
+
+export type ManusImport = {
+  components?: unknown[];
+  assets_summary?: unknown;
+  [key: string]: unknown;
+};
+
 const MANIFEST_PATH = "/brand/manifest.json";
+
+const CHAMPAGNE_SPEC_RELATIVE_PATH = path.join(
+  "brand",
+  "champagne_machine_manifest_full.json",
+);
+
+const MANUS_IMPORT_RELATIVE_PATH = path.join(
+  "brand",
+  "manus_import_unified_manifest_20251104.json",
+);
+
+const jsonCache = new Map<string, unknown>();
+const jsonPromiseCache = new Map<string, Promise<unknown | null>>();
 
 let manifestCache: BrandManifest | null = null;
 let manifestPromise: Promise<BrandManifest> | null = null;
@@ -78,6 +108,66 @@ export async function getHeroLayers() {
     particles: manifest.particles,
     motion: manifest.motion,
   };
+}
+
+async function readJsonFile<T>(
+  relativePath: string,
+  label: string,
+): Promise<T | null> {
+  if (jsonCache.has(relativePath)) {
+    return jsonCache.get(relativePath) as T | null;
+  }
+
+  const existingPromise = jsonPromiseCache.get(relativePath);
+  if (existingPromise) {
+    return (await existingPromise) as T | null;
+  }
+
+  const fullPath = path.join(process.cwd(), relativePath);
+  const promise = readFile(fullPath, "utf8")
+    .then((raw) => {
+      const parsed = JSON.parse(raw) as T;
+      jsonCache.set(relativePath, parsed as unknown);
+      jsonPromiseCache.delete(relativePath);
+      return parsed;
+    })
+    .catch((error) => {
+      jsonCache.delete(relativePath);
+      jsonPromiseCache.delete(relativePath);
+
+      const details =
+        error instanceof Error ? `${error.message}` : String(error);
+      const message = `Failed to load ${label} at ${fullPath}: ${details}`;
+
+      if (process.env.NODE_ENV === "production") {
+        console.error(message);
+        return null;
+      }
+
+      if (error instanceof Error) {
+        error.message = message;
+        throw error;
+      }
+
+      throw new Error(message);
+    });
+
+  jsonPromiseCache.set(relativePath, promise as Promise<unknown | null>);
+  return promise;
+}
+
+export async function loadChampagneSpec(): Promise<ChampagneSpec | null> {
+  return readJsonFile<ChampagneSpec>(
+    CHAMPAGNE_SPEC_RELATIVE_PATH,
+    "champagne spec",
+  );
+}
+
+export async function loadManusImport(): Promise<ManusImport | null> {
+  return readJsonFile<ManusImport>(
+    MANUS_IMPORT_RELATIVE_PATH,
+    "Manus import",
+  );
 }
 
 function resolveManifestUrl() {

@@ -16,6 +16,8 @@
     "brand:audit": "node scripts/brand-audit.cjs",
     "brand:report": "node scripts/brand-report.cjs",
     "brand:manifest": "node -e \"console.log(require('fs').readFileSync('public/brand/manifest.json','utf8'))\"",
+    "brand:spec": "node scripts/print-brand-spec.mjs",
+    "brand:manus": "node scripts/print-manus-import.mjs",
     "verify:hue": "node scripts/verify-hue.cjs",
     "verify:brand": "pnpm exec playwright test tests/brand-lock.spec.ts",
     "verify:visual": "pnpm exec playwright test preview/brand-live.spec.ts",
