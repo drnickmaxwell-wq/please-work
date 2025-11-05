@@ -2,7 +2,8 @@ export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-import { readFile, readdir, stat } from "fs/promises";
+import { headers } from "next/headers";
+import { readdir, stat } from "fs/promises";
 import { join } from "path";
 
 const CWD = process.cwd();
@@ -16,8 +17,8 @@ type LoadResult<T> =
   | {
       ok: true;
       json: T;
-      status: 200;
-      statusText: "OK";
+      status: number;
+      statusText: string;
       pathTried: string;
     }
   | {
@@ -27,55 +28,87 @@ type LoadResult<T> =
       statusText: string;
       pathTried: string;
       error: string;
-      code?: string;
     };
 
-async function safeReadJson<T>(absPath: string): Promise<LoadResult<T>> {
+type ManifestSummary = {
+  componentCount: number;
+  componentKeys: Set<string>;
+  assetCount: number;
+  assetPaths: Set<string>;
+  guardCount: number;
+  guardEntries: Set<string>;
+};
+
+function createBaseUrl() {
+  const headerList = headers();
+  const forwardedProto = headerList.get("x-forwarded-proto");
+  const forwardedHost = headerList.get("x-forwarded-host");
+  const host = forwardedHost || headerList.get("host") || "localhost:3000";
+  const protocol = forwardedProto || (host.includes("localhost") ? "http" : "https");
+  return `${protocol}://${host}`;
+}
+
+async function fetchManifest<T = unknown>(fileName: string): Promise<LoadResult<T>> {
+  const baseUrl = createBaseUrl();
+  const url = new URL(`/brand/${fileName}`, baseUrl);
+
   try {
-    const buf = await readFile(absPath);
-    try {
-      const json = JSON.parse(buf.toString()) as T;
-      return { ok: true, json, status: 200, statusText: "OK", pathTried: absPath };
-    } catch (e: any) {
+    const response = await fetch(url, { cache: "no-store" });
+    const statusText = response.statusText || "";
+
+    if (!response.ok) {
+      return {
+        ok: false,
+        json: null,
+        status: response.status,
+        statusText: statusText || "request failed",
+        pathTried: url.toString(),
+        error: `HTTP ${response.status} ${statusText || ""}`.trim(),
+      };
+    }
+
+    const body = await response.text();
+
+    if (!body.trim()) {
       return {
         ok: false,
         json: null,
         status: 422,
-        statusText: "json parse error",
-        pathTried: absPath,
-        error: String(e?.message || e),
+        statusText: "empty file",
+        pathTried: url.toString(),
+        error: "Manifest file is empty (0 bytes).",
       };
     }
-  } catch (e: any) {
-    const code = e?.code;
-    const status = code === "ENOENT" ? 404 : 500;
-    const statusText = code === "ENOENT" ? "not found" : "fs error";
+
+    try {
+      const json = JSON.parse(body) as T;
+      return {
+        ok: true,
+        json,
+        status: response.status,
+        statusText: statusText || "OK",
+        pathTried: url.toString(),
+      };
+    } catch (error: unknown) {
+      return {
+        ok: false,
+        json: null,
+        status: 422,
+        statusText: "invalid json",
+        pathTried: url.toString(),
+        error: String((error as { message?: unknown })?.message ?? error),
+      };
+    }
+  } catch (error: unknown) {
     return {
       ok: false,
       json: null,
-      status,
-      statusText,
-      pathTried: absPath,
-      error: String(e?.message || e),
-      code,
+      status: 0,
+      statusText: "network error",
+      pathTried: url.toString(),
+      error: String((error as { message?: unknown })?.message ?? error),
     };
   }
-}
-
-async function loadFromEither<T>(
-  fileName: string
-): Promise<{ tried: string[]; result: LoadResult<T> }> {
-  const candidates = [join(BRAND_PUBLIC, fileName), join(BRAND_ROOT, fileName)];
-  let lastResult: LoadResult<T> | null = null;
-  for (const abs of candidates) {
-    const res = await safeReadJson<T>(abs);
-    lastResult = res;
-    if (res.ok) {
-      return { tried: candidates, result: res };
-    }
-  }
-  const result = lastResult ?? (await safeReadJson<T>(candidates[candidates.length - 1]));
-  return { tried: candidates, result };
 }
 
 async function listDir(absDir: string) {
@@ -92,71 +125,177 @@ async function listDir(absDir: string) {
       })
     );
     return { ok: true as const, dir: absDir, entries: detailed };
-  } catch (e: any) {
-    return { ok: false as const, dir: absDir, error: String(e?.message || e) };
+  } catch (error: unknown) {
+    return {
+      ok: false as const,
+      dir: absDir,
+      error: String((error as { message?: unknown })?.message ?? error),
+    };
   }
 }
 
-function summarise(manifest: any | null) {
+function addToSet(set: Set<string>, value: unknown) {
+  if (typeof value === "string" && value.trim()) {
+    set.add(value.trim());
+  } else if (typeof value === "number") {
+    set.add(String(value));
+  }
+}
+
+function summarise(manifest: unknown): ManifestSummary {
+  const componentKeys = new Set<string>();
+  const assetPaths = new Set<string>();
+  const guardEntries = new Set<string>();
+
   if (!manifest || typeof manifest !== "object") {
-    return { total: 0, sectionKeys: new Set<string>() };
+    return {
+      componentCount: 0,
+      componentKeys,
+      assetCount: 0,
+      assetPaths,
+      guardCount: 0,
+      guardEntries,
+    };
   }
 
-  const sectionSource = manifest.sections;
-  let sectionKeys: string[] = [];
+  const { sections, components, assets_summary: assetsSummary, guards } = manifest as Record<
+    string,
+    unknown
+  >;
 
-  if (Array.isArray(sectionSource)) {
-    sectionKeys = sectionSource.map((item) => String(item));
-  } else if (sectionSource && typeof sectionSource === "object") {
-    sectionKeys = Object.keys(sectionSource as Record<string, unknown>);
-  } else if (manifest.components && typeof manifest.components === "object") {
-    if (Array.isArray(manifest.components)) {
-      sectionKeys = manifest.components.map((item: unknown) => String(item));
-    } else {
-      sectionKeys = Object.keys(manifest.components as Record<string, unknown>);
+  if (sections) {
+    if (Array.isArray(sections)) {
+      for (const entry of sections) {
+        addToSet(componentKeys, entry);
+      }
+    } else if (typeof sections === "object") {
+      Object.keys(sections as Record<string, unknown>).forEach((key) => addToSet(componentKeys, key));
     }
   }
 
-  const sections = new Set<string>(sectionKeys);
-  return { total: sections.size, sectionKeys: sections };
+  if (components) {
+    if (Array.isArray(components)) {
+      for (const component of components) {
+        if (component && typeof component === "object") {
+          const record = component as Record<string, unknown>;
+          if (record.id) {
+            addToSet(componentKeys, record.id);
+          } else if (record.key) {
+            addToSet(componentKeys, record.key);
+          } else if (record.name) {
+            addToSet(componentKeys, record.name);
+          }
+
+          const assets = record.assets;
+          if (Array.isArray(assets)) {
+            for (const asset of assets) {
+              if (asset && typeof asset === "object") {
+                const assetRecord = asset as Record<string, unknown>;
+                if (assetRecord.path) {
+                  addToSet(assetPaths, assetRecord.path);
+                } else if (assetRecord.file) {
+                  addToSet(assetPaths, assetRecord.file);
+                }
+              } else {
+                addToSet(assetPaths, asset);
+              }
+            }
+          }
+        } else {
+          addToSet(componentKeys, component);
+        }
+      }
+    } else if (typeof components === "object") {
+      Object.keys(components as Record<string, unknown>).forEach((key) => addToSet(componentKeys, key));
+    }
+  }
+
+  if (assetsSummary && typeof assetsSummary === "object") {
+    for (const value of Object.values(assetsSummary as Record<string, unknown>)) {
+      if (Array.isArray(value)) {
+        for (const asset of value) {
+          if (asset && typeof asset === "object") {
+            const assetRecord = asset as Record<string, unknown>;
+            if (assetRecord.file) {
+              addToSet(assetPaths, assetRecord.file);
+            } else if (assetRecord.path) {
+              addToSet(assetPaths, assetRecord.path);
+            }
+          } else {
+            addToSet(assetPaths, asset);
+          }
+        }
+      }
+    }
+  }
+
+  if (guards && typeof guards === "object") {
+    for (const guardValue of Object.values(guards as Record<string, unknown>)) {
+      if (Array.isArray(guardValue)) {
+        for (const entry of guardValue) {
+          addToSet(guardEntries, entry);
+        }
+      } else if (guardValue && typeof guardValue === "object") {
+        Object.values(guardValue as Record<string, unknown>).forEach((entry) => addToSet(guardEntries, entry));
+      } else {
+        addToSet(guardEntries, guardValue);
+      }
+    }
+  }
+
+  return {
+    componentCount: componentKeys.size,
+    componentKeys,
+    assetCount: assetPaths.size,
+    assetPaths,
+    guardCount: guardEntries.size,
+    guardEntries,
+  };
+}
+
+function hasVersion(candidate: unknown, version: string) {
+  if (!candidate || typeof candidate !== "object") {
+    return false;
+  }
+
+  const record = candidate as { version?: unknown };
+  return typeof record.version === "string" && record.version === version;
 }
 
 export default async function ManusAuditPage() {
   const [brandPublicList, brandRootList, champagne, manus] = await Promise.all([
     listDir(BRAND_PUBLIC),
     listDir(BRAND_ROOT),
-    loadFromEither<any>(CHAMPAGNE_MANIFEST_FILE),
-    loadFromEither<any>(MANUS_MANIFEST_FILE),
+    fetchManifest(CHAMPAGNE_MANIFEST_FILE),
+    fetchManifest(MANUS_MANIFEST_FILE),
   ]);
 
-  const champagneJson = champagne.result.ok ? champagne.result.json : null;
-  const manusJson = manus.result.ok ? manus.result.json : null;
+  const champagneJson = champagne.ok ? champagne.json : null;
+  const manusJson = manus.ok ? manus.json : null;
 
   const champagneSummary = summarise(champagneJson);
   const manusSummary = summarise(manusJson);
 
-  const missingInManus =
-    champagne.result.ok && manus.result.ok
-      ? [...champagneSummary.sectionKeys]
-          .filter((k) => !manusSummary.sectionKeys.has(k))
-          .sort()
-      : [];
-  const unexpectedInManus =
-    champagne.result.ok && manus.result.ok
-      ? [...manusSummary.sectionKeys]
-          .filter((k) => !champagneSummary.sectionKeys.has(k))
-          .sort()
-      : [];
+  const missingInManus = champagne.ok && manus.ok
+    ? [...champagneSummary.componentKeys]
+        .filter((key) => !manusSummary.componentKeys.has(key))
+        .sort()
+    : [];
+
+  const extraInManus = champagne.ok && manus.ok
+    ? [...manusSummary.componentKeys]
+        .filter((key) => !champagneSummary.componentKeys.has(key))
+        .sort()
+    : [];
 
   const trimError = (error: string) =>
     error.length > 180 ? `${error.slice(0, 180)}…` : error;
 
-  const champagneErrorSnippet = !champagne.result.ok ? trimError(champagne.result.error) : null;
-  const manusErrorSnippet = !manus.result.ok ? trimError(manus.result.error) : null;
+  const champagneErrorSnippet = !champagne.ok ? trimError(champagne.error) : null;
+  const manusErrorSnippet = !manus.ok ? trimError(manus.error) : null;
 
-  const champagneStubLoaded =
-    champagneJson && typeof champagneJson === "object" && champagneJson.version === "canon-stub-1";
-  const manusStubLoaded = manusJson && typeof manusJson === "object" && manusJson.version === "canon-stub-1";
+  const champagneStubLoaded = hasVersion(champagneJson, "canon-stub-1");
+  const manusStubLoaded = hasVersion(manusJson, "canon-stub-1");
 
   return (
     <main className="prose max-w-3xl mx-auto p-6">
@@ -223,16 +362,12 @@ export default async function ManusAuditPage() {
             <h4>Champagne manifest</h4>
             <ul>
               <li>
-                status: {champagne.result.status} {champagne.result.statusText}
-                {champagne.result.code ? ` (${champagne.result.code})` : ""}
+                status: {champagne.status} {champagne.statusText}
               </li>
               <li>
-                last path tried: <code>{champagne.result.pathTried}</code>
+                path: <code>{champagne.pathTried}</code>
               </li>
-              <li>
-                candidates tried: <code>{champagne.tried.join(", ")}</code>
-              </li>
-              {!champagne.result.ok && champagneErrorSnippet ? (
+              {!champagne.ok && champagneErrorSnippet ? (
                 <li>
                   error: <code>{champagneErrorSnippet}</code>
                 </li>
@@ -243,16 +378,12 @@ export default async function ManusAuditPage() {
             <h4>Manus manifest</h4>
             <ul>
               <li>
-                status: {manus.result.status} {manus.result.statusText}
-                {manus.result.code ? ` (${manus.result.code})` : ""}
+                status: {manus.status} {manus.statusText}
               </li>
               <li>
-                last path tried: <code>{manus.result.pathTried}</code>
+                path: <code>{manus.pathTried}</code>
               </li>
-              <li>
-                candidates tried: <code>{manus.tried.join(", ")}</code>
-              </li>
-              {!manus.result.ok && manusErrorSnippet ? (
+              {!manus.ok && manusErrorSnippet ? (
                 <li>
                   error: <code>{manusErrorSnippet}</code>
                 </li>
@@ -262,19 +393,31 @@ export default async function ManusAuditPage() {
         </div>
       </section>
 
-      <h3>Component totals</h3>
+      <h3>Totals</h3>
       <ul>
         <li>
-          Champagne reference: <b>{champagneSummary.total}</b>
-          {champagne.result.ok
+          Champagne components: <b>{champagneSummary.componentCount}</b>
+          {champagne.ok
             ? ""
-            : ` (missing: ${champagne.result.status} ${champagne.result.statusText}${champagne.result.code ? ` ${champagne.result.code}` : ""})`}
+            : ` (unavailable: ${champagne.status} ${champagne.statusText})`}
         </li>
         <li>
-          Manus package: <b>{manusSummary.total}</b>
-          {manus.result.ok
+          Manus components: <b>{manusSummary.componentCount}</b>
+          {manus.ok
             ? ""
-            : ` (missing: ${manus.result.status} ${manus.result.statusText}${manus.result.code ? ` ${manus.result.code}` : ""})`}
+            : ` (unavailable: ${manus.status} ${manus.statusText})`}
+        </li>
+        <li>
+          Champagne assets tracked: <b>{champagneSummary.assetCount}</b>
+        </li>
+        <li>
+          Manus assets tracked: <b>{manusSummary.assetCount}</b>
+        </li>
+        <li>
+          Champagne guard entries: <b>{champagneSummary.guardCount}</b>
+        </li>
+        <li>
+          Manus guard entries: <b>{manusSummary.guardCount}</b>
         </li>
       </ul>
 
@@ -283,21 +426,29 @@ export default async function ManusAuditPage() {
       ) : null}
 
       <h3>Missing from Manus</h3>
-      {missingInManus.length ? (
-        <ul>{missingInManus.map((k) => <li key={k}>{k}</li>)}</ul>
+      {champagne.ok && manus.ok ? (
+        missingInManus.length ? (
+          <ul>{missingInManus.map((k) => <li key={k}>{k}</li>)}</ul>
+        ) : (
+          <p>No gaps detected between the manifests.</p>
+        )
       ) : (
-        <p>No gaps detected between the manifests.</p>
+        <p>Waiting for both manifests to load before diffing.</p>
       )}
 
-      <h3>Unexpected or mismatched entries</h3>
-      {unexpectedInManus.length ? (
-        <ul>{unexpectedInManus.map((k) => <li key={k}>{k}</li>)}</ul>
+      <h3>Extra in Manus</h3>
+      {champagne.ok && manus.ok ? (
+        extraInManus.length ? (
+          <ul>{extraInManus.map((k) => <li key={k}>{k}</li>)}</ul>
+        ) : (
+          <p>No Manus-only entries detected.</p>
+        )
       ) : (
-        <p>No Manus-only entries detected.</p>
+        <p>Waiting for both manifests to load before diffing.</p>
       )}
 
       <h3>Report</h3>
-      <pre>Run: pnpm exec node scripts/compare-manus-to-champagne.mjs</pre>
+      <pre>Run: pnpm brand:audit</pre>
     </main>
   );
 }
