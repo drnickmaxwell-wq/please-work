@@ -101,11 +101,23 @@ function summarise(manifest: any | null) {
   if (!manifest || typeof manifest !== "object") {
     return { total: 0, sectionKeys: new Set<string>() };
   }
-  const sections = new Set<string>(
-    Array.isArray(manifest.sections)
-      ? manifest.sections
-      : Object.keys((manifest.components ?? {}) as Record<string, unknown>)
-  );
+
+  const sectionSource = manifest.sections;
+  let sectionKeys: string[] = [];
+
+  if (Array.isArray(sectionSource)) {
+    sectionKeys = sectionSource.map((item) => String(item));
+  } else if (sectionSource && typeof sectionSource === "object") {
+    sectionKeys = Object.keys(sectionSource as Record<string, unknown>);
+  } else if (manifest.components && typeof manifest.components === "object") {
+    if (Array.isArray(manifest.components)) {
+      sectionKeys = manifest.components.map((item: unknown) => String(item));
+    } else {
+      sectionKeys = Object.keys(manifest.components as Record<string, unknown>);
+    }
+  }
+
+  const sections = new Set<string>(sectionKeys);
   return { total: sections.size, sectionKeys: sections };
 }
 
@@ -117,8 +129,11 @@ export default async function ManusAuditPage() {
     loadFromEither<any>(MANUS_MANIFEST_FILE),
   ]);
 
-  const champagneSummary = summarise(champagne.result.ok ? champagne.result.json : null);
-  const manusSummary = summarise(manus.result.ok ? manus.result.json : null);
+  const champagneJson = champagne.result.ok ? champagne.result.json : null;
+  const manusJson = manus.result.ok ? manus.result.json : null;
+
+  const champagneSummary = summarise(champagneJson);
+  const manusSummary = summarise(manusJson);
 
   const missingInManus =
     champagne.result.ok && manus.result.ok
@@ -138,6 +153,10 @@ export default async function ManusAuditPage() {
 
   const champagneErrorSnippet = !champagne.result.ok ? trimError(champagne.result.error) : null;
   const manusErrorSnippet = !manus.result.ok ? trimError(manus.result.error) : null;
+
+  const champagneStubLoaded =
+    champagneJson && typeof champagneJson === "object" && champagneJson.version === "canon-stub-1";
+  const manusStubLoaded = manusJson && typeof manusJson === "object" && manusJson.version === "canon-stub-1";
 
   return (
     <main className="prose max-w-3xl mx-auto p-6">
@@ -258,6 +277,10 @@ export default async function ManusAuditPage() {
             : ` (missing: ${manus.result.status} ${manus.result.statusText}${manus.result.code ? ` ${manus.result.code}` : ""})`}
         </li>
       </ul>
+
+      {champagneStubLoaded || manusStubLoaded ? (
+        <p>Champagne reference loaded as stub (replace with full canon).</p>
+      ) : null}
 
       <h3>Missing from Manus</h3>
       {missingInManus.length ? (
