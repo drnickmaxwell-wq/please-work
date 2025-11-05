@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { headers } from "next/headers";
 import path from "node:path";
 import { promises as fs } from "node:fs";
 
@@ -233,26 +232,40 @@ function formatFetchFailure(url: string, status?: number, statusText?: string): 
   return `Fetch failed: ${url} — ${statusLabel}${text ? ` ${text}` : ""}`;
 }
 
-function createAbsoluteUrl(pathname: string): string {
-  let headersList: ReturnType<typeof headers> | null = null;
+async function readManifestFromFs<T>(relativePath: string): Promise<T | null> {
+  const localPath = relativePath.startsWith("/") ? relativePath.slice(1) : relativePath;
+  const filePath = path.join(process.cwd(), "public", localPath);
 
   try {
-    headersList = headers();
+    const raw = await fs.readFile(filePath, "utf8");
+    return JSON.parse(raw) as T;
   } catch {
-    headersList = null;
+    return null;
+  }
+}
+
+function formatStatus(status: number, statusText: string): string {
+  const parts: string[] = [];
+
+  if (Number.isFinite(status)) {
+    parts.push(String(status));
   }
 
-  const host = headersList?.get("x-forwarded-host") ?? headersList?.get("host");
-  const protocol = headersList?.get("x-forwarded-proto") ?? (host?.includes("localhost") ? "http" : "https");
-
-  if (host) {
-    return new URL(pathname, `${protocol}://${host}`).toString();
+  if (statusText) {
+    parts.push(statusText);
   }
 
-  const fallbackBase =
-    process.env.NEXT_PUBLIC_SITE_URL ?? (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+  return parts.join(" ").trim();
+}
 
-  return new URL(pathname, fallbackBase).toString();
+function combineErrors(...messages: Array<string | undefined>): string | undefined {
+  const filtered = messages.filter((message): message is string => Boolean(message));
+
+  if (filtered.length === 0) {
+    return undefined;
+  }
+
+  return filtered.join(" — ");
 }
 
 async function getReportAvailability(root = process.cwd()): Promise<boolean> {
