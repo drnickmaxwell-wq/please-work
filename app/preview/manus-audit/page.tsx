@@ -1,44 +1,40 @@
+export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-import { makeAbsolute } from "@/lib/url/absolute";
+import { readFile } from "fs/promises";
+import { join } from "path";
 
-const CHAMPAGNE_MANIFEST_PATH = "/api/brand-manifest/champagne_machine_manifest_full.json";
-const MANUS_MANIFEST_PATH = "/api/brand-manifest/manus_import_unified_manifest_20251104.json";
+const BRAND_DIR = join(process.cwd(), "public", "brand");
 
-type FetchJsonResult<T = unknown> = {
-  ok: boolean;
-  url: string;
-  status: number;
-  statusText: string;
-  json?: T | null;
-  error?: string;
-};
+const CHAMPAGNE_MANIFEST_FILE = "champagne_machine_manifest_full.json";
+const MANUS_MANIFEST_FILE = "manus_import_unified_manifest_20251104.json";
 
-function formatStatus(status: number, statusText: string) {
-  const cleaned = statusText ? statusText.toLowerCase() : "";
-  if (!status) {
-    return cleaned || "fetch error";
-  }
-  return cleaned ? `${status} ${cleaned}` : `${status}`;
-}
+type LoadJsonResult<T = unknown> =
+  | { ok: true; url: string; status: number; statusText: string; json: T }
+  | { ok: false; url: string; status: number; statusText: string; json: null };
 
-async function fetchJson<T = unknown>(relativePath: string): Promise<FetchJsonResult<T>> {
-  const url = makeAbsolute(relativePath);
+async function loadJson<T>(fileName: string): Promise<LoadJsonResult<T>> {
+  const url = `/brand/${fileName}`;
   try {
-    const res = await fetch(url, { cache: "no-store" });
-    const statusText = formatStatus(res.status, res.statusText);
-    if (!res.ok) {
-      return { ok: false, url, status: res.status, statusText, json: null, error: "bad status" };
-    }
-    const json = await res.json().catch(() => null);
-    if (!json) {
-      return { ok: false, url, status: res.status, statusText, json: null, error: "invalid json" };
-    }
-    return { ok: true, url, status: res.status, statusText, json };
-  } catch (e: any) {
-    const statusText = formatStatus(0, "fetch error");
-    return { ok: false, url, status: 0, statusText, json: null, error: e?.message || "fetch error" };
+    const buf = await readFile(join(BRAND_DIR, fileName));
+    return {
+      ok: true,
+      json: JSON.parse(buf.toString()) as T,
+      status: 200,
+      statusText: "OK",
+      url,
+    };
+  } catch (err: any) {
+    const msg = (err && err.message) || "read error";
+    const notFound = msg.includes("ENOENT");
+    return {
+      ok: false,
+      json: null,
+      status: notFound ? 404 : 500,
+      statusText: notFound ? "not found" : "fs error",
+      url,
+    };
   }
 }
 
@@ -56,8 +52,8 @@ function summarise(manifest: any | null) {
 
 export default async function ManusAuditPage() {
   const [champagneRes, manusRes] = await Promise.all([
-    fetchJson(CHAMPAGNE_MANIFEST_PATH),
-    fetchJson(MANUS_MANIFEST_PATH),
+    loadJson<any>(CHAMPAGNE_MANIFEST_FILE),
+    loadJson<any>(MANUS_MANIFEST_FILE),
   ]);
 
   const champagne = summarise(champagneRes.ok ? champagneRes.json : null);
@@ -74,10 +70,16 @@ export default async function ManusAuditPage() {
       <h3>Audit loads manifests from /public/brand</h3>
       <ul>
         <li>
-          Champagne URL: <code>{champagneRes.url}</code> {champagneRes.ok ? "OK" : `(missing: ${champagneRes.statusText})`}
+          Champagne URL: <code>{champagneRes.url}</code>{" "}
+          {champagneRes.ok
+            ? `(${champagneRes.status} ${champagneRes.statusText})`
+            : `(status: ${champagneRes.status} ${champagneRes.statusText})`}
         </li>
         <li>
-          Manus URL: <code>{manusRes.url}</code> {manusRes.ok ? "OK" : `(missing: ${manusRes.statusText})`}
+          Manus URL: <code>{manusRes.url}</code>{" "}
+          {manusRes.ok
+            ? `(${manusRes.status} ${manusRes.statusText})`
+            : `(status: ${manusRes.status} ${manusRes.statusText})`}
         </li>
       </ul>
 
