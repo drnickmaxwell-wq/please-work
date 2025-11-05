@@ -3,8 +3,8 @@ export const revalidate = 0;
 
 import { makeAbsolute } from "@/lib/url/absolute";
 
-const CHAMPAGNE_MANIFEST_PATH = "/brand/champagne_machine_manifest_full.json";
-const MANUS_MANIFEST_PATH = "/brand/manus_import_unified_manifest_20251104.json";
+const CHAMPAGNE_MANIFEST_PATH = "/api/brand-manifest/champagne_machine_manifest_full.json";
+const MANUS_MANIFEST_PATH = "/api/brand-manifest/manus_import_unified_manifest_20251104.json";
 
 type FetchJsonResult<T = unknown> = {
   ok: boolean;
@@ -15,20 +15,30 @@ type FetchJsonResult<T = unknown> = {
   error?: string;
 };
 
+function formatStatus(status: number, statusText: string) {
+  const cleaned = statusText ? statusText.toLowerCase() : "";
+  if (!status) {
+    return cleaned || "fetch error";
+  }
+  return cleaned ? `${status} ${cleaned}` : `${status}`;
+}
+
 async function fetchJson<T = unknown>(relativePath: string): Promise<FetchJsonResult<T>> {
   const url = makeAbsolute(relativePath);
   try {
     const res = await fetch(url, { cache: "no-store" });
+    const statusText = formatStatus(res.status, res.statusText);
     if (!res.ok) {
-      return { ok: false, url, status: res.status, statusText: res.statusText, json: null, error: "bad status" };
+      return { ok: false, url, status: res.status, statusText, json: null, error: "bad status" };
     }
     const json = await res.json().catch(() => null);
     if (!json) {
-      return { ok: false, url, status: res.status, statusText: res.statusText, json: null, error: "invalid json" };
+      return { ok: false, url, status: res.status, statusText, json: null, error: "invalid json" };
     }
-    return { ok: true, url, status: res.status, statusText: res.statusText, json };
+    return { ok: true, url, status: res.status, statusText, json };
   } catch (e: any) {
-    return { ok: false, url, status: 0, statusText: "fetch error", json: null, error: e?.message || "fetch error" };
+    const statusText = formatStatus(0, "fetch error");
+    return { ok: false, url, status: 0, statusText, json: null, error: e?.message || "fetch error" };
   }
 }
 
