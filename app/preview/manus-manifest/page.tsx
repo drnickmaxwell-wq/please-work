@@ -312,13 +312,7 @@ function StatusList({ label, result }: { label: string; result: ManifestLoad }) 
   );
 }
 
-function SummaryTable({
-  champagne,
-  manus,
-}: {
-  champagne: ManifestLoad;
-  manus: ManifestLoad;
-}) {
+function SummaryTable({ champagne, manus }: { champagne: ManifestLoad; manus: ManifestLoad }) {
   const rows: { label: string; champagne: number; manus: number }[] = [
     {
       label: "Components",
@@ -361,21 +355,37 @@ function SummaryTable({
   );
 }
 
-export default async function ManusAuditPage() {
+export default async function ManusManifestExplorerPage() {
   const [champagne, manus] = await Promise.all([
     fetchManifest(CHAMPAGNE_MANIFEST_FILE),
     fetchManifest(MANUS_MANIFEST_FILE),
   ]);
 
   const diff = diffComponents(champagne, manus);
+  const warnChampagne =
+    !champagne.ok &&
+    (champagne.statusText === "empty body" || champagne.statusText === "json parse error");
+  const warnManus =
+    !manus.ok && (manus.statusText === "empty body" || manus.statusText === "json parse error");
+  const showWarning = warnChampagne || warnManus;
 
   return (
     <main className="prose max-w-4xl mx-auto p-6">
-      <h1>Manus manifest audit</h1>
+      <h1>Manus manifest explorer</h1>
       <p>
-        Read-only comparison of the Champagne canon manifest and the imported Manus
-        manifest located in <code>/public/brand</code>.
+        Read-only view of the Champagne canon and Manus manifests stored under
+        <code>/public/brand</code>.
       </p>
+
+      {showWarning ? (
+        <div className="border-l-4 border-yellow-400 bg-yellow-100 p-4 text-yellow-900">
+          <p className="font-semibold">Manifest warning</p>
+          <ul className="mt-2 space-y-1">
+            {warnChampagne ? <li>{champagne.error}</li> : null}
+            {warnManus ? <li>{manus.error}</li> : null}
+          </ul>
+        </div>
+      ) : null}
 
       <section>
         <h2>Manifest status</h2>
@@ -391,7 +401,53 @@ export default async function ManusAuditPage() {
       </section>
 
       <section>
-        <h2>Differences</h2>
+        <h2>Components</h2>
+        <div className="grid gap-6 md:grid-cols-2">
+          <div>
+            <h3>Champagne</h3>
+            {champagne.ok && champagne.components.length ? (
+              <ul>
+                {champagne.components.map((component) => (
+                  <li key={component.id}>
+                    <span className="font-medium">{component.id}</span>
+                    {component.previewRoute ? (
+                      <>
+                        {" — "}
+                        <Link href={component.previewRoute}>preview</Link>
+                      </>
+                    ) : null}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>No components available.</p>
+            )}
+          </div>
+          <div>
+            <h3>Manus</h3>
+            {manus.ok && manus.components.length ? (
+              <ul>
+                {manus.components.map((component) => (
+                  <li key={component.id}>
+                    <span className="font-medium">{component.id}</span>
+                    {component.previewRoute ? (
+                      <>
+                        {" — "}
+                        <Link href={component.previewRoute}>preview</Link>
+                      </>
+                    ) : null}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>No components available.</p>
+            )}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Component diff</h2>
         {champagne.ok && manus.ok ? (
           <div className="grid gap-4 md:grid-cols-2">
             <div>
@@ -421,18 +477,9 @@ export default async function ManusAuditPage() {
           </div>
         ) : (
           <p className="text-amber-600">
-            Unable to compute differences until both manifests load successfully.
+            Differences are available once both manifests load successfully.
           </p>
         )}
-      </section>
-
-      <section>
-        <h2>Next steps</h2>
-        <p>
-          Run <code>pnpm brand:audit</code> for the CLI diff or explore component previews via
-          {" "}
-          <Link href="/preview/manus-manifest">/preview/manus-manifest</Link>.
-        </p>
       </section>
     </main>
   );
