@@ -4,6 +4,11 @@ import { join } from "node:path";
 const CHAMPAGNE_MANIFEST_FILE = "champagne_machine_manifest_full.json";
 const MANUS_MANIFEST_FILE = "manus_import_unified_manifest_20251104.json";
 
+const NORMALIZE_ID = (id) => ({
+  "hero-champagne-v2": "hero",
+  "hero-champagne": "hero",
+}[id] || id);
+
 const champagne = readManifest("Champagne", CHAMPAGNE_MANIFEST_FILE);
 const manus = readManifest("Manus", MANUS_MANIFEST_FILE);
 
@@ -25,7 +30,7 @@ function readManifest(label, fileName) {
     }
 
     try {
-      const manifest = JSON.parse(buffer.toString());
+      const manifest = normaliseManifest(JSON.parse(buffer.toString()));
       const summary = summarise(manifest);
       return { label, path, manifest, ...summary };
     } catch (error) {
@@ -47,6 +52,28 @@ function readManifest(label, fileName) {
   }
 }
 
+function normaliseManifest(manifest) {
+  if (!manifest || typeof manifest !== "object") {
+    return manifest;
+  }
+
+  const components = manifest.components;
+
+  if (Array.isArray(components)) {
+    manifest.components = components.map((component) => {
+      if (component && typeof component === "object") {
+        const candidate = component.id;
+        if (typeof candidate === "string") {
+          component.id = NORMALIZE_ID(candidate);
+        }
+      }
+      return component;
+    });
+  }
+
+  return manifest;
+}
+
 function summarise(manifest) {
   const componentKeys = new Set();
   const assetPaths = new Set();
@@ -60,9 +87,9 @@ function summarise(manifest) {
 
   if (sections) {
     if (Array.isArray(sections)) {
-      sections.forEach((item) => addToSet(componentKeys, item));
+      sections.forEach((item) => addComponentKey(componentKeys, item));
     } else if (typeof sections === "object") {
-      Object.keys(sections).forEach((key) => addToSet(componentKeys, key));
+      Object.keys(sections).forEach((key) => addComponentKey(componentKeys, key));
     }
   }
 
@@ -70,38 +97,22 @@ function summarise(manifest) {
     if (Array.isArray(components)) {
       components.forEach((entry) => {
         if (entry && typeof entry === "object") {
-          addToSet(componentKeys, entry.id ?? entry.key ?? entry.name);
+          addComponentKey(componentKeys, entry.id ?? entry.key ?? entry.name);
 
-          if (Array.isArray(entry.assets)) {
-            entry.assets.forEach((asset) => {
-              if (asset && typeof asset === "object") {
-                addToSet(assetPaths, asset.path ?? asset.file);
-              } else {
-                addToSet(assetPaths, asset);
-              }
-            });
+          if (entry.assets !== undefined) {
+            collectAssetEntries(entry.assets, assetPaths);
           }
         } else {
-          addToSet(componentKeys, entry);
+          addComponentKey(componentKeys, entry);
         }
       });
     } else if (typeof components === "object") {
-      Object.keys(components).forEach((key) => addToSet(componentKeys, key));
+      Object.keys(components).forEach((key) => addComponentKey(componentKeys, key));
     }
   }
 
   if (assetsSummary && typeof assetsSummary === "object") {
-    Object.values(assetsSummary).forEach((group) => {
-      if (Array.isArray(group)) {
-        group.forEach((asset) => {
-          if (asset && typeof asset === "object") {
-            addToSet(assetPaths, asset.file ?? asset.path);
-          } else {
-            addToSet(assetPaths, asset);
-          }
-        });
-      }
-    });
+    Object.values(assetsSummary).forEach((group) => collectAssetEntries(group, assetPaths));
   }
 
   if (guards && typeof guards === "object") {
@@ -123,11 +134,61 @@ function summarise(manifest) {
   };
 }
 
+function addComponentKey(set, value) {
+  if (typeof value === "string" && value.trim()) {
+    const normalised = NORMALIZE_ID(value.trim());
+    if (normalised) {
+      set.add(normalised);
+    }
+  } else if (typeof value === "number") {
+    const normalised = NORMALIZE_ID(String(value));
+    if (normalised) {
+      set.add(normalised);
+    }
+  }
+}
+
 function addToSet(set, value) {
   if (typeof value === "string" && value.trim()) {
     set.add(value.trim());
   } else if (typeof value === "number") {
     set.add(String(value));
+  }
+}
+
+function collectAssetEntries(candidate, set) {
+  if (!candidate) {
+    return;
+  }
+
+  if (typeof candidate === "string") {
+    const trimmed = candidate.trim();
+    if (trimmed && (trimmed.includes("/") || trimmed.includes("."))) {
+      addToSet(set, trimmed);
+    }
+    return;
+  }
+
+  if (Array.isArray(candidate)) {
+    candidate.forEach((item) => collectAssetEntries(item, set));
+    return;
+  }
+
+  if (typeof candidate === "object") {
+    const record = candidate;
+    if (record && typeof record === "object") {
+      if ("path" in record) {
+        collectAssetEntries(record.path, set);
+      }
+      if ("file" in record) {
+        collectAssetEntries(record.file, set);
+      }
+      Object.values(record).forEach((value) => {
+        if (value !== record.path && value !== record.file) {
+          collectAssetEntries(value, set);
+        }
+      });
+    }
   }
 }
 
@@ -147,11 +208,17 @@ function report(champagne, manus) {
   console.log(`Champagne guards: ${champagne.guardCount}`);
   console.log(`Manus guards: ${manus.guardCount}`);
 
-  const missing = champagne.componentKeys
-    .filter((key) => !manus.componentKeys.includes(key))
+  const champagneIds = champagne.componentKeys.slice().sort();
+  const manusIds = manus.componentKeys.slice().sort();
+
+  console.log(`Champagne component ids: ${champagneIds.join(", ") || "none"}`);
+  console.log(`Manus component ids: ${manusIds.join(", ") || "none"}`);
+
+  const missing = champagneIds
+    .filter((key) => !manusIds.includes(key))
     .sort();
-  const extra = manus.componentKeys
-    .filter((key) => !champagne.componentKeys.includes(key))
+  const extra = manusIds
+    .filter((key) => !champagneIds.includes(key))
     .sort();
 
   if (missing.length > 0) {
