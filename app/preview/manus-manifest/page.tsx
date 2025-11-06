@@ -2,8 +2,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-import { readFile } from "fs/promises";
-import { join } from "path";
+import { headers } from "next/headers";
 
 type ManifestComponent = {
   id?: unknown;
@@ -22,6 +21,7 @@ type ManifestLoadSuccess = {
   ok: true;
   fileName: string;
   bytes: number;
+  lastModified: string | null;
   text: string;
   data: ManifestData;
 };
@@ -32,6 +32,7 @@ type ManifestLoadFailure = {
   ok: false;
   fileName: string;
   bytes: number;
+  lastModified: string | null;
   text: string;
   error: string;
   reason: ManifestLoadFailureReason;
@@ -39,10 +40,14 @@ type ManifestLoadFailure = {
 
 type ManifestLoadResult = ManifestLoadSuccess | ManifestLoadFailure;
 
-const BRAND_DIR = join(process.cwd(), "public", "brand");
-
 const CHAMPAGNE_MANIFEST = "champagne_machine_manifest_full.json";
 const MANUS_MANIFEST = "manus_import_unified_manifest_20251104.json";
+
+const NORMALIZE_ID = (id: string) =>
+  ({
+    "hero-champagne-v2": "hero",
+    "hero-champagne": "hero",
+  }[id] || id);
 
 type ManifestSummary = {
   components: { id: string; previewRoute: string | null }[];
@@ -52,19 +57,36 @@ type ManifestSummary = {
   guardCount: number;
 };
 
-async function loadManifest(fileName: string): Promise<ManifestLoadResult> {
-  const absPath = join(BRAND_DIR, fileName);
+async function loadManifest(baseUrl: string, fileName: string): Promise<ManifestLoadResult> {
+  const relativePath = `/brand/${fileName}`;
+  const url = new URL(relativePath, baseUrl);
 
   try {
-    const buffer = await readFile(absPath);
-    const bytes = buffer.byteLength;
-    const text = buffer.toString("utf8");
+    const response = await fetch(url, { cache: "no-store", next: { revalidate: 0 } });
+
+    if (!response.ok) {
+      return {
+        ok: false,
+        fileName: relativePath,
+        bytes: Number.parseInt(response.headers.get("content-length") ?? "0", 10) || 0,
+        lastModified: response.headers.get("last-modified"),
+        text: "",
+        error: `HTTP ${response.status} ${response.statusText}`,
+        reason: "read",
+      };
+    }
+
+    const text = await response.text();
+    const bytesHeader = response.headers.get("content-length");
+    const bytes = Number.parseInt(bytesHeader ?? "0", 10) || Buffer.byteLength(text, "utf8");
+    const lastModified = response.headers.get("last-modified");
 
     if (!bytes || !text.trim()) {
       return {
         ok: false,
-        fileName,
+        fileName: relativePath,
         bytes,
+        lastModified,
         text,
         error: "Manifest file is empty (0 bytes).",
         reason: "empty",
@@ -75,16 +97,18 @@ async function loadManifest(fileName: string): Promise<ManifestLoadResult> {
       const data = JSON.parse(text) as ManifestData;
       return {
         ok: true,
-        fileName,
+        fileName: relativePath,
         bytes,
+        lastModified,
         text,
         data,
       };
     } catch (error: unknown) {
       return {
         ok: false,
-        fileName,
+        fileName: relativePath,
         bytes,
+        lastModified,
         text,
         error: String((error as { message?: unknown })?.message ?? error),
         reason: "parse",
@@ -93,8 +117,9 @@ async function loadManifest(fileName: string): Promise<ManifestLoadResult> {
   } catch (error: unknown) {
     return {
       ok: false,
-      fileName,
+      fileName: relativePath,
       bytes: 0,
+      lastModified: null,
       text: "",
       error: String((error as { message?: unknown })?.message ?? error),
       reason: "read",
@@ -123,11 +148,46 @@ function collectAssets(assetsSummary: unknown): number {
 
   for (const value of Object.values(assetsSummary as Record<string, unknown>)) {
     if (Array.isArray(value)) {
-      total += value.length;
+      for (const entry of value) {
+        if (typeof entry === "string" && entry.trim()) {
+          total += 1;
+        } else if (entry && typeof entry === "object") {
+          const file = (entry as { file?: unknown }).file;
+
+          if (typeof file === "string" && file.trim()) {
+            total += 1;
+          }
+        }
+      }
+    } else if (typeof value === "string" && value.trim()) {
+      total += 1;
+    } else if (value && typeof value === "object") {
+      const file = (value as { file?: unknown }).file;
+
+      if (typeof file === "string" && file.trim()) {
+        total += 1;
+      }
     }
   }
 
   return total;
+}
+
+function formatLastModified(value: string | null): string | null {
+  if (!value) {
+    return null;
+  }
+
+  const parsed = Date.parse(value);
+
+  if (Number.isNaN(parsed)) {
+    return value;
+  }
+
+  return new Date(parsed).toLocaleString("en-US", {
+    dateStyle: "medium",
+    timeStyle: "short",
+  });
 }
 
 function collectGuards(guards: unknown): number {
@@ -139,7 +199,7 @@ function collectGuards(guards: unknown): number {
 
   for (const entry of Object.values(guards as Record<string, unknown>)) {
     if (Array.isArray(entry)) {
-      total += entry.length;
+      total += entry.filter((value) => typeof value === "string" && value.trim()).length;
     } else if (entry && typeof entry === "object") {
       total += Object.values(entry as Record<string, unknown>).filter((value) =>
         typeof value === "string" && value.trim()
@@ -171,8 +231,14 @@ function summariseManifest(manifest: ManifestData | null): ManifestSummary {
       const preview = (entry as ManifestComponent).preview_route;
       const previewRoute = typeof preview === "string" && preview.trim() ? preview.trim() : null;
 
-      components.push({ id, previewRoute });
-      componentIds.add(id);
+      const normalisedId = NORMALIZE_ID(id);
+
+      if (componentIds.has(normalisedId)) {
+        continue;
+      }
+
+      componentIds.add(normalisedId);
+      components.push({ id: normalisedId, previewRoute });
     }
   }
 
@@ -227,15 +293,18 @@ function ComponentList({
   summary: ManifestSummary;
   loadResult: ManifestLoadResult;
 }) {
+  const lastModified = formatLastModified(loadResult.lastModified);
+
   return (
     <section className="space-y-3">
       <div className="flex flex-col gap-1">
         <h2 className="text-xl font-semibold">{label}</h2>
         <p className="text-sm text-neutral-500">
-          components: <span className="font-medium text-neutral-900">{summary.componentCount}</span> · assets: <span className="font-medium text-neutral-900">{summary.assetCount}</span> · guards: <span className="font-medium text-neutral-900">{summary.guardCount}</span>
+          components: <span className="font-medium text-neutral-900">{summary.componentCount}</span> · assets: <span className="font-medium text-neutral-900">{summary.assetCount}</span> · guard entries: <span className="font-medium text-neutral-900">{summary.guardCount}</span>
         </p>
         <p className="text-xs text-neutral-400">
           file: <code>{loadResult.fileName}</code> ({loadResult.bytes.toLocaleString()} bytes)
+          {lastModified ? <> · last modified {lastModified}</> : null}
         </p>
       </div>
 
@@ -277,9 +346,19 @@ function ComponentList({
 }
 
 export default async function ManusManifestExplorerPage() {
+  const headerList = headers();
+  const protocol = headerList.get("x-forwarded-proto") ?? "https";
+  const host = headerList.get("host");
+  const fallbackHost = process.env.VERCEL_URL ?? process.env.NEXT_PUBLIC_SITE_URL ?? "localhost:3000";
+  const baseUrl = host
+    ? `${protocol}://${host}`
+    : fallbackHost.includes("://")
+      ? fallbackHost
+      : `${protocol}://${fallbackHost}`;
+
   const [champagneResult, manusResult] = await Promise.all([
-    loadManifest(CHAMPAGNE_MANIFEST),
-    loadManifest(MANUS_MANIFEST),
+    loadManifest(baseUrl, CHAMPAGNE_MANIFEST),
+    loadManifest(baseUrl, MANUS_MANIFEST),
   ]);
 
   const champagneData = champagneResult.ok ? champagneResult.data : null;
