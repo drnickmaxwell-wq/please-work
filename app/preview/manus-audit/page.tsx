@@ -293,6 +293,42 @@ function collectAssetEntries(candidate: unknown, set: Set<string>) {
   };
 }
 
+function collectAssetEntries(candidate: unknown, set: Set<string>) {
+  if (!candidate) {
+    return;
+  }
+
+  if (typeof candidate === "string") {
+    const trimmed = candidate.trim();
+    if (trimmed && (trimmed.includes("/") || trimmed.includes("."))) {
+      addToSet(set, trimmed);
+    }
+    return;
+  }
+
+  if (Array.isArray(candidate)) {
+    for (const item of candidate) {
+      collectAssetEntries(item, set);
+    }
+    return;
+  }
+
+  if (typeof candidate === "object") {
+    const record = candidate as Record<string, unknown>;
+    if ("path" in record) {
+      collectAssetEntries(record.path, set);
+    }
+    if ("file" in record) {
+      collectAssetEntries(record.file, set);
+    }
+    for (const value of Object.values(record)) {
+      if (value !== record.path && value !== record.file) {
+        collectAssetEntries(value, set);
+      }
+    }
+  }
+}
+
 function hasVersion(candidate: unknown, version: string) {
   if (!candidate || typeof candidate !== "object") {
     return false;
