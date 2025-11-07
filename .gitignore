@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Generated brand media
+public/brand/textures/*.webp
+public/brand/motion/*.webm
+public/brand/motion/posters/*.jpg

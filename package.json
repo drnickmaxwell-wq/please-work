@@ -5,6 +5,8 @@
   "scripts": {
     "guard:hero": "node scripts/guard-hero-freeze.mjs",
     "guard:hero:baseline": "node scripts/guard-hero-freeze.mjs --write-baseline",
+    "brand:grain": "node scripts/generate-film-grain.mjs --seed champagne-v1 --width 2560 --height 1440 --intensity 0.015",
+    "freeze:update-filmgrain": "node scripts/freeze-update-filmgrain.mjs",
     "lint": "eslint . --max-warnings=0",
     "dev": "next dev",
     "build": "next build",
@@ -66,7 +68,8 @@
     "tsx": "^4.19.0",
     "typescript": "^5",
     "husky": "^9.1.7",
-    "prettier": "^3.4.2"
+    "prettier": "^3.4.2",
+    "sharp": "^0.33.3"
   },
   "engines": {
     "node": ">=20"
