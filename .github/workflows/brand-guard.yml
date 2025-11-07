@@ -23,6 +23,9 @@ jobs:
       - name: Install deps (frozen lockfile)
         run: pnpm install --frozen-lockfile
 
+      - name: Generate brand film grain texture
+        run: pnpm run brand:grain
+
       - name: Brand Guard (no rogue hex outside tokens)
         run: pnpm run brand:guard
 

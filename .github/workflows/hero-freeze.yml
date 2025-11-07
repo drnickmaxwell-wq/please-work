@@ -19,4 +19,5 @@ jobs:
           node-version: '20'
       - run: corepack enable
       - run: pnpm install --frozen-lockfile
-      - run: pnpm run guard:hero
+      - run: node scripts/generate-film-grain.mjs --seed champagne-v1 --width 2560 --height 1440 --intensity 0.015
+      - run: node scripts/guard-hero-freeze.mjs
