@@ -28,7 +28,7 @@
 
 .preview-hero-gilded .lux-gold {
   mix-blend-mode: screen;
-  opacity: var(--lux-gold-opacity, 0.14);
+  opacity: calc(var(--lux-gold-opacity, 0.14) * var(--gold-boost, 1));
 }
 
 .preview-hero-gilded .hero-cta-group {

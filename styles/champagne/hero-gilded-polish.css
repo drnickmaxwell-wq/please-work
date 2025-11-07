@@ -1,0 +1,19 @@
+:root {
+  --gold-boost: 1;
+  --caustics-smooth: 0.85;
+}
+
+.preview-hero-gilded .hero-gold-dust-drift,
+.preview-hero-gilded .hero-gold-dust-drift--alt,
+.preview-hero-gilded .hero-glass-shimmer,
+.preview-hero-gilded .lux-gold-tint,
+.preview-hero-gilded .hero-particles-static::after,
+.preview-hero-gilded .champagne-hero {
+  animation-timing-function: cubic-bezier(0.3, 0, 0.2, 1);
+}
+
+.preview-hero-gilded .hero-particles-static::after {
+  animation-duration: 6s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
