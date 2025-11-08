@@ -1,6 +1,9 @@
-.preview-hero-gilded { 
+.preview-hero-gilded {
   --parallax-1: 0;
   --parallax-2: 0;
+  --gold-phase: 0;
+  --gold-opacity-base: 0.26;
+  --gold-opacity-boost: 0.38;
 }
 
 .preview-hero-gilded .hero-wave-mask {
@@ -8,6 +11,78 @@
   background-position: center;
   mix-blend-mode: overlay;
   opacity: 0.4;
+}
+
+.preview-hero-gilded .veil-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+  opacity: var(--veil, 0.06);
+  background: radial-gradient(
+      120% 140% at 50% 10%,
+      rgba(255, 255, 255, 0.28),
+      rgba(255, 255, 255, 0.05) 54%,
+      rgba(147, 178, 196, 0.12) 85%,
+      rgba(90, 114, 128, 0.05)
+    ),
+    linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.22),
+      rgba(216, 201, 177, 0.14) 35%,
+      rgba(142, 170, 200, 0.1) 70%,
+      rgba(36, 58, 73, 0.28)
+    );
+}
+
+.preview-hero-gilded .hero-wave-caustics,
+.preview-hero-gilded .hero-glass-shimmer,
+.preview-hero-gilded .hero-gold-dust-drift {
+  --gold-phase: 0;
+  animation: preview-gilded-gold-cycle 11s ease-in-out infinite;
+  animation-delay: calc(var(--gold-phase, 0) * -11s);
+  opacity: calc(var(--gold-opacity-base) * 0.45);
+}
+
+.preview-hero-gilded .hero-wave-caustics {
+  --gold-phase: 0;
+}
+
+.preview-hero-gilded .hero-glass-shimmer {
+  --gold-phase: 0.36;
+}
+
+.preview-hero-gilded .hero-gold-dust-drift {
+  --gold-phase: 0.68;
+}
+
+.preview-hero-gilded .hero-gold-dust-drift.hero-gold-dust-drift--alt {
+  --gold-phase: 0.84;
+}
+
+@keyframes preview-gilded-gold-cycle {
+  0%,
+  8% {
+    opacity: calc(var(--gold-opacity-base) * 0.42);
+  }
+
+  28% {
+    opacity: calc(var(--gold-opacity-base) + var(--gold-opacity-boost) * 0.35);
+  }
+
+  48% {
+    opacity: calc(var(--gold-opacity-base) + var(--gold-opacity-boost));
+  }
+
+  64% {
+    opacity: calc(var(--gold-opacity-base) + var(--gold-opacity-boost) * 0.55);
+  }
+
+  86%,
+  100% {
+    opacity: calc(var(--gold-opacity-base) * 0.4 + var(--gold-opacity-boost) * 0.18);
+  }
 }
 
 .preview-hero-gilded .gradient-base {
@@ -57,4 +132,20 @@
   .preview-hero-gilded .parallax-2 {
     transform: none !important;
   }
+
+  .preview-hero-gilded .hero-wave-caustics,
+  .preview-hero-gilded .hero-glass-shimmer,
+  .preview-hero-gilded .hero-gold-dust-drift {
+    animation: none;
+    opacity: calc(var(--gold-opacity-base) * 0.45);
+  }
+}
+
+.preview-hero-gilded[data-prm="true"] .hero-motion {
+  animation: none;
+  opacity: calc(var(--gold-opacity-base) * 0.48);
+}
+
+.preview-hero-gilded[data-prm="true"] .hero-motion video {
+  filter: brightness(0.95) saturate(0.92);
 }
