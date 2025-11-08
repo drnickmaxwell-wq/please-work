@@ -92,6 +92,7 @@ function syncMotionState(prefersReducedMotion: boolean) {
 
 export default function Page() {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [goldOn, setGoldOn] = useState(false);
 
   useEffect(() => {
     ensureVeilLayer();
@@ -124,6 +125,23 @@ export default function Page() {
     syncMotionState(prefersReducedMotion);
   }, [prefersReducedMotion]);
 
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      setGoldOn(false);
+    }
+  }, [prefersReducedMotion]);
+
+  useEffect(() => {
+    const hero = document.querySelector<HTMLElement>(".preview-hero-gilded");
+    if (!hero) {
+      return;
+    }
+
+    const boosted = !prefersReducedMotion && goldOn;
+    hero.dataset.gold = boosted ? "on" : "off";
+    hero.style.setProperty("--gold-boost", boosted ? "1.2" : "1.0");
+  }, [goldOn, prefersReducedMotion]);
+
   return (
     <main
       className="min-h-screen"
@@ -133,6 +151,52 @@ export default function Page() {
         color: "var(--smh-text)",
       }}
     >
+      <div
+        style={{
+          position: "fixed",
+          top: "1.5rem",
+          right: "1.5rem",
+          zIndex: 20,
+          display: "flex",
+          gap: "0.5rem",
+          alignItems: "center",
+          fontSize: "0.875rem",
+          background: "color-mix(in srgb, var(--smh-ink) 85%, transparent)",
+          border: "1px solid color-mix(in srgb, var(--smh-ink) 55%, transparent)",
+          borderRadius: "999px",
+          padding: "0.35rem 0.65rem",
+          boxShadow: "0 8px 24px rgba(15, 17, 26, 0.18)",
+          backdropFilter: "blur(18px)",
+        }}
+      >
+        <span style={{ opacity: 0.8 }}>Gold boost</span>
+        <button
+          type="button"
+          onClick={() => setGoldOn((prev) => !prev)}
+          disabled={prefersReducedMotion}
+          style={{
+            appearance: "none",
+            border: "1px solid color-mix(in srgb, var(--smh-text) 45%, transparent)",
+            borderRadius: "999px",
+            padding: "0.25rem 0.75rem",
+            fontSize: "0.75rem",
+            fontWeight: 600,
+            letterSpacing: "0.02em",
+            textTransform: "uppercase",
+            background: prefersReducedMotion
+              ? "color-mix(in srgb, var(--smh-ink) 70%, transparent)"
+              : goldOn
+                ? "color-mix(in srgb, var(--smh-text) 28%, transparent)"
+                : "transparent",
+            color: "var(--smh-text)",
+            cursor: prefersReducedMotion ? "not-allowed" : "pointer",
+            transition: "background 180ms ease, color 180ms ease",
+          }}
+        >
+          {prefersReducedMotion ? "PRM" : goldOn ? "On" : "Off"}
+        </button>
+      </div>
+
       <PreviewHeroGilded />
     </main>
   );
