@@ -4,9 +4,9 @@
       radial-gradient(1200px 600px at 70% 10%, color-mix(in oklab, var(--brand-teal) 22%, transparent), transparent 60%),
       linear-gradient(
         135deg,
-        color-mix(in oklab, var(--brand-magenta) 78%, #000 10%) 0%,
-        color-mix(in oklab, var(--brand-teal) 78%, #000 10%) 60%,
-        color-mix(in oklab, var(--brand-gold) 55%, #000 18%) 100%
+        color-mix(in oklab, var(--brand-magenta) 78%, var(--ink) 22%) 0%,
+        color-mix(in oklab, var(--brand-teal) 78%, var(--ink) 22%) 60%,
+        color-mix(in oklab, var(--brand-gold) 55%, var(--ink) 45%) 100%
       ),
       url('/waves/smh-wave-mask.svg');
     background-blend-mode: soft-light, overlay, normal;
@@ -95,7 +95,7 @@
     --lux-glass-lightness: calc(28% + var(--cta-contrast-boost));
     background: color-mix(
       in oklab,
-      rgba(16, 11, 9, 0.78) calc(72% - var(--cta-contrast-boost)),
+      var(--ink) calc(72% - var(--cta-contrast-boost)),
       var(--surface-0) var(--lux-glass-lightness)
     );
     backdrop-filter: blur(14px);
@@ -104,7 +104,7 @@
     box-shadow: var(--shadow-soft);
     color: color-mix(
       in oklab,
-      #0b0908 calc(74% - var(--cta-contrast-boost)),
+      var(--ink) calc(74% - var(--cta-contrast-boost)),
       var(--surface-0) calc(26% + var(--cta-contrast-boost))
     );
     border: 1px solid color-mix(in oklab, var(--brand-gold) 26%, transparent);
@@ -118,13 +118,13 @@
     .lux-glass {
       background: color-mix(
         in oklab,
-        #050405 calc(68% - var(--cta-contrast-boost)),
+        var(--ink) calc(68% - var(--cta-contrast-boost)),
         var(--surface-0) calc(32% + var(--cta-contrast-boost))
       );
       color: color-mix(
         in oklab,
-        #ffffff calc(88% + var(--cta-contrast-boost)),
-        rgba(16, 11, 9, 0.08) calc(12% - var(--cta-contrast-boost))
+        var(--smh-white) calc(88% + var(--cta-contrast-boost)),
+        color-mix(in oklab, var(--ink) 8%, transparent) calc(12% - var(--cta-contrast-boost))
       );
       border-color: color-mix(in oklab, var(--brand-gold) 34%, transparent);
     }

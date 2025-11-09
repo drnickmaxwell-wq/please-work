@@ -3,8 +3,8 @@
   --turquoise: var(--smh-primary-teal);
   --gold: var(--smh-accent-gold);
   --warm-mist: var(--smh-warm-mist);
-  --glass-bg: rgba(255, 255, 255, 0.08);
-  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-bg: color-mix(in oklab, var(--smh-white) 8%, transparent);
+  --glass-border: color-mix(in oklab, var(--smh-white) 15%, transparent);
 }
 
 .technology-hero {
@@ -158,7 +158,7 @@
   left: 30%;
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.005) 0%, transparent 70%);
+  background: radial-gradient(circle, color-mix(in oklab, var(--smh-white) 0.5%, transparent) 0%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
   z-index: 4;
@@ -188,7 +188,7 @@
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.35);
+  background: color-mix(in oklab, var(--ink) 35%, transparent);
   z-index: 6;
 }
 
@@ -206,7 +206,7 @@
   width: 60%;
   max-width: 800px;
   aspect-ratio: 16/9;
-  background: rgba(0, 0, 0, 0.2);
+  background: color-mix(in oklab, var(--ink) 20%, transparent);
   backdrop-filter: blur(18px);
   border-radius: 1.5rem;
   border: 1px solid var(--glass-border);
@@ -217,7 +217,7 @@
 }
 
 .video-placeholder-text {
-  color: white;
+  color: var(--smh-white);
   font-size: 0.9rem;
   font-weight: 500;
   opacity: 0.7;
@@ -228,7 +228,7 @@
   position: relative;
   z-index: 10;
   text-align: center;
-  color: white;
+  color: var(--smh-white);
   padding: 2rem;
   max-width: 900px;
 }
@@ -285,29 +285,37 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  background: white;
+  background: var(--smh-white);
   color: var(--magenta);
   display: inline-flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
   /* Champagne Lock: Gold rim increased by 10% brightness */
-  box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.33), 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--brand-gold) 33%, transparent),
+    0 4px 12px color-mix(in oklab, var(--ink) 10%, transparent);
 }
 
 /* Dark mode: Gold rim increased by 10% brightness */
 [data-theme="dark"] .cta-primary {
-  box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.44), 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--brand-gold) 44%, transparent),
+    0 4px 12px color-mix(in oklab, var(--ink) 30%, transparent);
 }
 
 .cta-primary:hover {
   transform: translateY(-3px);
   /* Champagne Lock: Enhanced gold rim on hover with 10% brightness increase */
-  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.55), 0 10px 30px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    0 0 0 2px color-mix(in oklab, var(--brand-gold) 55%, transparent),
+    0 10px 30px color-mix(in oklab, var(--ink) 20%, transparent);
 }
 
 [data-theme="dark"] .cta-primary:hover {
-  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.66), 0 10px 30px rgba(0, 0, 0, 0.4);
+  box-shadow:
+    0 0 0 2px color-mix(in oklab, var(--brand-gold) 66%, transparent),
+    0 10px 30px color-mix(in oklab, var(--ink) 40%, transparent);
 }
 
 /* Specular Bloom - Gold reflection pulse on button hover */
@@ -319,7 +327,7 @@
   left: 50%;
   width: 0;
   height: 0;
-  background: radial-gradient(circle, rgba(212, 175, 55, 0.4) 0%, transparent 70%);
+  background: radial-gradient(circle, color-mix(in oklab, var(--brand-gold) 40%, transparent) 0%, transparent 70%);
   border-radius: 50%;
   transform: translate(-50%, -50%);
   opacity: 0;
@@ -431,12 +439,18 @@
 /* Champagne Phase-1A Enhancements */
 .iridescent-heading {
   position: relative;
-  background: conic-gradient(from 180deg at 50% 50%, rgba(255, 255, 255, 0.85) 0deg, rgba(64, 196, 180, 0.85) 120deg, rgba(194, 24, 91, 0.85) 240deg, rgba(212, 175, 55, 0.85) 360deg);
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    color-mix(in oklab, var(--smh-white) 85%, transparent) 0deg,
+    color-mix(in oklab, var(--brand-teal) 85%, transparent) 120deg,
+    color-mix(in oklab, var(--brand-magenta) 85%, transparent) 240deg,
+    color-mix(in oklab, var(--brand-gold) 85%, transparent) 360deg
+  );
   background-size: 300% 300%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  text-shadow: 0 0 30px rgba(212, 175, 55, 0.35);
+  text-shadow: 0 0 30px color-mix(in oklab, var(--brand-gold) 35%, transparent);
   animation: iridescentSpectral 60s linear infinite;
 }
 
@@ -517,31 +531,45 @@
 }
 
 .cta-primary {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(249, 232, 195, 0.92) 45%, rgba(212, 175, 55, 0.95) 100%);
-  color: #2f1a12;
-  box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.5), 0 12px 30px rgba(0, 0, 0, 0.25);
-  text-shadow: 0 1px 6px rgba(255, 255, 255, 0.35);
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--smh-white) 92%, transparent) 0%,
+    color-mix(in oklab, var(--champagne-keyline-gold) 92%, transparent) 45%,
+    color-mix(in oklab, var(--brand-gold) 95%, transparent) 100%
+  );
+  color: color-mix(in oklab, var(--ink) 85%, var(--brand-gold) 15%);
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--brand-gold) 50%, transparent),
+    0 12px 30px color-mix(in oklab, var(--ink) 25%, transparent);
+  text-shadow: 0 1px 6px color-mix(in oklab, var(--smh-white) 35%, transparent);
 }
 
 .cta-primary:hover {
   transform: translateY(-6px) scale(1.01);
-  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.6), 0 20px 45px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 0 0 2px color-mix(in oklab, var(--brand-gold) 60%, transparent),
+    0 20px 45px color-mix(in oklab, var(--ink) 30%, transparent);
 }
 
 .cta-primary:focus-visible {
-  outline: 2px solid rgba(212, 175, 55, 0.8);
+  outline: 2px solid color-mix(in oklab, var(--brand-gold) 80%, transparent);
   outline-offset: 4px;
 }
 
 .cta-primary::before {
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.55) 0%, rgba(212, 175, 55, 0) 70%);
+  background: radial-gradient(circle, color-mix(in oklab, var(--smh-white) 55%, transparent) 0%, color-mix(in oklab, var(--brand-gold) 5%, transparent) 70%);
 }
 
 .tech-hero::before {
   inset: -5% -5% 0;
   background:
-    radial-gradient(80% 70% at 15% 10%, rgba(255, 255, 255, 0.18) 0%, transparent 65%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 45%, rgba(64, 196, 180, 0.08) 100%);
+    radial-gradient(80% 70% at 15% 10%, color-mix(in oklab, var(--smh-white) 18%, transparent) 0%, transparent 65%),
+    linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--smh-white) 8%, transparent) 0%,
+      color-mix(in oklab, var(--smh-white) 2%, transparent) 45%,
+      color-mix(in oklab, var(--brand-teal) 8%, transparent) 100%
+    );
   mix-blend-mode: screen;
   opacity: 0.22;
 }

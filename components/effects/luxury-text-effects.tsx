@@ -238,7 +238,8 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
         <motion.span
           animate={{ opacity: [1, 0] }}
           transition={{ duration: 0.8, repeat: Infinity, repeatType: 'reverse' }}
-          className="inline-block w-0.5 h-[1em] bg-gradient-to-b from-pink-500 to-teal-500 ml-1"
+          className="inline-block w-0.5 h-[1em] ml-1"
+          style={{ background: 'linear-gradient(180deg, var(--brand-magenta) 0%, var(--brand-teal) 100%)' }}
         />
       )}
     </span>
@@ -309,7 +310,7 @@ const GlowText: React.FC<GlowTextProps> = ({
     magenta: 'var(--smh-primary-magenta)',
     turquoise: 'var(--smh-primary-teal)',
     gold: 'var(--smh-accent-gold)',
-    white: '#FFFFFF',
+    white: 'var(--smh-white)',
   };
 
   const intensityConfig = {

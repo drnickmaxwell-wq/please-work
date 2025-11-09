@@ -3,13 +3,13 @@
   padding: clamp(3.5rem, 7vw, 5.75rem) clamp(1.75rem, 5vw, 4.5rem) clamp(4.25rem, 7vw, 6.5rem);
   display: grid;
   gap: clamp(1.75rem, 4.5vw, 2.75rem);
-  color: #fdfbff;
+  color: color-mix(in oklab, var(--smh-white) 98%, var(--brand-magenta) 2%);
   text-align: center;
   background: var(--smh-gradient);
   border-radius: clamp(2rem, 5vw, 3.25rem);
   box-shadow:
-    inset 0 -1px 0 rgba(255, 255, 255, 0.12),
-    0 32px 68px rgba(6, 18, 32, 0.25);
+    inset 0 -1px 0 color-mix(in oklab, var(--smh-white) 12%, transparent),
+    0 32px 68px color-mix(in oklab, var(--ink) 25%, transparent);
   isolation: isolate;
   overflow: hidden;
 }
@@ -27,25 +27,25 @@
   font-size: 0.78rem;
   letter-spacing: 0.36em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.82);
+  color: color-mix(in oklab, var(--smh-white) 82%, transparent);
   margin: 0;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  text-shadow: 0 1px 2px color-mix(in oklab, var(--ink) 25%, transparent);
 }
 
 .heroTitle {
   margin: 0;
   font-size: clamp(2.75rem, 6vw, 4.25rem);
   line-height: 1.08;
-  color: #ffffff;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  color: var(--smh-white);
+  text-shadow: 0 1px 2px color-mix(in oklab, var(--ink) 25%, transparent);
 }
 
 .heroCopy {
   margin: 0;
   font-size: clamp(1.05rem, 2.5vw, 1.25rem);
-  color: rgba(255, 255, 255, 0.88);
+  color: color-mix(in oklab, var(--smh-white) 88%, transparent);
   line-height: 1.7;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  text-shadow: 0 1px 2px color-mix(in oklab, var(--ink) 25%, transparent);
 }
 
 .heroActions {

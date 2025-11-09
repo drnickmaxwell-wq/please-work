@@ -4,7 +4,11 @@
   overflow: hidden;
   width: 100%;
   border-radius: var(--brand-hero-radius, 28px);
-  background: color-mix(in srgb, var(--surface-0, #f8f4ee) 86%, transparent);
+  background: color-mix(
+    in srgb,
+    var(--surface-0, color-mix(in oklab, var(--champagne-keyline-gold) 30%, var(--smh-white) 70%)) 86%,
+    transparent
+  );
   --hero-drift-x: 0px;
   --hero-drift-y: 0px;
   --hero-drift-rotate: 0deg;
@@ -31,8 +35,8 @@
 }
 
 .brand-hero-shell.brand-hero-clip-top .brand-hero-layers {
-  -webkit-mask-image: radial-gradient(130% 85% at 50% 0%, #000 40%, transparent 72%);
-  mask-image: radial-gradient(130% 85% at 50% 0%, #000 40%, transparent 72%);
+  -webkit-mask-image: radial-gradient(130% 85% at 50% 0%, var(--ink) 40%, transparent 72%);
+  mask-image: radial-gradient(130% 85% at 50% 0%, var(--ink) 40%, transparent 72%);
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-size: cover;
@@ -42,8 +46,8 @@
 }
 
 .brand-hero-shell.brand-hero-clip-bottom .brand-hero-layers {
-  -webkit-mask-image: radial-gradient(130% 85% at 50% 100%, #000 40%, transparent 72%);
-  mask-image: radial-gradient(130% 85% at 50% 100%, #000 40%, transparent 72%);
+  -webkit-mask-image: radial-gradient(130% 85% at 50% 100%, var(--ink) 40%, transparent 72%);
+  mask-image: radial-gradient(130% 85% at 50% 100%, var(--ink) 40%, transparent 72%);
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-size: cover;
