@@ -1,0 +1,40 @@
+name: Audit Inbox
+
+on:
+  workflow_dispatch:
+    inputs:
+      inbox_path:
+        description: 'Folder containing ZIPs'
+        required: false
+        default: '_audit_inbox'
+  push:
+    paths:
+      - '_audit_inbox/**'
+      - '.github/workflows/audit-inbox.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install deps (if any)
+        run: |
+          if [ -f package.json ]; then
+            corepack enable
+            pnpm install --frozen-lockfile || npm ci || true
+          fi
+
+      - name: Run audit script
+        run: |
+          node scripts/audit/run-inbox.mjs "${{ github.event.inputs.inbox_path || '_audit_inbox' }}"
+        shell: bash
