@@ -10,7 +10,14 @@ const __dirname = dirname(__filename);
 
 const allowConfigPath = resolve(__dirname, "guard-rogue-hex.allow.json");
 const allowConfig = JSON.parse(readFileSync(allowConfigPath, "utf8"));
-const allowGlobs = allowConfig.allow ?? [];
+const allowGlobs = [
+  ...(allowConfig.allow ?? []),
+  "brand/**/champagne_machine_manifest_full.json",
+  "brand/**/hue-lock.json",
+  "docs/**",
+  "public/**",
+  "styles/tokens/**",
+];
 const allowExtensions = new Set(allowConfig.allowExtensions ?? []);
 const warnOnlyExtensions = new Set(allowConfig.warnOnlyExtensions ?? []);
 

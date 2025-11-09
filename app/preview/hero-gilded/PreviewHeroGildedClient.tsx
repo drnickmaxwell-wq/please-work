@@ -492,7 +492,7 @@ export default function PreviewHeroGildedClient() {
             lineHeight: 1.25,
             textAlign: "right",
             pointerEvents: "none",
-            color: "var(--champagne-hero-text, #fff)",
+            color: "var(--champagne-hero-text, var(--smh-white))",
           }}
         >
           <div>caustics {formatHudDuration(causticsDuration)}</div>

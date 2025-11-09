@@ -1,0 +1,4 @@
+:root {
+  /* bridge var used by manifests to the canonical gradient */
+  --gradient-champagne: var(--smh-gradient);
+}
