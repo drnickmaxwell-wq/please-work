@@ -1,19 +1,83 @@
 #!/usr/bin/env node
 import { execSync } from "node:child_process";
-const base = execSync(`git merge-base origin/${process.env.GITHUB_BASE_REF||"main"} HEAD`).toString().trim();
-const files = execSync(`git diff --name-only ${base} HEAD`).toString().trim().split("\n").filter(Boolean);
-const hexRegex = /#[0-9a-fA-F]{3,8}\b/g;
-const allow = ["styles/tokens/", "styles/champagne/manifest.json"];
+import { readFileSync } from "node:fs";
+import { dirname, extname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+import micromatch from "micromatch";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const allowConfigPath = resolve(__dirname, "guard-rogue-hex.allow.json");
+const allowConfig = JSON.parse(readFileSync(allowConfigPath, "utf8"));
+const allowGlobs = allowConfig.allow ?? [];
+const allowExtensions = new Set(allowConfig.allowExtensions ?? []);
+const warnOnlyExtensions = new Set(allowConfig.warnOnlyExtensions ?? []);
+
+const targetBase = process.env.GITHUB_BASE_REF || "main";
+const base = (() => {
+  const candidates = [`origin/${targetBase}`, targetBase];
+  for (const candidate of candidates) {
+    try {
+      return execSync(`git merge-base ${candidate} HEAD 2>/dev/null`)
+        .toString()
+        .trim();
+    } catch (error) {
+      // try next candidate
+    }
+  }
+  try {
+    return execSync("git rev-parse HEAD^ 2>/dev/null").toString().trim();
+  } catch (error) {
+    // fall back to repository root commit
+  }
+  const roots = execSync("git rev-list --max-parents=0 HEAD")
+    .toString()
+    .trim()
+    .split("\n")
+    .filter(Boolean);
+  return roots[roots.length - 1];
+})();
+
+const filesOutput = execSync(
+  `git diff --name-only --diff-filter=AM ${base} HEAD`
+)
+  .toString()
+  .trim();
+
+const files = filesOutput ? filesOutput.split("\n").filter(Boolean) : [];
+const hexRegex = /#[0-9a-fA-F]{3,8}\b/;
 
 let failed = false;
-for (const f of files) {
-  const isAllowed = allow.some(a => f.startsWith(a) || f === a);
-  if (isAllowed) continue;
-  const diff = execSync(`git diff ${base} HEAD -- ${f}`).toString();
-  if (hexRegex.test(diff)) {
-    console.error(`❌ Rogue HEX detected in ${f}. Use Champagne tokens instead.`);
-    failed = true;
+for (const file of files) {
+  const extension = extname(file);
+  if (allowExtensions.has(extension)) {
+    console.log(`ALLOW extension (${extension}): ${file}`);
+    continue;
   }
+
+  const diff = execSync(`git diff ${base} HEAD -- ${file}`).toString();
+  const hasHex = hexRegex.test(diff);
+  if (!hasHex) {
+    continue;
+  }
+
+  const isAllowlisted = micromatch.isMatch(file, allowGlobs);
+  if (isAllowlisted) {
+    if (warnOnlyExtensions.has(extension)) {
+      console.warn(`WARN allowlisted manifest: ${file}`);
+    } else {
+      console.warn(`WARN allowlisted: ${file}`);
+    }
+    continue;
+  }
+
+  console.error(`❌ Rogue HEX detected in ${file}. Use Champagne tokens instead.`);
+  failed = true;
 }
-if (failed) process.exit(1);
+
+if (failed) {
+  process.exit(1);
+}
+
 console.log("✅ No rogue HEX outside token files.");
