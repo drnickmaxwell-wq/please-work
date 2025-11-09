@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 
+import "@/styles/champagne/hero-gilded-tweaks.css";
+
 import {
   getBrandManifestClient,
   type BrandManifest,
@@ -470,7 +472,7 @@ export default function PreviewHeroGildedClient() {
       <div className="hero-particles-static" />
 
       <div
-        className="hero-film-grain"
+        className="hero-film-grain film-grain"
         style={{
           backgroundImage: layers?.textures?.filmGrain
             ? `url(${layers.textures.filmGrain})`
@@ -492,7 +494,7 @@ export default function PreviewHeroGildedClient() {
             lineHeight: 1.25,
             textAlign: "right",
             pointerEvents: "none",
-            color: "var(--champagne-hero-text, #fff)",
+            color: "var(--champagne-hero-text, var(--smh-white))",
           }}
         >
           <div>caustics {formatHudDuration(causticsDuration)}</div>
@@ -510,10 +512,10 @@ export default function PreviewHeroGildedClient() {
             balanced shimmer, and the Manus signature glow.
           </p>
           <div className="hero-cta-group">
-            <a href="/contact" className="hero-cta-primary">
+            <a href="/contact" className="hero-cta-primary cta-primary">
               Request a private consult
             </a>
-            <a href="/treatments" className="hero-cta-secondary">
+            <a href="/treatments" className="hero-cta-secondary cta-secondary">
               Explore bespoke treatments
             </a>
           </div>
