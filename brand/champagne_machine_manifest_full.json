@@ -1,15 +1,15 @@
 page_guess,section,keep_kill,reasons,brand_fit_notes,risks,seo_notes,ai_notes,asset_refs,motion,palette
 home,hero,refine,strong visual hierarchy but lacks gradient/waves,add champagne gradient and grain overlay; keep layout,contrast on white copy over bright bg,missing H1; single CTA,entity: "boutique dentistry",["localhost_2025-09-07_16-11-12.webp"],subtle,white–aqua–rose
 home,features-grid,keep,clean 3-col summary adaptable to tokens,use glass cards + gold keylines,none,H2s present; good for internal linking,entities: "same-day crowns","CBCT",["localhost_2025-09-07_16-15-19.webp"],none,#fafafa with magenta accents
-home,cta-band,refine,strong CTA but bland background,replace solid teal with gradient+grain,contrast minor,CTA ok; add schema "Action",intent: "book consultation",["localhost_2025-09-07_16-18-25.webp"],subtle,#40C4B4 solid
+home,cta-band,refine,strong CTA but bland background,replace solid teal with gradient+grain,contrast minor,CTA ok; add schema "Action",intent: "book consultation",["localhost_2025-09-07_16-18-25.webp"],subtle,var(--brand-teal) solid
 treatments/dental-implants,hero,keep,good imagery and depth for hero,wave-mask overlay fits naturally,perf ok,missing alt text; one H1 ok,entities: "dental implant","osseointegration",["localhost_2025-09-07_16-30-34.webp"],subtle,steel-blue + white
 treatments/dental-implants,process,refine,nice 4-step layout but hard edges,round with glassmorphism tokens,none,H2 each step; add HowTo schema,entity:"implant process",["localhost_2025-09-07_16-34-08.webp"],none,#e0e0e0 bg
-treatments/spark-aligners,hero,keep,strong portrait imagery and CTA,magenta–teal gradient overlay works perfectly,none,H1 ok; two CTAs,entity:"Spark aligners",["localhost_2025-09-07_16-39-30.webp"],subtle,#C2185B → #40C4B4
+treatments/spark-aligners,hero,keep,strong portrait imagery and CTA,magenta–teal gradient overlay works perfectly,none,H1 ok; two CTAs,entity:"Spark aligners",["localhost_2025-09-07_16-39-30.webp"],subtle,var(--brand-magenta) → var(--brand-teal)
 treatments/spark-aligners,faq,refine,copy good but visual dense,add accordion gold dividers,too tight spacing,FAQ schema candidate,entity:"aligner aftercare",["localhost_2025-09-07_16-48-25.webp"],none,#fff text on light bg
-technology,features-grid,keep,good tech cards showing scanners,replace blue accent with teal token,none,H2 labels per tech item,entities:"CBCT","3D printer",["localhost_2025-09-07_17-20-15.webp"],none,#2196f3 → adjust to #40C4B4
+technology,features-grid,keep,good tech cards showing scanners,replace blue accent with teal token,none,H2 labels per tech item,entities:"CBCT","3D printer",["localhost_2025-09-07_17-20-15.webp"],none,#2196f3 → adjust to var(--brand-teal)
 technology,3d-viewer,keep,shows model viewer window,retain but mask edges; use glass surface,perf heavy on mobile,needs alt captions; Product schema,entities:"3D viewer","tooth model",["localhost_2025-09-07_17-20-41.webp"],heavy,#fff bg
 about-us,team-gallery,refine,layout fine but dull palette,apply gold keylines and subtle grain,contrast low,H2 each staff name; add Person schema,entities:"Dr Nick Maxwell","team",["localhost_2025-09-07_16-23-41.webp"],none,#ddd neutral
-contact,cta-band,keep,clean map + form split,swap accent color to magenta token,none,H1 ok; Contact schema,entity:"contact clinic","map",["localhost_2025-09-07_16-27-36.webp"],none,#40C4B4 teal
+contact,cta-band,keep,clean map + form split,swap accent color to magenta token,none,H1 ok; Contact schema,entity:"contact clinic","map",["localhost_2025-09-07_16-27-36.webp"],none,var(--brand-teal) teal
 footer,footer,drop,old flat grey theme not reusable,use new luxe footer pack,contrast poor,low SEO value,none,["localhost_2025-09-07_17-20-53.webp"],none,#444 grey
 [
   {
@@ -353,12 +353,12 @@ footer,footer,drop,old flat grey theme not reusable,use new luxe footer pack,con
   "project": "St Mary’s House Dental – Champagne v4.2 Reskin",
   "brand": {
     "tokens": {
-      "--smh-primary-magenta": "#C2185B",
-      "--smh-primary-teal": "#40C4B4",
-      "--smh-accent-gold": "#D4AF37",
-      "--smh-gradient": "linear-gradient(135deg,#C2185B 0%,#40C4B4 60%,#D4AF37 100%)",
+      "--smh-primary-magenta": "var(--brand-magenta)",
+      "--smh-primary-teal": "var(--brand-teal)",
+      "--smh-accent-gold": "var(--brand-gold)",
+      "--smh-gradient": "linear-gradient(135deg,var(--brand-magenta) 0%,var(--brand-teal) 60%,var(--brand-gold) 100%)",
       "--smh-text": "#1A1A1A",
-      "--smh-bg": "#FFFFFF"
+      "--smh-bg": "var(--smh-white)"
     },
     "typography": {
       "headings": "Playfair Display",

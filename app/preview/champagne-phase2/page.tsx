@@ -1,48 +1,52 @@
-'use client';
+export { metadata } from "@/app/preview/metadata";
+("use client");
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from "react";
 
-import BrandHeroGradient from '@/components/brand/BrandHeroGradient';
-import FaqAccordion from '@/components/faq/FaqAccordion';
-import '@/styles/brand/brand-motion.css';
-import '@/styles/brand/lux-glass.css';
+import BrandHeroGradient from "@/components/brand/BrandHeroGradient";
+import FaqAccordion from "@/components/faq/FaqAccordion";
+import "@/styles/brand/brand-motion.css";
+import "@/styles/brand/lux-glass.css";
+import "@/styles/champagne/a11y.css";
 
-import styles from './champagne-phase2.module.css';
+import styles from "./champagne-phase2.module.css";
 
 const MIN_GRAIN = 0;
 const MAX_GRAIN = 0.2;
 const GRAIN_STEP = 0.01;
 
 const heroCopy = {
-  eyebrow: 'Champagne Drift',
-  title: 'Glass-layered radiance with motion guards',
-  body:
-    'Fine-tuned gradient drift, particle palettes, and gold rim detailing—all driven by production tokens with reduced-motion safeguards built in.',
+  eyebrow: "Champagne Drift",
+  title: "Glass-layered radiance with motion guards",
+  body: "Fine-tuned gradient drift, particle palettes, and gold rim detailing—all driven by production tokens with reduced-motion safeguards built in.",
 };
 
 const faqSample = [
   {
-    question: 'How subtle is the drift?',
-    answer: 'The animation stays under 20px of parallax with a 90-second hue sweep, pausing entirely when reduced motion is enabled.',
+    question: "How subtle is the drift?",
+    answer:
+      "The animation stays under 20px of parallax with a 90-second hue sweep, pausing entirely when reduced motion is enabled.",
   },
   {
-    question: 'Can we switch particle colours?',
-    answer: 'Yes. Swap between gold, teal, magenta, or disable entirely—ideal for aligning with campaign palettes.',
+    question: "Can we switch particle colours?",
+    answer:
+      "Yes. Swap between gold, teal, magenta, or disable entirely—ideal for aligning with campaign palettes.",
   },
   {
-    question: 'Does the glass treatment respect dark mode?',
-    answer: 'Backgrounds mix from champagne tokens, automatically tuning opacity and shadow depth for light or dark themes.',
+    question: "Does the glass treatment respect dark mode?",
+    answer:
+      "Backgrounds mix from champagne tokens, automatically tuning opacity and shadow depth for light or dark themes.",
   },
 ];
 
 const particleOptions = [
-  { value: 'gold', label: 'Gold' },
-  { value: 'teal', label: 'Teal' },
-  { value: 'magenta', label: 'Magenta' },
-  { value: 'none', label: 'None' },
+  { value: "gold", label: "Gold" },
+  { value: "teal", label: "Teal" },
+  { value: "magenta", label: "Magenta" },
+  { value: "none", label: "None" },
 ] as const;
 
-type ParticleOption = (typeof particleOptions)[number]['value'];
+type ParticleOption = (typeof particleOptions)[number]["value"];
 
 function HeroPreview({
   particles,
@@ -74,7 +78,10 @@ function HeroPreview({
             <a className="smh-btn sparkle-hover" href="#faq-preview">
               Preview CTA Motion
             </a>
-            <button className={`${styles.heroSecondary} underline-offset-4 transition hover:underline`} type="button">
+            <button
+              className={`${styles.heroSecondary} underline-offset-4 transition hover:underline`}
+              type="button"
+            >
               Inspect layers
             </button>
           </div>
@@ -90,30 +97,35 @@ export default function ChampagnePhaseTwoPreview() {
   useEffect(() => {
     const syncFromUrl = () => {
       const params = new URLSearchParams(window.location.search);
-      setExperimentsEnabled(params.get('exp') === '1');
+      setExperimentsEnabled(params.get("exp") === "1");
     };
 
     syncFromUrl();
-    window.addEventListener('popstate', syncFromUrl);
-    return () => window.removeEventListener('popstate', syncFromUrl);
+    window.addEventListener("popstate", syncFromUrl);
+    return () => window.removeEventListener("popstate", syncFromUrl);
   }, []);
 
-  const [particles, setParticles] = useState<ParticleOption>('gold');
+  const [particles, setParticles] = useState<ParticleOption>("gold");
   const [grainOpacity, setGrainOpacity] = useState(0.14);
   const [driftEnabled, setDriftEnabled] = useState(true);
 
   const formattedGrain = useMemo(() => grainOpacity.toFixed(2), [grainOpacity]);
-  const appliedParticles = experimentsEnabled ? particles : 'gold';
+  const appliedParticles = experimentsEnabled ? particles : "gold";
   const appliedGrain = experimentsEnabled ? grainOpacity : 0.14;
   const appliedDrift = experimentsEnabled ? driftEnabled : true;
 
   return (
-    <div className={`${styles.page} mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8`}>
+    <div
+      className={`${styles.page} mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8`}
+    >
       <header className={`${styles.header} md:text-left`}>
-        <h1 className="text-4xl font-serif md:text-5xl">Champagne Phase 2 Preview</h1>
+        <h1 className="text-4xl font-serif md:text-5xl">
+          Champagne Phase 2 Preview
+        </h1>
         <p className="md:max-w-3xl">
-          Validate hero drift, particle palettes, and lux-glass FAQs before promoting the toggle. Adjust controls below and compare
-          gold rim, grain intensity, and FAQ treatments side by side.
+          Validate hero drift, particle palettes, and lux-glass FAQs before
+          promoting the toggle. Adjust controls below and compare gold rim,
+          grain intensity, and FAQ treatments side by side.
         </p>
       </header>
 
@@ -124,15 +136,19 @@ export default function ChampagnePhaseTwoPreview() {
         <div className={styles.panelHeading}>
           <h2>Layer controls</h2>
           <p>
-            Particles, grain, and motion respond immediately for both hero variants.
+            Particles, grain, and motion respond immediately for both hero
+            variants.
           </p>
           {!experimentsEnabled && (
             <p className={styles.panelNotice}>
-              Experiments are disabled. Append <code>?exp=1</code> to the preview URL to unlock interactive layer controls.
+              Experiments are disabled. Append <code>?exp=1</code> to the
+              preview URL to unlock interactive layer controls.
             </p>
           )}
         </div>
-        <div className={`${styles.panelControls} md:flex-row md:items-center md:justify-end`}>
+        <div
+          className={`${styles.panelControls} md:flex-row md:items-center md:justify-end`}
+        >
           <label className={styles.controlInline} htmlFor="particles-select">
             <span className={styles.controlLabel}>Particles</span>
             <select
@@ -190,15 +206,29 @@ export default function ChampagnePhaseTwoPreview() {
       <section className="grid gap-8 md:grid-cols-2" aria-label="Hero variants">
         <div className="space-y-4">
           <h3 className={styles.sectionTitle}>Particles + grain</h3>
-          <HeroPreview particles={appliedParticles} grain={appliedGrain} goldRim={false} driftEnabled={appliedDrift} />
+          <HeroPreview
+            particles={appliedParticles}
+            grain={appliedGrain}
+            goldRim={false}
+            driftEnabled={appliedDrift}
+          />
         </div>
         <div className="space-y-4">
           <h3 className={styles.sectionTitle}>Add gold rim</h3>
-          <HeroPreview particles={appliedParticles} grain={appliedGrain} goldRim driftEnabled={appliedDrift} />
+          <HeroPreview
+            particles={appliedParticles}
+            grain={appliedGrain}
+            goldRim
+            driftEnabled={appliedDrift}
+          />
         </div>
       </section>
 
-      <section id="faq-preview" className="grid gap-12 md:grid-cols-2" aria-label="FAQ before and after">
+      <section
+        id="faq-preview"
+        className="grid gap-12 md:grid-cols-2"
+        aria-label="FAQ before and after"
+      >
         <div className="space-y-4">
           <h3 className={styles.sectionTitle}>Baseline accordion</h3>
           <FaqAccordion items={faqSample} glassEnabled={false} />

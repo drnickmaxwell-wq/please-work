@@ -9,7 +9,10 @@ import {
 
 import LoopCrossfade from "./LoopCrossfade";
 
-type HeroLayers = Pick<BrandManifest, "waves" | "textures" | "particles" | "motion">;
+type HeroLayers = Pick<
+  BrandManifest,
+  "waves" | "textures" | "particles" | "motion"
+>;
 
 type MotionPosterMap = Record<string, string | undefined>;
 
@@ -68,7 +71,9 @@ function getMotionDurations(manifest?: HeroLayers["motion"]): MotionDurations {
 
   const durations: MotionDurations = {};
 
-  for (const [key, value] of Object.entries(manifest as Record<string, MotionEntry | undefined>)) {
+  for (const [key, value] of Object.entries(
+    manifest as Record<string, MotionEntry | undefined>,
+  )) {
     if (!value) {
       continue;
     }
@@ -115,7 +120,11 @@ function getMotionSrc(
       return entry;
     }
 
-    if (typeof entry === "object" && typeof entry.src === "string" && entry.src.trim().length > 0) {
+    if (
+      typeof entry === "object" &&
+      typeof entry.src === "string" &&
+      entry.src.trim().length > 0
+    ) {
       return entry.src;
     }
   }
@@ -123,7 +132,10 @@ function getMotionSrc(
   return fallback;
 }
 
-function pickPoster(posters: MotionPosterMap | undefined, keys: string[]): string | undefined {
+function pickPoster(
+  posters: MotionPosterMap | undefined,
+  keys: string[],
+): string | undefined {
   if (!posters) {
     return undefined;
   }
@@ -183,9 +195,11 @@ export default function PreviewHeroGildedClient() {
           (await verify(manifest.particles?.soft)) ??
           "/assets/champagne/particles/home-hero-particles.webp";
 
-        const motionPosters = (manifest as BrandManifest & {
-          motionPosters?: Record<string, string | null | undefined>;
-        }).motionPosters;
+        const motionPosters = (
+          manifest as BrandManifest & {
+            motionPosters?: Record<string, string | null | undefined>;
+          }
+        ).motionPosters;
 
         let verifiedMotionPosters: MotionPosterMap | undefined;
 
@@ -197,15 +211,21 @@ export default function PreviewHeroGildedClient() {
             }),
           );
 
-          verifiedMotionPosters = entries.reduce<MotionPosterMap>((acc, [key, url]) => {
-            if (typeof url === "string") {
-              acc[key] = url;
-            }
+          verifiedMotionPosters = entries.reduce<MotionPosterMap>(
+            (acc, [key, url]) => {
+              if (typeof url === "string") {
+                acc[key] = url;
+              }
 
-            return acc;
-          }, {});
+              return acc;
+            },
+            {},
+          );
 
-          if (verifiedMotionPosters && Object.keys(verifiedMotionPosters).length === 0) {
+          if (
+            verifiedMotionPosters &&
+            Object.keys(verifiedMotionPosters).length === 0
+          ) {
             verifiedMotionPosters = undefined;
           }
         }
@@ -375,8 +395,16 @@ export default function PreviewHeroGildedClient() {
     layers?.waveMask ?? "/assets/champagne/waves/wave-mask-desktop.webp";
   const waveBgUrl = layers?.waveBg ?? "/assets/champagne/waves/wave-bg.webp";
 
-  const causticsSrc = getMotionSrc(layers?.motion, ["caustics", "waveCaustics"], "/assets/champagne/motion/wave-caustics.webm");
-  const glassSrc = getMotionSrc(layers?.motion, ["glass", "glassShimmer"], "/assets/champagne/motion/glass-shimmer.webm");
+  const causticsSrc = getMotionSrc(
+    layers?.motion,
+    ["caustics", "waveCaustics"],
+    "/assets/champagne/motion/wave-caustics.webm",
+  );
+  const glassSrc = getMotionSrc(
+    layers?.motion,
+    ["glass", "glassShimmer"],
+    "/assets/champagne/motion/glass-shimmer.webm",
+  );
   const particlesSrc = getMotionSrc(
     layers?.motion,
     ["particles", "particlesDrift"],
@@ -388,9 +416,18 @@ export default function PreviewHeroGildedClient() {
     "/assets/champagne/particles/gold-dust-drift.webm",
   );
 
-  const causticsPoster = pickPoster(layers?.motionPosters, ["caustics", "waveCaustics"]);
-  const glassPoster = pickPoster(layers?.motionPosters, ["glass", "glassShimmer"]);
-  const particlesPoster = pickPoster(layers?.motionPosters, ["particles", "particlesDrift"]);
+  const causticsPoster = pickPoster(layers?.motionPosters, [
+    "caustics",
+    "waveCaustics",
+  ]);
+  const glassPoster = pickPoster(layers?.motionPosters, [
+    "glass",
+    "glassShimmer",
+  ]);
+  const particlesPoster = pickPoster(layers?.motionPosters, [
+    "particles",
+    "particlesDrift",
+  ]);
   const goldPoster = pickPoster(layers?.motionPosters, ["gold", "goldDust"]);
 
   const causticsDuration = durations.caustics ?? 8;
@@ -407,10 +444,10 @@ export default function PreviewHeroGildedClient() {
       aria-labelledby="hero-gilded-title"
       data-smoothing="preview"
     >
-      <div className="hero-gradient-base gradient-base" />
+      <div className="hero-gradient-base gradient-base layer--static" />
 
       <div
-        className="hero-wave-mask parallax-1"
+        className="hero-wave-mask parallax-1 layer--static"
         style={{
           backgroundImage: `url(${waveBgUrl}), url(${waveMaskUrl})`,
         }}
@@ -418,7 +455,7 @@ export default function PreviewHeroGildedClient() {
 
       {!reduceMotion && (
         <>
-          <div className="loop-pair hero-motion hero-wave-caustics parallax-1">
+          <div className="loop-pair hero-motion hero-wave-caustics parallax-1 layer--motion">
             <LoopCrossfade
               src={causticsSrc}
               poster={causticsPoster}
@@ -427,7 +464,7 @@ export default function PreviewHeroGildedClient() {
             />
           </div>
 
-          <div className="loop-pair hero-motion hero-glass-shimmer">
+          <div className="loop-pair hero-motion hero-glass-shimmer layer--motion">
             <LoopCrossfade
               src={glassSrc}
               poster={glassPoster}
@@ -436,7 +473,7 @@ export default function PreviewHeroGildedClient() {
             />
           </div>
 
-          <div className="loop-pair hero-motion hero-particles-drift">
+          <div className="loop-pair hero-motion hero-particles-drift layer--motion">
             <LoopCrossfade
               src={particlesSrc}
               poster={particlesPoster}
@@ -445,7 +482,7 @@ export default function PreviewHeroGildedClient() {
             />
           </div>
 
-          <div className="loop-pair hero-motion hero-gold-dust-drift lux-gold parallax-2">
+          <div className="loop-pair hero-motion hero-gold-dust-drift lux-gold parallax-2 layer--motion">
             <LoopCrossfade
               src={goldSrc}
               poster={goldPoster}
@@ -455,22 +492,30 @@ export default function PreviewHeroGildedClient() {
           </div>
 
           <div
-            className="hero-gold-dust-drift hero-gold-dust-drift--alt lux-gold"
+            className="hero-gold-dust-drift hero-gold-dust-drift--alt lux-gold layer--motion"
             aria-hidden="true"
           />
 
           {particleSources.map(({ src, poster }) => (
-            <div className="loop-pair hero-particles-drift hero-motion" key={src}>
-              <LoopCrossfade src={src} poster={poster} durationSec={8} crossfadeMs={220} />
+            <div
+              className="loop-pair hero-particles-drift hero-motion layer--motion"
+              key={src}
+            >
+              <LoopCrossfade
+                src={src}
+                poster={poster}
+                durationSec={8}
+                crossfadeMs={220}
+              />
             </div>
           ))}
         </>
       )}
 
-      <div className="hero-particles-static" />
+      <div className="hero-particles-static layer--static" />
 
       <div
-        className="hero-film-grain"
+        className="hero-film-grain layer--static"
         style={{
           backgroundImage: layers?.textures?.filmGrain
             ? `url(${layers.textures.filmGrain})`
@@ -478,7 +523,10 @@ export default function PreviewHeroGildedClient() {
         }}
       />
 
-      <div className="hero-caustic-reflection" aria-hidden="true" />
+      <div
+        className="hero-caustic-reflection layer--static"
+        aria-hidden="true"
+      />
 
       {showDevHud && (
         <div
@@ -506,8 +554,8 @@ export default function PreviewHeroGildedClient() {
         <div className="hero-content-wrapper">
           <h1 id="hero-gilded-title">Gilded Light, Calm Precision</h1>
           <p>
-            Preview the Champagne experience in a dedicated sandbox. Refined motion,
-            balanced shimmer, and the Manus signature glow.
+            Preview the Champagne experience in a dedicated sandbox. Refined
+            motion, balanced shimmer, and the Manus signature glow.
           </p>
           <div className="hero-cta-group">
             <a href="/contact" className="hero-cta-primary">

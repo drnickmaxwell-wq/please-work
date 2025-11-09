@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "guard:hero": "node scripts/guard-hero-freeze.mjs",
+    "codemod:hex": "node scripts/codemod/hex-to-tokens.mjs",
     "guard:hero:baseline": "node scripts/guard-hero-freeze.mjs --write-baseline",
     "brand:grain": "node scripts/generate-film-grain.mjs --seed champagne-v1 --width 2560 --height 1440 --intensity 0.015",
     "freeze:update-filmgrain": "node scripts/freeze-update-filmgrain.mjs",
@@ -38,6 +39,7 @@
     "@fontsource-variable/playfair-display": "^5.2.8",
     "@react-three/drei": "^10.7.4",
     "@react-three/fiber": "^9.3.0",
+    "@studio-freight/lenis": "^1.0.35",
     "@types/three": "^0.180.0",
     "ai": "^5.0.33",
     "framer-motion": "^12.23.12",

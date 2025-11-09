@@ -1,3 +1,4 @@
+export { metadata } from '@/app/preview/metadata';
 import FooterLuxePreview from '@/components/preview/FooterLuxePreview';
 
 export default function FooterLuxePreviewPage() {

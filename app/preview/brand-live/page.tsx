@@ -1,3 +1,4 @@
+export { metadata } from '@/app/preview/metadata';
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';

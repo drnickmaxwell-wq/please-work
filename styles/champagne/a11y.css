@@ -1,0 +1,9 @@
+/* Shared PRM enforcement for Champagne heroic stacks */
+@media (prefers-reduced-motion: reduce) {
+  .layer--motion {
+    display: none !important;
+  }
+  .layer--static {
+    opacity: 1 !important;
+  }
+}

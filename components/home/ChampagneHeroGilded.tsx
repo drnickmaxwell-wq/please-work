@@ -197,10 +197,10 @@ export default function ChampagneHeroGilded() {
         "--parallax-cap-px": "6",
       }}
     >
-      <div className="hero-gradient-base gradient-base" />
+      <div className="hero-gradient-base gradient-base layer--static" />
 
       <div
-        className="hero-wave-mask parallax-1"
+        className="hero-wave-mask parallax-1 layer--static"
         style={{
           backgroundImage: layers?.waves?.background
             ? `url('${layers.waves.background}')`
@@ -210,7 +210,7 @@ export default function ChampagneHeroGilded() {
 
       {!reduceMotion && (
         <>
-          <div className="hero-wave-caustics parallax-1">
+          <div className="hero-wave-caustics parallax-1 layer--motion">
             <video autoPlay loop muted playsInline preload="auto">
               <source
                 src="/assets/champagne/motion/wave-caustics.webm"
@@ -219,7 +219,7 @@ export default function ChampagneHeroGilded() {
             </video>
           </div>
 
-          <div className="hero-glass-shimmer">
+          <div className="hero-glass-shimmer layer--motion">
             <video autoPlay loop muted playsInline preload="auto">
               <source
                 src="/assets/champagne/motion/glass-shimmer.webm"
@@ -228,7 +228,7 @@ export default function ChampagneHeroGilded() {
             </video>
           </div>
 
-          <div className="hero-particles-drift">
+          <div className="hero-particles-drift layer--motion">
             <video autoPlay loop muted playsInline preload="auto">
               <source
                 src="/assets/champagne/motion/particles-drift.webm"
@@ -237,7 +237,7 @@ export default function ChampagneHeroGilded() {
             </video>
           </div>
 
-          <div className="hero-gold-dust-drift parallax-2 lux-gold">
+          <div className="hero-gold-dust-drift parallax-2 lux-gold layer--motion">
             <video autoPlay loop muted playsInline preload="auto">
               <source
                 src="/assets/champagne/particles/gold-dust-drift.webm"
@@ -247,7 +247,7 @@ export default function ChampagneHeroGilded() {
           </div>
 
           {particleSources.map(({ src, poster }) => (
-            <div className="hero-particles-drift" key={src}>
+            <div className="hero-particles-drift layer--motion" key={src}>
               <video
                 autoPlay
                 loop
@@ -263,10 +263,10 @@ export default function ChampagneHeroGilded() {
         </>
       )}
 
-      <div className="hero-particles-static" />
+      <div className="hero-particles-static layer--static" />
 
       <div
-        className="hero-film-grain"
+        className="hero-film-grain layer--static"
         style={{
           backgroundImage: layers?.textures?.filmGrain
             ? `url(${layers.textures.filmGrain})`
@@ -278,8 +278,8 @@ export default function ChampagneHeroGilded() {
         <div className="hero-content-wrapper">
           <h1 id="hero-gilded-title">Gilded Light, Calm Precision</h1>
           <p>
-            Preview the Champagne experience in a dedicated sandbox. Refined motion,
-            balanced shimmer, and the Manus signature glow.
+            Preview the Champagne experience in a dedicated sandbox. Refined
+            motion, balanced shimmer, and the Manus signature glow.
           </p>
           <div className="hero-cta-group">
             <a href="/contact" className="hero-cta-primary">

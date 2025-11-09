@@ -1,3 +1,4 @@
+export { metadata } from '@/app/preview/metadata';
 import dynamic from 'next/dynamic';
 import EnvBadge from './env-badge';
 import '@/styles/preview/chat-tokens.css';

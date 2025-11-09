@@ -1,3 +1,4 @@
+export { metadata } from '@/app/preview/metadata';
 // app/preview/brand-lock/page.tsx — Runtime brand probe (read-only)
 "use client";
 

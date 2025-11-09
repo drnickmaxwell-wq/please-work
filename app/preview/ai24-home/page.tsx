@@ -1,3 +1,4 @@
+export { metadata } from '@/app/preview/metadata';
 import React from 'react';
 import Hero_Ai24 from '@/components/sections/home/Hero_Ai24';
 import SignatureServices from '@/components/sections/home/SignatureServices';

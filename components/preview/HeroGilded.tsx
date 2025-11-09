@@ -13,7 +13,10 @@ import {
   type BrandManifest,
 } from "@/lib/brand/manifest";
 
-type HeroLayers = Pick<BrandManifest, "waves" | "textures" | "particles" | "motion">;
+type HeroLayers = Pick<
+  BrandManifest,
+  "waves" | "textures" | "particles" | "motion"
+>;
 
 type PreviewHeroLayers = HeroLayers & {
   waveMask?: string;
@@ -531,9 +534,7 @@ export default function PreviewHeroGilded() {
       node
         .querySelectorAll<HTMLVideoElement>(".hero-motion video")
         .forEach((video) => {
-          if (
-            video.parentElement?.querySelector(":scope > video.fade-clone")
-          ) {
+          if (video.parentElement?.querySelector(":scope > video.fade-clone")) {
             return;
           }
 
@@ -566,10 +567,10 @@ export default function PreviewHeroGilded() {
       aria-labelledby="hero-gilded-title"
       data-smoothing="preview"
     >
-      <div className="hero-gradient-base gradient-base" />
+      <div className="hero-gradient-base gradient-base layer--static" />
 
       <div
-        className="hero-wave-mask parallax-1"
+        className="hero-wave-mask parallax-1 layer--static"
         style={{
           backgroundImage: `url(${waveBgUrl}), url(${waveMaskUrl})`,
         }}
@@ -578,36 +579,39 @@ export default function PreviewHeroGilded() {
       {!reduceMotion && (
         <>
           <CrossFadeLoop
-            className="hero-wave-caustics"
+            className="hero-wave-caustics layer--motion"
             zIndexClass="parallax-1"
             src="/assets/champagne/motion/wave-caustics.webm"
           />
 
           <CrossFadeLoop
-            className="hero-glass-shimmer"
+            className="hero-glass-shimmer layer--motion"
             src="/assets/champagne/motion/glass-shimmer.webm"
           />
 
-          <div className="lux-gold-tint" aria-hidden="true" />
+          <div className="lux-gold-tint layer--motion" aria-hidden="true" />
 
           <CrossFadeLoop
-            className="hero-particles-drift"
+            className="hero-particles-drift layer--motion"
             src="/assets/champagne/motion/particles-drift.webm"
           />
 
           <CrossFadeLoop
-            className="hero-gold-dust-drift lux-gold"
+            className="hero-gold-dust-drift lux-gold layer--motion"
             zIndexClass="parallax-2"
             src="/assets/champagne/particles/gold-dust-drift.webm"
           />
 
           <div
-            className="hero-gold-dust-drift hero-gold-dust-drift--alt lux-gold"
+            className="hero-gold-dust-drift hero-gold-dust-drift--alt lux-gold layer--motion"
             aria-hidden="true"
           />
 
           {particleSources.map(({ src, poster }) => (
-            <div className="hero-particles-drift hero-motion" key={src}>
+            <div
+              className="hero-particles-drift hero-motion layer--motion"
+              key={src}
+            >
               <video
                 autoPlay
                 loop
@@ -623,10 +627,10 @@ export default function PreviewHeroGilded() {
         </>
       )}
 
-      <div className="hero-particles-static" />
+      <div className="hero-particles-static layer--static" />
 
       <div
-        className="hero-film-grain"
+        className="hero-film-grain layer--static"
         style={{
           backgroundImage: layers?.textures?.filmGrain
             ? `url(${layers.textures.filmGrain})`
@@ -634,14 +638,17 @@ export default function PreviewHeroGilded() {
         }}
       />
 
-      <div className="hero-caustic-reflection" aria-hidden="true" />
+      <div
+        className="hero-caustic-reflection layer--static"
+        aria-hidden="true"
+      />
 
       <div className="hero-content">
         <div className="hero-content-wrapper">
           <h1 id="hero-gilded-title">Gilded Light, Calm Precision</h1>
           <p>
-            Preview the Champagne experience in a dedicated sandbox. Refined motion,
-            balanced shimmer, and the Manus signature glow.
+            Preview the Champagne experience in a dedicated sandbox. Refined
+            motion, balanced shimmer, and the Manus signature glow.
           </p>
           <div className="hero-cta-group">
             <a href="/contact" className="hero-cta-primary">

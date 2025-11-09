@@ -5,19 +5,19 @@
   "designSystem": "St Mary's House Champagne Design System",
   "lastUpdated": "2025-11-01",
   "author": "Manus AI",
-  
+
   "tokens": {
     "colors": {
-      "brandMagenta": "#C2185B",
-      "brandTurquoise": "#2CBFAE",
-      "brandTurquoiseAlt": "#40C4B4",
-      "brandGold": "#D4AF37",
-      "paper": "#FFFFFF",
-      "ink": "#0E1420"
+      "brandMagenta": "var(--brand-magenta)",
+      "brandTurquoise": "var(--brand-teal)",
+      "brandTurquoiseAlt": "var(--brand-teal)",
+      "brandGold": "var(--brand-gold)",
+      "paper": "var(--smh-white)",
+      "ink": "var(--ink)"
     },
     "gradients": {
-      "champagne": "linear-gradient(135deg, #C2185B 0%, #40C4B4 60%, #D4AF37 100%)",
-      "cta": "linear-gradient(135deg, #C2185B 0%, #2CBFAE 55%, #D4AF37 100%)"
+      "champagne": "var(--gradient-champagne)",
+      "cta": "var(--gradient-champagne)"
     },
     "typography": {
       "display": "Playfair Display",
@@ -32,7 +32,7 @@
       "goldGlow": "0 0 12px rgba(212, 175, 55, 0.4), 0 0 24px rgba(212, 175, 55, 0.2)"
     }
   },
-  
+
   "layers": [
     {
       "id": 1,
@@ -52,7 +52,7 @@
       "type": "motion",
       "description": "Subtle underwater light caustics with gradient colors",
       "src": "/assets/champagne/motion/wave-caustics.webm",
-      "opacity": 0.10,
+      "opacity": 0.1,
       "blendMode": "screen",
       "parallaxMaxPx": 2,
       "zIndex": 2
@@ -70,17 +70,6 @@
       "zIndex": 3
     },
     {
-      "id": 4,
-      "name": "glass-shimmer",
-      "type": "motion",
-      "description": "Elegant glass shimmer with gold highlights",
-      "src": "/assets/champagne/motion/glass-shimmer.webm",
-      "opacity": 0.12,
-      "blendMode": "screen",
-      "parallaxMaxPx": 1,
-      "zIndex": 4
-    },
-    {
       "id": 5,
       "name": "particles-static",
       "type": "static",
@@ -89,7 +78,7 @@
       "opacity": 0.08,
       "blendMode": "screen",
       "parallaxMaxPx": 3,
-      "zIndex": 5,
+      "zIndex": 4,
       "tileable": true,
       "tileSize": "1024px 1024px"
     },
@@ -102,7 +91,7 @@
       "opacity": 0.06,
       "blendMode": "screen",
       "parallaxMaxPx": 3,
-      "zIndex": 6
+      "zIndex": 5
     },
     {
       "id": 7,
@@ -113,7 +102,7 @@
       "opacity": 0.08,
       "blendMode": "screen",
       "parallaxMaxPx": 2,
-      "zIndex": 7
+      "zIndex": 6
     },
     {
       "id": 8,
@@ -124,9 +113,20 @@
       "opacity": 0.07,
       "blendMode": "overlay",
       "parallaxMaxPx": 0,
-      "zIndex": 8,
+      "zIndex": 7,
       "tileable": true,
       "tileSize": "512px 512px"
+    },
+    {
+      "id": 4,
+      "name": "glass-shimmer",
+      "type": "motion",
+      "description": "Elegant glass shimmer with gold highlights",
+      "src": "/assets/champagne/motion/glass-shimmer.webm",
+      "opacity": 0.12,
+      "blendMode": "screen",
+      "parallaxMaxPx": 1,
+      "zIndex": 8
     },
     {
       "id": 9,
@@ -140,13 +140,13 @@
       "zIndex": 9
     }
   ],
-  
+
   "parallax": {
     "maxTotal": 6,
     "unit": "px",
     "easing": "cubic-bezier(0.65, 0, 0.35, 1)"
   },
-  
+
   "motion": {
     "videoFormat": "webm",
     "codec": "vp9",
@@ -158,10 +158,10 @@
     "muted": true,
     "playsInline": true
   },
-  
+
   "accessibility": {
     "contrast": "AA",
-    "focusRing": "#D4AF37 1px glow",
+    "focusRing": "var(--brand-gold) 1px glow",
     "minHitTarget": "44x44px",
     "semanticHTML": true,
     "keyboardNav": true,
@@ -173,7 +173,7 @@
       "secondaryCTA": "Explore treatments"
     }
   },
-  
+
   "responsive": {
     "desktop": {
       "minHeight": "70vh",
@@ -186,7 +186,7 @@
       "ctaLayout": "stacked"
     }
   },
-  
+
   "assets": [
     {
       "path": "public/assets/champagne/waves/wave-mask-desktop.webp",
@@ -259,7 +259,7 @@
       "purpose": "Gold dust drift animation"
     }
   ],
-  
+
   "performance": {
     "willChange": ["transform"],
     "hardwareAcceleration": true,
@@ -267,14 +267,14 @@
     "assetCaching": true,
     "videoPreload": "auto"
   },
-  
+
   "browserSupport": {
     "chrome": "90+",
     "firefox": "88+",
     "safari": "14+",
     "edge": "90+"
   },
-  
+
   "compliance": {
     "layerOrder": "strict",
     "parallaxCap": "6px",

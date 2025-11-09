@@ -1,3 +1,4 @@
+export { metadata } from '@/app/preview/metadata';
 'use client';
 
 import StickyHeader from '@/components/layout/sticky-header';

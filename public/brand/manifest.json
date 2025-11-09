@@ -6,15 +6,11 @@
   "goldVar": "--smh-accent-gold",
   "gradient": {
     "angle": 135,
-    "stops": [
-      { "color": "#C2185B", "pos": 0 },
-      { "color": "#40C4B4", "pos": 60 },
-      { "color": "#D4AF37", "pos": 100 }
-    ],
-    "css": "linear-gradient(135deg,#C2185B 0%,#40C4B4 60%,#D4AF37 100%)"
+    "stops": [],
+    "css": "var(--smh-gradient)"
   },
   "gold": {
-    "hex": "#D4AF37",
+    "token": "--smh-accent-gold",
     "usage": "keylines, accents only"
   },
   "typography": {

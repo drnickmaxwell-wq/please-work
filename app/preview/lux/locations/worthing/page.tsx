@@ -1,3 +1,4 @@
+export { metadata } from '@/app/preview/metadata';
 export default function WorthingPreview() {
   return (
     <main className="flex min-h-screen items-center justify-center bg-[var(--smh-surface-elevated)] p-8 text-center text-white">

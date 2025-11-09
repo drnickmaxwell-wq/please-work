@@ -1,14 +1,14 @@
 {
   "repo": "drnickmaxwell-wq/please-work",
   "brand_tokens": {
-    "magenta": "#C2185B",
-    "teal": "#40C4B4",
-    "gold": "#D4AF37",
+    "magenta": "var(--brand-magenta)",
+    "teal": "var(--brand-teal)",
+    "gold": "var(--brand-gold)",
     "soft_gold": "#F9E8C3",
     "ink": "#0B0D0F",
     "text": "#1A1A1A"
   },
-  "gradient": "linear-gradient(135deg,#C2185B 0%,#40C4B4 60%,#D4AF37 100%)",
+  "gradient": "linear-gradient(135deg,var(--brand-magenta) 0%,var(--brand-teal) 60%,var(--brand-gold) 100%)",
   "guards": {
     "brand_guard": "pnpm run brand:guard",
     "hero_freeze": "pnpm run guard:hero"

@@ -1,10 +1,12 @@
-"use client";
+export { metadata } from "@/app/preview/metadata";
+("use client");
 
 import { useEffect, useState } from "react";
 
 import PreviewHeroGildedClient from "./PreviewHeroGildedClient";
 import "@/styles/champagne/hero-gilded-tweaks.css";
 import "@/styles/champagne/hero-polish.css";
+import "@/styles/champagne/a11y.css";
 
 function ensureVeilLayer() {
   if (typeof document === "undefined") {
@@ -47,7 +49,8 @@ function syncMotionState(prefersReducedMotion: boolean) {
   const videos = hero.querySelectorAll<HTMLVideoElement>("video");
   videos.forEach((video) => {
     const originalPreload =
-      video.getAttribute("data-preload-default") ?? video.getAttribute("preload") ??
+      video.getAttribute("data-preload-default") ??
+      video.getAttribute("preload") ??
       "auto";
 
     if (!video.hasAttribute("data-preload-default")) {
@@ -162,7 +165,8 @@ export default function Page() {
           alignItems: "center",
           fontSize: "0.875rem",
           background: "color-mix(in srgb, var(--smh-ink) 85%, transparent)",
-          border: "1px solid color-mix(in srgb, var(--smh-ink) 55%, transparent)",
+          border:
+            "1px solid color-mix(in srgb, var(--smh-ink) 55%, transparent)",
           borderRadius: "999px",
           padding: "0.35rem 0.65rem",
           boxShadow: "0 8px 24px rgba(15, 17, 26, 0.18)",
@@ -176,7 +180,8 @@ export default function Page() {
           disabled={prefersReducedMotion}
           style={{
             appearance: "none",
-            border: "1px solid color-mix(in srgb, var(--smh-text) 45%, transparent)",
+            border:
+              "1px solid color-mix(in srgb, var(--smh-text) 45%, transparent)",
             borderRadius: "999px",
             padding: "0.25rem 0.75rem",
             fontSize: "0.75rem",

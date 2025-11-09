@@ -309,7 +309,7 @@ const GlowText: React.FC<GlowTextProps> = ({
     magenta: 'var(--smh-primary-magenta)',
     turquoise: 'var(--smh-primary-teal)',
     gold: 'var(--smh-accent-gold)',
-    white: '#FFFFFF',
+    white: 'var(--smh-white)',
   };
 
   const intensityConfig = {

@@ -9,10 +9,10 @@ export default function ChampagneHero() {
 
   return (
     <section className="champagne-hero" aria-labelledby="home-hero-title">
-      <div className="hero-gradient-base" />
+      <div className="hero-gradient-base layer--static" />
       {!reduceMotion && (
         <>
-          <div className="hero-wave-caustics">
+          <div className="hero-wave-caustics layer--motion">
             <video autoPlay loop muted playsInline preload="auto">
               <source
                 src="/assets/champagne/motion/wave-caustics.webm"
@@ -20,7 +20,7 @@ export default function ChampagneHero() {
               />
             </video>
           </div>
-          <div className="hero-glass-shimmer">
+          <div className="hero-glass-shimmer layer--motion">
             <video autoPlay loop muted playsInline preload="auto">
               <source
                 src="/assets/champagne/motion/glass-shimmer.webm"
@@ -28,7 +28,7 @@ export default function ChampagneHero() {
               />
             </video>
           </div>
-          <div className="hero-particles-drift">
+          <div className="hero-particles-drift layer--motion">
             <video autoPlay loop muted playsInline preload="auto">
               <source
                 src="/assets/champagne/motion/particles-drift.webm"
@@ -36,7 +36,7 @@ export default function ChampagneHero() {
               />
             </video>
           </div>
-          <div className="hero-gold-dust-drift">
+          <div className="hero-gold-dust-drift layer--motion">
             <video autoPlay loop muted playsInline preload="auto">
               <source
                 src="/assets/champagne/particles/gold-dust-drift.webm"
@@ -46,15 +46,15 @@ export default function ChampagneHero() {
           </div>
         </>
       )}
-      <div className="hero-wave-mask" />
-      <div className="hero-particles-static" />
-      <div className="hero-film-grain" />
+      <div className="hero-wave-mask layer--static" />
+      <div className="hero-particles-static layer--static" />
+      <div className="hero-film-grain layer--static" />
       <div className="hero-content">
         <div className="hero-content-wrapper">
           <h1 id="home-hero-title">Your Luxury Smile Awaits</h1>
           <p>
-            Private dental care with calm precision, comfort-first technology, and
-            a signature Manus AI finish.
+            Private dental care with calm precision, comfort-first technology,
+            and a signature Manus AI finish.
           </p>
           <div className="hero-cta-group">
             <a href="/contact" className="hero-cta-primary">

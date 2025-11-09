@@ -1,11 +1,15 @@
-'use client';
+export { metadata } from "@/app/preview/metadata";
+("use client");
 
-import { useEffect, useMemo, useState } from 'react';
-import type { CSSProperties } from 'react';
+import { useEffect, useMemo, useState } from "react";
+import type { CSSProperties } from "react";
 
-import BrandHeroGradient, { type BrandHeroGradientProps } from '@/components/brand/BrandHeroGradient';
+import BrandHeroGradient, {
+  type BrandHeroGradientProps,
+} from "@/components/brand/BrandHeroGradient";
 
-import styles from './champagne-preview.module.css';
+import styles from "./champagne-preview.module.css";
+import "@/styles/champagne/a11y.css";
 
 const MIN_GRAIN = 0;
 const MAX_GRAIN = 0.25;
@@ -17,15 +21,17 @@ const ChampagnePreviewPage = () => {
   useEffect(() => {
     const syncFromUrl = () => {
       const params = new URLSearchParams(window.location.search);
-      setExperimentsEnabled(params.get('exp') === '1');
+      setExperimentsEnabled(params.get("exp") === "1");
     };
 
     syncFromUrl();
-    window.addEventListener('popstate', syncFromUrl);
-    return () => window.removeEventListener('popstate', syncFromUrl);
+    window.addEventListener("popstate", syncFromUrl);
+    return () => window.removeEventListener("popstate", syncFromUrl);
   }, []);
 
-  const [particlesVariant, setParticlesVariant] = useState<'gold' | 'none'>('gold');
+  const [particlesVariant, setParticlesVariant] = useState<"gold" | "none">(
+    "gold",
+  );
   const [grainOpacity, setGrainOpacity] = useState(0.14);
   const [goldRimEnabled, setGoldRimEnabled] = useState(false);
 
@@ -33,7 +39,7 @@ const ChampagnePreviewPage = () => {
   const heroStyle = useMemo<CSSProperties>(
     () =>
       ({
-        '--champagne-grain': experimentsEnabled ? formattedGrain : undefined,
+        "--champagne-grain": experimentsEnabled ? formattedGrain : undefined,
       }) as CSSProperties,
     [formattedGrain, experimentsEnabled],
   );
@@ -44,7 +50,8 @@ const ChampagnePreviewPage = () => {
         <p className={styles.controlsTitle}>Layer Toggles</p>
         {!experimentsEnabled && (
           <p className={styles.controlsNotice}>
-            Experiments are locked. Add <code>?exp=1</code> to the URL to explore grain, particles, and gold rim variations.
+            Experiments are locked. Add <code>?exp=1</code> to the URL to
+            explore grain, particles, and gold rim variations.
           </p>
         )}
         <div className={styles.controlGroup}>
@@ -58,10 +65,10 @@ const ChampagnePreviewPage = () => {
               role="switch"
               aria-label="Toggle particle overlay"
               className={styles.toggle}
-              checked={particlesVariant !== 'none'}
+              checked={particlesVariant !== "none"}
               onChange={(event) => {
                 if (!experimentsEnabled) return;
-                setParticlesVariant(event.target.checked ? 'gold' : 'none');
+                setParticlesVariant(event.target.checked ? "gold" : "none");
               }}
               disabled={!experimentsEnabled}
             />
@@ -112,11 +119,11 @@ const ChampagnePreviewPage = () => {
       <div className={styles.heroFrame}>
         <BrandHeroGradient
           {...({
-            intensity: 'bold',
-            clip: 'wave-bottom',
-            goldDensity: 'med',
+            intensity: "bold",
+            clip: "wave-bottom",
+            goldDensity: "med",
             waveOpacity: 0.24,
-            particles: experimentsEnabled ? particlesVariant : 'gold',
+            particles: experimentsEnabled ? particlesVariant : "gold",
             grainOpacity: experimentsEnabled ? grainOpacity : 0.14,
             goldRimEnabled: experimentsEnabled ? goldRimEnabled : false,
             driftEnabled: true,
@@ -125,10 +132,13 @@ const ChampagnePreviewPage = () => {
           <section className={styles.hero} style={heroStyle}>
             <div className={styles.heroContent}>
               <p className={styles.heroEyebrow}>Champagne Preview</p>
-              <h1 className={styles.heroTitle}>On-brand radiance, ready for launch</h1>
+              <h1 className={styles.heroTitle}>
+                On-brand radiance, ready for launch
+              </h1>
               <p className={styles.heroDescription}>
-                This hero uses production tokens for the magenta-to-teal gradient while layering particles, wave masks, and
-                film grain that can be tuned for polish audits.
+                This hero uses production tokens for the magenta-to-teal
+                gradient while layering particles, wave masks, and film grain
+                that can be tuned for polish audits.
               </p>
               <a className="smh-btn" href="#consult">
                 Plan Your Consultation
@@ -136,11 +146,16 @@ const ChampagnePreviewPage = () => {
             </div>
           </section>
         </BrandHeroGradient>
-        <div className={styles.goldRim} data-enabled={goldRimEnabled} aria-hidden="true" />
+        <div
+          className={styles.goldRim}
+          data-enabled={goldRimEnabled}
+          aria-hidden="true"
+        />
       </div>
 
       <p className={styles.heroNote}>
-        Preview the Champagne hero with adjustable layers to validate the gold rim treatment alongside film grain and particles.
+        Preview the Champagne hero with adjustable layers to validate the gold
+        rim treatment alongside film grain and particles.
       </p>
     </div>
   );

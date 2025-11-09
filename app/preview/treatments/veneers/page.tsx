@@ -1,3 +1,4 @@
+export { metadata } from '@/app/preview/metadata';
 // Preview-only clone. No hard hexes. Do not edit production pages.
 import Link from 'next/link';
 

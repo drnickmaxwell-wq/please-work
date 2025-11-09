@@ -6,7 +6,8 @@ import type { CSSProperties } from "react";
 import { useParallax } from "./hooks/useParallax";
 import "@/app/globals/hero-polish.css";
 
-const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
+const clamp = (value: number, min: number, max: number) =>
+  Math.min(max, Math.max(min, value));
 
 type ParticlePalette = "gold" | "teal" | "magenta" | "none";
 
@@ -102,17 +103,19 @@ export default function BrandHeroGradient({
     return "";
   }, [clip]);
 
-  const driftStyle = (driftEnabled
-    ? {
-        "--hero-drift-x": `${x.toFixed(2)}px`,
-        "--hero-drift-y": `${y.toFixed(2)}px`,
-        "--hero-drift-rotate": `${rotateZ.toFixed(2)}deg`,
-      }
-    : {
-        "--hero-drift-x": "0px",
-        "--hero-drift-y": "0px",
-        "--hero-drift-rotate": "0deg",
-      }) as CSSProperties;
+  const driftStyle = (
+    driftEnabled
+      ? {
+          "--hero-drift-x": `${x.toFixed(2)}px`,
+          "--hero-drift-y": `${y.toFixed(2)}px`,
+          "--hero-drift-rotate": `${rotateZ.toFixed(2)}deg`,
+        }
+      : {
+          "--hero-drift-x": "0px",
+          "--hero-drift-y": "0px",
+          "--hero-drift-rotate": "0deg",
+        }
+  ) as CSSProperties;
 
   const shellStyle = {
     ...driftStyle,
@@ -124,19 +127,32 @@ export default function BrandHeroGradient({
   const showParticles = particlesVariant !== "none";
   const particleDensity = particleDensityAttr[goldDensity ?? "low"] ?? "low";
   return (
-    <div ref={containerRef} className={`brand-hero-shell ${clipClass}`.trim()} style={shellStyle}>
+    <div
+      ref={containerRef}
+      className={`brand-hero-shell ${clipClass}`.trim()}
+      style={shellStyle}
+    >
       <div className="brand-hero-layers" aria-hidden="true">
-        <span className="hero-layer hero-layer--gradient" data-motion={driftEnabled} data-intensity={intensity} />
-        <span className="hero-layer hero-layer--wave champagne-wave-mask" />
+        <span
+          className={`hero-layer hero-layer--gradient ${driftEnabled ? "layer--motion" : "layer--static"}`}
+          data-motion={driftEnabled}
+          data-intensity={intensity}
+        />
+        <span className="hero-layer hero-layer--wave champagne-wave-mask layer--static" />
         {showParticles ? (
           <span
-            className="hero-layer hero-layer--particles particles"
+            className="hero-layer hero-layer--particles particles layer--motion"
             data-variant={particlesVariant}
             data-density={particleDensity}
           />
         ) : null}
-        <span className="hero-layer hero-layer--grain champagne-grain" />
-        {goldRimEnabled ? <span className="hero-layer hero-layer--gold-rim" data-glow={driftEnabled} /> : null}
+        <span className="hero-layer hero-layer--grain champagne-grain layer--static" />
+        {goldRimEnabled ? (
+          <span
+            className={`hero-layer hero-layer--gold-rim ${driftEnabled ? "layer--motion" : "layer--static"}`}
+            data-glow={driftEnabled}
+          />
+        ) : null}
       </div>
 
       {children ? <MotionDiv>{children}</MotionDiv> : null}

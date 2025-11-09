@@ -2,29 +2,23 @@
 /* Includes static + motion layers with prefers-reduced-motion support */
 
 :root {
-  /* Brand Colors */
-  --brand-magenta: #C2185B;
-  --brand-turquoise: #2CBFAE;
-  --brand-turquoise-alt: #40C4B4;
-  --brand-gold: #D4AF37;
-  --paper: #FFFFFF;
-  --ink: #0E1420;
-  
   /* Gradients */
-  --gradient-champagne: linear-gradient(135deg, #C2185B 0%, #40C4B4 60%, #D4AF37 100%);
-  --gradient-cta: linear-gradient(135deg, #C2185B 0%, #2CBFAE 55%, #D4AF37 100%);
-  
+  --gradient-champagne: var(--smh-gradient);
+  --gradient-cta: var(--gradient-champagne);
+
   /* Typography */
-  --font-display: 'Playfair Display', serif;
-  --font-body: 'Inter', sans-serif;
-  
+  --font-display: "Playfair Display", serif;
+  --font-body: "Inter", sans-serif;
+
   /* Radii */
   --radius-pill: 999px;
   --radius-lg: 18px;
-  
+
   /* Shadows */
-  --shadow-glow: 0 0 1px rgba(255, 255, 255, 0.6), 0 10px 40px rgba(194, 24, 91, 0.25);
-  --shadow-gold-glow: 0 0 12px rgba(212, 175, 55, 0.4), 0 0 24px rgba(212, 175, 55, 0.2);
+  --shadow-glow:
+    0 0 1px rgba(255, 255, 255, 0.6), 0 10px 40px rgba(194, 24, 91, 0.25);
+  --shadow-gold-glow:
+    0 0 12px rgba(212, 175, 55, 0.4), 0 0 24px rgba(212, 175, 55, 0.2);
 }
 
 /* Hero Container */
@@ -57,7 +51,7 @@
   position: absolute;
   inset: 0;
   z-index: 2;
-  opacity: 0.10;
+  opacity: 0.1;
   mix-blend-mode: screen;
   will-change: transform;
   pointer-events: none;
@@ -74,7 +68,7 @@
   position: absolute;
   inset: 0;
   z-index: 3;
-  background-image: url('/assets/champagne/waves/wave-mask-desktop.webp');
+  background-image: url("/assets/champagne/waves/wave-mask-desktop.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -85,7 +79,7 @@
 
 @media (max-width: 768px) {
   .hero-wave-mask {
-    background-image: url('/assets/champagne/waves/wave-mask-mobile.webp');
+    background-image: url("/assets/champagne/waves/wave-mask-mobile.webp");
   }
 }
 
@@ -111,7 +105,7 @@
   position: absolute;
   inset: 0;
   z-index: 5;
-  background-image: url('/assets/champagne/particles/home-hero-particles.webp');
+  background-image: url("/assets/champagne/particles/home-hero-particles.webp");
   background-size: 1024px 1024px;
   background-repeat: repeat;
   opacity: 0.08;
@@ -159,7 +153,7 @@
   position: absolute;
   inset: 0;
   z-index: 8;
-  background-image: url('/assets/champagne/textures/home-hero-film-grain.webp');
+  background-image: url("/assets/champagne/textures/home-hero-film-grain.webp");
   background-size: 512px 512px;
   background-repeat: repeat;
   opacity: 0.07;
@@ -172,7 +166,7 @@
   position: relative;
   z-index: 9;
   width: 100%;
-  color: var(--paper);
+  color: var(--smh-white);
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
 }
 
@@ -188,7 +182,7 @@
 }
 
 .hero-title {
-  color: var(--paper);
+  color: var(--smh-white);
   margin-bottom: 1.5rem;
   font-family: var(--font-display);
 }
@@ -209,7 +203,7 @@
 
 .hero-cta-primary {
   background: var(--gradient-cta);
-  color: var(--paper);
+  color: var(--smh-white);
   border: none;
   border-radius: var(--radius-pill);
   box-shadow: var(--shadow-glow);
@@ -226,7 +220,7 @@
 }
 
 .hero-cta-primary::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
@@ -240,19 +234,23 @@
 
 .hero-cta-primary:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-glow), 0 12px 32px rgba(194, 24, 91, 0.3);
+  box-shadow:
+    var(--shadow-glow),
+    0 12px 32px rgba(194, 24, 91, 0.3);
 }
 
 .hero-cta-primary:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px var(--brand-gold), var(--shadow-gold-glow);
+  box-shadow:
+    0 0 0 2px var(--brand-gold),
+    var(--shadow-gold-glow);
 }
 
 .hero-cta-secondary {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  color: var(--paper);
+  color: var(--smh-white);
   border: 1px solid var(--brand-gold);
   border-radius: var(--radius-pill);
   font-weight: 600;
@@ -274,7 +272,9 @@
 
 .hero-cta-secondary:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px var(--brand-gold), var(--shadow-gold-glow);
+  box-shadow:
+    0 0 0 2px var(--brand-gold),
+    var(--shadow-gold-glow);
 }
 
 /* Animations */
@@ -298,21 +298,21 @@
   .hero-gold-dust-drift {
     display: none !important;
   }
-  
+
   /* Disable parallax transforms */
   .hero-wave-mask,
   .hero-particles-static {
     transform: none !important;
     transition: none !important;
   }
-  
+
   /* Disable content animations */
   .hero-title,
   .hero-subtitle,
   .hero-cta-group {
     animation: none !important;
   }
-  
+
   /* Disable button hover transforms */
   .hero-cta-primary:hover,
   .hero-cta-secondary:hover {

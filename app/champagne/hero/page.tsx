@@ -1,5 +1,6 @@
 import ChampagneHero from "@/components/home/ChampagneHero";
 import "@/styles/champagne/hero.css";
+import "@/styles/champagne/a11y.css";
 
 export const metadata = {
   title: "Champagne Hero — Locked Preview",
