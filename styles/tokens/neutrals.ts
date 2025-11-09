@@ -1,5 +1,5 @@
 export const INK = "var(--ink)";
-export const TEXT = "var(--text)";
+export const TEXT = "var(--smh-text)";
 export const BG = "var(--bg)";
 export const WHITE = "var(--smh-white)";
 export const GRAY_200 = "var(--smh-gray-200)";

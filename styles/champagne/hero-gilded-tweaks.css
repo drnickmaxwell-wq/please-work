@@ -1,42 +1,21 @@
-:root {
-  /* nothing here; tokens come from smh-champagne-tokens.css */
-}
-
-/* Gradient surface for the preview hero */
-.preview-hero-surface {
+/* styles/champagne/hero-gilded-tweaks.css */
+/* Preview-only polish for the Gilded hero. Tokens only. */
+.previewHeroGilded {
   background: var(--smh-gradient);
   background-size: var(--smh-bg-size);
   background-position: var(--smh-bg-pos);
-  color: var(--smh-ink);
-  position: relative;
+  color: var(--smh-white);
 }
 
-/* Gold accents */
-.preview-hero .gold-border {
-  border: 1px solid var(--smh-accent-gold);
-  box-shadow: 0 0 0 1px color-mix(in oklab, var(--smh-accent-gold) 60%, transparent);
-}
-
-/* CTA buttons that respect tokens */
-.preview-hero .cta-primary {
-  background: var(--smh-accent-gold);
+.previewHeroGilded .ink {
   color: var(--ink);
 }
 
-.preview-hero .cta-secondary {
-  background: color-mix(in oklab, var(--smh-accent-gold) 15%, transparent);
+.previewHeroGilded .paper {
   color: var(--smh-white);
+}
+
+.previewHeroGilded .cta-primary {
   border: 1px solid var(--smh-accent-gold);
-}
-
-/* Film grain overlay (opacity controlled by token) */
-.preview-hero .film-grain {
-  pointer-events: none;
-  opacity: var(--smh-grain-alpha);
-  mix-blend-mode: overlay;
-}
-
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .preview-hero [data-parallax] { transform: none !important; }
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--smh-accent-gold) 40%, transparent);
 }

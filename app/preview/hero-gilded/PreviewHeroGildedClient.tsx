@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 
-import "@/styles/champagne/hero-gilded-tweaks.css";
+import "../../../styles/champagne/hero-gilded-tweaks.css";
 
 import {
   getBrandManifestClient,
@@ -405,7 +405,7 @@ export default function PreviewHeroGildedClient() {
   return (
     <section
       ref={heroRef}
-      className="champagne-hero champagne-hero--gilded preview-hero-gilded"
+      className="champagne-hero champagne-hero--gilded preview-hero-gilded previewHeroGilded"
       aria-labelledby="hero-gilded-title"
       data-smoothing="preview"
     >
