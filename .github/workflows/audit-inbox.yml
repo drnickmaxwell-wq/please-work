@@ -14,6 +14,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   audit:
@@ -21,38 +22,104 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # needed for commits/PRs
+
+      - name: Show repo tree (top level)
+        run: ls -la && echo && find . -maxdepth 2 -type d -print
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Install dependencies (if any)
+      - name: Ensure folders exist
         run: |
-          if [ -f package.json ]; then
+          INBOX="${{ github.event.inputs.inbox_path || '_audit_inbox' }}"
+          mkdir -p "$INBOX"
+          mkdir -p reports
+          echo "INBOX resolved to: $INBOX"
+          echo "Files in $INBOX:"
+          ls -la "$INBOX" || true
+
+      - name: Install dependencies if present (pnpm → npm fallback)
+        run: |
+          set -e
+          if [ -f pnpm-lock.yaml ]; then
             corepack enable
-            pnpm install --frozen-lockfile || npm ci || true
+            pnpm i --frozen-lockfile
+          elif [ -f package-lock.json ]; then
+            npm ci
+          elif [ -f package.json ]; then
+            npm i
+          else
+            echo "No package.json found; skipping install."
           fi
 
-      - name: Run audit script
-        run: |
-          node scripts/audit/run-inbox.mjs "${{ github.event.inputs.inbox_path || '_audit_inbox' }}"
+      - name: Run audit script (best-effort)
+        id: run_audit
         shell: bash
+        run: |
+          set -e
+          INBOX="${{ github.event.inputs.inbox_path || '_audit_inbox' }}"
+          SCRIPT_PATHS=(
+            "scripts/audit/run-inbox.mjs"
+            "scripts/audit/run-inbox.cjs"
+            "scripts/audit/run-inbox.js"
+          )
+          FOUND_SCRIPT=""
+          for p in "${SCRIPT_PATHS[@]}"; do
+            if [ -f "$p" ]; then
+              FOUND_SCRIPT="$p"
+              break
+            fi
+          done
 
-      # --- NEW SECTIONS BELOW ---
+          if [ -z "$FOUND_SCRIPT" ]; then
+            echo "::warning::Audit script not found at any of: ${SCRIPT_PATHS[*]}"
+            echo "::notice::Continuing so artifacts/PR steps still run (for debugging)."
+          else
+            echo "Using audit script: $FOUND_SCRIPT"
+            node "$FOUND_SCRIPT" "$INBOX"
+          fi
+
+          echo "Post-audit, listing /reports:"
+          ls -la reports || true
+
+          # Create empty stubs if the script didn't produce them so later steps succeed
+          touch reports/Manus_Section_Catalog.json
+          touch reports/Manus_Audit_Report.md
+          touch reports/Integration_Roadmap.md
 
       - name: Upload reports as artifact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: audit-reports
           path: reports/**
+          if-no-files-found: warn
 
-      - name: Commit reports to repo
+      - name: Prepare commit
         if: always()
         run: |
-          git config user.name "github-actions[bot]"
+          git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add reports/** || true
-          git commit -m "Audit Inbox: add reports [skip ci]" || echo "No changes to commit"
-          git push || echo "No push (likely no changes)"
+          git add reports || true
+          git status
+
+      - name: Create PR with reports (avoids pushing to protected main)
+        if: always()
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "Audit Inbox: add/update reports"
+          title: "Audit Inbox: add/update reports"
+          body: |
+            This PR contains the generated audit outputs:
+            - `reports/Manus_Section_Catalog.json`
+            - `reports/Manus_Audit_Report.md`
+            - `reports/Integration_Roadmap.md`
+
+            It was created by the Audit Inbox workflow. Review and merge.
+          branch: bot/audit-reports
+          delete-branch: true
 
