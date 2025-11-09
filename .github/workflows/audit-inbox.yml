@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       inbox_path:
-        description: 'Folder containing ZIPs'
+        description: 'Folder containing ZIPs to audit'
         required: false
         default: '_audit_inbox'
   push:
@@ -19,15 +19,15 @@ jobs:
   audit:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Install deps (if any)
+      - name: Install dependencies (if any)
         run: |
           if [ -f package.json ]; then
             corepack enable
@@ -38,3 +38,21 @@ jobs:
         run: |
           node scripts/audit/run-inbox.mjs "${{ github.event.inputs.inbox_path || '_audit_inbox' }}"
         shell: bash
+
+      # --- NEW SECTIONS BELOW ---
+
+      - name: Upload reports as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: audit-reports
+          path: reports/**
+
+      - name: Commit reports to repo
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/** || true
+          git commit -m "Audit Inbox: add reports [skip ci]" || echo "No changes to commit"
+          git push || echo "No push (likely no changes)"
+
