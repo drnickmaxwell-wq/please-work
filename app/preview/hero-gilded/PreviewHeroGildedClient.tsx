@@ -11,15 +11,28 @@ import LoopCrossfade from "./LoopCrossfade";
 
 type HeroLayers = Pick<BrandManifest, "waves" | "textures" | "particles" | "motion">;
 
+type MotionPosterMap = Record<string, string | undefined>;
+
 type PreviewHeroLayers = HeroLayers & {
   waveMask?: string;
   waveBg?: string;
+  motionPosters?: MotionPosterMap;
 };
 
 type MotionSource = {
   src: string;
   poster?: string;
 };
+
+type MotionEntry =
+  | string
+  | {
+      src?: string | null;
+      poster?: string | null;
+      duration?: number | string | null;
+      durationSec?: number | string | null;
+      durationSeconds?: number | string | null;
+    };
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);
@@ -33,6 +46,21 @@ type MotionDurations = {
   [key: string]: number | undefined;
 };
 
+function parseDuration(value: unknown): number | undefined {
+  if (typeof value === "number" && Number.isFinite(value)) {
+    return value;
+  }
+
+  if (typeof value === "string") {
+    const match = /(?<seconds>\d+(?:\.\d+)?)s?/i.exec(value);
+    if (match?.groups?.seconds) {
+      return Number.parseFloat(match.groups.seconds);
+    }
+  }
+
+  return undefined;
+}
+
 function getMotionDurations(manifest?: HeroLayers["motion"]): MotionDurations {
   if (!manifest) {
     return {};
@@ -40,18 +68,82 @@ function getMotionDurations(manifest?: HeroLayers["motion"]): MotionDurations {
 
   const durations: MotionDurations = {};
 
-  for (const [key, value] of Object.entries(manifest)) {
-    if (typeof value !== "string") {
+  for (const [key, value] of Object.entries(manifest as Record<string, MotionEntry | undefined>)) {
+    if (!value) {
       continue;
     }
 
-    const match = /duration-(\d+(?:\.\d+)?)s/i.exec(value);
-    if (match) {
-      durations[key] = Number.parseFloat(match[1]);
+    if (typeof value === "string") {
+      const match = /duration-(\d+(?:\.\d+)?)s/i.exec(value);
+      if (match) {
+        durations[key] = Number.parseFloat(match[1]);
+      }
+      continue;
+    }
+
+    const duration =
+      parseDuration(value.duration) ??
+      parseDuration(value.durationSec) ??
+      parseDuration(value.durationSeconds);
+
+    if (typeof duration === "number") {
+      durations[key] = duration;
     }
   }
 
   return durations;
+}
+
+function getMotionSrc(
+  motion: PreviewHeroLayers["motion"],
+  keys: string[],
+  fallback: string,
+): string {
+  if (!motion) {
+    return fallback;
+  }
+
+  const motionRecord = motion as Record<string, MotionEntry | undefined>;
+
+  for (const key of keys) {
+    const entry = motionRecord[key];
+    if (!entry) {
+      continue;
+    }
+
+    if (typeof entry === "string" && entry.trim().length > 0) {
+      return entry;
+    }
+
+    if (typeof entry === "object" && typeof entry.src === "string" && entry.src.trim().length > 0) {
+      return entry.src;
+    }
+  }
+
+  return fallback;
+}
+
+function pickPoster(posters: MotionPosterMap | undefined, keys: string[]): string | undefined {
+  if (!posters) {
+    return undefined;
+  }
+
+  for (const key of keys) {
+    const poster = posters[key];
+    if (typeof poster === "string" && poster.length > 0) {
+      return poster;
+    }
+  }
+
+  return undefined;
+}
+
+function formatHudDuration(seconds?: number): string {
+  if (typeof seconds !== "number" || !Number.isFinite(seconds)) {
+    return "t=?s";
+  }
+
+  return `t=${seconds.toFixed(2)}s`;
 }
 
 export default function PreviewHeroGildedClient() {
@@ -91,6 +183,33 @@ export default function PreviewHeroGildedClient() {
           (await verify(manifest.particles?.soft)) ??
           "/assets/champagne/particles/home-hero-particles.webp";
 
+        const motionPosters = (manifest as BrandManifest & {
+          motionPosters?: Record<string, string | null | undefined>;
+        }).motionPosters;
+
+        let verifiedMotionPosters: MotionPosterMap | undefined;
+
+        if (motionPosters) {
+          const entries = await Promise.all(
+            Object.entries(motionPosters).map(async ([key, url]) => {
+              const verified = await verify(url ?? undefined);
+              return [key, verified] as const;
+            }),
+          );
+
+          verifiedMotionPosters = entries.reduce<MotionPosterMap>((acc, [key, url]) => {
+            if (typeof url === "string") {
+              acc[key] = url;
+            }
+
+            return acc;
+          }, {});
+
+          if (verifiedMotionPosters && Object.keys(verifiedMotionPosters).length === 0) {
+            verifiedMotionPosters = undefined;
+          }
+        }
+
         const verifiedLayers: PreviewHeroLayers = {
           waves: {
             ...manifest.waves,
@@ -112,6 +231,7 @@ export default function PreviewHeroGildedClient() {
           motion: manifest.motion,
           waveMask: verifiedWavesMask,
           waveBg: verifiedWavesBackground,
+          motionPosters: verifiedMotionPosters,
         };
 
         if (isMounted) {
@@ -255,6 +375,31 @@ export default function PreviewHeroGildedClient() {
     layers?.waveMask ?? "/assets/champagne/waves/wave-mask-desktop.webp";
   const waveBgUrl = layers?.waveBg ?? "/assets/champagne/waves/wave-bg.webp";
 
+  const causticsSrc = getMotionSrc(layers?.motion, ["caustics", "waveCaustics"], "/assets/champagne/motion/wave-caustics.webm");
+  const glassSrc = getMotionSrc(layers?.motion, ["glass", "glassShimmer"], "/assets/champagne/motion/glass-shimmer.webm");
+  const particlesSrc = getMotionSrc(
+    layers?.motion,
+    ["particles", "particlesDrift"],
+    "/assets/champagne/motion/particles-drift.webm",
+  );
+  const goldSrc = getMotionSrc(
+    layers?.motion,
+    ["gold", "goldDust"],
+    "/assets/champagne/particles/gold-dust-drift.webm",
+  );
+
+  const causticsPoster = pickPoster(layers?.motionPosters, ["caustics", "waveCaustics"]);
+  const glassPoster = pickPoster(layers?.motionPosters, ["glass", "glassShimmer"]);
+  const particlesPoster = pickPoster(layers?.motionPosters, ["particles", "particlesDrift"]);
+  const goldPoster = pickPoster(layers?.motionPosters, ["gold", "goldDust"]);
+
+  const causticsDuration = durations.caustics ?? 8;
+  const glassDuration = durations.glass ?? 8;
+  const particlesDuration = durations.particles ?? 8;
+  const goldDuration = durations.gold ?? 8;
+
+  const showDevHud = process.env.NODE_ENV !== "production";
+
   return (
     <section
       ref={heroRef}
@@ -275,32 +420,36 @@ export default function PreviewHeroGildedClient() {
         <>
           <div className="loop-pair hero-motion hero-wave-caustics parallax-1">
             <LoopCrossfade
-              src="/assets/champagne/motion/wave-caustics.webm"
-              durationSec={durations.caustics ?? 8}
+              src={causticsSrc}
+              poster={causticsPoster}
+              durationSec={causticsDuration}
               crossfadeMs={220}
             />
           </div>
 
           <div className="loop-pair hero-motion hero-glass-shimmer">
             <LoopCrossfade
-              src="/assets/champagne/motion/glass-shimmer.webm"
-              durationSec={durations.glass ?? 8}
+              src={glassSrc}
+              poster={glassPoster}
+              durationSec={glassDuration}
               crossfadeMs={220}
             />
           </div>
 
           <div className="loop-pair hero-motion hero-particles-drift">
             <LoopCrossfade
-              src="/assets/champagne/motion/particles-drift.webm"
-              durationSec={durations.particles ?? 8}
+              src={particlesSrc}
+              poster={particlesPoster}
+              durationSec={particlesDuration}
               crossfadeMs={220}
             />
           </div>
 
           <div className="loop-pair hero-motion hero-gold-dust-drift lux-gold parallax-2">
             <LoopCrossfade
-              src="/assets/champagne/particles/gold-dust-drift.webm"
-              durationSec={durations.gold ?? 8}
+              src={goldSrc}
+              poster={goldPoster}
+              durationSec={goldDuration}
               crossfadeMs={220}
             />
           </div>
@@ -330,6 +479,28 @@ export default function PreviewHeroGildedClient() {
       />
 
       <div className="hero-caustic-reflection" aria-hidden="true" />
+
+      {showDevHud && (
+        <div
+          style={{
+            position: "absolute",
+            top: "0.75rem",
+            right: "0.75rem",
+            opacity: 0.35,
+            fontFamily: "monospace",
+            fontSize: "0.75rem",
+            lineHeight: 1.25,
+            textAlign: "right",
+            pointerEvents: "none",
+            color: "var(--champagne-hero-text, #fff)",
+          }}
+        >
+          <div>caustics {formatHudDuration(causticsDuration)}</div>
+          <div>glass {formatHudDuration(glassDuration)}</div>
+          <div>particles {formatHudDuration(particlesDuration)}</div>
+          <div>gold {formatHudDuration(goldDuration)}</div>
+        </div>
+      )}
 
       <div className="hero-content">
         <div className="hero-content-wrapper">
