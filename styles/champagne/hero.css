@@ -2,15 +2,17 @@
 /* Includes static + motion layers with prefers-reduced-motion support */
 
 :root {
-  /* Brand Tokens */
-  --brand-turquoise: var(--brand-teal);
-  --brand-turquoise-alt: var(--brand-teal);
-  --paper: var(--smh-white);
-  --ink: var(--ink);
-
+  /* Brand Colors */
+  --brand-magenta: #C2185B;
+  --brand-turquoise: #2CBFAE;
+  --brand-turquoise-alt: #40C4B4;
+  --brand-gold: #D4AF37;
+  --paper: #FFFFFF;
+  --ink: #0E1420;
+  
   /* Gradients */
-  --gradient-champagne: linear-gradient(135deg, var(--brand-magenta) 0%, var(--brand-teal) 60%, var(--brand-gold) 100%);
-  --gradient-cta: linear-gradient(135deg, var(--brand-magenta) 0%, var(--brand-teal) 55%, var(--brand-gold) 100%);
+  --gradient-champagne: linear-gradient(135deg, #C2185B 0%, #40C4B4 60%, #D4AF37 100%);
+  --gradient-cta: linear-gradient(135deg, #C2185B 0%, #2CBFAE 55%, #D4AF37 100%);
   
   /* Typography */
   --font-display: 'Playfair Display', serif;
@@ -21,12 +23,8 @@
   --radius-lg: 18px;
   
   /* Shadows */
-  --shadow-glow:
-    0 0 1px color-mix(in oklab, var(--smh-white) 60%, transparent),
-    0 10px 40px color-mix(in oklab, var(--brand-magenta) 25%, transparent);
-  --shadow-gold-glow:
-    0 0 12px color-mix(in oklab, var(--brand-gold) 40%, transparent),
-    0 0 24px color-mix(in oklab, var(--brand-gold) 20%, transparent);
+  --shadow-glow: 0 0 1px rgba(255, 255, 255, 0.6), 0 10px 40px rgba(194, 24, 91, 0.25);
+  --shadow-gold-glow: 0 0 12px rgba(212, 175, 55, 0.4), 0 0 24px rgba(212, 175, 55, 0.2);
 }
 
 /* Hero Container */
@@ -175,7 +173,7 @@
   z-index: 9;
   width: 100%;
   color: var(--paper);
-  text-shadow: 0 2px 12px color-mix(in oklab, var(--ink) 30%, transparent);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
 }
 
 .hero-content-wrapper {
@@ -196,7 +194,7 @@
 }
 
 .hero-subtitle {
-  color: color-mix(in oklab, var(--smh-white) 95%, transparent);
+  color: rgba(255, 255, 255, 0.95);
   margin-bottom: 2.5rem;
   opacity: 0.95;
   font-family: var(--font-body);
@@ -231,7 +229,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, color-mix(in oklab, var(--smh-white) 20%, transparent), transparent);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
   opacity: 0;
   transition: opacity 0.3s cubic-bezier(0.65, 0, 0.35, 1);
 }
@@ -242,9 +240,7 @@
 
 .hero-cta-primary:hover {
   transform: translateY(-2px);
-  box-shadow:
-    var(--shadow-glow),
-    0 12px 32px color-mix(in oklab, var(--brand-magenta) 30%, transparent);
+  box-shadow: var(--shadow-glow), 0 12px 32px rgba(194, 24, 91, 0.3);
 }
 
 .hero-cta-primary:focus-visible {
@@ -253,7 +249,7 @@
 }
 
 .hero-cta-secondary {
-  background: color-mix(in oklab, var(--smh-white) 10%, transparent);
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   color: var(--paper);
@@ -270,10 +266,10 @@
 }
 
 .hero-cta-secondary:hover {
-  background: color-mix(in oklab, var(--brand-gold) 15%, transparent);
+  background: rgba(212, 175, 55, 0.15);
   border-color: var(--brand-gold);
   transform: translateY(-2px);
-  box-shadow: 0 0 16px color-mix(in oklab, var(--brand-gold) 30%, transparent);
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.3);
 }
 
 .hero-cta-secondary:focus-visible {

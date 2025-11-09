@@ -1,13 +1,8 @@
 .preview-champagne-frame {
   min-height: 100vh;
-  background: radial-gradient(circle at top left, color-mix(in oklab, var(--smh-white) 12%, var(--brand-gold) 3%), transparent 60%),
-    linear-gradient(
-      160deg,
-      color-mix(in oklab, var(--ink) 92%, transparent 8%) 0%,
-      color-mix(in oklab, var(--ink) 88%, var(--brand-gold) 12%) 45%,
-      color-mix(in oklab, var(--ink) 96%, transparent 4%) 100%
-    );
-  color: color-mix(in oklab, var(--smh-white) 92%, var(--brand-gold) 8%);
+  background: radial-gradient(circle at top left, rgba(255, 244, 230, 0.12), transparent 60%),
+    linear-gradient(160deg, #0f0c0a 0%, #1c1412 45%, #060607 100%);
+  color: #f7f0e9;
   padding: 3rem 1.5rem 4rem;
   display: flex;
   justify-content: center;
@@ -35,7 +30,7 @@
 
 .preview-champagne-title p {
   margin: 0;
-  color: color-mix(in oklab, var(--smh-white) 75%, var(--brand-gold) 25%);
+  color: rgba(247, 240, 233, 0.75);
   font-size: 1rem;
 }
 
@@ -46,21 +41,21 @@
   justify-content: center;
   padding: 1.25rem 1.5rem;
   border-radius: 18px;
-  background: color-mix(in oklab, var(--ink) 45%, transparent);
-  border: 1px solid color-mix(in oklab, var(--brand-gold) 18%, transparent);
-  box-shadow: 0 18px 36px color-mix(in oklab, var(--ink) 35%, transparent);
+  background: rgba(14, 10, 9, 0.45);
+  border: 1px solid rgba(255, 214, 170, 0.18);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.35);
 }
 
 .preview-toggle {
   display: inline-flex;
   align-items: center;
   gap: 0.65rem;
-  color: color-mix(in oklab, var(--smh-white) 90%, var(--brand-gold) 10%);
+  color: rgba(247, 240, 233, 0.9);
   font-size: 0.95rem;
 }
 
 .preview-toggle input[type="checkbox"] {
-  accent-color: var(--brand-gold);
+  accent-color: #f0c674;
   width: 1.1rem;
   height: 1.1rem;
 }
@@ -76,7 +71,7 @@
   letter-spacing: 0.02em;
   text-transform: uppercase;
   font-weight: 500;
-  color: color-mix(in oklab, var(--smh-white) 75%, var(--brand-gold) 25%);
+  color: rgba(255, 238, 215, 0.75);
 }
 
 .preview-variant-grid {
@@ -89,21 +84,21 @@
   position: relative;
   border-radius: 24px;
   overflow: hidden;
-  border: 1px solid color-mix(in oklab, var(--brand-gold) 24%, transparent);
+  border: 1px solid rgba(255, 214, 170, 0.24);
   min-height: 260px;
-  background: color-mix(in oklab, var(--ink) 90%, transparent);
+  background: rgba(16, 11, 9, 0.9);
   display: flex;
   flex-direction: column;
 }
 
 .preview-variant-card header {
   padding: 1rem 1.25rem;
-  background: color-mix(in oklab, var(--ink) 80%, transparent);
-  border-bottom: 1px solid color-mix(in oklab, var(--brand-gold) 20%, transparent);
+  background: rgba(12, 9, 8, 0.8);
+  border-bottom: 1px solid rgba(255, 214, 170, 0.2);
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: color-mix(in oklab, var(--smh-white) 75%, var(--brand-gold) 25%);
+  color: rgba(255, 239, 220, 0.75);
 }
 
 .preview-variant-card .preview-variant-body {
@@ -113,7 +108,7 @@
   justify-content: center;
   position: relative;
   padding: 2.5rem 1.5rem;
-  color: color-mix(in oklab, var(--smh-white) 95%, var(--brand-gold) 5%);
+  color: rgba(255, 248, 235, 0.95);
   text-align: center;
   font-size: 1.25rem;
   letter-spacing: 0.04em;
@@ -132,11 +127,7 @@
 }
 
 .hero-live {
-  background: linear-gradient(
-    135deg,
-    color-mix(in oklab, var(--ink) 95%, var(--brand-gold) 5%),
-    color-mix(in oklab, var(--ink) 95%, var(--brand-magenta) 5%)
-  );
+  background: linear-gradient(135deg, rgba(28, 16, 9, 0.95), rgba(52, 27, 9, 0.95));
 }
 
 .hero-preview .hero-layer {
@@ -160,12 +151,8 @@
 }
 
 .preview-footer {
-  background: linear-gradient(
-    180deg,
-    color-mix(in oklab, var(--ink) 95%, transparent 5%),
-    color-mix(in oklab, var(--ink) 95%, var(--brand-gold) 5%)
-  );
-  border-top: 1px solid color-mix(in oklab, var(--brand-gold) 18%, transparent);
+  background: linear-gradient(180deg, rgba(13, 10, 8, 0.95), rgba(26, 17, 13, 0.95));
+  border-top: 1px solid rgba(255, 214, 170, 0.18);
   padding: 2rem 1.5rem;
   display: grid;
   gap: 1.25rem;
@@ -178,11 +165,11 @@
 }
 
 .footer-live {
-  color: color-mix(in oklab, var(--smh-white) 85%, var(--brand-gold) 15%);
+  color: rgba(255, 231, 205, 0.85);
 }
 
 .footer-preview {
-  color: color-mix(in oklab, var(--smh-white) 95%, var(--brand-gold) 5%);
+  color: rgba(255, 240, 224, 0.95);
   position: relative;
 }
 
@@ -196,11 +183,11 @@
 .preview-footer p {
   margin: 0;
   font-size: 0.95rem;
-  color: color-mix(in oklab, var(--smh-white) 80%, var(--brand-gold) 20%);
+  color: rgba(255, 241, 227, 0.8);
 }
 
 .preview-note {
   font-size: 0.85rem;
   text-align: center;
-  color: color-mix(in oklab, var(--smh-white) 60%, var(--brand-gold) 40%);
+  color: rgba(255, 245, 228, 0.6);
 }

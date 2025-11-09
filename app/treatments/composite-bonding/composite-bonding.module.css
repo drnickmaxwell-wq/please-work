@@ -3,7 +3,7 @@
   padding: clamp(3.25rem, 6.5vw, 5.5rem) clamp(1.75rem, 5vw, 4rem);
   display: grid;
   gap: clamp(1.5rem, 4vw, 2.75rem);
-  color: color-mix(in oklab, var(--smh-white) 98%, var(--brand-magenta) 2%);
+  color: #fdfbff;
   background: var(--smh-gradient);
   border-radius: clamp(2rem, 5vw, 3rem);
   box-shadow:
@@ -30,7 +30,7 @@
   font-size: 0.85rem;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: color-mix(in oklab, var(--smh-white) 82%, transparent);
+  color: rgba(255, 255, 255, 0.82);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
 
@@ -38,14 +38,14 @@
   font-size: clamp(2.4rem, 5vw, 3.75rem);
   line-height: 1.1;
   margin: 0;
-  color: var(--smh-white);
+  color: #ffffff;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
 
 .heroDescription {
   font-size: clamp(1.05rem, 2.5vw, 1.25rem);
   line-height: 1.7;
-  color: color-mix(in oklab, var(--smh-white) 88%, transparent);
+  color: rgba(255, 255, 255, 0.88);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
 
@@ -59,7 +59,7 @@
 
 .heroSecondary {
   text-decoration: none;
-  color: color-mix(in oklab, var(--smh-white) 90%, transparent);
+  color: rgba(255, 255, 255, 0.9);
   font-weight: 500;
   transition: color 180ms ease;
   text-shadow: 0 16px 36px rgba(6, 18, 32, 0.25);
@@ -67,7 +67,7 @@
 
 .heroSecondary:hover,
 .heroSecondary:focus-visible {
-  color: var(--smh-white);
+  color: #ffffff;
 }
 
 .sectionGrid {

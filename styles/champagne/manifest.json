@@ -8,16 +8,16 @@
   
   "tokens": {
     "colors": {
-      "brandMagenta": "var(--brand-magenta)",
-      "brandTurquoise": "var(--brand-teal)",
-      "brandTurquoiseAlt": "var(--brand-teal)",
-      "brandGold": "var(--brand-gold)",
-      "paper": "var(--smh-white)",
-      "ink": "var(--ink)"
+      "brandMagenta": "#C2185B",
+      "brandTurquoise": "#2CBFAE",
+      "brandTurquoiseAlt": "#40C4B4",
+      "brandGold": "#D4AF37",
+      "paper": "#FFFFFF",
+      "ink": "#0E1420"
     },
     "gradients": {
-      "champagne": "linear-gradient(135deg, var(--brand-magenta) 0%, var(--brand-teal) 60%, var(--brand-gold) 100%)",
-      "cta": "linear-gradient(135deg, var(--brand-magenta) 0%, var(--brand-teal) 55%, var(--brand-gold) 100%)"
+      "champagne": "linear-gradient(135deg, #C2185B 0%, #40C4B4 60%, #D4AF37 100%)",
+      "cta": "linear-gradient(135deg, #C2185B 0%, #2CBFAE 55%, #D4AF37 100%)"
     },
     "typography": {
       "display": "Playfair Display",
@@ -28,8 +28,8 @@
       "lg": "18px"
     },
     "shadows": {
-      "glow": "0 0 1px color-mix(in oklab, var(--smh-white) 60%, transparent), 0 10px 40px color-mix(in oklab, var(--brand-magenta) 25%, transparent)",
-      "goldGlow": "0 0 12px color-mix(in oklab, var(--brand-gold) 40%, transparent), 0 0 24px color-mix(in oklab, var(--brand-gold) 20%, transparent)"
+      "glow": "0 0 1px rgba(255, 255, 255, 0.6), 0 10px 40px rgba(194, 24, 91, 0.25)",
+      "goldGlow": "0 0 12px rgba(212, 175, 55, 0.4), 0 0 24px rgba(212, 175, 55, 0.2)"
     }
   },
   
@@ -161,7 +161,7 @@
   
   "accessibility": {
     "contrast": "AA",
-    "focusRing": "var(--brand-gold) 1px glow",
+    "focusRing": "#D4AF37 1px glow",
     "minHitTarget": "44x44px",
     "semanticHTML": true,
     "keyboardNav": true,

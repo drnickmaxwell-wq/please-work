@@ -35,8 +35,7 @@ function FloatingSparkle({ delay = 0 }: { delay?: number }) {
         repeat: Infinity,
         ease: easeOutCubic
       }}
-      className="absolute text-xs pointer-events-none"
-      style={{ color: 'var(--brand-gold)' }}
+      className="absolute text-yellow-400 text-xs pointer-events-none"
     >
       ✨
     </motion.div>
@@ -47,18 +46,13 @@ function FloatingSparkle({ delay = 0 }: { delay?: number }) {
 function EmotionIndicator({ emotion }: { emotion?: EmotionAnalysis }) {
   if (!emotion) return null;
 
-  const getEmotionStyle = (emotionType: string): React.CSSProperties => {
+  const getEmotionColor = (emotionType: string) => {
     switch (emotionType) {
-      case 'anxiety':
-        return { color: 'color-mix(in oklab, var(--brand-gold) 65%, var(--brand-magenta) 35%)' };
-      case 'distress':
-        return { color: 'var(--brand-magenta)' };
-      case 'excitement':
-        return { color: 'var(--brand-teal)' };
-      case 'discomfort':
-        return { color: 'color-mix(in oklab, var(--brand-magenta) 80%, var(--smh-white) 20%)' };
-      default:
-        return { color: 'color-mix(in oklab, var(--brand-teal) 70%, var(--smh-white) 30%)' };
+      case 'anxiety': return 'text-orange-500';
+      case 'distress': return 'text-red-500';
+      case 'excitement': return 'text-green-500';
+      case 'discomfort': return 'text-red-400';
+      default: return 'text-blue-500';
     }
   };
 
@@ -76,11 +70,10 @@ function EmotionIndicator({ emotion }: { emotion?: EmotionAnalysis }) {
     <motion.div
       initial={{ opacity: 0, scale: 0 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="flex items-center gap-2 text-xs mb-2"
-      style={{ color: 'color-mix(in oklab, var(--text) 70%, var(--smh-white) 30%)' }}
+      className="flex items-center gap-2 text-xs text-gray-500 mb-2"
     >
       <span>{getEmotionIcon(emotion.primary)}</span>
-      <span style={getEmotionStyle(emotion.primary)}>
+      <span className={getEmotionColor(emotion.primary)}>
         {emotion.primary} ({Math.round(emotion.confidence * 100)}%)
       </span>
     </motion.div>

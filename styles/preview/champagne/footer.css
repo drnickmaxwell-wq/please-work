@@ -2,19 +2,19 @@
   .footer-champagne {
     position: relative;
     overflow: hidden;
-    border-top: 1px solid color-mix(in oklab, var(--brand-gold) 30%, var(--ink) 70%);
+    border-top: 1px solid color-mix(in oklab, var(--brand-gold) 30%, rgba(0, 0, 0, 0.75));
     background: linear-gradient(
       180deg,
-      color-mix(in oklab, var(--brand-magenta) 22%, color-mix(in oklab, var(--ink) 90%, transparent 10%)) 0%,
-      color-mix(in oklab, var(--brand-teal) 24%, color-mix(in oklab, var(--ink) 90%, transparent 10%)) 55%,
-      color-mix(in oklab, var(--brand-gold) 28%, color-mix(in oklab, var(--ink) 90%, transparent 10%)) 100%
+      color-mix(in oklab, var(--brand-magenta) 22%, #050505 78%) 0%,
+      color-mix(in oklab, var(--brand-teal) 24%, #050505 76%) 55%,
+      color-mix(in oklab, var(--brand-gold) 28%, #050505 72%) 100%
     );
-    color: color-mix(in oklab, var(--smh-white) 92%, var(--brand-gold) 8%);
+    color: rgba(255, 242, 222, 0.92);
     isolation: isolate;
     padding: 2.25rem 1.75rem;
     gap: 1.75rem;
     border-radius: 20px 20px 0 0;
-    box-shadow: 0 -30px 60px color-mix(in oklab, var(--ink) 45%, transparent);
+    box-shadow: 0 -30px 60px rgba(0, 0, 0, 0.45);
   }
 
   .footer-champagne::before {
@@ -34,7 +34,7 @@
     text-transform: uppercase;
     letter-spacing: 0.14em;
     font-size: 0.9rem;
-    color: color-mix(in oklab, var(--smh-white) 82%, var(--brand-gold) 18%);
+    color: rgba(255, 237, 209, 0.82);
   }
 
   .footer-preview-cards {
@@ -52,13 +52,13 @@
     padding: 1.25rem 1.5rem;
     display: grid;
     gap: 0.5rem;
-    color: color-mix(in oklab, var(--smh-white) 88%, var(--brand-gold) 12%);
+    color: rgba(255, 249, 236, 0.88);
   }
 
   .footer-preview-card p {
     margin: 0;
     font-size: 0.95rem;
     line-height: 1.5;
-    color: color-mix(in oklab, var(--smh-white) 78%, var(--brand-gold) 22%);
+    color: rgba(255, 244, 229, 0.78);
   }
 }
