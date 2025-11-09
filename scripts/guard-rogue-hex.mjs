@@ -46,10 +46,15 @@ const filesOutput = execSync(
   .trim();
 
 const files = filesOutput ? filesOutput.split("\n").filter(Boolean) : [];
+const ignorePrefixes = ["reports/"];
 const hexRegex = /#[0-9a-fA-F]{3,8}\b/;
 
 let failed = false;
 for (const file of files) {
+  if (ignorePrefixes.some((prefix) => file.startsWith(prefix))) {
+    console.log(`ALLOW generated artifact: ${file}`);
+    continue;
+  }
   const extension = extname(file);
   if (allowExtensions.has(extension)) {
     console.log(`ALLOW extension (${extension}): ${file}`);
