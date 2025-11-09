@@ -1,0 +1,69 @@
+{
+  "sections": [
+    {
+      "id": "compositeBondingHero",
+      "label": "Composite Bonding Hero Surface",
+      "recommendedRepoTargets": [
+        "app/treatments/composite-bonding/_sections/CompositeBondingHeroSection.tsx"
+      ]
+    },
+    {
+      "id": "compositeBondingHighlights",
+      "label": "Composite Bonding Highlights",
+      "recommendedRepoTargets": [
+        "app/treatments/composite-bonding/_sections/CompositeBondingHighlightsSection.tsx"
+      ]
+    },
+    {
+      "id": "compositeBondingResults",
+      "label": "Composite Bonding Results",
+      "recommendedRepoTargets": [
+        "app/treatments/composite-bonding/_sections/CompositeBondingResultsSection.tsx"
+      ]
+    },
+    {
+      "id": "compositeBondingFaq",
+      "label": "Composite Bonding FAQ",
+      "recommendedRepoTargets": [
+        "app/treatments/composite-bonding/_sections/CompositeBondingFaqSection.tsx"
+      ]
+    },
+    {
+      "id": "compositeBondingPlanSession",
+      "label": "Composite Bonding Plan Session",
+      "recommendedRepoTargets": [
+        "app/treatments/composite-bonding/_sections/CompositeBondingPlanSessionSection.tsx"
+      ]
+    }
+  ],
+  "shared": [
+    {
+      "id": "treatmentConsultationCta",
+      "label": "Treatment Consultation CTA",
+      "recommendedRepoTargets": [
+        "components/cta/TreatmentConsultationCta.tsx"
+      ]
+    },
+    {
+      "id": "treatmentFaqList",
+      "label": "Treatment FAQ List",
+      "recommendedRepoTargets": [
+        "components/faq/CompositeBondingFaqList.tsx"
+      ]
+    },
+    {
+      "id": "treatmentBreadcrumb",
+      "label": "Treatment Breadcrumb Navigation",
+      "recommendedRepoTargets": [
+        "components/nav/TreatmentBreadcrumb.tsx"
+      ]
+    },
+    {
+      "id": "champagneTreatmentSurface",
+      "label": "Champagne Treatment Surface Wrapper",
+      "recommendedRepoTargets": [
+        "components/theme/ChampagneTreatmentSurface.tsx"
+      ]
+    }
+  ]
+}
