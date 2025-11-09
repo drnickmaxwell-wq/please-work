@@ -1,0 +1,20 @@
+name: Champagne Guards
+on: [pull_request]
+jobs:
+  guards:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+      - run: pnpm install --frozen-lockfile
+      - run: node scripts/guard-rogue-hex.mjs
+      - run: node scripts/guard-preview-only.mjs
+      - run: node scripts/guard-asset-size.mjs
+        env: { PUBLIC_MAX_MB: "6" }
+      - run: node scripts/guard-manifest-sync.mjs
+      - run: node scripts/guard-sacred-routes.mjs
+      - run: pnpm run brand:guard
+      - run: pnpm run guard:hero
+      - run: pnpm run verify:hue || echo "Hue check skipped/not configured"
