@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import PreviewHeroGilded from "@/components/preview/HeroGilded";
+import PreviewHeroGildedClient from "./PreviewHeroGildedClient";
 import "@/styles/champagne/hero-gilded-tweaks.css";
 import "@/styles/champagne/hero-polish.css";
 
@@ -197,7 +197,7 @@ export default function Page() {
         </button>
       </div>
 
-      <PreviewHeroGilded />
+      <PreviewHeroGildedClient />
     </main>
   );
 }
