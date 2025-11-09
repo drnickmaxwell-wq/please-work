@@ -11,6 +11,12 @@
     "styles/champagne/hero.css",
     "styles/preview/champagne/footer.css",
     "styles/preview/champagne/layers.css",
-    "styles/preview/champagne/page.css"
-  ]
+    "styles/preview/champagne/page.css",
+    "docs/**",
+    "styles/champagne/manifest.json",
+    "public/brand/manifest.json",
+    "public/assets/champagne/manifest.json"
+  ],
+  "allowExtensions": [".md"],
+  "warnOnlyExtensions": [".json"]
 }

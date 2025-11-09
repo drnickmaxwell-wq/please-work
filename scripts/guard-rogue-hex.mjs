@@ -1,15 +1,18 @@
 #!/usr/bin/env node
 import { execSync } from "node:child_process";
 import { readFileSync } from "node:fs";
-import { dirname, resolve } from "node:path";
+import { dirname, extname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import micromatch from "micromatch";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const allowConfigPath = resolve(__dirname, "guard-rogue-hex.allow.json");
 const allowConfig = JSON.parse(readFileSync(allowConfigPath, "utf8"));
-const allowList = new Set(allowConfig.allow ?? []);
+const allowGlobs = allowConfig.allow ?? [];
+const allowExtensions = new Set(allowConfig.allowExtensions ?? []);
+const warnOnlyExtensions = new Set(allowConfig.warnOnlyExtensions ?? []);
 
 const targetBase = process.env.GITHUB_BASE_REF || "main";
 const base = (() => {
@@ -47,12 +50,25 @@ const hexRegex = /#[0-9a-fA-F]{3,8}\b/;
 
 let failed = false;
 for (const file of files) {
+  const extension = extname(file);
+  if (allowExtensions.has(extension)) {
+    console.log(`ALLOW extension (${extension}): ${file}`);
+    continue;
+  }
+
   const diff = execSync(`git diff ${base} HEAD -- ${file}`).toString();
   const hasHex = hexRegex.test(diff);
-  if (!hasHex) continue;
+  if (!hasHex) {
+    continue;
+  }
 
-  if (allowList.has(file)) {
-    console.warn(`⚠️  Rogue HEX remains in allowlisted file: ${file}`);
+  const isAllowlisted = micromatch.isMatch(file, allowGlobs);
+  if (isAllowlisted) {
+    if (warnOnlyExtensions.has(extension)) {
+      console.warn(`WARN allowlisted manifest: ${file}`);
+    } else {
+      console.warn(`WARN allowlisted: ${file}`);
+    }
     continue;
   }
 
