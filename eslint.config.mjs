@@ -33,6 +33,23 @@ const eslintConfig = [
       },
     ],
   }),
+  {
+    files: [
+      "app/**/*.{js,jsx,ts,tsx}",
+      "components/**/*.{js,jsx,ts,tsx}",
+      "src/**/*.{js,jsx,ts,tsx}",
+      "styles/**/*.{js,jsx,ts,tsx}",
+    ],
+    rules: {
+      "no-restricted-syntax": [
+        "error",
+        {
+          selector: "Literal[value=/^#[0-9a-fA-F]{3,8}$/]",
+          message: "Use Champagne tokens instead of literal hex.",
+        },
+      ],
+    },
+  },
 ];
 
 export default eslintConfig;
