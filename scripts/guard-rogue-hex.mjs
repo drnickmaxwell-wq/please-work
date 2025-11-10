@@ -93,7 +93,17 @@ for (const file of files) {
   }
 
   const diff = execSync(`git diff ${base} HEAD -- ${file}`).toString();
-  const hasHex = hexRegex.test(diff);
+  const hasHex = diff
+    .split("\n")
+    .some((line) => {
+      if (!line.startsWith("+")) {
+        return false;
+      }
+      if (line.startsWith("+++")) {
+        return false;
+      }
+      return hexRegex.test(line);
+    });
   if (!hasHex) {
     continue;
   }
