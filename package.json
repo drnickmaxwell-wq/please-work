@@ -30,7 +30,8 @@
     "prepush": "pnpm run brand:guard && pnpm run verify:hue && pnpm test:brand",
     "prepare": "husky",
     "test:brand": "pnpm exec playwright test tests/brand-lux.spec.ts",
-    "test:brand:manifests": "playwright test tests/brand-manifests.spec.ts"
+    "test:brand:manifests": "playwright test tests/brand-manifests.spec.ts",
+    "verify:sacred": "node scripts/verify-sacred-heroes-unchanged.mjs"
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.24",
