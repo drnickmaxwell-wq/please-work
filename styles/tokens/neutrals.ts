@@ -1,27 +1,19 @@
 // styles/tokens/neutrals.ts
-// Canonical neutral aliases that never ship raw hex.
-// All backups reference other tokens or color-mix of tokens.
-// This file is audited by scripts/guard-rogue-hex.mjs
+// Canonical neutral aliases that never ship raw hex. 100% token- or mix-based.
+// This file must contain zero literal hex values to satisfy guard-rogue-hex.mjs.
 
 const neutrals = {
-  // Canonical white/ink/text come straight from the brand tokens.
-  white: 'var(--smh-white)',            // resolves to var(--bg) in canon
+  white: 'var(--smh-white)',                         // resolves to --bg in canon
   ink: 'var(--ink)',
   text: 'var(--text)',
-
-  // Subtle gray uses the named neutral token directly.
   graySubtle: 'var(--smh-gray-200)',
-
-  // Champagne surface: use dedicated token; fall back to keyline gold if unset.
+  // Use keyline gold as interim champagne fallback (no raw literal)
   champagne: 'var(--smh-champagne, var(--brand-gold-keyline))',
-
-  // Silver: approximate via token blend (no literals).
+  // Silver approximation from canon neutrals (no raw literal)
   silver: 'var(--smh-silver, color-mix(in oklab, var(--smh-gray-200) 70%, var(--bg) 30%))',
-
-  // Navy 800: derive from ink + white so fallback remains tokenized.
+  // Navy approximation from canon neutrals (no raw literal)
   navy: 'var(--smh-navy-800, color-mix(in oklab, var(--ink) 85%, var(--smh-white) 15%))',
-
-  // Urgent: derive from brand magenta + ink for accessibility while avoiding bespoke reds.
+  // Urgent tint derived from tokens (no bespoke red literal)
   urgent: 'var(--smh-urgent, color-mix(in oklab, var(--brand-magenta) 48%, var(--ink) 52%))',
 } as const;
 
