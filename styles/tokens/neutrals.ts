@@ -1,6 +1,6 @@
 export const TOKENS = {
   white: 'var(--smh-white)',
-  ink: 'var(--smh-ink, var(--smh-primary-ink))',
+  ink: 'var(--smh-ink, var(--smh-primary-ink)',
   graySubtle: 'var(--smh-gray-200)',
   champagne: 'var(--smh-champagne)',
   silver: 'var(--smh-silver)',
