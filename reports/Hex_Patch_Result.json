@@ -1,0 +1,13 @@
+{
+  "brandGuard": "pass",
+  "guardHero": "pass",
+  "remainingRogueHits": [],
+  "touchedFiles": [
+    "styles/tokens/neutrals.ts",
+    "tests/brand-lux.spec.ts",
+    "components/navigation/breadcrumbs.module.css",
+    "reports/Hex_Patch_Snapshot.json",
+    "reports/Hex_Patch_Result.json"
+  ],
+  "sacredChanged": false
+}
