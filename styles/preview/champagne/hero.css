@@ -1,4 +1,19 @@
 @layer preview-champagne.hero {
+  .preview-hero-gilded {
+    --preview-gold-opacity: 0.06;
+    --preview-caustics-opacity: 0.1;
+    --preview-particles-opacity: 0.08;
+    --preview-overlay-alpha-max: 0.18;
+    --preview-layer-caustics: var(--preview-caustics-opacity);
+    --preview-layer-particles: var(--preview-particles-opacity);
+    --preview-layer-gold: var(--preview-gold-opacity);
+    --preview-overlay-sum: calc(
+      var(--preview-layer-caustics) +
+        var(--preview-layer-particles) +
+        var(--preview-layer-gold)
+    );
+  }
+
   .hero-champagne {
     position: relative;
     overflow: hidden;
@@ -89,6 +104,86 @@
   .hero-preview.show-shimmer .hero-layer--shimmer {
     opacity: 1;
     animation: shimmerSweep 4.5s ease-in-out infinite;
+  }
+
+  .preview-hero-gilded .hero-wave-caustics {
+    opacity: min(
+        var(--preview-layer-caustics, var(--preview-caustics-opacity)),
+        var(--preview-caustics-opacity)
+      ) !important;
+  }
+
+  .preview-hero-gilded .hero-particles-drift {
+    opacity: min(
+        var(--preview-layer-particles, var(--preview-particles-opacity)),
+        var(--preview-particles-opacity)
+      ) !important;
+  }
+
+  .preview-hero-gilded .hero-gold-dust-drift {
+    opacity: min(
+        var(--preview-layer-gold, var(--preview-gold-opacity)),
+        var(--preview-gold-opacity)
+      ) !important;
+  }
+
+  .preview-hero-gilded .loop-poster {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 200ms ease;
+    pointer-events: none;
+  }
+
+  .preview-hero-gilded .hero-motion-poster {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  .preview-hero-gilded[data-reduce-motion="true"] .hero-motion video {
+    opacity: 0 !important;
+  }
+
+  .preview-hero-gilded[data-reduce-motion="true"] .hero-motion {
+    opacity: 0 !important;
+  }
+
+  .preview-hero-gilded[data-reduce-motion="true"] .loop-poster {
+    opacity: 1;
+  }
+
+  .preview-hero-gilded[data-reduce-motion="true"] .hero-motion-poster--caustics {
+    opacity: min(
+        var(--preview-layer-caustics, var(--preview-caustics-opacity)),
+        var(--preview-caustics-opacity)
+      );
+  }
+
+  .preview-hero-gilded[data-reduce-motion="true"] .hero-motion-poster--particles {
+    opacity: min(
+        var(--preview-layer-particles, var(--preview-particles-opacity)),
+        var(--preview-particles-opacity)
+      );
+  }
+
+  .preview-hero-gilded[data-reduce-motion="true"] .hero-motion-poster--gold {
+    opacity: min(
+        var(--preview-layer-gold, var(--preview-gold-opacity)),
+        var(--preview-gold-opacity)
+      );
+  }
+
+  .preview-hero-gilded[data-reduce-motion="true"] .hero-motion-poster--glass {
+    opacity: 0.12;
+    mix-blend-mode: screen;
   }
 
   @keyframes hero-champagne-parallax {

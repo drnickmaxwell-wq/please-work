@@ -1,6 +1,15 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
+
+import { useSearchParams } from "next/navigation";
 
 import {
   getBrandManifestClient,
@@ -8,6 +17,7 @@ import {
 } from "@/lib/brand/manifest";
 
 import LoopCrossfade from "./LoopCrossfade";
+import useReducedMotion from "@/components/preview/useReducedMotion";
 
 type HeroLayers = Pick<BrandManifest, "waves" | "textures" | "particles" | "motion">;
 
@@ -34,10 +44,6 @@ type MotionEntry =
       durationSeconds?: number | string | null;
     };
 
-function clamp(value: number, min: number, max: number) {
-  return Math.min(Math.max(value, min), max);
-}
-
 type MotionDurations = {
   caustics?: number;
   glass?: number;
@@ -45,6 +51,42 @@ type MotionDurations = {
   gold?: number;
   [key: string]: number | undefined;
 };
+
+type LoopMetrics = {
+  effectiveDuration: number;
+  metadataDuration?: number;
+  manifestDuration?: number;
+  isReady: boolean;
+};
+
+type LayerOpacities = {
+  caustics: number;
+  particles: number;
+  gold: number;
+};
+
+type ManifestLayer = {
+  name?: string | null;
+  opacity?: number | string | null;
+};
+
+const OPACITY_DEFAULTS: LayerOpacities = {
+  caustics: 0.08,
+  particles: 0.06,
+  gold: 0.04,
+};
+
+const OPACITY_MAX: LayerOpacities = {
+  caustics: 0.1,
+  particles: 0.08,
+  gold: 0.06,
+};
+
+const OVERLAY_MAX = 0.18;
+
+function clamp(value: number, min: number, max: number) {
+  return Math.min(Math.max(value, min), max);
+}
 
 function parseDuration(value: unknown): number | undefined {
   if (typeof value === "number" && Number.isFinite(value)) {
@@ -59,6 +101,96 @@ function parseDuration(value: unknown): number | undefined {
   }
 
   return undefined;
+}
+
+function parseLayerOpacityValue(value: unknown): number | undefined {
+  if (typeof value === "number" && Number.isFinite(value)) {
+    if (value > 1) {
+      return value / 100;
+    }
+
+    return Math.max(0, value);
+  }
+
+  if (typeof value === "string") {
+    const trimmed = value.trim();
+
+    if (trimmed.endsWith("%")) {
+      const numeric = Number.parseFloat(trimmed.slice(0, -1));
+      if (Number.isFinite(numeric)) {
+        return Math.max(0, numeric / 100);
+      }
+    }
+
+    const parsed = Number.parseFloat(trimmed);
+    if (Number.isFinite(parsed)) {
+      return parsed > 1 ? parsed / 100 : Math.max(0, parsed);
+    }
+  }
+
+  return undefined;
+}
+
+function getLayerOpacity(
+  manifest: BrandManifest,
+  layerNames: string[],
+): number | undefined {
+  const manifestWithLayers = manifest as BrandManifest & {
+    layers?: ManifestLayer[] | null;
+  };
+
+  const layers = manifestWithLayers.layers;
+  if (!Array.isArray(layers)) {
+    return undefined;
+  }
+
+  for (const layer of layers) {
+    const name = typeof layer?.name === "string" ? layer.name.toLowerCase() : "";
+    if (!name) {
+      continue;
+    }
+
+    if (layerNames.some((candidate) => name.includes(candidate))) {
+      const parsed = parseLayerOpacityValue(layer?.opacity);
+      if (typeof parsed === "number") {
+        return parsed;
+      }
+    }
+  }
+
+  return undefined;
+}
+
+function clampLayerOpacities(base?: Partial<LayerOpacities>): LayerOpacities {
+  const merged: LayerOpacities = {
+    caustics: base?.caustics ?? OPACITY_DEFAULTS.caustics,
+    particles: base?.particles ?? OPACITY_DEFAULTS.particles,
+    gold: base?.gold ?? OPACITY_DEFAULTS.gold,
+  };
+
+  const clamped: LayerOpacities = {
+    caustics: Math.min(Math.max(0, merged.caustics), OPACITY_MAX.caustics),
+    particles: Math.min(Math.max(0, merged.particles), OPACITY_MAX.particles),
+    gold: Math.min(Math.max(0, merged.gold), OPACITY_MAX.gold),
+  };
+
+  const total = clamped.caustics + clamped.particles + clamped.gold;
+
+  if (total > OVERLAY_MAX && total > 0) {
+    const scale = OVERLAY_MAX / total;
+
+    return {
+      caustics: Number((clamped.caustics * scale).toFixed(4)),
+      particles: Number((clamped.particles * scale).toFixed(4)),
+      gold: Number((clamped.gold * scale).toFixed(4)),
+    };
+  }
+
+  return {
+    caustics: Number(clamped.caustics.toFixed(4)),
+    particles: Number(clamped.particles.toFixed(4)),
+    gold: Number(clamped.gold.toFixed(4)),
+  };
 }
 
 function getMotionDurations(manifest?: HeroLayers["motion"]): MotionDurations {
@@ -149,8 +281,13 @@ function formatHudDuration(seconds?: number): string {
 export default function PreviewHeroGildedClient() {
   const heroRef = useRef<HTMLElement | null>(null);
   const [layers, setLayers] = useState<PreviewHeroLayers | null>(null);
-  const [reduceMotion, setReduceMotion] = useState(false);
   const [durations, setDurations] = useState<MotionDurations>({});
+  const [opacityConfig, setOpacityConfig] = useState<LayerOpacities>(() => clampLayerOpacities());
+  const [loopMetrics, setLoopMetrics] = useState<Record<string, LoopMetrics>>({});
+
+  const reduceMotion = useReducedMotion();
+  const searchParams = useSearchParams();
+  const showDevHud = searchParams?.get("hud") === "1";
 
   useEffect(() => {
     let isMounted = true;
@@ -235,6 +372,13 @@ export default function PreviewHeroGildedClient() {
         };
 
         if (isMounted) {
+          const baseOpacities: Partial<LayerOpacities> = {
+            caustics: getLayerOpacity(manifest, ["wave-caustics", "caustics"]),
+            particles: getLayerOpacity(manifest, ["particles-drift", "particles"]),
+            gold: getLayerOpacity(manifest, ["gold-dust-drift", "gold"]),
+          };
+
+          setOpacityConfig(clampLayerOpacities(baseOpacities));
           setLayers(verifiedLayers);
           setDurations(getMotionDurations(manifest.motion));
           console.log("[preview-hero-gilded] verified layers", verifiedLayers);
@@ -257,6 +401,7 @@ export default function PreviewHeroGildedClient() {
             waveBg: "/assets/champagne/waves/wave-bg.webp",
           };
 
+          setOpacityConfig(clampLayerOpacities());
           setLayers(fallbackLayers);
           setDurations({});
         }
@@ -265,31 +410,6 @@ export default function PreviewHeroGildedClient() {
 
     return () => {
       isMounted = false;
-    };
-  }, []);
-
-  useEffect(() => {
-    if (typeof window === "undefined") {
-      return;
-    }
-
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const updateMotionPreference = () => setReduceMotion(mediaQuery.matches);
-
-    updateMotionPreference();
-
-    if (typeof mediaQuery.addEventListener === "function") {
-      mediaQuery.addEventListener("change", updateMotionPreference);
-
-      return () => {
-        mediaQuery.removeEventListener("change", updateMotionPreference);
-      };
-    }
-
-    mediaQuery.addListener(updateMotionPreference);
-
-    return () => {
-      mediaQuery.removeListener(updateMotionPreference);
     };
   }, []);
 
@@ -375,8 +495,16 @@ export default function PreviewHeroGildedClient() {
     layers?.waveMask ?? "/assets/champagne/waves/wave-mask-desktop.webp";
   const waveBgUrl = layers?.waveBg ?? "/assets/champagne/waves/wave-bg.webp";
 
-  const causticsSrc = getMotionSrc(layers?.motion, ["caustics", "waveCaustics"], "/assets/champagne/motion/wave-caustics.webm");
-  const glassSrc = getMotionSrc(layers?.motion, ["glass", "glassShimmer"], "/assets/champagne/motion/glass-shimmer.webm");
+  const causticsSrc = getMotionSrc(
+    layers?.motion,
+    ["caustics", "waveCaustics"],
+    "/assets/champagne/motion/wave-caustics.webm",
+  );
+  const glassSrc = getMotionSrc(
+    layers?.motion,
+    ["glass", "glassShimmer"],
+    "/assets/champagne/motion/glass-shimmer.webm",
+  );
   const particlesSrc = getMotionSrc(
     layers?.motion,
     ["particles", "particlesDrift"],
@@ -398,7 +526,56 @@ export default function PreviewHeroGildedClient() {
   const particlesDuration = durations.particles ?? 8;
   const goldDuration = durations.gold ?? 8;
 
-  const showDevHud = process.env.NODE_ENV !== "production";
+  const overlaySum = useMemo(
+    () => opacityConfig.caustics + opacityConfig.particles + opacityConfig.gold,
+    [opacityConfig],
+  );
+
+  const heroStyle = useMemo<CSSProperties>(
+    () => ({
+      "--preview-layer-caustics": opacityConfig.caustics.toString(),
+      "--preview-layer-particles": opacityConfig.particles.toString(),
+      "--preview-layer-gold": opacityConfig.gold.toString(),
+      "--preview-overlay-sum": overlaySum.toString(),
+    }),
+    [opacityConfig, overlaySum],
+  );
+
+  const handleLoopMetrics = useCallback(
+    (layerKey: string) => (metrics: LoopMetrics) => {
+      setLoopMetrics((previous) => {
+        const current = previous[layerKey];
+        if (
+          current &&
+          current.effectiveDuration === metrics.effectiveDuration &&
+          current.metadataDuration === metrics.metadataDuration &&
+          current.manifestDuration === metrics.manifestDuration &&
+          current.isReady === metrics.isReady
+        ) {
+          return previous;
+        }
+
+        return {
+          ...previous,
+          [layerKey]: metrics,
+        };
+      });
+    },
+    [],
+  );
+
+  const activeLayers = useMemo(
+    () => [
+      "gradient",
+      "wave-mask",
+      "caustics",
+      "particles",
+      "film-grain",
+      "glass",
+      "content",
+    ],
+    [],
+  );
 
   return (
     <section
@@ -406,6 +583,8 @@ export default function PreviewHeroGildedClient() {
       className="champagne-hero champagne-hero--gilded preview-hero-gilded"
       aria-labelledby="hero-gilded-title"
       data-smoothing="preview"
+      data-reduce-motion={reduceMotion ? "true" : "false"}
+      style={heroStyle}
     >
       <div className="hero-gradient-base gradient-base" />
 
@@ -416,56 +595,75 @@ export default function PreviewHeroGildedClient() {
         }}
       />
 
-      {!reduceMotion && (
-        <>
-          <div className="loop-pair hero-motion hero-wave-caustics parallax-1">
-            <LoopCrossfade
-              src={causticsSrc}
-              poster={causticsPoster}
-              durationSec={causticsDuration}
-              crossfadeMs={220}
-            />
-          </div>
+      <div className="loop-pair hero-motion hero-wave-caustics parallax-1" data-layer="caustics">
+        <LoopCrossfade
+          src={causticsSrc}
+          poster={causticsPoster}
+          durationSec={causticsDuration}
+          crossfadeMs={220}
+          onMetricsChange={handleLoopMetrics("caustics")}
+        />
+      </div>
 
-          <div className="loop-pair hero-motion hero-glass-shimmer">
-            <LoopCrossfade
-              src={glassSrc}
-              poster={glassPoster}
-              durationSec={glassDuration}
-              crossfadeMs={220}
-            />
-          </div>
+      <div className="loop-pair hero-motion hero-particles-drift" data-layer="particles">
+        <LoopCrossfade
+          src={particlesSrc}
+          poster={particlesPoster}
+          durationSec={particlesDuration}
+          crossfadeMs={220}
+          onMetricsChange={handleLoopMetrics("particles")}
+        />
+      </div>
 
-          <div className="loop-pair hero-motion hero-particles-drift">
-            <LoopCrossfade
-              src={particlesSrc}
-              poster={particlesPoster}
-              durationSec={particlesDuration}
-              crossfadeMs={220}
-            />
-          </div>
+      <div className="loop-pair hero-motion hero-gold-dust-drift lux-gold parallax-2" data-layer="gold">
+        <LoopCrossfade
+          src={goldSrc}
+          poster={goldPoster}
+          durationSec={goldDuration}
+          crossfadeMs={220}
+          onMetricsChange={handleLoopMetrics("gold")}
+        />
+      </div>
 
-          <div className="loop-pair hero-motion hero-gold-dust-drift lux-gold parallax-2">
-            <LoopCrossfade
-              src={goldSrc}
-              poster={goldPoster}
-              durationSec={goldDuration}
-              crossfadeMs={220}
-            />
-          </div>
+      <div className="hero-gold-dust-drift hero-gold-dust-drift--alt lux-gold" aria-hidden="true" />
 
-          <div
-            className="hero-gold-dust-drift hero-gold-dust-drift--alt lux-gold"
-            aria-hidden="true"
+      {particleSources.map(({ src, poster }) => (
+        <div className="loop-pair hero-particles-drift hero-motion" data-layer="particles" key={src}>
+          <LoopCrossfade
+            src={src}
+            poster={poster}
+            durationSec={particlesDuration}
+            crossfadeMs={220}
+            onMetricsChange={handleLoopMetrics(src)}
           />
+        </div>
+      ))}
 
-          {particleSources.map(({ src, poster }) => (
-            <div className="loop-pair hero-particles-drift hero-motion" key={src}>
-              <LoopCrossfade src={src} poster={poster} durationSec={8} crossfadeMs={220} />
-            </div>
-          ))}
+      {reduceMotion ? (
+        <>
+          {causticsPoster ? (
+            <div
+              className="hero-motion-poster hero-motion-poster--caustics parallax-1"
+              style={{ backgroundImage: `url(${causticsPoster})` }}
+              aria-hidden="true"
+            />
+          ) : null}
+          {particlesPoster ? (
+            <div
+              className="hero-motion-poster hero-motion-poster--particles"
+              style={{ backgroundImage: `url(${particlesPoster})` }}
+              aria-hidden="true"
+            />
+          ) : null}
+          {goldPoster ? (
+            <div
+              className="hero-motion-poster hero-motion-poster--gold parallax-2"
+              style={{ backgroundImage: `url(${goldPoster})` }}
+              aria-hidden="true"
+            />
+          ) : null}
         </>
-      )}
+      ) : null}
 
       <div className="hero-particles-static" />
 
@@ -478,29 +676,58 @@ export default function PreviewHeroGildedClient() {
         }}
       />
 
+      {reduceMotion && glassPoster ? (
+        <div
+          className="hero-motion-poster hero-motion-poster--glass"
+          style={{ backgroundImage: `url(${glassPoster})` }}
+          aria-hidden="true"
+        />
+      ) : null}
+
+      <div className="loop-pair hero-motion hero-glass-shimmer" data-layer="glass">
+        <LoopCrossfade
+          src={glassSrc}
+          poster={glassPoster}
+          durationSec={glassDuration}
+          crossfadeMs={220}
+          onMetricsChange={handleLoopMetrics("glass")}
+        />
+      </div>
+
       <div className="hero-caustic-reflection" aria-hidden="true" />
 
-      {showDevHud && (
+      {showDevHud ? (
         <div
           style={{
             position: "absolute",
             top: "0.75rem",
             right: "0.75rem",
-            opacity: 0.35,
+            opacity: 0.6,
             fontFamily: "monospace",
             fontSize: "0.75rem",
             lineHeight: 1.25,
             textAlign: "right",
             pointerEvents: "none",
             color: "var(--champagne-hero-text, #fff)",
+            background: "rgba(10, 8, 7, 0.55)",
+            padding: "0.5rem 0.75rem",
+            borderRadius: "0.5rem",
+            backdropFilter: "blur(6px)",
+            maxWidth: "16rem",
           }}
         >
-          <div>caustics {formatHudDuration(causticsDuration)}</div>
-          <div>glass {formatHudDuration(glassDuration)}</div>
-          <div>particles {formatHudDuration(particlesDuration)}</div>
-          <div>gold {formatHudDuration(goldDuration)}</div>
+          <div>layers: {activeLayers.join(", ")}</div>
+          <div>prm: {reduceMotion ? "on" : "off"}</div>
+          <div>
+            opacities:
+            {` c=${opacityConfig.caustics.toFixed(2)} p=${opacityConfig.particles.toFixed(2)} g=${opacityConfig.gold.toFixed(2)} Σ=${overlaySum.toFixed(2)}`}
+          </div>
+          <div>caustics {formatHudDuration(loopMetrics.caustics?.effectiveDuration ?? causticsDuration)}</div>
+          <div>particles {formatHudDuration(loopMetrics.particles?.effectiveDuration ?? particlesDuration)}</div>
+          <div>gold {formatHudDuration(loopMetrics.gold?.effectiveDuration ?? goldDuration)}</div>
+          <div>glass {formatHudDuration(loopMetrics.glass?.effectiveDuration ?? glassDuration)}</div>
         </div>
-      )}
+      ) : null}
 
       <div className="hero-content">
         <div className="hero-content-wrapper">

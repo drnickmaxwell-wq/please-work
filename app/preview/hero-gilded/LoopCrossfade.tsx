@@ -1,12 +1,33 @@
 "use client";
 
-import { useEffect, useRef, useState, type SyntheticEvent } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type SyntheticEvent,
+} from "react";
+
+import useReducedMotion from "@/components/preview/useReducedMotion";
+
+type LoopCrossfadeMetrics = {
+  effectiveDuration: number;
+  metadataDuration?: number;
+  manifestDuration?: number;
+  isReady: boolean;
+};
 
 type LoopCrossfadeProps = {
   src: string;
   poster?: string;
+  /**
+   * Optional upper bound sourced from the manifest. If provided, the loop
+   * duration will never exceed this value even if the media metadata suggests a
+   * longer time.
+   */
   durationSec?: number;
   crossfadeMs?: number;
+  onMetricsChange?: (metrics: LoopCrossfadeMetrics) => void;
 };
 
 const DEFAULT_DURATION = 8;
@@ -15,47 +36,52 @@ const DEFAULT_CROSSFADE_MS = 220;
 export default function LoopCrossfade({
   src,
   poster,
-  durationSec = DEFAULT_DURATION,
+  durationSec,
   crossfadeMs = DEFAULT_CROSSFADE_MS,
+  onMetricsChange,
 }: LoopCrossfadeProps) {
   const primaryRef = useRef<HTMLVideoElement | null>(null);
   const secondaryRef = useRef<HTMLVideoElement | null>(null);
   const activeIndexRef = useRef<0 | 1>(0);
   const timeoutRef = useRef<number | null>(null);
   const rafRef = useRef<number | null>(null);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  const [effectiveDuration, setEffectiveDuration] = useState(durationSec);
+  const readyRef = useRef<{ primary: boolean; secondary: boolean }>({
+    primary: false,
+    secondary: false,
+  });
+  const [loopReady, setLoopReady] = useState(false);
+  const [metadataDuration, setMetadataDuration] = useState<number | undefined>();
 
-  useEffect(() => {
-    if (typeof window === "undefined") {
-      return;
+  const prefersReducedMotion = useReducedMotion();
+
+  const manifestDuration = useMemo(() => {
+    if (typeof durationSec === "number" && Number.isFinite(durationSec) && durationSec > 0) {
+      return durationSec;
     }
 
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const updatePreference = () => {
-      setPrefersReducedMotion(mediaQuery.matches);
-    };
+    return undefined;
+  }, [durationSec]);
 
-    updatePreference();
+  const effectiveDuration = useMemo(() => {
+    const fallback = manifestDuration ?? DEFAULT_DURATION;
 
-    if (typeof mediaQuery.addEventListener === "function") {
-      mediaQuery.addEventListener("change", updatePreference);
+    if (typeof metadataDuration === "number" && Number.isFinite(metadataDuration)) {
+      if (manifestDuration) {
+        return Math.max(0.5, Math.min(metadataDuration, manifestDuration));
+      }
 
-      return () => {
-        mediaQuery.removeEventListener("change", updatePreference);
-      };
+      return Math.max(0.5, metadataDuration);
     }
 
-    mediaQuery.addListener(updatePreference);
-
-    return () => {
-      mediaQuery.removeListener(updatePreference);
-    };
-  }, []);
+    return Math.max(0.5, fallback);
+  }, [manifestDuration, metadataDuration]);
 
   useEffect(() => {
     activeIndexRef.current = 0;
-    setEffectiveDuration(durationSec);
+    readyRef.current = { primary: false, secondary: false };
+    setLoopReady(false);
+    setMetadataDuration(undefined);
+
     const primary = primaryRef.current;
     const secondary = secondaryRef.current;
 
@@ -82,7 +108,16 @@ export default function LoopCrossfade({
 
       secondary.style.opacity = "0";
     }
-  }, [durationSec, src]);
+  }, [src]);
+
+  useEffect(() => {
+    onMetricsChange?.({
+      effectiveDuration,
+      metadataDuration,
+      manifestDuration,
+      isReady: loopReady,
+    });
+  }, [effectiveDuration, loopReady, manifestDuration, metadataDuration, onMetricsChange]);
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -205,20 +240,22 @@ export default function LoopCrossfade({
     const primary = primaryRef.current;
     const secondary = secondaryRef.current;
 
-    if (prefersReducedMotion) {
+    if (prefersReducedMotion || !loopReady) {
       clearTimers();
       stopVideo(primary);
       stopVideo(secondary);
 
       if (primary) {
-        primary.style.opacity = "1";
+        primary.style.opacity = prefersReducedMotion ? "0" : "1";
       }
 
       if (secondary) {
         secondary.style.opacity = "0";
       }
 
-      return clearTimers;
+      return () => {
+        clearTimers();
+      };
     }
 
     if (secondary) {
@@ -237,22 +274,35 @@ export default function LoopCrossfade({
       stopVideo(primaryRef.current);
       stopVideo(secondaryRef.current);
     };
-  }, [crossfadeMs, effectiveDuration, prefersReducedMotion, src]);
+  }, [crossfadeMs, effectiveDuration, loopReady, prefersReducedMotion, src]);
 
-  const handleMetadata = (event: SyntheticEvent<HTMLVideoElement, Event>) => {
-    const video = event.currentTarget;
-    if (!Number.isFinite(video.duration) || video.duration <= 0) {
-      return;
+  const updateMetadata = (key: "primary" | "secondary", value?: number) => {
+    if (typeof value === "number" && Number.isFinite(value) && value > 0) {
+      setMetadataDuration((prev) => {
+        if (typeof prev === "number" && Math.abs(prev - value) < 0.01) {
+          return prev;
+        }
+
+        return value;
+      });
     }
 
-    setEffectiveDuration((prev) => {
-      if (Math.abs(prev - video.duration) < 0.05) {
-        return prev;
-      }
+    readyRef.current[key] = true;
 
-      return video.duration;
-    });
+    if (readyRef.current.primary && readyRef.current.secondary) {
+      setLoopReady(true);
+    }
   };
+
+  const handlePrimaryMetadata = (event: SyntheticEvent<HTMLVideoElement, Event>) => {
+    updateMetadata("primary", event.currentTarget.duration);
+  };
+
+  const handleSecondaryMetadata = (event: SyntheticEvent<HTMLVideoElement, Event>) => {
+    updateMetadata("secondary", event.currentTarget.duration);
+  };
+
+  const posterOpacity = prefersReducedMotion ? 1 : 0;
 
   return (
     <>
@@ -263,9 +313,9 @@ export default function LoopCrossfade({
         playsInline
         preload={prefersReducedMotion ? "metadata" : "auto"}
         poster={poster}
-        onLoadedMetadata={handleMetadata}
+        onLoadedMetadata={handlePrimaryMetadata}
         style={{
-          opacity: 1,
+          opacity: prefersReducedMotion ? 0 : 1,
           transition: "none",
         }}
       >
@@ -278,7 +328,7 @@ export default function LoopCrossfade({
         playsInline
         preload={prefersReducedMotion ? "metadata" : "auto"}
         poster={poster}
-        onLoadedMetadata={handleMetadata}
+        onLoadedMetadata={handleSecondaryMetadata}
         style={{
           opacity: 0,
           transition: "none",
@@ -286,6 +336,16 @@ export default function LoopCrossfade({
       >
         <source src={src} type="video/webm" />
       </video>
+      {poster ? (
+        <div
+          className="loop-poster"
+          aria-hidden="true"
+          style={{
+            backgroundImage: `url(${poster})`,
+            opacity: posterOpacity,
+          }}
+        />
+      ) : null}
     </>
   );
 }
