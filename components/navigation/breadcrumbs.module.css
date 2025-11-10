@@ -38,7 +38,7 @@
 
 .link:hover,
 .link:focus-visible {
-  color: #ffffff;
+  color: var(--smh-white);
 }
 
 .link:focus-visible {
@@ -48,7 +48,7 @@
 }
 
 .current {
-  color: #ffffff;
+  color: var(--smh-white);
   font-weight: 600;
 }
 
