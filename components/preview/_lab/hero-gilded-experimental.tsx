@@ -146,7 +146,7 @@ function formatHudDuration(seconds?: number): string {
   return `t=${seconds.toFixed(2)}s`;
 }
 
-export default function PreviewHeroGildedClient() {
+export default function HeroGildedExperimental() {
   const heroRef = useRef<HTMLElement | null>(null);
   const [layers, setLayers] = useState<PreviewHeroLayers | null>(null);
   const [reduceMotion, setReduceMotion] = useState(false);
