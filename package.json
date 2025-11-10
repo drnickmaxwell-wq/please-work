@@ -23,6 +23,7 @@
     "brand:manifest": "node -e \"console.log(require('fs').readFileSync('./public/brand/champagne_machine_manifest_full.json','utf8'))\"",
     "brand:manus": "node -e \"console.log(require('fs').readFileSync('./public/brand/manus_import_unified_manifest_20251104.json','utf8'))\"",
     "verify:hue": "node scripts/verify-hue.cjs",
+    "verify:sacred": "node scripts/verify-sacred-heroes-unchanged.mjs",
     "verify:brand": "pnpm exec playwright test tests/brand-lock.spec.ts",
     "verify:visual": "pnpm exec playwright test preview/brand-live.spec.ts",
     "hue:capture": "node scripts/capture-gradient.cjs",

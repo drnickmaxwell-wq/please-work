@@ -10,6 +10,7 @@ jobs:
         with: { version: 9 }
       - run: pnpm install --frozen-lockfile
       - run: node scripts/guard-rogue-hex.mjs
+      - run: pnpm run verify:sacred
       - run: node scripts/guard-preview-only.mjs
       - run: node scripts/guard-asset-size.mjs
         env: { PUBLIC_MAX_MB: "6" }

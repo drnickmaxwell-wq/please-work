@@ -10,7 +10,12 @@ const __dirname = dirname(__filename);
 
 const allowConfigPath = resolve(__dirname, "guard-rogue-hex.allow.json");
 const allowConfig = JSON.parse(readFileSync(allowConfigPath, "utf8"));
-const allowGlobs = allowConfig.allow ?? [];
+const allowGlobs = [
+  ...(allowConfig.allow ?? []),
+  "**/docs/Brand_Canon_Packet/smh-champagne-tokens.css",
+  "**/styles/tokens/smh-champagne-tokens.css", // allow tokens file in styles too
+  "reports/**", // generated artifacts
+];
 const allowExtensions = new Set(allowConfig.allowExtensions ?? []);
 const warnOnlyExtensions = new Set(allowConfig.warnOnlyExtensions ?? []);
 
