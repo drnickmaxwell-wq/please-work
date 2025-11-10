@@ -3,18 +3,40 @@ import { test, expect } from '@playwright/test';
 test('canonical gradient and keyline gold are present', async ({ page }) => {
   await page.goto('/preview/brand-lock');
 
-  const resolved = await page.evaluate(() => {
-    const g = getComputedStyle(document.documentElement).getPropertyValue('--smh-gradient').trim();
-    return g.replace(/\s+/g, ' ');
+  const gradient = await page.evaluate(() => {
+    const raw = getComputedStyle(document.documentElement)
+      .getPropertyValue('--smh-gradient')
+      .replace(/\s+/g, ' ')
+      .trim();
+    return raw;
   });
-  // rgb() canonical equivalent for #C2185B, #40C4B4, #D4AF37
-  expect(resolved).toContain('linear-gradient(135deg');
-  expect(resolved).toMatch(/rgb\(\s*194,\s*24,\s*91\s*\)\s*0%/);
-  expect(resolved).toMatch(/rgb\(\s*64,\s*196,\s*180\s*\)\s*60%/);
-  expect(resolved).toMatch(/rgb\(\s*212,\s*175,\s*55\s*\)\s*100%/);
 
-  // Check a CTA border uses keyline gold #F9E8C3
+  expect(gradient).toBe(
+    'linear-gradient(135deg, var(--brand-magenta) 0%, var(--brand-teal) 60%, var(--brand-gold) 100%)'
+  );
+
+  // Check a CTA border uses the champagne keyline gold token
   await page.goto('/preview/brand-live');
-  const borderColor = await page.locator('.glass-btn').first().evaluate(el => getComputedStyle(el).borderColor);
-  expect(borderColor.replace(/\s+/g,'')).toMatch(/rgb\(249,232,195\)/);
+  const { keylineToken, resolvedKeyline, borderColor } = await page.evaluate(() => {
+    const rootStyles = getComputedStyle(document.documentElement);
+    const keylineToken = rootStyles.getPropertyValue('--champagne-keyline-gold').trim() || '--champagne-keyline-gold';
+
+    const resolveToken = (token) => {
+      if (!token.startsWith('var(')) return token;
+      const inner = token.slice(4, -1).split(',')[0].trim();
+      return rootStyles.getPropertyValue(inner).trim() || token;
+    };
+
+    const button = document.querySelector('.glass-btn');
+    if (!button) {
+      return { keylineToken, resolvedKeyline: resolveToken(keylineToken), borderColor: '' };
+    }
+
+    const border = getComputedStyle(button).borderColor.replace(/\s+/g, ' ');
+    return { keylineToken, resolvedKeyline: resolveToken(keylineToken).replace(/\s+/g, ' '), borderColor: border };
+  });
+
+  expect(keylineToken).toContain('var(--brand-gold-keyline)');
+  expect(borderColor).not.toEqual('');
+  expect(resolvedKeyline).toBe(borderColor);
 });

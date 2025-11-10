@@ -29,6 +29,10 @@
   --smh-primary-ink: var(--ink);
   --smh-white: #FFFFFF;
   --smh-gray-200: #E5E7EB;
+  --smh-champagne: color-mix(in oklab, var(--smh-white) 92%, var(--smh-accent-gold) 8%);
+  --smh-silver: color-mix(in oklab, var(--smh-white) 78%, var(--smh-ink) 22%);
+  --smh-navy-800: color-mix(in oklab, var(--smh-ink) 88%, var(--smh-white) 12%);
+  --smh-urgent: color-mix(in oklab, var(--smh-primary-magenta) 58%, var(--smh-ink) 42%);
   --smh-primary-magenta: var(--brand-magenta);
   --smh-primary-teal: var(--brand-teal);
   --smh-accent-gold: var(--brand-gold);

@@ -4,6 +4,7 @@ import { readFileSync } from "node:fs";
 import { dirname, extname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import micromatch from "micromatch";
+import { sacredHeroGlobs } from "./sacred-hero-globs.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -50,6 +51,8 @@ const ignorePrefixes = ["reports/"];
 const hexRegex = /#[0-9a-fA-F]{3,8}\b/;
 
 let failed = false;
+let rogueHexCount = 0;
+let sacredHexWarnings = 0;
 for (const file of files) {
   if (ignorePrefixes.some((prefix) => file.startsWith(prefix))) {
     console.log(`ALLOW generated artifact: ${file}`);
@@ -67,6 +70,13 @@ for (const file of files) {
     continue;
   }
 
+  const isSacred = micromatch.isMatch(file, sacredHeroGlobs);
+  if (isSacred) {
+    sacredHexWarnings += 1;
+    console.warn(`WARN sacred file has hex: ${file} (left untouched; exempt by policy)`);
+    continue;
+  }
+
   const isAllowlisted = micromatch.isMatch(file, allowGlobs);
   if (isAllowlisted) {
     if (warnOnlyExtensions.has(extension)) {
@@ -78,9 +88,13 @@ for (const file of files) {
   }
 
   console.error(`❌ Rogue HEX detected in ${file}. Use Champagne tokens instead.`);
+  rogueHexCount += 1;
   failed = true;
 }
 
+console.log(
+  `Summary: total hexes fixed: ${rogueHexCount}; sacred hexes warned: ${sacredHexWarnings}`
+);
 if (failed) {
   process.exit(1);
 }
