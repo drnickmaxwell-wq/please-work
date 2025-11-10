@@ -3,6 +3,7 @@
 - Tuned brand guard whitelist to permit canonical sources only.
 - brand:guard ✅
 - guard:hero ✅
+- fix: repaired rogue-hex guard allow-list; replaced unsafe literals in breadcrumbs, neutrals, chat preview; tests/comments updated; guards green.
 
 ## 2025-11-08
 - Added Director docs scaffold (Blueprint, Departments, control block).
