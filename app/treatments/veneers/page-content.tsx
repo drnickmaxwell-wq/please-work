@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { easeInOutCubic } from '@/lib/motion/easing';
 import Link from 'next/link';
 import InteractiveToothModel from '@/components/3d/interactive-tooth-model';
-import { TOKENS as NEUTRAL_TOKENS } from '@/styles/tokens/neutrals';
+import NEUTRAL_TOKENS from '@/styles/tokens/neutrals';
 import {
   Sparkles,
   Star,

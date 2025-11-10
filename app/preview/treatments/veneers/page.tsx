@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import InteractiveToothModel from '@/components/3d/interactive-tooth-model';
 import TreatmentBanner from '@/components/preview/TreatmentBanner';
-import { TOKENS as NEUTRAL_TOKENS } from '@/styles/tokens/neutrals';
+import NEUTRAL_TOKENS from '@/styles/tokens/neutrals';
 
 import '@/styles/treatments/preview-light.css';
 

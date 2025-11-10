@@ -2,7 +2,7 @@
 // Brand Colors: Magenta var(--smh-primary-magenta), Turquoise var(--smh-primary-teal), Gold var(--smh-accent-gold)
 // Fonts: Montserrat headings, Lora body text
 
-import { TOKENS as NEUTRAL_TOKENS } from '@/styles/tokens/neutrals';
+import NEUTRAL_TOKENS from '@/styles/tokens/neutrals';
 
 export interface UserProfile {
   id: string;

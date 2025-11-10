@@ -11,7 +11,7 @@ import {
   getBrandColor,
   SMH_BRAND_COLOR_FALLBACKS,
 } from '@/lib/brand/palette';
-import { TOKENS as NEUTRAL_TOKENS } from '@/styles/tokens/neutrals';
+import NEUTRAL_TOKENS from '@/styles/tokens/neutrals';
 
 // Brand Colors: Magenta var(--smh-primary-magenta), Turquoise var(--smh-primary-teal), Gold var(--smh-accent-gold)
 // Fonts: Montserrat headings, Lora body text

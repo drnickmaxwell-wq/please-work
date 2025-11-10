@@ -1,7 +1,7 @@
 // Image optimization utilities for St Mary's House Dental Care
 // Maintains brand consistency across all image loading states
 import { SMH_BRAND_COLOR_FALLBACKS, SMH_BRAND_COLOR_TOKENS } from '@/lib/brand/palette';
-import { TOKENS as NEUTRAL_TOKENS } from '@/styles/tokens/neutrals';
+import NEUTRAL_TOKENS from '@/styles/tokens/neutrals';
 
 export interface OptimizedImageConfig {
   src: string;
