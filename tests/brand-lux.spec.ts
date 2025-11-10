@@ -13,9 +13,13 @@ test('canonical gradient and keyline gold are present', async ({ page }) => {
   expect(resolved).toContain('var(--brand-teal) 60%');
   expect(resolved).toContain('var(--brand-gold) 100%');
 
-  // Check border uses var(--brand-gold-keyline)
+  // Check a CTA border uses keyline gold var(--brand-gold-keyline)
   await page.goto('/preview/brand-live');
-  const borderColor = await page.locator('.glass-btn').first().evaluate(el => getComputedStyle(el).borderColor);
+  const borderColor = await page
+    .locator('.glass-btn')
+    .first()
+    .evaluate(el => getComputedStyle(el).borderColor);
+
   const keylineToken = await page.evaluate(() => {
     const root = document.documentElement;
     const keyline = getComputedStyle(root).getPropertyValue('--brand-gold-keyline').trim();
@@ -26,5 +30,6 @@ test('canonical gradient and keyline gold are present', async ({ page }) => {
     probe.remove();
     return rgb.replace(/\s+/g, '');
   });
+
   expect(borderColor.replace(/\s+/g, '')).toBe(keylineToken);
 });
