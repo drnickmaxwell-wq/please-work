@@ -14,6 +14,7 @@
     "format": "prettier --write public/brand/manifest.json lib/brand/manifest.ts app/brand.ts components/sections/HeroLuxury.tsx tests/brand-manifest.spec.ts",
     "test": "tsx --test tests/brand-manifest.spec.ts",
     "brand:guard": "node scripts/brand-guard.cjs",
+    "guard:hex": "node scripts/guard-rogue-hex.mjs",
     "brand:canon": "node scripts/generate-champagne-canon.mjs",
     "brand:compare": "node scripts/compare-manus-to-champagne.mjs",
     "test:guard": "node scripts/brand-guard.smoke.mjs",
