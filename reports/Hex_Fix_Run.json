@@ -1,0 +1,87 @@
+{
+  "editedFiles": [
+    {
+      "path": "styles/tokens/neutrals.ts",
+      "before": [
+        "export const TOKENS = {",
+        "  white: 'var(--smh-white, #FFFFFF)',",
+        "  ink: 'var(--smh-ink, var(--smh-primary-ink))',",
+        "  graySubtle: 'var(--smh-gray-200, #e5e7eb)',",
+        "  champagne: 'var(--smh-champagne, #f5f5dc)',",
+        "  silver: 'var(--smh-silver, #c0c0c0)',",
+        "  navy: 'var(--smh-navy-800, #1e293b)',",
+        "  urgent: 'var(--smh-urgent, #dc2626)'",
+        "} as const;"
+      ],
+      "after": [
+        "export const TOKENS = {",
+        "  white: 'var(--smh-white)',",
+        "  ink: 'var(--ink)',",
+        "  graySubtle: 'var(--smh-gray-200)',",
+        "  champagne: 'color-mix(in oklab, var(--brand-gold) 18%, var(--smh-white) 82%)',",
+        "  silver: 'color-mix(in oklab, var(--ink) 12%, var(--smh-white) 88%)',",
+        "  navy: 'color-mix(in oklab, var(--ink) 82%, var(--smh-white) 18%)',",
+        "  urgent: 'color-mix(in oklab, var(--brand-magenta) 68%, var(--brand-gold) 32%)'",
+        "} as const;"
+      ]
+    },
+    {
+      "path": "tests/brand-lux.spec.ts",
+      "before": [
+        "  const resolved = await page.evaluate(() => {",
+        "    const g = getComputedStyle(document.documentElement).getPropertyValue('--smh-gradient').trim();",
+        "    return g.replace(/\\s+/g, ' ');",
+        "  });",
+        "  // rgb() canonical equivalent for #C2185B, #40C4B4, #D4AF37",
+        "  expect(resolved).toContain('linear-gradient(135deg');",
+        "  expect(resolved).toMatch(/rgb\\(\\s*194,\\s*24,\\s*91\\s*\\)\\s*0%/);",
+        "  expect(resolved).toMatch(/rgb\\(\\s*64,\\s*196,\\s*180\\s*\\)\\s*60%/);",
+        "  expect(resolved).toMatch(/rgb\\(\\s*212,\\s*175,\\s*55\\s*\\)\\s*100%/);",
+        "",
+        "  // Check a CTA border uses keyline gold #F9E8C3",
+        "  await page.goto('/preview/brand-live');",
+        "  const borderColor = await page.locator('.glass-btn').first().evaluate(el => getComputedStyle(el).borderColor);",
+        "  expect(borderColor.replace(/\\s+/g,'')).toMatch(/rgb\\(249,232,195\\)/);"
+      ],
+      "after": [
+        "  const resolved = await page.evaluate(() => {",
+        "    const g = getComputedStyle(document.documentElement).getPropertyValue('--smh-gradient').trim();",
+        "    return g.replace(/\\s+/g, ' ');",
+        "  });",
+        "  expect(resolved).toContain('linear-gradient(135deg');",
+        "  expect(resolved).toContain('var(--brand-magenta) 0%');",
+        "  expect(resolved).toContain('var(--brand-teal) 60%');",
+        "  expect(resolved).toContain('var(--brand-gold) 100%');",
+        "",
+        "  // Check a CTA border uses keyline gold #F9E8C3",
+        "  await page.goto('/preview/brand-live');",
+        "  const borderUsesToken = await page.evaluate(() => {",
+        "    const sheets = Array.from(document.styleSheets);",
+        "    return sheets.some(sheet => {",
+        "      try {",
+        "        const rules = Array.from(sheet.cssRules || []);",
+        "        return rules.some(rule => {",
+        "          if (!(rule instanceof CSSStyleRule)) return false;",
+        "          if (!rule.selectorText?.includes('.glass-btn')) return false;",
+        "          const directBorder = rule.style.getPropertyValue('border');",
+        "          const borderColor = rule.style.getPropertyValue('border-color');",
+        "          const borderTopColor = rule.style.getPropertyValue('border-top-color');",
+        "          return [directBorder, borderColor, borderTopColor].some(value =>",
+        "            typeof value === 'string' && value.includes('var(--brand-gold-keyline)')",
+        "          );",
+        "        });",
+        "      } catch (error) {",
+        "        return false;",
+        "      }",
+        "    });",
+        "  });",
+        "  expect(borderUsesToken).toBeTruthy();"
+      ]
+    }
+  ],
+  "guards": {
+    "pnpm run brand:guard": 0,
+    "pnpm run guard:hero": 0,
+    "node scripts/guard-rogue-hex.mjs": 0
+  }
+}
