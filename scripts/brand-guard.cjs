@@ -33,6 +33,11 @@ const HERO_JOURNEY_FILES = new Set([
 const LEGACY_GRADIENT_HEXES = [/#d94bc6/i, /#00c2c7/i];
 const HEX_FILE_ALLOWLIST = new Set([
   join(SCAN_ROOT, "styles/champagne/hero.css"),
+  join(SCAN_ROOT, "styles/tokens/smh-champagne-tokens.css"),
+  join(SCAN_ROOT, "scripts/brand-guard.cjs"),
+  join(SCAN_ROOT, "scripts/brand-lock-guard.cjs"),
+  join(SCAN_ROOT, "scripts/brand-report.cjs"),
+  join(SCAN_ROOT, "brand/hue-lock.json"),
 ]);
 
 function shouldSkip(relPath){

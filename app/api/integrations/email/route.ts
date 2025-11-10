@@ -22,47 +22,62 @@ const emailTemplates: Record<string, EmailTemplateContent> = {
   appointment_confirmation: {
     subject: 'Appointment Confirmation - St Mary\'s House Dental Care',
     html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f8fafc;">
+      <div
+        style="
+          --bg: var(--smh-gray-50, #f8fafc);
+          --surface: var(--smh-white, #ffffff);
+          --ink: var(--ink, var(--smh-navy-800, #1e293b));
+          --text: var(--text, var(--smh-slate-600, #475569));
+          --panel: var(--smh-gray-100, #f1f5f9);
+          --border: var(--smh-gray-200, #e2e8f0);
+          --muted: var(--muted, var(--smh-slate-500, #64748b));
+          font-family: Arial, sans-serif;
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 20px;
+          background-color: var(--bg);
+        "
+      >
         <div style="background: var(--smh-gradient); padding: 30px; border-radius: 12px; text-align: center; margin-bottom: 30px;">
-          <h1 style="color: white; margin: 0; font-size: 28px;">St Mary's House Dental Care</h1>
-          <p style="color: rgba(255,255,255,0.9); margin: 10px 0 0 0; font-size: 16px;">Luxury Coastal Dentistry</p>
+          <h1 style="color: var(--smh-white, #ffffff); margin: 0; font-size: 28px;">St Mary's House Dental Care</h1>
+          <p style="color: color-mix(in srgb, var(--smh-white, #ffffff) 90%, transparent); margin: 10px 0 0 0; font-size: 16px;">Luxury Coastal Dentistry</p>
         </div>
-        
-        <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-          <h2 style="color: #1e293b; margin-bottom: 20px;">Appointment Confirmation</h2>
-          
-          <p style="color: #475569; font-size: 16px; line-height: 1.6;">Dear {{patientName}},</p>
-          
-          <p style="color: #475569; font-size: 16px; line-height: 1.6;">
+
+        <div style="background: var(--surface); padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+          <h2 style="color: var(--ink); margin-bottom: 20px;">Appointment Confirmation</h2>
+
+          <p style="color: var(--text); font-size: 16px; line-height: 1.6;">Dear {{patientName}},</p>
+
+          <p style="color: var(--text); font-size: 16px; line-height: 1.6;">
             Thank you for booking your appointment with us. We're delighted to confirm your upcoming visit to our luxury coastal practice.
           </p>
-          
-          <div style="background: #f1f5f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <h3 style="color: #1e293b; margin-top: 0;">Appointment Details</h3>
-            <p style="margin: 5px 0; color: #475569;"><strong>Treatment:</strong> {{treatmentType}}</p>
-            <p style="margin: 5px 0; color: #475569;"><strong>Date:</strong> {{appointmentDate}}</p>
-            <p style="margin: 5px 0; color: #475569;"><strong>Time:</strong> {{appointmentTime}}</p>
-            <p style="margin: 5px 0; color: #475569;"><strong>Duration:</strong> {{duration}} minutes</p>
-            <p style="margin: 5px 0; color: #475569;"><strong>Appointment ID:</strong> {{appointmentId}}</p>
+
+          <div style="background: var(--panel); padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <h3 style="color: var(--ink); margin-top: 0;">Appointment Details</h3>
+            <p style="margin: 5px 0; color: var(--text);"><strong>Treatment:</strong> {{treatmentType}}</p>
+            <p style="margin: 5px 0; color: var(--text);"><strong>Date:</strong> {{appointmentDate}}</p>
+            <p style="margin: 5px 0; color: var(--text);"><strong>Time:</strong> {{appointmentTime}}</p>
+            <p style="margin: 5px 0; color: var(--text);"><strong>Duration:</strong> {{duration}} minutes</p>
+            <p style="margin: 5px 0; color: var(--text);"><strong>Appointment ID:</strong> {{appointmentId}}</p>
           </div>
-          
-          <p style="color: #475569; font-size: 16px; line-height: 1.6;">
+
+          <p style="color: var(--text); font-size: 16px; line-height: 1.6;">
             Our practice is located in beautiful Shoreham-by-Sea with stunning coastal views. We look forward to providing you with exceptional dental care in our calming, luxury environment.
           </p>
-          
+
           <div style="text-align: center; margin: 30px 0;">
-            <a href="{{practiceWebsite}}" style="background: var(--gradient-cta); color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold;">View Practice Information</a>
+            <a href="{{practiceWebsite}}" style="background: var(--gradient-cta); color: var(--smh-white, #ffffff); padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold;">View Practice Information</a>
           </div>
-          
-          <div style="border-top: 1px solid #e2e8f0; padding-top: 20px; margin-top: 30px;">
-            <h4 style="color: #1e293b; margin-bottom: 10px;">Contact Information</h4>
-            <p style="margin: 5px 0; color: #475569;">📞 01273 123456</p>
-            <p style="margin: 5px 0; color: #475569;">📧 info@stmaryshousedental.co.uk</p>
-            <p style="margin: 5px 0; color: #475569;">📍 Shoreham-by-Sea, West Sussex</p>
+
+          <div style="border-top: 1px solid var(--border); padding-top: 20px; margin-top: 30px;">
+            <h4 style="color: var(--ink); margin-bottom: 10px;">Contact Information</h4>
+            <p style="margin: 5px 0; color: var(--text);">📞 01273 123456</p>
+            <p style="margin: 5px 0; color: var(--text);">📧 info@stmaryshousedental.co.uk</p>
+            <p style="margin: 5px 0; color: var(--text);">📍 Shoreham-by-Sea, West Sussex</p>
           </div>
         </div>
-        
-        <div style="text-align: center; margin-top: 20px; color: #64748b; font-size: 14px;">
+
+        <div style="text-align: center; margin-top: 20px; color: var(--muted); font-size: 14px;">
           <p>St Mary's House Dental Care - Where luxury meets exceptional dental care</p>
         </div>
       </div>
@@ -91,11 +106,21 @@ St Mary's House Dental Care Team
   appointment_reminder: {
     subject: 'Appointment Reminder - Tomorrow at St Mary\'s House Dental Care',
     html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+      <div
+        style="
+          --text: var(--text, var(--smh-slate-600, #475569));
+          --panel: var(--smh-gray-50, #f8fafc);
+          font-family: Arial, sans-serif;
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 20px;
+          color: var(--text);
+        "
+      >
         <h2 style="color: var(--smh-primary-magenta);">Appointment Reminder</h2>
         <p>Dear {{patientName}},</p>
         <p>This is a friendly reminder about your appointment tomorrow:</p>
-        <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
+        <div style="background: var(--panel); padding: 15px; border-radius: 8px; margin: 15px 0;">
           <p><strong>Treatment:</strong> {{treatmentType}}</p>
           <p><strong>Date:</strong> {{appointmentDate}}</p>
           <p><strong>Time:</strong> {{appointmentTime}}</p>
@@ -121,27 +146,39 @@ St Mary's House Dental Care
   emergency_response: {
     subject: 'Emergency Dental Care - We\'re Here to Help',
     html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-        <div style="background: #dc2626; color: white; padding: 20px; border-radius: 8px; text-align: center; margin-bottom: 20px;">
+      <div
+        style="
+          --urgent: var(--smh-urgent, #dc2626);
+          --surface: var(--smh-white, #ffffff);
+          --panel: var(--smh-rose-50, #fef2f2);
+          --text: var(--text, var(--smh-slate-700, #374151));
+          font-family: Arial, sans-serif;
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 20px;
+          color: var(--text);
+        "
+      >
+        <div style="background: var(--urgent); color: var(--surface); padding: 20px; border-radius: 8px; text-align: center; margin-bottom: 20px;">
           <h2 style="margin: 0;">Emergency Dental Care</h2>
           <p style="margin: 10px 0 0 0;">We're here to help you right away</p>
         </div>
-        
+
         <p>Dear {{patientName}},</p>
         <p>We've received your emergency dental request and understand you need immediate care.</p>
-        
-        <div style="background: #fef2f2; border-left: 4px solid #dc2626; padding: 15px; margin: 15px 0;">
-          <h3 style="color: #dc2626; margin-top: 0;">Immediate Actions:</h3>
-          <ul style="color: #374151;">
+
+        <div style="background: var(--panel); border-left: 4px solid var(--urgent); padding: 15px; margin: 15px 0;">
+          <h3 style="color: var(--urgent); margin-top: 0;">Immediate Actions:</h3>
+          <ul style="color: var(--text);">
             <li>We will contact you within 30 minutes</li>
             <li>Emergency appointment will be arranged today if possible</li>
             <li>Pain relief guidance will be provided over the phone</li>
           </ul>
         </div>
-        
+
         <p><strong>Emergency Contact:</strong> 01273 123456</p>
         <p>If this is a life-threatening emergency, please call 999 immediately.</p>
-        
+
         <p>We're committed to providing you with immediate relief and exceptional care.</p>
       </div>
     `,
