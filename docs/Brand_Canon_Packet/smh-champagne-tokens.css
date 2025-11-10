@@ -29,11 +29,13 @@
   --smh-primary-ink: var(--ink);
   --smh-white: #FFFFFF;
   --smh-gray-200: #E5E7EB;
+  --smh-bg: var(--bg);
   --smh-primary-magenta: var(--brand-magenta);
   --smh-primary-teal: var(--brand-teal);
   --smh-accent-gold: var(--brand-gold);
   --smh-gold: var(--brand-gold);
   --champagne-keyline-gold: var(--brand-gold-keyline);
+  --gradient-champagne: var(--smh-gradient);
 
   /* Surface sizing */
   --smh-surface-bg-size: 165% 165%;

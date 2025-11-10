@@ -1,0 +1,33 @@
+{
+  "commands": [
+    {
+      "command": "pnpm run brand:guard",
+      "status": "passed",
+      "output": [
+        "✅ No rogue hex detected outside approved tokens.",
+        "Manifests scanned: 4 | WARN: 0 | OK: 4"
+      ]
+    },
+    {
+      "command": "pnpm run guard:hero",
+      "status": "passed",
+      "output": [
+        "FILMGRAIN_SHA=9f6464c44a70d849acc18972dcc6d9f8c75243c57183c3ebe19e022d043ed208",
+        "PIXEL_SHA=e016252e74ce1540556b8a7bd0062304bf3a52b5c198a076903aecca55f6bb46",
+        "✅ Hero freeze OK (10 files checked)"
+      ]
+    },
+    {
+      "command": "node scripts/guard-rogue-hex.mjs",
+      "status": "passed",
+      "output": [
+        "✅ No rogue HEX outside token files."
+      ]
+    },
+    {
+      "command": "node scripts/verify-sacred.mjs",
+      "status": "failed",
+      "error": "Cannot find module 'scripts/verify-sacred.mjs'"
+    }
+  ]
+}
