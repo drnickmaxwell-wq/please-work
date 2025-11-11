@@ -35,6 +35,7 @@ public/brand/manifest.json
 public/brand/champagne_machine_manifest_full.json
 public/brand/manus_import_unified_manifest_20251104.json
 public/assets/champagne/manifest.json
+scripts/hero-freeze.hashes.json  ← reference checksums used by `pnpm run guard:hero`
 
 Edits to these require a Director-labelled PR and a freeze refresh using  
 `pnpm run guard:hero --update-freeze`.
