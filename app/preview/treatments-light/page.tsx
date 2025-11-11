@@ -6,7 +6,7 @@ import routesMap from '@/reports/schema/routes-map.json';
 import { SchemaInjector, getAllPreviewSchemaStatuses } from '@/lib/seo/preview/SchemaInjector';
 import Hero from '@/components/treatments-light/Hero';
 import ValueGrid from '@/components/treatments-light/ValueGrid';
-import FeaturedTreatments from '@/components/treatments-light/FeaturedTreatments';
+import FeaturedTreatmentsPreview from '@/components/preview/treatments/FeaturedTreatmentsPreview';
 import ThreeDViewerPreview from '@/components/treatments-light/ThreeDViewerPreview';
 import Finance from '@/components/treatments-light/Finance';
 import FaqRail from '@/components/treatments-light/FaqRail';
@@ -26,7 +26,7 @@ import { DevHud, shouldShowHud } from '@/components/preview/Hud';
 const SECTION_COMPONENTS = {
   hero: Hero,
   'value-grid': ValueGrid,
-  'featured-treatments': FeaturedTreatments,
+  'featured-treatments': FeaturedTreatmentsPreview,
   '3d-viewer-preview': ThreeDViewerPreview,
   finance: Finance,
   faq: FaqRail,
