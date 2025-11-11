@@ -708,7 +708,7 @@ export default function PreviewHeroGildedClient() {
             lineHeight: 1.25,
             textAlign: "right",
             pointerEvents: "none",
-            color: "var(--smh-white)",
+            color: "var(--smh-text)",
             background: "color-mix(in oklab, var(--smh-ink) 92%, transparent)",
             padding: "0.5rem 0.75rem",
             borderRadius: "0.5rem",
