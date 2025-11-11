@@ -165,7 +165,8 @@ export default function Page() {
           border: "1px solid color-mix(in srgb, var(--smh-ink) 55%, transparent)",
           borderRadius: "999px",
           padding: "0.35rem 0.65rem",
-          boxShadow: "0 8px 24px rgba(15, 17, 26, 0.18)",
+          boxShadow:
+            "0 8px 24px color-mix(in srgb, var(--smh-ink) 18%, transparent)",
           backdropFilter: "blur(18px)",
         }}
       >
