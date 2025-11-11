@@ -45,7 +45,7 @@ const routesMapModule = await import('@/reports/schema/routes-map.json')
   .then((mod) => mod.default)
   .catch(() => ({}));
 
-const schemaPackModule = await import('@/reports/schema/Treatments_Schema_Pack_v2.json')
+const schemaPackModule = await import('@/reports/schema/Treatments_Schema_Pack_v3.json')
   .then((mod) => mod.default)
   .catch(() => ({}));
 
