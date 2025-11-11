@@ -1,189 +1,154 @@
 import type { Metadata } from 'next';
 
-import routesMap from '@/reports/schema/routes-map.json';
+import React from 'react';
 
-import './page.css';
+import routesMap from '@/reports/routes-map.json';
+import schemaPack from '@/reports/seo/Treatments_Schema_Pack.json';
+import Hero from '@/components/treatments-light/Hero';
+import ValueGrid from '@/components/treatments-light/ValueGrid';
+import FeaturedTreatments from '@/components/treatments-light/FeaturedTreatments';
+import ThreeDViewerPreview from '@/components/treatments-light/ThreeDViewerPreview';
+import Finance from '@/components/treatments-light/Finance';
+import FaqRail from '@/components/treatments-light/FaqRail';
+import Cta from '@/components/treatments-light/Cta';
+import Benefits from '@/components/treatments-light/Benefits';
+import HowItWorks from '@/components/treatments-light/HowItWorks';
+import ThreeDViewer from '@/components/treatments-light/ThreeDViewer';
+import Pricing from '@/components/treatments-light/Pricing';
+import Gallery from '@/components/treatments-light/Gallery';
+import Faqs from '@/components/treatments-light/Faqs';
+import UnknownSection from '@/components/treatments-light/UnknownSection';
+import '@/styles/preview/treatments-light.css';
 
-type RouteMap = Record<string, string[]>;
+import { DevHud, shouldShowHud } from '../_utils/dev-hud';
 
-type CanonicalSection = 'hero' | 'how-it-works' | 'experts' | 'faqs' | 'gallery';
+const SECTION_COMPONENTS = {
+  hero: Hero,
+  'value-grid': ValueGrid,
+  'featured-treatments': FeaturedTreatments,
+  '3d-viewer-preview': ThreeDViewerPreview,
+  finance: Finance,
+  faq: FaqRail,
+  cta: Cta,
+  benefits: Benefits,
+  'how-it-works': HowItWorks,
+  '3d-viewer': ThreeDViewer,
+  pricing: Pricing,
+  gallery: Gallery,
+  faqs: Faqs,
+} as const;
 
-type SectionMatch = {
-  canonical: CanonicalSection;
-  alias: string;
+type SectionKey = keyof typeof SECTION_COMPONENTS;
+
+type SchemaRoute = {
+  ['@context']?: string;
+  ['@graph']?: unknown[];
+  ['@type']?: string;
 };
 
-const SECTION_ORDER: CanonicalSection[] = ['hero', 'how-it-works', 'experts', 'faqs', 'gallery'];
-
-const SECTION_LABEL: Record<CanonicalSection, string> = {
-  hero: 'Hero',
-  'how-it-works': 'How it works',
-  experts: 'Experts',
-  faqs: 'FAQs',
-  gallery: 'Gallery',
+type SchemaPack = {
+  generated?: string;
+  routes?: Record<string, SchemaRoute>;
 };
 
-const SECTION_ALIAS: Record<CanonicalSection, string[]> = {
-  hero: ['hero'],
-  'how-it-works': ['how-it-works', 'how_it_works', 'howTo'],
-  experts: ['experts', 'team', 'clinicians'],
-  faqs: ['faqs', 'faq'],
-  gallery: ['gallery', 'before-after', 'before-after-gallery'],
-};
+const schemaRoutes = (schemaPack as SchemaPack).routes ?? {};
 
-const routes = routesMap as RouteMap;
+const treatmentsRoutes = Object.entries(routesMap as Record<string, string[]>).filter(([path]) =>
+  path.startsWith('/treatments'),
+);
 
 export const metadata: Metadata = {
   title: 'Treatments Light Preview',
-  robots: {
-    index: false,
-    follow: false,
-  },
-  description:
-    'Preview surface for treatments routes. Uses schema-driven stubs to visualise hero, process, experts, FAQs, and gallery blocks with champagne tokens.',
+  robots: { index: false, follow: false },
 };
 
 type TreatmentsLightPreviewPageProps = {
-  searchParams?: {
-    hud?: string;
-  };
+  searchParams?: Record<string, string | string[] | undefined>;
 };
 
-function resolveSections(allSections: string[]): SectionMatch[] {
-  return SECTION_ORDER.flatMap((section) => {
-    const alias = SECTION_ALIAS[section].find((candidate) => allSections.includes(candidate));
-
-    if (!alias) {
-      return [];
-    }
-
-    return [
-      {
-        canonical: section,
-        alias,
-      },
-    ];
-  });
-}
-
 export default function TreatmentsLightPreviewPage({ searchParams }: TreatmentsLightPreviewPageProps) {
-  const treatmentEntries = Object.entries(routes)
-    .filter(([path]) => path.startsWith('/treatments'))
-    .map(([path, sections]) => ({
-      path,
-      sections,
-      matches: resolveSections(sections),
-    }));
+  const knownSectionKeys = new Set<SectionKey>(Object.keys(SECTION_COMPONENTS) as SectionKey[]);
 
-  const showHud = searchParams?.hud === '1';
+  const enrichedRoutes = treatmentsRoutes.map(([route, sections]) => {
+    const schemaInfo = schemaRoutes[route] ?? {};
+    const graphNodes = Array.isArray(schemaInfo['@graph']) ? schemaInfo['@graph'].length : 0;
+    const context = schemaInfo['@context'];
+
+    const knownSections = sections.filter((sectionKey) => knownSectionKeys.has(sectionKey as SectionKey));
+
+    return {
+      route,
+      sections,
+      schemaInfo,
+      graphNodes,
+      context,
+      knownSections,
+    };
+  });
+
+  const showHud = shouldShowHud(searchParams?.hud);
 
   return (
     <main className="tl-main">
       {showHud ? (
-        <aside className="tl-hud" aria-label="Developer HUD">
-          <p className="tl-hud__title">Treatments HUD</p>
-          <dl className="tl-hud__grid">
-            <div>
-              <dt>Total preview routes</dt>
-              <dd>{treatmentEntries.length}</dd>
-            </div>
-            <div>
-              <dt>Canonical sections tracked</dt>
-              <dd>{SECTION_ORDER.length}</dd>
-            </div>
-            <div>
-              <dt>Routes with full coverage</dt>
-              <dd>
-                {
-                  treatmentEntries.filter(
-                    (entry) => entry.matches.length === SECTION_ORDER.length,
-                  ).length
-                }
-              </dd>
-            </div>
-          </dl>
-          <p className="tl-hud__hint">Toggle with ?hud=1</p>
-        </aside>
+        <DevHud
+          title="Treatments preview HUD"
+          stats={[
+            { label: 'Routes tracked', value: enrichedRoutes.length },
+            {
+              label: 'Known shells rendered',
+              value: enrichedRoutes.reduce((total, entry) => total + entry.knownSections.length, 0),
+            },
+            {
+              label: 'Schema contexts set',
+              value: enrichedRoutes.filter((entry) => Boolean(entry.context)).length,
+            },
+          ]}
+        />
       ) : null}
 
-      <section className="tl-shell" aria-labelledby="treatments-preview-heading">
+      <div className="tl-shell">
         <header className="tl-header">
-          <div className="tl-header__grid">
-            <div>
-              <h1 className="tl-heading" id="treatments-preview-heading">
-                Treatments light preview
-              </h1>
-              <p className="tl-lede">
-                Schema-aligned sandbox for champagne treatments workstreams. Each card reflects the canonical sections planned in
-                <code className="tl-inline-code">/reports/schema/routes-map.json</code> so creative and engineering can iterate without
-                touching protected hero surfaces.
-              </p>
-            </div>
-            <div className="tl-meta">
-              <span className="tl-chip">Tokenised stubs</span>
-              <span className="tl-chip">PRM aware</span>
-              <span className="tl-chip">Developer safe-space</span>
+          <div className="tl-header__content">
+            <h1>Treatments preview light</h1>
+            <p>
+              Non-production staging surface that renders treatment stacks based on <code>routes-map.json</code>. Each section
+              pulls a tokenised stub so creative, content, and engineering can align before touching production heroes.
+            </p>
+            <div className="tl-header__meta" role="list">
+              <span className="tl-chip" role="listitem">Tokens: smh champagne</span>
+              <span className="tl-chip" role="listitem">Motion: PRM aware</span>
+              <span className="tl-chip" role="listitem">Gradient: var(--smh-gradient)</span>
             </div>
           </div>
-          <span className="tl-prm-label" aria-live="polite">
-            motion paused
-          </span>
         </header>
 
-        <div className="tl-grid" role="list">
-          {treatmentEntries.map(({ path, matches, sections }) => {
-            const remaining = SECTION_ORDER.filter(
-              (section) => !matches.some((match) => match.canonical === section),
-            );
+        {enrichedRoutes.map(({ route, sections, graphNodes, context }) => (
+          <article aria-labelledby={`route-${route}`} className="tl-route" key={route}>
+            <div className="tl-route__intro">
+              <h2 className="tl-route__title" id={`route-${route}`}>
+                {route}
+              </h2>
+              <p className="tl-route__summary">
+                Sections resolved directly from the schema to ensure parity between preview sandboxes and live builds. Schema
+                context{' '}
+                {context ? <code>{context}</code> : <span className="tl-fallback">pending context</span>}{' '}
+                with {graphNodes} graph node{graphNodes === 1 ? '' : 's'} tracked for structured data QA.
+              </p>
+            </div>
+            <div className="tl-route__stack">
+              {sections.map((sectionKey) => {
+                const Component = SECTION_COMPONENTS[sectionKey as SectionKey];
+                if (Component) {
+                  return <Component key={`${route}-${sectionKey}`} route={route} />;
+                }
 
-            return (
-              <article className="tl-card" key={path} role="listitem">
-                <header className="tl-card__header">
-                  <h2 className="tl-card__title">{path}</h2>
-                  <p className="tl-card__summary">
-                    {matches.length > 0
-                      ? 'Rendering available stubs with champagne tokens.'
-                      : 'No canonical sections matched in schema map yet.'}
-                  </p>
-                  <p className="tl-card__schema" aria-label="Schema keys tracked">
-                    {sections.join(' • ')}
-                  </p>
-                </header>
-                <div className="tl-stub-grid">
-                  {matches.map((match) => (
-                    <section
-                      className="tl-stub"
-                      data-schema-key={match.alias}
-                      key={`${path}-${match.canonical}`}
-                    >
-                      <h3 className="tl-stub__title">{SECTION_LABEL[match.canonical]}</h3>
-                      <p className="tl-stub__copy">
-                        {match.canonical === 'hero' &&
-                          'Hero shell anchored to champagne hero spec with gradient, grain, and CTA placeholders.'}
-                        {match.canonical === 'how-it-works' &&
-                          'Process rail stub referencing planning steps for choreography and instrumentation.'}
-                        {match.canonical === 'experts' &&
-                          'Expert spotlight placeholder for clinical bios sourced from treatments manifests.'}
-                        {match.canonical === 'faqs' &&
-                          'FAQ accordion tokens to validate schema injection and accessibility structure.'}
-                        {match.canonical === 'gallery' &&
-                          'Before / after gallery frame ensuring keyline and caption treatments stay aligned.'}
-                      </p>
-                    </section>
-                  ))}
-                </div>
-                {remaining.length > 0 ? (
-                  <footer className="tl-card__footer">
-                    <p className="tl-card__footer-copy">
-                      Missing canonical stubs: {remaining.map((key) => SECTION_LABEL[key]).join(', ')}
-                    </p>
-                  </footer>
-                ) : null}
-              </article>
-            );
-          })}
-        </div>
-      </section>
+                return <UnknownSection key={`${route}-${sectionKey}`} route={route} section={sectionKey} />;
+              })}
+            </div>
+          </article>
+        ))}
+      </div>
     </main>
   );
 }
