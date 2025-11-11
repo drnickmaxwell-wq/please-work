@@ -1,0 +1,41 @@
+{
+  "/treatments": [
+    "hero",
+    "value-grid",
+    "featured-treatments",
+    "3d-viewer-preview",
+    "finance",
+    "faq",
+    "cta"
+  ],
+  "/treatments/veneers": [
+    "hero",
+    "benefits",
+    "how-it-works",
+    "3d-viewer",
+    "pricing",
+    "gallery",
+    "faqs",
+    "cta"
+  ],
+  "/treatments/implants": [
+    "hero",
+    "benefits",
+    "how-it-works",
+    "3d-viewer",
+    "pricing",
+    "gallery",
+    "faqs",
+    "cta"
+  ],
+  "/treatments/orthodontics/spark-aligners": [
+    "hero",
+    "benefits",
+    "how-it-works",
+    "3d-viewer",
+    "pricing",
+    "gallery",
+    "faqs",
+    "cta"
+  ]
+}
