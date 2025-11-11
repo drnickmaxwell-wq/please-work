@@ -28,6 +28,45 @@ export type PreviewSchemaStatus = {
   missing: { howTo: boolean; faq: boolean };
 };
 
+export type PreviewHowToStep = {
+  name?: string;
+  text?: string;
+};
+
+export type PreviewFaqEntry = {
+  question?: string;
+  answer?: string;
+};
+
+export type PreviewBreadcrumbItem = {
+  name?: string;
+  item?: string;
+};
+
+export type PreviewServiceSummary = {
+  name?: string;
+  description?: string;
+};
+
+export type TreatmentPreviewContent = {
+  slug: string;
+  route?: string;
+  context?: string;
+  service: PreviewServiceSummary | null;
+  howTo: { name?: string; steps: PreviewHowToStep[] } | null;
+  faq: PreviewFaqEntry[];
+  breadcrumbs: PreviewBreadcrumbItem[];
+  schemaTypes: string[];
+  hasSchemaPack: boolean;
+  hudStatus: 'ok' | 'partial' | 'missing';
+  missing: {
+    service: boolean;
+    howTo: boolean;
+    faq: boolean;
+    breadcrumbs: boolean;
+  };
+};
+
 const DEFAULT_CONTEXT = 'https://schema.org';
 
 function isJsonObject(v: unknown): v is Record<string, unknown> {
@@ -138,5 +177,177 @@ export async function loadPreviewSchemaStatuses(): Promise<PreviewSchemaStatus[]
   } catch {
     // absolutely never throw from preview loader
     return [];
+  }
+}
+
+type SafeRoutesMap = Record<string, unknown>;
+
+function normaliseBreadcrumbItems(route: string | undefined, pack: BreadcrumbPack | undefined): PreviewBreadcrumbItem[] {
+  if (!route || !pack || !isJsonObject(pack.breadcrumbs)) return [];
+  const entry = (pack.breadcrumbs as Record<string, unknown>)[route];
+  if (!isJsonObject(entry)) return [];
+  const list = (entry.itemListElement as unknown) ?? [];
+  if (!Array.isArray(list)) return [];
+  return list
+    .map((item) => (isJsonObject(item) ? { name: item.name as string | undefined, item: item.item as string | undefined } : null))
+    .filter(Boolean) as PreviewBreadcrumbItem[];
+}
+
+function resolveHudStatus(flags: TreatmentPreviewContent['missing']): 'ok' | 'partial' | 'missing' {
+  const missingCount = Number(flags.service) + Number(flags.howTo) + Number(flags.faq);
+  if (missingCount === 0) return 'ok';
+  if (missingCount === 3) return 'missing';
+  return 'partial';
+}
+
+function extractRouteFromMap(slug: string, routesMap: SafeRoutesMap): string | undefined {
+  const desired = `/treatments/${slug}`;
+  if (Object.prototype.hasOwnProperty.call(routesMap, desired)) {
+    return desired;
+  }
+  // fallback search for nested slugs (e.g. orthodontics/spark-aligners)
+  const nested = Object.keys(routesMap).find((key) => key.endsWith(`/${slug}`));
+  return nested;
+}
+
+function toPreviewHowToStep(value: unknown): PreviewHowToStep | null {
+  if (!isJsonObject(value)) return null;
+  return {
+    name: typeof value.name === 'string' ? (value.name as string) : undefined,
+    text: typeof value.text === 'string' ? (value.text as string) : undefined,
+  };
+}
+
+export async function loadTreatmentPreviewContent(slug: string): Promise<TreatmentPreviewContent> {
+  const fallback: TreatmentPreviewContent = {
+    slug,
+    route: `/treatments/${slug}`,
+    context: DEFAULT_CONTEXT,
+    service: null,
+    howTo: null,
+    faq: [],
+    breadcrumbs: [],
+    schemaTypes: [],
+    hasSchemaPack: false,
+    hudStatus: 'missing',
+    missing: { service: true, howTo: true, faq: true, breadcrumbs: true },
+  };
+
+  try {
+    const routesMap = await import('@/reports/schema/routes-map.json')
+      .then((m) => (isJsonObject(m.default) ? (m.default as SafeRoutesMap) : ({} as SafeRoutesMap)))
+      .catch(() => ({} as SafeRoutesMap));
+    const schemaPack = await import('@/reports/schema/Treatments_Schema_Pack_v3.json')
+      .then((m) => ((isJsonObject(m.default) ? (m.default as SchemaPack) : { routes: {} }) as SchemaPack))
+      .catch(() => ({ routes: {} } as SchemaPack));
+    const breadcrumbPack = await import('@/reports/schema/Treatments_Breadcrumbs.json')
+      .then((m) => (isJsonObject(m.default) ? (m.default as BreadcrumbPack) : ({ breadcrumbs: {} } as BreadcrumbPack)))
+      .catch(() => ({ breadcrumbs: {} } as BreadcrumbPack));
+
+    const route = extractRouteFromMap(slug, routesMap);
+    const breadcrumbs = normaliseBreadcrumbItems(route, breadcrumbPack);
+
+    if (!route) {
+      const missingFlags: TreatmentPreviewContent['missing'] = {
+        service: true,
+        howTo: true,
+        faq: true,
+        breadcrumbs: breadcrumbs.length === 0,
+      };
+      return { ...fallback, route: fallback.route, breadcrumbs, missing: missingFlags, hudStatus: resolveHudStatus(missingFlags) };
+    }
+
+    const routeEntry = isJsonObject(schemaPack.routes)
+      ? ((schemaPack.routes as Record<string, unknown>)[route] as SchemaRouteEntry | undefined)
+      : undefined;
+
+    if (!routeEntry || !isJsonObject(routeEntry)) {
+      const missingFlags: TreatmentPreviewContent['missing'] = {
+        service: true,
+        howTo: true,
+        faq: true,
+        breadcrumbs: breadcrumbs.length === 0,
+      };
+      return {
+        ...fallback,
+        route,
+        breadcrumbs,
+        missing: missingFlags,
+        hudStatus: resolveHudStatus(missingFlags),
+      };
+    }
+
+    const context = typeof routeEntry['@context'] === 'string' ? (routeEntry['@context'] as string) : DEFAULT_CONTEXT;
+
+    const graphNodes = Array.isArray(routeEntry['@graph'])
+      ? (routeEntry['@graph'] as unknown[]).filter(isJsonObject)
+      : [];
+
+    const serviceNode = graphNodes.find((node) => extractTypes(node['@type']).includes('Service'));
+    const howToNode = graphNodes.find((node) => extractTypes(node['@type']).includes('HowTo'));
+    const faqNode = graphNodes.find((node) => extractTypes(node['@type']).includes('FAQPage'));
+
+    const service: PreviewServiceSummary | null = serviceNode
+      ? {
+          name: typeof serviceNode.name === 'string' ? (serviceNode.name as string) : undefined,
+          description: typeof serviceNode.description === 'string' ? (serviceNode.description as string) : undefined,
+        }
+      : null;
+
+    let howTo: TreatmentPreviewContent['howTo'] = null;
+    if (howToNode) {
+      const stepsCandidate = (howToNode.step as unknown) ?? [];
+      const steps = Array.isArray(stepsCandidate)
+        ? (stepsCandidate.map(toPreviewHowToStep).filter(Boolean) as PreviewHowToStep[])
+        : [];
+      howTo = {
+        name: typeof howToNode.name === 'string' ? (howToNode.name as string) : undefined,
+        steps,
+      };
+    }
+
+    const faq: PreviewFaqEntry[] = faqNode && Array.isArray(faqNode.mainEntity)
+      ? (faqNode.mainEntity as unknown[])
+          .map((entity) => {
+            if (!isJsonObject(entity)) return null;
+            const acceptedAnswer = entity.acceptedAnswer;
+            return {
+              question: typeof entity.name === 'string' ? (entity.name as string) : undefined,
+              answer: isJsonObject(acceptedAnswer) && typeof acceptedAnswer.text === 'string'
+                ? (acceptedAnswer.text as string)
+                : undefined,
+            };
+          })
+          .filter(Boolean) as PreviewFaqEntry[]
+      : [];
+
+    const schemaTypes = new Set<string>();
+    if (serviceNode) extractTypes(serviceNode['@type']).forEach((t) => schemaTypes.add(t));
+    if (howToNode) extractTypes(howToNode['@type']).forEach((t) => schemaTypes.add(t));
+    if (faqNode) extractTypes(faqNode['@type']).forEach((t) => schemaTypes.add(t));
+    if (breadcrumbs.length > 0) schemaTypes.add('BreadcrumbList');
+
+    const missingFlags: TreatmentPreviewContent['missing'] = {
+      service: !service,
+      howTo: !howTo || howTo.steps.length === 0,
+      faq: faq.length === 0,
+      breadcrumbs: breadcrumbs.length === 0,
+    };
+
+    return {
+      slug,
+      route,
+      context,
+      service,
+      howTo,
+      faq,
+      breadcrumbs,
+      schemaTypes: Array.from(schemaTypes).sort(),
+      hasSchemaPack: true,
+      hudStatus: resolveHudStatus(missingFlags),
+      missing: missingFlags,
+    };
+  } catch {
+    return fallback;
   }
 }

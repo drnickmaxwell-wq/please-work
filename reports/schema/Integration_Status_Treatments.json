@@ -1,49 +1,18 @@
-{
-  "updated": "2025-11-11T17:18:02.652Z",
-  "routes": [
-    {
-      "route": "/treatments",
-      "schemaTypes": [
-        "BreadcrumbList"
-      ],
-      "breadcrumbStatus": "pack",
-      "missing": {
-        "howTo": true,
-        "faq": true
-      }
-    },
-    {
-      "route": "/treatments/implants",
-      "schemaTypes": [
-        "BreadcrumbList"
-      ],
-      "breadcrumbStatus": "pack",
-      "missing": {
-        "howTo": true,
-        "faq": true
-      }
-    },
-    {
-      "route": "/treatments/orthodontics/spark-aligners",
-      "schemaTypes": [
-        "BreadcrumbList"
-      ],
-      "breadcrumbStatus": "pack",
-      "missing": {
-        "howTo": true,
-        "faq": true
-      }
-    },
-    {
-      "route": "/treatments/veneers",
-      "schemaTypes": [
-        "BreadcrumbList"
-      ],
-      "breadcrumbStatus": "pack",
-      "missing": {
-        "howTo": true,
-        "faq": true
-      }
-    }
-  ]
-}
+[
+  {
+    "route": "/treatments/veneers",
+    "schemaTypes": ["FAQPage", "HowTo", "Service"],
+    "hasHowTo": true,
+    "hasFAQ": true,
+    "hasService": true,
+    "hudStatus": "ok"
+  },
+  {
+    "route": "/treatments/implants",
+    "schemaTypes": ["FAQPage", "HowTo", "Service"],
+    "hasHowTo": true,
+    "hasFAQ": true,
+    "hasService": true,
+    "hudStatus": "ok"
+  }
+]

@@ -1,3 +1,6 @@
+## 2025-11-14
+- feat(preview): wired treatments detail preview shells (hero, how-to, FAQ, 3D slot) for veneers and implants with schema HUD.
+
 ## 2025-11-13
 - chore(preview): harden treatments-stubs with safe runtime loader + graceful empty-state
 
