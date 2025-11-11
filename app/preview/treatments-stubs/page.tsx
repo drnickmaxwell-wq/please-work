@@ -1,7 +1,9 @@
 export const dynamic = 'force-static';
 export const revalidate = 0;
 
+import ChampagneFX from '@/components/preview/fx/ChampagneFX';
 import { loadPreviewSchemaStatuses } from '@/lib/seo/preview/safe-loader';
+import '@/styles/champagne/preview-fx.css';
 
 export default async function TreatmentsStubsPreview() {
   const statuses = await loadPreviewSchemaStatuses();
@@ -16,15 +18,20 @@ export default async function TreatmentsStubsPreview() {
       }}
     >
       <section className="max-w-7xl mx-auto">
-        <header className="mb-10 text-center">
-          <h1 className="text-3xl font-semibold tracking-tight"
-              style={{ color: 'var(--smh-primary-magenta)' }}>
-            Treatments Schema Stubs
-          </h1>
-          <p className="mt-2 opacity-80">
-            Schema-aligned sandbox for Champagne treatments workstreams.
-          </p>
-        </header>
+        <div className="champagne-hero-shell" id="champagne-preview-stubs-hero">
+          <ChampagneFX targetId="champagne-preview-stubs-hero" dust="low" parallax />
+          <header className="mb-10 text-center champagne-hero-shell__inner" data-parallax-depth="1">
+            <h1
+              className="text-3xl font-semibold tracking-tight"
+              style={{ color: 'var(--smh-primary-magenta)' }}
+            >
+              Treatments Schema Stubs
+            </h1>
+            <p className="mt-2 opacity-80">
+              Schema-aligned sandbox for Champagne treatments workstreams.
+            </p>
+          </header>
+        </div>
 
         <div className="grid gap-8">
           {statuses.length > 0 ? (

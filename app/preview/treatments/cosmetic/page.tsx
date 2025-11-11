@@ -2,9 +2,13 @@
 import Link from 'next/link';
 
 import TreatmentBanner from '@/components/preview/TreatmentBanner';
+import ChampagneFX from '@/components/preview/fx/ChampagneFX';
 import '@/styles/treatments/preview-light.css';
+import '@/styles/champagne/preview-fx.css';
 
 export default function CosmeticPreviewPage() {
+  const heroId = 'champagne-preview-hero-cosmetic';
+
   return (
     <main className="min-h-screen bg-[var(--champagne-surface)] text-[var(--champagne-ink)]">
       <div className="mx-auto flex max-w-4xl flex-col gap-10 px-6 py-16">
@@ -28,11 +32,16 @@ export default function CosmeticPreviewPage() {
           </ol>
         </nav>
 
-        <TreatmentBanner
-          label="Treatments"
-          subtitle="Scaffold content for the upcoming cosmetic dentistry journey. The production route remains untouched while this preview hosts copy, imagery, and schema experiments in the Champagne palette."
-          title="Cosmetic dentistry preview"
-        />
+        <section className="champagne-hero-shell" id={heroId}>
+          <ChampagneFX targetId={heroId} dust="low" parallax />
+          <div className="champagne-hero-shell__inner" data-parallax-depth="1">
+            <TreatmentBanner
+              label="Treatments"
+              subtitle="Scaffold content for the upcoming cosmetic dentistry journey. The production route remains untouched while this preview hosts copy, imagery, and schema experiments in the Champagne palette."
+              title="Cosmetic dentistry preview"
+            />
+          </div>
+        </section>
 
         <section className="t-section rounded-3xl p-8 shadow-sm">
           <p className="leading-relaxed t-muted">

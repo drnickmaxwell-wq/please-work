@@ -3,7 +3,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import TreatmentBanner from '@/components/preview/TreatmentBanner';
+import ChampagneFX from '@/components/preview/fx/ChampagneFX';
 import '@/styles/treatments/preview-light.css';
+import '@/styles/champagne/preview-fx.css';
 
 import CompositeBondingFaqSection from './_sections/CompositeBondingFaqSection';
 import CompositeBondingHeroSection from './_sections/CompositeBondingHeroSection';
@@ -22,6 +24,8 @@ export const metadata: Metadata = {
 };
 
 export default function CompositeBondingPreviewPage() {
+  const heroId = 'champagne-preview-hero-composite-bonding';
+
   return (
     <main className="min-h-screen bg-[var(--champagne-surface)] text-[var(--champagne-ink)]">
       <div className="border-b border-[color:var(--champagne-keyline-gold)] bg-[color:var(--champagne-glass-bg)]/80 py-3 text-center text-sm text-[var(--champagne-ink)]">
@@ -48,11 +52,16 @@ export default function CompositeBondingPreviewPage() {
           </ol>
         </nav>
 
-        <TreatmentBanner
-          label="Treatments"
-          subtitle="Guided artistry layered over a calm coastal setting. Every detail—gloss, hue, texture—is tuned to your natural tooth anatomy for a luminous, camera-ready finish."
-          title="Composite bonding artistry"
-        />
+        <section className="champagne-hero-shell" id={heroId}>
+          <ChampagneFX targetId={heroId} dust="low" parallax />
+          <div className="champagne-hero-shell__inner" data-parallax-depth="1">
+            <TreatmentBanner
+              label="Treatments"
+              subtitle="Guided artistry layered over a calm coastal setting. Every detail—gloss, hue, texture—is tuned to your natural tooth anatomy for a luminous, camera-ready finish."
+              title="Composite bonding artistry"
+            />
+          </div>
+        </section>
 
         <div className="flex flex-col gap-10">
           <CompositeBondingHeroSection />

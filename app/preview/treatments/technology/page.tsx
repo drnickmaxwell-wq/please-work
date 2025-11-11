@@ -2,7 +2,9 @@
 import Link from 'next/link';
 
 import TreatmentBanner from '@/components/preview/TreatmentBanner';
+import ChampagneFX from '@/components/preview/fx/ChampagneFX';
 import '@/styles/treatments/preview-light.css';
+import '@/styles/champagne/preview-fx.css';
 
 const workflowSteps = [
   {
@@ -59,6 +61,8 @@ const technologyFaq = [
 ];
 
 export default function TechnologyPreviewPage() {
+  const heroId = 'champagne-preview-hero-technology';
+
   return (
     <main className="min-h-screen bg-[var(--champagne-surface)] text-[var(--champagne-ink)]">
       <div className="mx-auto flex max-w-5xl flex-col gap-12 px-6 py-16">
@@ -82,11 +86,16 @@ export default function TechnologyPreviewPage() {
           </ol>
         </nav>
 
-        <TreatmentBanner
-          label="Treatments"
-          subtitle="Guided implants, 3D printing, and laser refinements make every appointment efficient and comfortable while delivering studio-ready results."
-          title="Precision technology, calmer appointments"
-        />
+        <section className="champagne-hero-shell" id={heroId}>
+          <ChampagneFX targetId={heroId} dust="low" parallax />
+          <div className="champagne-hero-shell__inner" data-parallax-depth="1">
+            <TreatmentBanner
+              label="Treatments"
+              subtitle="Guided implants, 3D printing, and laser refinements make every appointment efficient and comfortable while delivering studio-ready results."
+              title="Precision technology, calmer appointments"
+            />
+          </div>
+        </section>
 
         <section className="t-section rounded-3xl p-8 shadow-sm">
           <div className="flex flex-col gap-6">

@@ -2,10 +2,12 @@
 import Link from 'next/link';
 
 import TreatmentBanner from '@/components/preview/TreatmentBanner';
+import ChampagneFX from '@/components/preview/fx/ChampagneFX';
 import ThreeDViewerSlot from '@/components/preview/treatments/ThreeDViewerSlot';
 import ChampagneSectionShell, { champagneShellClasses } from '@/components/sections/ChampagneSectionShell';
 
 import '@/styles/treatments/preview-light.css';
+import '@/styles/champagne/preview-fx.css';
 
 const alignerHighlights = [
   {
@@ -56,6 +58,7 @@ const candidacy = [
 
 export default function SparkAlignersPreviewPage() {
   const { goldGlow, parallax } = champagneShellClasses;
+  const heroId = 'champagne-preview-hero-spark-aligners';
 
   return (
     <ChampagneSectionShell>
@@ -86,13 +89,16 @@ export default function SparkAlignersPreviewPage() {
           </ol>
         </nav>
 
-        <div className={parallax} data-direction="reverse">
-          <TreatmentBanner
-            label="Orthodontics preview"
-            subtitle="Preview the digital-first Spark Aligner journey designed for adults seeking subtle, steady refinement with Champagne layering."
-            title="Spark Aligners in Shoreham-by-Sea"
-          />
-        </div>
+        <section className="champagne-hero-shell" id={heroId}>
+          <ChampagneFX targetId={heroId} dust="low" parallax />
+          <div className={`${parallax} champagne-hero-shell__inner`} data-direction="reverse" data-parallax-depth="1">
+            <TreatmentBanner
+              label="Orthodontics preview"
+              subtitle="Preview the digital-first Spark Aligner journey designed for adults seeking subtle, steady refinement with Champagne layering."
+              title="Spark Aligners in Shoreham-by-Sea"
+            />
+          </div>
+        </section>
 
         <section className="t-section rounded-3xl p-8 shadow-sm">
           <div className="flex flex-col gap-6">
@@ -131,8 +137,6 @@ export default function SparkAlignersPreviewPage() {
             </div>
           </div>
         </section>
-
-        <div aria-hidden className="fx-waves" />
 
         <section className="t-section rounded-3xl p-8 shadow-sm">
           <div className="flex flex-col gap-6">

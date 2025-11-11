@@ -1,3 +1,6 @@
+## 2025-11-15
+- Preview: Champagne Effects Stitch — layered Champagne FX overlays with parallax hooks across treatments preview heroes and schema stubs.
+
 ## 2025-11-14
 - feat(preview): wired treatments detail preview shells (hero, how-to, FAQ, 3D slot) for veneers and implants with schema HUD.
 

@@ -2,7 +2,9 @@
 import Link from 'next/link';
 
 import TreatmentBanner from '@/components/preview/TreatmentBanner';
+import ChampagneFX from '@/components/preview/fx/ChampagneFX';
 import '@/styles/treatments/preview-light.css';
+import '@/styles/champagne/preview-fx.css';
 
 const benefits = [
   {
@@ -53,6 +55,8 @@ const procedures = [
 ];
 
 export default function ThreeDDentistryPreviewPage() {
+  const heroId = 'champagne-preview-hero-3d';
+
   return (
     <main className="min-h-screen bg-[var(--champagne-surface)] text-[var(--champagne-ink)]">
       <div className="mx-auto flex max-w-5xl flex-col gap-12 px-6 py-16">
@@ -76,11 +80,16 @@ export default function ThreeDDentistryPreviewPage() {
           </ol>
         </nav>
 
-        <TreatmentBanner
-          label="Treatments"
-          subtitle="Experience contactless scanning, AI-guided planning, and on-site 3D printing that deliver a smoother, faster appointment. Every stage is choreographed for precision and calm."
-          title="3D digital dentistry"
-        />
+        <section className="champagne-hero-shell" id={heroId}>
+          <ChampagneFX targetId={heroId} dust="low" parallax />
+          <div className="champagne-hero-shell__inner" data-parallax-depth="1">
+            <TreatmentBanner
+              label="Treatments"
+              subtitle="Experience contactless scanning, AI-guided planning, and on-site 3D printing that deliver a smoother, faster appointment. Every stage is choreographed for precision and calm."
+              title="3D digital dentistry"
+            />
+          </div>
+        </section>
 
         <section className="t-section rounded-3xl p-8 shadow-sm">
           <div className="flex flex-col gap-6">

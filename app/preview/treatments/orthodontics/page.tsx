@@ -2,9 +2,13 @@
 import Link from 'next/link';
 
 import TreatmentBanner from '@/components/preview/TreatmentBanner';
+import ChampagneFX from '@/components/preview/fx/ChampagneFX';
 import '@/styles/treatments/preview-light.css';
+import '@/styles/champagne/preview-fx.css';
 
 export default function OrthodonticsPreviewPage() {
+  const heroId = 'champagne-preview-hero-orthodontics';
+
   return (
     <main className="min-h-screen bg-[var(--champagne-surface)] text-[var(--champagne-ink)]">
       <div className="mx-auto flex max-w-4xl flex-col gap-10 px-6 py-16">
@@ -28,11 +32,16 @@ export default function OrthodonticsPreviewPage() {
           </ol>
         </nav>
 
-        <TreatmentBanner
-          label="Treatments"
-          subtitle="Draft copy for aligner pathways, fixed appliance refinements, and retention planning in a Champagne-safe sandbox. Production routes stay untouched until final creative passes are approved."
-          title="Orthodontics preview"
-        />
+        <section className="champagne-hero-shell" id={heroId}>
+          <ChampagneFX targetId={heroId} dust="low" parallax />
+          <div className="champagne-hero-shell__inner" data-parallax-depth="1">
+            <TreatmentBanner
+              label="Treatments"
+              subtitle="Draft copy for aligner pathways, fixed appliance refinements, and retention planning in a Champagne-safe sandbox. Production routes stay untouched until final creative passes are approved."
+              title="Orthodontics preview"
+            />
+          </div>
+        </section>
 
         <section className="t-section rounded-3xl p-8 shadow-sm">
           <p className="leading-relaxed t-muted">

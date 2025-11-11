@@ -8,6 +8,7 @@ import BenefitsCapsules, { type BenefitCapsule } from '@/components/preview/trea
 import FaqAccordion from '@/components/preview/treatments/FaqAccordion';
 import HowToRail from '@/components/preview/treatments/HowToRail';
 import PreviewHero, { type PreviewHeroBadge } from '@/components/preview/treatments/PreviewHero';
+import ChampagneFX from '@/components/preview/fx/ChampagneFX';
 import Viewer3DSlot from '@/components/preview/treatments/Viewer3DSlot';
 import { DevHud, shouldShowHud } from '@/components/preview/Hud';
 import {
@@ -15,6 +16,7 @@ import {
   loadTreatmentPreviewContent,
 } from '@/lib/seo/preview/safe-loader';
 import '@/styles/preview/treatments.css';
+import '@/styles/champagne/preview-fx.css';
 
 export const metadata: Metadata = {
   title: 'Treatment detail preview',
@@ -113,13 +115,21 @@ export default async function TreatmentPreviewPage({ params, searchParams }: Tre
       {showHud ? <DevHud className="tl-hud" stats={hudStats} title="Treatment detail HUD" /> : null}
       <div className="tp-shell">
         <BreadcrumbBar items={previewData.breadcrumbs} route={previewData.route} />
-        <PreviewHero
-          badges={heroBadges}
-          description={previewData.service?.description}
-          eyebrow={`Preview route · ${previewData.route ?? `/treatments/${slug}`}`}
-          missingCopy={!previewData.service?.description}
-          title={previewData.service?.name}
-        />
+        <section
+          className="champagne-hero-shell"
+          id={`champagne-preview-hero-${slug}`}
+        >
+          <ChampagneFX targetId={`champagne-preview-hero-${slug}`} dust="low" parallax />
+          <div className="champagne-hero-shell__inner" data-parallax-depth="1">
+            <PreviewHero
+              badges={heroBadges}
+              description={previewData.service?.description}
+              eyebrow={`Preview route · ${previewData.route ?? `/treatments/${slug}`}`}
+              missingCopy={!previewData.service?.description}
+              title={previewData.service?.name}
+            />
+          </div>
+        </section>
         <div className="tp-grid-duo">
           <BenefitsCapsules benefits={benefits} />
           <Viewer3DSlot posterSrc="/brand/posters/placeholder.webp" />

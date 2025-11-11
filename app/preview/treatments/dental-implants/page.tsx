@@ -3,11 +3,13 @@ import Link from 'next/link';
 
 import InteractiveToothModel from '@/components/3d/interactive-tooth-model';
 import TreatmentBanner from '@/components/preview/TreatmentBanner';
+import ChampagneFX from '@/components/preview/fx/ChampagneFX';
 import ThreeDViewerSlot from '@/components/preview/treatments/ThreeDViewerSlot';
 import ChampagneSectionShell, { champagneShellClasses } from '@/components/sections/ChampagneSectionShell';
 import { TOKENS as NEUTRAL_TOKENS } from '@/styles/tokens/neutrals';
 
 import '@/styles/treatments/preview-light.css';
+import '@/styles/champagne/preview-fx.css';
 
 const benefits = [
   {
@@ -122,6 +124,7 @@ const candidateChecklist = [
 
 export default function DentalImplantsPreviewPage() {
   const { goldGlow, parallax } = champagneShellClasses;
+  const heroId = 'champagne-preview-hero-dental-implants';
 
   return (
     <ChampagneSectionShell>
@@ -146,13 +149,16 @@ export default function DentalImplantsPreviewPage() {
           </ol>
         </nav>
 
-        <div className={parallax} data-direction="reverse">
-          <TreatmentBanner
-            label="Treatments"
-            subtitle="Restore missing teeth with titanium implants that look and feel natural. Our advanced planning, calming environment, and same-day provisional options keep every stage precise and comfortable."
-            title="Dental implants in Shoreham-by-Sea"
-          />
-        </div>
+        <section className="champagne-hero-shell" id={heroId}>
+          <ChampagneFX targetId={heroId} dust="low" parallax />
+          <div className={`${parallax} champagne-hero-shell__inner`} data-direction="reverse" data-parallax-depth="1">
+            <TreatmentBanner
+              label="Treatments"
+              subtitle="Restore missing teeth with titanium implants that look and feel natural. Our advanced planning, calming environment, and same-day provisional options keep every stage precise and comfortable."
+              title="Dental implants in Shoreham-by-Sea"
+            />
+          </div>
+        </section>
 
         <section className="t-section rounded-3xl p-8 shadow-sm">
           <div className="flex flex-col gap-6">
@@ -234,9 +240,6 @@ export default function DentalImplantsPreviewPage() {
             </div>
           </div>
         </section>
-
-        <div aria-hidden className="fx-waves" />
-
         <section className="t-section rounded-3xl p-8 shadow-sm">
           <div className="flex flex-col gap-6">
             <h2 className="text-2xl font-semibold">Are implants right for you?</h2>

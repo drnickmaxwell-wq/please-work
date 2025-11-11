@@ -2,7 +2,9 @@
 import Link from 'next/link';
 
 import TreatmentBanner from '@/components/preview/TreatmentBanner';
+import ChampagneFX from '@/components/preview/fx/ChampagneFX';
 import '@/styles/treatments/preview-light.css';
+import '@/styles/champagne/preview-fx.css';
 
 const benefits = [
   {
@@ -105,6 +107,8 @@ const aftercare = [
 ];
 
 export default function WhiteningPreviewPage() {
+  const heroId = 'champagne-preview-hero-whitening';
+
   return (
     <main className="min-h-screen bg-[var(--champagne-surface)] text-[var(--champagne-ink)]">
       <div className="mx-auto flex max-w-5xl flex-col gap-12 px-6 py-16">
@@ -128,11 +132,16 @@ export default function WhiteningPreviewPage() {
           </ol>
         </nav>
 
-        <TreatmentBanner
-          label="Treatments"
-          subtitle="Achieve a brilliantly white smile with customised whitening journeys. Each plan balances comfort, speed, and longevity so your results stay luminous well beyond the initial appointment."
-          title="Professional teeth whitening in Shoreham-by-Sea"
-        />
+        <section className="champagne-hero-shell" id={heroId}>
+          <ChampagneFX targetId={heroId} dust="low" parallax />
+          <div className="champagne-hero-shell__inner" data-parallax-depth="1">
+            <TreatmentBanner
+              label="Treatments"
+              subtitle="Achieve a brilliantly white smile with customised whitening journeys. Each plan balances comfort, speed, and longevity so your results stay luminous well beyond the initial appointment."
+              title="Professional teeth whitening in Shoreham-by-Sea"
+            />
+          </div>
+        </section>
 
         <section className="t-section rounded-3xl p-8 shadow-sm">
           <div className="flex flex-col gap-6">

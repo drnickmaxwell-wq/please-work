@@ -18,8 +18,10 @@ import Pricing from '@/components/treatments-light/Pricing';
 import Gallery from '@/components/treatments-light/Gallery';
 import Faqs from '@/components/treatments-light/Faqs';
 import UnknownSection from '@/components/treatments-light/UnknownSection';
+import ChampagneFX from '@/components/preview/fx/ChampagneFX';
 import '@/styles/preview/treatments-light.css';
 import '@/styles/preview/schema-injector.css';
+import '@/styles/champagne/preview-fx.css';
 
 import { DevHud, shouldShowHud } from '@/components/preview/Hud';
 
@@ -123,20 +125,24 @@ export default function TreatmentsLightPreviewPage({ searchParams }: TreatmentsL
       ) : null}
 
       <div className="tl-shell">
-        <header className="tl-header">
-          <div className="tl-header__content">
-            <h1>Treatments preview light</h1>
-            <p>
-              Non-production staging surface that renders treatment stacks based on <code>routes-map.json</code>. Each section
-              pulls a tokenised stub so creative, content, and engineering can align before touching production heroes.
-            </p>
-            <div className="tl-header__meta" role="list">
-              <span className="tl-chip" role="listitem">Tokens: smh champagne</span>
-              <span className="tl-chip" role="listitem">Motion: PRM aware</span>
-              <span className="tl-chip" role="listitem">Gradient: var(--smh-gradient)</span>
+        <section className="champagne-hero-shell" id="champagne-preview-hero">
+          <ChampagneFX targetId="champagne-preview-hero" dust="low" parallax />
+          <header className="tl-header">
+            <div className="tl-header__content champagne-hero-shell__inner" data-parallax-depth="1">
+              <h1>Treatments preview light</h1>
+              <p>
+                Non-production staging surface that renders treatment stacks based on <code>routes-map.json</code>. Each
+                section pulls a tokenised stub so creative, content, and engineering can align before touching production
+                heroes.
+              </p>
+              <div className="tl-header__meta" role="list">
+                <span className="tl-chip" role="listitem">Tokens: smh champagne</span>
+                <span className="tl-chip" role="listitem">Motion: PRM aware</span>
+                <span className="tl-chip" role="listitem">Gradient: var(--smh-gradient)</span>
+              </div>
             </div>
-          </div>
-        </header>
+          </header>
+        </section>
 
         {enrichedRoutes.map(({ route, sections, graphNodes, context, schemaStatus }) => (
           <article aria-labelledby={`route-${route}`} className="tl-route" key={route}>

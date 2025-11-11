@@ -3,11 +3,13 @@ import Link from 'next/link';
 
 import InteractiveToothModel from '@/components/3d/interactive-tooth-model';
 import TreatmentBanner from '@/components/preview/TreatmentBanner';
+import ChampagneFX from '@/components/preview/fx/ChampagneFX';
 import ThreeDViewerSlot from '@/components/preview/treatments/ThreeDViewerSlot';
 import ChampagneSectionShell, { champagneShellClasses } from '@/components/sections/ChampagneSectionShell';
 import { TOKENS as NEUTRAL_TOKENS } from '@/styles/tokens/neutrals';
 
 import '@/styles/treatments/preview-light.css';
+import '@/styles/champagne/preview-fx.css';
 
 const benefits = [
   {
@@ -71,6 +73,7 @@ const candidateChecklist = [
 
 export default function VeneersPreviewPage() {
   const { goldGlow, parallax } = champagneShellClasses;
+  const heroId = 'champagne-preview-hero-veneers';
 
   return (
     <ChampagneSectionShell>
@@ -95,13 +98,16 @@ export default function VeneersPreviewPage() {
           </ol>
         </nav>
 
-        <div className={parallax} data-direction="reverse">
-          <TreatmentBanner
-            label="Treatments"
-            subtitle="Redesign your smile with feather-light porcelain crafted for your features. We blend digital design with artisanal finishing so every veneer feels luminous, balanced, and entirely yours."
-            title="Porcelain veneers in Shoreham-by-Sea"
-          />
-        </div>
+        <section className="champagne-hero-shell" id={heroId}>
+          <ChampagneFX targetId={heroId} dust="low" parallax />
+          <div className={`${parallax} champagne-hero-shell__inner`} data-direction="reverse" data-parallax-depth="1">
+            <TreatmentBanner
+              label="Treatments"
+              subtitle="Redesign your smile with feather-light porcelain crafted for your features. We blend digital design with artisanal finishing so every veneer feels luminous, balanced, and entirely yours."
+              title="Porcelain veneers in Shoreham-by-Sea"
+            />
+          </div>
+        </section>
 
         <section className="t-section rounded-3xl p-8 shadow-sm">
           <div className="flex flex-col gap-6">
@@ -173,8 +179,6 @@ export default function VeneersPreviewPage() {
             </div>
           </div>
         </section>
-
-        <div aria-hidden className="fx-waves" />
 
         <section className="t-section rounded-3xl p-8 shadow-sm">
           <div className="flex flex-col gap-6">
