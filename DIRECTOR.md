@@ -34,6 +34,8 @@ styles/tokens/smh-champagne-tokens.css
 public/brand/manifest.json
 public/brand/champagne_machine_manifest_full.json
 public/brand/manus_import_unified_manifest_20251104.json
+scripts/hero-freeze.hashes.json
+public/brand/*freeze*.json
 public/assets/champagne/manifest.json
 scripts/hero-freeze.hashes.json  ← reference checksums used by `pnpm run guard:hero`
 
