@@ -1,10 +1,9 @@
 import { Fragment } from 'react';
-import { writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { join } from 'path';
+import { writeFileSync } from 'fs';
 
-import routesMap from '@/reports/schema/routes-map.json';
-import schemaPack from '@/reports/schema/Treatments_Schema_Pack_v2.json';
-import breadcrumbsPack from '@/reports/schema/Treatments_Breadcrumbs.json';
+export const dynamic = 'force-static';
+export const revalidate = 0;
 
 const DEFAULT_CONTEXT = 'https://schema.org';
 
@@ -42,12 +41,38 @@ export type PreviewSchemaStatus = {
 
 type StatusByRoute = Map<string, PreviewSchemaStatus>;
 
-const treatmentsRoutes = Object.keys(routesMap as Record<string, unknown>)
+const routesMapModule = await import('@/reports/schema/routes-map.json')
+  .then((mod) => mod.default)
+  .catch(() => ({}));
+
+const schemaPackModule = await import('@/reports/schema/Treatments_Schema_Pack_v2.json')
+  .then((mod) => mod.default)
+  .catch(() => ({}));
+
+const breadcrumbsPackModule = await import('@/reports/schema/Treatments_Breadcrumbs.json')
+  .then((mod) => mod.default)
+  .catch(() => ({}));
+
+const routesMap = isJsonObject(routesMapModule) ? (routesMapModule as Record<string, unknown>) : {};
+
+const schemaPack = isJsonObject(schemaPackModule) ? (schemaPackModule as SchemaPack) : ({} as SchemaPack);
+const breadcrumbPack = isJsonObject(breadcrumbsPackModule)
+  ? (breadcrumbsPackModule as BreadcrumbPack)
+  : ({} as BreadcrumbPack);
+
+const treatmentsRoutes = Object.keys(routesMap)
   .filter((key) => key.startsWith('/treatments'))
   .sort();
 
-const schemaRoutes = ((schemaPack as SchemaPack).routes ?? {}) as Record<string, SchemaRouteEntry>;
-const breadcrumbRoutes = ((breadcrumbsPack as BreadcrumbPack).breadcrumbs ?? {}) as Record<string, JsonLd>;
+const schemaRoutesCandidate = schemaPack?.routes;
+const schemaRoutes = isJsonObject(schemaRoutesCandidate)
+  ? (schemaRoutesCandidate as Record<string, SchemaRouteEntry>)
+  : {};
+
+const breadcrumbRoutesCandidate = breadcrumbPack?.breadcrumbs;
+const breadcrumbRoutes = isJsonObject(breadcrumbRoutesCandidate)
+  ? (breadcrumbRoutesCandidate as Record<string, JsonLd>)
+  : {};
 
 const statusByRoute: StatusByRoute = new Map();
 
@@ -209,10 +234,16 @@ export function logPreviewSchemaIntegration(): void {
     return;
   }
 
-  const integrationPath = join(process.cwd(), 'reports/schema/Integration_Status_Treatments.json');
   const payload = buildIntegrationStatusPayload(getAllPreviewSchemaStatuses());
 
-  writeFileSync(integrationPath, `${JSON.stringify(payload, null, 2)}\n`);
+  if (typeof process !== 'undefined' && process.env.NODE_ENV === 'development' && typeof window === 'undefined') {
+    const integrationPath = join(process.cwd(), 'reports/schema/Integration_Status_Treatments.json');
+    try {
+      writeFileSync(integrationPath, JSON.stringify(payload, null, 2));
+    } catch (err) {
+      console.warn('Preview schema write skipped:', err);
+    }
+  }
 }
 
 export type SchemaInjectorProps = {

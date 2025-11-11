@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 import routesMap from '@/reports/schema/routes-map.json';
-import { SchemaInjector, getAllPreviewSchemaStatuses, logPreviewSchemaIntegration } from '@/lib/seo/preview/SchemaInjector';
+import { SchemaInjector, getAllPreviewSchemaStatuses } from '@/lib/seo/preview/SchemaInjector';
 import { DevHud, shouldShowHud } from '@/components/preview/Hud';
 
 import '@/styles/preview/schema-injector.css';
@@ -35,10 +35,24 @@ const SECTION_ALIAS: Record<CanonicalSection, string[]> = {
 };
 
 const routes = routesMap as RouteMap;
-const schemaStatuses = getAllPreviewSchemaStatuses();
+
+let schemaStatuses = [] as ReturnType<typeof getAllPreviewSchemaStatuses>;
+try {
+  schemaStatuses = getAllPreviewSchemaStatuses();
+} catch (err) {
+  console.error('Schema status load failed', err);
+}
+
 const schemaStatusMap = new Map(schemaStatuses.map((status) => [status.route, status]));
 
-logPreviewSchemaIntegration();
+function renderSchemaInjector(route: string) {
+  try {
+    return <SchemaInjector route={route} />;
+  } catch (err) {
+    console.error('SchemaInjector error', err);
+    return <div style={{ opacity: 0.5 }}>Schema data unavailable for {route}</div>;
+  }
+}
 
 export const metadata: Metadata = {
   title: 'Treatments Schema Stubs Preview',
@@ -135,7 +149,7 @@ export default function TreatmentsStubsPreviewPage({ searchParams }: TreatmentsS
 
             return (
               <article className="tl-card" key={path} role="listitem">
-                <SchemaInjector route={path} />
+                {renderSchemaInjector(path)}
                 <header className="tl-card__header">
                   <h2 className="tl-card__title">{path}</h2>
                   <p className="tl-card__summary">

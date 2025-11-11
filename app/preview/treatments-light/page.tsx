@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import React from 'react';
 
 import routesMap from '@/reports/schema/routes-map.json';
-import { SchemaInjector, getAllPreviewSchemaStatuses, logPreviewSchemaIntegration } from '@/lib/seo/preview/SchemaInjector';
+import { SchemaInjector, getAllPreviewSchemaStatuses } from '@/lib/seo/preview/SchemaInjector';
 import Hero from '@/components/treatments-light/Hero';
 import ValueGrid from '@/components/treatments-light/ValueGrid';
 import FeaturedTreatments from '@/components/treatments-light/FeaturedTreatments';
@@ -45,10 +45,23 @@ const treatmentsRoutes = Object.entries(routesMap as Record<string, string[]>).f
   path.startsWith('/treatments'),
 );
 
-const schemaStatuses = getAllPreviewSchemaStatuses();
+let schemaStatuses = [] as ReturnType<typeof getAllPreviewSchemaStatuses>;
+try {
+  schemaStatuses = getAllPreviewSchemaStatuses();
+} catch (err) {
+  console.error('Schema status load failed', err);
+}
+
 const schemaStatusMap = new Map(schemaStatuses.map((status) => [status.route, status]));
 
-logPreviewSchemaIntegration();
+function renderSchemaInjector(route: string) {
+  try {
+    return <SchemaInjector route={route} />;
+  } catch (err) {
+    console.error('SchemaInjector error', err);
+    return <div style={{ opacity: 0.5 }}>Schema data unavailable for {route}</div>;
+  }
+}
 
 export const metadata: Metadata = {
   title: 'Treatments Light Preview',
@@ -127,7 +140,7 @@ export default function TreatmentsLightPreviewPage({ searchParams }: TreatmentsL
 
         {enrichedRoutes.map(({ route, sections, graphNodes, context, schemaStatus }) => (
           <article aria-labelledby={`route-${route}`} className="tl-route" key={route}>
-            <SchemaInjector route={route} />
+            {renderSchemaInjector(route)}
             <div className="tl-route__intro">
               <h2 className="tl-route__title" id={`route-${route}`}>
                 {route}
