@@ -1,0 +1,221 @@
+{
+  "generated": "2025-11-11",
+  "routes": {
+    "/treatments": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://smhdental.co.uk/treatments#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Dental Treatments",
+              "item": "https://smhdental.co.uk/treatments"
+            }
+          ]
+        }
+      ]
+    },
+    "/treatments/veneers": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Service",
+          "@id": "https://smhdental.co.uk/treatments/veneers#service",
+          "name": "Dental Veneers",
+          "description": "Porcelain and composite veneers to improve shape, colour and symmetry with minimal preparation.",
+          "areaServed": {
+            "@type": "AdministrativeArea",
+            "name": "Shoreham-by-Sea, West Sussex"
+          },
+          "provider": {
+            "@type": "LocalBusiness",
+            "name": "St Mary’s House Dental"
+          },
+          "offers": {
+            "@type": "Offer",
+            "url": "https://smhdental.co.uk/treatments/veneers"
+          }
+        },
+        {
+          "@type": "HowTo",
+          "@id": "https://smhdental.co.uk/treatments/veneers#howto",
+          "name": "How veneers treatment works",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "name": "Consultation",
+              "text": "Assessment, photos and digital smile goals."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "3D Planning",
+              "text": "Shade selection and mock‑up with precise prep guide."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Treatment Day",
+              "text": "Teeth prepared as required; veneers crafted and fitted."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Aftercare Review",
+              "text": "Bite check and care advice; maintenance plan set."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://smhdental.co.uk/treatments/veneers#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How long do veneers last?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "With good care, porcelain veneers typically last 10–15 years; composite veneers often 5–7 years. We’ll advise the best option for your bite and goals."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is the veneers procedure painful?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Treatment is performed with local anaesthetic for comfort. Minor sensitivity can occur for a few days; we provide detailed aftercare to minimise this."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What do veneers cost?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Pricing depends on material and the number of teeth. Transparent fees and monthly finance examples are listed on this page, with a free e‑consult to discuss options."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "/treatments/implants": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Service",
+          "@id": "https://smhdental.co.uk/treatments/implants#service",
+          "name": "Dental Implants",
+          "description": "3D‑planned dental implants to replace missing teeth with stable, natural‑looking results.",
+          "areaServed": {
+            "@type": "AdministrativeArea",
+            "name": "Shoreham-by-Sea, West Sussex"
+          },
+          "provider": {
+            "@type": "LocalBusiness",
+            "name": "St Mary’s House Dental"
+          },
+          "offers": {
+            "@type": "Offer",
+            "url": "https://smhdental.co.uk/treatments/implants"
+          }
+        },
+        {
+          "@type": "HowTo",
+          "@id": "https://smhdental.co.uk/treatments/implants#howto",
+          "name": "How dental implant treatment works",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "name": "Consultation",
+              "text": "Clinical exam, CBCT scan and suitability check."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "3D Planning",
+              "text": "Guided placement planned for precision and safety."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Treatment Day",
+              "text": "Implant placed; temporary solution as needed."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Aftercare Review",
+              "text": "Healing checks; final crown fitted and maintenance advice."
+            }
+          ],
+          "tool": [
+            {
+              "@type": "HowToTool",
+              "name": "CBCT scanner"
+            },
+            {
+              "@type": "HowToTool",
+              "name": "Surgical guide"
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://smhdental.co.uk/treatments/implants#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How long does implant treatment take?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Most single‑tooth cases take 3–6 months from placement to final crown, depending on healing. Same‑day options may be possible after assessment."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is implant surgery painful?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Local anaesthetic keeps you comfortable. Soreness and swelling are common for a few days and are managed with standard pain relief and aftercare."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What do dental implants cost?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Costs vary by case complexity and restoration. We publish transparent fees and offer monthly finance through our partner."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "/treatments/orthodontics/spark-aligners": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://smhdental.co.uk/treatments/orthodontics/spark-aligners#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Treatments",
+              "item": "https://smhdental.co.uk/treatments"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Orthodontics",
+              "item": "https://smhdental.co.uk/treatments/orthodontics"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Spark Clear Aligners",
+              "item": "https://smhdental.co.uk/treatments/orthodontics/spark-aligners"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
