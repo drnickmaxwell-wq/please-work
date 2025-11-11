@@ -1,0 +1,97 @@
+{
+  "generated": "2025-11-11",
+  "routes": {
+    "/treatments": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://smhdental.co.uk/treatments#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Dental Treatments",
+              "item": "https://smhdental.co.uk/treatments"
+            }
+          ]
+        }
+      ]
+    },
+    "/treatments/veneers": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://smhdental.co.uk/treatments/veneers#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Treatments",
+              "item": "https://smhdental.co.uk/treatments"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Veneers",
+              "item": "https://smhdental.co.uk/treatments/veneers"
+            }
+          ]
+        }
+      ]
+    },
+    "/treatments/implants": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://smhdental.co.uk/treatments/implants#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Treatments",
+              "item": "https://smhdental.co.uk/treatments"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Dental Implants",
+              "item": "https://smhdental.co.uk/treatments/implants"
+            }
+          ]
+        }
+      ]
+    },
+    "/treatments/orthodontics/spark-aligners": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://smhdental.co.uk/treatments/orthodontics/spark-aligners#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Treatments",
+              "item": "https://smhdental.co.uk/treatments"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Orthodontics",
+              "item": "https://smhdental.co.uk/treatments/orthodontics"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Spark Clear Aligners",
+              "item": "https://smhdental.co.uk/treatments/orthodontics/spark-aligners"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
