@@ -709,7 +709,7 @@ export default function PreviewHeroGildedClient() {
             textAlign: "right",
             pointerEvents: "none",
             color: "var(--champagne-hero-text, var(--smh-white))",
-            background: "rgba(10, 8, 7, 0.55)",
+            background: "color-mix(in srgb, var(--ink) 92%, transparent 8%)",
             padding: "0.5rem 0.75rem",
             borderRadius: "0.5rem",
             backdropFilter: "blur(6px)",
