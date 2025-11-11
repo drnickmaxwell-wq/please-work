@@ -1,0 +1,405 @@
+{
+  "updated": "2025-11-11T14:19:33.546Z",
+  "routes": [
+    {
+      "route": "/treatments",
+      "schemaTypes": [
+        "BreadcrumbList",
+        "Service",
+        "FAQPage"
+      ],
+      "breadcrumbStatus": "pack",
+      "missing": {
+        "howTo": true,
+        "faq": false
+      }
+    },
+    {
+      "route": "/treatments/3d-dentistry",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/3d-dentistry/3d-implants-overview",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/3d-dentistry/3d-printed-veneers",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/3d-dentistry/3d-restorative-dentistry",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/3d-dentistry/3d-same-day-dentures",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/composite-bonding",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/cosmetic",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/cosmetic/composite-bonding",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/cosmetic/teeth-whitening",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/cosmetic/veneers",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/dental-implants",
+      "schemaTypes": [
+        "BreadcrumbList",
+        "Service",
+        "HowTo",
+        "FAQPage"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": false,
+        "faq": false
+      }
+    },
+    {
+      "route": "/treatments/general",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/general/check-ups",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/general/childrens-dentistry",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/general/crowns-and-bridges",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/general/emergency-dentistry",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/general/extractions",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/general/root-canal-treatment",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/general/sedation",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/general/tooth-coloured-fillings",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/implants",
+      "schemaTypes": [
+        "BreadcrumbList",
+        "Service",
+        "HowTo",
+        "FAQPage"
+      ],
+      "breadcrumbStatus": "pack",
+      "missing": {
+        "howTo": false,
+        "faq": false
+      }
+    },
+    {
+      "route": "/treatments/implants/3d-printed-restorations",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/implants/3d-surgically-guided-implants",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/implants/all-on-4-6-same-day",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/implants/same-day-implants",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/orthodontics",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/orthodontics/fixed-braces",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/orthodontics/spark-aligners",
+      "schemaTypes": [
+        "BreadcrumbList",
+        "Service",
+        "HowTo",
+        "FAQPage"
+      ],
+      "breadcrumbStatus": "pack",
+      "missing": {
+        "howTo": false,
+        "faq": false
+      }
+    },
+    {
+      "route": "/treatments/technology",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/technology/3d-scanning-and-printing",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/technology/soft-tissue-laser",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/technology/the-wand-painless-numbing",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    },
+    {
+      "route": "/treatments/veneers",
+      "schemaTypes": [
+        "BreadcrumbList",
+        "Service",
+        "HowTo",
+        "FAQPage"
+      ],
+      "breadcrumbStatus": "pack",
+      "missing": {
+        "howTo": false,
+        "faq": false
+      }
+    },
+    {
+      "route": "/treatments/whitening",
+      "schemaTypes": [
+        "BreadcrumbList"
+      ],
+      "breadcrumbStatus": "generated",
+      "missing": {
+        "howTo": true,
+        "faq": true
+      }
+    }
+  ],
+  "notes": "Schema coverage derived from Treatments_Schema_Pack data with fallback breadcrumbs generated for missing entries."
+}

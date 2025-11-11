@@ -1,5 +1,6 @@
 import BrandHeroGradient from "@/components/brand/BrandHeroGradient";
 import FaqAccordion from "@/components/faq/FaqAccordion";
+import { SchemaInjector } from '@/lib/schema-injector';
 
 export const metadata = { title: "Composite Bonding" };
 
@@ -70,6 +71,8 @@ export default function Page() {
       ) : (
         hero
       )}
+
+      <SchemaInjector route="/treatments/cosmetic/composite-bonding" />
 
       <section id="faq" className="mx-auto mt-16 max-w-3xl space-y-8 md:mt-24">
         <div className="space-y-4 text-center md:text-left">

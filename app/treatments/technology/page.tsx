@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 
 import BrandHeroGradient from '@/components/brand/BrandHeroGradient';
 import FaqAccordion from '@/components/faq/FaqAccordion';
+import { SchemaInjector } from '@/lib/schema-injector';
 
 import styles from './technology.module.css';
 
@@ -110,6 +111,8 @@ export default function TechnologyPage() {
           </div>
         </section>
       </BrandHeroGradient>
+
+      <SchemaInjector route="/treatments/technology" />
 
       <main className={styles.main}>
         <div className={styles.wrapper}>

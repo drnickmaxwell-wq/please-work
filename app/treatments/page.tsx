@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion, type Variants } from 'framer-motion';
 import Link from 'next/link';
+import { SchemaInjector } from '@/lib/schema-injector';
 import {
   Sparkles,
   Heart,
@@ -128,6 +129,7 @@ export default function TreatmentsPage() {
           </motion.div>
         </div>
       </section>
+      <SchemaInjector route="/treatments" />
 
       {/* Treatments Grid */}
       <section className="py-20 px-6">

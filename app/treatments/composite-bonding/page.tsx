@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import BrandHeroGradient from '@/components/brand/BrandHeroGradient';
 import FaqAccordion from '@/components/faq/FaqAccordion';
 import CompositeBonding from '@/components/sections/treatments/CompositeBonding';
+import { SchemaInjector } from '@/lib/schema-injector';
 import styles from './composite-bonding.module.css';
 
 const siteUrl =
@@ -98,6 +99,8 @@ export default function CompositeBondingPage() {
       ) : (
         hero
       )}
+
+      <SchemaInjector route="/treatments/composite-bonding" />
 
       <div className={styles.sectionGrid}>
         <CompositeBonding />
