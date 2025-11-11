@@ -1,0 +1,40 @@
+@import '../tokens/smh-champagne-tokens.css';
+
+.tl-route__badges,
+.tl-card__flags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.tl-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: 1px solid color-mix(in oklab, var(--ink) 22%, transparent);
+  background: color-mix(in oklab, var(--smh-white) 88%, transparent);
+  color: color-mix(in oklab, var(--ink) 80%, transparent);
+}
+
+.tl-badge--alert {
+  border-color: color-mix(in oklab, var(--brand-magenta) 55%, var(--ink) 35%);
+  background: color-mix(in oklab, var(--brand-magenta) 18%, var(--smh-white) 82%);
+  color: color-mix(in oklab, var(--ink) 85%, transparent);
+}
+
+.tl-badge--muted {
+  border-style: dashed;
+  border-color: color-mix(in oklab, var(--ink) 35%, transparent);
+  background: color-mix(in oklab, var(--smh-white) 92%, transparent);
+  color: color-mix(in oklab, var(--ink) 70%, transparent);
+}
+
+.tl-badge strong {
+  font-weight: 600;
+}

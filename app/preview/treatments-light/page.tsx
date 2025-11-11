@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 
 import React from 'react';
 
-import routesMap from '@/reports/routes-map.json';
-import schemaPack from '@/reports/seo/Treatments_Schema_Pack.json';
+import routesMap from '@/reports/schema/routes-map.json';
+import { SchemaInjector, getAllPreviewSchemaStatuses, logPreviewSchemaIntegration } from '@/lib/seo/preview/SchemaInjector';
 import Hero from '@/components/treatments-light/Hero';
 import ValueGrid from '@/components/treatments-light/ValueGrid';
 import FeaturedTreatments from '@/components/treatments-light/FeaturedTreatments';
@@ -19,8 +19,9 @@ import Gallery from '@/components/treatments-light/Gallery';
 import Faqs from '@/components/treatments-light/Faqs';
 import UnknownSection from '@/components/treatments-light/UnknownSection';
 import '@/styles/preview/treatments-light.css';
+import '@/styles/preview/schema-injector.css';
 
-import { DevHud, shouldShowHud } from '../_utils/dev-hud';
+import { DevHud, shouldShowHud } from '@/components/preview/Hud';
 
 const SECTION_COMPONENTS = {
   hero: Hero,
@@ -40,22 +41,14 @@ const SECTION_COMPONENTS = {
 
 type SectionKey = keyof typeof SECTION_COMPONENTS;
 
-type SchemaRoute = {
-  ['@context']?: string;
-  ['@graph']?: unknown[];
-  ['@type']?: string;
-};
-
-type SchemaPack = {
-  generated?: string;
-  routes?: Record<string, SchemaRoute>;
-};
-
-const schemaRoutes = (schemaPack as SchemaPack).routes ?? {};
-
 const treatmentsRoutes = Object.entries(routesMap as Record<string, string[]>).filter(([path]) =>
   path.startsWith('/treatments'),
 );
+
+const schemaStatuses = getAllPreviewSchemaStatuses();
+const schemaStatusMap = new Map(schemaStatuses.map((status) => [status.route, status]));
+
+logPreviewSchemaIntegration();
 
 export const metadata: Metadata = {
   title: 'Treatments Light Preview',
@@ -70,19 +63,24 @@ export default function TreatmentsLightPreviewPage({ searchParams }: TreatmentsL
   const knownSectionKeys = new Set<SectionKey>(Object.keys(SECTION_COMPONENTS) as SectionKey[]);
 
   const enrichedRoutes = treatmentsRoutes.map(([route, sections]) => {
-    const schemaInfo = schemaRoutes[route] ?? {};
-    const graphNodes = Array.isArray(schemaInfo['@graph']) ? schemaInfo['@graph'].length : 0;
-    const context = schemaInfo['@context'];
+    const schemaStatus = schemaStatusMap.get(route);
+    const graphNodes = schemaStatus
+      ? schemaStatus.schemas.reduce((total, schema) => {
+          const nodes = Array.isArray(schema['@graph']) ? schema['@graph'].filter(Boolean).length : 1;
+          return total + nodes;
+        }, 0)
+      : 0;
+    const context = schemaStatus?.context;
 
     const knownSections = sections.filter((sectionKey) => knownSectionKeys.has(sectionKey as SectionKey));
 
     return {
       route,
       sections,
-      schemaInfo,
       graphNodes,
       context,
       knownSections,
+      schemaStatus,
     };
   });
 
@@ -102,6 +100,10 @@ export default function TreatmentsLightPreviewPage({ searchParams }: TreatmentsL
             {
               label: 'Schema contexts set',
               value: enrichedRoutes.filter((entry) => Boolean(entry.context)).length,
+            },
+            {
+              label: 'Routes with schema pack',
+              value: enrichedRoutes.filter((entry) => entry.schemaStatus?.hasPrimarySchemas).length,
             },
           ]}
         />
@@ -123,8 +125,9 @@ export default function TreatmentsLightPreviewPage({ searchParams }: TreatmentsL
           </div>
         </header>
 
-        {enrichedRoutes.map(({ route, sections, graphNodes, context }) => (
+        {enrichedRoutes.map(({ route, sections, graphNodes, context, schemaStatus }) => (
           <article aria-labelledby={`route-${route}`} className="tl-route" key={route}>
+            <SchemaInjector route={route} />
             <div className="tl-route__intro">
               <h2 className="tl-route__title" id={`route-${route}`}>
                 {route}
@@ -135,6 +138,22 @@ export default function TreatmentsLightPreviewPage({ searchParams }: TreatmentsL
                 {context ? <code>{context}</code> : <span className="tl-fallback">pending context</span>}{' '}
                 with {graphNodes} graph node{graphNodes === 1 ? '' : 's'} tracked for structured data QA.
               </p>
+              <div className="tl-route__badges" role="status">
+                {!schemaStatus?.hasPrimarySchemas ? (
+                  <span className="tl-badge tl-badge--alert">Missing schema pack</span>
+                ) : null}
+                {schemaStatus?.missing.faq || schemaStatus?.missing.howTo ? (
+                  <span className="tl-badge tl-badge--muted">
+                    Missing
+                    {schemaStatus.missing.howTo ? ' HowTo' : ''}
+                    {schemaStatus.missing.howTo && schemaStatus.missing.faq ? ' and' : ''}
+                    {schemaStatus.missing.faq ? ' FAQPage' : ''} schema
+                  </span>
+                ) : null}
+                {schemaStatus?.breadcrumbStatus === 'missing' ? (
+                  <span className="tl-badge tl-badge--muted">Missing breadcrumb</span>
+                ) : null}
+              </div>
             </div>
             <div className="tl-route__stack">
               {sections.map((sectionKey) => {
