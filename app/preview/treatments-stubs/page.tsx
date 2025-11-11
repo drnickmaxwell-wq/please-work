@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 
 import routesMap from '@/reports/schema/routes-map.json';
+import { SchemaInjector, getAllPreviewSchemaStatuses } from '@/lib/seo/preview/SchemaInjector';
+import { DevHud, shouldShowHud } from '@/components/preview/Hud';
 
-import { DevHud, shouldShowHud } from '../_utils/dev-hud';
-
+import '@/styles/preview/schema-injector.css';
 import './page.css';
 
 type RouteMap = Record<string, string[]>;
@@ -34,6 +35,24 @@ const SECTION_ALIAS: Record<CanonicalSection, string[]> = {
 };
 
 const routes = routesMap as RouteMap;
+
+let schemaStatuses = [] as ReturnType<typeof getAllPreviewSchemaStatuses>;
+try {
+  schemaStatuses = getAllPreviewSchemaStatuses();
+} catch (err) {
+  console.error('Schema status load failed', err);
+}
+
+const schemaStatusMap = new Map(schemaStatuses.map((status) => [status.route, status]));
+
+function renderSchemaInjector(route: string) {
+  try {
+    return <SchemaInjector route={route} />;
+  } catch (err) {
+    console.error('SchemaInjector error', err);
+    return <div style={{ opacity: 0.5 }}>Schema data unavailable for {route}</div>;
+  }
+}
 
 export const metadata: Metadata = {
   title: 'Treatments Schema Stubs Preview',
@@ -73,6 +92,7 @@ export default function TreatmentsStubsPreviewPage({ searchParams }: TreatmentsS
       path,
       sections,
       matches: resolveSections(sections),
+      schemaStatus: schemaStatusMap.get(path),
     }));
 
   const showHud = shouldShowHud(searchParams?.hud);
@@ -88,6 +108,10 @@ export default function TreatmentsStubsPreviewPage({ searchParams }: TreatmentsS
             {
               label: 'Routes with full coverage',
               value: treatmentEntries.filter((entry) => entry.matches.length === SECTION_ORDER.length).length,
+            },
+            {
+              label: 'Routes with schema pack',
+              value: treatmentEntries.filter((entry) => entry.schemaStatus?.hasPrimarySchemas).length,
             },
           ]}
         />
@@ -118,13 +142,14 @@ export default function TreatmentsStubsPreviewPage({ searchParams }: TreatmentsS
         </header>
 
         <div className="tl-grid" role="list">
-          {treatmentEntries.map(({ path, matches, sections }) => {
+          {treatmentEntries.map(({ path, matches, sections, schemaStatus }) => {
             const remaining = SECTION_ORDER.filter(
               (section) => !matches.some((match) => match.canonical === section),
             );
 
             return (
               <article className="tl-card" key={path} role="listitem">
+                {renderSchemaInjector(path)}
                 <header className="tl-card__header">
                   <h2 className="tl-card__title">{path}</h2>
                   <p className="tl-card__summary">
@@ -135,6 +160,22 @@ export default function TreatmentsStubsPreviewPage({ searchParams }: TreatmentsS
                   <p className="tl-card__schema" aria-label="Schema keys tracked">
                     {sections.join(' • ')}
                   </p>
+                  <div className="tl-card__flags" role="status">
+                    {!schemaStatus?.hasPrimarySchemas ? (
+                      <span className="tl-badge tl-badge--alert">Missing schema pack</span>
+                    ) : null}
+                    {schemaStatus?.missing.howTo || schemaStatus?.missing.faq ? (
+                      <span className="tl-badge tl-badge--muted">
+                        Missing
+                        {schemaStatus.missing.howTo ? ' HowTo' : ''}
+                        {schemaStatus.missing.howTo && schemaStatus.missing.faq ? ' and' : ''}
+                        {schemaStatus.missing.faq ? ' FAQPage' : ''} schema
+                      </span>
+                    ) : null}
+                    {schemaStatus?.breadcrumbStatus === 'missing' ? (
+                      <span className="tl-badge tl-badge--muted">Missing breadcrumb</span>
+                    ) : null}
+                  </div>
                 </header>
                 <div className="tl-stub-grid">
                   {matches.map((match) => (
