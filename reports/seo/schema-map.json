@@ -1,0 +1,206 @@
+{
+  "/": {
+    "schemas": [
+      {
+        "@type": "Organization",
+        "properties": ["name", "url", "logo", "sameAs", "foundingDate", "award"],
+        "whereToInject": "hero",
+        "entityTargets": ["St Mary’s House Dental", "AI Concierge"],
+        "reviewSignals": ["AggregateRating", "reviewCount"],
+        "tracking": ["cta_book_click", "quiz_start"]
+      },
+      {
+        "@type": "LocalBusiness",
+        "properties": ["@id", "name", "address", "geo", "openingHoursSpecification", "telephone"],
+        "whereToInject": "local-proof",
+        "entityTargets": ["Shoreham-by-Sea dental clinic"],
+        "reviewSignals": ["ratingValue", "reviewCount"],
+        "tracking": ["map_interact", "call_click"]
+      },
+      {
+        "@type": "WebSite",
+        "properties": ["url", "potentialAction"],
+        "whereToInject": "footer",
+        "entityTargets": ["SearchAction"],
+        "reviewSignals": [],
+        "tracking": ["site_search"]
+      },
+      {
+        "@type": "FAQPage",
+        "properties": ["mainEntity"],
+        "whereToInject": "faq",
+        "entityTargets": ["Treatment affordability", "Booking options"],
+        "reviewSignals": [],
+        "tracking": ["faq_expand"]
+      }
+    ]
+  },
+  "/treatments/[slug]": {
+    "schemas": [
+      {
+        "@type": "Service",
+        "properties": ["name", "description", "areaServed", "provider", "offers"],
+        "whereToInject": "hero",
+        "entityTargets": ["veneers", "implants", "Invisalign", "composite bonding"],
+        "reviewSignals": ["ratingValue", "reviewCount"],
+        "tracking": ["cta_book", "faq_expand"]
+      },
+      {
+        "@type": "HowTo",
+        "properties": ["name", "step", "supply", "tool"],
+        "whereToInject": "how-it-works",
+        "entityTargets": ["Smile makeover steps", "Implant process"],
+        "reviewSignals": [],
+        "tracking": ["step_view"]
+      },
+      {
+        "@type": "Person",
+        "properties": ["name", "jobTitle", "identifier", "knowsAbout"],
+        "whereToInject": "experts",
+        "entityTargets": ["clinicians", "GDC numbers"],
+        "reviewSignals": ["author", "reviewedBy"],
+        "tracking": ["expert_profile_view"]
+      },
+      {
+        "@type": "FAQPage",
+        "properties": ["mainEntity"],
+        "whereToInject": "faqs",
+        "entityTargets": ["Treatment duration", "Pain expectations", "Cost"],
+        "reviewSignals": [],
+        "tracking": ["faq_expand"]
+      }
+    ]
+  },
+  "/technology": {
+    "schemas": [
+      {
+        "@type": "Product",
+        "properties": ["name", "brand", "manufacturer", "image"],
+        "whereToInject": "tech-grid",
+        "entityTargets": ["CBCT scanner", "3D printer", "Intraoral scanner"],
+        "reviewSignals": [],
+        "tracking": ["product_card_view"]
+      },
+      {
+        "@type": "TechArticle",
+        "properties": ["headline", "author", "datePublished"],
+        "whereToInject": "cases",
+        "entityTargets": ["AI planning", "Digital dentistry"],
+        "reviewSignals": [],
+        "tracking": ["scroll_depth"]
+      }
+    ]
+  },
+  "/about": {
+    "schemas": [
+      {
+        "@type": "Organization",
+        "properties": ["name", "slogan", "foundingDate", "memberOf"],
+        "whereToInject": "hero",
+        "entityTargets": ["St Mary’s House Dental mission"],
+        "reviewSignals": ["award", "affiliation"],
+        "tracking": ["scroll_to_team"]
+      },
+      {
+        "@type": "Person",
+        "properties": ["name", "jobTitle", "identifier", "affiliation", "knowsAbout"],
+        "whereToInject": "team",
+        "entityTargets": ["Dr Nick Maxwell", "Dr Sandra Forde"],
+        "reviewSignals": ["author", "reviewedBy"],
+        "tracking": ["bio_open"]
+      }
+    ]
+  },
+  "/patient-stories": {
+    "schemas": [
+      {
+        "@type": "CollectionPage",
+        "properties": ["name", "about", "hasPart"],
+        "whereToInject": "grid",
+        "entityTargets": ["cosmetic dentistry cases", "orthodontics"],
+        "reviewSignals": ["AggregateRating"],
+        "tracking": ["filter_apply", "story_click"]
+      },
+      {
+        "@type": "Review",
+        "properties": ["author", "reviewBody", "itemReviewed", "datePublished"],
+        "whereToInject": "grid",
+        "entityTargets": ["veneers case", "implant patient story"],
+        "reviewSignals": ["E-E-A-T"],
+        "tracking": ["story_read"]
+      }
+    ]
+  },
+  "/ai-smile-quiz": {
+    "schemas": [
+      {
+        "@type": "HowTo",
+        "properties": ["name", "step", "supply", "tool"],
+        "whereToInject": "steps",
+        "entityTargets": ["AI smile quiz process"],
+        "reviewSignals": [],
+        "tracking": ["quiz_step_change"]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "properties": ["name", "applicationCategory", "operatingSystem", "privacyPolicy"],
+        "whereToInject": "results",
+        "entityTargets": ["AI Smile Quiz"],
+        "reviewSignals": [],
+        "tracking": ["result_view", "treatment_click"]
+      }
+    ]
+  },
+  "/portal": {
+    "schemas": [
+      {
+        "@type": "SoftwareApplication",
+        "properties": ["name", "applicationCategory", "operatingSystem", "url", "offers"],
+        "whereToInject": "overview",
+        "entityTargets": ["Patient Portal App"],
+        "reviewSignals": [],
+        "tracking": ["login_click"]
+      }
+    ]
+  },
+  "/contact": {
+    "schemas": [
+      {
+        "@type": "LocalBusiness",
+        "properties": ["name", "address", "geo", "openingHoursSpecification"],
+        "whereToInject": "map-hours",
+        "entityTargets": ["St Mary’s House Dental"],
+        "reviewSignals": ["AggregateRating"],
+        "tracking": ["map_interact", "call_click"]
+      },
+      {
+        "@type": "ContactPoint",
+        "properties": ["contactType", "telephone", "email"],
+        "whereToInject": "smart-contact",
+        "entityTargets": ["emergencies", "bookings"],
+        "reviewSignals": [],
+        "tracking": ["form_submit"]
+      }
+    ]
+  },
+  "/blog": {
+    "schemas": [
+      {
+        "@type": "Blog",
+        "properties": ["name", "publisher", "author"],
+        "whereToInject": "posts",
+        "entityTargets": ["cosmetic dentistry", "aligners"],
+        "reviewSignals": ["author", "reviewedBy"],
+        "tracking": ["post_click"]
+      },
+      {
+        "@type": "FAQPage",
+        "properties": ["mainEntity"],
+        "whereToInject": "posts",
+        "entityTargets": ["dental care", "smile tips"],
+        "reviewSignals": [],
+        "tracking": ["faq_expand"]
+      }
+    ]
+  }
+}
