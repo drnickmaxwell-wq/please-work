@@ -1,0 +1,4 @@
+.preview-surface {
+  background: var(--smh-bg, var(--smh-accent-gold-soft));
+  color: var(--smh-text);
+}

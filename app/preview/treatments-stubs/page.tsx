@@ -1,3 +1,6 @@
+export const dynamic = 'force-static';
+export const revalidate = 0;
+
 import type { Metadata } from 'next';
 
 import routesMap from '@/reports/schema/routes-map.json';
@@ -5,6 +8,7 @@ import { SchemaInjector, getAllPreviewSchemaStatuses } from '@/lib/seo/preview/S
 import { DevHud, shouldShowHud } from '@/components/preview/Hud';
 
 import '@/styles/preview/schema-injector.css';
+import '@/styles/preview/treatments.css';
 import './page.css';
 
 type RouteMap = Record<string, string[]>;
@@ -35,15 +39,6 @@ const SECTION_ALIAS: Record<CanonicalSection, string[]> = {
 };
 
 const routes = routesMap as RouteMap;
-
-let schemaStatuses = [] as ReturnType<typeof getAllPreviewSchemaStatuses>;
-try {
-  schemaStatuses = getAllPreviewSchemaStatuses();
-} catch (err) {
-  console.error('Schema status load failed', err);
-}
-
-const schemaStatusMap = new Map(schemaStatuses.map((status) => [status.route, status]));
 
 function renderSchemaInjector(route: string) {
   try {
@@ -86,6 +81,35 @@ function resolveSections(allSections: string[]): SectionMatch[] {
 }
 
 export default function TreatmentsStubsPreviewPage({ searchParams }: TreatmentsStubsPreviewPageProps) {
+  let statuses: any[] = [];
+  try {
+    statuses = getAllPreviewSchemaStatuses?.() ?? [];
+  } catch {
+    statuses = [];
+  }
+
+  if (!statuses || statuses.length === 0) {
+    return (
+      <main className="preview-surface flex flex-col items-center justify-center min-h-screen">
+        <h1 className="text-2xl font-semibold text-[color:var(--smh-text)] mb-4">No Preview Schema Found</h1>
+        <p className="text-[color:var(--smh-text)] opacity-70 text-center max-w-lg">
+          This preview requires the following files:
+          <br />
+          <code>/reports/schema/routes-map.json</code>
+          <br />
+          <code>/reports/schema/Treatments_Schema_Pack_v3.json</code>
+          <br />
+          <code>/reports/schema/Treatments_Breadcrumbs.json</code>
+          <br />
+          <br />
+          The page will automatically display schema HUD cards when these are detected.
+        </p>
+      </main>
+    );
+  }
+
+  const schemaStatusMap = new Map(statuses.map((status) => [status.route, status]));
+
   const treatmentEntries = Object.entries(routes)
     .filter(([path]) => path.startsWith('/treatments'))
     .map(([path, sections]) => ({
