@@ -708,7 +708,7 @@ export default function PreviewHeroGildedClient() {
             lineHeight: 1.25,
             textAlign: "right",
             pointerEvents: "none",
-            color: "var(--champagne-hero-text, #fff)",
+            color: "var(--champagne-hero-text, var(--smh-white))",
             background: "rgba(10, 8, 7, 0.55)",
             padding: "0.5rem 0.75rem",
             borderRadius: "0.5rem",
