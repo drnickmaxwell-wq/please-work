@@ -39,7 +39,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 This repo is coordinated by a Director AI workflow.
 
-- Docs: see `/docs/Blueprint.md` and `/docs/DEPARTMENTS.md`
+- Docs: see `/docs/Blueprint.md`, `/docs/DEPARTMENTS.md`
+- SEO & Schema references: `/reports/schema-map.json`, `/reports/seo/SEO_Schema.md`
 - Guards: `pnpm run brand:guard` and `pnpm run guard:hero` must pass before merge
 - Binaries (webp/webm/svg) are uploaded via GitHub UI; Codex PRs are text-only
 - Preview sandboxes for safe iteration:

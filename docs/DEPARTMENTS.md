@@ -10,6 +10,6 @@ Update after every PR; link to preview URLs.
 | Chat UI | SMH Chat — Luxe UI (Dock & Panel) | Codex | planned | PR: /preview/chat polished |
 | Chat Brain | SMH Chat — Brain & Scheduling Spec | Planner | planned | OpenAPI+JSON |
 | Portal | SMH Portal — Patient App (Railway) | Planner → Codex | planned | ADR + DDL |
-| Content/SEO | SMH Content — Pillar Pages & Schema | Planner | planned | MDX pack + JSON-LD |
+| Content/SEO | SMH Content — Pillar Pages & Schema | Planner | planned | MDX pack + JSON-LD (see [/reports/seo/SEO_Schema.md]) |
 | Motion Pack | SMH Motion — Seamless Loop Pipeline | Planner (+ Manus) | planned | Runbook + manifest |
 | QA/Guards | SMH QA — PRM & Tokens Playwright | Codex | planned | CI tests green |
