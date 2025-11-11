@@ -3,51 +3,7 @@ export const revalidate = 0;
 
 import type { Metadata } from 'next';
 
-import routesMap from '@/reports/schema/routes-map.json';
-import { SchemaInjector, getAllPreviewSchemaStatuses } from '@/lib/seo/preview/SchemaInjector';
-import { DevHud, shouldShowHud } from '@/components/preview/Hud';
-
-import '@/styles/preview/schema-injector.css';
-import '@/styles/preview/treatments.css';
-import './page.css';
-
-type RouteMap = Record<string, string[]>;
-
-type CanonicalSection = 'hero' | 'how-it-works' | 'experts' | 'faqs' | 'gallery';
-
-type SectionMatch = {
-  canonical: CanonicalSection;
-  alias: string;
-};
-
-const SECTION_ORDER: CanonicalSection[] = ['hero', 'how-it-works', 'experts', 'faqs', 'gallery'];
-
-const SECTION_LABEL: Record<CanonicalSection, string> = {
-  hero: 'Hero',
-  'how-it-works': 'How it works',
-  experts: 'Experts',
-  faqs: 'FAQs',
-  gallery: 'Gallery',
-};
-
-const SECTION_ALIAS: Record<CanonicalSection, string[]> = {
-  hero: ['hero'],
-  'how-it-works': ['how-it-works', 'how_it_works', 'howTo'],
-  experts: ['experts', 'team', 'clinicians'],
-  faqs: ['faqs', 'faq'],
-  gallery: ['gallery', 'before-after', 'before-after-gallery'],
-};
-
-const routes = routesMap as RouteMap;
-
-function renderSchemaInjector(route: string) {
-  try {
-    return <SchemaInjector route={route} />;
-  } catch (err) {
-    console.error('SchemaInjector error', err);
-    return <div style={{ opacity: 0.5 }}>Schema data unavailable for {route}</div>;
-  }
-}
+import { loadPreviewSchemaStatuses } from '@/lib/seo/preview/safe-loader';
 
 export const metadata: Metadata = {
   title: 'Treatments Schema Stubs Preview',
@@ -59,183 +15,74 @@ export const metadata: Metadata = {
     'Schema-driven preview surface for treatments routes. Visualises hero, process, experts, FAQs, and gallery stubs to track planned coverage.',
 };
 
-type TreatmentsStubsPreviewPageProps = {
-  searchParams?: Record<string, string | string[] | undefined>;
-};
+export default async function Page() {
+  const statuses = await loadPreviewSchemaStatuses();
 
-function resolveSections(allSections: string[]): SectionMatch[] {
-  return SECTION_ORDER.flatMap((section) => {
-    const alias = SECTION_ALIAS[section].find((candidate) => allSections.includes(candidate));
-
-    if (!alias) {
-      return [];
-    }
-
-    return [
-      {
-        canonical: section,
-        alias,
-      },
-    ];
-  });
-}
-
-export default function TreatmentsStubsPreviewPage({ searchParams }: TreatmentsStubsPreviewPageProps) {
-  let statuses: any[] = [];
-  try {
-    statuses = getAllPreviewSchemaStatuses?.() ?? [];
-  } catch {
-    statuses = [];
-  }
-
-  if (!statuses || statuses.length === 0) {
+  if (!Array.isArray(statuses) || statuses.length === 0) {
     return (
-      <main className="preview-surface flex flex-col items-center justify-center min-h-screen">
-        <h1 className="text-2xl font-semibold text-[color:var(--smh-text)] mb-4">No Preview Schema Found</h1>
-        <p className="text-[color:var(--smh-text)] opacity-70 text-center max-w-lg">
-          This preview requires the following files:
-          <br />
-          <code>/reports/schema/routes-map.json</code>
-          <br />
-          <code>/reports/schema/Treatments_Schema_Pack_v3.json</code>
-          <br />
-          <code>/reports/schema/Treatments_Breadcrumbs.json</code>
-          <br />
-          <br />
-          The page will automatically display schema HUD cards when these are detected.
-        </p>
+      <main className="min-h-screen grid place-items-center p-8" style={{ background: 'var(--smh-bg)' }}>
+        <div
+          className="max-w-xl rounded-2xl p-6"
+          style={{
+            background: 'color-mix(in oklab, var(--smh-white) 86%, transparent)',
+            border: '1px solid color-mix(in oklab, var(--brand-gold-keyline) 60%, transparent)',
+            boxShadow: '0 10px 30px color-mix(in oklab, var(--ink) 12%, transparent)',
+          }}
+        >
+          <h1 className="text-xl" style={{ color: 'var(--smh-text)' }}>
+            No Preview Schema Detected
+          </h1>
+          <p className="opacity-70 mt-2" style={{ color: 'var(--smh-text)' }}>
+            This preview reads JSON from <code>/reports/schema/</code>. Ensure these files exist:
+          </p>
+          <ul className="mt-3 ml-5 list-disc" style={{ color: 'var(--smh-text)' }}>
+            <li>routes-map.json</li>
+            <li>Treatments_Schema_Pack_v2.json (or v3)</li>
+            <li>Treatments_Breadcrumbs.json</li>
+          </ul>
+          <p className="opacity-70 mt-4" style={{ color: 'var(--smh-text)' }}>
+            When present, HUD cards will appear here. This page never renders blank.
+          </p>
+        </div>
       </main>
     );
   }
 
-  const schemaStatusMap = new Map(statuses.map((status) => [status.route, status]));
-
-  const treatmentEntries = Object.entries(routes)
-    .filter(([path]) => path.startsWith('/treatments'))
-    .map(([path, sections]) => ({
-      path,
-      sections,
-      matches: resolveSections(sections),
-      schemaStatus: schemaStatusMap.get(path),
-    }));
-
-  const showHud = shouldShowHud(searchParams?.hud);
-
   return (
-    <main className="tl-main">
-      {showHud ? (
-        <DevHud
-          title="Treatments HUD"
-          stats={[
-            { label: 'Total preview routes', value: treatmentEntries.length },
-            { label: 'Canonical sections tracked', value: SECTION_ORDER.length },
-            {
-              label: 'Routes with full coverage',
-              value: treatmentEntries.filter((entry) => entry.matches.length === SECTION_ORDER.length).length,
-            },
-            {
-              label: 'Routes with schema pack',
-              value: treatmentEntries.filter((entry) => entry.schemaStatus?.hasPrimarySchemas).length,
-            },
-          ]}
-        />
-      ) : null}
-
-      <section className="tl-shell" aria-labelledby="treatments-preview-heading">
-        <header className="tl-header">
-          <div className="tl-header__grid">
-            <div>
-              <h1 className="tl-heading" id="treatments-preview-heading">
-                Treatments schema stubs
-              </h1>
-              <p className="tl-lede">
-                Schema-aligned sandbox for champagne treatments workstreams. Each card reflects the canonical sections planned in
-                <code className="tl-inline-code">/reports/schema/routes-map.json</code> so creative and engineering can iterate
-                without touching protected hero surfaces.
-              </p>
-            </div>
-            <div className="tl-meta">
-              <span className="tl-chip">Tokenised stubs</span>
-              <span className="tl-chip">PRM aware</span>
-              <span className="tl-chip">Developer safe-space</span>
-            </div>
-          </div>
-          <span className="tl-prm-label" aria-live="polite">
-            motion paused
-          </span>
-        </header>
-
-        <div className="tl-grid" role="list">
-          {treatmentEntries.map(({ path, matches, sections, schemaStatus }) => {
-            const remaining = SECTION_ORDER.filter(
-              (section) => !matches.some((match) => match.canonical === section),
-            );
-
-            return (
-              <article className="tl-card" key={path} role="listitem">
-                {renderSchemaInjector(path)}
-                <header className="tl-card__header">
-                  <h2 className="tl-card__title">{path}</h2>
-                  <p className="tl-card__summary">
-                    {matches.length > 0
-                      ? 'Rendering available stubs with champagne tokens.'
-                      : 'No canonical sections matched in schema map yet.'}
-                  </p>
-                  <p className="tl-card__schema" aria-label="Schema keys tracked">
-                    {sections.join(' • ')}
-                  </p>
-                  <div className="tl-card__flags" role="status">
-                    {!schemaStatus?.hasPrimarySchemas ? (
-                      <span className="tl-badge tl-badge--alert">Missing schema pack</span>
-                    ) : null}
-                    {schemaStatus?.missing.howTo || schemaStatus?.missing.faq ? (
-                      <span className="tl-badge tl-badge--muted">
-                        Missing
-                        {schemaStatus.missing.howTo ? ' HowTo' : ''}
-                        {schemaStatus.missing.howTo && schemaStatus.missing.faq ? ' and' : ''}
-                        {schemaStatus.missing.faq ? ' FAQPage' : ''} schema
-                      </span>
-                    ) : null}
-                    {schemaStatus?.breadcrumbStatus === 'missing' ? (
-                      <span className="tl-badge tl-badge--muted">Missing breadcrumb</span>
-                    ) : null}
-                  </div>
-                </header>
-                <div className="tl-stub-grid">
-                  {matches.map((match) => (
-                    <section
-                      className="tl-stub"
-                      data-schema-key={match.alias}
-                      key={`${path}-${match.canonical}`}
-                    >
-                      <h3 className="tl-stub__title">{SECTION_LABEL[match.canonical]}</h3>
-                      <p className="tl-stub__copy">
-                        {match.canonical === 'hero' &&
-                          'Hero shell anchored to champagne hero spec with gradient, grain, and CTA placeholders.'}
-                        {match.canonical === 'how-it-works' &&
-                          'Process rail stub referencing planning steps for choreography and instrumentation.'}
-                        {match.canonical === 'experts' &&
-                          'Expert spotlight placeholder for clinical bios sourced from treatments manifests.'}
-                        {match.canonical === 'faqs' &&
-                          'FAQ accordion tokens to validate schema injection and accessibility structure.'}
-                        {match.canonical === 'gallery' &&
-                          'Before / after gallery frame ensuring keyline and caption treatments stay aligned.'}
-                      </p>
-                    </section>
-                  ))}
-                </div>
-                {remaining.length > 0 ? (
-                  <footer className="tl-card__footer">
-                    <p className="tl-card__footer-copy">
-                      Missing canonical stubs: {remaining.map((key) => SECTION_LABEL[key]).join(', ')}
-                    </p>
-                  </footer>
-                ) : null}
-              </article>
-            );
-          })}
-        </div>
-      </section>
+    <main className="p-8" style={{ background: 'var(--smh-bg)' }}>
+      <h1 className="text-2xl mb-4" style={{ color: 'var(--smh-text)' }}>
+        Treatments — Preview Stubs
+      </h1>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {statuses.map((s) => (
+          <article
+            key={s.route}
+            className="rounded-2xl p-4"
+            style={{
+              background: 'color-mix(in oklab, var(--smh-white) 90%, transparent)',
+              border: '1px solid color-mix(in oklab, var(--brand-gold-keyline) 60%, transparent)',
+            }}
+          >
+            <h2 className="font-semibold" style={{ color: 'var(--smh-text)' }}>
+              {s.route}
+            </h2>
+            <p className="mt-1 text-sm opacity-70" style={{ color: 'var(--smh-text)' }}>
+              Types: {s.schemaTypes.join(', ') || '—'}
+            </p>
+            <p className="mt-1 text-sm opacity-70" style={{ color: 'var(--smh-text)' }}>
+              Breadcrumb: {s.breadcrumbStatus}
+            </p>
+            <p className="mt-1 text-sm opacity-70" style={{ color: 'var(--smh-text)' }}>
+              Missing: {[
+                s.missing.howTo ? 'HowTo' : null,
+                s.missing.faq ? 'FAQPage' : null,
+              ]
+                .filter(Boolean)
+                .join(', ') || '—'}
+            </p>
+          </article>
+        ))}
+      </div>
     </main>
   );
 }

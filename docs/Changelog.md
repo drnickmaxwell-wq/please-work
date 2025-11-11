@@ -1,5 +1,5 @@
 ## 2025-11-13
-- Fixed treatments-stubs preview to show HUD or empty-state when schema packs not loaded.
+- chore(preview): harden treatments-stubs with safe runtime loader + graceful empty-state
 
 ## 2025-11-12
 - Added preview-only schema injector plus breadcrumb merge for treatments sandboxes and emit the integration status report for structured data QA.
