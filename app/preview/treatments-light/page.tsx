@@ -1,6 +1,7 @@
 import React from 'react';
 
-import routesMap from '@/reports/schema/routes-map.json';
+import routesMap from '@/reports/routes-map.json';
+import schemaPack from '@/reports/seo/Treatments_Schema_Pack.json';
 import Hero from '@/components/treatments-light/Hero';
 import ValueGrid from '@/components/treatments-light/ValueGrid';
 import FeaturedTreatments from '@/components/treatments-light/FeaturedTreatments';
@@ -35,6 +36,19 @@ const SECTION_COMPONENTS = {
 
 type SectionKey = keyof typeof SECTION_COMPONENTS;
 
+type SchemaRoute = {
+  ['@context']?: string;
+  ['@graph']?: unknown[];
+  ['@type']?: string;
+};
+
+type SchemaPack = {
+  generated?: string;
+  routes?: Record<string, SchemaRoute>;
+};
+
+const schemaRoutes = (schemaPack as SchemaPack).routes ?? {};
+
 const treatmentsRoutes = Object.entries(routesMap as Record<string, string[]>).filter(([path]) =>
   path.startsWith('/treatments'),
 );
@@ -63,14 +77,26 @@ export default function TreatmentsLightPreviewPage() {
           </div>
         </header>
 
-        {treatmentsRoutes.map(([route, sections]) => (
-          <article aria-labelledby={`route-${route}`} className="tl-route" key={route}>
+        {treatmentsRoutes.map(([route, sections]) => {
+          const schemaInfo = schemaRoutes[route] ?? {};
+          const graphNodes = Array.isArray(schemaInfo['@graph']) ? schemaInfo['@graph'].length : 0;
+          const context = schemaInfo['@context'];
+
+          return (
+            <article aria-labelledby={`route-${route}`} className="tl-route" key={route}>
             <div className="tl-route__intro">
               <h2 className="tl-route__title" id={`route-${route}`}>
                 {route}
               </h2>
               <p className="tl-route__summary">
                 Sections resolved directly from the schema to ensure parity between preview sandboxes and live builds.
+                Schema context{' '}
+                {context ? (
+                  <code>{context}</code>
+                ) : (
+                  <span className="tl-fallback">pending context</span>
+                )}{' '}
+                with {graphNodes} graph node{graphNodes === 1 ? '' : 's'} tracked for structured data QA.
               </p>
             </div>
             <div className="tl-route__stack">
@@ -84,7 +110,8 @@ export default function TreatmentsLightPreviewPage() {
               })}
             </div>
           </article>
-        ))}
+          );
+        })}
       </div>
     </main>
   );

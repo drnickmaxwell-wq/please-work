@@ -95,6 +95,11 @@
   color: var(--tl-muted);
 }
 
+.tl-fallback {
+  color: color-mix(in oklab, var(--tl-muted) 82%, transparent);
+  font-style: italic;
+}
+
 .tl-route__stack {
   display: grid;
   gap: 2.5rem;
