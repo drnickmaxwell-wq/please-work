@@ -3,6 +3,8 @@ import Link from 'next/link';
 
 import InteractiveToothModel from '@/components/3d/interactive-tooth-model';
 import TreatmentBanner from '@/components/preview/TreatmentBanner';
+import ThreeDViewerSlot from '@/components/preview/treatments/ThreeDViewerSlot';
+import ChampagneSectionShell, { champagneShellClasses } from '@/components/sections/ChampagneSectionShell';
 import { TOKENS as NEUTRAL_TOKENS } from '@/styles/tokens/neutrals';
 
 import '@/styles/treatments/preview-light.css';
@@ -119,9 +121,11 @@ const candidateChecklist = [
 ];
 
 export default function DentalImplantsPreviewPage() {
+  const { goldGlow, parallax } = champagneShellClasses;
+
   return (
-    <main className="min-h-screen bg-[var(--champagne-surface)] text-[var(--champagne-ink)]">
-      <div className="mx-auto flex max-w-5xl flex-col gap-12 px-6 py-16">
+    <ChampagneSectionShell>
+      <main className="mx-auto flex max-w-5xl flex-col gap-12 px-6">
         <nav aria-label="Breadcrumb" className="text-sm">
           <ol className="flex flex-wrap items-center gap-2 text-[var(--champagne-ink-muted)]">
             <li>
@@ -142,17 +146,17 @@ export default function DentalImplantsPreviewPage() {
           </ol>
         </nav>
 
-        <TreatmentBanner
-          label="Treatments"
-          subtitle="Restore missing teeth with titanium implants that look and feel natural. Our advanced planning, calming environment, and same-day provisional options keep every stage precise and comfortable."
-          title="Dental implants in Shoreham-by-Sea"
-        />
+        <div className={parallax} data-direction="reverse">
+          <TreatmentBanner
+            label="Treatments"
+            subtitle="Restore missing teeth with titanium implants that look and feel natural. Our advanced planning, calming environment, and same-day provisional options keep every stage precise and comfortable."
+            title="Dental implants in Shoreham-by-Sea"
+          />
+        </div>
 
         <section className="t-section rounded-3xl p-8 shadow-sm">
           <div className="flex flex-col gap-6">
-            <h2 className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
-              3D implant visualiser
-            </h2>
+            <h2 className="text-2xl font-semibold">3D implant visualiser</h2>
             <p className="max-w-3xl leading-relaxed t-muted">
               Explore how the implant, abutment, and crown work together. Rotate the model to see how the restoration integrates
               with surrounding bone and soft tissue.
@@ -166,20 +170,17 @@ export default function DentalImplantsPreviewPage() {
                 afterColor={NEUTRAL_TOKENS.white}
               />
             </div>
+            <ThreeDViewerSlot />
           </div>
         </section>
 
         <section className="t-section rounded-3xl p-8 shadow-sm">
           <div className="flex flex-col gap-6">
-            <h2 className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
-              Why guests choose implants
-            </h2>
+            <h2 className="text-2xl font-semibold">Why guests choose implants</h2>
             <div className="grid gap-6 sm:grid-cols-2">
               {benefits.map((benefit) => (
                 <article key={benefit.title} className="t-card h-full p-6">
-                  <h3 className="text-xl font-semibold" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
-                    {benefit.title}
-                  </h3>
+                  <h3 className="text-xl font-semibold">{benefit.title}</h3>
                   <p className="mt-3 leading-relaxed t-muted">{benefit.description}</p>
                 </article>
               ))}
@@ -189,15 +190,11 @@ export default function DentalImplantsPreviewPage() {
 
         <section className="t-section rounded-3xl p-8 shadow-sm">
           <div className="flex flex-col gap-6">
-            <h2 className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
-              Implant treatment options
-            </h2>
+            <h2 className="text-2xl font-semibold">Implant treatment options</h2>
             <div className="grid gap-6 md:grid-cols-3">
               {treatmentOptions.map((option) => (
                 <article key={option.name} className="t-card h-full p-6">
-                  <h3 className="text-lg font-semibold" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
-                    {option.name}
-                  </h3>
+                  <h3 className="text-lg font-semibold">{option.name}</h3>
                   <p className="mt-2 leading-relaxed t-muted">{option.description}</p>
                   <ul className="mt-4 space-y-2 text-sm leading-relaxed t-muted">
                     {option.highlights.map((item) => (
@@ -215,16 +212,12 @@ export default function DentalImplantsPreviewPage() {
 
         <section className="t-section rounded-3xl p-8 shadow-sm">
           <div className="flex flex-col gap-6">
-            <h2 className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
-              The implant journey
-            </h2>
+            <h2 className="text-2xl font-semibold">The implant journey</h2>
             <div className="space-y-6">
               {process.map((step) => (
                 <article key={step.phase} className="t-card p-6">
                   <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                    <h3 className="text-lg font-semibold" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
-                      {step.phase}
-                    </h3>
+                    <h3 className="text-lg font-semibold">{step.phase}</h3>
                     <p className="text-sm uppercase tracking-wider text-[var(--champagne-ink-muted)]">{step.duration}</p>
                   </div>
                   <p className="mt-3 leading-relaxed t-muted">{step.description}</p>
@@ -242,17 +235,15 @@ export default function DentalImplantsPreviewPage() {
           </div>
         </section>
 
+        <div aria-hidden className="fx-waves" />
+
         <section className="t-section rounded-3xl p-8 shadow-sm">
           <div className="flex flex-col gap-6">
-            <h2 className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
-              Are implants right for you?
-            </h2>
+            <h2 className="text-2xl font-semibold">Are implants right for you?</h2>
             <div className="grid gap-6 md:grid-cols-2">
               {candidateChecklist.map((item) => (
                 <article key={item.title} className="t-card h-full p-6">
-                  <h3 className="text-lg font-semibold" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
-                    {item.title}
-                  </h3>
+                  <h3 className="text-lg font-semibold">{item.title}</h3>
                   <p className="mt-3 leading-relaxed t-muted">{item.description}</p>
                 </article>
               ))}
@@ -260,30 +251,24 @@ export default function DentalImplantsPreviewPage() {
           </div>
         </section>
 
-        <section className="t-section rounded-3xl p-8 shadow-sm">
+        <section className={`t-section rounded-3xl p-8 shadow-sm ${parallax}`} data-depth="cta">
           <div className="flex flex-col gap-4">
-            <h2 className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
-              Plan your implant consultation
-            </h2>
+            <h2 className="text-2xl font-semibold">Plan your implant consultation</h2>
             <p className="max-w-3xl leading-relaxed t-muted">
               Meet with our implant dentist to map your smile transformation, review timelines, and design a restoration that
               feels indistinguishable from natural teeth.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link className="rounded-full border border-[var(--champagne-keyline)] px-6 py-3 text-sm font-semibold"
-                href="/contact"
-              >
+              <Link className={goldGlow} href="/contact">
                 Book a consultation
               </Link>
-              <Link className="rounded-full border border-[var(--champagne-keyline)] px-6 py-3 text-sm font-semibold"
-                href="/treatments"
-              >
+              <Link className={goldGlow} href="/treatments">
                 View all treatments
               </Link>
             </div>
           </div>
         </section>
-      </div>
-    </main>
+      </main>
+    </ChampagneSectionShell>
   );
 }
