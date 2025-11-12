@@ -1,0 +1,135 @@
+.cpv-hero {
+  position: relative;
+  color: var(--smh-text);
+  background: linear-gradient(
+    135deg,
+    var(--smh-primary-magenta) 0%,
+    var(--smh-primary-teal) 60%,
+    var(--smh-accent-gold) 100%
+  );
+  overflow: hidden;
+}
+
+.cpv-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  mask-image: url(/brand/waves/mask-01.webp);
+  mask-size: cover;
+  mask-repeat: no-repeat;
+  background: color-mix(in oklab, var(--smh-ink), transparent 88%);
+  opacity: var(--cpv-wave-alpha, 0.12);
+  pointer-events: none;
+}
+
+.cpv-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url(/brand/grain/grain-512.webp);
+  background-size: 512px 512px;
+  mix-blend-mode: multiply;
+  opacity: var(--cpv-grain-alpha, 0.06);
+  pointer-events: none;
+}
+
+.cpv-hero__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding-block: clamp(4rem, 8vw, 7rem);
+}
+
+.cpv-hero__content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.cpv-glass {
+  background: color-mix(in oklab, var(--smh-accent-gold-soft), transparent 88%);
+  backdrop-filter: blur(6px);
+  border: 1px solid color-mix(in oklab, var(--smh-accent-gold), transparent 90%);
+  border-radius: 12px;
+}
+
+.cpv-hero__card {
+  padding: clamp(2rem, 5vw, 3.5rem);
+  box-shadow: 0 40px 80px color-mix(in oklab, var(--smh-ink), transparent 92%);
+}
+
+.cpv-hero__kicker {
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--smh-text), transparent 25%);
+}
+
+.cpv-hero__title {
+  font-size: clamp(2.5rem, 6vw, 3.75rem);
+  line-height: 1.1;
+  font-weight: 600;
+}
+
+.cpv-hero__body {
+  max-width: 48ch;
+  color: color-mix(in oklab, var(--smh-text), transparent 10%);
+}
+
+@media (min-width: 1024px) {
+  .cpv-hero__content {
+    max-width: 52rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cpv-hero::before {
+    opacity: 0.06;
+  }
+}
+
+.cpv-section {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.cpv-section__title {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  line-height: 1.2;
+  font-weight: 600;
+  color: var(--smh-ink);
+}
+
+.cpv-section__body {
+  display: grid;
+  gap: 1rem;
+  color: color-mix(in oklab, var(--smh-ink), transparent 15%);
+}
+
+.cpv-card {
+  border-radius: 16px;
+  padding: clamp(1.5rem, 4vw, 2rem);
+  background: color-mix(in oklab, var(--smh-ink-soft), transparent 92%);
+  border: 1px solid color-mix(in oklab, var(--smh-ink), transparent 94%);
+}
+
+.cpv-card p {
+  margin: 0;
+}
+
+.cpv-card ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.cpv-card li + li {
+  margin-top: 0.5rem;
+}
+
+.cpv-card--glass {
+  background: color-mix(in oklab, var(--smh-accent-gold-soft), transparent 92%);
+  border-color: color-mix(in oklab, var(--smh-accent-gold), transparent 94%);
+}
