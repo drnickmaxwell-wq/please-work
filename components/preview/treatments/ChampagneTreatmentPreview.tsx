@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
 
+import '@/styles/preview/treatments.css';
+
 import { getPreviewSchemaStatus, SchemaInjector } from '@/lib/seo/preview/SchemaInjector';
 
 export type ChampagneTreatmentPreviewProps = {
@@ -7,6 +9,9 @@ export type ChampagneTreatmentPreviewProps = {
   subtitle?: string;
   route: string;
   tint?: 'veneers' | 'implants' | 'spark' | 'default';
+  breadcrumbs?: ReactNode;
+  lead?: ReactNode;
+  viewerSlot?: ReactNode;
   children: ReactNode;
 };
 
@@ -27,6 +32,9 @@ export default function ChampagneTreatmentPreview({
   subtitle,
   route,
   tint = 'default',
+  breadcrumbs,
+  lead,
+  viewerSlot,
   children,
 }: ChampagneTreatmentPreviewProps) {
   const status = getPreviewSchemaStatus(route);
@@ -53,8 +61,8 @@ export default function ChampagneTreatmentPreview({
             <div className="ctv-schema-badge" role="status" aria-live="polite">
               <span>Types: {schemaTypes.length > 0 ? schemaTypes.join(', ') : '—'}</span>
               <span>Breadcrumb: {status.breadcrumbStatus}</span>
-              {status.missing.howTo ? <span>Missing: HowTo</span> : null}
-              {status.missing.faq ? <span>Missing: FAQPage</span> : null}
+              {status.missing?.howTo ? <span>Missing: HowTo</span> : null}
+              {status.missing?.faq ? <span>Missing: FAQPage</span> : null}
             </div>
           ) : null}
         </div>
@@ -62,13 +70,25 @@ export default function ChampagneTreatmentPreview({
 
       <div className="ctv-divider" aria-hidden="true" />
 
-      <section className="ctv-3d-slot" aria-label="3D viewer slot">
-        <div className="ctv-3d-slot__card">
-          <p>3D viewer slot (preview) — production integrates the interactive model.</p>
-        </div>
-      </section>
+      <main className="ctv-main">
+        {breadcrumbs ? (
+          <div className="ctv-container">
+            <div className="ctv-breadcrumbs">{breadcrumbs}</div>
+          </div>
+        ) : null}
 
-      <main className="ctv-main">{children}</main>
+        {lead ? <div className="ctv-container">{lead}</div> : null}
+
+        <section className="ctv-3d-slot" role="region" aria-label="3D viewer slot">
+          <div className="ctv-3d-slot__card">
+            {viewerSlot ?? (
+              <p>3D viewer slot (preview) — production integrates the interactive model.</p>
+            )}
+          </div>
+        </section>
+
+        {children}
+      </main>
 
       <SchemaInjector route={route} />
     </article>

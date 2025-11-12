@@ -76,42 +76,39 @@ export default function VeneersPreviewPage() {
       subtitle="Luxury care, thoughtfully staged"
       route="/treatments/veneers"
       tint="veneers"
+      breadcrumbs={<TreatmentBreadcrumb current="Porcelain veneers" />}
+      lead={
+        <section className="ctv-cta" aria-label="Preview actions">
+          <Link className="btn btn-primary" href="/contact#book">
+            Reserve a consultation
+          </Link>
+          <Link className="btn btn-outline" href="/treatments">
+            View all treatments
+          </Link>
+        </section>
+      }
+      viewerSlot={
+        <div className="flex flex-col gap-4">
+          <h2 className="text-2xl font-semibold">Interactive veneer preview</h2>
+          <p className="max-w-3xl leading-relaxed t-muted">
+            Rotate the 3D model to see how ultra-thin shells layer over enamel for a seamless transformation from every
+            angle.
+          </p>
+          <div className="viewer-slot" role="region" aria-label="3D veneer viewer placeholder">
+            <InteractiveToothModel
+              treatmentType="veneer"
+              title="Porcelain Veneer Transformation"
+              description="See how ultra-thin porcelain shells create a perfect, natural-looking smile"
+              beforeColor={NEUTRAL_TOKENS.champagne}
+              afterColor={NEUTRAL_TOKENS.white}
+            />
+          </div>
+        </div>
+      }
     >
       <div className="ctv-surface">
         <div className="ctv-particles" aria-hidden="true" />
         <div className="ctv-container">
-          <div className="ctv-breadcrumbs">
-            <TreatmentBreadcrumb current="Porcelain veneers" />
-          </div>
-
-          <section className="ctv-cta" aria-label="Preview actions">
-            <Link className="btn btn-primary" href="/contact#book">
-              Reserve a consultation
-            </Link>
-            <Link className="btn btn-outline" href="/treatments">
-              View all treatments
-            </Link>
-          </section>
-
-          <section className="section">
-            <div className="flex flex-col gap-4">
-              <h2 className="text-2xl font-semibold">Interactive veneer preview</h2>
-              <p className="max-w-3xl leading-relaxed t-muted">
-                Rotate the 3D model to see how ultra-thin shells layer over enamel for a seamless transformation from every
-                angle.
-              </p>
-              <div className="viewer-slot" role="region" aria-label="3D veneer viewer placeholder">
-                <InteractiveToothModel
-                  treatmentType="veneer"
-                  title="Porcelain Veneer Transformation"
-                  description="See how ultra-thin porcelain shells create a perfect, natural-looking smile"
-                  beforeColor={NEUTRAL_TOKENS.champagne}
-                  afterColor={NEUTRAL_TOKENS.white}
-                />
-              </div>
-            </div>
-          </section>
-
           <ChampagneSectionShell>
             <main className="mx-auto flex max-w-5xl flex-col gap-12 px-6">
               <section className="t-section rounded-3xl p-8 shadow-sm">
