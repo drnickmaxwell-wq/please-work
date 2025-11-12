@@ -1,7 +1,11 @@
 // Preview-only clone. No hard hexes. Do not edit production pages.
+export const dynamic = 'force-static';
+export const revalidate = 0;
+
 import Link from 'next/link';
 
 import InteractiveToothModel from '@/components/3d/interactive-tooth-model';
+import { TreatmentPreviewFrame } from '@/components/preview/TreatmentPreviewFrame';
 import TreatmentBanner from '@/components/preview/TreatmentBanner';
 import ThreeDViewerSlot from '@/components/preview/treatments/ThreeDViewerSlot';
 import ChampagneSectionShell, { champagneShellClasses } from '@/components/sections/ChampagneSectionShell';
@@ -73,8 +77,9 @@ export default function VeneersPreviewPage() {
   const { goldGlow, parallax } = champagneShellClasses;
 
   return (
-    <ChampagneSectionShell>
-      <main className="mx-auto flex max-w-5xl flex-col gap-12 px-6">
+    <TreatmentPreviewFrame section="veneers">
+      <ChampagneSectionShell>
+        <main className="mx-auto flex max-w-5xl flex-col gap-12 px-6">
         <nav aria-label="Breadcrumb" className="text-sm">
           <ol className="flex flex-wrap items-center gap-2 text-[var(--champagne-ink-muted)]">
             <li>
@@ -206,7 +211,8 @@ export default function VeneersPreviewPage() {
             </div>
           </div>
         </section>
-      </main>
-    </ChampagneSectionShell>
+        </main>
+      </ChampagneSectionShell>
+    </TreatmentPreviewFrame>
   );
 }
