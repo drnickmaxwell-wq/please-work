@@ -618,6 +618,7 @@
   border-radius: var(--preview-hero-radius-xl);
   text-decoration: none;
   font-weight: 600;
+  font-family: 'Inter', var(--font-ui, system-ui);
   letter-spacing: 0.05em;
   text-transform: uppercase;
   border: 1px solid color-mix(in oklab, var(--preview-hero-text) 22%, var(--smh-white));
@@ -733,12 +734,15 @@
   position: relative;
   isolation: isolate;
   color: var(--smh-text);
-  background: linear-gradient(
-    180deg,
-    color-mix(in oklab, var(--smh-primary-teal) 35%, var(--smh-ink) 65%) 0%,
-    color-mix(in oklab, var(--smh-primary-magenta) 18%, var(--smh-ink) 82%) 45%,
-    color-mix(in oklab, var(--smh-ink) 94%, transparent) 100%
-  );
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--smh-primary-magenta) 45%, var(--smh-ink) 55%) 0%,
+      color-mix(in oklab, var(--smh-primary-teal) 50%, var(--smh-ink) 50%) 45%,
+      color-mix(in oklab, var(--smh-accent-gold) 28%, var(--smh-ink) 72%) 70%,
+      color-mix(in oklab, var(--smh-ink) 95%, transparent) 100%
+    ),
+    var(--smh-gradient);
   padding-block: clamp(2.5rem, 6vw, 5rem);
   border-radius: clamp(1.5rem, 5vw, 2.5rem);
   margin-inline: auto;
@@ -757,13 +761,13 @@
 }
 
 .ctv-surface::before {
-  background: var(--preview-hero-wave-image) center/cover no-repeat;
+  background: url('/brand/waves/wave-mask.webp') center/cover no-repeat;
   mix-blend-mode: soft-light;
   opacity: clamp(0, var(--ctv-wave-alpha-base), 0.12);
 }
 
 .ctv-surface::after {
-  background: var(--preview-hero-grain-image) repeat;
+  background: url('/brand/grain/grain-512.webp') repeat;
   mix-blend-mode: overlay;
   opacity: clamp(0, var(--ctv-grain-alpha-base), 0.08);
 }
@@ -773,12 +777,41 @@
   z-index: 1;
 }
 
+.ctv-surface h1,
+.ctv-surface h2 {
+  font-family: 'Montserrat', var(--smh-heading, sans-serif);
+  font-weight: 700;
+}
+
+.ctv-surface h3,
+.ctv-surface h4,
+.ctv-surface h5,
+.ctv-surface h6 {
+  font-family: 'Montserrat', var(--smh-heading, sans-serif);
+  font-weight: 600;
+}
+
+.ctv-surface p,
+.ctv-surface li {
+  font-family: 'Lora', var(--font-body, serif);
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+.ctv-surface small,
+.ctv-surface a,
+.ctv-surface button,
+.ctv-surface label {
+  font-family: 'Inter', var(--font-ui, system-ui);
+  font-weight: 500;
+}
+
 .ctv-particles {
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background: var(--preview-hero-particles-image) center/120% repeat;
+  background: url('/brand/particles/particles-soft.webp') center/120% repeat;
   mix-blend-mode: screen;
   opacity: clamp(0, var(--ctv-particles-alpha-base), 0.05);
 }

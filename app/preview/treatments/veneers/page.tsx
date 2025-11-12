@@ -1,6 +1,4 @@
 // Preview-only clone. No hard hexes. Do not edit production pages.
-import Link from 'next/link';
-
 import InteractiveToothModel from '@/components/3d/interactive-tooth-model';
 import ChampagneTreatmentPreview from '@/components/preview/treatments/ChampagneTreatmentPreview';
 import TreatmentBreadcrumb from '@/components/preview/nav/TreatmentBreadcrumb';
@@ -76,17 +74,9 @@ export default function VeneersPreviewPage() {
       subtitle="Luxury care, thoughtfully staged"
       route="/treatments/veneers"
       tint="veneers"
+      ctaPrimary={{ label: 'Reserve a consultation', href: '/contact#book' }}
+      ctaSecondary={{ label: 'View all treatments', href: '/treatments' }}
       breadcrumbs={<TreatmentBreadcrumb current="Porcelain veneers" />}
-      lead={
-        <section className="ctv-cta" aria-label="Preview actions">
-          <Link className="btn btn-primary" href="/contact#book">
-            Reserve a consultation
-          </Link>
-          <Link className="btn btn-outline" href="/treatments">
-            View all treatments
-          </Link>
-        </section>
-      }
       viewerSlot={
         <div className="flex flex-col gap-4">
           <h2 className="text-2xl font-semibold">Interactive veneer preview</h2>

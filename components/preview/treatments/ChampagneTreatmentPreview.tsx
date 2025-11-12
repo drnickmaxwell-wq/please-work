@@ -5,13 +5,16 @@ import '@/styles/preview/treatments.css';
 import { getPreviewSchemaStatus, SchemaInjector } from '@/lib/seo/preview/SchemaInjector';
 
 export type ChampagneTreatmentPreviewProps = {
+  eyebrow?: string;
   title: string;
   subtitle?: string;
   route: string;
   tint?: 'veneers' | 'implants' | 'spark' | 'default';
   breadcrumbs?: ReactNode;
-  lead?: ReactNode;
   viewerSlot?: ReactNode;
+  ctaPrimary?: { label: string; href: string; ariaLabel?: string };
+  ctaSecondary?: { label: string; href: string; ariaLabel?: string };
+  lead?: ReactNode;
   children: ReactNode;
 };
 
@@ -28,13 +31,16 @@ const tintClassMap: Record<NonNullable<ChampagneTreatmentPreviewProps['tint']>, 
 };
 
 export default function ChampagneTreatmentPreview({
+  eyebrow = 'Treatments preview',
   title,
   subtitle,
   route,
   tint = 'default',
   breadcrumbs,
-  lead,
   viewerSlot,
+  ctaPrimary,
+  ctaSecondary,
+  lead,
   children,
 }: ChampagneTreatmentPreviewProps) {
   const status = getPreviewSchemaStatus(route);
@@ -52,11 +58,33 @@ export default function ChampagneTreatmentPreview({
         <div className="preview-hero-champagne__glass" aria-hidden="true" />
         <div className="preview-hero-champagne__particles" aria-hidden="true" />
         <div className="preview-hero-champagne__inner">
-          <p className="preview-hero-champagne__eyebrow">Treatments preview</p>
+          <p className="preview-hero-champagne__eyebrow">{eyebrow}</p>
           <h1 id={heroTitleId} className="preview-hero-champagne__title">
             {title}
           </h1>
           {subtitle ? <p className="preview-hero-champagne__kicker">{subtitle}</p> : null}
+          {ctaPrimary || ctaSecondary ? (
+            <div className="preview-hero-champagne__cta-row" aria-label="Primary actions">
+              {ctaPrimary ? (
+                <a
+                  className="btn btn-primary"
+                  href={ctaPrimary.href}
+                  aria-label={ctaPrimary.ariaLabel ?? ctaPrimary.label}
+                >
+                  {ctaPrimary.label}
+                </a>
+              ) : null}
+              {ctaSecondary ? (
+                <a
+                  className="btn btn-outline"
+                  href={ctaSecondary.href}
+                  aria-label={ctaSecondary.ariaLabel ?? ctaSecondary.label}
+                >
+                  {ctaSecondary.label}
+                </a>
+              ) : null}
+            </div>
+          ) : null}
           {status ? (
             <div className="ctv-schema-badge" role="status" aria-live="polite">
               <span>Types: {schemaTypes.length > 0 ? schemaTypes.join(', ') : '—'}</span>
