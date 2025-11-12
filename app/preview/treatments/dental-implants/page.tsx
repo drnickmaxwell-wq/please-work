@@ -2,14 +2,13 @@
 import Link from 'next/link';
 
 import InteractiveToothModel from '@/components/3d/interactive-tooth-model';
-import TreatmentBanner from '@/components/preview/TreatmentBanner';
-import ChampagneFX from '@/components/preview/fx/ChampagneFX';
 import ThreeDViewerSlot from '@/components/preview/treatments/ThreeDViewerSlot';
+import TreatmentHeroShell from '@/components/preview/treatments/TreatmentHeroShell';
 import ChampagneSectionShell, { champagneShellClasses } from '@/components/sections/ChampagneSectionShell';
+import { SchemaInjector } from '@/lib/seo/preview/SchemaInjector';
 import { TOKENS as NEUTRAL_TOKENS } from '@/styles/tokens/neutrals';
 
 import '@/styles/treatments/preview-light.css';
-import '@/styles/champagne/preview-fx.css';
 
 const benefits = [
   {
@@ -122,156 +121,162 @@ const candidateChecklist = [
   },
 ];
 
-export default function DentalImplantsPreviewPage() {
+export function DentalImplantsPreviewContent() {
   const { goldGlow, parallax } = champagneShellClasses;
-  const heroId = 'champagne-preview-hero-dental-implants';
 
   return (
-    <ChampagneSectionShell>
-      <main className="mx-auto flex max-w-5xl flex-col gap-12 px-6">
-        <nav aria-label="Breadcrumb" className="text-sm">
-          <ol className="flex flex-wrap items-center gap-2 text-[var(--champagne-ink-muted)]">
-            <li>
-              <Link className="underline-offset-4 hover:underline" href="/preview">
-                Preview
-              </Link>
-            </li>
-            <li aria-hidden="true">/</li>
-            <li>
-              <Link className="underline-offset-4 hover:underline" href="/preview/treatments">
-                Treatments
-              </Link>
-            </li>
-            <li aria-hidden="true">/</li>
-            <li aria-current="page" className="font-medium text-[var(--champagne-ink)]">
-              Dental implants
-            </li>
-          </ol>
-        </nav>
+    <>
+      <TreatmentHeroShell
+        title="Dental implants in Shoreham-by-Sea"
+        subtitle="Restore missing teeth with titanium implants that look and feel natural. Advanced planning keeps every stage precise and calm."
+        ctas={[
+          { label: 'Reserve a consultation', href: '/contact' },
+          { label: 'View all treatments', href: '/treatments' },
+        ]}
+        show3DSlot
+      />
+      <ChampagneSectionShell>
+        <main className="mx-auto flex max-w-5xl flex-col gap-12 px-6">
+          <nav aria-label="Breadcrumb" className="text-sm">
+            <ol className="flex flex-wrap items-center gap-2 text-[var(--champagne-ink-muted)]">
+              <li>
+                <Link className="underline-offset-4 hover:underline" href="/preview">
+                  Preview
+                </Link>
+              </li>
+              <li aria-hidden="true">/</li>
+              <li>
+                <Link className="underline-offset-4 hover:underline" href="/preview/treatments">
+                  Treatments
+                </Link>
+              </li>
+              <li aria-hidden="true">/</li>
+              <li aria-current="page" className="font-medium text-[var(--champagne-ink)]">
+                Dental implants
+              </li>
+            </ol>
+          </nav>
 
-        <section className="champagne-hero-shell" id={heroId}>
-          <ChampagneFX targetId={heroId} dust="low" parallax />
-          <div className={`${parallax} champagne-hero-shell__inner`} data-direction="reverse" data-parallax-depth="1">
-            <TreatmentBanner
-              label="Treatments"
-              subtitle="Restore missing teeth with titanium implants that look and feel natural. Our advanced planning, calming environment, and same-day provisional options keep every stage precise and comfortable."
-              title="Dental implants in Shoreham-by-Sea"
-            />
-          </div>
-        </section>
+          <section className="t-section rounded-3xl p-8 shadow-sm">
+            <div className="flex flex-col gap-6">
+              <h2 className="text-2xl font-semibold">3D implant visualiser</h2>
+              <p className="max-w-3xl leading-relaxed t-muted">
+                Explore how the implant, abutment, and crown work together. Rotate the model to see how the restoration integrates with surrounding bone and soft tissue.
+              </p>
+              <div className="t-card p-6">
+                <InteractiveToothModel
+                  treatmentType="implant"
+                  title="Complete Dental Implant System"
+                  description="See how titanium implants integrate with bone to create a permanent tooth replacement"
+                  beforeColor={NEUTRAL_TOKENS.champagne}
+                  afterColor={NEUTRAL_TOKENS.white}
+                />
+              </div>
+              <ThreeDViewerSlot />
+            </div>
+          </section>
 
-        <section className="t-section rounded-3xl p-8 shadow-sm">
-          <div className="flex flex-col gap-6">
-            <h2 className="text-2xl font-semibold">3D implant visualiser</h2>
-            <p className="max-w-3xl leading-relaxed t-muted">
-              Explore how the implant, abutment, and crown work together. Rotate the model to see how the restoration integrates
-              with surrounding bone and soft tissue.
-            </p>
-            <div className="t-card p-6">
-              <InteractiveToothModel
-                treatmentType="implant"
-                title="Complete Dental Implant System"
-                description="See how titanium implants integrate with bone to create a permanent tooth replacement"
-                beforeColor={NEUTRAL_TOKENS.champagne}
-                afterColor={NEUTRAL_TOKENS.white}
-              />
+          <section className="t-section rounded-3xl p-8 shadow-sm">
+            <div className="flex flex-col gap-6">
+              <h2 className="text-2xl font-semibold">Why guests choose implants</h2>
+              <div className="grid gap-6 sm:grid-cols-2">
+                {benefits.map((benefit) => (
+                  <article key={benefit.title} className="t-card h-full p-6">
+                    <h3 className="text-xl font-semibold">{benefit.title}</h3>
+                    <p className="mt-3 leading-relaxed t-muted">{benefit.description}</p>
+                  </article>
+                ))}
+              </div>
             </div>
-            <ThreeDViewerSlot />
-          </div>
-        </section>
+          </section>
 
-        <section className="t-section rounded-3xl p-8 shadow-sm">
-          <div className="flex flex-col gap-6">
-            <h2 className="text-2xl font-semibold">Why guests choose implants</h2>
-            <div className="grid gap-6 sm:grid-cols-2">
-              {benefits.map((benefit) => (
-                <article key={benefit.title} className="t-card h-full p-6">
-                  <h3 className="text-xl font-semibold">{benefit.title}</h3>
-                  <p className="mt-3 leading-relaxed t-muted">{benefit.description}</p>
-                </article>
-              ))}
+          <section className="t-section rounded-3xl p-8 shadow-sm">
+            <div className="flex flex-col gap-6">
+              <h2 className="text-2xl font-semibold">Implant treatment options</h2>
+              <div className="grid gap-6 md:grid-cols-3">
+                {treatmentOptions.map((option) => (
+                  <article key={option.name} className="t-card h-full p-6">
+                    <h3 className="text-lg font-semibold">{option.name}</h3>
+                    <p className="mt-2 leading-relaxed t-muted">{option.description}</p>
+                    <ul className="mt-4 space-y-2 text-sm leading-relaxed t-muted">
+                      {option.highlights.map((item) => (
+                        <li key={item} className="flex gap-2">
+                          <span aria-hidden="true">•</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section className="t-section rounded-3xl p-8 shadow-sm">
-          <div className="flex flex-col gap-6">
-            <h2 className="text-2xl font-semibold">Implant treatment options</h2>
-            <div className="grid gap-6 md:grid-cols-3">
-              {treatmentOptions.map((option) => (
-                <article key={option.name} className="t-card h-full p-6">
-                  <h3 className="text-lg font-semibold">{option.name}</h3>
-                  <p className="mt-2 leading-relaxed t-muted">{option.description}</p>
-                  <ul className="mt-4 space-y-2 text-sm leading-relaxed t-muted">
-                    {option.highlights.map((item) => (
-                      <li key={item} className="flex gap-2">
-                        <span aria-hidden="true">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              ))}
+          <section className="t-section rounded-3xl p-8 shadow-sm">
+            <div className="flex flex-col gap-6">
+              <h2 className="text-2xl font-semibold">The implant journey</h2>
+              <div className="space-y-6">
+                {process.map((step) => (
+                  <article key={step.phase} className="t-card p-6">
+                    <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                      <h3 className="text-lg font-semibold">{step.phase}</h3>
+                      <p className="text-sm uppercase tracking-wider text-[var(--champagne-ink-muted)]">{step.duration}</p>
+                    </div>
+                    <p className="mt-3 leading-relaxed t-muted">{step.description}</p>
+                    <ul className="mt-4 grid gap-2 text-sm leading-relaxed t-muted sm:grid-cols-2">
+                      {step.details.map((detail) => (
+                        <li key={detail} className="flex gap-2">
+                          <span aria-hidden="true">•</span>
+                          <span>{detail}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+          <section className="t-section rounded-3xl p-8 shadow-sm">
+            <div className="flex flex-col gap-6">
+              <h2 className="text-2xl font-semibold">Are implants right for you?</h2>
+              <div className="grid gap-6 md:grid-cols-2">
+                {candidateChecklist.map((item) => (
+                  <article key={item.title} className="t-card h-full p-6">
+                    <h3 className="text-lg font-semibold">{item.title}</h3>
+                    <p className="mt-3 leading-relaxed t-muted">{item.description}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
 
-        <section className="t-section rounded-3xl p-8 shadow-sm">
-          <div className="flex flex-col gap-6">
-            <h2 className="text-2xl font-semibold">The implant journey</h2>
-            <div className="space-y-6">
-              {process.map((step) => (
-                <article key={step.phase} className="t-card p-6">
-                  <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                    <h3 className="text-lg font-semibold">{step.phase}</h3>
-                    <p className="text-sm uppercase tracking-wider text-[var(--champagne-ink-muted)]">{step.duration}</p>
-                  </div>
-                  <p className="mt-3 leading-relaxed t-muted">{step.description}</p>
-                  <ul className="mt-4 grid gap-2 text-sm leading-relaxed t-muted sm:grid-cols-2">
-                    {step.details.map((detail) => (
-                      <li key={detail} className="flex gap-2">
-                        <span aria-hidden="true">•</span>
-                        <span>{detail}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              ))}
+          <section className={`t-section rounded-3xl p-8 shadow-sm ${parallax}`} data-depth="cta">
+            <div className="flex flex-col gap-4">
+              <h2 className="text-2xl font-semibold">Plan your implant consultation</h2>
+              <p className="max-w-3xl leading-relaxed t-muted">
+                Meet with our implant dentist to map your smile transformation, review timelines, and design a restoration that feels indistinguishable from natural teeth.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Link className={goldGlow} href="/contact">
+                  Book a consultation
+                </Link>
+                <Link className={goldGlow} href="/treatments">
+                  View all treatments
+                </Link>
+              </div>
             </div>
-          </div>
-        </section>
-        <section className="t-section rounded-3xl p-8 shadow-sm">
-          <div className="flex flex-col gap-6">
-            <h2 className="text-2xl font-semibold">Are implants right for you?</h2>
-            <div className="grid gap-6 md:grid-cols-2">
-              {candidateChecklist.map((item) => (
-                <article key={item.title} className="t-card h-full p-6">
-                  <h3 className="text-lg font-semibold">{item.title}</h3>
-                  <p className="mt-3 leading-relaxed t-muted">{item.description}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+          </section>
+        </main>
+      </ChampagneSectionShell>
+    </>
+  );
+}
 
-        <section className={`t-section rounded-3xl p-8 shadow-sm ${parallax}`} data-depth="cta">
-          <div className="flex flex-col gap-4">
-            <h2 className="text-2xl font-semibold">Plan your implant consultation</h2>
-            <p className="max-w-3xl leading-relaxed t-muted">
-              Meet with our implant dentist to map your smile transformation, review timelines, and design a restoration that
-              feels indistinguishable from natural teeth.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link className={goldGlow} href="/contact">
-                Book a consultation
-              </Link>
-              <Link className={goldGlow} href="/treatments">
-                View all treatments
-              </Link>
-            </div>
-          </div>
-        </section>
-      </main>
-    </ChampagneSectionShell>
+export default function DentalImplantsPreviewPage() {
+  return (
+    <>
+      <DentalImplantsPreviewContent />
+      <SchemaInjector route="/treatments/dental-implants" />
+    </>
   );
 }
