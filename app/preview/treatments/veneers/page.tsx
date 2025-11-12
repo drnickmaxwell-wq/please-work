@@ -2,7 +2,7 @@
 import Link from 'next/link';
 
 import InteractiveToothModel from '@/components/3d/interactive-tooth-model';
-import ThreeDViewerSlot from '@/components/preview/treatments/ThreeDViewerSlot';
+import TreatmentBreadcrumb from '@/components/preview/nav/TreatmentBreadcrumb';
 import TreatmentHeroShell from '@/components/preview/treatments/TreatmentHeroShell';
 import ChampagneSectionShell, { champagneShellClasses } from '@/components/sections/ChampagneSectionShell';
 import { SchemaInjector } from '@/lib/seo/preview/SchemaInjector';
@@ -77,7 +77,7 @@ export default function VeneersPreviewPage() {
     <>
       <TreatmentHeroShell
         title="Porcelain veneers in Shoreham-by-Sea"
-        subtitle="Redesign your smile with feather-light porcelain crafted for your features. Digital design with artisanal finishing."
+        subtitle="Feather-light porcelain tailored to your features. Digital design with artisanal finishing."
         ctas={[
           { label: 'Reserve a consultation', href: '/contact' },
           { label: 'View all treatments', href: '/treatments' },
@@ -86,25 +86,7 @@ export default function VeneersPreviewPage() {
       />
       <ChampagneSectionShell>
         <main className="mx-auto flex max-w-5xl flex-col gap-12 px-6">
-          <nav aria-label="Breadcrumb" className="text-sm">
-            <ol className="flex flex-wrap items-center gap-2 text-[var(--champagne-ink-muted)]">
-              <li>
-                <Link className="underline-offset-4 hover:underline" href="/preview">
-                  Preview
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li>
-                <Link className="underline-offset-4 hover:underline" href="/preview/treatments">
-                  Treatments
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li aria-current="page" className="font-medium text-[var(--champagne-ink)]">
-                Porcelain veneers
-              </li>
-            </ol>
-          </nav>
+          <TreatmentBreadcrumb current="Porcelain veneers" />
 
           <section className="t-section rounded-3xl p-8 shadow-sm">
             <div className="flex flex-col gap-6">
@@ -121,7 +103,6 @@ export default function VeneersPreviewPage() {
                   afterColor={NEUTRAL_TOKENS.white}
                 />
               </div>
-              <ThreeDViewerSlot />
             </div>
           </section>
 
