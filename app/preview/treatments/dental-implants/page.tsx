@@ -2,8 +2,8 @@
 import Link from 'next/link';
 
 import InteractiveToothModel from '@/components/3d/interactive-tooth-model';
+import PreviewTreatmentHero from '@/components/preview/PreviewTreatmentHero';
 import TreatmentBreadcrumb from '@/components/preview/nav/TreatmentBreadcrumb';
-import TreatmentHeroShell from '@/components/preview/treatments/TreatmentHeroShell';
 import ChampagneSectionShell, { champagneShellClasses } from '@/components/sections/ChampagneSectionShell';
 import { SchemaInjector } from '@/lib/seo/preview/SchemaInjector';
 import { TOKENS as NEUTRAL_TOKENS } from '@/styles/tokens/neutrals';
@@ -126,39 +126,39 @@ export function DentalImplantsPreviewContent() {
 
   return (
     <>
-      <TreatmentHeroShell
+      <PreviewTreatmentHero
         title="Dental implants in Shoreham-by-Sea"
-        subtitle="Restore missing teeth with titanium implants that look and feel natural. Advanced planning keeps every stage precise and calm."
-        ctas={[
-          { label: 'Reserve a consultation', href: '/contact' },
-          { label: 'View all treatments', href: '/treatments' },
-        ]}
-        show3DSlot
+        kicker="Restore missing teeth with titanium implants that look and feel natural. Advanced planning keeps every stage precise and calm."
+        ctaPrimary={{ label: 'Reserve a consultation', href: '/contact' }}
+        ctaSecondary={{ label: 'View all treatments', href: '/treatments' }}
       />
-      <div className="mx-auto max-w-5xl px-6 pt-6">
+
+      <div className="preview-breadcrumbs-wrapper">
         <div className="preview-breadcrumbs">
           <TreatmentBreadcrumb current="Dental implants" />
         </div>
       </div>
+
+      <section className="section">
+        <div className="flex flex-col gap-4">
+          <h2 className="text-2xl font-semibold">3D implant visualiser</h2>
+          <p className="max-w-3xl leading-relaxed t-muted">
+            Explore how the implant, abutment, and crown work together. Rotate the model to see how the restoration integrates with surrounding bone and soft tissue.
+          </p>
+          <div className="viewer-slot" role="region" aria-label="3D implant viewer placeholder">
+            <InteractiveToothModel
+              treatmentType="implant"
+              title="Complete Dental Implant System"
+              description="See how titanium implants integrate with bone to create a permanent tooth replacement"
+              beforeColor={NEUTRAL_TOKENS.champagne}
+              afterColor={NEUTRAL_TOKENS.white}
+            />
+          </div>
+        </div>
+      </section>
+
       <ChampagneSectionShell>
         <main className="mx-auto flex max-w-5xl flex-col gap-12 px-6">
-          <section className="t-section rounded-3xl p-8 shadow-sm">
-            <div className="flex flex-col gap-6">
-              <h2 className="text-2xl font-semibold">3D implant visualiser</h2>
-              <p className="max-w-3xl leading-relaxed t-muted">
-                Explore how the implant, abutment, and crown work together. Rotate the model to see how the restoration integrates with surrounding bone and soft tissue.
-              </p>
-              <div className="t-card p-6">
-                <InteractiveToothModel
-                  treatmentType="implant"
-                  title="Complete Dental Implant System"
-                  description="See how titanium implants integrate with bone to create a permanent tooth replacement"
-                  beforeColor={NEUTRAL_TOKENS.champagne}
-                  afterColor={NEUTRAL_TOKENS.white}
-                />
-              </div>
-            </div>
-          </section>
 
           <section className="t-section rounded-3xl p-8 shadow-sm">
             <div className="flex flex-col gap-6">

@@ -2,8 +2,8 @@
 import Link from 'next/link';
 
 import InteractiveToothModel from '@/components/3d/interactive-tooth-model';
+import PreviewTreatmentHero from '@/components/preview/PreviewTreatmentHero';
 import TreatmentBreadcrumb from '@/components/preview/nav/TreatmentBreadcrumb';
-import TreatmentHeroShell from '@/components/preview/treatments/TreatmentHeroShell';
 import ChampagneSectionShell, { champagneShellClasses } from '@/components/sections/ChampagneSectionShell';
 import { SchemaInjector } from '@/lib/seo/preview/SchemaInjector';
 import { TOKENS as NEUTRAL_TOKENS } from '@/styles/tokens/neutrals';
@@ -75,39 +75,39 @@ export default function VeneersPreviewPage() {
 
   return (
     <>
-      <TreatmentHeroShell
+      <PreviewTreatmentHero
         title="Porcelain veneers in Shoreham-by-Sea"
-        subtitle="Feather-light porcelain tailored to your features. Digital design with artisanal finishing."
-        ctas={[
-          { label: 'Reserve a consultation', href: '/contact' },
-          { label: 'View all treatments', href: '/treatments' },
-        ]}
-        show3DSlot
+        kicker="Feather-light porcelain tailored to your features. Digital design with artisanal finishing."
+        ctaPrimary={{ label: 'Reserve a consultation', href: '/contact' }}
+        ctaSecondary={{ label: 'View all treatments', href: '/treatments' }}
       />
-      <div className="mx-auto max-w-5xl px-6 pt-6">
+
+      <div className="preview-breadcrumbs-wrapper">
         <div className="preview-breadcrumbs">
           <TreatmentBreadcrumb current="Porcelain veneers" />
         </div>
       </div>
+
+      <section className="section">
+        <div className="flex flex-col gap-4">
+          <h2 className="text-2xl font-semibold">Interactive veneer preview</h2>
+          <p className="max-w-3xl leading-relaxed t-muted">
+            Rotate the 3D model to see how ultra-thin shells layer over enamel for a seamless transformation from every angle.
+          </p>
+          <div className="viewer-slot" role="region" aria-label="3D veneer viewer placeholder">
+            <InteractiveToothModel
+              treatmentType="veneer"
+              title="Porcelain Veneer Transformation"
+              description="See how ultra-thin porcelain shells create a perfect, natural-looking smile"
+              beforeColor={NEUTRAL_TOKENS.champagne}
+              afterColor={NEUTRAL_TOKENS.white}
+            />
+          </div>
+        </div>
+      </section>
+
       <ChampagneSectionShell>
         <main className="mx-auto flex max-w-5xl flex-col gap-12 px-6">
-          <section className="t-section rounded-3xl p-8 shadow-sm">
-            <div className="flex flex-col gap-6">
-              <h2 className="text-2xl font-semibold">Interactive veneer preview</h2>
-              <p className="max-w-3xl leading-relaxed t-muted">
-                Rotate the 3D model to see how ultra-thin shells layer over enamel for a seamless transformation from every angle.
-              </p>
-              <div className="t-card p-6">
-                <InteractiveToothModel
-                  treatmentType="veneer"
-                  title="Porcelain Veneer Transformation"
-                  description="See how ultra-thin porcelain shells create a perfect, natural-looking smile"
-                  beforeColor={NEUTRAL_TOKENS.champagne}
-                  afterColor={NEUTRAL_TOKENS.white}
-                />
-              </div>
-            </div>
-          </section>
 
           <section className="t-section rounded-3xl p-8 shadow-sm">
             <div className="flex flex-col gap-6">
