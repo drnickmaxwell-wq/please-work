@@ -460,17 +460,27 @@
 :root {
   --preview-hero-ink: var(--smh-ink);
   --preview-hero-text: var(--smh-text);
-  --preview-hero-surface: var(--smh-surface, color-mix(in oklab, white 90%, transparent));
+  --preview-hero-surface: var(--smh-surface, color-mix(in oklab, var(--smh-white) 90%, transparent));
   --preview-hero-gradient: var(--smh-gradient);
-  --preview-hero-wave-mask: var(--smh-wave-mask, url('/waves/smh-wave-mask.svg'));
-  --preview-hero-grain-image: var(--champagne-grain-image, image-set(url('/textures/film-grain-desktop.webp') 1x));
+  --preview-hero-wave-image: var(
+    --smh-wave-mask,
+    url('/brand/waves/wave-mask.webp')
+  );
+  --preview-hero-grain-image: var(
+    --champagne-grain-image,
+    url('/brand/film/grain-512.webp')
+  );
+  --preview-hero-wave-alpha: var(--smh-wave-alpha, 0.1);
+  --preview-hero-glass-alpha: var(--smh-gold-alpha, 0.12);
   --preview-hero-grain-alpha: var(--smh-grain-alpha, 0.06);
-  --preview-hero-wave-alpha: 0.1;
-  --preview-hero-vignette-alpha: var(--smh-vignette-alpha, 0.06);
-  --preview-hero-vignette-strength: calc(var(--preview-hero-vignette-alpha, 0.06) * 100%);
   --preview-hero-radius-xl: 1.25rem;
   --preview-hero-space-y: clamp(3.5rem, 6vw, 6rem);
   --preview-hero-gold: var(--smh-accent-gold, var(--smh-gold));
+  --preview-hero-gold-soft: var(--smh-gold-soft, color-mix(in oklab, var(--preview-hero-gold) 55%, var(--smh-white) 45%));
+  --preview-hero-shadow-gold: var(
+    --smh-shadow-gold,
+    0 18px 38px color-mix(in oklab, var(--preview-hero-gold) 22%, transparent)
+  );
 }
 
 .preview-hero-champagne {
@@ -493,9 +503,9 @@
 }
 
 .preview-hero-champagne__bg,
-.preview-hero-champagne__overlay,
-.preview-hero-champagne__grain,
-.preview-hero-champagne__vignette {
+.preview-hero-champagne__wave,
+.preview-hero-champagne__glass,
+.preview-hero-champagne__grain {
   position: absolute;
   inset: 0;
   pointer-events: none;
@@ -506,54 +516,64 @@
   transform: translateZ(0);
 }
 
-.preview-hero-champagne__overlay {
+.preview-hero-champagne__wave {
   opacity: var(--preview-hero-wave-alpha);
   mix-blend-mode: screen;
-  background: var(--preview-hero-gradient);
-  mask-image: var(--preview-hero-wave-mask);
-  -webkit-mask-image: var(--preview-hero-wave-mask);
-  mask-size: cover;
-  -webkit-mask-size: cover;
-  mask-repeat: no-repeat;
-  -webkit-mask-repeat: no-repeat;
-  mask-position: center;
-  -webkit-mask-position: center;
+  background-image: var(--preview-hero-wave-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .preview-hero-champagne__grain {
   opacity: var(--preview-hero-grain-alpha);
-  mix-blend-mode: soft-light;
   background-image: var(--preview-hero-grain-image);
-  background-size: 320px 320px;
+  background-size: 512px 512px;
   background-repeat: repeat;
+  mix-blend-mode: soft-light;
+}
+.preview-hero-champagne__glass {
+  opacity: var(--preview-hero-glass-alpha);
+  mix-blend-mode: screen;
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--preview-hero-gold-soft) 88%, transparent) 0%,
+    transparent 100%
+  );
 }
 
-.preview-hero-champagne__vignette {
-  background: radial-gradient(
-    75% 65% at 50% 25%,
-    transparent 42%,
-    color-mix(in oklab, var(--preview-hero-ink) var(--preview-hero-vignette-strength), transparent) 100%
+.preview-hero-champagne__divider {
+  position: absolute;
+  inset-inline: 0;
+  bottom: -1px;
+  height: clamp(3rem, 10vw, 5.5rem);
+  background: linear-gradient(
+    to bottom,
+    color-mix(in oklab, var(--smh-white) 0%, transparent) 0%,
+    color-mix(in oklab, var(--smh-white) 40%, transparent) 100%
   );
+  pointer-events: none;
+  z-index: 0;
 }
 
 .preview-hero-champagne .eyebrow {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   font: 600 0.75rem/1.2 var(--font-ui, var(--smh-heading, 'Montserrat', system-ui));
-  color: color-mix(in oklab, var(--preview-hero-text) 80%, white);
+  color: color-mix(in oklab, var(--preview-hero-text) 80%, var(--smh-white));
   margin: 0 0 0.75rem 0;
 }
 
 .preview-hero-champagne .title {
   font: 700 clamp(1.85rem, 4vw, 3rem)/1.1 var(--smh-heading, 'Montserrat', system-ui);
   margin: 0 0 0.5rem 0;
-  color: var(--preview-hero-ink);
+  color: color-mix(in oklab, var(--preview-hero-ink) 92%, var(--smh-white) 8%);
 }
 
 .preview-hero-champagne .kicker {
   max-width: 62ch;
   font: 400 1rem/1.6 var(--font-body, 'Lora', serif);
-  color: color-mix(in oklab, var(--preview-hero-text) 86%, white);
+  color: color-mix(in oklab, var(--preview-hero-text) 86%, var(--smh-white));
   margin: 0 0 1.25rem 0;
 }
 
@@ -573,7 +593,7 @@
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  border: 1px solid color-mix(in oklab, var(--preview-hero-text) 22%, white);
+  border: 1px solid color-mix(in oklab, var(--preview-hero-text) 22%, var(--smh-white));
   color: var(--preview-hero-text);
   background: color-mix(in oklab, var(--preview-hero-surface) 60%, transparent);
   transition: transform 250ms ease, opacity 250ms ease;
@@ -585,11 +605,11 @@
   background: color-mix(in oklab, var(--preview-hero-gold) 24%, transparent);
   color: color-mix(in oklab, var(--preview-hero-ink) 90%, var(--preview-hero-text) 10%);
   border-color: color-mix(in oklab, var(--preview-hero-gold) 40%, transparent);
-  box-shadow: 0 0 0 1px color-mix(in oklab, var(--preview-hero-gold) 45%, transparent);
+  box-shadow: var(--preview-hero-shadow-gold);
 }
 
 .preview-hero-champagne .btn-ghost {
-  background: color-mix(in oklab, white 70%, transparent);
+  background: color-mix(in oklab, var(--smh-white) 70%, transparent);
   color: var(--preview-hero-text);
   border-color: color-mix(in oklab, var(--preview-hero-gold) 35%, transparent);
 }
@@ -616,7 +636,7 @@
   backdrop-filter: blur(2px);
   border-radius: 0.5rem;
   padding: 0.375rem 0.625rem;
-  color: color-mix(in oklab, var(--preview-hero-text) 85%, white);
+  color: color-mix(in oklab, var(--preview-hero-text) 85%, var(--smh-white));
 }
 
 .section {
@@ -627,7 +647,7 @@
 
 .viewer-slot {
   border-radius: var(--preview-hero-radius-xl);
-  border: 1px dashed color-mix(in oklab, var(--preview-hero-text) 25%, white);
+  border: 1px dashed color-mix(in oklab, var(--preview-hero-text) 25%, var(--smh-white));
   padding: clamp(1rem, 3vw, 1.5rem);
   background: color-mix(in oklab, var(--preview-hero-surface) 75%, transparent);
   color: color-mix(in oklab, var(--preview-hero-text) 70%, var(--preview-hero-ink));
@@ -638,7 +658,9 @@
     transition: none;
   }
 
-  .preview-hero-champagne__overlay {
-    opacity: 0.08;
+  .preview-hero-champagne__wave,
+  .preview-hero-champagne__glass {
+    opacity: 0 !important;
+    mix-blend-mode: normal;
   }
 }

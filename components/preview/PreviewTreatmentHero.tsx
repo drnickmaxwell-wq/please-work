@@ -20,9 +20,9 @@ export default memo(function PreviewTreatmentHero({
   return (
     <section className="preview-hero-champagne" aria-label="Intro">
       <div className="preview-hero-champagne__bg" aria-hidden="true" />
-      <div className="preview-hero-champagne__overlay" aria-hidden="true" />
+      <div className="preview-hero-champagne__wave" aria-hidden="true" />
+      <div className="preview-hero-champagne__glass" aria-hidden="true" />
       <div className="preview-hero-champagne__grain" aria-hidden="true" />
-      <div className="preview-hero-champagne__vignette" aria-hidden="true" />
       <div className="container">
         <p className="eyebrow">{eyebrow}</p>
         <h1 className="title">{title}</h1>
@@ -43,6 +43,7 @@ export default memo(function PreviewTreatmentHero({
           </div>
         )}
       </div>
+      <div className="preview-hero-champagne__divider" aria-hidden="true" />
     </section>
   );
 });
