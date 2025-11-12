@@ -24,13 +24,16 @@ export default function TreatmentHeroShell({
       <div className="champ-hero__inner">
         <p className="champ-hero__kicker">{kicker}</p>
         <h1 className="champ-hero__title">{title}</h1>
-        {subtitle && <p className="champ-hero__sub">{subtitle}</p>}
+        {subtitle && <p className="champ-hero__subtitle">{subtitle}</p>}
         {ctas.length > 0 && (
           <div className="champ-hero__ctas">
             {ctas.map((cta, index) => (
               <a
                 key={`${cta.label}-${index}`}
-                className={index === 0 ? "button-gold" : "button-ghost"}
+                className={[
+                  'button',
+                  index === 0 ? 'button--primary' : 'button--ghost',
+                ].join(' ')}
                 href={cta.href}
               >
                 {cta.label}

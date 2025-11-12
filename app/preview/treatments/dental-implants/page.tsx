@@ -135,10 +135,13 @@ export function DentalImplantsPreviewContent() {
         ]}
         show3DSlot
       />
+      <div className="mx-auto max-w-5xl px-6 pt-6">
+        <div className="preview-breadcrumbs">
+          <TreatmentBreadcrumb current="Dental implants" />
+        </div>
+      </div>
       <ChampagneSectionShell>
         <main className="mx-auto flex max-w-5xl flex-col gap-12 px-6">
-          <TreatmentBreadcrumb current="Dental implants" />
-
           <section className="t-section rounded-3xl p-8 shadow-sm">
             <div className="flex flex-col gap-6">
               <h2 className="text-2xl font-semibold">3D implant visualiser</h2>

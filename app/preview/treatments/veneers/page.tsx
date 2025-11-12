@@ -84,10 +84,13 @@ export default function VeneersPreviewPage() {
         ]}
         show3DSlot
       />
+      <div className="mx-auto max-w-5xl px-6 pt-6">
+        <div className="preview-breadcrumbs">
+          <TreatmentBreadcrumb current="Porcelain veneers" />
+        </div>
+      </div>
       <ChampagneSectionShell>
         <main className="mx-auto flex max-w-5xl flex-col gap-12 px-6">
-          <TreatmentBreadcrumb current="Porcelain veneers" />
-
           <section className="t-section rounded-3xl p-8 shadow-sm">
             <div className="flex flex-col gap-6">
               <h2 className="text-2xl font-semibold">Interactive veneer preview</h2>
