@@ -21,15 +21,16 @@ export default memo(function PreviewTreatmentHero({
     <section className="preview-hero-champagne" aria-label="Intro">
       <div className="preview-hero-champagne__bg" aria-hidden="true" />
       <div className="preview-hero-champagne__wave" aria-hidden="true" />
-      <div className="preview-hero-champagne__glass" aria-hidden="true" />
       <div className="preview-hero-champagne__grain" aria-hidden="true" />
-      <div className="container">
-        <p className="eyebrow">{eyebrow}</p>
-        <h1 className="title">{title}</h1>
-        {kicker && <p className="kicker">{kicker}</p>}
+      <div className="preview-hero-champagne__glass" aria-hidden="true" />
+      <div className="preview-hero-champagne__particles" aria-hidden="true" />
+      <div className="preview-hero-champagne__inner">
+        <p className="preview-hero-champagne__eyebrow eyebrow">{eyebrow}</p>
+        <h1 className="preview-hero-champagne__title title">{title}</h1>
+        {kicker && <p className="preview-hero-champagne__kicker kicker">{kicker}</p>}
 
         {(ctaPrimary || ctaSecondary) && (
-          <div className="cta-row" role="group" aria-label="Primary actions">
+          <div className="cta-row preview-hero-champagne__cta-row" role="group" aria-label="Primary actions">
             {ctaPrimary && (
               <a className="btn btn-primary" href={ctaPrimary.href}>
                 {ctaPrimary.label}
