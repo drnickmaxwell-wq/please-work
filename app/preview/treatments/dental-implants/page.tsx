@@ -130,33 +130,33 @@ export default function DentalImplantsPreviewPage() {
   return (
     <TreatmentPreviewFrame section="implants">
       <ChampagneSectionShell>
-      <main className="mx-auto flex max-w-5xl flex-col gap-12 px-6">
-        <nav aria-label="Breadcrumb" className="text-sm">
-          <ol className="flex flex-wrap items-center gap-2 text-[var(--champagne-ink-muted)]">
-            <li>
-              <Link className="underline-offset-4 hover:underline" href="/preview">
-                Preview
-              </Link>
-            </li>
-            <li aria-hidden="true">/</li>
-            <li>
-              <Link className="underline-offset-4 hover:underline" href="/preview/treatments">
-                Treatments
-              </Link>
-            </li>
-            <li aria-hidden="true">/</li>
-            <li aria-current="page" className="font-medium text-[var(--champagne-ink)]">
-              Dental implants
-            </li>
-          </ol>
-        </nav>
+        <div className="mx-auto flex max-w-5xl flex-col gap-12 px-6">
+          <nav aria-label="Breadcrumb" className="text-sm">
+            <ol className="flex flex-wrap items-center gap-2 text-[var(--champagne-ink-muted)]">
+              <li>
+                <Link className="underline-offset-4 hover:underline" href="/preview">
+                  Preview
+                </Link>
+              </li>
+              <li aria-hidden="true">/</li>
+              <li>
+                <Link className="underline-offset-4 hover:underline" href="/preview/treatments">
+                  Treatments
+                </Link>
+              </li>
+              <li aria-hidden="true">/</li>
+              <li aria-current="page" className="font-medium text-[var(--champagne-ink)]">
+                Dental implants
+              </li>
+            </ol>
+          </nav>
 
-        <div className={parallax} data-direction="reverse">
-          <TreatmentBanner
-            label="Treatments"
-            subtitle="Restore missing teeth with titanium implants that look and feel natural. Our advanced planning, calming environment, and same-day provisional options keep every stage precise and comfortable."
-            title="Dental implants in Shoreham-by-Sea"
-          />
+          <div className={parallax} data-direction="reverse">
+            <TreatmentBanner
+              label="Treatments"
+              subtitle="Restore missing teeth with titanium implants that look and feel natural. Our advanced planning, calming environment, and same-day provisional options keep every stage precise and comfortable."
+              title="Dental implants in Shoreham-by-Sea"
+            />
         </div>
 
         <section className="t-section rounded-3xl p-8 shadow-sm">
@@ -273,7 +273,7 @@ export default function DentalImplantsPreviewPage() {
             </div>
           </div>
         </section>
-      </main>
+        </div>
       </ChampagneSectionShell>
     </TreatmentPreviewFrame>
   );

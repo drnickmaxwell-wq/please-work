@@ -1,0 +1,68 @@
+@import url('../tokens/smh-champagne-tokens.css');
+
+.preview-treatment-hero {
+  position: relative;
+  isolation: isolate;
+}
+
+.preview-treatment-hero .champagne-hero {
+  min-height: clamp(20rem, 60vw, 32rem);
+  display: flex;
+  align-items: flex-end;
+  padding: clamp(2rem, 6vw, 4rem) clamp(1.5rem, 4vw, 3.5rem);
+}
+
+.preview-treatment-hero .champagne-hero--compact .hero-content-wrapper {
+  padding: 0;
+}
+
+.preview-treatment-hero .hero-content {
+  width: min(64ch, 100%);
+}
+
+.preview-treatment-hero .hero-eyebrow {
+  margin-bottom: 0.75rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--paper, white) 68%, transparent);
+}
+
+.preview-treatment-hero .hero-title {
+  font-size: clamp(2.5rem, 4vw, 3rem);
+  line-height: 1.05;
+}
+
+.preview-treatment-hero .hero-subtitle {
+  margin-top: 1rem;
+  max-width: 56ch;
+}
+
+.preview-treatment-hero [data-layer='gradient'] {
+  filter: hue-rotate(var(--section-tint, 0deg)) saturate(1.02);
+}
+
+.preview-content {
+  background: transparent;
+}
+
+.preview-content .champagne-preview-skin__inner {
+  padding-top: clamp(2rem, 6vw, 4rem);
+}
+
+.preview-card {
+  background: color-mix(in oklab, white 82%, transparent);
+  border: 1px solid color-mix(in oklab, var(--smh-ink) 8%, transparent);
+  backdrop-filter: blur(6px);
+}
+
+@media (max-width: 768px) {
+  .preview-treatment-hero .champagne-hero {
+    padding: clamp(2.5rem, 10vw, 3.5rem) clamp(1.5rem, 6vw, 2.5rem);
+    min-height: 22rem;
+  }
+
+  .preview-treatment-hero .hero-title {
+    font-size: clamp(2rem, 9vw, 2.75rem);
+  }
+}
