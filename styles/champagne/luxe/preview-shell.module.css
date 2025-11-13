@@ -1,0 +1,50 @@
+.surface {
+  min-height: 100svh;
+  background: radial-gradient(
+      circle at 20% 20%,
+      color-mix(in srgb, var(--smh-primary-magenta) 6%, transparent) 0%,
+      transparent 52%
+    ),
+    radial-gradient(
+      circle at 80% 85%,
+      color-mix(in srgb, var(--smh-primary-teal) 8%, transparent) 0%,
+      transparent 60%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--smh-ink) 90%, transparent 10%) 0%,
+      color-mix(in srgb, var(--smh-ink) 84%, transparent 16%) 100%
+    );
+  color: color-mix(in srgb, var(--smh-white) 92%, transparent);
+}
+
+.main {
+  width: min(1120px, 100%);
+  margin-inline: auto;
+  display: grid;
+  gap: clamp(6rem, 10vw, 8rem);
+  padding-inline: clamp(1.75rem, 6vw, 4rem);
+  margin-top: clamp(4rem, 8vw, 5.5rem);
+  padding-bottom: clamp(6rem, 10vw, 8rem);
+  position: relative;
+}
+
+.main::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: -4rem;
+  height: 4rem;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--smh-ink) 8%, transparent) 0%,
+    transparent 80%
+  );
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .main {
+    gap: clamp(4rem, 12vw, 6rem);
+  }
+}

@@ -1,0 +1,159 @@
+.section {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding-inline: clamp(1.5rem, 6vw, 3rem);
+}
+
+.section::before {
+  content: "";
+  position: absolute;
+  inset-inline: clamp(0rem, 4vw, 2rem);
+  top: 0;
+  height: 1px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--smh-ink) 6%, transparent) 0%,
+    transparent 100%
+  );
+}
+
+.inner {
+  position: relative;
+  width: min(1040px, 100%);
+  display: grid;
+  gap: clamp(2rem, 6vw, 3rem);
+  padding: clamp(3rem, 7vw, 4rem);
+  border-radius: clamp(2rem, 5vw, 2.75rem);
+  background: color-mix(in srgb, var(--smh-ink) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--smh-accent-gold-soft) 14%, transparent);
+  backdrop-filter: blur(24px);
+  box-shadow:
+    0 32px 84px color-mix(in srgb, var(--smh-ink) 18%, transparent),
+    inset 0 0 0.5px color-mix(in srgb, var(--smh-ink) 40%, transparent);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--smh-accent-gold-soft) 12%, transparent) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      color-mix(in srgb, var(--smh-primary-teal) 16%, transparent) 0%,
+      transparent 60%
+    );
+  opacity: 0.28;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+.inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/assets/champagne/film-grain-desktop.webp");
+  background-size: cover;
+  opacity: 0.08;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+  color: color-mix(in srgb, var(--smh-white) 85%, var(--smh-text) 15%);
+  font-family: var(--font-lora, "Lora", serif);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.section[data-surface-tone='muted'] .inner {
+  background: color-mix(in srgb, var(--smh-ink) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--smh-primary-teal) 18%, transparent);
+}
+
+.section[data-surface-tone='highlight'] .inner {
+  background: color-mix(in srgb, var(--smh-accent-gold-soft) 16%, transparent);
+  border: 1px solid color-mix(in srgb, var(--smh-accent-gold) 20%, transparent);
+}
+
+.section[data-tone='veneers'] .inner::before {
+  background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--smh-accent-gold-soft) 20%, transparent) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at 78% 18%,
+      color-mix(in srgb, var(--smh-primary-magenta) 16%, transparent) 0%,
+      transparent 62%
+    );
+}
+
+.section[data-tone='implants'] .inner::before {
+  background: linear-gradient(
+      120deg,
+      color-mix(in srgb, var(--smh-primary-teal) 22%, transparent) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 20% 78%,
+      color-mix(in srgb, var(--smh-primary-magenta) 10%, transparent) 0%,
+      transparent 60%
+    );
+}
+
+.section[data-tone='whitening'] .inner::before {
+  background: linear-gradient(
+      140deg,
+      color-mix(in srgb, var(--smh-primary-magenta) 16%, transparent) 0%,
+      transparent 52%
+    ),
+    radial-gradient(
+      circle at 82% 72%,
+      color-mix(in srgb, var(--smh-accent-gold-soft) 18%, transparent) 0%,
+      transparent 64%
+    );
+}
+
+.section[data-tone='spark'] .inner::before {
+  background: linear-gradient(
+      130deg,
+      color-mix(in srgb, var(--smh-primary-teal) 24%, transparent) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 18% 28%,
+      color-mix(in srgb, var(--smh-primary-magenta) 12%, transparent) 0%,
+      transparent 60%
+    );
+}
+
+.section[data-tone='general'] .inner::before {
+  background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--smh-primary-magenta) 14%, transparent) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 72% 28%,
+      color-mix(in srgb, var(--smh-primary-teal) 14%, transparent) 0%,
+      transparent 60%
+    );
+}
+
+@media (max-width: 768px) {
+  .inner {
+    padding: clamp(2.25rem, 10vw, 3rem);
+    border-radius: 1.75rem;
+  }
+}

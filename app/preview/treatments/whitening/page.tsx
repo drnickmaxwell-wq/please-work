@@ -1,114 +1,55 @@
-// Preview-only clone. No hard hexes. Do not edit production pages.
+export const dynamic = "force-static";
+export const revalidate = 0;
+
 import Link from "next/link";
 
-import { ChampagneTreatmentHero } from "@/components/treatments/ChampagneTreatmentHero";
 import {
+  ChampagneTreatmentHeroLuxe,
   LuxeCard,
   LuxeSection,
   PreviewMain,
   PreviewPageShell,
-} from "@/components/treatments/preview";
+} from "@/components/luxe";
 import { SchemaInjector } from "@/lib/seo/preview/SchemaInjector";
 
-import "@/styles/treatments/preview-light.css";
+const whiteningHighlights = [
+  "Gentle, calibrated whitening programmes protect enamel while lifting shade.",
+  "Shade previews track progress with Champagne-safe photography guides.",
+  "At-home kits pair with in-studio care for luminous, lasting brightness.",
+  "Comfort rituals keep sensitivity low with serum soothers and micro mist hydration.",
+];
 
-const benefits = [
+const whiteningSteps = [
   {
-    title: "Immediate results",
-    description: "See dramatic whitening results in a single professional session calibrated for Champagne comfort.",
+    title: "Shade mapping",
+    detail: "Baseline scans and shade charts define a personalised lift and timing.",
   },
   {
-    title: "Safe & effective",
-    description: "Professional-grade whitening protects enamel while lifting stains with even coverage.",
+    title: "Studio activation",
+    detail: "Low-heat LED activation and Champagne-calibrated gels start the lift.",
   },
   {
-    title: "Long lasting",
-    description: "Results can last 12–18 months with thoughtful aftercare, touch-ups, and hygiene visits.",
+    title: "At-home rhythm",
+    detail: "Gentle kits continue the journey with check-ins for comfort and progress.",
   },
   {
-    title: "Confidence boost",
-    description: "A brighter smile elevates presence for events, photography, and everyday confidence.",
+    title: "Radiance sealing",
+    detail: "Mineral serums and Champagne polishes lock in gloss and soothe enamel.",
   },
 ];
 
-const options = [
+const whiteningFaq = [
   {
-    name: "In-practice whitening",
-    summary: "Fastest lift with dentist-applied gels and LED activation for enhanced brightness.",
-    duration: "60–90 minutes",
-    results: "Up to 8 shades lighter",
-    highlights: [
-      "Applied in practice with precision isolation",
-      "Comfort-first LED activation",
-      "Immediate reveal before you leave",
-      "Perfect for rapid event prep",
-    ],
+    question: "How long do results last?",
+    answer: "Most guests maintain their glow for 12–18 months with bespoke at-home boosters.",
   },
   {
-    name: "Take-home whitening trays",
-    summary: "Custom-fitted trays and professional gels allow gradual, flexible whitening at home.",
-    duration: "1–2 weeks",
-    results: "Up to 6 shades lighter",
-    highlights: [
-      "Thermoformed trays from your digital scans",
-      "Professional gels for even coverage",
-      "Evening or weekend flexibility",
-      "Easy top-ups whenever needed",
-    ],
+    question: "Is whitening safe for sensitive teeth?",
+    answer: "Yes. We stage the programme with sensitivity checkpoints and soothing serums to keep guests comfortable.",
   },
   {
-    name: "Combination care",
-    summary: "Begin in practice and maintain at home for long-lasting brilliance and even tone.",
-    duration: "Ongoing",
-    results: "Maximum whitening potential",
-    highlights: [
-      "Best-of-both schedules",
-      "Custom plans for lasting brightness",
-      "Top-up gels included",
-      "Supports extended maintenance",
-    ],
-  },
-];
-
-const stainTypes = [
-  {
-    label: "Surface stains",
-    causes: ["Coffee", "Tea", "Wine", "Tobacco"],
-    approach: "Easily removed with a single professional session.",
-    success: "95% response rate",
-  },
-  {
-    label: "Age-related stains",
-    causes: ["Enamel thinning", "Natural dentine changes"],
-    approach: "Responds well to calibrated whitening under supervision.",
-    success: "85% response rate",
-  },
-  {
-    label: "Intrinsic stains",
-    causes: ["Medications", "Fluorosis", "Tooth trauma"],
-    approach: "May require layered treatments or veneers for complete correction.",
-    success: "70% response rate",
-  },
-];
-
-const aftercare = [
-  {
-    title: "First 48 hours",
-    notes: [
-      "Avoid richly coloured foods and drinks.",
-      "Use a straw for any coloured beverages.",
-      "Skip tobacco products while enamel settles.",
-      "Choose clear or white dishes to maintain lift.",
-    ],
-  },
-  {
-    title: "Long-term maintenance",
-    notes: [
-      "Attend hygiene visits every 6 months.",
-      "Use a gentle whitening toothpaste weekly.",
-      "Rinse after stain-prone meals.",
-      "Refresh with top-up syringes when needed.",
-    ],
+    question: "Do I need to avoid certain foods?",
+    answer: "For the first 48 hours avoid deep pigments like coffee, berries, or red wine to protect the new shade.",
   },
 ];
 
@@ -117,132 +58,75 @@ export default function WhiteningPreviewPage() {
     <PreviewPageShell>
       <SchemaInjector route="/treatments/whitening" />
 
-      <ChampagneTreatmentHero
+      <ChampagneTreatmentHeroLuxe
         tone="whitening"
         eyebrow="Teeth whitening"
-        title="Whitening that stays luminous"
-        subtitle="Pearl-toned gradients and minimal gold detailing keep the experience calm, bright, and true to Champagne."
-        primaryCta={{ label: "Book whitening consult", href: "/contact" }}
-        secondaryCta={{ label: "View all previews", href: "/preview/treatments" }}
+        title="Whitening rituals with Champagne glow"
+        subtitle="Layered care plans keep shades luminous and enamel calm with every appointment."
+        primaryCta={{ label: "Book whitening session", href: "/contact" }}
+        secondaryCta={{ label: "View treatment menu", href: "/treatments" }}
       />
 
       <PreviewMain>
-        <LuxeSection tone="whitening" id="benefits" label="Why guests choose our whitening">
-          <div className="grid gap-6 md:grid-cols-2">
-            {benefits.map((benefit) => (
-              <LuxeCard key={benefit.title}>
-                <h3
-                  className="text-xl font-semibold text-[color-mix(in_oklab,var(--smh-ink)_86%,transparent)]"
-                  style={{ fontFamily: "var(--font-playfair, 'Playfair Display', serif)" }}
-                >
-                  {benefit.title}
-                </h3>
-                <p className="mt-3 text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_74%,transparent)]">
-                  {benefit.description}
-                </p>
+        <LuxeSection tone="whitening" surfaceTone="muted" id="viewer" label="Radiance monitor">
+          <LuxeCard variant="muted" className="flex flex-col gap-3 text-center">
+            <p className="text-xs uppercase tracking-[0.28em]">Radiance dashboard placeholder</p>
+            <p className="mx-auto max-w-2xl text-base leading-relaxed">
+              Reserve this block for the whitening dashboard with tone tracking, sensitivity notes, and kit re-order prompts.
+            </p>
+            <div className="flex min-h-[10rem] items-center justify-center rounded-2xl border border-dashed border-current text-xs uppercase tracking-[0.24em]">
+              Dashboard in development
+            </div>
+          </LuxeCard>
+        </LuxeSection>
+
+        <LuxeSection tone="whitening" id="benefits" label="Why guests love Champagne whitening">
+          <div className="grid gap-4 md:grid-cols-2">
+            {whiteningHighlights.map((highlight) => (
+              <LuxeCard key={highlight}>
+                <p className="text-base leading-relaxed">{highlight}</p>
               </LuxeCard>
             ))}
           </div>
         </LuxeSection>
 
-        <LuxeSection tone="whitening" surfaceTone="muted" id="pathways" label="Tailored whitening pathways">
-          <div className="grid gap-6 lg:grid-cols-3">
-            {options.map((option) => (
-              <LuxeCard key={option.name} tone="default" className="flex h-full flex-col gap-3">
-                <header>
-                  <h3
-                    className="text-lg font-semibold text-[color-mix(in_oklab,var(--smh-ink)_84%,transparent)]"
-                    style={{ fontFamily: "var(--font-playfair, 'Playfair Display', serif)" }}
-                  >
-                    {option.name}
-                  </h3>
-                  <p className="mt-1 text-xs uppercase tracking-[0.2em] text-[color-mix(in_oklab,var(--smh-primary-teal)_58%,var(--smh-ink)_42%)]">
-                    {option.duration} · {option.results}
-                  </p>
-                </header>
-                <p className="text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_74%,transparent)]">
-                  {option.summary}
-                </p>
-                <ul className="mt-auto space-y-2 text-sm leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_72%,transparent)]">
-                  {option.highlights.map((item) => (
-                    <li key={item} className="flex gap-2">
-                      <span aria-hidden>•</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
+        <LuxeSection tone="whitening" id="how-it-works" label="How the programme flows">
+          <div className="grid gap-4 md:grid-cols-2">
+            {whiteningSteps.map((step) => (
+              <LuxeCard key={step.title}>
+                <h3 className="text-sm uppercase tracking-[0.18em]">{step.title}</h3>
+                <p className="mt-2 text-base leading-relaxed">{step.detail}</p>
               </LuxeCard>
             ))}
           </div>
         </LuxeSection>
 
-        <LuxeSection tone="whitening" id="stains" label="Understanding different stains">
-          <div className="grid gap-6 lg:grid-cols-3">
-            {stainTypes.map((type) => (
-              <LuxeCard key={type.label} tone="default" className="flex h-full flex-col gap-3">
-                <h3
-                  className="text-lg font-semibold text-[color-mix(in_oklab,var(--smh-ink)_84%,transparent)]"
-                  style={{ fontFamily: "var(--font-playfair, 'Playfair Display', serif)" }}
-                >
-                  {type.label}
-                </h3>
-                <p className="mt-2 text-xs uppercase tracking-[0.2em] text-[color-mix(in_oklab,var(--smh-primary-magenta)_58%,var(--smh-ink)_42%)]">
-                  Common causes
-                </p>
-                <ul className="mt-2 space-y-1 text-sm text-[color-mix(in_oklab,var(--smh-ink)_70%,transparent)]">
-                  {type.causes.map((cause) => (
-                    <li key={cause}>{cause}</li>
-                  ))}
-                </ul>
-                <p className="mt-3 text-sm leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_74%,transparent)]">
-                  {type.approach}
-                </p>
-                <p className="mt-1 text-xs uppercase tracking-[0.2em] text-[color-mix(in_oklab,var(--smh-primary-teal)_58%,var(--smh-ink)_42%)]">
-                  {type.success}
-                </p>
+        <LuxeSection tone="whitening" id="faqs" label="Preview FAQs" surfaceTone="muted">
+          <div className="grid gap-4 md:grid-cols-2">
+            {whiteningFaq.map((faq) => (
+              <LuxeCard key={faq.question} variant="muted">
+                <h3 className="text-sm uppercase tracking-[0.18em]">{faq.question}</h3>
+                <p className="mt-2 text-base leading-relaxed">{faq.answer}</p>
               </LuxeCard>
             ))}
           </div>
         </LuxeSection>
 
-        <LuxeSection tone="whitening" surfaceTone="muted" id="aftercare" label="Aftercare guidance">
-          <div className="grid gap-6 md:grid-cols-2">
-            {aftercare.map((entry) => (
-              <LuxeCard key={entry.title} tone="default" className="flex h-full flex-col gap-3">
-                <h3
-                  className="text-lg font-semibold text-[color-mix(in_oklab,var(--smh-ink)_84%,transparent)]"
-                  style={{ fontFamily: "var(--font-playfair, 'Playfair Display', serif)" }}
-                >
-                  {entry.title}
-                </h3>
-                <ul className="space-y-2 text-sm leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_74%,transparent)]">
-                  {entry.notes.map((note) => (
-                    <li key={note} className="flex gap-2">
-                      <span aria-hidden>•</span>
-                      <span>{note}</span>
-                    </li>
-                  ))}
-                </ul>
-              </LuxeCard>
-            ))}
-          </div>
-        </LuxeSection>
-
-        <LuxeSection tone="whitening" surfaceTone="highlight" id="cta" label="Ready to brighten">
-          <LuxeCard tone="default" className="flex flex-col gap-4">
-            <p className="text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_74%,transparent)]">
-              Pair in-practice whitening with at-home maintenance to hold your preferred shade. Schema HUD confirms Service and
-              HowTo packs are wired for this route.
+        <LuxeSection tone="whitening" id="pricing" label="Pricing & aftercare" surfaceTone="highlight">
+          <LuxeCard variant="highlight" className="flex flex-col gap-4">
+            <p>
+              Outline whitening packages, sensitivity serums, and aftercare bundles here. Keep finance CTAs ready for Tabeo and
+              other partners once integrated.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
-                className="inline-flex items-center justify-center rounded-full border border-[color-mix(in_oklab,var(--smh-primary-teal)_28%,transparent)] bg-[color-mix(in_oklab,var(--smh-white)_92%,transparent)] px-5 py-2 text-sm font-semibold tracking-[0.16em] text-[color-mix(in_oklab,var(--smh-primary-teal)_70%,var(--smh-ink)_30%)] transition-transform duration-300 ease-[cubic-bezier(0.645,0.045,0.355,1)] hover:translate-y-[-2px]"
+                className="inline-flex items-center justify-center rounded-full border border-current px-6 py-2 text-xs uppercase tracking-[0.2em] transition-transform duration-300 ease-[cubic-bezier(0.645,0.045,0.355,1)] motion-safe:hover:-translate-y-1"
                 href="/contact"
               >
-                Book whitening consult
+                Book session
               </Link>
               <Link
-                className="inline-flex items-center justify-center rounded-full border border-[color-mix(in_oklab,var(--smh-primary-magenta)_22%,transparent)] bg-[color-mix(in_oklab,var(--smh-white)_92%,transparent)] px-5 py-2 text-sm font-semibold tracking-[0.16em] text-[color-mix(in_oklab,var(--smh-primary-magenta)_68%,var(--smh-ink)_32%)] transition-transform duration-300 ease-[cubic-bezier(0.645,0.045,0.355,1)] hover:translate-y-[-2px]"
+                className="inline-flex items-center justify-center rounded-full border border-current px-6 py-2 text-xs uppercase tracking-[0.2em] transition-transform duration-300 ease-[cubic-bezier(0.645,0.045,0.355,1)] motion-safe:hover:-translate-y-1"
                 href="/preview/treatments"
               >
                 Back to previews

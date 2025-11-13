@@ -1,0 +1,37 @@
+.wrapper {
+  display: grid;
+  gap: 0.75rem;
+  color: color-mix(in srgb, var(--smh-white) 90%, transparent);
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-inter, "Inter", sans-serif);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: color-mix(in srgb, var(--smh-white) 76%, transparent);
+}
+
+.heading {
+  font-family: var(--font-playfair, "Playfair Display", serif);
+  font-weight: 600;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  line-height: 1.1;
+  color: color-mix(in srgb, var(--smh-white) 94%, transparent);
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--smh-accent-gold) 18%, transparent);
+  max-width: 32ch;
+}
+
+.description {
+  font-family: var(--font-lora, "Lora", serif);
+  font-weight: 400;
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--smh-white) 80%, var(--smh-text) 20%);
+  max-width: 52ch;
+}

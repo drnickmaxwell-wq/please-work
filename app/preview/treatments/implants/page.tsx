@@ -3,13 +3,13 @@ export const revalidate = 0;
 
 import Link from "next/link";
 
-import { ChampagneTreatmentHero } from "@/components/treatments/ChampagneTreatmentHero";
 import {
+  ChampagneTreatmentHeroLuxe,
   LuxeCard,
   LuxeSection,
   PreviewMain,
   PreviewPageShell,
-} from "@/components/treatments/preview";
+} from "@/components/luxe";
 import { SchemaInjector } from "@/lib/seo/preview/SchemaInjector";
 
 const implantBenefits = [
@@ -50,7 +50,7 @@ export default function ImplantsPreviewPage() {
     <PreviewPageShell>
       <SchemaInjector route="/treatments/implants" />
 
-      <ChampagneTreatmentHero
+      <ChampagneTreatmentHeroLuxe
         tone="implants"
         eyebrow="Advanced implants"
         title="Implants that feel like your own teeth"
@@ -61,11 +61,9 @@ export default function ImplantsPreviewPage() {
 
       <PreviewMain>
         <LuxeSection tone="implants" surfaceTone="muted" id="viewer" label="3D overview (coming soon)">
-          <LuxeCard tone="frosted" className="flex min-h-[12rem] flex-col items-center justify-center text-center">
-            <p className="text-sm uppercase tracking-[0.28em] text-[color-mix(in_oklab,var(--smh-primary-teal)_62%,var(--smh-ink)_38%)]">
-              3D viewer placeholder
-            </p>
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_72%,transparent)]">
+          <LuxeCard variant="muted" className="flex min-h-[12rem] flex-col items-center justify-center text-center">
+            <p className="text-xs uppercase tracking-[0.28em]">3D viewer placeholder</p>
+            <p className="mt-3 max-w-2xl text-base leading-relaxed">
               Placeholder slot for the guided implant visualiser. The final module will highlight placement angles, abutment fit,
               and soft tissue transitions in real time.
             </p>
@@ -76,7 +74,7 @@ export default function ImplantsPreviewPage() {
           <div className="grid gap-4 md:grid-cols-2">
             {implantBenefits.map((benefit) => (
               <LuxeCard key={benefit}>
-                <p className="text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_82%,transparent)]">{benefit}</p>
+                <p className="text-base leading-relaxed">{benefit}</p>
               </LuxeCard>
             ))}
           </div>
@@ -86,12 +84,8 @@ export default function ImplantsPreviewPage() {
           <div className="grid gap-4 md:grid-cols-2">
             {implantJourney.map((stage) => (
               <LuxeCard key={stage.title}>
-                <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-[color-mix(in_oklab,var(--smh-primary-teal)_66%,var(--smh-ink)_34%)]">
-                  {stage.title}
-                </h3>
-                <p className="mt-2 text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_78%,transparent)]">
-                  {stage.detail}
-                </p>
+                <h3 className="text-sm uppercase tracking-[0.18em]">{stage.title}</h3>
+                <p className="mt-2 text-base leading-relaxed">{stage.detail}</p>
               </LuxeCard>
             ))}
           </div>
@@ -100,28 +94,28 @@ export default function ImplantsPreviewPage() {
         <LuxeSection tone="implants" id="candidacy" label="Who it’s for" surfaceTone="muted">
           <div className="grid gap-4 md:grid-cols-2">
             {implantCandidates.map((item) => (
-              <LuxeCard key={item} tone="default">
-                <p className="text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_78%,transparent)]">{item}</p>
+              <LuxeCard key={item} variant="muted">
+                <p className="text-base leading-relaxed">{item}</p>
               </LuxeCard>
             ))}
           </div>
         </LuxeSection>
 
         <LuxeSection tone="implants" id="pricing" label="Pricing & finance" surfaceTone="highlight">
-          <LuxeCard tone="frosted" className="flex flex-col gap-4 text-[color-mix(in_oklab,var(--smh-ink)_82%,transparent)]">
+          <LuxeCard variant="highlight" className="flex flex-col gap-4">
             <p>
               Finance modules from Tabeo slot in here. Prepare tiers for single implants, bridges, and full-arch solutions with
               repayment illustrations.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
-                className="inline-flex items-center justify-center rounded-full border border-[color-mix(in_oklab,var(--smh-primary-teal)_28%,transparent)] bg-[color-mix(in_oklab,var(--smh-white)_92%,transparent)] px-5 py-2 text-sm font-semibold tracking-[0.16em] text-[color-mix(in_oklab,var(--smh-primary-teal)_72%,var(--smh-ink)_28%)] transition-transform duration-300 ease-[cubic-bezier(0.645,0.045,0.355,1)] hover:translate-y-[-2px]"
+                className="inline-flex items-center justify-center rounded-full border border-current px-6 py-2 text-xs uppercase tracking-[0.2em] transition-transform duration-300 ease-[cubic-bezier(0.645,0.045,0.355,1)] motion-safe:hover:-translate-y-1"
                 href="/contact"
               >
                 Book consultation
               </Link>
               <Link
-                className="inline-flex items-center justify-center rounded-full border border-[color-mix(in_oklab,var(--smh-primary-magenta)_24%,transparent)] bg-[color-mix(in_oklab,var(--smh-white)_90%,transparent)] px-5 py-2 text-sm font-semibold tracking-[0.16em] text-[color-mix(in_oklab,var(--smh-primary-magenta)_68%,var(--smh-ink)_32%)] transition-transform duration-300 ease-[cubic-bezier(0.645,0.045,0.355,1)] hover:translate-y-[-2px]"
+                className="inline-flex items-center justify-center rounded-full border border-current px-6 py-2 text-xs uppercase tracking-[0.2em] transition-transform duration-300 ease-[cubic-bezier(0.645,0.045,0.355,1)] motion-safe:hover:-translate-y-1"
                 href="/preview/treatments"
               >
                 Back to previews

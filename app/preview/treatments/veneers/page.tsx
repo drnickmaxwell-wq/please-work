@@ -3,13 +3,13 @@ export const revalidate = 0;
 
 import Link from "next/link";
 
-import { ChampagneTreatmentHero } from "@/components/treatments/ChampagneTreatmentHero";
 import {
+  ChampagneTreatmentHeroLuxe,
   LuxeCard,
   LuxeSection,
   PreviewMain,
   PreviewPageShell,
-} from "@/components/treatments/preview";
+} from "@/components/luxe";
 import { SchemaInjector } from "@/lib/seo/preview/SchemaInjector";
 
 const veneerHighlights = [
@@ -50,7 +50,7 @@ export default function VeneersPreviewPage() {
     <PreviewPageShell>
       <SchemaInjector route="/treatments/veneers" />
 
-      <ChampagneTreatmentHero
+      <ChampagneTreatmentHeroLuxe
         tone="veneers"
         eyebrow="Porcelain veneers"
         title="Porcelain veneers with Champagne luminosity"
@@ -61,13 +61,14 @@ export default function VeneersPreviewPage() {
 
       <PreviewMain>
         <LuxeSection tone="veneers" surfaceTone="muted" id="viewer" label="3D veneer visualiser">
-          <LuxeCard tone="default" className="flex flex-col gap-3 text-[color-mix(in_oklab,var(--smh-ink)_78%,transparent)]">
-            <p>
+          <LuxeCard variant="muted" className="flex flex-col gap-3 text-center">
+            <p className="text-xs uppercase tracking-[0.28em]">3D viewer placeholder</p>
+            <p className="mx-auto max-w-2xl text-base leading-relaxed">
               Placeholder for the veneer layering viewer. Final build will display digital wax-ups, translucency maps, and
               before/after toggles in one Champagne-aligned module.
             </p>
-            <div className="flex min-h-[10rem] items-center justify-center rounded-2xl border border-[color-mix(in_oklab,var(--smh-accent-gold)_22%,transparent)] bg-[color-mix(in_oklab,var(--smh-accent-gold-soft)_32%,var(--smh-white)_68%)] text-xs uppercase tracking-[0.24em] text-[color-mix(in_oklab,var(--smh-ink)_62%,transparent)]">
-              3D VIEWER PLACEHOLDER
+            <div className="flex min-h-[10rem] items-center justify-center rounded-2xl border border-dashed border-current text-xs uppercase tracking-[0.24em]">
+              Visual coming soon
             </div>
           </LuxeCard>
         </LuxeSection>
@@ -76,7 +77,7 @@ export default function VeneersPreviewPage() {
           <div className="grid gap-4 md:grid-cols-2">
             {veneerHighlights.map((highlight) => (
               <LuxeCard key={highlight}>
-                <p className="text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_82%,transparent)]">{highlight}</p>
+                <p className="text-base leading-relaxed">{highlight}</p>
               </LuxeCard>
             ))}
           </div>
@@ -86,12 +87,8 @@ export default function VeneersPreviewPage() {
           <div className="grid gap-4 md:grid-cols-2">
             {veneerJourney.map((stage) => (
               <LuxeCard key={stage.title}>
-                <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-[color-mix(in_oklab,var(--smh-accent-gold)_58%,var(--smh-ink)_42%)]">
-                  {stage.title}
-                </h3>
-                <p className="mt-2 text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_78%,transparent)]">
-                  {stage.detail}
-                </p>
+                <h3 className="text-sm uppercase tracking-[0.18em]">{stage.title}</h3>
+                <p className="mt-2 text-base leading-relaxed">{stage.detail}</p>
               </LuxeCard>
             ))}
           </div>
@@ -100,28 +97,28 @@ export default function VeneersPreviewPage() {
         <LuxeSection tone="veneers" id="candidacy" label="Are veneers right for you?" surfaceTone="muted">
           <div className="grid gap-4 md:grid-cols-2">
             {veneerCandidates.map((item) => (
-              <LuxeCard key={item} tone="default">
-                <p className="text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_76%,transparent)]">{item}</p>
+              <LuxeCard key={item} variant="muted">
+                <p className="text-base leading-relaxed">{item}</p>
               </LuxeCard>
             ))}
           </div>
         </LuxeSection>
 
         <LuxeSection tone="veneers" id="pricing" label="Finance & next steps" surfaceTone="highlight">
-          <LuxeCard className="flex flex-col gap-4 text-[color-mix(in_oklab,var(--smh-ink)_80%,transparent)]">
+          <LuxeCard variant="highlight" className="flex flex-col gap-4">
             <p>
               Reserve slots for finance illustrations, treatment timelines, and follow-up scheduling. CTA buttons keep Champagne
               hover easing within the 1.03 scale guidance.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
-                className="inline-flex items-center justify-center rounded-full border border-[color-mix(in_oklab,var(--smh-accent-gold)_28%,transparent)] bg-[color-mix(in_oklab,var(--smh-accent-gold-soft)_38%,var(--smh-white)_62%)] px-5 py-2 text-sm font-semibold tracking-[0.16em] text-[color-mix(in_oklab,var(--smh-ink)_62%,var(--smh-accent-gold)_38%)] transition-transform duration-300 ease-[cubic-bezier(0.645,0.045,0.355,1)] hover:translate-y-[-2px]"
+                className="inline-flex items-center justify-center rounded-full border border-current px-6 py-2 text-xs uppercase tracking-[0.2em] transition-transform duration-300 ease-[cubic-bezier(0.645,0.045,0.355,1)] motion-safe:hover:-translate-y-1"
                 href="/contact"
               >
                 Reserve consultation
               </Link>
               <Link
-                className="inline-flex items-center justify-center rounded-full border border-[color-mix(in_oklab,var(--smh-primary-magenta)_20%,transparent)] bg-[color-mix(in_oklab,var(--smh-white)_92%,transparent)] px-5 py-2 text-sm font-semibold tracking-[0.16em] text-[color-mix(in_oklab,var(--smh-primary-magenta)_68%,var(--smh-ink)_32%)] transition-transform duration-300 ease-[cubic-bezier(0.645,0.045,0.355,1)] hover:translate-y-[-2px]"
+                className="inline-flex items-center justify-center rounded-full border border-current px-6 py-2 text-xs uppercase tracking-[0.2em] transition-transform duration-300 ease-[cubic-bezier(0.645,0.045,0.355,1)] motion-safe:hover:-translate-y-1"
                 href="/preview/treatments"
               >
                 Back to previews

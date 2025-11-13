@@ -1,0 +1,102 @@
+.card {
+  position: relative;
+  display: grid;
+  gap: 0.75rem;
+  padding: clamp(1.75rem, 4vw, 2.5rem);
+  border-radius: 22px;
+  background: color-mix(in srgb, var(--smh-ink) 6%, transparent);
+  border: 1px solid color-mix(in srgb, var(--smh-accent-gold-soft) 14%, transparent);
+  backdrop-filter: blur(22px);
+  box-shadow:
+    0 12px 28px color-mix(in srgb, var(--smh-ink) 18%, transparent),
+    inset 0 0 0.5px color-mix(in srgb, var(--smh-ink) 40%, transparent);
+  color: color-mix(in srgb, var(--smh-white) 88%, var(--smh-text) 12%);
+  font-family: var(--font-lora, "Lora", serif);
+  line-height: 1.7;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+      140deg,
+      color-mix(in srgb, var(--smh-primary-magenta) 12%, transparent) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 85% 18%,
+      color-mix(in srgb, var(--smh-primary-teal) 14%, transparent) 0%,
+      transparent 60%
+    );
+  opacity: 0.16;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/assets/champagne/film-grain-desktop.webp");
+  background-size: cover;
+  opacity: 0.08;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+.card[data-variant='muted'] {
+  background: color-mix(in srgb, var(--smh-ink) 4%, transparent);
+  border: 1px solid color-mix(in srgb, var(--smh-primary-teal) 18%, transparent);
+}
+
+.card[data-variant='highlight'] {
+  background: color-mix(in srgb, var(--smh-accent-gold-soft) 18%, transparent);
+  border: 1px solid color-mix(in srgb, var(--smh-accent-gold) 22%, transparent);
+  color: color-mix(in srgb, var(--smh-ink) 22%, var(--smh-text) 78%);
+}
+
+.card :is(h3, h4, h5) {
+  font-family: var(--font-playfair, "Playfair Display", serif);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: color-mix(in srgb, var(--smh-white) 92%, transparent);
+}
+
+.card[data-variant='highlight'] :is(h3, h4, h5) {
+  color: color-mix(in srgb, var(--smh-ink) 36%, var(--smh-text) 64%);
+}
+
+.card a {
+  font-family: var(--font-inter, "Inter", sans-serif);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: color-mix(in srgb, var(--smh-white) 85%, transparent);
+  position: relative;
+}
+
+.card a::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: -0.2rem;
+  height: 2px;
+  background: color-mix(in srgb, var(--smh-primary-magenta) 68%, var(--smh-accent-gold) 32%);
+  opacity: 0.72;
+  transition: transform 260ms cubic-bezier(0.645, 0.045, 0.355, 1);
+  transform-origin: center;
+  transform: scaleX(1);
+}
+
+.card a:hover::after {
+  transform: scaleX(1.12);
+}
+
+@media (max-width: 768px) {
+  .card {
+    border-radius: 18px;
+    padding: clamp(1.5rem, 6vw, 2rem);
+  }
+}

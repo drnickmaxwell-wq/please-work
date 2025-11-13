@@ -1,63 +1,56 @@
-// Preview-only Champagne polish for Spark Aligners. Production route untouched.
+export const dynamic = "force-static";
+export const revalidate = 0;
+
 import Link from "next/link";
 
-import { ChampagneTreatmentHero } from "@/components/treatments/ChampagneTreatmentHero";
 import {
+  ChampagneTreatmentHeroLuxe,
   LuxeCard,
   LuxeSection,
   PreviewMain,
   PreviewPageShell,
-} from "@/components/treatments/preview";
-import ThreeDViewerSlot from "@/components/preview/treatments/ThreeDViewerSlot";
+} from "@/components/luxe";
 import { SchemaInjector } from "@/lib/seo/preview/SchemaInjector";
 
-import "@/styles/treatments/preview-light.css";
+const sparkHighlights = [
+  "Clear aligners trimmed to the gumline for comfort and discreet wear.",
+  "Digital staging keeps each tray change calm, predictable, and Champagne precise.",
+  "Remote check-ins pair with in-studio refinements for steady progress.",
+  "Finishing protocols polish enamel and refine edges for camera-ready sparkle.",
+];
 
-const alignerHighlights = [
+const sparkJourney = [
   {
-    title: "Feather-light trays",
-    description: "Slim, contoured aligners hug every curve for barely-there comfort day and night.",
+    title: "Smile mapping",
+    detail: "3D scans and AI sequencing draft each aligner step with Champagne precision.",
   },
   {
-    title: "Discreet clarity",
-    description: "Crystal-clear materials resist staining so trays stay virtually invisible.",
+    title: "Tray rhythm",
+    detail: "Weekly or bi-weekly changes keep movement steady with minimal pressure spikes.",
   },
   {
-    title: "Responsive tracking",
-    description: "Digital scans at each visit guide refinements and keep every movement on schedule.",
+    title: "Hybrid reviews",
+    detail: "Remote monitoring pairs with studio visits to course-correct and celebrate milestones.",
   },
   {
-    title: "Gentle force mapping",
-    description: "Precision attachments and staged movements deliver predictable alignment with minimal pressure.",
+    title: "Finish & retention",
+    detail: "Final polish, retainers, and champagne-toned whitening lock in the new alignment.",
   },
 ];
 
-const journey = [
+const sparkFaq = [
   {
-    phase: "Digital smile design",
-    detail: "Scan, simulate, and preview alignment with 3D mapping and AI-assisted staging.",
+    question: "How often do I switch aligners?",
+    answer: "Most guests change trays every 7–10 days, guided by the Champagne monitoring app.",
   },
   {
-    phase: "Tray crafting",
-    detail: "Spark specialists thermoform ultra-clear aligners to match each micro-stage of movement.",
+    question: "Can I pair Spark with whitening?",
+    answer: "Yes. Whitening boosters are timed for calm sensitivity and luminous results post-treatment.",
   },
   {
-    phase: "Weekly progressions",
-    detail: "Switch trays every 7–10 days and pair with remote check-ins between in-practice reviews.",
+    question: "What about retainers?",
+    answer: "We stage retainers early so you leave with a retention plan, aligner case, and polishing kit.",
   },
-  {
-    phase: "Finishing & retention",
-    detail: "Polish, contour, and transition to custom retainers that hold your new smile in place.",
-  },
-];
-
-const candidacy = [
-  "Mild to moderate crowding or spacing.",
-  "Previous orthodontic relapse needing refinement.",
-  "Patients seeking minimal chair time and gentle forces.",
-  "Commitment to wearing aligners 20–22 hours per day.",
-  "Desire for nearly invisible orthodontics.",
-  "Excellent oral hygiene and routine dental reviews.",
 ];
 
 export default function SparkAlignersPreviewPage() {
@@ -65,110 +58,78 @@ export default function SparkAlignersPreviewPage() {
     <PreviewPageShell>
       <SchemaInjector route="/treatments/orthodontics/spark-aligners" />
 
-      <ChampagneTreatmentHero
+      <ChampagneTreatmentHeroLuxe
         tone="spark"
-        eyebrow="Orthodontics preview"
-        title="Spark Aligners with Champagne clarity"
-        subtitle="Aqua gradients, crisp glass overlays, and schema-backed sections keep the aligner journey luminous."
-        primaryCta={{ label: "Reserve Spark consultation", href: "/contact" }}
-        secondaryCta={{ label: "Explore orthodontic previews", href: "/preview/treatments/orthodontics" }}
+        eyebrow="Spark aligners"
+        title="Spark aligners with aqua clarity"
+        subtitle="Precise staging and calm motion control keep aligner journeys discreet and on schedule."
+        primaryCta={{ label: "Start Spark consultation", href: "/contact" }}
+        secondaryCta={{ label: "Explore orthodontics", href: "/treatments/orthodontics" }}
       />
 
       <PreviewMain>
-        <nav aria-label="Breadcrumb" className="text-sm text-[color-mix(in_oklab,var(--smh-ink)_70%,transparent)]">
-          <ol className="flex flex-wrap items-center gap-2">
-            <li>
-              <Link className="underline-offset-4 hover:underline" href="/preview">
-                Preview
-              </Link>
-            </li>
-            <li aria-hidden="true">/</li>
-            <li>
-              <Link className="underline-offset-4 hover:underline" href="/preview/treatments">
-                Treatments
-              </Link>
-            </li>
-            <li aria-hidden="true">/</li>
-            <li>
-              <Link className="underline-offset-4 hover:underline" href="/preview/treatments/orthodontics">
-                Orthodontics
-              </Link>
-            </li>
-            <li aria-hidden="true">/</li>
-            <li aria-current="page" className="font-medium text-[color-mix(in_oklab,var(--smh-ink)_86%,transparent)]">
-              Spark aligners
-            </li>
-          </ol>
-        </nav>
-
-        <LuxeSection tone="spark" id="viewer" label="Interactive aligner preview">
-          <LuxeCard tone="frosted" className="flex flex-col gap-4 text-[color-mix(in_oklab,var(--smh-ink)_76%,transparent)]">
-            <p>
-              Visualise how Spark trays seat over enamel with precise scalloped edges and soft force zones. Final build will
-              integrate Three.js for model rotation and pressure mapping overlays.
+        <LuxeSection tone="spark" surfaceTone="muted" id="viewer" label="Aligner visualiser">
+          <LuxeCard variant="muted" className="flex flex-col gap-3 text-center">
+            <p className="text-xs uppercase tracking-[0.28em]">Aligner preview placeholder</p>
+            <p className="mx-auto max-w-2xl text-base leading-relaxed">
+              Slot reserved for the aligner journey visualiser with tray progression, attachments, and retention planning tools.
             </p>
-            <ThreeDViewerSlot />
+            <div className="flex min-h-[10rem] items-center justify-center rounded-2xl border border-dashed border-current text-xs uppercase tracking-[0.24em]">
+              Visual system in progress
+            </div>
           </LuxeCard>
         </LuxeSection>
 
-        <LuxeSection tone="spark" id="highlights" label="Why guests choose Spark">
-          <div className="grid gap-6 md:grid-cols-2">
-            {alignerHighlights.map((item) => (
-              <LuxeCard key={item.title} tone="default">
-                <h3 className="text-lg font-semibold" style={{ fontFamily: "var(--font-playfair, 'Playfair Display', serif)" }}>
-                  {item.title}
-                </h3>
-                <p className="mt-2 text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_74%,transparent)]">
-                  {item.description}
-                </p>
-              </LuxeCard>
-            ))}
-          </div>
-        </LuxeSection>
-
-        <LuxeSection tone="spark" surfaceTone="muted" id="journey" label="Four-stage Spark journey">
-          <div className="grid gap-6 md:grid-cols-2">
-            {journey.map((stage) => (
-              <LuxeCard key={stage.phase} tone="frosted">
-                <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-[color-mix(in_oklab,var(--smh-primary-teal)_68%,var(--smh-ink)_32%)]">
-                  {stage.phase}
-                </h3>
-                <p className="mt-2 text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_76%,transparent)]">
-                  {stage.detail}
-                </p>
-              </LuxeCard>
-            ))}
-          </div>
-        </LuxeSection>
-
-        <LuxeSection tone="spark" id="candidacy" label="Ideal Spark candidates">
+        <LuxeSection tone="spark" id="benefits" label="Why guests choose Spark">
           <div className="grid gap-4 md:grid-cols-2">
-            {candidacy.map((item) => (
-              <LuxeCard key={item} tone="default">
-                <p className="text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_74%,transparent)]">{item}</p>
+            {sparkHighlights.map((highlight) => (
+              <LuxeCard key={highlight}>
+                <p className="text-base leading-relaxed">{highlight}</p>
               </LuxeCard>
             ))}
           </div>
         </LuxeSection>
 
-        <LuxeSection tone="spark" surfaceTone="highlight" id="cta" label="Book your Spark consultation">
-          <LuxeCard tone="frosted" className="flex flex-col gap-4 text-[color-mix(in_oklab,var(--smh-ink)_74%,transparent)]">
+        <LuxeSection tone="spark" id="journey" label="Journey outline">
+          <div className="grid gap-4 md:grid-cols-2">
+            {sparkJourney.map((stage) => (
+              <LuxeCard key={stage.title}>
+                <h3 className="text-sm uppercase tracking-[0.18em]">{stage.title}</h3>
+                <p className="mt-2 text-base leading-relaxed">{stage.detail}</p>
+              </LuxeCard>
+            ))}
+          </div>
+        </LuxeSection>
+
+        <LuxeSection tone="spark" id="faqs" label="Preview FAQs" surfaceTone="muted">
+          <div className="grid gap-4 md:grid-cols-2">
+            {sparkFaq.map((faq) => (
+              <LuxeCard key={faq.question} variant="muted">
+                <h3 className="text-sm uppercase tracking-[0.18em]">{faq.question}</h3>
+                <p className="mt-2 text-base leading-relaxed">{faq.answer}</p>
+              </LuxeCard>
+            ))}
+          </div>
+        </LuxeSection>
+
+        <LuxeSection tone="spark" id="pricing" label="Pricing & next steps" surfaceTone="highlight">
+          <LuxeCard variant="highlight" className="flex flex-col gap-4">
             <p>
-              Connect preview CTAs to booking tools or chat assistants. Motion stays within Champagne easing so hover cues remain
-              calm and precise.
+              Use this block for pricing matrices, remote monitoring subscriptions, and retainer packages. Align CTAs with the
+              Champagne finance guidance once integrations are ready.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
-                className="inline-flex items-center justify-center rounded-full border border-[color-mix(in_oklab,var(--smh-primary-teal)_26%,transparent)] bg-[color-mix(in_oklab,var(--smh-white)_92%,transparent)] px-5 py-2 text-sm font-semibold tracking-[0.16em] text-[color-mix(in_oklab,var(--smh-primary-teal)_72%,var(--smh-ink)_28%)] transition-transform duration-300 ease-[cubic-bezier(0.645,0.045,0.355,1)] hover:translate-y-[-2px]"
+                className="inline-flex items-center justify-center rounded-full border border-current px-6 py-2 text-xs uppercase tracking-[0.2em] transition-transform duration-300 ease-[cubic-bezier(0.645,0.045,0.355,1)] motion-safe:hover:-translate-y-1"
                 href="/contact"
               >
-                Reserve Spark consult
+                Start consultation
               </Link>
               <Link
-                className="inline-flex items-center justify-center rounded-full border border-[color-mix(in_oklab,var(--smh-primary-magenta)_20%,transparent)] bg-[color-mix(in_oklab,var(--smh-white)_92%,transparent)] px-5 py-2 text-sm font-semibold tracking-[0.16em] text-[color-mix(in_oklab,var(--smh-primary-magenta)_68%,var(--smh-ink)_32%)] transition-transform duration-300 ease-[cubic-bezier(0.645,0.045,0.355,1)] hover:translate-y-[-2px]"
-                href="/preview/treatments/orthodontics"
+                className="inline-flex items-center justify-center rounded-full border border-current px-6 py-2 text-xs uppercase tracking-[0.2em] transition-transform duration-300 ease-[cubic-bezier(0.645,0.045,0.355,1)] motion-safe:hover:-translate-y-1"
+                href="/preview/treatments"
               >
-                Explore orthodontic previews
+                Back to previews
               </Link>
             </div>
           </LuxeCard>
