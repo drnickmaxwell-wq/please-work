@@ -1,0 +1,117 @@
+.section {
+  position: relative;
+  padding: clamp(2.75rem, 6vw, 4rem) 1.25rem;
+  display: flex;
+  justify-content: center;
+  --section-surface: color-mix(in oklab, var(--smh-white) 86%, transparent 14%);
+  --section-keyline: color-mix(in oklab, var(--smh-accent-gold) 14%, transparent 86%);
+  --section-glow: 0 32px 68px color-mix(in oklab, var(--smh-ink) 12%, transparent 88%);
+  --section-overlay: color-mix(in oklab, var(--smh-ink) 10%, transparent 90%);
+}
+
+.inner {
+  position: relative;
+  isolation: isolate;
+  width: min(1100px, 100%);
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+  padding: clamp(2.25rem, 5vw, 3.5rem);
+  border-radius: 28px;
+  background: var(--section-surface);
+  border: 1px solid var(--section-keyline);
+  box-shadow: var(--section-glow);
+  overflow: hidden;
+}
+
+.inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+      circle at 12% 18%,
+      color-mix(in oklab, var(--smh-accent-gold-soft) 24%, transparent) 0%,
+      transparent 52%
+    ),
+    radial-gradient(
+      circle at 86% 82%,
+      color-mix(in oklab, var(--smh-primary-teal) 18%, transparent) 0%,
+      transparent 60%
+    );
+  opacity: 0.18;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+.inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--section-overlay) 14%, transparent) 0%,
+    transparent 70%
+  );
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+  color: color-mix(in oklab, var(--smh-ink) 88%, transparent 12%);
+}
+
+.section[data-tone='muted'] {
+  --section-surface: color-mix(in oklab, var(--smh-white) 90%, transparent 10%);
+  --section-keyline: color-mix(in oklab, var(--smh-accent-gold) 10%, transparent 90%);
+  --section-overlay: color-mix(in oklab, var(--smh-ink) 6%, transparent 94%);
+}
+
+.section[data-tone='highlight'] {
+  --section-surface: color-mix(in oklab, var(--smh-accent-gold-soft) 38%, var(--smh-white));
+  --section-keyline: color-mix(in oklab, var(--smh-accent-gold) 26%, transparent 74%);
+  --section-overlay: color-mix(in oklab, var(--smh-accent-gold) 14%, transparent 86%);
+}
+
+.section[data-variant='implants'] {
+  --section-surface: color-mix(in oklab, var(--smh-primary-teal) 12%, var(--smh-white));
+  --section-keyline: color-mix(in oklab, var(--smh-primary-teal) 26%, transparent 74%);
+  --section-overlay: color-mix(in oklab, var(--smh-primary-teal) 10%, transparent 90%);
+}
+
+.section[data-variant='whitening'] {
+  --section-surface: color-mix(in oklab, var(--smh-white) 92%, transparent 8%);
+  --section-overlay: color-mix(in oklab, var(--smh-primary-magenta) 6%, transparent 94%);
+}
+
+.section[data-variant='spark-aligners'] {
+  --section-surface: color-mix(in oklab, var(--smh-primary-teal) 14%, var(--smh-white));
+  --section-keyline: color-mix(in oklab, var(--smh-primary-teal) 24%, transparent 76%);
+  --section-overlay: color-mix(in oklab, var(--smh-primary-teal) 12%, transparent 88%);
+}
+
+.section[data-variant='veneers'] {
+  --section-surface: color-mix(in oklab, var(--smh-accent-gold-soft) 32%, var(--smh-white));
+  --section-overlay: color-mix(in oklab, var(--smh-accent-gold) 10%, transparent 90%);
+}
+
+.section[data-variant='emergency'] {
+  --section-surface: color-mix(in oklab, var(--smh-ink) 12%, transparent 88%);
+  --section-keyline: color-mix(in oklab, var(--smh-ink) 32%, transparent 68%);
+  --section-overlay: color-mix(in oklab, var(--smh-ink) 18%, transparent 82%);
+  --section-glow: 0 32px 72px color-mix(in oklab, var(--smh-ink) 22%, transparent 78%);
+  color: color-mix(in oklab, var(--smh-white) 90%, transparent 10%);
+}
+
+.section[data-variant='emergency'] .content {
+  color: color-mix(in oklab, var(--smh-white) 90%, transparent 10%);
+}
+
+@media (max-width: 768px) {
+  .inner {
+    border-radius: 24px;
+    padding: clamp(1.75rem, 8vw, 2.5rem);
+  }
+}

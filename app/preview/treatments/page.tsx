@@ -1,10 +1,10 @@
 // Preview-only clone. No hard hexes. Do not edit production pages.
 import Link from "next/link";
 
-import { ChampagneSectionShell } from "@/components/champagne/ChampagneSectionShell";
-import { ChampagneTreatmentHero } from "@/components/champagne/ChampagneTreatmentHero";
-import { SchemaInjector } from "@/lib/seo/preview/SchemaInjector";
+import { ChampagneTreatmentHero } from "@/components/treatments/ChampagneTreatmentHero";
+import { LuxeCard, LuxeSection } from "@/components/treatments/preview";
 import TreatmentBanner from "@/components/preview/TreatmentBanner";
+import { SchemaInjector } from "@/lib/seo/preview/SchemaInjector";
 
 import "@/styles/treatments/preview-light.css";
 
@@ -23,97 +23,82 @@ const PREVIEW_ROUTES = [
 
 export default function TreatmentsPreviewIndex() {
   return (
-    <main className="min-h-screen bg-[var(--champagne-surface)] text-[var(--champagne-ink)]">
+    <main className="min-h-screen bg-[color-mix(in_oklab,var(--smh-white)_96%,transparent)] text-[color-mix(in_oklab,var(--smh-ink)_92%,transparent)]">
       <SchemaInjector route="/treatments" />
 
       <ChampagneTreatmentHero
-        treatmentKey="general"
+        variant="general"
         eyebrow="Preview hub"
         title="Treatment previews in Champagne"
-        subtitle="Preview Champagne variants before they reach production. Each route keeps the hero wave, gradient law, and schema coverage aligned with the design system."
+        kicker="Review gradients, motion, and schema before launch"
+        description="Preview Champagne variants before they reach production. Each route keeps the hero wave, gradient law, and schema coverage aligned with the design system."
         primaryCta={{ label: "View production treatments", href: "/treatments" }}
         secondaryCta={{ label: "Book a consultation", href: "/contact" }}
-        schemaRoute="/treatments"
-        footnote={
-          <span>
-            Preview-only surfaces use soft gold balancing to stay within the 4% gold guidance while keeping Champagne warmth.
-          </span>
-        }
       />
 
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-12 px-6 py-16">
-        <ChampagneSectionShell
-          id="preview-directory"
-          treatmentKey="general"
-          label="Preview routes"
+        <LuxeSection
+          variant="general"
           tone="highlight"
+          label="Preview routes"
+          description="Use these links to review layouts, tone adjustments, and schema HUD output before routing updates go live."
         >
-          <p className="text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_78%,transparent)]">
-            Use these links to review layouts, tone adjustments, and schema HUD output before routing updates go live.
-          </p>
           <div className="grid gap-4 md:grid-cols-2">
             {PREVIEW_ROUTES.map((route) => (
-              <Link
-                key={route.slug}
-                className="group block rounded-2xl p-6 transition-transform duration-300"
-                href={`/preview/treatments/${route.slug}`}
-                style={{
-                  background: "color-mix(in oklab, var(--smh-white) 14%, transparent)",
-                  border: "1px solid color-mix(in oklab, var(--smh-primary-teal) 18%, transparent)",
-                  boxShadow: "0 18px 38px color-mix(in srgb, var(--smh-ink) 12%, transparent)",
-                }}
-              >
-                <h2
-                  className="text-lg font-semibold"
-                  style={{ fontFamily: "var(--font-playfair, 'Playfair Display', serif)" }}
-                >
-                  {route.label}
-                </h2>
-                <p className="mt-2 text-sm leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_72%,transparent)]">
-                  {route.summary}
-                </p>
-                <span
-                  className="mt-4 inline-flex items-center gap-1 text-xs uppercase tracking-[0.24em] text-[color-mix(in_oklab,var(--smh-primary-teal)_62%,var(--smh-ink)_38%)]"
-                  style={{ fontFamily: "var(--font-inter, 'Inter', sans-serif)" }}
-                >
-                  View preview
-                  <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">
-                    →
+              <Link key={route.slug} href={`/preview/treatments/${route.slug}`} className="group block no-underline">
+                <LuxeCard className="h-full">
+                  <h3
+                    className="text-xl font-semibold"
+                    style={{ fontFamily: "var(--font-playfair, 'Playfair Display', serif)" }}
+                  >
+                    {route.label}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_72%,transparent)]">
+                    {route.summary}
+                  </p>
+                  <span
+                    className="mt-5 inline-flex items-center gap-2 text-xs uppercase tracking-[0.26em] text-[color-mix(in_oklab,var(--smh-primary-teal)_62%,var(--smh-ink)_38%)] transition-transform duration-300 group-hover:translate-x-1"
+                    style={{ fontFamily: "var(--font-inter, 'Inter', sans-serif)" }}
+                  >
+                    View preview
+                    <span aria-hidden>→</span>
                   </span>
-                </span>
+                </LuxeCard>
               </Link>
             ))}
           </div>
-        </ChampagneSectionShell>
+        </LuxeSection>
 
-        <ChampagneSectionShell treatmentKey="technology" tone="muted" label="Schema & HUD references">
+        <LuxeSection variant="technology" tone="muted" label="Schema & HUD references">
           <div className="grid gap-6 md:grid-cols-2">
-            <div className="rounded-2xl border border-[color-mix(in_oklab,var(--smh-primary-teal)_12%,transparent)] bg-[color-mix(in_oklab,var(--smh-white)_88%,transparent)] p-5">
-              <h3 className="text-base font-semibold uppercase tracking-[0.18em] text-[color-mix(in_oklab,var(--smh-primary-teal)_64%,var(--smh-ink)_36%)]">
+            <LuxeCard>
+              <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-[color-mix(in_oklab,var(--smh-primary-teal)_62%,var(--smh-ink)_38%)]">
                 Schema coverage
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_72%,transparent)]">
-                Heroes stay linked to the preview schema packs for Service, HowTo, and FAQ validation. Watch the HUD overlay for badges while reviewing copy.
+              <p className="mt-3 text-sm leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_72%,transparent)]">
+                Heroes stay linked to the preview schema packs for Service, HowTo, and FAQ validation. Watch the HUD overlay for
+                badges while reviewing copy.
               </p>
-            </div>
-            <div className="rounded-2xl border border-[color-mix(in_oklab,var(--smh-primary-magenta)_12%,transparent)] bg-[color-mix(in_oklab,var(--smh-white)_90%,transparent)] p-5">
-              <h3 className="text-base font-semibold uppercase tracking-[0.18em] text-[color-mix(in_oklab,var(--smh-primary-magenta)_64%,var(--smh-ink)_36%)]">
+            </LuxeCard>
+            <LuxeCard>
+              <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-[color-mix(in_oklab,var(--smh-primary-magenta)_60%,var(--smh-ink)_40%)]">
                 Tone controls
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_72%,transparent)]">
-                Section shells inherit the same variant key as their hero, keeping gradients, borders, and copy blocks harmonised without touching production styles.
+              <p className="mt-3 text-sm leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_72%,transparent)]">
+                Section shells inherit the same variant key as their hero, keeping gradients, borders, and copy blocks harmonised
+                without touching production styles.
               </p>
-            </div>
+            </LuxeCard>
           </div>
-        </ChampagneSectionShell>
+        </LuxeSection>
 
-        <ChampagneSectionShell treatmentKey="general" tone="muted">
+        <LuxeSection variant="general" tone="muted">
           <TreatmentBanner
             label="Reminder"
             title="Production treatment pages remain untouched"
             subtitle="All Champagne experiments live only under /preview. Continue reviewing tone, motion, and schema before migrating to the production routes."
           />
-        </ChampagneSectionShell>
+        </LuxeSection>
       </div>
     </main>
   );

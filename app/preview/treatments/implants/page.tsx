@@ -1,11 +1,9 @@
 export const dynamic = "force-static";
 export const revalidate = 0;
 
-import { ChampagneSectionShell } from "@/components/champagne/ChampagneSectionShell";
-import { ChampagneTreatmentHero } from "@/components/champagne/ChampagneTreatmentHero";
+import { ChampagneTreatmentHero } from "@/components/treatments/ChampagneTreatmentHero";
+import { LuxeCard, LuxeSection } from "@/components/treatments/preview";
 import { SchemaInjector } from "@/lib/seo/preview/SchemaInjector";
-
-import "@/styles/preview/champagne-preview.css";
 
 const implantBenefits = [
   "Feels and functions like your natural teeth for confident eating and speaking.",
@@ -42,75 +40,72 @@ const implantCandidates = [
 
 export default function ImplantsPreviewPage() {
   return (
-    <div className="cpv-page">
+    <div className="min-h-screen bg-[color-mix(in_oklab,var(--smh-white)_94%,transparent)] text-[color-mix(in_oklab,var(--smh-ink)_92%,transparent)]">
       <SchemaInjector route="/treatments/implants" />
 
       <ChampagneTreatmentHero
-        treatmentKey="implants"
+        variant="implants"
         eyebrow="Advanced implants"
         title="Implants that feel like your own teeth"
-        subtitle="Digitally guided placement with Champagne motion layers keeps the experience calm, precise, and beautifully finished."
+        kicker="Digitally guided for calm, precise outcomes"
+        description="Digitally guided placement with Champagne motion layers keeps the experience calm, precise, and beautifully finished."
         primaryCta={{ label: "Book implant consultation", href: "/contact" }}
         secondaryCta={{ label: "Explore patient stories", href: "/patient-stories" }}
-        schemaRoute="/treatments/implants"
       />
 
-      <main className="cpv-main" role="main">
-        <ChampagneSectionShell treatmentKey="implants" id="viewer" label="3D overview (coming soon)" tone="muted">
-          <p className="max-w-3xl leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_75%,transparent)]">
-            Placeholder slot for the guided implant visualiser. The final module will highlight placement angles, abutment fit, and soft tissue transitions in real time.
-          </p>
-          <div className="flex min-h-[12rem] items-center justify-center rounded-2xl border border-[color-mix(in_oklab,var(--smh-primary-teal)_20%,transparent)] bg-[color-mix(in_oklab,var(--smh-white)_85%,transparent)] text-sm uppercase tracking-[0.2em] text-[color-mix(in_oklab,var(--smh-primary-teal)_64%,var(--smh-ink)_36%)]">
-            3D VIEWER PLACEHOLDER
-          </div>
-        </ChampagneSectionShell>
+      <main className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-6 py-16" role="main">
+        <LuxeSection variant="implants" id="viewer" label="3D overview (coming soon)" tone="muted">
+          <LuxeCard tone="frosted" className="flex min-h-[12rem] flex-col items-center justify-center text-center">
+            <p className="text-sm uppercase tracking-[0.28em] text-[color-mix(in_oklab,var(--smh-primary-teal)_62%,var(--smh-ink)_38%)]">
+              3D viewer placeholder
+            </p>
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_72%,transparent)]">
+              Placeholder slot for the guided implant visualiser. The final module will highlight placement angles, abutment fit,
+              and soft tissue transitions in real time.
+            </p>
+          </LuxeCard>
+        </LuxeSection>
 
-        <ChampagneSectionShell treatmentKey="implants" id="benefits" label="Why patients choose implants">
-          <ul className="grid gap-4 text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_78%,transparent)] md:grid-cols-2">
+        <LuxeSection variant="implants" id="benefits" label="Why patients choose implants">
+          <div className="grid gap-4 md:grid-cols-2">
             {implantBenefits.map((benefit) => (
-              <li
-                key={benefit}
-                className="rounded-2xl border border-[color-mix(in_oklab,var(--smh-primary-teal)_16%,transparent)] bg-[color-mix(in_oklab,var(--smh-white)_90%,transparent)] p-5"
-              >
-                {benefit}
-              </li>
+              <LuxeCard key={benefit}>
+                <p className="text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_82%,transparent)]">{benefit}</p>
+              </LuxeCard>
             ))}
-          </ul>
-        </ChampagneSectionShell>
+          </div>
+        </LuxeSection>
 
-        <ChampagneSectionShell treatmentKey="implants" id="how-it-works" label="How it works">
-          <ol className="grid gap-4 text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_78%,transparent)] md:grid-cols-2">
+        <LuxeSection variant="implants" id="how-it-works" label="How it works">
+          <div className="grid gap-4 md:grid-cols-2">
             {implantJourney.map((stage) => (
-              <li
-                key={stage.title}
-                className="rounded-2xl border border-[color-mix(in_oklab,var(--smh-primary-teal)_18%,transparent)] bg-[color-mix(in_oklab,var(--smh-white)_88%,transparent)] p-5"
-              >
-                <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-[color-mix(in_oklab,var(--smh-primary-teal)_68%,var(--smh-ink)_32%)]">
+              <LuxeCard key={stage.title}>
+                <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-[color-mix(in_oklab,var(--smh-primary-teal)_66%,var(--smh-ink)_34%)]">
                   {stage.title}
                 </h3>
-                <p className="mt-2 text-base leading-relaxed">{stage.detail}</p>
-              </li>
+                <p className="mt-2 text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_78%,transparent)]">
+                  {stage.detail}
+                </p>
+              </LuxeCard>
             ))}
-          </ol>
-        </ChampagneSectionShell>
+          </div>
+        </LuxeSection>
 
-        <ChampagneSectionShell treatmentKey="implants" id="candidacy" label="Who it’s for" tone="muted">
-          <ul className="grid gap-3 text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_76%,transparent)] md:grid-cols-2">
+        <LuxeSection variant="implants" id="candidacy" label="Who it’s for" tone="muted">
+          <div className="grid gap-4 md:grid-cols-2">
             {implantCandidates.map((item) => (
-              <li
-                key={item}
-                className="rounded-2xl border border-[color-mix(in_oklab,var(--smh-primary-teal)_14%,transparent)] bg-[color-mix(in_oklab,var(--smh-white)_90%,transparent)] p-5"
-              >
-                {item}
-              </li>
+              <LuxeCard key={item} tone="default">
+                <p className="text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_78%,transparent)]">{item}</p>
+              </LuxeCard>
             ))}
-          </ul>
-        </ChampagneSectionShell>
+          </div>
+        </LuxeSection>
 
-        <ChampagneSectionShell treatmentKey="implants" id="pricing" label="Pricing & finance" tone="highlight">
-          <div className="flex flex-col gap-4 text-[color-mix(in_oklab,var(--smh-ink)_78%,transparent)]">
+        <LuxeSection variant="implants" id="pricing" label="Pricing & finance" tone="highlight">
+          <LuxeCard tone="frosted" className="flex flex-col gap-4 text-[color-mix(in_oklab,var(--smh-ink)_82%,transparent)]">
             <p>
-              Finance modules from Tabeo slot in here. Prepare tiers for single implants, bridges, and full-arch solutions with repayment illustrations.
+              Finance modules from Tabeo slot in here. Prepare tiers for single implants, bridges, and full-arch solutions with
+              repayment illustrations.
             </p>
             <div className="flex flex-wrap gap-3">
               <a
@@ -126,8 +121,8 @@ export default function ImplantsPreviewPage() {
                 Back to previews
               </a>
             </div>
-          </div>
-        </ChampagneSectionShell>
+          </LuxeCard>
+        </LuxeSection>
       </main>
     </div>
   );

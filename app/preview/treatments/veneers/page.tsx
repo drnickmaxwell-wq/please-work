@@ -1,11 +1,9 @@
 export const dynamic = "force-static";
 export const revalidate = 0;
 
-import { ChampagneSectionShell } from "@/components/champagne/ChampagneSectionShell";
-import { ChampagneTreatmentHero } from "@/components/champagne/ChampagneTreatmentHero";
+import { ChampagneTreatmentHero } from "@/components/treatments/ChampagneTreatmentHero";
+import { LuxeCard, LuxeSection } from "@/components/treatments/preview";
 import { SchemaInjector } from "@/lib/seo/preview/SchemaInjector";
-
-import "@/styles/preview/champagne-preview.css";
 
 const veneerHighlights = [
   "Featherlight porcelain mirrors natural enamel for luminous reflections.",
@@ -42,73 +40,68 @@ const veneerCandidates = [
 
 export default function VeneersPreviewPage() {
   return (
-    <div className="cpv-page">
+    <div className="min-h-screen bg-[color-mix(in_oklab,var(--smh-accent-gold-soft)_18%,var(--smh-white))] text-[color-mix(in_oklab,var(--smh-ink)_90%,transparent)]">
       <SchemaInjector route="/treatments/veneers" />
 
       <ChampagneTreatmentHero
-        treatmentKey="veneers"
+        variant="veneers"
         eyebrow="Porcelain veneers"
         title="Porcelain veneers with Champagne luminosity"
-        subtitle="Digital artistry and handcrafted ceramics transform smiles with soft gold warmth, while keeping the hero stack entirely on-brand."
+        kicker="Digital artistry, handcrafted glow"
+        description="Digital artistry and handcrafted ceramics transform smiles with soft gold warmth, while keeping the hero stack entirely on-brand."
         primaryCta={{ label: "Plan veneer consultation", href: "/contact" }}
         secondaryCta={{ label: "Preview patient stories", href: "/patient-stories" }}
-        schemaRoute="/treatments/veneers"
       />
 
-      <main className="cpv-main" role="main">
-        <ChampagneSectionShell treatmentKey="veneers" id="viewer" label="3D veneer visualiser" tone="muted">
-          <p className="max-w-3xl leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_76%,transparent)]">
-            Placeholder for the veneer layering viewer. Final build will display digital wax-ups, translucency maps, and before/after toggles in one Champagne-aligned module.
-          </p>
-          <div className="flex min-h-[12rem] items-center justify-center rounded-2xl border border-[color-mix(in_oklab,var(--smh-accent-gold)_18%,transparent)] bg-[color-mix(in_oklab,var(--smh-accent-gold-soft)_24%,var(--smh-white)_76%)] text-sm uppercase tracking-[0.2em] text-[color-mix(in_oklab,var(--smh-ink)_64%,transparent)]">
-            3D VIEWER PLACEHOLDER
-          </div>
-        </ChampagneSectionShell>
+      <main className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-6 py-16" role="main">
+        <LuxeSection variant="veneers" id="viewer" label="3D veneer visualiser" tone="muted">
+          <LuxeCard tone="default" className="flex flex-col gap-3 text-[color-mix(in_oklab,var(--smh-ink)_78%,transparent)]">
+            <p>
+              Placeholder for the veneer layering viewer. Final build will display digital wax-ups, translucency maps, and before/after toggles in one Champagne-aligned module.
+            </p>
+            <div className="flex min-h-[10rem] items-center justify-center rounded-2xl border border-[color-mix(in_oklab,var(--smh-accent-gold)_22%,transparent)] bg-[color-mix(in_oklab,var(--smh-accent-gold-soft)_32%,var(--smh-white)_68%)] text-xs uppercase tracking-[0.24em] text-[color-mix(in_oklab,var(--smh-ink)_62%,transparent)]">
+              3D VIEWER PLACEHOLDER
+            </div>
+          </LuxeCard>
+        </LuxeSection>
 
-        <ChampagneSectionShell treatmentKey="veneers" id="benefits" label="Why guests love veneers">
-          <ul className="grid gap-4 text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_80%,transparent)] md:grid-cols-2">
+        <LuxeSection variant="veneers" id="benefits" label="Why guests love veneers">
+          <div className="grid gap-4 md:grid-cols-2">
             {veneerHighlights.map((highlight) => (
-              <li
-                key={highlight}
-                className="rounded-2xl border border-[color-mix(in_oklab,var(--smh-accent-gold)_18%,transparent)] bg-[color-mix(in_oklab,var(--smh-accent-gold-soft)_26%,var(--smh-white)_74%)] p-5"
-              >
-                {highlight}
-              </li>
+              <LuxeCard key={highlight}>
+                <p className="text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_82%,transparent)]">{highlight}</p>
+              </LuxeCard>
             ))}
-          </ul>
-        </ChampagneSectionShell>
+          </div>
+        </LuxeSection>
 
-        <ChampagneSectionShell treatmentKey="veneers" id="journey" label="The veneer journey">
-          <ol className="grid gap-4 text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_78%,transparent)] md:grid-cols-2">
+        <LuxeSection variant="veneers" id="journey" label="The veneer journey">
+          <div className="grid gap-4 md:grid-cols-2">
             {veneerJourney.map((stage) => (
-              <li
-                key={stage.title}
-                className="rounded-2xl border border-[color-mix(in_oklab,var(--smh-accent-gold)_20%,transparent)] bg-[color-mix(in_oklab,var(--smh-accent-gold-soft)_24%,var(--smh-white)_76%)] p-5"
-              >
-                <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-[color-mix(in_oklab,var(--smh-accent-gold)_54%,var(--smh-ink)_46%)]">
+              <LuxeCard key={stage.title}>
+                <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-[color-mix(in_oklab,var(--smh-accent-gold)_58%,var(--smh-ink)_42%)]">
                   {stage.title}
                 </h3>
-                <p className="mt-2 text-base leading-relaxed">{stage.detail}</p>
-              </li>
+                <p className="mt-2 text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_78%,transparent)]">
+                  {stage.detail}
+                </p>
+              </LuxeCard>
             ))}
-          </ol>
-        </ChampagneSectionShell>
+          </div>
+        </LuxeSection>
 
-        <ChampagneSectionShell treatmentKey="veneers" id="candidacy" label="Are veneers right for you?" tone="muted">
-          <ul className="grid gap-3 text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_78%,transparent)] md:grid-cols-2">
+        <LuxeSection variant="veneers" id="candidacy" label="Are veneers right for you?" tone="muted">
+          <div className="grid gap-4 md:grid-cols-2">
             {veneerCandidates.map((item) => (
-              <li
-                key={item}
-                className="rounded-2xl border border-[color-mix(in_oklab,var(--smh-accent-gold)_16%,transparent)] bg-[color-mix(in_oklab,var(--smh-white)_90%,transparent)] p-5"
-              >
-                {item}
-              </li>
+              <LuxeCard key={item} tone="default">
+                <p className="text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_76%,transparent)]">{item}</p>
+              </LuxeCard>
             ))}
-          </ul>
-        </ChampagneSectionShell>
+          </div>
+        </LuxeSection>
 
-        <ChampagneSectionShell treatmentKey="veneers" id="pricing" label="Finance & next steps" tone="highlight">
-          <div className="flex flex-col gap-4 text-[color-mix(in_oklab,var(--smh-ink)_80%,transparent)]">
+        <LuxeSection variant="veneers" id="pricing" label="Finance & next steps" tone="highlight">
+          <LuxeCard className="flex flex-col gap-4 text-[color-mix(in_oklab,var(--smh-ink)_80%,transparent)]">
             <p>
               Reserve slots for finance illustrations, treatment timelines, and follow-up scheduling. CTA buttons keep Champagne hover easing within the 1.03 scale guidance.
             </p>
@@ -126,8 +119,8 @@ export default function VeneersPreviewPage() {
                 Back to previews
               </a>
             </div>
-          </div>
-        </ChampagneSectionShell>
+          </LuxeCard>
+        </LuxeSection>
       </main>
     </div>
   );

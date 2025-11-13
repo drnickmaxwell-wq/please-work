@@ -1,8 +1,8 @@
 // Preview-only clone. No hard hexes. Do not edit production pages.
 import Link from "next/link";
 
-import { ChampagneSectionShell } from "@/components/champagne/ChampagneSectionShell";
-import { ChampagneTreatmentHero } from "@/components/champagne/ChampagneTreatmentHero";
+import { ChampagneTreatmentHero } from "@/components/treatments/ChampagneTreatmentHero";
+import { LuxeCard, LuxeSection } from "@/components/treatments/preview";
 import { SchemaInjector } from "@/lib/seo/preview/SchemaInjector";
 
 import "@/styles/treatments/preview-light.css";
@@ -109,53 +109,57 @@ const aftercare = [
 
 export default function WhiteningPreviewPage() {
   return (
-    <main className="min-h-screen bg-[var(--champagne-surface)] text-[var(--champagne-ink)]">
+    <main className="min-h-screen bg-[color-mix(in_oklab,var(--smh-white)_96%,transparent)] text-[color-mix(in_oklab,var(--smh-ink)_92%,transparent)]">
       <SchemaInjector route="/treatments/whitening" />
 
       <ChampagneTreatmentHero
-        treatmentKey="whitening"
+        variant="whitening"
         eyebrow="Teeth whitening"
         title="Whitening that stays luminous"
-        subtitle="Preview the Champagne whitening journey with bright, pearl-toned gradients and minimal gold."
+        kicker="Pearl-toned gradients, minimal gold"
+        description="Preview the Champagne whitening journey with bright, pearl-toned gradients and minimal gold."
         primaryCta={{ label: "Book whitening consult", href: "/contact" }}
         secondaryCta={{ label: "View all previews", href: "/preview/treatments" }}
-        schemaRoute="/treatments/whitening"
       />
 
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-12 px-6 py-16">
-        <ChampagneSectionShell treatmentKey="whitening" id="benefits" label="Why guests choose our whitening">
-          <div className="grid gap-6 text-[color-mix(in_oklab,var(--smh-ink)_78%,transparent)] md:grid-cols-2">
+        <LuxeSection variant="whitening" id="benefits" label="Why guests choose our whitening">
+          <div className="grid gap-6 md:grid-cols-2">
             {benefits.map((benefit) => (
-              <article
-                key={benefit.title}
-                className="rounded-2xl border border-[color-mix(in_oklab,var(--smh-primary-teal)_14%,transparent)] bg-[color-mix(in_oklab,var(--smh-white)_94%,var(--smh-accent-gold-soft)_6%)] p-6"
-              >
-                <h3 className="text-xl font-semibold" style={{ fontFamily: "var(--font-playfair, 'Playfair Display', serif)" }}>
+              <LuxeCard key={benefit.title}>
+                <h3
+                  className="text-xl font-semibold"
+                  style={{ fontFamily: "var(--font-playfair, 'Playfair Display', serif)" }}
+                >
                   {benefit.title}
                 </h3>
-                <p className="mt-3 text-base leading-relaxed">{benefit.description}</p>
-              </article>
+                <p className="mt-3 text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_76%,transparent)]">
+                  {benefit.description}
+                </p>
+              </LuxeCard>
             ))}
           </div>
-        </ChampagneSectionShell>
+        </LuxeSection>
 
-        <ChampagneSectionShell treatmentKey="whitening" id="pathways" label="Tailored whitening pathways" tone="muted">
-          <div className="grid gap-6 text-[color-mix(in_oklab,var(--smh-ink)_76%,transparent)] lg:grid-cols-3">
+        <LuxeSection variant="whitening" id="pathways" label="Tailored whitening pathways" tone="muted">
+          <div className="grid gap-6 lg:grid-cols-3">
             {options.map((option) => (
-              <article
-                key={option.name}
-                className="flex h-full flex-col gap-3 rounded-2xl border border-[color-mix(in_oklab,var(--smh-primary-teal)_16%,transparent)] bg-[color-mix(in_oklab,var(--smh-white)_95%,transparent)] p-6"
-              >
+              <LuxeCard key={option.name} tone="default" className="flex h-full flex-col gap-3">
                 <header>
-                  <h3 className="text-lg font-semibold" style={{ fontFamily: "var(--font-playfair, 'Playfair Display', serif)" }}>
+                  <h3
+                    className="text-lg font-semibold"
+                    style={{ fontFamily: "var(--font-playfair, 'Playfair Display', serif)" }}
+                  >
                     {option.name}
                   </h3>
                   <p className="mt-1 text-xs uppercase tracking-[0.2em] text-[color-mix(in_oklab,var(--smh-primary-teal)_58%,var(--smh-ink)_42%)]">
                     {option.duration} · {option.results}
                   </p>
                 </header>
-                <p className="text-base leading-relaxed">{option.summary}</p>
-                <ul className="mt-auto space-y-2 text-sm leading-relaxed">
+                <p className="text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_74%,transparent)]">
+                  {option.summary}
+                </p>
+                <ul className="mt-auto space-y-2 text-sm leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_72%,transparent)]">
                   {option.highlights.map((item) => (
                     <li key={item} className="flex gap-2">
                       <span aria-hidden>•</span>
@@ -163,49 +167,48 @@ export default function WhiteningPreviewPage() {
                     </li>
                   ))}
                 </ul>
-              </article>
+              </LuxeCard>
             ))}
           </div>
-        </ChampagneSectionShell>
+        </LuxeSection>
 
-        <ChampagneSectionShell treatmentKey="whitening" id="stains" label="Understanding different stains">
-          <div className="grid gap-6 text-[color-mix(in_oklab,var(--smh-ink)_76%,transparent)] lg:grid-cols-3">
+        <LuxeSection variant="whitening" id="stains" label="Understanding different stains">
+          <div className="grid gap-6 lg:grid-cols-3">
             {stainTypes.map((type) => (
-              <article
-                key={type.label}
-                className="rounded-2xl border border-[color-mix(in_oklab,var(--smh-primary-magenta)_14%,transparent)] bg-[color-mix(in_oklab,var(--smh-white)_95%,transparent)] p-6"
-              >
-                <h3 className="text-lg font-semibold" style={{ fontFamily: "var(--font-playfair, 'Playfair Display', serif)" }}>
+              <LuxeCard key={type.label} tone="default" className="flex h-full flex-col gap-3">
+                <h3
+                  className="text-lg font-semibold"
+                  style={{ fontFamily: "var(--font-playfair, 'Playfair Display', serif)" }}
+                >
                   {type.label}
                 </h3>
                 <p className="mt-2 text-xs uppercase tracking-[0.2em] text-[color-mix(in_oklab,var(--smh-primary-magenta)_58%,var(--smh-ink)_42%)]">
                   Common causes
                 </p>
-                <ul className="mt-2 space-y-1 text-sm">
+                <ul className="mt-2 space-y-1 text-sm text-[color-mix(in_oklab,var(--smh-ink)_70%,transparent)]">
                   {type.causes.map((cause) => (
                     <li key={cause}>{cause}</li>
                   ))}
                 </ul>
-                <p className="mt-3 text-sm leading-relaxed">{type.approach}</p>
+                <p className="mt-3 text-sm leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_74%,transparent)]">
+                  {type.approach}
+                </p>
                 <p className="mt-1 text-xs uppercase tracking-[0.2em] text-[color-mix(in_oklab,var(--smh-primary-teal)_58%,var(--smh-ink)_42%)]">
                   {type.success}
                 </p>
-              </article>
+              </LuxeCard>
             ))}
           </div>
-        </ChampagneSectionShell>
+        </LuxeSection>
 
-        <ChampagneSectionShell treatmentKey="whitening" id="aftercare" label="Aftercare guidance" tone="muted">
-          <div className="grid gap-6 text-[color-mix(in_oklab,var(--smh-ink)_78%,transparent)] md:grid-cols-2">
+        <LuxeSection variant="whitening" id="aftercare" label="Aftercare guidance" tone="muted">
+          <div className="grid gap-6 md:grid-cols-2">
             {aftercare.map((entry) => (
-              <article
-                key={entry.title}
-                className="rounded-2xl border border-[color-mix(in_oklab,var(--smh-primary-teal)_14%,transparent)] bg-[color-mix(in_oklab,var(--smh-white)_94%,transparent)] p-6"
-              >
+              <LuxeCard key={entry.title} tone="default" className="flex h-full flex-col gap-3">
                 <h3 className="text-lg font-semibold" style={{ fontFamily: "var(--font-playfair, 'Playfair Display', serif)" }}>
                   {entry.title}
                 </h3>
-                <ul className="mt-3 space-y-2 text-sm leading-relaxed">
+                <ul className="space-y-2 text-sm leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_74%,transparent)]">
                   {entry.notes.map((note) => (
                     <li key={note} className="flex gap-2">
                       <span aria-hidden>•</span>
@@ -213,32 +216,32 @@ export default function WhiteningPreviewPage() {
                     </li>
                   ))}
                 </ul>
-              </article>
+              </LuxeCard>
             ))}
           </div>
-        </ChampagneSectionShell>
+        </LuxeSection>
 
-        <ChampagneSectionShell treatmentKey="whitening" id="cta" label="Ready to brighten" tone="highlight">
-          <div className="flex flex-col gap-4 text-[color-mix(in_oklab,var(--smh-ink)_76%,transparent)]">
-            <p>
-              Use these CTAs to plug in scheduling widgets, finance options, or educational downloads. Keep hover offsets subtle to respect Champagne motion rules.
+        <LuxeSection variant="whitening" id="cta" label="Ready to brighten" tone="highlight">
+          <LuxeCard tone="default" className="flex flex-col gap-4">
+            <p className="text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_76%,transparent)]">
+              Pair in-practice whitening with at-home maintenance to hold your preferred shade. Schema HUD confirms Service and HowTo packs are wired for this route.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
-                className="inline-flex items-center justify-center rounded-full border border-[color-mix(in_oklab,var(--smh-primary-teal)_26%,transparent)] bg-[color-mix(in_oklab,var(--smh-white)_94%,transparent)] px-5 py-2 text-sm font-semibold tracking-[0.16em] text-[color-mix(in_oklab,var(--smh-primary-teal)_68%,var(--smh-ink)_32%)] transition-transform duration-300 ease-[cubic-bezier(0.645,0.045,0.355,1)] hover:translate-y-[-2px]"
+                className="inline-flex items-center justify-center rounded-full border border-[color-mix(in_oklab,var(--smh-primary-teal)_28%,transparent)] bg-[color-mix(in_oklab,var(--smh-white)_92%,transparent)] px-5 py-2 text-sm font-semibold tracking-[0.16em] text-[color-mix(in_oklab,var(--smh-primary-teal)_70%,var(--smh-ink)_30%)] transition-transform duration-300 ease-[cubic-bezier(0.645,0.045,0.355,1)] hover:translate-y-[-2px]"
                 href="/contact"
               >
-                Book consultation
+                Book whitening consult
               </Link>
               <Link
-                className="inline-flex items-center justify-center rounded-full border border-[color-mix(in_oklab,var(--smh-primary-magenta)_22%,transparent)] bg-[color-mix(in_oklab,var(--smh-white)_94%,transparent)] px-5 py-2 text-sm font-semibold tracking-[0.16em] text-[color-mix(in_oklab,var(--smh-primary-magenta)_68%,var(--smh-ink)_32%)] transition-transform duration-300 ease-[cubic-bezier(0.645,0.045,0.355,1)] hover:translate-y-[-2px]"
+                className="inline-flex items-center justify-center rounded-full border border-[color-mix(in_oklab,var(--smh-primary-magenta)_22%,transparent)] bg-[color-mix(in_oklab,var(--smh-white)_92%,transparent)] px-5 py-2 text-sm font-semibold tracking-[0.16em] text-[color-mix(in_oklab,var(--smh-primary-magenta)_68%,var(--smh-ink)_32%)] transition-transform duration-300 ease-[cubic-bezier(0.645,0.045,0.355,1)] hover:translate-y-[-2px]"
                 href="/preview/treatments"
               >
-                Explore more previews
+                Back to previews
               </Link>
             </div>
-          </div>
-        </ChampagneSectionShell>
+          </LuxeCard>
+        </LuxeSection>
       </div>
     </main>
   );
