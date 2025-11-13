@@ -92,7 +92,7 @@ function LuxeTreatmentHeroButton({ label, href, intent }: LuxeTreatmentHeroCta &
   );
 }
 
-const easing = [0.645, 0.045, 0.355, 1];
+const heroEasing = [0.645, 0.045, 0.355, 1];
 
 const LuxeTreatmentHero = ({
   variant,
@@ -104,7 +104,7 @@ const LuxeTreatmentHero = ({
   secondaryCta,
 }: LuxeTreatmentHeroProps) => {
   const prefersReducedMotion = usePrefersReducedMotion();
-  const theme = VARIANT_THEMES[variant];
+  const theme = VARIANT_THEMES[variant] ?? VARIANT_THEMES.general;
   const cardHover = prefersReducedMotion
     ? undefined
     : {
@@ -122,7 +122,7 @@ const LuxeTreatmentHero = ({
       style={theme}
       initial={prefersReducedMotion ? undefined : { opacity: 0, y: 12 }}
       animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-      transition={{ duration: 1.2, ease: easing }}
+      transition={{ duration: 1.2, ease: heroEasing }}
     >
       <div aria-hidden className="lth-hero__surface" />
       <WaveFXPreview />
@@ -134,7 +134,12 @@ const LuxeTreatmentHero = ({
             ? undefined
             : { opacity: [0.32, 0.46, 0.34], y: [0, -6, 0] }
         }
-        transition={{ duration: 16, repeat: prefersReducedMotion ? 0 : Infinity, repeatType: 'mirror', ease }}
+        transition={{
+          duration: 16,
+          repeat: prefersReducedMotion ? 0 : Infinity,
+          repeatType: 'mirror',
+          ease: heroEasing,
+        }}
       />
       <motion.div
         aria-hidden
@@ -144,7 +149,12 @@ const LuxeTreatmentHero = ({
             ? undefined
             : { opacity: [0.04, 0.12, 0.06], backgroundPosition: ['0% 0%', '6% 4%', '0% 0%'] }
         }
-        transition={{ duration: 20, repeat: prefersReducedMotion ? 0 : Infinity, repeatType: 'mirror', ease }}
+        transition={{
+          duration: 20,
+          repeat: prefersReducedMotion ? 0 : Infinity,
+          repeatType: 'mirror',
+          ease: heroEasing,
+        }}
       />
       <div className="container">
         <div className="cpv-hero__inner">
@@ -152,7 +162,7 @@ const LuxeTreatmentHero = ({
             <motion.div
               className="cpv-glass cpv-hero__card"
               whileHover={cardHover}
-              transition={{ duration: 0.6, ease }}
+              transition={{ duration: 0.6, ease: heroEasing }}
             >
               <div className="flex flex-col gap-6">
                 {eyebrow || kicker ? (
