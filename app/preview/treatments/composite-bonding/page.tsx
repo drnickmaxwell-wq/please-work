@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import '@/styles/preview/champagne-preview.css';
 
 import LuxeTreatmentHero from '@/components/treatments/LuxeTreatmentHero';
+import { previewRobots } from '@/lib/seo/preview/previewRobots';
 
 import CompositeBondingFaqSection from './_sections/CompositeBondingFaqSection';
 import CompositeBondingHeroSection from './_sections/CompositeBondingHeroSection';
@@ -14,10 +15,7 @@ import CompositeBondingResultsSection from './_sections/CompositeBondingResultsS
 export const metadata: Metadata = {
   title: 'Composite bonding stage preview',
   description: 'Preview-only showcase for composite bonding sections before promotion to the live treatments route.',
-  robots: {
-    index: false,
-    follow: false,
-  },
+  robots: previewRobots,
 };
 
 export default function CompositeBondingPreviewPage() {

@@ -1,11 +1,17 @@
 export const dynamic = 'force-static';
 export const revalidate = 0;
 
+import type { Metadata } from 'next';
 import '@/styles/preview/champagne-preview.css';
 import Link from 'next/link';
 
 import LuxeTreatmentHero from '@/components/treatments/LuxeTreatmentHero';
 import { KeyList, Section } from '@/components/preview/PreviewBlocks';
+import { previewRobots } from '@/lib/seo/preview/previewRobots';
+
+export const metadata: Metadata = {
+  robots: previewRobots,
+};
 
 const highlights = [
   'Featherlight porcelain mirroring natural enamel texture',

@@ -1,9 +1,15 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import '@/styles/preview/champagne-preview.css';
 
 import LuxeTreatmentHero from '@/components/treatments/LuxeTreatmentHero';
 import { Section } from '@/components/preview/PreviewBlocks';
+import { previewRobots } from '@/lib/seo/preview/previewRobots';
+
+export const metadata: Metadata = {
+  robots: previewRobots,
+};
 
 const PREVIEW_ROUTES = [
   { slug: '3d-dentistry', label: '3D digital dentistry', summary: 'Contactless scanning and same-day restorations.' },
