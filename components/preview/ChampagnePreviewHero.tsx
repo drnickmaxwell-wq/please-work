@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
 
+import WaveFXPreview from '@/components/preview/fx/WaveFXPreview';
+
 export type ChampagnePreviewHeroProps = {
   title: string;
   kicker?: string;
@@ -10,8 +12,9 @@ export type ChampagnePreviewHeroProps = {
 const ChampagnePreviewHero = ({ title, kicker, ctas, children }: ChampagnePreviewHeroProps) => {
   return (
     <section className="cpv-hero">
-      <div className="cpv-hero__inner">
-        <div className="cpv-hero__container">
+      <WaveFXPreview />
+      <div className="container">
+        <div className="cpv-hero__inner">
           <div className="cpv-hero__content">
             <div className="cpv-glass cpv-hero__card">
               <div className="flex flex-col gap-6">

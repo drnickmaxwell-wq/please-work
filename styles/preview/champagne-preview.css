@@ -9,40 +9,63 @@
   color: var(--smh-text);
 }
 
+
 .cpv-hero {
   position: relative;
-  color: var(--smh-text);
+  isolation: isolate;
   background: linear-gradient(
     135deg,
     var(--smh-primary-magenta) 0%,
     var(--smh-primary-teal) 60%,
     var(--smh-accent-gold) 100%
   );
-  overflow: hidden;
+  padding: clamp(2.5rem, 5vw, 4rem) 1.25rem;
+  color: var(--smh-text);
 }
 
-.cpv-hero::before {
+.cpv-hero > .container {
+  max-width: 1100px;
+  margin-inline: auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* Wave layer cloned for PREVIEW (read-only, no binaries) */
+.cpv-wavefx {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  /* wave mask/lines derived from existing public assets and tokens */
+  background-image:
+    var(--smh-wave-image, url("/brand/waves/wave-lines.webp")),
+    var(--smh-grain-image, url("/brand/textures/grain.webp"));
+  background-size: cover, 512px 512px;
+  background-repeat: no-repeat, repeat;
+  background-position: center, center;
+  /* gentle opacity & blend—Champagne law */
+  opacity: 0.12; /* ≤ 0.12 */
+  mix-blend-mode: soft-light;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cpv-wavefx {
+    opacity: 0.06;
+  }
+}
+
+/* Optional caustics (kept subtle; ≤ 0.10) if manifest exposes it as a var */
+.cpv-wavefx::after {
   content: "";
   position: absolute;
   inset: 0;
-  mask-image: url(/brand/waves/mask-01.webp);
-  mask-size: cover;
-  mask-repeat: no-repeat;
-  background: color-mix(in oklab, var(--smh-ink), transparent 88%);
-  opacity: var(--cpv-wave-alpha, 0.12);
-  pointer-events: none;
+  background-image: var(--smh-caustics-image, url("/brand/effects/caustics.webp"));
+  background-size: cover;
+  background-position: center;
+  opacity: 0.08;
+  mix-blend-mode: overlay;
 }
 
-.cpv-hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url(/brand/grain/grain-512.webp);
-  background-size: 512px 512px;
-  mix-blend-mode: multiply;
-  opacity: var(--cpv-grain-alpha, 0.06);
-  pointer-events: none;
-}
 
 .cpv-hero__inner {
   position: relative;
@@ -50,13 +73,6 @@
   display: flex;
   align-items: center;
   width: 100%;
-  padding-block: clamp(4rem, 8vw, 7rem);
-}
-
-.cpv-hero__container {
-  width: min(1100px, 100%);
-  margin-inline: auto;
-  padding-inline: 1.25rem;
 }
 
 .cpv-hero__content {
@@ -167,12 +183,6 @@
 @media (min-width: 1024px) {
   .cpv-hero__content {
     max-width: 52rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cpv-hero::before {
-    opacity: 0.06;
   }
 }
 
