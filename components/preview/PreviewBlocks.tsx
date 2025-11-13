@@ -6,11 +6,12 @@ type SectionProps = {
   description?: ReactNode;
   children?: ReactNode;
   tone?: 'default' | 'bright';
+  id?: string;
 };
 
-export function Section({ title, eyebrow, description, children, tone = 'default' }: SectionProps) {
+export function Section({ title, eyebrow, description, children, tone = 'default', id }: SectionProps) {
   return (
-    <section className="cpv-card" data-tone={tone}>
+    <section className="cpv-card" data-tone={tone} id={id}>
       <div className="cpv-card__inner">
         {eyebrow ? <p className="cpv-card__eyebrow">{eyebrow}</p> : null}
         <h2 className="cpv-card__title">{title}</h2>

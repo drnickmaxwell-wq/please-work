@@ -25,6 +25,15 @@ const PREVIEW_ROUTES = [
 ];
 
 export default function TreatmentsPreviewIndex() {
+  const showPreviewTools = process.env.NEXT_PUBLIC_PREVIEW_MODE === 'true';
+
+  const devAccessory = showPreviewTools ? (
+    <Link className="cpv-devpill" href="#preview-routes">
+      <span className="cpv-devpill__badge">DEV</span>
+      Preview routes
+    </Link>
+  ) : undefined;
+
   return (
     <div className="cpv-page">
       <LuxeTreatmentHero
@@ -34,10 +43,12 @@ export default function TreatmentsPreviewIndex() {
         description="Explore Champagne-themed staging areas for each treatment while production routes remain untouched. Use these links to review copy, layout, and token usage before launch."
         primaryCta={{ label: 'Back to preview hub', href: '/preview' }}
         secondaryCta={{ label: 'View live treatments', href: '/treatments' }}
+        devAccessory={devAccessory}
       />
 
       <main className="cpv-main" role="main">
         <Section
+          id="preview-routes"
           title="Browse preview routes"
           description={<p>Select a route to fine-tune copy, hero states, metrics, and luxe block experiments.</p>}
         >
