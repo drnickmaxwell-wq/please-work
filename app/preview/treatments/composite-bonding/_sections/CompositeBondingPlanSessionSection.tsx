@@ -8,12 +8,11 @@ export default function CompositeBondingPlanSessionSection(): JSX.Element {
       headline="Plan your bonding session"
       description="This CTA cluster showcases how the production page will invite guests to reserve time with our clinicians."
     >
-      <div className="flex flex-col gap-4">
-        <p className="max-w-2xl text-sm leading-relaxed text-[var(--champagne-ink-muted)]">
-          Once the treatments team finalises scripting, this section will connect to booking flows and surface concierge contact details.
-        </p>
-        <TreatmentConsultationCta />
-      </div>
+      <p className="cpv-card__lead">
+        Once scripting is finalised, connect this block to booking flows and concierge contact details without disturbing the
+        live experience.
+      </p>
+      <TreatmentConsultationCta />
     </ChampagneTreatmentSurface>
   );
 }

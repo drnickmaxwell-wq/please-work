@@ -1,236 +1,87 @@
-// Preview-only clone. No hard hexes. Do not edit production pages.
+export const dynamic = 'force-static';
+export const revalidate = 0;
+
+import type { Metadata } from 'next';
+import '@/styles/preview/champagne-preview.css';
 import Link from 'next/link';
 
-import TreatmentBanner from '@/components/preview/TreatmentBanner';
-import '@/styles/treatments/preview-light.css';
+import LuxeTreatmentHero from '@/components/treatments/LuxeTreatmentHero';
+import { KeyList, Section } from '@/components/preview/PreviewBlocks';
+import { previewRobots } from '@/lib/seo/preview/previewRobots';
 
-const benefits = [
-  {
-    title: 'Immediate results',
-    description: 'See dramatic whitening results in a single professional treatment session.',
-  },
-  {
-    title: 'Safe & effective',
-    description: 'Professional-grade whitening that protects enamel while removing stains.',
-  },
-  {
-    title: 'Long lasting',
-    description: 'Results can last 12-18 months with thoughtful at-home care and touch-ups.',
-  },
-  {
-    title: 'Confidence boost',
-    description: 'A brighter smile enhances appearance, photographs, and day-to-day confidence.',
-  },
+export const metadata: Metadata = {
+  robots: previewRobots,
+};
+
+const highlights = [
+  'Shade mapping and sensitivity checks for calm, predictable results',
+  'Enlighten and boutique systems with luxe gel formulations',
+  'Weekly touchpoints to keep each stage comfortable',
+  'Remineralising serums and aftercare rituals that protect enamel',
 ];
 
-const options = [
-  {
-    name: 'In-practice whitening',
-    summary: 'The fastest and most effective way to brighten your smile.',
-    duration: '60-90 minutes',
-    results: 'Up to 8 shades lighter',
-    highlights: [
-      'Dentist-applied whitening gel',
-      'LED activation for enhanced lift',
-      'Immediate transformation before you leave',
-      'Gum protection for comfort',
-    ],
-  },
-  {
-    name: 'Take-home whitening trays',
-    summary: 'Custom-fitted aligners let you whiten gradually at home.',
-    duration: '1-2 weeks',
-    results: 'Up to 6 shades lighter',
-    highlights: [
-      'Precision-fit trays made in-house',
-      'Professional gels for even coverage',
-      'Flexible evening or weekend schedule',
-      'Easy top-ups before events',
-    ],
-  },
-  {
-    name: 'Combination care',
-    summary: 'Begin in-practice, then maintain at home for long-lasting brightness.',
-    duration: 'Ongoing',
-    results: 'Maximum whitening potential',
-    highlights: [
-      'Best-of-both approach',
-      'Tailored plan for ongoing lift',
-      'Top-up gels included',
-      'Keeps results luminous for longer',
-    ],
-  },
+const journey = [
+  'Consultation & mapping — lifestyle insights, shade goals, gel selection',
+  'At-home phase — bespoke trays with guided weekly reviews',
+  'In-clinic glow — precision finishing session with gentle light activation',
+  'Aftercare — remineralising treatments and long-term whitening plans',
 ];
 
-const stainTypes = [
-  {
-    label: 'Surface stains',
-    causes: ['Coffee', 'Tea', 'Wine', 'Tobacco'],
-    approach: 'Easily removed with a single professional session.',
-    success: '95% response rate',
-  },
-  {
-    label: 'Age-related stains',
-    causes: ['Enamel thinning', 'Natural dentine changes'],
-    approach: 'Responds well to calibrated whitening under supervision.',
-    success: '85% response rate',
-  },
-  {
-    label: 'Intrinsic stains',
-    causes: ['Medications', 'Fluorosis', 'Tooth trauma'],
-    approach: 'Often needs layered treatments or veneers for full correction.',
-    success: '70% response rate',
-  },
-];
-
-const aftercare = [
-  {
-    title: 'First 48 hours',
-    notes: [
-      'Avoid richly coloured foods and drinks',
-      'Use a straw for any coloured beverages',
-      'Skip tobacco products while enamel settles',
-      'Choose clear or white dishes to maintain lift',
-    ],
-  },
-  {
-    title: 'Long-term maintenance',
-    notes: [
-      'Attend hygiene visits every 6 months',
-      'Use a gentle whitening toothpaste weekly',
-      'Rinse after stain-prone meals',
-      'Refresh with top-up syringes when needed',
-    ],
-  },
+const candidacy = [
+  'No active decay or untreated gum concerns',
+  'Happy to follow the prescribed tray routine',
+  'Understands natural shade shifts for realistic outcomes',
+  'Ready to maintain with gentle whitening pastes post-treatment',
 ];
 
 export default function WhiteningPreviewPage() {
   return (
-    <main className="min-h-screen bg-[var(--champagne-surface)] text-[var(--champagne-ink)]">
-      <div className="mx-auto flex max-w-5xl flex-col gap-12 px-6 py-16">
-        <nav aria-label="Breadcrumb" className="text-sm">
-          <ol className="flex flex-wrap items-center gap-2 text-[var(--champagne-ink-muted)]">
-            <li>
-              <Link className="underline-offset-4 hover:underline" href="/preview">
-                Preview
-              </Link>
-            </li>
-            <li aria-hidden="true">/</li>
-            <li>
-              <Link className="underline-offset-4 hover:underline" href="/preview/treatments">
-                Treatments
-              </Link>
-            </li>
-            <li aria-hidden="true">/</li>
-            <li aria-current="page" className="font-medium text-[var(--champagne-ink)]">
-              Teeth whitening
-            </li>
-          </ol>
-        </nav>
+    <div className="cpv-page">
+      <LuxeTreatmentHero
+        variant="whitening"
+        eyebrow="Treatments preview"
+        title="Teeth whitening in Shoreham-by-Sea"
+        description="Luminous dusk-to-teal gradients echo the Champagne home hero so you can stress-test copy, component swaps, and tracking without touching production."
+        primaryCta={{ label: 'Reserve a consultation', href: '/contact' }}
+        secondaryCta={{ label: 'View all treatments', href: '/treatments' }}
+      />
 
-        <TreatmentBanner
-          label="Treatments"
-          subtitle="Achieve a brilliantly white smile with customised whitening journeys. Each plan balances comfort, speed, and longevity so your results stay luminous well beyond the initial appointment."
-          title="Professional teeth whitening in Shoreham-by-Sea"
-        />
-
-        <section className="t-section rounded-3xl p-8 shadow-sm">
-          <div className="flex flex-col gap-6">
-            <h2 className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
-              Why guests choose our whitening
-            </h2>
-            <div className="grid gap-6 sm:grid-cols-2">
-              {benefits.map((benefit) => (
-                <article key={benefit.title} className="t-card h-full p-6">
-                  <h3 className="text-xl font-semibold" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
-                    {benefit.title}
-                  </h3>
-                  <p className="mt-3 leading-relaxed t-muted">{benefit.description}</p>
-                </article>
-              ))}
-            </div>
+      <main className="cpv-main" role="main">
+        <Section
+          title="Shade preview"
+          description={<p>Embed your shade selector or before/after slider to illustrate tonal refinement.</p>}
+        >
+          <div className="cpv-slot" aria-label="Shade preview slot">
+            SHADE PREVIEW SLOT (placeholder)
           </div>
-        </section>
+        </Section>
 
-        <section className="t-section rounded-3xl p-8 shadow-sm">
-          <div className="flex flex-col gap-6">
-            <h2 className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
-              Tailored whitening pathways
-            </h2>
-            <div className="grid gap-6 md:grid-cols-3">
-              {options.map((option) => (
-                <article key={option.name} className="t-card h-full p-6">
-                  <h3 className="text-xl font-semibold" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
-                    {option.name}
-                  </h3>
-                  <p className="mt-2 text-sm uppercase tracking-wider text-[var(--champagne-ink-muted)]">
-                    {option.duration} · {option.results}
-                  </p>
-                  <p className="mt-3 leading-relaxed t-muted">{option.summary}</p>
-                  <ul className="mt-4 space-y-2 text-sm leading-relaxed t-muted">
-                    {option.highlights.map((item) => (
-                      <li key={item} className="flex gap-2">
-                        <span aria-hidden="true">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+        <Section title="Whitening guests love">
+          <KeyList items={highlights} />
+        </Section>
 
-        <section className="t-section rounded-3xl p-8 shadow-sm">
-          <div className="flex flex-col gap-6">
-            <h2 className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
-              Understanding different stains
-            </h2>
-            <div className="grid gap-6 md:grid-cols-3">
-              {stainTypes.map((type) => (
-                <article key={type.label} className="t-card h-full p-6">
-                  <h3 className="text-lg font-semibold" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
-                    {type.label}
-                  </h3>
-                  <p className="mt-3 text-sm uppercase tracking-wide text-[var(--champagne-ink-muted)]">Common causes</p>
-                  <ul className="mt-2 space-y-1 text-sm t-muted">
-                    {type.causes.map((cause) => (
-                      <li key={cause}>{cause}</li>
-                    ))}
-                  </ul>
-                  <p className="mt-4 leading-relaxed t-muted">{type.approach}</p>
-                  <p className="mt-2 text-sm font-medium text-[var(--champagne-ink)]">{type.success}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+        <Section title="The whitening journey">
+          <KeyList items={journey} />
+        </Section>
 
-        <section className="t-section rounded-3xl p-8 shadow-sm">
-          <div className="flex flex-col gap-6">
-            <h2 className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
-              Aftercare to lock in brightness
-            </h2>
-            <div className="grid gap-6 md:grid-cols-2">
-              {aftercare.map((phase) => (
-                <article key={phase.title} className="t-card h-full p-6">
-                  <h3 className="text-lg font-semibold" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
-                    {phase.title}
-                  </h3>
-                  <ul className="mt-3 space-y-2 text-sm leading-relaxed t-muted">
-                    {phase.notes.map((note) => (
-                      <li key={note} className="flex gap-2">
-                        <span aria-hidden="true">•</span>
-                        <span>{note}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              ))}
-            </div>
+        <Section title="Is whitening right for you?">
+          <KeyList items={candidacy} />
+        </Section>
+
+        <Section
+          title="Plan your whitening consultation"
+          description={<p>Swap this CTA block for scheduling experiments, nurture automations, or concierge details.</p>}
+        >
+          <div className="cpv-cta-row">
+            <Link className="cpv-btn cpv-btn-solid" href="/contact">
+              Book a consultation
+            </Link>
+            <Link className="cpv-btn cpv-btn-outline" href="/treatments">
+              View all treatments
+            </Link>
           </div>
-        </section>
-      </div>
-    </main>
+        </Section>
+      </main>
+    </div>
   );
 }

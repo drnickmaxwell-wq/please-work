@@ -1,46 +1,81 @@
-// Preview-only clone. No hard hexes. Do not edit production pages.
+export const dynamic = 'force-static';
+export const revalidate = 0;
+
+import type { Metadata } from 'next';
+import '@/styles/preview/champagne-preview.css';
 import Link from 'next/link';
 
-import TreatmentBanner from '@/components/preview/TreatmentBanner';
-import '@/styles/treatments/preview-light.css';
+import LuxeTreatmentHero from '@/components/treatments/LuxeTreatmentHero';
+import { KeyList, Section } from '@/components/preview/PreviewBlocks';
+import { previewRobots } from '@/lib/seo/preview/previewRobots';
+
+export const metadata: Metadata = {
+  robots: previewRobots,
+};
+
+const everyday = [
+  'Gentle hygiene programmes with digital charting',
+  'Comprehensive examinations and preventive coaching',
+  'Restorative artistry from fillings to crowns',
+  'Smile enhancements that keep everyday care elevated',
+];
+
+const serviceMix = [
+  'Routine check-ups and tailored hygiene therapy',
+  'Periodontal maintenance and guided home routines',
+  'Minimally invasive restorations with digital design',
+  'Whitening and cosmetic refinements for finishing touches',
+];
+
+const guestExperience = [
+  'Warm welcome lounge with digital check-in',
+  'Comfort menu, blankets, and noise-cancelling headphones',
+  'Sedation options for anxious guests',
+  'After-visit follow-ups with personalised care notes',
+];
 
 export default function GeneralDentistryPreviewPage() {
   return (
-    <main className="min-h-screen bg-[var(--champagne-surface)] text-[var(--champagne-ink)]">
-      <div className="mx-auto flex max-w-4xl flex-col gap-10 px-6 py-16">
-        <nav aria-label="Breadcrumb" className="text-sm">
-          <ol className="flex flex-wrap items-center gap-2 text-[var(--champagne-ink-muted)]">
-            <li>
-              <Link className="underline-offset-4 hover:underline" href="/preview">
-                Preview
-              </Link>
-            </li>
-            <li aria-hidden="true">/</li>
-            <li>
-              <Link className="underline-offset-4 hover:underline" href="/preview/treatments">
-                Treatments
-              </Link>
-            </li>
-            <li aria-hidden="true">/</li>
-            <li aria-current="page" className="font-medium text-[var(--champagne-ink)]">
-              General dentistry
-            </li>
-          </ol>
-        </nav>
+    <div className="cpv-page">
+      <LuxeTreatmentHero
+        variant="general"
+        eyebrow="Treatments preview"
+        title="General dentistry in Shoreham-by-Sea"
+        description="A calm Manus dusk gradient gives you space to finesse general dentistry copy, sequencing, and schema while maintaining Champagne hero continuity."
+        primaryCta={{ label: 'Reserve a consultation', href: '/contact' }}
+        secondaryCta={{ label: 'View all treatments', href: '/treatments' }}
+      />
 
-        <TreatmentBanner
-          label="Treatments"
-          subtitle="Placeholder copy for preventive and restorative care. Populate this preview with treatment flows, copy guidelines, and schema updates while leaving the production route unchanged."
-          title="General dentistry preview"
-        />
+      <main className="cpv-main" role="main">
+        <Section
+          title="Everyday comfort, elevated"
+          description={<p>Replace this placeholder once your narratives and block components are finalised.</p>}
+        >
+          <KeyList items={everyday} />
+        </Section>
 
-        <section className="t-section rounded-3xl p-8 shadow-sm">
-          <p className="leading-relaxed t-muted">
-            Outline hygiene programs, exam sequences, and restorative options here. Replace with production components only when
-            content and Champagne styling are complete.
-          </p>
-        </section>
-      </div>
-    </main>
+        <Section title="Preview your service mix">
+          <KeyList items={serviceMix} />
+        </Section>
+
+        <Section title="Guest experience touchpoints">
+          <KeyList items={guestExperience} />
+        </Section>
+
+        <Section
+          title="Plan your general dentistry consultation"
+          description={<p>Test CTA copy, scheduling logic, and nurture workflows without touching the live site.</p>}
+        >
+          <div className="cpv-cta-row">
+            <Link className="cpv-btn cpv-btn-solid" href="/contact">
+              Book a consultation
+            </Link>
+            <Link className="cpv-btn cpv-btn-outline" href="/treatments">
+              View all treatments
+            </Link>
+          </div>
+        </Section>
+      </main>
+    </div>
   );
 }
