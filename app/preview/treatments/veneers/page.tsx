@@ -1,81 +1,78 @@
 export const dynamic = 'force-static';
 export const revalidate = 0;
 
-import '@/styles/preview/champagne-preview.css';
+import '@/styles/champagne/luxe/treatment-preview.css';
 
-import ChampagnePreviewHero from '@/components/preview/ChampagnePreviewHero';
-import { KeyList, Section } from '@/components/preview/PreviewBlocks';
+import ChampagneTreatmentHeroLuxe from '@/components/luxe/hero/ChampagneTreatmentHeroLuxe';
+import LuxeCtaLink from '@/components/luxe/hero/LuxeCtaLink';
+import LuxeKeyList from '@/components/luxe/cards/LuxeKeyList';
+import LuxeSection from '@/components/luxe/sections/LuxeSection';
 
 export default function VeneersPreviewPage() {
   return (
-    <div className="cpv-page">
-      <ChampagnePreviewHero
+    <div className="luxe-preview">
+      <ChampagneTreatmentHeroLuxe
         kicker="Treatments preview"
         title="Porcelain veneers in Shoreham-by-Sea"
-        ctas={
-          <div className="cpv-cta-row">
-            <a className="cpv-btn cpv-btn-solid" href="/contact">
-              Reserve a consultation
-            </a>
-            <a className="cpv-btn cpv-btn-outline" href="/treatments">
-              View all treatments
-            </a>
-          </div>
-        }
+        subtitle="Manus R1 dusk gradients set the tone for couture smile design"
+        ctas={[
+          { label: 'Reserve a consultation', href: '/contact', variant: 'primary' },
+          { label: 'View all treatments', href: '/treatments', variant: 'secondary' },
+        ]}
       >
-        <p>Digital artistry and handcrafted ceramics transform every smile with luminous balance.</p>
-      </ChampagnePreviewHero>
+        Digital artistry and handcrafted ceramics converge with soft Champagne shimmer, giving guests a calm space to imagine their luminous smile.
+      </ChampagneTreatmentHeroLuxe>
 
-      <main className="cpv-main" role="main">
-        <Section title="3D veneer visualiser">
-          <div className="cpv-card" aria-label="3D viewer slot">
+      <main className="luxe-preview__main" role="main">
+        <LuxeSection title="3D veneer visualiser" description="Embed a smile design preview to showcase morphing mock-ups and veneer layering.">
+          <div className="luxe-card-placeholder" aria-label="3D veneer viewer slot">
             3D VIEWER SLOT (placeholder)
           </div>
-        </Section>
+        </LuxeSection>
 
-        <Section title="Why guests love veneers">
-          <KeyList
+        <LuxeSection title="Why guests love veneers">
+          <LuxeKeyList
             items={[
-              'Featherlight porcelain layers that mirror natural enamel',
-              'Digital smile design previews ensure shape and proportion feel right',
-              'Colour harmonised to neighbouring teeth for luminous balance',
-              'Guided aftercare keeps veneers radiant for the long term',
+              'Featherlight porcelain that mirrors natural enamel texture',
+              'Digital smile design previews to perfect balance and symmetry',
+              'Colour harmonised to neighbouring teeth for a luminous blend',
+              'Guided aftercare to keep veneers radiant long term',
             ]}
           />
-        </Section>
+        </LuxeSection>
 
-        <Section title="The veneer journey">
-          <KeyList
+        <LuxeSection title="The veneer journey">
+          <LuxeKeyList
             items={[
-              'Discovery consultation — share goals, facial analysis, and preview mock-ups',
-              'Design refinement — digital planning and wax-ups perfect every contour',
-              'Preparation day — minimal enamel shaping with beautifully crafted temporaries',
+              'Discovery consultation — goals, facial analysis, and preview mock-ups',
+              'Design refinement — digital planning and wax-ups finesse every contour',
+              'Preparation day — minimal enamel sculpting with couture temporaries',
               'Final placement — bespoke porcelain bonded and polished to a champagne sheen',
             ]}
           />
-        </Section>
+        </LuxeSection>
 
-        <Section title="Are veneers right for you?">
-          <KeyList
+        <LuxeSection title="Are veneers right for you?">
+          <LuxeKeyList
             items={[
               'Healthy gums and commitment to consistent hygiene visits',
-              'Desire to enhance colour, symmetry, or alignment',
-              'Ready to follow personalised veneer care guidance',
+              'Desire to enhance colour, alignment, or proportional balance',
+              'Prepared to follow personalised veneer care guidance',
               'Looking for a confident, camera-ready smile finish',
             ]}
           />
-        </Section>
+        </LuxeSection>
 
-        <Section title="Plan your veneer consultation">
-          <div className="cpv-cta-row">
-            <a className="cpv-btn cpv-btn-solid" href="/contact">
+        <LuxeSection title="Plan your veneer consultation" description="We will confirm scheduling, digital scans, and bespoke design preferences with you personally.">
+          <div className="luxe-cta-row">
+            <LuxeCtaLink href="/contact" variant="primary">
               Book a consultation
-            </a>
-            <a className="cpv-btn cpv-btn-outline" href="/treatments">
+            </LuxeCtaLink>
+            <LuxeCtaLink href="/treatments" variant="secondary">
               View all treatments
-            </a>
+            </LuxeCtaLink>
           </div>
-        </Section>
+        </LuxeSection>
       </main>
     </div>
   );

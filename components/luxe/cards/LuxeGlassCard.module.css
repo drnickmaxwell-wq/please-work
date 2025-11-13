@@ -1,0 +1,22 @@
+.card {
+  background: color-mix(in srgb, var(--smh-ink) 6%, transparent);
+  backdrop-filter: blur(22px);
+  border-radius: 22px;
+  border: 1px solid color-mix(in srgb, var(--smh-accent-gold-soft) 14%, transparent);
+  box-shadow:
+    0 4px 12px color-mix(in srgb, var(--smh-ink) 8%, transparent),
+    inset 0 0 0.5px color-mix(in srgb, var(--smh-ink) 40%, transparent);
+  padding: clamp(2rem, 4vw, 3rem);
+  color: color-mix(in srgb, var(--smh-text) 92%, transparent);
+}
+
+.card:focus-within {
+  outline: 1px solid color-mix(in srgb, var(--smh-accent-gold) 32%, transparent);
+  outline-offset: 4px;
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: clamp(1.75rem, 7vw, 2.5rem);
+  }
+}
