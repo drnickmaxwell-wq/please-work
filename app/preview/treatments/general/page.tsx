@@ -4,7 +4,7 @@ export const revalidate = 0;
 import '@/styles/preview/champagne-preview.css';
 import Link from 'next/link';
 
-import ChampagnePreviewHero from '@/components/preview/ChampagnePreviewHero';
+import LuxeTreatmentHero from '@/components/treatments/LuxeTreatmentHero';
 import { KeyList, Section } from '@/components/preview/PreviewBlocks';
 
 const everyday = [
@@ -31,24 +31,14 @@ const guestExperience = [
 export default function GeneralDentistryPreviewPage() {
   return (
     <div className="cpv-page">
-      <ChampagnePreviewHero
-        kicker="Treatments preview"
+      <LuxeTreatmentHero
+        variant="general"
+        eyebrow="Treatments preview"
         title="General dentistry in Shoreham-by-Sea"
-        ctas={
-          <div className="cpv-cta-row">
-            <Link className="cpv-btn cpv-btn-solid" href="/contact">
-              Reserve a consultation
-            </Link>
-            <Link className="cpv-btn cpv-btn-outline" href="/treatments">
-              View all treatments
-            </Link>
-          </div>
-        }
-      >
-        <p>
-          A calm Manus dusk gradient gives you space to finesse general dentistry copy, sequencing, and schema while maintaining Champagne hero continuity.
-        </p>
-      </ChampagnePreviewHero>
+        description="A calm Manus dusk gradient gives you space to finesse general dentistry copy, sequencing, and schema while maintaining Champagne hero continuity."
+        primaryCta={{ label: 'Reserve a consultation', href: '/contact' }}
+        secondaryCta={{ label: 'View all treatments', href: '/treatments' }}
+      />
 
       <main className="cpv-main" role="main">
         <Section

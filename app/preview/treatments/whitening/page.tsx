@@ -4,7 +4,7 @@ export const revalidate = 0;
 import '@/styles/preview/champagne-preview.css';
 import Link from 'next/link';
 
-import ChampagnePreviewHero from '@/components/preview/ChampagnePreviewHero';
+import LuxeTreatmentHero from '@/components/treatments/LuxeTreatmentHero';
 import { KeyList, Section } from '@/components/preview/PreviewBlocks';
 
 const highlights = [
@@ -31,24 +31,14 @@ const candidacy = [
 export default function WhiteningPreviewPage() {
   return (
     <div className="cpv-page">
-      <ChampagnePreviewHero
-        kicker="Treatments preview"
+      <LuxeTreatmentHero
+        variant="whitening"
+        eyebrow="Treatments preview"
         title="Teeth whitening in Shoreham-by-Sea"
-        ctas={
-          <div className="cpv-cta-row">
-            <Link className="cpv-btn cpv-btn-solid" href="/contact">
-              Reserve a consultation
-            </Link>
-            <Link className="cpv-btn cpv-btn-outline" href="/treatments">
-              View all treatments
-            </Link>
-          </div>
-        }
-      >
-        <p>
-          Luminous dusk-to-teal gradients echo the Champagne home hero so you can stress-test copy, component swaps, and tracking without touching production.
-        </p>
-      </ChampagnePreviewHero>
+        description="Luminous dusk-to-teal gradients echo the Champagne home hero so you can stress-test copy, component swaps, and tracking without touching production."
+        primaryCta={{ label: 'Reserve a consultation', href: '/contact' }}
+        secondaryCta={{ label: 'View all treatments', href: '/treatments' }}
+      />
 
       <main className="cpv-main" role="main">
         <Section

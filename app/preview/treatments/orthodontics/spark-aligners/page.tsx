@@ -4,7 +4,7 @@ export const revalidate = 0;
 import '@/styles/preview/champagne-preview.css';
 import Link from 'next/link';
 
-import ChampagnePreviewHero from '@/components/preview/ChampagnePreviewHero';
+import LuxeTreatmentHero from '@/components/treatments/LuxeTreatmentHero';
 import { KeyList, Section } from '@/components/preview/PreviewBlocks';
 import ThreeDViewerSlot from '@/components/preview/treatments/ThreeDViewerSlot';
 
@@ -34,24 +34,14 @@ const candidacyPoints = [
 export default function SparkAlignersPreviewPage() {
   return (
     <div className="cpv-page">
-      <ChampagnePreviewHero
-        kicker="Treatments preview"
+      <LuxeTreatmentHero
+        variant="technology"
+        eyebrow="Treatments preview"
         title="Spark Aligners in Shoreham-by-Sea"
-        ctas={
-          <div className="cpv-cta-row">
-            <Link className="cpv-btn cpv-btn-solid" href="/contact">
-              Reserve Spark consult
-            </Link>
-            <Link className="cpv-btn cpv-btn-outline" href="/preview/treatments/orthodontics">
-              Explore orthodontic previews
-            </Link>
-          </div>
-        }
-      >
-        <p>
-          Preview the digital-first Spark experience inside a Manus-balanced dusk hero. Swap in live copy, metrics, and viewer integrations without disturbing the production route.
-        </p>
-      </ChampagnePreviewHero>
+        description="Preview the digital-first Spark experience inside a Manus-balanced dusk hero. Swap in live copy, metrics, and viewer integrations without disturbing the production route."
+        primaryCta={{ label: 'Reserve Spark consult', href: '/contact' }}
+        secondaryCta={{ label: 'Explore orthodontic previews', href: '/preview/treatments/orthodontics' }}
+      />
 
       <main className="cpv-main" role="main">
         <Section

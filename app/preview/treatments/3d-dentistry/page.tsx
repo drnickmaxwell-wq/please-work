@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import '@/styles/preview/champagne-preview.css';
 
-import ChampagnePreviewHero from '@/components/preview/ChampagnePreviewHero';
+import LuxeTreatmentHero from '@/components/treatments/LuxeTreatmentHero';
 import { KeyList, Section } from '@/components/preview/PreviewBlocks';
 
 const benefits = [
@@ -56,24 +56,14 @@ const procedures = [
 export default function ThreeDDentistryPreviewPage() {
   return (
     <div className="cpv-page">
-      <ChampagnePreviewHero
-        kicker="Treatments preview"
+      <LuxeTreatmentHero
+        variant="technology"
+        eyebrow="Treatments preview"
         title="3D digital dentistry"
-        ctas={
-          <div className="cpv-cta-row">
-            <Link className="cpv-btn cpv-btn-solid" href="/contact">
-              Book a 3D consultation
-            </Link>
-            <Link className="cpv-btn cpv-btn-outline" href="/treatments">
-              View all treatments
-            </Link>
-          </div>
-        }
-      >
-        <p>
-          Contactless scanning, AI-guided planning, and on-site 3D printing come together under the Balanced Dusk hero so you can iterate freely before the production launch.
-        </p>
-      </ChampagnePreviewHero>
+        description="Contactless scanning, AI-guided planning, and on-site 3D printing come together under the Balanced Dusk hero so you can iterate freely before the production launch."
+        primaryCta={{ label: 'Book a 3D consultation', href: '/contact' }}
+        secondaryCta={{ label: 'View all treatments', href: '/treatments' }}
+      />
 
       <main className="cpv-main" role="main">
         <Section

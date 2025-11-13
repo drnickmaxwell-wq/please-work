@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import '@/styles/preview/champagne-preview.css';
 
-import ChampagnePreviewHero from '@/components/preview/ChampagnePreviewHero';
+import LuxeTreatmentHero from '@/components/treatments/LuxeTreatmentHero';
 import { Section } from '@/components/preview/PreviewBlocks';
 
 const workflowSteps = [
@@ -64,24 +64,14 @@ const technologyFaq = [
 export default function TechnologyPreviewPage() {
   return (
     <div className="cpv-page">
-      <ChampagnePreviewHero
-        kicker="Treatments preview"
+      <LuxeTreatmentHero
+        variant="technology"
+        eyebrow="Treatments preview"
         title="Precision technology, calmer appointments"
-        ctas={
-          <div className="cpv-cta-row">
-            <Link className="cpv-btn cpv-btn-solid" href="/contact">
-              Book a technology tour
-            </Link>
-            <Link className="cpv-btn cpv-btn-outline" href="/treatments">
-              View all treatments
-            </Link>
-          </div>
-        }
-      >
-        <p>
-          Guided implants, 3D printing, and laser refinements live inside the same dusk-to-teal Champagne hero system used on the home page—perfect for previewing interactive modules and copy.
-        </p>
-      </ChampagnePreviewHero>
+        description="Guided implants, 3D printing, and laser refinements live inside the same dusk-to-teal Champagne hero system used on the home page—perfect for previewing interactive modules and copy."
+        primaryCta={{ label: 'Book a technology tour', href: '/contact' }}
+        secondaryCta={{ label: 'View all treatments', href: '/treatments' }}
+      />
 
       <main className="cpv-main" role="main">
         <Section

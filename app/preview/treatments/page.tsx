@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import '@/styles/preview/champagne-preview.css';
 
-import ChampagnePreviewHero from '@/components/preview/ChampagnePreviewHero';
+import LuxeTreatmentHero from '@/components/treatments/LuxeTreatmentHero';
 import { Section } from '@/components/preview/PreviewBlocks';
 
 const PREVIEW_ROUTES = [
@@ -21,24 +21,14 @@ const PREVIEW_ROUTES = [
 export default function TreatmentsPreviewIndex() {
   return (
     <div className="cpv-page">
-      <ChampagnePreviewHero
-        kicker="Treatments preview"
+      <LuxeTreatmentHero
+        variant="general"
+        eyebrow="Treatments preview"
         title="Treatment previews"
-        ctas={
-          <div className="cpv-cta-row">
-            <Link className="cpv-btn cpv-btn-solid" href="/preview">
-              Back to preview hub
-            </Link>
-            <Link className="cpv-btn cpv-btn-outline" href="/treatments">
-              View live treatments
-            </Link>
-          </div>
-        }
-      >
-        <p>
-          Explore Champagne-themed staging areas for each treatment while production routes remain untouched. Use these links to review copy, layout, and token usage before launch.
-        </p>
-      </ChampagnePreviewHero>
+        description="Explore Champagne-themed staging areas for each treatment while production routes remain untouched. Use these links to review copy, layout, and token usage before launch."
+        primaryCta={{ label: 'Back to preview hub', href: '/preview' }}
+        secondaryCta={{ label: 'View live treatments', href: '/treatments' }}
+      />
 
       <main className="cpv-main" role="main">
         <Section

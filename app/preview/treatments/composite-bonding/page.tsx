@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 
 import '@/styles/preview/champagne-preview.css';
 
-import ChampagnePreviewHero from '@/components/preview/ChampagnePreviewHero';
+import LuxeTreatmentHero from '@/components/treatments/LuxeTreatmentHero';
 
 import CompositeBondingFaqSection from './_sections/CompositeBondingFaqSection';
 import CompositeBondingHeroSection from './_sections/CompositeBondingHeroSection';
@@ -23,11 +23,12 @@ export const metadata: Metadata = {
 export default function CompositeBondingPreviewPage() {
   return (
     <div className="cpv-page">
-      <ChampagnePreviewHero kicker="Treatments preview" title="Composite bonding artistry">
-        <p>
-          Guided artistry layered over a calm Champagne hero. Assemble copy, imagery, and schema experiments here while the live treatments route remains unchanged.
-        </p>
-      </ChampagnePreviewHero>
+      <LuxeTreatmentHero
+        variant="veneers"
+        eyebrow="Treatments preview"
+        title="Composite bonding artistry"
+        description="Guided artistry layered over a calm Champagne hero. Assemble copy, imagery, and schema experiments here while the live treatments route remains unchanged."
+      />
 
       <main className="cpv-main" role="main">
         <CompositeBondingHeroSection />

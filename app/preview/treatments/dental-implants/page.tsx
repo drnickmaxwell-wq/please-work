@@ -5,7 +5,7 @@ export const revalidate = 0;
 import '@/styles/preview/champagne-preview.css';
 import Link from 'next/link';
 
-import ChampagnePreviewHero from '@/components/preview/ChampagnePreviewHero';
+import LuxeTreatmentHero from '@/components/treatments/LuxeTreatmentHero';
 import { KeyList, Section } from '@/components/preview/PreviewBlocks';
 import ThreeDViewerSlot from '@/components/preview/treatments/ThreeDViewerSlot';
 
@@ -85,24 +85,14 @@ const candidateChecklist = [
 export default function DentalImplantsPreviewPage() {
   return (
     <div className="cpv-page">
-      <ChampagnePreviewHero
-        kicker="Treatments preview"
+      <LuxeTreatmentHero
+        variant="implants"
+        eyebrow="Treatments preview"
         title="Dental implants in Shoreham-by-Sea"
-        ctas={
-          <div className="cpv-cta-row">
-            <Link className="cpv-btn cpv-btn-solid" href="/contact">
-              Reserve a consultation
-            </Link>
-            <Link className="cpv-btn cpv-btn-outline" href="/treatments">
-              View all treatments
-            </Link>
-          </div>
-        }
-      >
-        <p>
-          Restore missing teeth with titanium precision, 3D planning, and calm guest experiences—all staged within the Balanced Dusk Champagne hero before production launch.
-        </p>
-      </ChampagnePreviewHero>
+        description="Restore missing teeth with titanium precision, 3D planning, and calm guest experiences—all staged within the Balanced Dusk Champagne hero before production launch."
+        primaryCta={{ label: 'Reserve a consultation', href: '/contact' }}
+        secondaryCta={{ label: 'View all treatments', href: '/treatments' }}
+      />
 
       <main className="cpv-main" role="main">
         <Section
