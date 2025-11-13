@@ -1,16 +1,15 @@
 export const dynamic = 'force-static';
 export const revalidate = 0;
 
-import '@/styles/champagne/luxe/treatment-preview.css';
+import '@/styles/preview/champagne-preview.css';
+import Link from 'next/link';
 
-import ChampagneTreatmentHeroLuxe from '@/components/luxe/hero/ChampagneTreatmentHeroLuxe';
-import LuxeCtaLink from '@/components/luxe/hero/LuxeCtaLink';
-import LuxeKeyList from '@/components/luxe/cards/LuxeKeyList';
-import LuxeSection from '@/components/luxe/sections/LuxeSection';
+import ChampagnePreviewHero from '@/components/preview/ChampagnePreviewHero';
+import { KeyList, Section } from '@/components/preview/PreviewBlocks';
 import ThreeDViewerSlot from '@/components/preview/treatments/ThreeDViewerSlot';
 
 const highlightItems = [
-  'Feather-light trays that hug every curve for barely-there comfort',
+  'Feather-light trays that hug every curve for nearly invisible comfort',
   'Crystal clarity that resists staining for discreet treatment',
   'Responsive digital tracking keeps each stage perfectly on schedule',
   'Gentle force mapping delivers predictable alignment with ease',
@@ -34,49 +33,60 @@ const candidacyPoints = [
 
 export default function SparkAlignersPreviewPage() {
   return (
-    <div className="luxe-preview">
-      <ChampagneTreatmentHeroLuxe
+    <div className="cpv-page">
+      <ChampagnePreviewHero
         kicker="Treatments preview"
         title="Spark Aligners in Shoreham-by-Sea"
-        subtitle="Dusk-to-teal gradients introduce the Spark journey with Champagne shimmer"
-        ctas={[
-          { label: 'Reserve Spark consult', href: '/contact', variant: 'primary' },
-          { label: 'Explore orthodontic previews', href: '/preview/treatments/orthodontics', variant: 'secondary' },
-        ]}
-      >
-        Preview the digital-first Spark Aligner experience with Manus-inspired layering—ideal for testing motion, copy, and schema updates before touching production.
-      </ChampagneTreatmentHeroLuxe>
-
-      <main className="luxe-preview__main" role="main">
-        <LuxeSection title="Interactive aligner preview" description="Embed your WebGL or Three.js viewer inside this luxe glass card.">
-          <ThreeDViewerSlot />
-          <p className="luxe-section-note">
-            Swap this placeholder slot for your aligner model or animation to demonstrate Spark precision.
-          </p>
-        </LuxeSection>
-
-        <LuxeSection title="Why guests choose Spark Aligners">
-          <LuxeKeyList items={highlightItems} />
-        </LuxeSection>
-
-        <LuxeSection title="The Spark journey">
-          <LuxeKeyList items={journeySteps} />
-        </LuxeSection>
-
-        <LuxeSection title="Ideal Spark candidates">
-          <LuxeKeyList items={candidacyPoints} />
-        </LuxeSection>
-
-        <LuxeSection title="Plan your Spark Aligner consultation" description="Use this CTA zone to test messaging, scheduling flows, and conversion copy before launch.">
-          <div className="luxe-cta-row">
-            <LuxeCtaLink href="/contact" variant="primary">
+        ctas={
+          <div className="cpv-cta-row">
+            <Link className="cpv-btn cpv-btn-solid" href="/contact">
               Reserve Spark consult
-            </LuxeCtaLink>
-            <LuxeCtaLink href="/preview/treatments/orthodontics" variant="secondary">
+            </Link>
+            <Link className="cpv-btn cpv-btn-outline" href="/preview/treatments/orthodontics">
               Explore orthodontic previews
-            </LuxeCtaLink>
+            </Link>
           </div>
-        </LuxeSection>
+        }
+      >
+        <p>
+          Preview the digital-first Spark experience inside a Manus-balanced dusk hero. Swap in live copy, metrics, and viewer integrations without disturbing the production route.
+        </p>
+      </ChampagnePreviewHero>
+
+      <main className="cpv-main" role="main">
+        <Section
+          title="Interactive aligner preview"
+          description={<p>Embed WebGL or Three.js viewers to demonstrate Spark precision within this glass card.</p>}
+        >
+          <ThreeDViewerSlot />
+          <p className="cpv-note">Swap this placeholder once your aligner model or animation is wired.</p>
+        </Section>
+
+        <Section title="Why guests choose Spark Aligners">
+          <KeyList items={highlightItems} />
+        </Section>
+
+        <Section title="The Spark journey">
+          <KeyList items={journeySteps} />
+        </Section>
+
+        <Section title="Ideal Spark candidates">
+          <KeyList items={candidacyPoints} />
+        </Section>
+
+        <Section
+          title="Plan your Spark Aligner consultation"
+          description={<p>Use this CTA row for experimentation with booking flows, nurture copy, or analytics tags.</p>}
+        >
+          <div className="cpv-cta-row">
+            <Link className="cpv-btn cpv-btn-solid" href="/contact">
+              Reserve Spark consult
+            </Link>
+            <Link className="cpv-btn cpv-btn-outline" href="/preview/treatments/orthodontics">
+              Explore orthodontic previews
+            </Link>
+          </div>
+        </Section>
       </main>
     </div>
   );

@@ -1,72 +1,84 @@
 export const dynamic = 'force-static';
 export const revalidate = 0;
 
-import '@/styles/champagne/luxe/treatment-preview.css';
+import '@/styles/preview/champagne-preview.css';
+import Link from 'next/link';
 
-import ChampagneTreatmentHeroLuxe from '@/components/luxe/hero/ChampagneTreatmentHeroLuxe';
-import LuxeCtaLink from '@/components/luxe/hero/LuxeCtaLink';
-import LuxeKeyList from '@/components/luxe/cards/LuxeKeyList';
-import LuxeSection from '@/components/luxe/sections/LuxeSection';
+import ChampagnePreviewHero from '@/components/preview/ChampagnePreviewHero';
+import { KeyList, Section } from '@/components/preview/PreviewBlocks';
+
+const everyday = [
+  'Gentle hygiene programmes with digital charting',
+  'Comprehensive examinations and preventive coaching',
+  'Restorative artistry from fillings to crowns',
+  'Smile enhancements that keep everyday care elevated',
+];
+
+const serviceMix = [
+  'Routine check-ups and tailored hygiene therapy',
+  'Periodontal maintenance and guided home routines',
+  'Minimally invasive restorations with digital design',
+  'Whitening and cosmetic refinements for finishing touches',
+];
+
+const guestExperience = [
+  'Warm welcome lounge with digital check-in',
+  'Comfort menu, blankets, and noise-cancelling headphones',
+  'Sedation options for anxious guests',
+  'After-visit follow-ups with personalised care notes',
+];
 
 export default function GeneralDentistryPreviewPage() {
   return (
-    <div className="luxe-preview">
-      <ChampagneTreatmentHeroLuxe
+    <div className="cpv-page">
+      <ChampagnePreviewHero
         kicker="Treatments preview"
         title="General dentistry in Shoreham-by-Sea"
-        subtitle="A calm Manus dusk gradient for everyday care pathways"
-        ctas={[
-          { label: 'Reserve a consultation', href: '/contact', variant: 'primary' },
-          { label: 'View all treatments', href: '/treatments', variant: 'secondary' },
-        ]}
-      >
-        Preventive, restorative, and cosmetic maintenance delivered within a Champagne luxe preview—perfect for refining copy, schema, and UI before launching to production.
-      </ChampagneTreatmentHeroLuxe>
-
-      <main className="luxe-preview__main" role="main">
-        <LuxeSection title="Everyday comfort, elevated" description="Swap in your production narratives once finalised—this layout ensures a consistent Manus-inspired rhythm.">
-          <LuxeKeyList
-            items={[
-              'Gentle hygiene programmes with digital charting',
-              'Comprehensive examinations and personalised treatment plans',
-              'Restorative excellence from fillings to crowns',
-              'Preventive care that protects smiles between visits',
-            ]}
-          />
-        </LuxeSection>
-
-        <LuxeSection title="Preview your service mix">
-          <LuxeKeyList
-            items={[
-              'Routine check-ups and hygiene therapy',
-              'Periodontal maintenance and guided home care',
-              'Minimally invasive restorations',
-              'Smile enhancements and whitening pathways',
-            ]}
-          />
-        </LuxeSection>
-
-        <LuxeSection title="Guest experience touchpoints">
-          <LuxeKeyList
-            items={[
-              'Warm welcome lounge with digital check-in',
-              'Comfort menu, blankets, and noise-cancelling headphones',
-              'Sedation options for anxious guests',
-              'After-visit follow-up and personalised care notes',
-            ]}
-          />
-        </LuxeSection>
-
-        <LuxeSection title="Plan your general dentistry consultation" description="Use this section for CTA experiments, conversion copy, and data capture tests without touching the live site.">
-          <div className="luxe-cta-row">
-            <LuxeCtaLink href="/contact" variant="primary">
-              Book a consultation
-            </LuxeCtaLink>
-            <LuxeCtaLink href="/treatments" variant="secondary">
+        ctas={
+          <div className="cpv-cta-row">
+            <Link className="cpv-btn cpv-btn-solid" href="/contact">
+              Reserve a consultation
+            </Link>
+            <Link className="cpv-btn cpv-btn-outline" href="/treatments">
               View all treatments
-            </LuxeCtaLink>
+            </Link>
           </div>
-        </LuxeSection>
+        }
+      >
+        <p>
+          A calm Manus dusk gradient gives you space to finesse general dentistry copy, sequencing, and schema while maintaining Champagne hero continuity.
+        </p>
+      </ChampagnePreviewHero>
+
+      <main className="cpv-main" role="main">
+        <Section
+          title="Everyday comfort, elevated"
+          description={<p>Replace this placeholder once your narratives and block components are finalised.</p>}
+        >
+          <KeyList items={everyday} />
+        </Section>
+
+        <Section title="Preview your service mix">
+          <KeyList items={serviceMix} />
+        </Section>
+
+        <Section title="Guest experience touchpoints">
+          <KeyList items={guestExperience} />
+        </Section>
+
+        <Section
+          title="Plan your general dentistry consultation"
+          description={<p>Test CTA copy, scheduling logic, and nurture workflows without touching the live site.</p>}
+        >
+          <div className="cpv-cta-row">
+            <Link className="cpv-btn cpv-btn-solid" href="/contact">
+              Book a consultation
+            </Link>
+            <Link className="cpv-btn cpv-btn-outline" href="/treatments">
+              View all treatments
+            </Link>
+          </div>
+        </Section>
       </main>
     </div>
   );

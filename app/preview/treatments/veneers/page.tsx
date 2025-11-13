@@ -1,78 +1,91 @@
 export const dynamic = 'force-static';
 export const revalidate = 0;
 
-import '@/styles/champagne/luxe/treatment-preview.css';
+import '@/styles/preview/champagne-preview.css';
+import Link from 'next/link';
 
-import ChampagneTreatmentHeroLuxe from '@/components/luxe/hero/ChampagneTreatmentHeroLuxe';
-import LuxeCtaLink from '@/components/luxe/hero/LuxeCtaLink';
-import LuxeKeyList from '@/components/luxe/cards/LuxeKeyList';
-import LuxeSection from '@/components/luxe/sections/LuxeSection';
+import ChampagnePreviewHero from '@/components/preview/ChampagnePreviewHero';
+import { KeyList, Section } from '@/components/preview/PreviewBlocks';
+
+const highlights = [
+  'Featherlight porcelain mirroring natural enamel texture',
+  'Digital smile design previews to perfect harmony',
+  'Hue-matched ceramics for a seamless Champagne finish',
+  'Aftercare rituals that keep veneers radiant for years',
+];
+
+const journey = [
+  'Discovery consultation — lifestyle, goals, and luminosity mapping',
+  'Design refinement — digital planning and wax-up artistry',
+  'Preparation day — minimal enamel sculpting with couture temporaries',
+  'Final placement — bespoke porcelain bonded and polished to a soft-gold sheen',
+];
+
+const candidacy = [
+  'Healthy gums with commitment to routine reviews',
+  'Desire to refine proportion, shade, or alignment',
+  'Prepared to follow personalised veneer care guidance',
+  'Seeking a confident, camera-ready smile finish',
+];
 
 export default function VeneersPreviewPage() {
   return (
-    <div className="luxe-preview">
-      <ChampagneTreatmentHeroLuxe
+    <div className="cpv-page">
+      <ChampagnePreviewHero
         kicker="Treatments preview"
         title="Porcelain veneers in Shoreham-by-Sea"
-        subtitle="Manus R1 dusk gradients set the tone for couture smile design"
-        ctas={[
-          { label: 'Reserve a consultation', href: '/contact', variant: 'primary' },
-          { label: 'View all treatments', href: '/treatments', variant: 'secondary' },
-        ]}
+        ctas={
+          <div className="cpv-cta-row">
+            <Link className="cpv-btn cpv-btn-solid" href="/contact">
+              Reserve a consultation
+            </Link>
+            <Link className="cpv-btn cpv-btn-outline" href="/treatments">
+              View all treatments
+            </Link>
+          </div>
+        }
       >
-        Digital artistry and handcrafted ceramics converge with soft Champagne shimmer, giving guests a calm space to imagine their luminous smile.
-      </ChampagneTreatmentHeroLuxe>
+        <p>
+          Soft dusk gradients, Champagne shimmer, and balanced glass cards give you a safe playground to refine veneer copy,
+          schema, and interactive elements before production.
+        </p>
+      </ChampagnePreviewHero>
 
-      <main className="luxe-preview__main" role="main">
-        <LuxeSection title="3D veneer visualiser" description="Embed a smile design preview to showcase morphing mock-ups and veneer layering.">
-          <div className="luxe-card-placeholder" aria-label="3D veneer viewer slot">
+      <main className="cpv-main" role="main">
+        <Section
+          title="3D veneer visualiser"
+          description={<p>Drop in your smile design mock-up or before/after slider to preview veneer transformations.</p>}
+        >
+          <div className="cpv-slot" aria-label="3D veneer viewer slot">
             3D VIEWER SLOT (placeholder)
           </div>
-        </LuxeSection>
+        </Section>
 
-        <LuxeSection title="Why guests love veneers">
-          <LuxeKeyList
-            items={[
-              'Featherlight porcelain that mirrors natural enamel texture',
-              'Digital smile design previews to perfect balance and symmetry',
-              'Colour harmonised to neighbouring teeth for a luminous blend',
-              'Guided aftercare to keep veneers radiant long term',
-            ]}
-          />
-        </LuxeSection>
+        <Section title="Why guests love veneers">
+          <KeyList items={highlights} />
+        </Section>
 
-        <LuxeSection title="The veneer journey">
-          <LuxeKeyList
-            items={[
-              'Discovery consultation — goals, facial analysis, and preview mock-ups',
-              'Design refinement — digital planning and wax-ups finesse every contour',
-              'Preparation day — minimal enamel sculpting with couture temporaries',
-              'Final placement — bespoke porcelain bonded and polished to a champagne sheen',
-            ]}
-          />
-        </LuxeSection>
+        <Section title="The veneer journey">
+          <KeyList items={journey} />
+        </Section>
 
-        <LuxeSection title="Are veneers right for you?">
-          <LuxeKeyList
-            items={[
-              'Healthy gums and commitment to consistent hygiene visits',
-              'Desire to enhance colour, alignment, or proportional balance',
-              'Prepared to follow personalised veneer care guidance',
-              'Looking for a confident, camera-ready smile finish',
-            ]}
-          />
-        </LuxeSection>
+        <Section title="Are veneers right for you?">
+          <KeyList items={candidacy} />
+        </Section>
 
-        <LuxeSection title="Plan your veneer consultation" description="We will confirm scheduling, digital scans, and bespoke design preferences with you personally.">
-          <div className="luxe-cta-row">
-            <LuxeCtaLink href="/contact" variant="primary">
+        <Section
+          title="Plan your veneer consultation"
+          description={<p>Experiment with CTA language, waitlist logic, or concierge flows here.</p>}
+        >
+          <div className="cpv-cta-row">
+            <Link className="cpv-btn cpv-btn-solid" href="/contact">
               Book a consultation
-            </LuxeCtaLink>
-            <LuxeCtaLink href="/treatments" variant="secondary">
+            </Link>
+            <Link className="cpv-btn cpv-btn-outline" href="/treatments">
               View all treatments
-            </LuxeCtaLink>
+            </Link>
           </div>
-        </LuxeSection>
+        </Section>
       </main>
     </div>
   );

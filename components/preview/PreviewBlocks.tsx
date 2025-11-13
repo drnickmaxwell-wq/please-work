@@ -1,19 +1,35 @@
 import type { ReactNode } from 'react';
 
-export function Section({ title, children }: { title: string; children: ReactNode }) {
+type SectionProps = {
+  title: string;
+  eyebrow?: string;
+  description?: ReactNode;
+  children?: ReactNode;
+  tone?: 'default' | 'bright';
+};
+
+export function Section({ title, eyebrow, description, children, tone = 'default' }: SectionProps) {
   return (
-    <section className="cpv-card">
-      <h2 className="cpv-h2">{title}</h2>
-      {children}
+    <section className="cpv-card" data-tone={tone}>
+      <div className="cpv-card__inner">
+        {eyebrow ? <p className="cpv-card__eyebrow">{eyebrow}</p> : null}
+        <h2 className="cpv-card__title">{title}</h2>
+        {description ? <div className="cpv-card__lead">{description}</div> : null}
+        {children}
+      </div>
     </section>
   );
 }
 
-export function KeyList({ items }: { items: string[] }) {
+type KeyListProps = {
+  items: string[];
+};
+
+export function KeyList({ items }: KeyListProps) {
   return (
     <ul className="cpv-list">
-      {items.map((li, i) => (
-        <li key={i}>{li}</li>
+      {items.map((item, index) => (
+        <li key={index}>{item}</li>
       ))}
     </ul>
   );

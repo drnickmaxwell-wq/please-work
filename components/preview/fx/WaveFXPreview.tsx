@@ -1,9 +1,12 @@
-import React from "react";
+import React from 'react';
 
 export default function WaveFXPreview() {
-  // Use CSS variables already set by tokens & manifests
-  // Layer order: gradient(base) → wave(mask/lines) → optional caustics → grain → content
   return (
-    <div aria-hidden="true" className="cpv-wavefx" />
+    <div aria-hidden className="cpv-wavefx">
+      <div className="cpv-wavefx__waves" />
+      <div className="cpv-wavefx__shimmer" />
+      <div className="cpv-wavefx__particles" />
+      <div className="cpv-wavefx__grain" />
+    </div>
   );
 }

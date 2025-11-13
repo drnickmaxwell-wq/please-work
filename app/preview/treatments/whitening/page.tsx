@@ -1,78 +1,90 @@
 export const dynamic = 'force-static';
 export const revalidate = 0;
 
-import '@/styles/champagne/luxe/treatment-preview.css';
+import '@/styles/preview/champagne-preview.css';
+import Link from 'next/link';
 
-import ChampagneTreatmentHeroLuxe from '@/components/luxe/hero/ChampagneTreatmentHeroLuxe';
-import LuxeCtaLink from '@/components/luxe/hero/LuxeCtaLink';
-import LuxeKeyList from '@/components/luxe/cards/LuxeKeyList';
-import LuxeSection from '@/components/luxe/sections/LuxeSection';
+import ChampagnePreviewHero from '@/components/preview/ChampagnePreviewHero';
+import { KeyList, Section } from '@/components/preview/PreviewBlocks';
+
+const highlights = [
+  'Shade mapping and sensitivity checks for calm, predictable results',
+  'Enlighten and boutique systems with luxe gel formulations',
+  'Weekly touchpoints to keep each stage comfortable',
+  'Remineralising serums and aftercare rituals that protect enamel',
+];
+
+const journey = [
+  'Consultation & mapping — lifestyle insights, shade goals, gel selection',
+  'At-home phase — bespoke trays with guided weekly reviews',
+  'In-clinic glow — precision finishing session with gentle light activation',
+  'Aftercare — remineralising treatments and long-term whitening plans',
+];
+
+const candidacy = [
+  'No active decay or untreated gum concerns',
+  'Happy to follow the prescribed tray routine',
+  'Understands natural shade shifts for realistic outcomes',
+  'Ready to maintain with gentle whitening pastes post-treatment',
+];
 
 export default function WhiteningPreviewPage() {
   return (
-    <div className="luxe-preview">
-      <ChampagneTreatmentHeroLuxe
+    <div className="cpv-page">
+      <ChampagnePreviewHero
         kicker="Treatments preview"
         title="Teeth whitening in Shoreham-by-Sea"
-        subtitle="Soft-gold shimmer meets teal luminance for a calm glow-up"
-        ctas={[
-          { label: 'Reserve a consultation', href: '/contact', variant: 'primary' },
-          { label: 'View all treatments', href: '/treatments', variant: 'secondary' },
-        ]}
+        ctas={
+          <div className="cpv-cta-row">
+            <Link className="cpv-btn cpv-btn-solid" href="/contact">
+              Reserve a consultation
+            </Link>
+            <Link className="cpv-btn cpv-btn-outline" href="/treatments">
+              View all treatments
+            </Link>
+          </div>
+        }
       >
-        Luminous, even whitening guided by clinicians trained in Enlighten and boutique protocols—now staged inside a Manus R1 dusk gradient hero with Champagne shimmer layers.
-      </ChampagneTreatmentHeroLuxe>
+        <p>
+          Luminous dusk-to-teal gradients echo the Champagne home hero so you can stress-test copy, component swaps, and tracking without touching production.
+        </p>
+      </ChampagnePreviewHero>
 
-      <main className="luxe-preview__main" role="main">
-        <LuxeSection title="Shade preview" description="Embed your shade selector or before/after slider to showcase tonal refinement.">
-          <div className="luxe-card-placeholder" aria-label="Shade preview slot">
+      <main className="cpv-main" role="main">
+        <Section
+          title="Shade preview"
+          description={<p>Embed your shade selector or before/after slider to illustrate tonal refinement.</p>}
+        >
+          <div className="cpv-slot" aria-label="Shade preview slot">
             SHADE PREVIEW SLOT (placeholder)
           </div>
-        </LuxeSection>
+        </Section>
 
-        <LuxeSection title="Whitening guests love">
-          <LuxeKeyList
-            items={[
-              'Fully tailored plans following shade mapping and sensitivity checks',
-              'Enlighten and boutique systems for comfortable, luminous results',
-              'Weekly check-ins keep progress predictable and calm',
-              'Remineralising serums protect enamel at every step',
-            ]}
-          />
-        </LuxeSection>
+        <Section title="Whitening guests love">
+          <KeyList items={highlights} />
+        </Section>
 
-        <LuxeSection title="The whitening journey">
-          <LuxeKeyList
-            items={[
-              'Consultation & mapping — lifestyle insights, gel selection, comfort plan',
-              'At-home phase — bespoke trays, luxe gel formulation, weekly reviews',
-              'In-clinic glow — precision finishing session with minimal light exposure',
-              'Aftercare — tailored maintenance and remineralising treatments',
-            ]}
-          />
-        </LuxeSection>
+        <Section title="The whitening journey">
+          <KeyList items={journey} />
+        </Section>
 
-        <LuxeSection title="Is whitening right for you?">
-          <LuxeKeyList
-            items={[
-              'No active decay or untreated gum concerns',
-              'Commitment to consistent tray wear where prescribed',
-              'Realistic expectations around natural shade shift',
-              'Happy to maintain with gentle whitening pastes post-treatment',
-            ]}
-          />
-        </LuxeSection>
+        <Section title="Is whitening right for you?">
+          <KeyList items={candidacy} />
+        </Section>
 
-        <LuxeSection title="Plan your whitening consultation" description="Select your preferred schedule and we will orchestrate the experience with our whitening concierge.">
-          <div className="luxe-cta-row">
-            <LuxeCtaLink href="/contact" variant="primary">
+        <Section
+          title="Plan your whitening consultation"
+          description={<p>Swap this CTA block for scheduling experiments, nurture automations, or concierge details.</p>}
+        >
+          <div className="cpv-cta-row">
+            <Link className="cpv-btn cpv-btn-solid" href="/contact">
               Book a consultation
-            </LuxeCtaLink>
-            <LuxeCtaLink href="/treatments" variant="secondary">
+            </Link>
+            <Link className="cpv-btn cpv-btn-outline" href="/treatments">
               View all treatments
-            </LuxeCtaLink>
+            </Link>
           </div>
-        </LuxeSection>
+        </Section>
       </main>
     </div>
   );

@@ -18,16 +18,11 @@ const faqs = [
 
 export default function CompositeBondingFaqList(): JSX.Element {
   return (
-    <div data-component="composite-bonding-faq-list" className="space-y-4">
+    <div className="cpv-faq">
       {faqs.map((item) => (
-        <article key={item.question} className="t-card p-6">
-          <h3
-            className="text-lg font-semibold text-[var(--champagne-ink)]"
-            style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
-          >
-            {item.question}
-          </h3>
-          <p className="mt-3 leading-relaxed text-[var(--champagne-ink-muted)]">{item.answer}</p>
+        <article key={item.question} className="cpv-faq__item">
+          <h3 className="cpv-faq__question">{item.question}</h3>
+          <p className="cpv-faq__answer">{item.answer}</p>
         </article>
       ))}
     </div>

@@ -1,78 +1,91 @@
 export const dynamic = 'force-static';
 export const revalidate = 0;
 
-import '@/styles/champagne/luxe/treatment-preview.css';
+import '@/styles/preview/champagne-preview.css';
+import Link from 'next/link';
 
-import ChampagneTreatmentHeroLuxe from '@/components/luxe/hero/ChampagneTreatmentHeroLuxe';
-import LuxeCtaLink from '@/components/luxe/hero/LuxeCtaLink';
-import LuxeKeyList from '@/components/luxe/cards/LuxeKeyList';
-import LuxeSection from '@/components/luxe/sections/LuxeSection';
+import ChampagnePreviewHero from '@/components/preview/ChampagnePreviewHero';
+import { KeyList, Section } from '@/components/preview/PreviewBlocks';
+
+const benefits = [
+  'Natural feel for confident eating and speaking',
+  'Bone preservation maintains facial harmony long term',
+  'Longevity with a thoughtful hygiene partnership',
+  'Custom ceramics designed to blend seamlessly',
+];
+
+const journey = [
+  'Consultation & planning — scans, bone mapping, treatment roadmap',
+  'Implant placement — gentle precision with comfort-first options',
+  'Healing & integration — guided reviews plus home-care coaching',
+  'Crown placement — bespoke ceramics refined for bite and brilliance',
+];
+
+const candidacy = [
+  'Healthy gums and commitment to consistent reviews',
+  'Adequate bone density or grafting pathway confirmed',
+  'Non-smoker or ready to pause during treatment',
+  'Aligned with the hygiene routine that keeps implants luminous',
+];
 
 export default function ImplantsPreviewPage() {
   return (
-    <div className="luxe-preview">
-      <ChampagneTreatmentHeroLuxe
+    <div className="cpv-page">
+      <ChampagnePreviewHero
         kicker="Treatments preview"
         title="Dental implants in Shoreham-by-Sea"
-        subtitle="Precision-guided placement with a calming dusk-to-dawn aura"
-        ctas={[
-          { label: 'Reserve a consultation', href: '/contact', variant: 'primary' },
-          { label: 'View all treatments', href: '/treatments', variant: 'secondary' },
-        ]}
+        ctas={
+          <div className="cpv-cta-row">
+            <Link className="cpv-btn cpv-btn-solid" href="/contact">
+              Reserve a consultation
+            </Link>
+            <Link className="cpv-btn cpv-btn-outline" href="/treatments">
+              View all treatments
+            </Link>
+          </div>
+        }
       >
-        Experience Manus-inspired planning layers that keep every stage smooth, from diagnostics to final crown delivery.
-      </ChampagneTreatmentHeroLuxe>
+        <p>
+          Experience Manus-balanced dusk lighting while you test copy, schema, and viewer integrations. This hero mirrors the
+          Champagne home signature without touching production routes.
+        </p>
+      </ChampagnePreviewHero>
 
-      <main className="luxe-preview__main" role="main">
-        <LuxeSection title="3D implant visualiser" description="Drop in your interactive module to showcase implant positioning and bone mapping.">
-          <div className="luxe-card-placeholder" aria-label="3D implant viewer slot">
+      <main className="cpv-main" role="main">
+        <Section
+          title="3D implant visualiser"
+          description={<p>Embed your viewer module to preview angulation, placement pathways, and restorative sequencing.</p>}
+        >
+          <div className="cpv-slot" aria-label="3D implant viewer slot">
             3D VIEWER SLOT (placeholder)
           </div>
-        </LuxeSection>
+        </Section>
 
-        <LuxeSection title="Why guests choose implants">
-          <LuxeKeyList
-            items={[
-              'Natural feel for confident eating and speaking',
-              'Bone preservation helps maintain facial harmony',
-              'Long-lasting with thoughtful maintenance',
-              'Custom-crafted ceramics that blend with neighbouring teeth',
-            ]}
-          />
-        </LuxeSection>
+        <Section title="Why guests choose implants">
+          <KeyList items={benefits} />
+        </Section>
 
-        <LuxeSection title="The implant journey">
-          <LuxeKeyList
-            items={[
-              'Consultation & planning — scans, bone analysis, and treatment pathways',
-              'Implant placement — gentle, precise techniques with comfort options',
-              'Healing & integration — scheduled reviews plus hygiene guidance',
-              'Crown placement — bespoke ceramics refined for bite and brilliance',
-            ]}
-          />
-        </LuxeSection>
+        <Section title="The implant journey">
+          <KeyList items={journey} />
+        </Section>
 
-        <LuxeSection title="Is the implant pathway right for you?">
-          <LuxeKeyList
-            items={[
-              'Adequate bone density or a grafting roadmap',
-              'Healthy gums and strong overall wellbeing',
-              'Non-smoker or committed to quitting through treatment',
-              'Ready to partner with our hygiene and review schedule',
-            ]}
-          />
-        </LuxeSection>
+        <Section title="Ideal implant candidates">
+          <KeyList items={candidacy} />
+        </Section>
 
-        <LuxeSection title="Plan your implant consultation" description="Choose the pathway that fits you best—our guest experience team will confirm every detail.">
-          <div className="luxe-cta-row">
-            <LuxeCtaLink href="/contact" variant="primary">
+        <Section
+          title="Plan your implant consultation"
+          description={<p>Use this CTA strip to experiment with booking logic, nurture copy, or CRM tracking.</p>}
+        >
+          <div className="cpv-cta-row">
+            <Link className="cpv-btn cpv-btn-solid" href="/contact">
               Book a consultation
-            </LuxeCtaLink>
-            <LuxeCtaLink href="/treatments" variant="secondary">
+            </Link>
+            <Link className="cpv-btn cpv-btn-outline" href="/treatments">
               View all treatments
-            </LuxeCtaLink>
+            </Link>
           </div>
-        </LuxeSection>
+        </Section>
       </main>
     </div>
   );
