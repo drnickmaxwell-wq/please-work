@@ -11,7 +11,7 @@ const ChampagnePreviewHero = ({ title, kicker, ctas, children }: ChampagnePrevie
   return (
     <section className="cpv-hero">
       <div className="cpv-hero__inner">
-        <div className="container">
+        <div className="cpv-hero__container">
           <div className="cpv-hero__content">
             <div className="cpv-glass cpv-hero__card">
               <div className="flex flex-col gap-6">
@@ -20,7 +20,7 @@ const ChampagnePreviewHero = ({ title, kicker, ctas, children }: ChampagnePrevie
                   <h1 className="cpv-hero__title">{title}</h1>
                   {children ? <div className="cpv-hero__body text-lg leading-relaxed">{children}</div> : null}
                 </div>
-                {ctas ? <div className="flex flex-wrap gap-3">{ctas}</div> : null}
+                {ctas ? ctas : null}
               </div>
             </div>
           </div>
