@@ -5,64 +5,62 @@ import { useEffect, useState } from "react";
 
 import styles from "./ChampagneTreatmentHero.module.css";
 
-export type TreatmentHeroVariant =
+export type ChampagneTreatmentHeroTone =
   | "veneers"
   | "implants"
   | "whitening"
-  | "spark-aligners"
-  | "emergency"
-  | "general"
-  | "technology";
+  | "spark"
+  | "general";
 
 type MotionSettings = {
   tint: "soft-gold" | "cool-teal" | "pearl" | "aqua" | "ink-dusk";
-  waveIntensity: "low" | "medium" | "high";
-  particleDensity: "low" | "medium" | "high";
-  goldEmphasis: "whisper" | "normal" | "clinical-low";
+  wave: "low" | "medium" | "high";
+  particles: "low" | "medium" | "high";
+  gold: "whisper" | "normal" | "clinical-low";
+  badgeLabel: string;
+  badgeTone: "magenta" | "teal" | "gold" | "neutral";
 };
 
-const VARIANT_SETTINGS: Record<TreatmentHeroVariant, MotionSettings> = {
+const TONE_SETTINGS: Record<ChampagneTreatmentHeroTone, MotionSettings> = {
   veneers: {
     tint: "soft-gold",
-    waveIntensity: "medium",
-    particleDensity: "medium",
-    goldEmphasis: "normal",
+    wave: "medium",
+    particles: "medium",
+    gold: "normal",
+    badgeLabel: "Porcelain veneers",
+    badgeTone: "gold",
   },
   implants: {
     tint: "cool-teal",
-    waveIntensity: "low",
-    particleDensity: "low",
-    goldEmphasis: "clinical-low",
+    wave: "low",
+    particles: "low",
+    gold: "clinical-low",
+    badgeLabel: "Digital implants",
+    badgeTone: "teal",
   },
   whitening: {
     tint: "pearl",
-    waveIntensity: "medium",
-    particleDensity: "high",
-    goldEmphasis: "whisper",
+    wave: "medium",
+    particles: "high",
+    gold: "whisper",
+    badgeLabel: "Champagne whitening",
+    badgeTone: "magenta",
   },
-  "spark-aligners": {
+  spark: {
     tint: "aqua",
-    waveIntensity: "medium",
-    particleDensity: "medium",
-    goldEmphasis: "clinical-low",
-  },
-  emergency: {
-    tint: "ink-dusk",
-    waveIntensity: "high",
-    particleDensity: "medium",
-    goldEmphasis: "whisper",
+    wave: "medium",
+    particles: "medium",
+    gold: "clinical-low",
+    badgeLabel: "Spark aligners",
+    badgeTone: "teal",
   },
   general: {
     tint: "soft-gold",
-    waveIntensity: "medium",
-    particleDensity: "medium",
-    goldEmphasis: "normal",
-  },
-  technology: {
-    tint: "aqua",
-    waveIntensity: "medium",
-    particleDensity: "medium",
-    goldEmphasis: "clinical-low",
+    wave: "medium",
+    particles: "medium",
+    gold: "normal",
+    badgeLabel: "Champagne treatments",
+    badgeTone: "neutral",
   },
 };
 
@@ -72,24 +70,29 @@ type Cta = {
 };
 
 type ChampagneTreatmentHeroProps = {
-  variant: TreatmentHeroVariant;
+  tone: ChampagneTreatmentHeroTone;
   eyebrow?: string;
   title: string;
-  kicker?: string;
-  description: string;
-  primaryCta?: Cta;
+  subtitle: string;
+  primaryCta: Cta;
   secondaryCta?: Cta;
+};
+
+const badgeToneClass: Record<MotionSettings["badgeTone"], string> = {
+  magenta: styles.badgeMagenta,
+  teal: styles.badgeTeal,
+  gold: styles.badgeGold,
+  neutral: styles.badgeNeutral,
 };
 
 const join = (...tokens: Array<string | false | null | undefined>) =>
   tokens.filter(Boolean).join(" ");
 
 export function ChampagneTreatmentHero({
-  variant,
+  tone,
   eyebrow,
   title,
-  kicker,
-  description,
+  subtitle,
   primaryCta,
   secondaryCta,
 }: ChampagneTreatmentHeroProps) {
@@ -115,17 +118,17 @@ export function ChampagneTreatmentHero({
     return () => mediaQuery.removeListener(updatePreference);
   }, []);
 
-  const settings = VARIANT_SETTINGS[variant];
+  const settings = TONE_SETTINGS[tone];
 
   return (
     <section
-      aria-labelledby={`${variant}-treatment-hero`}
+      aria-labelledby={`${tone}-treatment-hero`}
       className={join("champagne-hero", styles.hero)}
-      data-variant={variant}
+      data-tone={tone}
       data-tint={settings.tint}
-      data-wave={settings.waveIntensity}
-      data-particles={settings.particleDensity}
-      data-gold={settings.goldEmphasis}
+      data-wave={settings.wave}
+      data-particles={settings.particles}
+      data-gold={settings.gold}
     >
       <div aria-hidden className="hero-gradient-base" />
 
@@ -160,30 +163,32 @@ export function ChampagneTreatmentHero({
 
       <div className={join("hero-content", styles.content)}>
         <div className={styles.inner}>
-          {eyebrow ? <span className={styles.eyebrow}>{eyebrow}</span> : null}
-          <h1 className={styles.title} id={`${variant}-treatment-hero`}>
+          <div className={styles.meta}>
+            {settings.badgeLabel ? (
+              <span className={join(styles.badge, badgeToneClass[settings.badgeTone])}>
+                {settings.badgeLabel}
+              </span>
+            ) : null}
+            {eyebrow ? <span className={styles.eyebrow}>{eyebrow}</span> : null}
+          </div>
+          <h1 className={styles.title} id={`${tone}-treatment-hero`}>
             {title}
           </h1>
-          {kicker ? <p className={styles.kicker}>{kicker}</p> : null}
-          <p className={styles.description}>{description}</p>
-          {(primaryCta || secondaryCta) && (
-            <div className={styles.ctaGroup}>
-              {primaryCta ? (
-                <Link href={primaryCta.href} className={styles.primaryCta}>
-                  <span>{primaryCta.label}</span>
-                </Link>
-              ) : null}
-              {secondaryCta ? (
-                <Link href={secondaryCta.href} className={styles.secondaryCta}>
-                  <span>{secondaryCta.label}</span>
-                </Link>
-              ) : null}
-            </div>
-          )}
+          <p className={styles.subtitle}>{subtitle}</p>
+          <div className={styles.ctaGroup}>
+            <Link href={primaryCta.href} className={styles.primaryCta}>
+              <span>{primaryCta.label}</span>
+            </Link>
+            {secondaryCta ? (
+              <Link href={secondaryCta.href} className={styles.secondaryCta}>
+                <span>{secondaryCta.label}</span>
+              </Link>
+            ) : null}
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-export const treatmentHeroVariants = VARIANT_SETTINGS;
+export const champagneTreatmentHeroTones = TONE_SETTINGS;

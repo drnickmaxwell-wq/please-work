@@ -2,7 +2,12 @@
 import Link from "next/link";
 
 import { ChampagneTreatmentHero } from "@/components/treatments/ChampagneTreatmentHero";
-import { LuxeCard, LuxeSection } from "@/components/treatments/preview";
+import {
+  LuxeCard,
+  LuxeSection,
+  PreviewMain,
+  PreviewPageShell,
+} from "@/components/treatments/preview";
 import ThreeDViewerSlot from "@/components/preview/treatments/ThreeDViewerSlot";
 import { SchemaInjector } from "@/lib/seo/preview/SchemaInjector";
 
@@ -57,20 +62,19 @@ const candidacy = [
 
 export default function SparkAlignersPreviewPage() {
   return (
-    <main className="min-h-screen bg-[color-mix(in_oklab,var(--smh-white)_95%,transparent)] text-[color-mix(in_oklab,var(--smh-ink)_92%,transparent)]">
+    <PreviewPageShell>
       <SchemaInjector route="/treatments/orthodontics/spark-aligners" />
 
       <ChampagneTreatmentHero
-        variant="spark-aligners"
+        tone="spark"
         eyebrow="Orthodontics preview"
         title="Spark Aligners with Champagne clarity"
-        kicker="Aqua gradients, glass sheen"
-        description="Aqua-toned gradients, crisp glass overlays, and schema-backed sections keep the aligner journey sharp and light."
+        subtitle="Aqua gradients, crisp glass overlays, and schema-backed sections keep the aligner journey luminous."
         primaryCta={{ label: "Reserve Spark consultation", href: "/contact" }}
         secondaryCta={{ label: "Explore orthodontic previews", href: "/preview/treatments/orthodontics" }}
       />
 
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-12 px-6 py-16">
+      <PreviewMain>
         <nav aria-label="Breadcrumb" className="text-sm text-[color-mix(in_oklab,var(--smh-ink)_70%,transparent)]">
           <ol className="flex flex-wrap items-center gap-2">
             <li>
@@ -97,16 +101,17 @@ export default function SparkAlignersPreviewPage() {
           </ol>
         </nav>
 
-        <LuxeSection variant="spark-aligners" id="viewer" label="Interactive aligner preview">
+        <LuxeSection tone="spark" id="viewer" label="Interactive aligner preview">
           <LuxeCard tone="frosted" className="flex flex-col gap-4 text-[color-mix(in_oklab,var(--smh-ink)_76%,transparent)]">
             <p>
-              Visualise how Spark trays seat over enamel with precise scalloped edges and soft force zones. Final build will integrate Three.js for model rotation and pressure mapping overlays.
+              Visualise how Spark trays seat over enamel with precise scalloped edges and soft force zones. Final build will
+              integrate Three.js for model rotation and pressure mapping overlays.
             </p>
             <ThreeDViewerSlot />
           </LuxeCard>
         </LuxeSection>
 
-        <LuxeSection variant="spark-aligners" id="highlights" label="Why guests choose Spark">
+        <LuxeSection tone="spark" id="highlights" label="Why guests choose Spark">
           <div className="grid gap-6 md:grid-cols-2">
             {alignerHighlights.map((item) => (
               <LuxeCard key={item.title} tone="default">
@@ -121,7 +126,7 @@ export default function SparkAlignersPreviewPage() {
           </div>
         </LuxeSection>
 
-        <LuxeSection variant="spark-aligners" id="journey" label="Four-stage Spark journey" tone="muted">
+        <LuxeSection tone="spark" surfaceTone="muted" id="journey" label="Four-stage Spark journey">
           <div className="grid gap-6 md:grid-cols-2">
             {journey.map((stage) => (
               <LuxeCard key={stage.phase} tone="frosted">
@@ -136,7 +141,7 @@ export default function SparkAlignersPreviewPage() {
           </div>
         </LuxeSection>
 
-        <LuxeSection variant="spark-aligners" id="candidacy" label="Ideal Spark candidates">
+        <LuxeSection tone="spark" id="candidacy" label="Ideal Spark candidates">
           <div className="grid gap-4 md:grid-cols-2">
             {candidacy.map((item) => (
               <LuxeCard key={item} tone="default">
@@ -146,10 +151,11 @@ export default function SparkAlignersPreviewPage() {
           </div>
         </LuxeSection>
 
-        <LuxeSection variant="spark-aligners" id="cta" label="Book your Spark consultation" tone="highlight">
+        <LuxeSection tone="spark" surfaceTone="highlight" id="cta" label="Book your Spark consultation">
           <LuxeCard tone="frosted" className="flex flex-col gap-4 text-[color-mix(in_oklab,var(--smh-ink)_74%,transparent)]">
             <p>
-              Connect preview CTAs to booking tools or chat assistants. Motion stays within Champagne easing so hover cues remain calm and precise.
+              Connect preview CTAs to booking tools or chat assistants. Motion stays within Champagne easing so hover cues remain
+              calm and precise.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
@@ -167,7 +173,7 @@ export default function SparkAlignersPreviewPage() {
             </div>
           </LuxeCard>
         </LuxeSection>
-      </div>
-    </main>
+      </PreviewMain>
+    </PreviewPageShell>
   );
 }

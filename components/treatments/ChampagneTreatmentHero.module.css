@@ -7,18 +7,22 @@
   min-height: clamp(28rem, 72vh, 46rem);
   padding-block: clamp(6rem, 12vw, 9rem);
   padding-inline: clamp(1.5rem, 6vw, 5rem);
-  color: color-mix(in oklab, var(--smh-white) 94%, transparent);
-  --hero-gradient: var(--smh-gradient);
+  color: color-mix(in oklab, var(--smh-white) 96%, transparent);
+  --hero-gradient: linear-gradient(
+    var(--smh-grad-angle, 135deg),
+    color-mix(in oklab, var(--smh-primary-magenta) 82%, transparent) 0%,
+    color-mix(in oklab, var(--smh-primary-teal) 78%, transparent) 58%,
+    color-mix(in oklab, var(--smh-accent-gold) 38%, var(--smh-accent-gold-soft) 62%) 100%
+  );
   --hero-wave-opacity: 0.12;
   --hero-glass-opacity: 0.16;
   --hero-particles-opacity: 0.1;
-  --hero-gold-opacity: 0.05;
+  --hero-gold-opacity: 0.045;
   --hero-static-particles: 0.08;
   --hero-glass-tint: color-mix(in oklab, var(--smh-ink) 18%, transparent);
   --hero-text-shadow: 0 2px 16px color-mix(in srgb, var(--smh-ink) 35%, transparent);
-  --hero-eyebrow-color: color-mix(in oklab, var(--smh-white) 78%, transparent);
-  --hero-kicker-color: color-mix(in oklab, var(--smh-white) 92%, transparent 18%);
-  --hero-description-color: color-mix(in oklab, var(--smh-white) 90%, transparent 10%);
+  --hero-eyebrow-color: color-mix(in oklab, var(--smh-white) 82%, transparent 18%);
+  --hero-subtitle-color: color-mix(in oklab, var(--smh-white) 90%, transparent 10%);
   --hero-cta-shadow: 0 24px 64px color-mix(in srgb, var(--smh-ink) 18%, transparent);
   --hero-secondary-surface: color-mix(in oklab, var(--smh-white) 18%, transparent);
 }
@@ -41,8 +45,8 @@
   position: absolute;
   inset: 0;
   background: radial-gradient(
-    circle at 30% 38%,
-    color-mix(in oklab, var(--smh-white) 14%, transparent),
+    circle at 30% 40%,
+    color-mix(in oklab, var(--smh-white) 16%, transparent) 0%,
     transparent 60%
   );
   mix-blend-mode: screen;
@@ -61,7 +65,7 @@
 }
 
 .hero[data-gold='clinical-low'] {
-  --hero-gold-opacity: 0.028;
+  --hero-gold-opacity: 0.026;
   --hero-static-particles: 0.06;
 }
 
@@ -90,16 +94,16 @@
 
 .hero[data-tint='soft-gold'] {
   --hero-gradient: linear-gradient(
-    var(--smh-grad-angle),
-    color-mix(in oklab, var(--smh-primary-magenta) 74%, var(--smh-accent-gold-soft) 26%) 0%,
+    var(--smh-grad-angle, 135deg),
+    color-mix(in oklab, var(--smh-primary-magenta) 76%, var(--smh-accent-gold-soft) 24%) 0%,
     color-mix(in oklab, var(--smh-primary-teal) 78%, var(--smh-accent-gold-soft) 22%) 58%,
-    color-mix(in oklab, var(--smh-accent-gold) 62%, var(--smh-white) 38%) 100%
+    color-mix(in oklab, var(--smh-accent-gold) 62%, var(--smh-accent-gold-soft) 38%) 100%
   );
 }
 
 .hero[data-tint='cool-teal'] {
   --hero-gradient: linear-gradient(
-    var(--smh-grad-angle),
+    var(--smh-grad-angle, 135deg),
     color-mix(in oklab, var(--smh-primary-magenta) 54%, var(--smh-primary-teal) 46%) 0%,
     color-mix(in oklab, var(--smh-primary-teal) 92%, var(--smh-white) 8%) 55%,
     color-mix(in oklab, var(--smh-accent-gold) 22%, transparent) 100%
@@ -109,19 +113,18 @@
 
 .hero[data-tint='pearl'] {
   --hero-gradient: linear-gradient(
-    var(--smh-grad-angle),
+    var(--smh-grad-angle, 135deg),
     color-mix(in oklab, var(--smh-primary-magenta) 48%, var(--smh-white) 52%) 0%,
     color-mix(in oklab, var(--smh-primary-teal) 64%, var(--smh-white) 36%) 58%,
-    color-mix(in oklab, var(--smh-accent-gold-soft) 32%, var(--smh-white) 68%) 100%
+    color-mix(in oklab, var(--smh-accent-gold-soft) 36%, var(--smh-white) 64%) 100%
   );
   --hero-glass-opacity: 0.18;
-  --hero-kicker-color: color-mix(in oklab, var(--smh-white) 96%, transparent 12%);
-  --hero-description-color: color-mix(in oklab, var(--smh-white) 94%, transparent 6%);
+  --hero-subtitle-color: color-mix(in oklab, var(--smh-white) 94%, transparent 6%);
 }
 
 .hero[data-tint='aqua'] {
   --hero-gradient: linear-gradient(
-    var(--smh-grad-angle),
+    var(--smh-grad-angle, 135deg),
     color-mix(in oklab, var(--smh-primary-magenta) 42%, var(--smh-primary-teal) 58%) 0%,
     color-mix(in oklab, var(--smh-primary-teal) 88%, var(--smh-white) 12%) 56%,
     color-mix(in oklab, var(--smh-accent-gold) 20%, transparent) 100%
@@ -131,15 +134,14 @@
 
 .hero[data-tint='ink-dusk'] {
   --hero-gradient: linear-gradient(
-    var(--smh-grad-angle),
+    var(--smh-grad-angle, 135deg),
     color-mix(in oklab, var(--smh-primary-magenta) 34%, var(--smh-ink) 66%) 0%,
     color-mix(in oklab, var(--smh-primary-teal) 54%, var(--smh-ink) 46%) 58%,
     color-mix(in oklab, var(--smh-ink) 86%, transparent 14%) 100%
   );
   --hero-glass-opacity: 0.12;
-  --hero-kicker-color: color-mix(in oklab, var(--smh-white) 78%, transparent 22%);
-  --hero-description-color: color-mix(in oklab, var(--smh-white) 82%, transparent 18%);
-  --hero-eyebrow-color: color-mix(in oklab, var(--smh-white) 68%, transparent 32%);
+  --hero-subtitle-color: color-mix(in oklab, var(--smh-white) 78%, transparent 22%);
+  --hero-eyebrow-color: color-mix(in oklab, var(--smh-white) 70%, transparent 30%);
 }
 
 .motionLayer video {
@@ -166,20 +168,58 @@
 .inner {
   max-width: min(72rem, 100%);
   display: grid;
-  gap: clamp(1.25rem, 3vw, 1.75rem);
+  gap: clamp(1.5rem, 3vw, 2rem);
   text-align: center;
   color: color-mix(in oklab, var(--smh-white) 96%, transparent);
   filter: drop-shadow(var(--hero-text-shadow));
 }
 
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 1.4rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+  background: color-mix(in oklab, currentColor 18%, transparent);
+  color: color-mix(in oklab, var(--smh-white) 90%, transparent 10%);
+  backdrop-filter: blur(16px);
+}
+
+.badgeMagenta {
+  color: color-mix(in oklab, var(--smh-primary-magenta) 82%, var(--smh-white) 18%);
+}
+
+.badgeTeal {
+  color: color-mix(in oklab, var(--smh-primary-teal) 86%, var(--smh-white) 14%);
+}
+
+.badgeGold {
+  color: color-mix(in oklab, var(--smh-accent-gold) 80%, var(--smh-accent-gold-soft) 20%);
+}
+
+.badgeNeutral {
+  color: color-mix(in oklab, var(--smh-white) 84%, transparent 16%);
+}
+
 .eyebrow {
   display: inline-flex;
-  align-self: center;
+  align-items: center;
   justify-content: center;
-  padding: 0.5rem 1.4rem;
+  padding: 0.45rem 1.6rem;
   border-radius: 999px;
-  font-size: 0.8rem;
-  letter-spacing: 0.24em;
+  font-size: 0.82rem;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
   color: var(--hero-eyebrow-color);
   background: color-mix(in oklab, var(--smh-ink) 16%, transparent);
@@ -188,24 +228,16 @@
 
 .title {
   font-family: var(--font-playfair, "Playfair Display", serif);
-  font-size: clamp(2.8rem, 5vw, 4.2rem);
+  font-size: clamp(2.8rem, 5vw, 4.3rem);
   letter-spacing: -0.02em;
-  line-height: 1.1;
+  line-height: 1.12;
 }
 
-.kicker {
+.subtitle {
   font-family: var(--font-inter, "Inter", sans-serif);
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--hero-kicker-color);
-}
-
-.description {
-  font-family: var(--font-inter, "Inter", sans-serif);
-  font-size: clamp(1.1rem, 2.4vw, 1.35rem);
+  font-size: clamp(1.15rem, 2.4vw, 1.35rem);
   line-height: 1.6;
-  color: var(--hero-description-color);
+  color: var(--hero-subtitle-color);
   max-width: min(62ch, 100%);
   justify-self: center;
 }

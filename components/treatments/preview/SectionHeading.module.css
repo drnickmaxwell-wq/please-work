@@ -1,14 +1,22 @@
 .heading {
   display: grid;
-  gap: 0.75rem;
+  gap: 1rem;
   max-width: min(60ch, 100%);
 }
 
 .eyebrow {
-  font-size: 0.8rem;
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 1.15rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
   letter-spacing: 0.32em;
   text-transform: uppercase;
   color: color-mix(in oklab, var(--smh-ink) 68%, transparent 32%);
+  background: color-mix(in oklab, var(--smh-accent-gold-soft) 14%, transparent);
+  border: 1px solid color-mix(in oklab, var(--smh-accent-gold) 22%, transparent 78%);
 }
 
 .label {
@@ -16,7 +24,7 @@
   font-size: clamp(2rem, 4vw, 2.75rem);
   font-weight: 600;
   letter-spacing: -0.01em;
-  color: color-mix(in oklab, var(--smh-ink) 92%, transparent 8%);
+  color: color-mix(in oklab, var(--smh-ink) 90%, transparent 10%);
 }
 
 .description {

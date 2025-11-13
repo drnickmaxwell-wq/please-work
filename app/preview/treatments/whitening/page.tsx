@@ -2,7 +2,12 @@
 import Link from "next/link";
 
 import { ChampagneTreatmentHero } from "@/components/treatments/ChampagneTreatmentHero";
-import { LuxeCard, LuxeSection } from "@/components/treatments/preview";
+import {
+  LuxeCard,
+  LuxeSection,
+  PreviewMain,
+  PreviewPageShell,
+} from "@/components/treatments/preview";
 import { SchemaInjector } from "@/lib/seo/preview/SchemaInjector";
 
 import "@/styles/treatments/preview-light.css";
@@ -109,31 +114,30 @@ const aftercare = [
 
 export default function WhiteningPreviewPage() {
   return (
-    <main className="min-h-screen bg-[color-mix(in_oklab,var(--smh-white)_96%,transparent)] text-[color-mix(in_oklab,var(--smh-ink)_92%,transparent)]">
+    <PreviewPageShell>
       <SchemaInjector route="/treatments/whitening" />
 
       <ChampagneTreatmentHero
-        variant="whitening"
+        tone="whitening"
         eyebrow="Teeth whitening"
         title="Whitening that stays luminous"
-        kicker="Pearl-toned gradients, minimal gold"
-        description="Preview the Champagne whitening journey with bright, pearl-toned gradients and minimal gold."
+        subtitle="Pearl-toned gradients and minimal gold detailing keep the experience calm, bright, and true to Champagne."
         primaryCta={{ label: "Book whitening consult", href: "/contact" }}
         secondaryCta={{ label: "View all previews", href: "/preview/treatments" }}
       />
 
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-12 px-6 py-16">
-        <LuxeSection variant="whitening" id="benefits" label="Why guests choose our whitening">
+      <PreviewMain>
+        <LuxeSection tone="whitening" id="benefits" label="Why guests choose our whitening">
           <div className="grid gap-6 md:grid-cols-2">
             {benefits.map((benefit) => (
               <LuxeCard key={benefit.title}>
                 <h3
-                  className="text-xl font-semibold"
+                  className="text-xl font-semibold text-[color-mix(in_oklab,var(--smh-ink)_86%,transparent)]"
                   style={{ fontFamily: "var(--font-playfair, 'Playfair Display', serif)" }}
                 >
                   {benefit.title}
                 </h3>
-                <p className="mt-3 text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_76%,transparent)]">
+                <p className="mt-3 text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_74%,transparent)]">
                   {benefit.description}
                 </p>
               </LuxeCard>
@@ -141,13 +145,13 @@ export default function WhiteningPreviewPage() {
           </div>
         </LuxeSection>
 
-        <LuxeSection variant="whitening" id="pathways" label="Tailored whitening pathways" tone="muted">
+        <LuxeSection tone="whitening" surfaceTone="muted" id="pathways" label="Tailored whitening pathways">
           <div className="grid gap-6 lg:grid-cols-3">
             {options.map((option) => (
               <LuxeCard key={option.name} tone="default" className="flex h-full flex-col gap-3">
                 <header>
                   <h3
-                    className="text-lg font-semibold"
+                    className="text-lg font-semibold text-[color-mix(in_oklab,var(--smh-ink)_84%,transparent)]"
                     style={{ fontFamily: "var(--font-playfair, 'Playfair Display', serif)" }}
                   >
                     {option.name}
@@ -172,12 +176,12 @@ export default function WhiteningPreviewPage() {
           </div>
         </LuxeSection>
 
-        <LuxeSection variant="whitening" id="stains" label="Understanding different stains">
+        <LuxeSection tone="whitening" id="stains" label="Understanding different stains">
           <div className="grid gap-6 lg:grid-cols-3">
             {stainTypes.map((type) => (
               <LuxeCard key={type.label} tone="default" className="flex h-full flex-col gap-3">
                 <h3
-                  className="text-lg font-semibold"
+                  className="text-lg font-semibold text-[color-mix(in_oklab,var(--smh-ink)_84%,transparent)]"
                   style={{ fontFamily: "var(--font-playfair, 'Playfair Display', serif)" }}
                 >
                   {type.label}
@@ -201,11 +205,14 @@ export default function WhiteningPreviewPage() {
           </div>
         </LuxeSection>
 
-        <LuxeSection variant="whitening" id="aftercare" label="Aftercare guidance" tone="muted">
+        <LuxeSection tone="whitening" surfaceTone="muted" id="aftercare" label="Aftercare guidance">
           <div className="grid gap-6 md:grid-cols-2">
             {aftercare.map((entry) => (
               <LuxeCard key={entry.title} tone="default" className="flex h-full flex-col gap-3">
-                <h3 className="text-lg font-semibold" style={{ fontFamily: "var(--font-playfair, 'Playfair Display', serif)" }}>
+                <h3
+                  className="text-lg font-semibold text-[color-mix(in_oklab,var(--smh-ink)_84%,transparent)]"
+                  style={{ fontFamily: "var(--font-playfair, 'Playfair Display', serif)" }}
+                >
                   {entry.title}
                 </h3>
                 <ul className="space-y-2 text-sm leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_74%,transparent)]">
@@ -221,10 +228,11 @@ export default function WhiteningPreviewPage() {
           </div>
         </LuxeSection>
 
-        <LuxeSection variant="whitening" id="cta" label="Ready to brighten" tone="highlight">
+        <LuxeSection tone="whitening" surfaceTone="highlight" id="cta" label="Ready to brighten">
           <LuxeCard tone="default" className="flex flex-col gap-4">
-            <p className="text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_76%,transparent)]">
-              Pair in-practice whitening with at-home maintenance to hold your preferred shade. Schema HUD confirms Service and HowTo packs are wired for this route.
+            <p className="text-base leading-relaxed text-[color-mix(in_oklab,var(--smh-ink)_74%,transparent)]">
+              Pair in-practice whitening with at-home maintenance to hold your preferred shade. Schema HUD confirms Service and
+              HowTo packs are wired for this route.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
@@ -242,7 +250,7 @@ export default function WhiteningPreviewPage() {
             </div>
           </LuxeCard>
         </LuxeSection>
-      </div>
-    </main>
+      </PreviewMain>
+    </PreviewPageShell>
   );
 }

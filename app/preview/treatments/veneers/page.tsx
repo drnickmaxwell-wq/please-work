@@ -1,8 +1,15 @@
 export const dynamic = "force-static";
 export const revalidate = 0;
 
+import Link from "next/link";
+
 import { ChampagneTreatmentHero } from "@/components/treatments/ChampagneTreatmentHero";
-import { LuxeCard, LuxeSection } from "@/components/treatments/preview";
+import {
+  LuxeCard,
+  LuxeSection,
+  PreviewMain,
+  PreviewPageShell,
+} from "@/components/treatments/preview";
 import { SchemaInjector } from "@/lib/seo/preview/SchemaInjector";
 
 const veneerHighlights = [
@@ -40,24 +47,24 @@ const veneerCandidates = [
 
 export default function VeneersPreviewPage() {
   return (
-    <div className="min-h-screen bg-[color-mix(in_oklab,var(--smh-accent-gold-soft)_18%,var(--smh-white))] text-[color-mix(in_oklab,var(--smh-ink)_90%,transparent)]">
+    <PreviewPageShell>
       <SchemaInjector route="/treatments/veneers" />
 
       <ChampagneTreatmentHero
-        variant="veneers"
+        tone="veneers"
         eyebrow="Porcelain veneers"
         title="Porcelain veneers with Champagne luminosity"
-        kicker="Digital artistry, handcrafted glow"
-        description="Digital artistry and handcrafted ceramics transform smiles with soft gold warmth, while keeping the hero stack entirely on-brand."
+        subtitle="Digital artistry and handcrafted ceramics bring a soft gold warmth to every smile design session."
         primaryCta={{ label: "Plan veneer consultation", href: "/contact" }}
         secondaryCta={{ label: "Preview patient stories", href: "/patient-stories" }}
       />
 
-      <main className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-6 py-16" role="main">
-        <LuxeSection variant="veneers" id="viewer" label="3D veneer visualiser" tone="muted">
+      <PreviewMain>
+        <LuxeSection tone="veneers" surfaceTone="muted" id="viewer" label="3D veneer visualiser">
           <LuxeCard tone="default" className="flex flex-col gap-3 text-[color-mix(in_oklab,var(--smh-ink)_78%,transparent)]">
             <p>
-              Placeholder for the veneer layering viewer. Final build will display digital wax-ups, translucency maps, and before/after toggles in one Champagne-aligned module.
+              Placeholder for the veneer layering viewer. Final build will display digital wax-ups, translucency maps, and
+              before/after toggles in one Champagne-aligned module.
             </p>
             <div className="flex min-h-[10rem] items-center justify-center rounded-2xl border border-[color-mix(in_oklab,var(--smh-accent-gold)_22%,transparent)] bg-[color-mix(in_oklab,var(--smh-accent-gold-soft)_32%,var(--smh-white)_68%)] text-xs uppercase tracking-[0.24em] text-[color-mix(in_oklab,var(--smh-ink)_62%,transparent)]">
               3D VIEWER PLACEHOLDER
@@ -65,7 +72,7 @@ export default function VeneersPreviewPage() {
           </LuxeCard>
         </LuxeSection>
 
-        <LuxeSection variant="veneers" id="benefits" label="Why guests love veneers">
+        <LuxeSection tone="veneers" id="benefits" label="Why guests love veneers">
           <div className="grid gap-4 md:grid-cols-2">
             {veneerHighlights.map((highlight) => (
               <LuxeCard key={highlight}>
@@ -75,7 +82,7 @@ export default function VeneersPreviewPage() {
           </div>
         </LuxeSection>
 
-        <LuxeSection variant="veneers" id="journey" label="The veneer journey">
+        <LuxeSection tone="veneers" id="journey" label="The veneer journey">
           <div className="grid gap-4 md:grid-cols-2">
             {veneerJourney.map((stage) => (
               <LuxeCard key={stage.title}>
@@ -90,7 +97,7 @@ export default function VeneersPreviewPage() {
           </div>
         </LuxeSection>
 
-        <LuxeSection variant="veneers" id="candidacy" label="Are veneers right for you?" tone="muted">
+        <LuxeSection tone="veneers" id="candidacy" label="Are veneers right for you?" surfaceTone="muted">
           <div className="grid gap-4 md:grid-cols-2">
             {veneerCandidates.map((item) => (
               <LuxeCard key={item} tone="default">
@@ -100,28 +107,29 @@ export default function VeneersPreviewPage() {
           </div>
         </LuxeSection>
 
-        <LuxeSection variant="veneers" id="pricing" label="Finance & next steps" tone="highlight">
+        <LuxeSection tone="veneers" id="pricing" label="Finance & next steps" surfaceTone="highlight">
           <LuxeCard className="flex flex-col gap-4 text-[color-mix(in_oklab,var(--smh-ink)_80%,transparent)]">
             <p>
-              Reserve slots for finance illustrations, treatment timelines, and follow-up scheduling. CTA buttons keep Champagne hover easing within the 1.03 scale guidance.
+              Reserve slots for finance illustrations, treatment timelines, and follow-up scheduling. CTA buttons keep Champagne
+              hover easing within the 1.03 scale guidance.
             </p>
             <div className="flex flex-wrap gap-3">
-              <a
+              <Link
                 className="inline-flex items-center justify-center rounded-full border border-[color-mix(in_oklab,var(--smh-accent-gold)_28%,transparent)] bg-[color-mix(in_oklab,var(--smh-accent-gold-soft)_38%,var(--smh-white)_62%)] px-5 py-2 text-sm font-semibold tracking-[0.16em] text-[color-mix(in_oklab,var(--smh-ink)_62%,var(--smh-accent-gold)_38%)] transition-transform duration-300 ease-[cubic-bezier(0.645,0.045,0.355,1)] hover:translate-y-[-2px]"
                 href="/contact"
               >
                 Reserve consultation
-              </a>
-              <a
+              </Link>
+              <Link
                 className="inline-flex items-center justify-center rounded-full border border-[color-mix(in_oklab,var(--smh-primary-magenta)_20%,transparent)] bg-[color-mix(in_oklab,var(--smh-white)_92%,transparent)] px-5 py-2 text-sm font-semibold tracking-[0.16em] text-[color-mix(in_oklab,var(--smh-primary-magenta)_68%,var(--smh-ink)_32%)] transition-transform duration-300 ease-[cubic-bezier(0.645,0.045,0.355,1)] hover:translate-y-[-2px]"
                 href="/preview/treatments"
               >
                 Back to previews
-              </a>
+              </Link>
             </div>
           </LuxeCard>
         </LuxeSection>
-      </main>
-    </div>
+      </PreviewMain>
+    </PreviewPageShell>
   );
 }
