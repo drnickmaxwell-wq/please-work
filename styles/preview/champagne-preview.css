@@ -10,29 +10,29 @@
     var(--smh-primary-teal) 60%,
     var(--smh-accent-gold) 100%
   );
-  --cpv-hero-card-bg: color-mix(in srgb, var(--smh-ink) 76%, transparent);
+  --cpv-hero-card-bg: color-mix(in srgb, var(--smh-ink) 70%, transparent);
   --cpv-hero-border: color-mix(in srgb, var(--smh-accent-gold-soft) 26%, transparent);
   --cpv-hero-shadow: 0 48px 120px color-mix(in srgb, var(--smh-ink) 38%, transparent);
-  --cpv-card-surface: color-mix(in srgb, var(--smh-ink) 82%, transparent);
-  --cpv-card-bg: color-mix(in srgb, var(--smh-ink) 88%, transparent);
+  --cpv-card-surface: color-mix(in srgb, var(--smh-ink) 76%, transparent);
+  --cpv-card-bg: color-mix(in srgb, var(--smh-ink) 82%, transparent);
   --cpv-card-gradient:
     radial-gradient(
-      120% 90% at 18% -8%,
-      color-mix(in srgb, var(--smh-accent-gold-soft) 16%, transparent) 0%,
-      transparent 60%
+      140% 110% at 18% -8%,
+      color-mix(in srgb, var(--smh-accent-gold-soft) 18%, transparent) 0%,
+      transparent 58%
     ),
     radial-gradient(
-      120% 90% at 82% 110%,
-      color-mix(in srgb, var(--smh-primary-teal) 14%, transparent) 0%,
-      transparent 74%
+      120% 110% at 82% 118%,
+      color-mix(in srgb, var(--smh-primary-teal) 16%, transparent) 0%,
+      transparent 78%
     ),
     linear-gradient(
       180deg,
-      color-mix(in srgb, var(--cpv-card-bg) 94%, transparent) 0%,
+      color-mix(in srgb, var(--cpv-card-bg) 92%, transparent) 0%,
       color-mix(in srgb, var(--smh-ink) 94%, transparent) 100%
     );
-  --cpv-card-border: color-mix(in srgb, var(--smh-accent-gold-soft) 30%, transparent);
-  --cpv-card-shadow: 0 24px 60px color-mix(in srgb, var(--smh-ink) 52%, transparent);
+  --cpv-card-border: color-mix(in srgb, var(--smh-accent-gold-soft) 36%, transparent);
+  --cpv-card-shadow: 0 24px 60px color-mix(in srgb, var(--smh-ink) 46%, transparent);
   --cpv-chip-bg: color-mix(in srgb, var(--smh-ink) 94%, transparent);
   --cpv-chip-border: color-mix(in srgb, var(--smh-accent-gold-soft) 22%, transparent);
   --cpv-chip-text: color-mix(in srgb, var(--smh-white) 92%, transparent);
@@ -89,8 +89,8 @@
 }
 
 .lth-hero {
-  --lth-glow-strength: 0.24;
-  --lth-speckle-opacity: 0.08;
+  --lth-glow-strength: 0.18;
+  --lth-speckle-opacity: 0.07;
 }
 
 .lth-hero__glow,
@@ -180,18 +180,8 @@
 }
 
 .cpv-wavefx__wave-mask {
-  background-image: url('/assets/champagne/waves/wave-mask-desktop.webp');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  mix-blend-mode: screen;
-  opacity: 0.34;
-}
-
-@media (max-width: 768px) {
-  .cpv-wavefx__wave-mask {
-    background-image: url('/assets/champagne/waves/wave-mask-mobile.webp');
-  }
+  background-image: none;
+  opacity: 0;
 }
 
 .cpv-wavefx__particles-static {
