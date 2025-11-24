@@ -4,7 +4,7 @@ import type { CSSProperties, ReactNode } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
-import WaveFXPreview from '@/components/preview/fx/WaveFXPreview';
+import ChampagneHeroSurface from '@/components/champagne/ChampagneHeroSurface';
 import { usePrefersReducedMotion } from '@/lib/hooks/usePrefersReducedMotion';
 
 type LuxeTreatmentHeroVariant = 'implants' | 'veneers' | 'whitening' | 'general' | 'technology';
@@ -27,64 +27,24 @@ type LuxeTreatmentHeroProps = {
 
 const VARIANT_THEMES: Record<LuxeTreatmentHeroVariant, CSSProperties> = {
   implants: {
-    '--lth-stop-magenta': 'color-mix(in srgb, var(--smh-primary-magenta) 82%, transparent)',
-    '--lth-stop-blend': 'color-mix(in srgb, var(--smh-primary-magenta) 34%, var(--smh-primary-teal))',
-    '--lth-stop-teal': 'color-mix(in srgb, var(--smh-primary-teal) 80%, transparent)',
-    '--lth-stop-gold': 'color-mix(in srgb, var(--smh-accent-gold-soft) 22%, transparent)',
-    '--lth-ambient-top': 'color-mix(in srgb, var(--smh-primary-magenta) 22%, transparent)',
-    '--lth-ambient-bottom': 'color-mix(in srgb, var(--smh-primary-teal) 22%, transparent)',
-    '--lth-surface-opacity': '0.22',
-    '--lth-glow-strength': '0.5',
+    '--lth-glow-strength': '0.46',
     '--lth-speckle-opacity': '0.1',
-    '--lth-wave-opacity': '0.6',
   },
   veneers: {
-    '--lth-stop-magenta': 'color-mix(in srgb, var(--smh-primary-magenta) 94%, transparent)',
-    '--lth-stop-blend': 'color-mix(in srgb, var(--smh-primary-magenta) 42%, var(--smh-primary-teal))',
-    '--lth-stop-teal': 'color-mix(in srgb, var(--smh-primary-teal) 72%, transparent)',
-    '--lth-stop-gold': 'color-mix(in srgb, var(--smh-accent-gold-soft) 24%, transparent)',
-    '--lth-ambient-top': 'color-mix(in srgb, var(--smh-primary-magenta) 30%, transparent)',
-    '--lth-ambient-bottom': 'color-mix(in srgb, var(--smh-accent-gold-soft) 22%, transparent)',
-    '--lth-surface-opacity': '0.22',
-    '--lth-glow-strength': '0.56',
+    '--lth-glow-strength': '0.5',
     '--lth-speckle-opacity': '0.12',
-    '--lth-wave-opacity': '0.6',
   },
   whitening: {
-    '--lth-stop-magenta': 'color-mix(in srgb, var(--smh-primary-magenta) 86%, transparent)',
-    '--lth-stop-blend': 'color-mix(in srgb, var(--smh-primary-magenta) 34%, var(--smh-primary-teal))',
-    '--lth-stop-teal': 'color-mix(in srgb, var(--smh-primary-teal) 74%, transparent)',
-    '--lth-stop-gold': 'color-mix(in srgb, var(--smh-accent-gold-soft) 26%, transparent)',
-    '--lth-ambient-top': 'color-mix(in srgb, var(--smh-primary-magenta) 24%, transparent)',
-    '--lth-ambient-bottom': 'color-mix(in srgb, var(--smh-accent-gold-soft) 24%, transparent)',
-    '--lth-surface-opacity': '0.22',
-    '--lth-glow-strength': '0.58',
+    '--lth-glow-strength': '0.52',
     '--lth-speckle-opacity': '0.12',
-    '--lth-wave-opacity': '0.6',
   },
   general: {
-    '--lth-stop-magenta': 'color-mix(in srgb, var(--smh-primary-magenta) 90%, transparent)',
-    '--lth-stop-blend': 'color-mix(in srgb, var(--smh-primary-magenta) 38%, var(--smh-primary-teal))',
-    '--lth-stop-teal': 'color-mix(in srgb, var(--smh-primary-teal) 78%, transparent)',
-    '--lth-stop-gold': 'color-mix(in srgb, var(--smh-accent-gold-soft) 24%, transparent)',
-    '--lth-ambient-top': 'color-mix(in srgb, var(--smh-primary-magenta) 26%, transparent)',
-    '--lth-ambient-bottom': 'color-mix(in srgb, var(--smh-accent-gold-soft) 22%, transparent)',
-    '--lth-surface-opacity': '0.22',
-    '--lth-glow-strength': '0.54',
+    '--lth-glow-strength': '0.48',
     '--lth-speckle-opacity': '0.11',
-    '--lth-wave-opacity': '0.6',
   },
   technology: {
-    '--lth-stop-magenta': 'color-mix(in srgb, var(--smh-primary-magenta) 84%, transparent)',
-    '--lth-stop-blend': 'color-mix(in srgb, var(--smh-primary-magenta) 32%, var(--smh-primary-teal))',
-    '--lth-stop-teal': 'color-mix(in srgb, var(--smh-primary-teal) 82%, transparent)',
-    '--lth-stop-gold': 'color-mix(in srgb, var(--smh-accent-gold-soft) 22%, transparent)',
-    '--lth-ambient-top': 'color-mix(in srgb, var(--smh-primary-magenta) 22%, transparent)',
-    '--lth-ambient-bottom': 'color-mix(in srgb, var(--smh-primary-teal) 26%, transparent)',
-    '--lth-surface-opacity': '0.22',
-    '--lth-glow-strength': '0.5',
+    '--lth-glow-strength': '0.46',
     '--lth-speckle-opacity': '0.1',
-    '--lth-wave-opacity': '0.6',
   },
 };
 
@@ -132,8 +92,7 @@ const LuxeTreatmentHero = ({
       animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
       transition={{ duration: 1.2, ease: heroEasing }}
     >
-      <div aria-hidden className="lth-hero__surface" />
-      <WaveFXPreview />
+      <ChampagneHeroSurface />
       <motion.div
         aria-hidden
         className="lth-hero__glow"
