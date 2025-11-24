@@ -10,21 +10,21 @@
     var(--smh-primary-teal) 60%,
     var(--smh-accent-gold) 100%
   );
-  --cpv-hero-card-bg: color-mix(in srgb, var(--smh-ink) 56%, transparent);
+  --cpv-hero-card-bg: color-mix(in srgb, var(--smh-ink) 48%, transparent);
   --cpv-hero-border: color-mix(in srgb, var(--smh-accent-gold-soft) 22%, transparent);
   --cpv-hero-shadow: 0 48px 120px color-mix(in srgb, var(--smh-ink) 38%, transparent);
-  --cpv-card-surface: color-mix(in srgb, var(--smh-ink) 70%, transparent);
-  --cpv-card-bg: color-mix(in srgb, var(--smh-ink) 82%, transparent);
+  --cpv-card-surface: color-mix(in srgb, var(--smh-ink) 62%, transparent);
+  --cpv-card-bg: color-mix(in srgb, var(--smh-ink) 74%, transparent);
   --cpv-card-gradient:
     linear-gradient(
       180deg,
-      color-mix(in srgb, var(--smh-ink) 76%, transparent) 0%,
-      color-mix(in srgb, var(--smh-ink) 90%, transparent) 100%
+      color-mix(in srgb, var(--smh-ink) 64%, transparent) 0%,
+      color-mix(in srgb, var(--smh-ink) 78%, transparent) 100%
     ),
     radial-gradient(
       140% 120% at 16% -6%,
       color-mix(in srgb, var(--smh-primary-magenta) 12%, transparent) 0%,
-      transparent 60%
+      transparent 64%
     ),
     radial-gradient(
       140% 120% at 84% 118%,
@@ -32,12 +32,12 @@
       transparent 74%
     ),
     radial-gradient(
-      150% 120% at 50% 120%,
-      color-mix(in srgb, var(--smh-accent-gold-soft) 10%, transparent) 0%,
-      transparent 88%
+      150% 120% at 50% 118%,
+      color-mix(in srgb, var(--smh-accent-gold-soft) 14%, transparent) 0%,
+      transparent 86%
     );
-  --cpv-card-border: color-mix(in srgb, var(--smh-accent-gold-soft) 30%, transparent);
-  --cpv-card-shadow: 0 24px 60px color-mix(in srgb, var(--smh-ink) 32%, transparent);
+  --cpv-card-border: color-mix(in srgb, var(--smh-accent-gold-soft) 32%, transparent);
+  --cpv-card-shadow: 0 22px 56px color-mix(in srgb, var(--smh-ink) 28%, transparent);
   --cpv-chip-bg: color-mix(in srgb, var(--smh-ink) 94%, transparent);
   --cpv-chip-border: color-mix(in srgb, var(--smh-accent-gold-soft) 22%, transparent);
   --cpv-chip-text: color-mix(in srgb, var(--smh-white) 92%, transparent);
@@ -80,17 +80,28 @@
 .champagne-hero-surface__gradient {
   position: absolute;
   inset: 0;
-  background-image:
-    var(--cpv-hero-gradient),
-    url('/brand/waves-bg-1024.webp');
+  background-image: var(--cpv-hero-gradient);
   background-size: cover;
   background-position: center right;
   background-repeat: no-repeat;
-  background-blend-mode: normal, soft-light;
 }
 
 .champagne-hero-surface .cpv-wavefx {
   z-index: 1;
+}
+
+.champagne-hero-surface::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: url('/brand/waves-bg-1024.webp');
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+  mix-blend-mode: soft-light;
+  opacity: clamp(0.2, 0.2 + 1vw, 0.28);
+  pointer-events: none;
 }
 
 .lth-hero {
