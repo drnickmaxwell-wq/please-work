@@ -1,191 +1,774 @@
+@import '../tokens/smh-champagne-tokens.css';
+
 :root {
-  /* gentle parchment from brand tokens; no hex */
-  --cpv-surface: color-mix(in oklab, var(--smh-accent-gold-soft) 92%, var(--smh-text));
-  --cpv-surface-ink: color-mix(in oklab, var(--smh-ink) 85%, transparent);
-}
-
-.cpv-page {
-  background: var(--cpv-surface);
-  color: var(--smh-text);
-}
-
-
-.cpv-hero {
-  position: relative;
-  isolation: isolate;
-  background: linear-gradient(
+  --cpv-page-ink: var(--smh-ink);
+  --cpv-page-text: color-mix(in srgb, var(--smh-white) 96%, transparent);
+  --cpv-page-text-soft: color-mix(in srgb, var(--smh-white) 84%, transparent);
+  --cpv-hero-gradient: linear-gradient(
     135deg,
     var(--smh-primary-magenta) 0%,
     var(--smh-primary-teal) 60%,
     var(--smh-accent-gold) 100%
   );
-  padding: clamp(2.5rem, 5vw, 4rem) 1.25rem;
-  color: var(--smh-text);
+  --cpv-hero-gradient-dusk: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--smh-primary-magenta) 80%, var(--smh-ink) 20%) 0%,
+    color-mix(in srgb, var(--smh-primary-teal) 80%, var(--smh-ink) 20%) 60%,
+    color-mix(in srgb, var(--smh-accent-gold) 80%, var(--smh-ink) 20%) 100%
+  );
+  --cpv-hero-wave: url('/brand/waves-bg-1920.webp');
+  --cpv-hero-card-bg: color-mix(in srgb, var(--smh-ink) 58%, transparent);
+  --cpv-hero-border: color-mix(in srgb, var(--smh-accent-gold-soft) 62%, transparent);
+  --cpv-hero-shadow: 0 44px 132px color-mix(in srgb, var(--smh-ink) 36%, transparent);
+  --cpv-card-surface: color-mix(in srgb, var(--smh-ink) 26%, transparent);
+  --cpv-card-bg: color-mix(in srgb, var(--smh-ink) 38%, transparent);
+  --cpv-card-gradient:
+    linear-gradient(
+      160deg,
+      color-mix(in srgb, var(--smh-primary-magenta) 80%, var(--smh-ink) 20%) 0%,
+      color-mix(in srgb, var(--smh-primary-teal) 72%, var(--smh-ink) 28%) 60%,
+      color-mix(in srgb, var(--smh-accent-gold) 48%, var(--smh-ink) 52%) 100%
+    ),
+    radial-gradient(
+      120% 120% at 12% -8%,
+      color-mix(in srgb, var(--smh-primary-magenta) 10%, transparent) 0%,
+      transparent 62%
+    ),
+    radial-gradient(
+      120% 120% at 88% 112%,
+      color-mix(in srgb, var(--smh-primary-teal) 8%, transparent) 0%,
+      transparent 70%
+    );
+  --cpv-card-border: color-mix(in srgb, var(--smh-accent-gold-soft) 65%, var(--smh-ink) 35%);
+  --cpv-card-shadow: 0 28px 78px color-mix(in srgb, var(--smh-ink) 42%, transparent);
+  --cpv-chip-bg: color-mix(in srgb, var(--smh-ink) 94%, transparent);
+  --cpv-chip-border: color-mix(in srgb, var(--smh-accent-gold-soft) 22%, transparent);
+  --cpv-chip-text: color-mix(in srgb, var(--smh-white) 92%, transparent);
+  --cpv-link-underline: color-mix(in srgb, var(--smh-primary-magenta) 64%, var(--smh-accent-gold-soft));
+  --cpv-gold-keyline: color-mix(in srgb, var(--smh-accent-gold-soft) 22%, transparent);
+  --lth-speckle-base: color-mix(in srgb, var(--smh-accent-gold-soft) 52%, var(--smh-primary-magenta));
+}
+
+.cpv-page {
+  position: relative;
+  min-height: 100vh;
+  background: var(--cpv-page-ink);
+  color: var(--cpv-page-text);
+  padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 7vw, 4rem) clamp(4rem, 8vw, 6rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4rem, 7vw, 6.5rem);
+  overflow: hidden;
+}
+
+.cpv-hero {
+  position: relative;
+  isolation: isolate;
+  border-radius: clamp(32px, 5vw, 46px);
+  padding: clamp(3rem, 5vw, 4.5rem);
+  overflow: hidden;
+  box-shadow: var(--cpv-hero-shadow);
+  color: var(--cpv-page-text);
+}
+
+.champagne-hero-surface {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.champagne-hero-surface__gradient {
+  position: absolute;
+  inset: 0;
+  background-image: var(--cpv-hero-gradient);
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+}
+
+.champagne-hero-surface .cpv-wavefx {
+  z-index: 1;
+}
+
+.champagne-hero-surface::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: var(--cpv-hero-wave);
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+  mix-blend-mode: soft-light;
+  opacity: clamp(0.12, 0.14 + 0.06vw, 0.18);
+  filter: grayscale(1) contrast(1.04);
+  pointer-events: none;
+}
+
+.lth-hero {
+  --lth-glow-strength: 0.1;
+  --lth-speckle-opacity: 0.045;
+}
+
+.lth-hero__glow,
+.lth-hero__speckle {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+  .lth-hero__glow {
+    z-index: 2;
+    background:
+      radial-gradient(140% 120% at 50% 108%, color-mix(in srgb, var(--smh-accent-gold-soft) 14%, transparent) 0%, transparent 74%),
+      radial-gradient(120% 80% at 42% 30%, color-mix(in srgb, var(--smh-primary-magenta) 10%, transparent) 0%, transparent 88%),
+      radial-gradient(90% 70% at 62% 78%, color-mix(in srgb, var(--smh-primary-teal) 10%, transparent) 0%, transparent 100%);
+    mix-blend-mode: screen;
+    opacity: var(--lth-glow-strength);
+  }
+
+.lth-hero__speckle {
+  z-index: 3;
+  background-image:
+    radial-gradient(circle at 18% 24%, color-mix(in srgb, var(--lth-speckle-base) 72%, transparent) 0%, transparent 44%),
+    radial-gradient(circle at 72% 36%, color-mix(in srgb, var(--smh-primary-teal) 16%, transparent) 0%, transparent 48%),
+    radial-gradient(circle at 32% 78%, color-mix(in srgb, var(--smh-accent-gold-soft) 18%, transparent) 0%, transparent 46%),
+    radial-gradient(circle at 66% 72%, color-mix(in srgb, var(--smh-primary-magenta) 14%, transparent) 0%, transparent 48%);
+  background-size: 240px 240px, 300px 300px, 320px 320px, 360px 360px;
+  background-repeat: repeat;
+  mix-blend-mode: screen;
+  opacity: var(--lth-speckle-opacity);
+}
+
+.lth-hero .cpv-wavefx {
+  z-index: 2;
+}
+
+.lth-hero .container {
+  position: relative;
+  z-index: 4;
 }
 
 .cpv-hero > .container {
-  max-width: 1100px;
+  width: min(1020px, 100%);
   margin-inline: auto;
   position: relative;
   z-index: 2;
 }
 
-/* Wave layer cloned for PREVIEW (read-only, no binaries) */
 .cpv-wavefx {
   position: absolute;
   inset: 0;
-  z-index: 1;
   pointer-events: none;
-  /* wave mask/lines derived from existing public assets and tokens */
-  background-image:
-    var(--smh-wave-image, url("/brand/waves/wave-lines.webp")),
-    var(--smh-grain-image, url("/brand/textures/grain.webp"));
-  background-size: cover, 512px 512px;
-  background-repeat: no-repeat, repeat;
-  background-position: center, center;
-  /* gentle opacity & blend—Champagne law */
-  opacity: 0.12; /* ≤ 0.12 */
-  mix-blend-mode: soft-light;
+  overflow: hidden;
+  z-index: 1;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .cpv-wavefx {
-    opacity: 0.06;
-  }
-}
-
-/* Optional caustics (kept subtle; ≤ 0.10) if manifest exposes it as a var */
-.cpv-wavefx::after {
-  content: "";
+.cpv-wavefx__layer {
   position: absolute;
   inset: 0;
-  background-image: var(--smh-caustics-image, url("/brand/effects/caustics.webp"));
-  background-size: cover;
-  background-position: center;
+}
+
+.cpv-wavefx__layer video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cpv-wavefx__wave-caustics {
+  opacity: 0.16;
+  mix-blend-mode: screen;
+}
+
+.cpv-wavefx__glass-shimmer {
+  opacity: 0.12;
+  mix-blend-mode: screen;
+}
+
+.cpv-wavefx__particles-drift {
   opacity: 0.08;
+  mix-blend-mode: screen;
+}
+
+.cpv-wavefx__gold-dust {
+  opacity: 0.04;
+  mix-blend-mode: screen;
+}
+
+.cpv-wavefx__wave-mask {
+  background-image: none;
+  opacity: 0;
+}
+
+.cpv-wavefx__particles-static {
+  background-image: url('/assets/champagne/particles/home-hero-particles.webp');
+  background-size: 720px 720px;
+  background-repeat: repeat;
+  mix-blend-mode: screen;
+  opacity: 0.11;
+}
+
+.cpv-wavefx__grain {
+  background-image: url('/assets/champagne/textures/home-hero-film-grain.webp');
+  background-size: 512px 512px;
   mix-blend-mode: overlay;
+  opacity: 0.07;
 }
 
 
 .cpv-hero__inner {
   position: relative;
-  z-index: 1;
   display: flex;
-  align-items: center;
-  width: 100%;
+  justify-content: center;
 }
 
 .cpv-hero__content {
   width: 100%;
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  justify-content: center;
 }
 
 .cpv-glass {
-  background: color-mix(in oklab, var(--smh-accent-gold-soft), transparent 88%);
-  backdrop-filter: blur(6px);
-  border: 1px solid color-mix(in oklab, var(--smh-accent-gold), transparent 90%);
-  border-radius: 12px;
+  position: relative;
+  border-radius: clamp(24px, 5vw, 32px);
+    background:
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--cpv-hero-card-bg) 96%, transparent) 0%,
+        color-mix(in srgb, var(--cpv-hero-card-bg) 90%, transparent) 100%
+      ),
+      radial-gradient(140% 120% at 18% -10%, color-mix(in srgb, var(--smh-primary-magenta) 14%, transparent) 0%, transparent 58%),
+      radial-gradient(120% 120% at 82% 120%, color-mix(in srgb, var(--smh-primary-teal) 12%, transparent) 0%, transparent 76%),
+      radial-gradient(160% 120% at 50% 120%, color-mix(in srgb, var(--smh-accent-gold-soft) 12%, transparent) 0%, transparent 88%);
+  backdrop-filter: blur(26px);
+  border: 1px solid var(--cpv-hero-border);
+  box-shadow:
+    0 24px 72px color-mix(in srgb, var(--smh-ink) 52%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 14%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--smh-accent-gold-soft) 18%, transparent);
 }
 
 .cpv-hero__card {
-  padding: clamp(2rem, 5vw, 3.5rem);
-  box-shadow: 0 40px 80px color-mix(in oklab, var(--smh-ink), transparent 92%);
+  padding: clamp(2.5rem, 5vw, 3.75rem);
+  color: var(--cpv-page-text);
 }
 
 .cpv-hero__kicker {
-  font-size: var(--step--1);
-  letter-spacing: 0.08em;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid var(--cpv-chip-border);
+  background: color-mix(in srgb, var(--cpv-chip-bg) 90%, transparent);
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: color-mix(in oklab, var(--smh-text), transparent 25%);
+  color: var(--cpv-chip-text);
 }
 
 .cpv-hero__title {
-  font-size: clamp(2.5rem, 6vw, 3.75rem);
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: clamp(2.6rem, 6vw, 3.9rem);
   line-height: 1.1;
-  font-weight: 600;
+  margin: 0;
+  color: var(--cpv-page-text);
+  text-shadow: 0 8px 24px color-mix(in srgb, var(--smh-ink) 55%, transparent);
+  position: relative;
+  padding-bottom: 1.1rem;
+}
+
+.cpv-hero__title::after {
+  content: '';
+  display: block;
+  width: min(160px, 42%);
+  height: 1px;
+  margin-top: 0.85rem;
+  background: color-mix(in srgb, var(--smh-accent-gold) 18%, transparent);
+  opacity: 0.8;
 }
 
 .cpv-hero__body {
-  max-width: 48ch;
-  color: color-mix(in oklab, var(--smh-text), transparent 10%);
+  font-family: var(--font-lora, 'Lora', serif);
+  font-size: clamp(1.05rem, 2vw, 1.18rem);
+  line-height: 1.8;
+  color: var(--cpv-page-text-soft);
+  max-width: 54ch;
 }
 
-.cpv-main {
-  max-width: 1100px;
-  margin-inline: auto;
-  padding: 3rem 1.25rem;
-  display: grid;
-  gap: 2.5rem;
-}
-
-.cpv-card {
-  border-radius: 16px;
-  background: color-mix(in oklab, var(--smh-accent-gold-soft) 30%, transparent);
-  border: 1px solid color-mix(in oklab, var(--smh-accent-gold), transparent 92%);
-  backdrop-filter: blur(6px);
-  padding: 1.25rem;
-}
-
-.cpv-h2 {
-  font-family: var(--smh-heading, inherit);
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  margin: 0 0 0.75rem;
-}
-
-.cpv-list {
+.cpv-hero__body p {
   margin: 0;
-  padding-left: 1.2rem;
-  display: grid;
-  gap: 0.35rem;
 }
 
 .cpv-cta-row {
   display: flex;
-  gap: 0.75rem;
+  gap: 0.9rem;
   flex-wrap: wrap;
+}
+
+.cpv-hero__utility {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.75rem;
+}
+
+.cpv-devpill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 1.25rem 0.45rem 0.95rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: color-mix(in srgb, var(--cpv-page-text) 92%, transparent);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--smh-primary-magenta) 22%, transparent) 0%,
+    color-mix(in srgb, var(--smh-ink) 32%, transparent) 52%,
+    color-mix(in srgb, var(--smh-accent-gold-soft) 32%, transparent) 100%
+  );
+  border: 1px solid color-mix(in srgb, var(--smh-accent-gold-soft) 45%, transparent);
+  box-shadow:
+    0 16px 28px color-mix(in srgb, var(--smh-ink) 52%, transparent 68%),
+    inset 0 0 0 1px color-mix(in srgb, var(--smh-accent-gold-soft) 26%, transparent);
+  transition: transform 0.35s cubic-bezier(0.645, 0.045, 0.355, 1), box-shadow 0.35s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.cpv-devpill__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.18rem 0.6rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--smh-accent-gold) 42%, transparent);
+  color: color-mix(in srgb, var(--smh-ink) 78%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--smh-ink) 18%, transparent);
+}
+
+.cpv-devpill:hover,
+.cpv-devpill:focus-visible {
+  transform: translateY(-1px);
+  box-shadow:
+    0 18px 32px color-mix(in srgb, var(--smh-accent-gold-soft) 32%, transparent 68%),
+    inset 0 0 0 1px color-mix(in srgb, var(--smh-accent-gold) 32%, transparent);
+}
+
+.cpv-devpill:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--smh-accent-gold) 40%, transparent);
+  outline-offset: 3px;
 }
 
 .cpv-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.65rem 1rem;
+  gap: 0.35rem;
   border-radius: 999px;
+  padding: 0.75rem 1.75rem;
+  font-family: var(--font-inter, 'Inter', sans-serif);
+  font-size: 0.92rem;
   font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   text-decoration: none;
-  transition: transform 0.2s ease;
+  transition: transform 0.4s cubic-bezier(0.645, 0.045, 0.355, 1), box-shadow 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  border: 1px solid transparent;
 }
 
 .cpv-btn:focus-visible {
-  outline: 2px solid var(--smh-accent-gold);
-  outline-offset: 2px;
-}
-
-.cpv-btn:hover {
-  transform: translateY(-1px);
+  outline: 2px solid color-mix(in srgb, var(--smh-accent-gold) 32%, transparent);
+  outline-offset: 3px;
 }
 
 .cpv-btn-solid {
-  color: var(--smh-ink);
-  background: color-mix(in oklab, var(--smh-accent-gold) 82%, var(--smh-accent-gold-soft));
-  border: 1px solid color-mix(in oklab, var(--smh-accent-gold), transparent 85%);
+  background: linear-gradient(
+    135deg,
+    var(--smh-primary-magenta) 0%,
+    var(--smh-primary-teal) 60%,
+    var(--smh-accent-gold) 100%
+  );
+  color: var(--cpv-page-text);
+  border-color: color-mix(in srgb, var(--smh-accent-gold-soft) 36%, transparent);
+  box-shadow: 0 16px 32px color-mix(in srgb, var(--smh-primary-magenta) 35%, transparent 72%);
 }
 
 .cpv-btn-outline {
-  color: var(--smh-text);
-  background: transparent;
-  border: 1px solid color-mix(in oklab, var(--smh-text), transparent 60%);
+  background: color-mix(in srgb, transparent 92%, var(--cpv-card-bg));
+  color: var(--cpv-page-text);
+  border-color: color-mix(in srgb, var(--smh-primary-teal) 26%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--smh-primary-teal) 18%, transparent);
 }
 
-@media (min-width: 1024px) {
-  .cpv-hero__content {
-    max-width: 52rem;
+.cpv-btn:hover {
+  transform: translateY(-1px) scale(1.01);
+}
+
+.cpv-btn:active {
+  transform: translateY(0) scale(0.99);
+}
+
+.cpv-main {
+  width: min(1120px, 100%);
+  margin-inline: auto;
+  display: grid;
+  gap: clamp(5.2rem, 9vw, 8rem);
+}
+
+  .cpv-card {
+    position: relative;
+    border-radius: clamp(22px, 4vw, 28px);
+    background: var(--cpv-card-gradient);
+    border: 1px solid var(--cpv-card-border);
+    backdrop-filter: blur(18px);
+    box-shadow:
+      var(--cpv-card-shadow),
+      inset 0 1px 0 color-mix(in srgb, var(--smh-white) 10%, transparent),
+      inset 0 0 0 1px color-mix(in srgb, var(--smh-accent-gold-soft) 12%, transparent);
+    overflow: hidden;
+  }
+
+  .cpv-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(130% 120% at 18% -10%, color-mix(in srgb, var(--smh-accent-gold-soft) 22%, transparent) 0%, transparent 64%);
+    opacity: 0.12;
+    pointer-events: none;
+    mix-blend-mode: screen;
+  }
+
+  .cpv-card::after {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    border-radius: inherit;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--smh-white) 8%, transparent) 0%, transparent 100%);
+    mix-blend-mode: screen;
+    opacity: 0.08;
+    pointer-events: none;
+  }
+
+.cpv-card[data-tone='bright'] {
+  background: var(--cpv-card-gradient);
+  border-color: color-mix(in srgb, var(--smh-accent-gold-soft) 24%, transparent);
+}
+
+.cpv-card__inner {
+  position: relative;
+  z-index: 1;
+  padding: clamp(2.6rem, 4.8vw, 3.4rem);
+  display: grid;
+  gap: clamp(2.05rem, 3.4vw, 2.4rem);
+}
+
+.cpv-card__eyebrow {
+  margin: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--cpv-page-text) 72%, transparent);
+}
+
+.cpv-card__title {
+  margin: 0;
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: clamp(1.75rem, 3.6vw, 2.6rem);
+  font-weight: 600;
+  color: var(--cpv-page-text);
+  text-shadow: 0 12px 28px color-mix(in srgb, var(--smh-ink) 55%, transparent 68%);
+}
+
+.cpv-card__lead {
+  font-family: var(--font-lora, 'Lora', serif);
+  font-size: 1rem;
+  line-height: 1.82;
+  color: var(--cpv-page-text-soft);
+}
+
+.cpv-card__lead p {
+  margin: 0;
+}
+
+.cpv-list {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+  list-style: none;
+  color: var(--cpv-page-text);
+}
+
+.cpv-list li {
+  position: relative;
+  padding-left: 1.65rem;
+  font-family: var(--font-lora, 'Lora', serif);
+  line-height: 1.7;
+}
+
+.cpv-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--smh-accent-gold-soft) 80%, transparent);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--smh-accent-gold-soft) 58%, transparent);
+}
+
+.cpv-card[data-tone='bright'] .cpv-list li::before {
+  background: color-mix(in srgb, var(--smh-primary-teal) 68%, transparent);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--smh-primary-teal) 52%, transparent);
+}
+
+.cpv-card .cpv-list li span {
+  color: var(--cpv-page-text-soft);
+}
+
+.cpv-card__inner > :last-child {
+  margin-bottom: 0;
+}
+
+.cpv-card__inner > .cpv-cta-row {
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .cpv-hero {
+    border-radius: 28px;
+    padding: clamp(2.4rem, 7vw, 3rem);
+  }
+
+  .cpv-glass {
+    border-radius: 24px;
+  }
+
+  .cpv-hero__card {
+    padding: clamp(1.9rem, 6vw, 2.6rem);
+  }
+
+  .cpv-hero__utility {
+    justify-content: flex-start;
   }
 }
 
-.cpv-btn-outline:hover {
-  transform: translateY(-1px);
+@media (prefers-reduced-motion: reduce) {
+  .cpv-wavefx__wave-caustics,
+  .cpv-wavefx__glass-shimmer,
+  .cpv-wavefx__particles-drift,
+  .cpv-wavefx__gold-dust {
+    display: none;
+  }
+
+  .cpv-wavefx__layer video {
+    display: none;
+  }
+
+  .cpv-btn {
+    transition: none;
+  }
+}
+
+.cpv-cta-row .cpv-btn-outline {
+  text-decoration: underline;
+  text-decoration-color: var(--cpv-link-underline);
+  text-underline-offset: 0.35em;
+}
+
+.cpv-cta-row .cpv-btn-outline:hover {
+  text-decoration-color: color-mix(in srgb, var(--smh-accent-gold) 42%, transparent);
+}
+
+.cpv-cta-row .cpv-btn-solid:hover {
+  box-shadow: 0 22px 44px color-mix(in srgb, var(--smh-primary-magenta) 38%, transparent 68%);
+}
+
+.cpv-cta-row .cpv-btn-outline:focus-visible,
+.cpv-cta-row .cpv-btn-solid:focus-visible {
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--smh-accent-gold) 35%, transparent);
+}
+
+.cpv-card :is(p, li) a {
+  color: color-mix(in srgb, var(--smh-accent-gold-soft) 75%, transparent);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--smh-accent-gold-soft) 40%, transparent);
+  text-underline-offset: 0.25em;
+}
+
+.cpv-card :is(p, li) a:hover {
+  text-decoration-color: color-mix(in srgb, var(--smh-accent-gold) 48%, transparent);
+}
+
+.cpv-slot {
+  border-radius: 18px;
+  border: 1px dashed color-mix(in srgb, var(--cpv-page-text) 28%, transparent);
+  background: color-mix(in srgb, var(--cpv-card-bg) 82%, transparent);
+  padding: clamp(1.75rem, 3vw, 2.5rem);
+  text-align: center;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--cpv-page-text-soft) 90%, transparent);
+}
+
+.cpv-note {
+  margin: 0;
+  font-size: 0.9rem;
+  color: color-mix(in srgb, var(--cpv-page-text-soft) 94%, transparent);
+}
+
+.cpv-grid {
+  display: grid;
+  gap: clamp(1.4rem, 2.5vw, 1.9rem);
+}
+
+.cpv-grid--three {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.cpv-subcard {
+  border-radius: 18px;
+  border: 1px solid color-mix(in srgb, var(--cpv-card-border) 56%, transparent);
+  background: var(--cpv-card-gradient);
+  padding: clamp(1.6rem, 3vw, 2rem);
+  display: grid;
+  gap: 0.9rem;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 8%, transparent),
+    0 18px 42px color-mix(in srgb, var(--smh-ink) 36%, transparent);
+  backdrop-filter: blur(16px);
+}
+
+.cpv-subcard__title {
+  margin: 0;
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: 1.15rem;
+  color: var(--cpv-page-text);
+}
+
+.cpv-subcard__body {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: var(--cpv-page-text-soft);
+}
+
+.cpv-subcard__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  color: var(--cpv-page-text-soft);
+}
+
+.cpv-subcard__list li {
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.cpv-subcard__list li::before {
+  content: '•';
+  font-size: 0.9rem;
+  color: color-mix(in srgb, var(--smh-accent-gold-soft) 70%, transparent);
+}
+
+.cpv-faq {
+  display: grid;
+  gap: clamp(1.2rem, 2.2vw, 1.8rem);
+}
+
+.cpv-faq__item {
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--cpv-card-border) 56%, transparent);
+  background: var(--cpv-card-gradient);
+  padding: clamp(1.5rem, 3vw, 1.9rem);
+  display: grid;
+  gap: 0.6rem;
+}
+
+.cpv-faq__question {
+  margin: 0;
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: 1.1rem;
+  color: var(--cpv-page-text);
+}
+
+.cpv-faq__answer {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--cpv-page-text-soft);
+}
+
+.cpv-linkcard {
+  display: grid;
+  gap: 0.6rem;
+  padding: clamp(1.4rem, 3vw, 1.9rem);
+  border-radius: 18px;
+  border: 1px solid color-mix(in srgb, var(--cpv-card-border) 56%, transparent);
+  background: var(--cpv-card-gradient);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.4s cubic-bezier(0.645, 0.045, 0.355, 1), box-shadow 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.cpv-linkcard:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 18px 36px color-mix(in srgb, var(--smh-accent-gold-soft) 34%, transparent);
+}
+
+.cpv-linkcard__title {
+  margin: 0;
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: 1.1rem;
+  color: var(--cpv-page-text);
+}
+
+.cpv-linkcard__summary {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--cpv-page-text-soft);
+}
+
+.cpv-grid--links {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.cpv-grid--two {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.cpv-breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: color-mix(in srgb, var(--cpv-page-text-soft) 92%, transparent);
+}
+
+.cpv-breadcrumb a {
+  color: color-mix(in srgb, var(--cpv-page-text) 92%, transparent);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--cpv-link-underline) 70%, transparent);
+  text-underline-offset: 0.25em;
+}
+
+.cpv-breadcrumb a:hover {
+  text-decoration-color: color-mix(in srgb, var(--smh-accent-gold) 48%, transparent);
+}
+
+.cpv-breadcrumb__divider {
+  color: color-mix(in srgb, var(--cpv-page-text-soft) 70%, transparent);
 }

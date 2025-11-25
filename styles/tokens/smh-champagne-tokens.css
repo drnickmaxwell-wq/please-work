@@ -32,6 +32,7 @@
   --smh-primary-magenta: var(--brand-magenta);
   --smh-primary-teal: var(--brand-teal);
   --smh-accent-gold: var(--brand-gold);
+  --smh-accent-gold-soft: color-mix(in srgb, var(--brand-gold) 65%, white 35%);
   --smh-gold: var(--brand-gold);
   --champagne-keyline-gold: var(--brand-gold-keyline);
 

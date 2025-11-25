@@ -1,79 +1,84 @@
 export const dynamic = 'force-static';
 export const revalidate = 0;
 
+import type { Metadata } from 'next';
 import '@/styles/preview/champagne-preview.css';
+import Link from 'next/link';
 
-import ChampagnePreviewHero from '@/components/preview/ChampagnePreviewHero';
+import LuxeTreatmentHero from '@/components/treatments/LuxeTreatmentHero';
 import { KeyList, Section } from '@/components/preview/PreviewBlocks';
+import { previewRobots } from '@/lib/seo/preview/previewRobots';
+
+export const metadata: Metadata = {
+  robots: previewRobots,
+};
+
+const highlights = [
+  'Featherlight porcelain mirroring natural enamel texture',
+  'Digital smile design previews to perfect harmony',
+  'Hue-matched ceramics for a seamless Champagne finish',
+  'Aftercare rituals that keep veneers radiant for years',
+];
+
+const journey = [
+  'Discovery consultation — lifestyle, goals, and luminosity mapping',
+  'Design refinement — digital planning and wax-up artistry',
+  'Preparation day — minimal enamel sculpting with couture temporaries',
+  'Final placement — bespoke porcelain bonded and polished to a soft-gold sheen',
+];
+
+const candidacy = [
+  'Healthy gums with commitment to routine reviews',
+  'Desire to refine proportion, shade, or alignment',
+  'Prepared to follow personalised veneer care guidance',
+  'Seeking a confident, camera-ready smile finish',
+];
 
 export default function VeneersPreviewPage() {
   return (
     <div className="cpv-page">
-      <ChampagnePreviewHero
-        kicker="Treatments preview"
+      <LuxeTreatmentHero
+        variant="veneers"
+        eyebrow="Treatments preview"
         title="Porcelain veneers in Shoreham-by-Sea"
-        ctas={
-          <div className="cpv-cta-row">
-            <a className="cpv-btn cpv-btn-solid" href="/contact">
-              Reserve a consultation
-            </a>
-            <a className="cpv-btn cpv-btn-outline" href="/treatments">
-              View all treatments
-            </a>
-          </div>
-        }
-      >
-        <p>Digital artistry and handcrafted ceramics transform every smile with luminous balance.</p>
-      </ChampagnePreviewHero>
+        description="Soft dusk gradients, Champagne shimmer, and balanced glass cards give you a safe playground to refine veneer copy, schema, and interactive elements before production."
+        primaryCta={{ label: 'Reserve a consultation', href: '/contact' }}
+        secondaryCta={{ label: 'View all treatments', href: '/treatments' }}
+      />
 
       <main className="cpv-main" role="main">
-        <Section title="3D veneer visualiser">
-          <div className="cpv-card" aria-label="3D viewer slot">
+        <Section
+          title="3D veneer visualiser"
+          description={<p>Drop in your smile design mock-up or before/after slider to preview veneer transformations.</p>}
+        >
+          <div className="cpv-slot" aria-label="3D veneer viewer slot">
             3D VIEWER SLOT (placeholder)
           </div>
         </Section>
 
         <Section title="Why guests love veneers">
-          <KeyList
-            items={[
-              'Featherlight porcelain layers that mirror natural enamel',
-              'Digital smile design previews ensure shape and proportion feel right',
-              'Colour harmonised to neighbouring teeth for luminous balance',
-              'Guided aftercare keeps veneers radiant for the long term',
-            ]}
-          />
+          <KeyList items={highlights} />
         </Section>
 
         <Section title="The veneer journey">
-          <KeyList
-            items={[
-              'Discovery consultation — share goals, facial analysis, and preview mock-ups',
-              'Design refinement — digital planning and wax-ups perfect every contour',
-              'Preparation day — minimal enamel shaping with beautifully crafted temporaries',
-              'Final placement — bespoke porcelain bonded and polished to a champagne sheen',
-            ]}
-          />
+          <KeyList items={journey} />
         </Section>
 
         <Section title="Are veneers right for you?">
-          <KeyList
-            items={[
-              'Healthy gums and commitment to consistent hygiene visits',
-              'Desire to enhance colour, symmetry, or alignment',
-              'Ready to follow personalised veneer care guidance',
-              'Looking for a confident, camera-ready smile finish',
-            ]}
-          />
+          <KeyList items={candidacy} />
         </Section>
 
-        <Section title="Plan your veneer consultation">
+        <Section
+          title="Plan your veneer consultation"
+          description={<p>Experiment with CTA language, waitlist logic, or concierge flows here.</p>}
+        >
           <div className="cpv-cta-row">
-            <a className="cpv-btn cpv-btn-solid" href="/contact">
+            <Link className="cpv-btn cpv-btn-solid" href="/contact">
               Book a consultation
-            </a>
-            <a className="cpv-btn cpv-btn-outline" href="/treatments">
+            </Link>
+            <Link className="cpv-btn cpv-btn-outline" href="/treatments">
               View all treatments
-            </a>
+            </Link>
           </div>
         </Section>
       </main>

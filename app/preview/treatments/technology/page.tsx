@@ -1,18 +1,27 @@
-// Preview-only clone. No hard hexes. Do not edit production pages.
+import type { Metadata } from 'next';
 import Link from 'next/link';
 
-import TreatmentBanner from '@/components/preview/TreatmentBanner';
-import '@/styles/treatments/preview-light.css';
+import '@/styles/preview/champagne-preview.css';
+
+import LuxeTreatmentHero from '@/components/treatments/LuxeTreatmentHero';
+import { Section } from '@/components/preview/PreviewBlocks';
+import { previewRobots } from '@/lib/seo/preview/previewRobots';
+
+export const metadata: Metadata = {
+  robots: previewRobots,
+};
 
 const workflowSteps = [
   {
     title: 'Digital scan',
-    description: 'Micron-level 3D scanning replaces impressions, capturing every contour with gentle, contactless mapping.',
+    description:
+      'Micron-level 3D scanning replaces impressions, capturing every contour with gentle, contactless mapping.',
     timeline: ['5 minute scan', 'No moulds', 'Instant preview'],
   },
   {
     title: 'Design in motion',
-    description: 'Designers co-create your smile in real-time, blending anatomy, bite, and facial harmony under studio lighting.',
+    description:
+      'Designers co-create your smile in real-time, blending anatomy, bite, and facial harmony under studio lighting.',
     timeline: ['Shade matching', 'Texture overlays', 'Your approval'],
   },
   {
@@ -60,128 +69,83 @@ const technologyFaq = [
 
 export default function TechnologyPreviewPage() {
   return (
-    <main className="min-h-screen bg-[var(--champagne-surface)] text-[var(--champagne-ink)]">
-      <div className="mx-auto flex max-w-5xl flex-col gap-12 px-6 py-16">
-        <nav aria-label="Breadcrumb" className="text-sm">
-          <ol className="flex flex-wrap items-center gap-2 text-[var(--champagne-ink-muted)]">
-            <li>
-              <Link className="underline-offset-4 hover:underline" href="/preview">
-                Preview
-              </Link>
-            </li>
-            <li aria-hidden="true">/</li>
-            <li>
-              <Link className="underline-offset-4 hover:underline" href="/preview/treatments">
-                Treatments
-              </Link>
-            </li>
-            <li aria-hidden="true">/</li>
-            <li aria-current="page" className="font-medium text-[var(--champagne-ink)]">
-              Technology
-            </li>
-          </ol>
-        </nav>
+    <div className="cpv-page">
+      <LuxeTreatmentHero
+        variant="technology"
+        eyebrow="Treatments preview"
+        title="Precision technology, calmer appointments"
+        description="Guided implants, 3D printing, and laser refinements live inside the same dusk-to-teal Champagne hero system used on the home page—perfect for previewing interactive modules and copy."
+        primaryCta={{ label: 'Book a technology tour', href: '/contact' }}
+        secondaryCta={{ label: 'View all treatments', href: '/treatments' }}
+      />
 
-        <TreatmentBanner
-          label="Treatments"
-          subtitle="Guided implants, 3D printing, and laser refinements make every appointment efficient and comfortable while delivering studio-ready results."
-          title="Precision technology, calmer appointments"
-        />
-
-        <section className="t-section rounded-3xl p-8 shadow-sm">
-          <div className="flex flex-col gap-6">
-            <h2 className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
-              Our digital workflow
-            </h2>
-            <div className="grid gap-6 md:grid-cols-3">
-              {workflowSteps.map((step) => (
-                <article key={step.title} className="t-card h-full p-6">
-                  <h3 className="text-lg font-semibold" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
-                    {step.title}
-                  </h3>
-                  <p className="mt-3 leading-relaxed t-muted">{step.description}</p>
-                  <ul className="mt-4 space-y-2 text-sm leading-relaxed t-muted">
-                    {step.timeline.map((item) => (
-                      <li key={item} className="flex gap-2">
-                        <span aria-hidden="true">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              ))}
-            </div>
+      <main className="cpv-main" role="main">
+        <Section
+          title="Our digital workflow"
+          description={<p>Showcase each stage with production-ready language or swap in component experiments.</p>}
+        >
+          <div className="cpv-grid cpv-grid--three">
+            {workflowSteps.map((step) => (
+              <article key={step.title} className="cpv-subcard">
+                <h3 className="cpv-subcard__title">{step.title}</h3>
+                <p className="cpv-subcard__body">{step.description}</p>
+                <ul className="cpv-subcard__list">
+                  {step.timeline.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
           </div>
-        </section>
+        </Section>
 
-        <section className="t-section rounded-3xl p-8 shadow-sm">
-          <div className="flex flex-col gap-6">
-            <h2 className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
-              Equipment gallery
-            </h2>
-            <div className="grid gap-6 md:grid-cols-3">
-              {equipmentShowcase.map((item) => (
-                <article key={item.title} className="t-card h-full p-6">
-                  <h3 className="text-lg font-semibold" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 leading-relaxed t-muted">{item.description}</p>
-                  <ul className="mt-4 space-y-2 text-sm leading-relaxed t-muted">
-                    {item.notes.map((note) => (
-                      <li key={note} className="flex gap-2">
-                        <span aria-hidden="true">•</span>
-                        <span>{note}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              ))}
-            </div>
+        <Section
+          title="Equipment gallery"
+          description={<p>Embed photography or short clips here; the subcards below provide quick reference copy.</p>}
+        >
+          <div className="cpv-grid cpv-grid--three">
+            {equipmentShowcase.map((item) => (
+              <article key={item.title} className="cpv-subcard">
+                <h3 className="cpv-subcard__title">{item.title}</h3>
+                <p className="cpv-subcard__body">{item.description}</p>
+                <ul className="cpv-subcard__list">
+                  {item.notes.map((note) => (
+                    <li key={note}>{note}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
           </div>
-        </section>
+        </Section>
 
-        <section className="t-section rounded-3xl p-8 shadow-sm">
-          <div className="flex flex-col gap-6">
-            <h2 className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
-              Technology FAQs
-            </h2>
-            <div className="space-y-4">
-              {technologyFaq.map((faq) => (
-                <article key={faq.question} className="t-card p-6">
-                  <h3 className="text-lg font-semibold" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
-                    {faq.question}
-                  </h3>
-                  <p className="mt-3 leading-relaxed t-muted">{faq.answer}</p>
-                </article>
-              ))}
-            </div>
+        <Section
+          title="Technology FAQs"
+          description={<p>Pair these placeholders with schema tests, accordion variants, or AI-generated responses.</p>}
+        >
+          <div className="cpv-faq">
+            {technologyFaq.map((faq) => (
+              <article key={faq.question} className="cpv-faq__item">
+                <h3 className="cpv-faq__question">{faq.question}</h3>
+                <p className="cpv-faq__answer">{faq.answer}</p>
+              </article>
+            ))}
           </div>
-        </section>
+        </Section>
 
-        <section className="t-section rounded-3xl p-8 shadow-sm">
-          <div className="flex flex-col gap-4">
-            <h2 className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
-              See the suite in person
-            </h2>
-            <p className="max-w-3xl leading-relaxed t-muted">
-              Arrange a tour to experience scanning, smile design, and laser finishing first-hand, and tailor a treatment plan to
-              your goals.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link className="rounded-full border border-[var(--champagne-keyline)] px-6 py-3 text-sm font-semibold"
-                href="/contact"
-              >
-                Book a technology tour
-              </Link>
-              <Link className="rounded-full border border-[var(--champagne-keyline)] px-6 py-3 text-sm font-semibold"
-                href="/treatments"
-              >
-                View all treatments
-              </Link>
-            </div>
+        <Section
+          title="See the suite in person"
+          description={<p>Adapt this CTA pair for concierge workflows, automation tests, or data capture experiments.</p>}
+        >
+          <div className="cpv-cta-row">
+            <Link className="cpv-btn cpv-btn-solid" href="/contact">
+              Book a technology tour
+            </Link>
+            <Link className="cpv-btn cpv-btn-outline" href="/treatments">
+              View all treatments
+            </Link>
           </div>
-        </section>
-      </div>
-    </main>
+        </Section>
+      </main>
+    </div>
   );
 }
