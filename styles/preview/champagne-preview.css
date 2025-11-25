@@ -6,15 +6,9 @@
   --cpv-page-text-soft: color-mix(in srgb, var(--smh-text-on-dark) 84%, transparent);
   --cpv-hero-gradient: linear-gradient(
     135deg,
-    color-mix(in srgb, var(--smh-magenta) 92%, transparent) 0%,
-    color-mix(in srgb, var(--smh-teal) 85%, transparent) 55%,
-    color-mix(in srgb, var(--smh-soft-gold) 75%, transparent) 100%
-  );
-  --cpv-hero-gradient-dusk: linear-gradient(
-    135deg,
-    color-mix(in srgb, var(--smh-magenta) 78%, var(--smh-ink) 22%) 0%,
-    color-mix(in srgb, var(--smh-teal) 72%, var(--smh-ink) 28%) 58%,
-    color-mix(in srgb, var(--smh-soft-gold) 68%, var(--smh-ink) 32%) 100%
+    color-mix(in srgb, var(--smh-magenta) 82%, var(--smh-ink) 18%) 0%,
+    color-mix(in srgb, var(--smh-teal) 76%, var(--smh-ink) 24%) 55%,
+    color-mix(in srgb, var(--smh-soft-gold) 70%, var(--smh-ink) 30%) 100%
   );
   --cpv-hero-wave: url('/brand/waves-bg-1920.webp');
   --cpv-hero-card-bg: color-mix(in srgb, var(--smh-ink) 14%, transparent);
@@ -33,8 +27,8 @@
   --cpv-card-shadow: 0 28px 78px color-mix(in srgb, var(--smh-ink) 42%, transparent);
   --cpv-chip-bg: color-mix(in srgb, var(--smh-ink) 94%, transparent);
   --cpv-chip-border: color-mix(in srgb, var(--smh-soft-gold) 22%, transparent);
-  --cpv-chip-text: color-mix(in srgb, var(--smh-white) 92%, transparent);
-  --cpv-link-underline: color-mix(in srgb, var(--smh-primary-magenta) 64%, var(--smh-accent-gold-soft));
+  --cpv-chip-text: color-mix(in srgb, var(--smh-text-on-dark) 92%, transparent);
+  --cpv-link-underline: color-mix(in srgb, var(--smh-magenta) 64%, var(--smh-soft-gold));
   --cpv-gold-keyline: color-mix(in srgb, var(--smh-soft-gold) 22%, transparent);
   --lth-speckle-base: color-mix(in srgb, var(--smh-soft-gold) 52%, var(--smh-magenta));
 }
@@ -114,9 +108,9 @@
   .lth-hero__glow {
     z-index: 2;
     background:
-      radial-gradient(140% 120% at 50% 108%, color-mix(in srgb, var(--smh-accent-gold-soft) 14%, transparent) 0%, transparent 74%),
-      radial-gradient(120% 80% at 42% 30%, color-mix(in srgb, var(--smh-primary-magenta) 10%, transparent) 0%, transparent 88%),
-      radial-gradient(90% 70% at 62% 78%, color-mix(in srgb, var(--smh-primary-teal) 10%, transparent) 0%, transparent 100%);
+      radial-gradient(140% 120% at 50% 108%, color-mix(in srgb, var(--smh-soft-gold) 14%, transparent) 0%, transparent 74%),
+      radial-gradient(120% 80% at 42% 30%, color-mix(in srgb, var(--smh-magenta) 10%, transparent) 0%, transparent 88%),
+      radial-gradient(90% 70% at 62% 78%, color-mix(in srgb, var(--smh-teal) 10%, transparent) 0%, transparent 100%);
     mix-blend-mode: screen;
     opacity: var(--lth-glow-strength);
   }
@@ -125,9 +119,9 @@
   z-index: 3;
   background-image:
     radial-gradient(circle at 18% 24%, color-mix(in srgb, var(--lth-speckle-base) 72%, transparent) 0%, transparent 44%),
-    radial-gradient(circle at 72% 36%, color-mix(in srgb, var(--smh-primary-teal) 16%, transparent) 0%, transparent 48%),
-    radial-gradient(circle at 32% 78%, color-mix(in srgb, var(--smh-accent-gold-soft) 18%, transparent) 0%, transparent 46%),
-    radial-gradient(circle at 66% 72%, color-mix(in srgb, var(--smh-primary-magenta) 14%, transparent) 0%, transparent 48%);
+    radial-gradient(circle at 72% 36%, color-mix(in srgb, var(--smh-teal) 16%, transparent) 0%, transparent 48%),
+    radial-gradient(circle at 32% 78%, color-mix(in srgb, var(--smh-soft-gold) 18%, transparent) 0%, transparent 46%),
+    radial-gradient(circle at 66% 72%, color-mix(in srgb, var(--smh-magenta) 14%, transparent) 0%, transparent 48%);
   background-size: 240px 240px, 300px 300px, 320px 320px, 360px 360px;
   background-repeat: repeat;
   mix-blend-mode: screen;
@@ -231,15 +225,15 @@
       color-mix(in srgb, var(--cpv-hero-card-bg) 92%, transparent) 0%,
       color-mix(in srgb, var(--cpv-hero-card-bg) 86%, transparent) 100%
     ),
-    radial-gradient(140% 120% at 18% -10%, color-mix(in srgb, var(--smh-primary-magenta) 18%, transparent) 0%, transparent 58%),
-    radial-gradient(120% 120% at 82% 120%, color-mix(in srgb, var(--smh-primary-teal) 18%, transparent) 0%, transparent 76%),
-    radial-gradient(160% 120% at 50% 120%, color-mix(in srgb, var(--smh-accent-gold-soft) 16%, transparent) 0%, transparent 88%);
+    radial-gradient(140% 120% at 18% -10%, color-mix(in srgb, var(--smh-magenta) 18%, transparent) 0%, transparent 58%),
+    radial-gradient(120% 120% at 82% 120%, color-mix(in srgb, var(--smh-teal) 18%, transparent) 0%, transparent 76%),
+    radial-gradient(160% 120% at 50% 120%, color-mix(in srgb, var(--smh-soft-gold) 16%, transparent) 0%, transparent 88%);
   backdrop-filter: blur(26px);
   border: 1px solid var(--cpv-hero-border);
   box-shadow:
     0 24px 72px color-mix(in srgb, var(--smh-ink) 52%, transparent),
-    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 14%, transparent),
-    inset 0 0 0 1px color-mix(in srgb, var(--smh-accent-gold-soft) 18%, transparent);
+    inset 0 1px 0 color-mix(in srgb, var(--smh-text-on-dark) 14%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--smh-soft-gold) 18%, transparent);
 }
 
 .cpv-hero__card {
@@ -277,7 +271,7 @@
   width: min(160px, 42%);
   height: 1px;
   margin-top: 0.85rem;
-  background: color-mix(in srgb, var(--smh-accent-gold) 18%, transparent);
+  background: color-mix(in srgb, var(--smh-gold) 18%, transparent);
   opacity: 0.8;
 }
 
@@ -319,14 +313,14 @@
   color: color-mix(in srgb, var(--cpv-page-text) 92%, transparent);
   background: linear-gradient(
     135deg,
-    color-mix(in srgb, var(--smh-primary-magenta) 22%, transparent) 0%,
+    color-mix(in srgb, var(--smh-magenta) 22%, transparent) 0%,
     color-mix(in srgb, var(--smh-ink) 32%, transparent) 52%,
-    color-mix(in srgb, var(--smh-accent-gold-soft) 32%, transparent) 100%
+    color-mix(in srgb, var(--smh-soft-gold) 32%, transparent) 100%
   );
-  border: 1px solid color-mix(in srgb, var(--smh-accent-gold-soft) 45%, transparent);
+  border: 1px solid color-mix(in srgb, var(--smh-soft-gold) 45%, transparent);
   box-shadow:
     0 16px 28px color-mix(in srgb, var(--smh-ink) 52%, transparent 68%),
-    inset 0 0 0 1px color-mix(in srgb, var(--smh-accent-gold-soft) 26%, transparent);
+    inset 0 0 0 1px color-mix(in srgb, var(--smh-soft-gold) 26%, transparent);
   transition: transform 0.35s cubic-bezier(0.645, 0.045, 0.355, 1), box-shadow 0.35s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
@@ -336,7 +330,7 @@
   justify-content: center;
   padding: 0.18rem 0.6rem;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--smh-accent-gold) 42%, transparent);
+  background: color-mix(in srgb, var(--smh-gold) 42%, transparent);
   color: color-mix(in srgb, var(--smh-ink) 78%, transparent);
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--smh-ink) 18%, transparent);
 }
@@ -345,12 +339,12 @@
 .cpv-devpill:focus-visible {
   transform: translateY(-1px);
   box-shadow:
-    0 18px 32px color-mix(in srgb, var(--smh-accent-gold-soft) 32%, transparent 68%),
-    inset 0 0 0 1px color-mix(in srgb, var(--smh-accent-gold) 32%, transparent);
+    0 18px 32px color-mix(in srgb, var(--smh-soft-gold) 32%, transparent 68%),
+    inset 0 0 0 1px color-mix(in srgb, var(--smh-gold) 32%, transparent);
 }
 
 .cpv-devpill:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--smh-accent-gold) 40%, transparent);
+  outline: 2px solid color-mix(in srgb, var(--smh-gold) 40%, transparent);
   outline-offset: 3px;
 }
 
@@ -372,27 +366,27 @@
 }
 
 .cpv-btn:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--smh-accent-gold) 32%, transparent);
+  outline: 2px solid color-mix(in srgb, var(--smh-gold) 32%, transparent);
   outline-offset: 3px;
 }
 
 .cpv-btn-solid {
   background: linear-gradient(
     135deg,
-    var(--smh-primary-magenta) 0%,
-    var(--smh-primary-teal) 60%,
-    var(--smh-accent-gold) 100%
+    var(--smh-magenta) 0%,
+    var(--smh-teal) 60%,
+    var(--smh-gold) 100%
   );
   color: var(--cpv-page-text);
-  border-color: color-mix(in srgb, var(--smh-accent-gold-soft) 36%, transparent);
-  box-shadow: 0 16px 32px color-mix(in srgb, var(--smh-primary-magenta) 35%, transparent 72%);
+  border-color: color-mix(in srgb, var(--smh-soft-gold) 36%, transparent);
+  box-shadow: 0 16px 32px color-mix(in srgb, var(--smh-magenta) 35%, transparent 72%);
 }
 
 .cpv-btn-outline {
   background: color-mix(in srgb, transparent 92%, var(--cpv-card-bg));
   color: var(--cpv-page-text);
-  border-color: color-mix(in srgb, var(--smh-primary-teal) 26%, transparent);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--smh-primary-teal) 18%, transparent);
+  border-color: color-mix(in srgb, var(--smh-teal) 26%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--smh-teal) 18%, transparent);
 }
 
 .cpv-btn:hover {
@@ -418,8 +412,8 @@
     backdrop-filter: blur(18px);
     box-shadow:
       var(--cpv-card-shadow),
-      inset 0 1px 0 color-mix(in srgb, var(--smh-white) 10%, transparent),
-      inset 0 0 0 1px color-mix(in srgb, var(--smh-accent-gold-soft) 12%, transparent);
+      inset 0 1px 0 color-mix(in srgb, var(--smh-text-on-dark) 10%, transparent),
+      inset 0 0 0 1px color-mix(in srgb, var(--smh-soft-gold) 12%, transparent);
     overflow: hidden;
   }
 
@@ -427,7 +421,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(130% 120% at 18% -10%, color-mix(in srgb, var(--smh-accent-gold-soft) 22%, transparent) 0%, transparent 64%);
+    background: radial-gradient(130% 120% at 18% -10%, color-mix(in srgb, var(--smh-soft-gold) 22%, transparent) 0%, transparent 64%);
     opacity: 0.12;
     pointer-events: none;
     mix-blend-mode: screen;
@@ -438,7 +432,7 @@
     position: absolute;
     inset: 1px;
     border-radius: inherit;
-    background: linear-gradient(180deg, color-mix(in srgb, var(--smh-white) 8%, transparent) 0%, transparent 100%);
+    background: linear-gradient(180deg, color-mix(in srgb, var(--smh-text-on-dark) 8%, transparent) 0%, transparent 100%);
     mix-blend-mode: screen;
     opacity: 0.08;
     pointer-events: none;
@@ -446,7 +440,7 @@
 
 .cpv-card[data-tone='bright'] {
   background: var(--cpv-card-gradient);
-  border-color: color-mix(in srgb, var(--smh-accent-gold-soft) 24%, transparent);
+  border-color: color-mix(in srgb, var(--smh-soft-gold) 24%, transparent);
 }
 
 .cpv-card__inner {
@@ -509,13 +503,13 @@
   width: 0.55rem;
   height: 0.55rem;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--smh-accent-gold-soft) 80%, transparent);
-  box-shadow: 0 0 12px color-mix(in srgb, var(--smh-accent-gold-soft) 58%, transparent);
+  background: color-mix(in srgb, var(--smh-soft-gold) 80%, transparent);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--smh-soft-gold) 58%, transparent);
 }
 
 .cpv-card[data-tone='bright'] .cpv-list li::before {
-  background: color-mix(in srgb, var(--smh-primary-teal) 68%, transparent);
-  box-shadow: 0 0 12px color-mix(in srgb, var(--smh-primary-teal) 52%, transparent);
+  background: color-mix(in srgb, var(--smh-teal) 68%, transparent);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--smh-teal) 52%, transparent);
 }
 
 .cpv-card .cpv-list li span {
@@ -573,27 +567,27 @@
 }
 
 .cpv-cta-row .cpv-btn-outline:hover {
-  text-decoration-color: color-mix(in srgb, var(--smh-accent-gold) 42%, transparent);
+  text-decoration-color: color-mix(in srgb, var(--smh-gold) 42%, transparent);
 }
 
 .cpv-cta-row .cpv-btn-solid:hover {
-  box-shadow: 0 22px 44px color-mix(in srgb, var(--smh-primary-magenta) 38%, transparent 68%);
+  box-shadow: 0 22px 44px color-mix(in srgb, var(--smh-magenta) 38%, transparent 68%);
 }
 
 .cpv-cta-row .cpv-btn-outline:focus-visible,
 .cpv-cta-row .cpv-btn-solid:focus-visible {
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--smh-accent-gold) 35%, transparent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--smh-gold) 35%, transparent);
 }
 
 .cpv-card :is(p, li) a {
-  color: color-mix(in srgb, var(--smh-accent-gold-soft) 75%, transparent);
+  color: color-mix(in srgb, var(--smh-soft-gold) 75%, transparent);
   text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, var(--smh-accent-gold-soft) 40%, transparent);
+  text-decoration-color: color-mix(in srgb, var(--smh-soft-gold) 40%, transparent);
   text-underline-offset: 0.25em;
 }
 
 .cpv-card :is(p, li) a:hover {
-  text-decoration-color: color-mix(in srgb, var(--smh-accent-gold) 48%, transparent);
+  text-decoration-color: color-mix(in srgb, var(--smh-gold) 48%, transparent);
 }
 
 .cpv-slot {
@@ -631,7 +625,7 @@
   display: grid;
   gap: 0.9rem;
   box-shadow:
-    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 8%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--smh-text-on-dark) 8%, transparent),
     0 18px 42px color-mix(in srgb, var(--smh-ink) 36%, transparent);
   backdrop-filter: blur(16px);
 }
@@ -669,7 +663,7 @@
 .cpv-subcard__list li::before {
   content: '•';
   font-size: 0.9rem;
-  color: color-mix(in srgb, var(--smh-accent-gold-soft) 70%, transparent);
+  color: color-mix(in srgb, var(--smh-soft-gold) 70%, transparent);
 }
 
 .cpv-faq {
@@ -714,7 +708,7 @@
 
 .cpv-linkcard:hover {
   transform: translateY(-2px) scale(1.01);
-  box-shadow: 0 18px 36px color-mix(in srgb, var(--smh-accent-gold-soft) 34%, transparent);
+  box-shadow: 0 18px 36px color-mix(in srgb, var(--smh-soft-gold) 34%, transparent);
 }
 
 .cpv-linkcard__title {
@@ -756,7 +750,7 @@
 }
 
 .cpv-breadcrumb a:hover {
-  text-decoration-color: color-mix(in srgb, var(--smh-accent-gold) 48%, transparent);
+  text-decoration-color: color-mix(in srgb, var(--smh-gold) 48%, transparent);
 }
 
 .cpv-breadcrumb__divider {
