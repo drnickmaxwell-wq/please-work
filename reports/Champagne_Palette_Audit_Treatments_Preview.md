@@ -12,3 +12,7 @@
 ## Token Usage
 - Primary hues now draw directly from the canonical set: #C2185B (magenta), #40C4B4 (teal), #D4AF37 (gold), #F9E8C3 (soft gold), #0B0D0F (ink), and #FFFFFF for text/highlights.
 - No additional brand colours were introduced; gradients and keylines are composed via existing token variables and color-mix overlays.
+
+## After v2 Adjustments
+- Hero surfaces now use the canonical magenta→teal→gold gradient with the single soft-light `/brand/waves-bg-1920.webp` texture at low opacity, ensuring the wave is visible without muting colour.
+- Preview cards share a refreshed ink-to-Champagne gradient with ink mixing capped at 40% and a soft-gold keyline, restoring the dusk glow without brown casts.

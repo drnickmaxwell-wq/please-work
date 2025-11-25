@@ -4,40 +4,42 @@
   --cpv-page-ink: var(--smh-ink);
   --cpv-page-text: color-mix(in srgb, var(--smh-white) 96%, transparent);
   --cpv-page-text-soft: color-mix(in srgb, var(--smh-white) 84%, transparent);
-  --cpv-hero-gradient: var(--smh-gradient);
-  --cpv-hero-card-bg: color-mix(in srgb, var(--smh-ink) 18%, transparent);
+  --cpv-hero-gradient: linear-gradient(
+    135deg,
+    var(--smh-primary-magenta) 0%,
+    var(--smh-primary-teal) 60%,
+    var(--smh-accent-gold) 100%
+  );
+  --cpv-hero-gradient-dusk: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--smh-primary-magenta) 80%, var(--smh-ink) 20%) 0%,
+    color-mix(in srgb, var(--smh-primary-teal) 80%, var(--smh-ink) 20%) 60%,
+    color-mix(in srgb, var(--smh-accent-gold) 80%, var(--smh-ink) 20%) 100%
+  );
+  --cpv-hero-wave: url('/brand/waves-bg-1920.webp');
+  --cpv-hero-card-bg: color-mix(in srgb, var(--smh-ink) 14%, transparent);
   --cpv-hero-border: color-mix(in srgb, var(--smh-accent-gold-soft) 62%, transparent);
   --cpv-hero-shadow: 0 44px 132px color-mix(in srgb, var(--smh-ink) 36%, transparent);
-  --cpv-card-surface: color-mix(in srgb, var(--smh-ink) 16%, transparent);
-  --cpv-card-bg: color-mix(in srgb, var(--smh-ink) 26%, transparent);
+  --cpv-card-surface: color-mix(in srgb, var(--smh-ink) 12%, transparent);
+  --cpv-card-bg: color-mix(in srgb, var(--smh-ink) 22%, transparent);
   --cpv-card-gradient:
     linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--smh-ink) 36%, transparent) 0%,
-      color-mix(in srgb, var(--smh-ink) 66%, transparent) 100%
-    ),
-    linear-gradient(
-      135deg,
-      color-mix(in srgb, var(--smh-primary-magenta) 32%, transparent) 0%,
-      color-mix(in srgb, var(--smh-primary-teal) 32%, transparent) 60%,
-      color-mix(in srgb, var(--smh-accent-gold) 14%, transparent) 100%
+      160deg,
+      color-mix(in srgb, var(--smh-primary-magenta) 60%, var(--smh-ink) 40%) 0%,
+      color-mix(in srgb, var(--smh-primary-teal) 70%, var(--smh-ink) 30%) 60%,
+      color-mix(in srgb, var(--smh-ink) 80%, transparent 20%) 100%
     ),
     radial-gradient(
-      130% 110% at 12% -6%,
-      color-mix(in srgb, var(--smh-primary-magenta) 30%, transparent) 0%,
+      120% 120% at 12% -8%,
+      color-mix(in srgb, var(--smh-primary-magenta) 22%, transparent) 0%,
       transparent 60%
     ),
     radial-gradient(
-      130% 110% at 88% 116%,
-      color-mix(in srgb, var(--smh-primary-teal) 28%, transparent) 0%,
+      120% 120% at 88% 112%,
+      color-mix(in srgb, var(--smh-primary-teal) 22%, transparent) 0%,
       transparent 70%
-    ),
-    radial-gradient(
-      120% 110% at 52% 112%,
-      color-mix(in srgb, var(--smh-accent-gold-soft) 18%, transparent) 0%,
-      transparent 90%
     );
-  --cpv-card-border: color-mix(in srgb, var(--smh-accent-gold-soft) 48%, transparent);
+  --cpv-card-border: color-mix(in srgb, var(--smh-accent-gold-soft) 65%, var(--smh-ink) 35%);
   --cpv-card-shadow: 0 28px 78px color-mix(in srgb, var(--smh-ink) 42%, transparent);
   --cpv-chip-bg: color-mix(in srgb, var(--smh-ink) 94%, transparent);
   --cpv-chip-border: color-mix(in srgb, var(--smh-accent-gold-soft) 22%, transparent);
@@ -96,13 +98,13 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background-image: url('/brand/waves-bg-1920.webp');
+  background-image: var(--cpv-hero-wave);
   background-size: cover;
   background-position: center right;
   background-repeat: no-repeat;
   mix-blend-mode: soft-light;
-  opacity: clamp(0.42, 0.48 + 0.08vw, 0.54);
-  filter: grayscale(1) brightness(1.06) contrast(1.06);
+  opacity: clamp(0.12, 0.14 + 0.06vw, 0.18);
+  filter: grayscale(1) contrast(1.04);
   pointer-events: none;
 }
 
