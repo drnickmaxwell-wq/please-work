@@ -5,8 +5,16 @@
   --brand-gold:    #D4AF37;     /* deep gold for visuals */
   --brand-gold-keyline: #F9E8C3;/* soft keyline gold for keylines/accents */
 
+  /* Canonical Champagne tokens */
+  --smh-magenta: var(--brand-magenta);
+  --smh-teal: var(--brand-teal);
+  --smh-gold: var(--brand-gold);
+  --smh-soft-gold: var(--brand-gold-keyline);
+  --smh-ink: var(--ink);
+  --smh-text-on-dark: #FFFFFF;
+
   /* ===== Canonical Gradient (LAW) ===== */
-  --smh-gradient: linear-gradient(135deg, var(--brand-magenta) 0%, var(--brand-teal) 60%, var(--brand-gold) 100%);
+  --smh-gradient: linear-gradient(135deg, var(--smh-magenta) 0%, var(--smh-teal) 60%, var(--smh-gold) 100%);
 
   /* Legacy (diagnostics/rollback only — do not use in new UI) */
   --smh-gradient-legacy: linear-gradient(135deg,#D94BC6 0%,#00C2C7 100%);

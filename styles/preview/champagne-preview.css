@@ -2,51 +2,41 @@
 
 :root {
   --cpv-page-ink: var(--smh-ink);
-  --cpv-page-text: color-mix(in srgb, var(--smh-white) 96%, transparent);
-  --cpv-page-text-soft: color-mix(in srgb, var(--smh-white) 84%, transparent);
+  --cpv-page-text: color-mix(in srgb, var(--smh-text-on-dark) 96%, transparent);
+  --cpv-page-text-soft: color-mix(in srgb, var(--smh-text-on-dark) 84%, transparent);
   --cpv-hero-gradient: linear-gradient(
     135deg,
-    var(--smh-primary-magenta) 0%,
-    var(--smh-primary-teal) 60%,
-    var(--smh-accent-gold) 100%
+    color-mix(in srgb, var(--smh-magenta) 92%, transparent) 0%,
+    color-mix(in srgb, var(--smh-teal) 85%, transparent) 55%,
+    color-mix(in srgb, var(--smh-soft-gold) 75%, transparent) 100%
   );
   --cpv-hero-gradient-dusk: linear-gradient(
     135deg,
-    color-mix(in srgb, var(--smh-primary-magenta) 80%, var(--smh-ink) 20%) 0%,
-    color-mix(in srgb, var(--smh-primary-teal) 80%, var(--smh-ink) 20%) 60%,
-    color-mix(in srgb, var(--smh-accent-gold) 80%, var(--smh-ink) 20%) 100%
+    color-mix(in srgb, var(--smh-magenta) 78%, var(--smh-ink) 22%) 0%,
+    color-mix(in srgb, var(--smh-teal) 72%, var(--smh-ink) 28%) 58%,
+    color-mix(in srgb, var(--smh-soft-gold) 68%, var(--smh-ink) 32%) 100%
   );
   --cpv-hero-wave: url('/brand/waves-bg-1920.webp');
   --cpv-hero-card-bg: color-mix(in srgb, var(--smh-ink) 14%, transparent);
-  --cpv-hero-border: color-mix(in srgb, var(--smh-accent-gold-soft) 62%, transparent);
+  --cpv-hero-border: color-mix(in srgb, var(--smh-soft-gold) 62%, transparent);
   --cpv-hero-shadow: 0 44px 132px color-mix(in srgb, var(--smh-ink) 36%, transparent);
   --cpv-card-surface: color-mix(in srgb, var(--smh-ink) 12%, transparent);
   --cpv-card-bg: color-mix(in srgb, var(--smh-ink) 22%, transparent);
   --cpv-card-gradient:
     linear-gradient(
-      160deg,
-      color-mix(in srgb, var(--smh-primary-magenta) 60%, var(--smh-ink) 40%) 0%,
-      color-mix(in srgb, var(--smh-primary-teal) 70%, var(--smh-ink) 30%) 60%,
-      color-mix(in srgb, var(--smh-ink) 80%, transparent 20%) 100%
-    ),
-    radial-gradient(
-      120% 120% at 12% -8%,
-      color-mix(in srgb, var(--smh-primary-magenta) 22%, transparent) 0%,
-      transparent 60%
-    ),
-    radial-gradient(
-      120% 120% at 88% 112%,
-      color-mix(in srgb, var(--smh-primary-teal) 22%, transparent) 0%,
-      transparent 70%
+      135deg,
+      color-mix(in srgb, var(--smh-magenta) 80%, var(--smh-ink) 20%) 0%,
+      color-mix(in srgb, var(--smh-teal) 75%, var(--smh-ink) 25%) 55%,
+      color-mix(in srgb, var(--smh-soft-gold) 60%, var(--smh-ink) 40%) 100%
     );
-  --cpv-card-border: color-mix(in srgb, var(--smh-accent-gold-soft) 65%, var(--smh-ink) 35%);
+  --cpv-card-border: color-mix(in srgb, var(--smh-soft-gold) 65%, var(--smh-ink) 35%);
   --cpv-card-shadow: 0 28px 78px color-mix(in srgb, var(--smh-ink) 42%, transparent);
   --cpv-chip-bg: color-mix(in srgb, var(--smh-ink) 94%, transparent);
-  --cpv-chip-border: color-mix(in srgb, var(--smh-accent-gold-soft) 22%, transparent);
+  --cpv-chip-border: color-mix(in srgb, var(--smh-soft-gold) 22%, transparent);
   --cpv-chip-text: color-mix(in srgb, var(--smh-white) 92%, transparent);
   --cpv-link-underline: color-mix(in srgb, var(--smh-primary-magenta) 64%, var(--smh-accent-gold-soft));
-  --cpv-gold-keyline: color-mix(in srgb, var(--smh-accent-gold-soft) 22%, transparent);
-  --lth-speckle-base: color-mix(in srgb, var(--smh-accent-gold-soft) 52%, var(--smh-primary-magenta));
+  --cpv-gold-keyline: color-mix(in srgb, var(--smh-soft-gold) 22%, transparent);
+  --lth-speckle-base: color-mix(in srgb, var(--smh-soft-gold) 52%, var(--smh-magenta));
 }
 
 .cpv-page {
