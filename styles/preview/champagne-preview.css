@@ -10,30 +10,30 @@
     var(--smh-primary-teal) 60%,
     var(--smh-accent-gold) 100%
   );
-  --cpv-hero-card-bg: color-mix(in srgb, var(--smh-ink) 22%, transparent);
-  --cpv-hero-border: color-mix(in srgb, var(--smh-accent-gold-soft) 36%, transparent);
+  --cpv-hero-card-bg: color-mix(in srgb, var(--smh-ink) 18%, transparent);
+  --cpv-hero-border: color-mix(in srgb, var(--smh-accent-gold-soft) 42%, transparent);
   --cpv-hero-shadow: 0 40px 120px color-mix(in srgb, var(--smh-ink) 18%, transparent);
-  --cpv-card-surface: color-mix(in srgb, var(--smh-ink) 22%, transparent);
-  --cpv-card-bg: color-mix(in srgb, var(--smh-ink) 34%, transparent);
+  --cpv-card-surface: color-mix(in srgb, var(--smh-ink) 18%, transparent);
+  --cpv-card-bg: color-mix(in srgb, var(--smh-ink) 28%, transparent);
   --cpv-card-gradient:
     linear-gradient(
       180deg,
-      color-mix(in srgb, var(--smh-ink) 30%, transparent) 0%,
-      color-mix(in srgb, var(--smh-ink) 50%, transparent) 100%
+      color-mix(in srgb, var(--smh-ink) 18%, transparent) 0%,
+      color-mix(in srgb, var(--smh-ink) 42%, transparent) 100%
     ),
     radial-gradient(
-      150% 120% at 16% -12%,
-      color-mix(in srgb, var(--smh-primary-magenta) 24%, transparent) 0%,
-      transparent 62%
+      150% 120% at 18% -10%,
+      color-mix(in srgb, var(--smh-primary-magenta) 32%, transparent) 0%,
+      transparent 60%
     ),
     radial-gradient(
-      150% 120% at 84% 118%,
-      color-mix(in srgb, var(--smh-primary-teal) 26%, transparent) 0%,
+      150% 120% at 82% 116%,
+      color-mix(in srgb, var(--smh-primary-teal) 30%, transparent) 0%,
       transparent 70%
     ),
     radial-gradient(
-      150% 130% at 50% 118%,
-      color-mix(in srgb, var(--smh-accent-gold-soft) 16%, transparent) 0%,
+      150% 130% at 50% 116%,
+      color-mix(in srgb, var(--smh-accent-gold-soft) 18%, transparent) 0%,
       transparent 86%
     );
   --cpv-card-border: color-mix(in srgb, var(--smh-accent-gold-soft) 42%, transparent);
@@ -100,8 +100,8 @@
   background-position: center right;
   background-repeat: no-repeat;
   mix-blend-mode: soft-light;
-  opacity: clamp(0.28, 0.34 + 0.24vw, 0.42);
-  filter: grayscale(1) brightness(1.08) contrast(1.08);
+  opacity: clamp(0.26, 0.3 + 0.2vw, 0.38);
+  filter: grayscale(1) brightness(1.02) contrast(1.04);
   pointer-events: none;
 }
 
