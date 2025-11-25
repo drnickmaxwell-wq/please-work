@@ -4,13 +4,8 @@
   --cpv-page-ink: var(--smh-ink);
   --cpv-page-text: color-mix(in srgb, var(--smh-white) 96%, transparent);
   --cpv-page-text-soft: color-mix(in srgb, var(--smh-white) 84%, transparent);
-  --cpv-hero-gradient: linear-gradient(
-    135deg,
-    var(--smh-primary-magenta) 0%,
-    var(--smh-primary-teal) 60%,
-    var(--smh-accent-gold) 100%
-  );
-  --cpv-hero-card-bg: color-mix(in srgb, var(--smh-ink) 58%, transparent);
+  --cpv-hero-gradient: var(--smh-gradient);
+  --cpv-hero-card-bg: color-mix(in srgb, var(--smh-ink) 46%, transparent);
   --cpv-hero-border: color-mix(in srgb, var(--smh-accent-gold-soft) 52%, transparent);
   --cpv-hero-shadow: 0 44px 132px color-mix(in srgb, var(--smh-ink) 26%, transparent);
   --cpv-card-surface: color-mix(in srgb, var(--smh-ink) 38%, transparent);
@@ -18,25 +13,25 @@
   --cpv-card-gradient:
     linear-gradient(
       180deg,
-      color-mix(in srgb, var(--smh-ink) 76%, transparent) 0%,
-      color-mix(in srgb, var(--smh-ink) 88%, transparent) 100%
+      color-mix(in srgb, var(--smh-ink) 68%, transparent) 0%,
+      color-mix(in srgb, var(--smh-ink) 84%, transparent) 100%
     ),
     radial-gradient(
       160% 140% at 18% -10%,
-      color-mix(in srgb, var(--smh-primary-magenta) 32%, transparent) 0%,
+      color-mix(in srgb, var(--smh-primary-magenta) 34%, transparent) 0%,
       transparent 58%
     ),
     radial-gradient(
       160% 140% at 84% 118%,
-      color-mix(in srgb, var(--smh-primary-teal) 30%, transparent) 0%,
+      color-mix(in srgb, var(--smh-primary-teal) 32%, transparent) 0%,
       transparent 68%
     ),
     radial-gradient(
       140% 120% at 52% 118%,
-      color-mix(in srgb, var(--smh-accent-gold-soft) 22%, transparent) 0%,
+      color-mix(in srgb, var(--smh-accent-gold-soft) 26%, transparent) 0%,
       transparent 88%
     );
-  --cpv-card-border: color-mix(in srgb, var(--smh-accent-gold-soft) 52%, transparent);
+  --cpv-card-border: color-mix(in srgb, var(--smh-accent-gold-soft) 62%, transparent);
   --cpv-card-shadow: 0 26px 72px color-mix(in srgb, var(--smh-ink) 34%, transparent);
   --cpv-chip-bg: color-mix(in srgb, var(--smh-ink) 94%, transparent);
   --cpv-chip-border: color-mix(in srgb, var(--smh-accent-gold-soft) 22%, transparent);
@@ -100,7 +95,7 @@
   background-position: center right;
   background-repeat: no-repeat;
   mix-blend-mode: soft-light;
-  opacity: clamp(0.24, 0.28 + 0.16vw, 0.34);
+  opacity: clamp(0.32, 0.36 + 0.12vw, 0.42);
   filter: grayscale(1) brightness(1.06) contrast(1.05);
   pointer-events: none;
 }
