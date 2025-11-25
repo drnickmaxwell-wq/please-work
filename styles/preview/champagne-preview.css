@@ -1,7 +1,7 @@
 @import '../tokens/smh-champagne-tokens.css';
 
 :root {
-  --cpv-page-ink: color-mix(in srgb, var(--brand-ink) 92%, var(--smh-accent-gold-soft) 8%);
+  --cpv-page-ink: color-mix(in srgb, var(--brand-ink) 90%, var(--smh-white) 10%);
   --cpv-page-text: color-mix(in srgb, var(--smh-white) 96%, transparent);
   --cpv-page-text-soft: color-mix(in srgb, var(--smh-white) 84%, transparent);
   --cpv-hero-gradient: linear-gradient(
@@ -11,22 +11,22 @@
     var(--brand-gold) 100%
   );
   --cpv-hero-wave: url('/brand/waves-bg-1920.webp');
-  --cpv-hero-wave-opacity: 0.22;
-  --cpv-hero-card-bg: color-mix(in srgb, var(--brand-ink) 65%, var(--smh-white) 35%);
-  --cpv-hero-card-glow: radial-gradient(120% 120% at 50% 30%, color-mix(in srgb, var(--smh-white) 14%, transparent) 0%, transparent 56%);
-  --cpv-hero-border: color-mix(in srgb, var(--smh-accent-gold-soft) 48%, transparent);
+  --cpv-hero-wave-opacity: 0.34;
+  --cpv-hero-card-bg: color-mix(in srgb, var(--brand-ink) 52%, var(--smh-white) 48%);
+  --cpv-hero-card-glow: radial-gradient(120% 120% at 50% 30%, color-mix(in srgb, var(--smh-white) 18%, transparent) 0%, transparent 56%);
+  --cpv-hero-border: color-mix(in srgb, var(--smh-accent-gold-soft) 52%, transparent);
   --cpv-hero-shadow: 0 44px 132px color-mix(in srgb, var(--ink) 36%, transparent);
-  --cpv-card-surface: color-mix(in srgb, var(--brand-ink) 16%, transparent);
-  --cpv-card-bg: color-mix(in srgb, var(--brand-ink) 88%, var(--smh-accent-gold-soft) 12%);
+  --cpv-card-surface: color-mix(in srgb, var(--brand-ink) 12%, transparent);
+  --cpv-card-bg: color-mix(in srgb, var(--brand-ink) 82%, var(--smh-white) 18%);
   --cpv-card-gradient: linear-gradient(
     135deg,
     var(--brand-magenta) 0%,
     var(--brand-teal) 60%,
     var(--brand-gold) 100%
   );
-  --cpv-card-dusk-overlay: radial-gradient(120% 110% at 18% 20%, color-mix(in srgb, var(--brand-ink) 32%, transparent) 0%, transparent 54%),
-    radial-gradient(160% 130% at 82% 86%, color-mix(in srgb, var(--brand-ink) 36%, transparent) 0%, transparent 62%),
-    linear-gradient(180deg, color-mix(in srgb, var(--brand-ink) 18%, transparent) 0%, transparent 46%);
+  --cpv-card-dusk-overlay: radial-gradient(120% 110% at 18% 20%, color-mix(in srgb, var(--brand-ink) 18%, transparent) 0%, transparent 54%),
+    radial-gradient(160% 130% at 82% 86%, color-mix(in srgb, var(--brand-ink) 22%, transparent) 0%, transparent 62%),
+    linear-gradient(180deg, color-mix(in srgb, var(--brand-ink) 10%, transparent) 0%, transparent 52%);
   --cpv-card-border: color-mix(in srgb, var(--smh-accent-gold-soft) 58%, var(--ink) 42%);
   --cpv-card-shadow: 0 28px 78px color-mix(in srgb, var(--ink) 42%, transparent);
   --cpv-chip-bg: color-mix(in srgb, var(--ink) 94%, transparent);
@@ -73,21 +73,27 @@
 .champagne-hero-surface__gradient {
   position: absolute;
   inset: 0;
-  background-image: var(--cpv-hero-gradient), var(--cpv-hero-wave);
-  background-size: cover, cover;
-  background-position: center right, center right;
+  background-image: var(--cpv-hero-gradient);
+  background-size: cover;
+  background-position: center right;
   background-repeat: no-repeat;
-  background-blend-mode: normal, soft-light;
-  filter: brightness(1.05) contrast(1.05);
 }
 
 .champagne-hero-surface::after {
-  content: none;
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--cpv-hero-wave);
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+  opacity: var(--cpv-hero-wave-opacity);
+  mix-blend-mode: soft-light;
 }
 
 .lth-hero {
-  --lth-glow-strength: 0.1;
-  --lth-speckle-opacity: 0.045;
+  --lth-glow-strength: 0;
+  --lth-speckle-opacity: 0;
 }
 
 .lth-hero__glow,
@@ -589,9 +595,9 @@
   border-radius: 18px;
   border: 1px solid transparent;
   border-image: var(--cpv-card-gradient) 1;
-  background-color: color-mix(in srgb, var(--cpv-card-bg) 72%, var(--smh-white) 28%);
-  background-image: radial-gradient(120% 110% at 50% 18%, color-mix(in srgb, var(--smh-white) 12%, transparent) 0%, transparent 62%),
-    linear-gradient(180deg, color-mix(in srgb, var(--brand-ink) 12%, transparent) 0%, transparent 68%);
+  background-color: color-mix(in srgb, var(--cpv-card-bg) 64%, var(--smh-white) 36%);
+  background-image: radial-gradient(120% 110% at 50% 18%, color-mix(in srgb, var(--smh-white) 14%, transparent) 0%, transparent 62%),
+    linear-gradient(180deg, color-mix(in srgb, var(--brand-ink) 8%, transparent) 0%, transparent 70%);
   padding: clamp(1.6rem, 3vw, 2rem);
   display: grid;
   gap: 0.9rem;
@@ -646,9 +652,9 @@
   border-radius: 16px;
   border: 1px solid transparent;
   border-image: var(--cpv-card-gradient) 1;
-  background-color: color-mix(in srgb, var(--cpv-card-bg) 76%, var(--smh-white) 24%);
-  background-image: radial-gradient(140% 120% at 52% 18%, color-mix(in srgb, var(--smh-white) 10%, transparent) 0%, transparent 54%),
-    linear-gradient(180deg, color-mix(in srgb, var(--brand-ink) 10%, transparent) 0%, transparent 62%);
+  background-color: color-mix(in srgb, var(--cpv-card-bg) 66%, var(--smh-white) 34%);
+  background-image: radial-gradient(140% 120% at 52% 18%, color-mix(in srgb, var(--smh-white) 12%, transparent) 0%, transparent 54%),
+    linear-gradient(180deg, color-mix(in srgb, var(--brand-ink) 8%, transparent) 0%, transparent 64%);
   padding: clamp(1.5rem, 3vw, 1.9rem);
   display: grid;
   gap: 0.6rem;
@@ -676,9 +682,9 @@
   border-radius: 18px;
   border: 1px solid transparent;
   border-image: var(--cpv-card-gradient) 1;
-  background-color: color-mix(in srgb, var(--cpv-card-bg) 78%, var(--smh-white) 22%);
-  background-image: radial-gradient(125% 115% at 50% 22%, color-mix(in srgb, var(--smh-white) 12%, transparent) 0%, transparent 54%),
-    linear-gradient(180deg, color-mix(in srgb, var(--brand-ink) 12%, transparent) 0%, transparent 60%);
+  background-color: color-mix(in srgb, var(--cpv-card-bg) 68%, var(--smh-white) 32%);
+  background-image: radial-gradient(125% 115% at 50% 22%, color-mix(in srgb, var(--smh-white) 14%, transparent) 0%, transparent 54%),
+    linear-gradient(180deg, color-mix(in srgb, var(--brand-ink) 8%, transparent) 0%, transparent 62%);
   text-decoration: none;
   color: inherit;
   transition: transform 0.4s cubic-bezier(0.645, 0.045, 0.355, 1), box-shadow 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
