@@ -10,6 +10,8 @@ const SOCIAL_LINKS = [
   { href: 'https://www.facebook.com/stmaryshousedental', label: 'Facebook', short: 'FB' },
 ];
 
+const isPreviewMode = process.env.NEXT_PUBLIC_PREVIEW_MODE === 'true';
+
 type FormStatus = 'idle' | 'success' | 'error';
 
 function getEnabledLinks<T extends { enabled?: boolean }>(links: T[]): T[] {
@@ -127,6 +129,12 @@ const FooterLuxe = () => {
               <Link href="/cookies">Cookies</Link>
               <Link href="/accessibility">Accessibility</Link>
               <Link href="/terms">Terms of Use</Link>
+              {isPreviewMode ? (
+                <Link className="footer-luxe__devlink" href="/preview/treatments">
+                  <span className="footer-luxe__devbadge">DEV</span>
+                  Treatment previews workspace
+                </Link>
+              ) : null}
             </div>
           </div>
         </div>
@@ -336,6 +344,38 @@ const FooterLuxe = () => {
 
         .footer-luxe__links a {
           font-size: 0.9rem;
+        }
+
+        .footer-luxe__devlink {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.35rem 0.85rem;
+          border-radius: 999px;
+          border: 1px solid color-mix(in srgb, var(--smh-primary-magenta) 34%, transparent);
+          background: color-mix(in srgb, var(--smh-ink) 30%, transparent);
+          font-size: 0.85rem;
+          letter-spacing: 0.01em;
+        }
+
+        .footer-luxe__devlink:hover,
+        .footer-luxe__devlink:focus-visible {
+          background: color-mix(in srgb, var(--smh-primary-magenta) 26%, transparent);
+          border-color: color-mix(in srgb, var(--smh-accent-gold-soft) 34%, transparent);
+        }
+
+        .footer-luxe__devbadge {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.1rem 0.5rem;
+          border-radius: 999px;
+          background: color-mix(in srgb, var(--smh-primary-magenta) 44%, transparent);
+          color: color-mix(in srgb, var(--smh-white) 92%, transparent);
+          font-size: 0.7rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
         }
 
         .sr-only {
