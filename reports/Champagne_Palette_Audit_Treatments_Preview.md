@@ -17,3 +17,7 @@
 - Hero surfaces now use the canonical magenta→teal→gold gradient with the single soft-light `/brand/waves-bg-1920.webp` texture at low opacity, ensuring the wave is visible without muting colour.
 - Preview cards share a refreshed ink-to-Champagne gradient with ink mixing capped at 40% and a soft-gold keyline, restoring the dusk glow without brown casts.
 - Mint/pastel casts were removed by deepening the hero glass base (`--cpv-hero-card-bg`) and re-weighting `--cpv-card-gradient` toward magenta/teal ink mixes while keeping gold as a subtle edge.
+
+## After v3 Adjustments
+- Further rebalanced the hero glass and card gradients to reduce mint bias: increased ink weight, lowered radial highlight strength, and kept gradient stops anchored to magenta/teal/gold tokens.
+- Wave texture remains the single soft-light `/brand/waves-bg-1920.webp` mask; colour now comes entirely from token-driven gradients with no added tints.

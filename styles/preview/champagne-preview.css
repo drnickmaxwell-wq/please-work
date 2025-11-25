@@ -12,31 +12,31 @@
   );
   --cpv-hero-gradient-dusk: linear-gradient(
     135deg,
-    color-mix(in srgb, var(--smh-primary-magenta) 80%, var(--smh-ink) 20%) 0%,
-    color-mix(in srgb, var(--smh-primary-teal) 80%, var(--smh-ink) 20%) 60%,
-    color-mix(in srgb, var(--smh-accent-gold) 80%, var(--smh-ink) 20%) 100%
+    color-mix(in srgb, var(--smh-primary-magenta) 82%, var(--smh-ink) 18%) 0%,
+    color-mix(in srgb, var(--smh-primary-teal) 82%, var(--smh-ink) 18%) 60%,
+    color-mix(in srgb, var(--smh-accent-gold) 82%, var(--smh-ink) 18%) 100%
   );
   --cpv-hero-wave: url('/brand/waves-bg-1920.webp');
-  --cpv-hero-card-bg: color-mix(in srgb, var(--smh-ink) 28%, transparent);
+  --cpv-hero-card-bg: color-mix(in srgb, var(--smh-ink) 44%, transparent);
   --cpv-hero-border: color-mix(in srgb, var(--smh-accent-gold-soft) 62%, transparent);
   --cpv-hero-shadow: 0 44px 132px color-mix(in srgb, var(--smh-ink) 36%, transparent);
-  --cpv-card-surface: color-mix(in srgb, var(--smh-ink) 12%, transparent);
-  --cpv-card-bg: color-mix(in srgb, var(--smh-ink) 22%, transparent);
+  --cpv-card-surface: color-mix(in srgb, var(--smh-ink) 22%, transparent);
+  --cpv-card-bg: color-mix(in srgb, var(--smh-ink) 32%, transparent);
   --cpv-card-gradient:
     linear-gradient(
       160deg,
-      color-mix(in srgb, var(--smh-primary-magenta) 70%, var(--smh-ink) 30%) 0%,
-      color-mix(in srgb, var(--smh-primary-teal) 60%, var(--smh-ink) 40%) 60%,
-      color-mix(in srgb, var(--smh-accent-gold) 40%, var(--smh-ink) 60%) 100%
+      color-mix(in srgb, var(--smh-primary-magenta) 76%, var(--smh-ink) 24%) 0%,
+      color-mix(in srgb, var(--smh-primary-teal) 68%, var(--smh-ink) 32%) 60%,
+      color-mix(in srgb, var(--smh-accent-gold) 42%, var(--smh-ink) 58%) 100%
     ),
     radial-gradient(
       120% 120% at 12% -8%,
-      color-mix(in srgb, var(--smh-primary-magenta) 18%, transparent) 0%,
+      color-mix(in srgb, var(--smh-primary-magenta) 14%, transparent) 0%,
       transparent 58%
     ),
     radial-gradient(
       120% 120% at 88% 112%,
-      color-mix(in srgb, var(--smh-primary-teal) 18%, transparent) 0%,
+      color-mix(in srgb, var(--smh-primary-teal) 12%, transparent) 0%,
       transparent 68%
     );
   --cpv-card-border: color-mix(in srgb, var(--smh-accent-gold-soft) 65%, var(--smh-ink) 35%);
@@ -235,15 +235,15 @@
 .cpv-glass {
   position: relative;
   border-radius: clamp(24px, 5vw, 32px);
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--cpv-hero-card-bg) 92%, transparent) 0%,
-      color-mix(in srgb, var(--cpv-hero-card-bg) 86%, transparent) 100%
-    ),
-    radial-gradient(140% 120% at 18% -10%, color-mix(in srgb, var(--smh-primary-magenta) 18%, transparent) 0%, transparent 58%),
-    radial-gradient(120% 120% at 82% 120%, color-mix(in srgb, var(--smh-primary-teal) 18%, transparent) 0%, transparent 76%),
-    radial-gradient(160% 120% at 50% 120%, color-mix(in srgb, var(--smh-accent-gold-soft) 16%, transparent) 0%, transparent 88%);
+    background:
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--cpv-hero-card-bg) 96%, transparent) 0%,
+        color-mix(in srgb, var(--cpv-hero-card-bg) 90%, transparent) 100%
+      ),
+      radial-gradient(140% 120% at 18% -10%, color-mix(in srgb, var(--smh-primary-magenta) 14%, transparent) 0%, transparent 58%),
+      radial-gradient(120% 120% at 82% 120%, color-mix(in srgb, var(--smh-primary-teal) 12%, transparent) 0%, transparent 76%),
+      radial-gradient(160% 120% at 50% 120%, color-mix(in srgb, var(--smh-accent-gold-soft) 12%, transparent) 0%, transparent 88%);
   backdrop-filter: blur(26px);
   border: 1px solid var(--cpv-hero-border);
   box-shadow:
