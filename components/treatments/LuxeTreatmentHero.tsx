@@ -27,24 +27,24 @@ type LuxeTreatmentHeroProps = {
 
 const VARIANT_THEMES: Record<LuxeTreatmentHeroVariant, CSSProperties> = {
   implants: {
-    '--lth-glow-strength': '0.16',
-    '--lth-speckle-opacity': '0.06',
+    '--lth-glow-strength': '0.12',
+    '--lth-speckle-opacity': '0.05',
   },
   veneers: {
-    '--lth-glow-strength': '0.18',
-    '--lth-speckle-opacity': '0.07',
+    '--lth-glow-strength': '0.13',
+    '--lth-speckle-opacity': '0.055',
   },
   whitening: {
-    '--lth-glow-strength': '0.2',
-    '--lth-speckle-opacity': '0.08',
+    '--lth-glow-strength': '0.14',
+    '--lth-speckle-opacity': '0.06',
   },
   general: {
-    '--lth-glow-strength': '0.18',
-    '--lth-speckle-opacity': '0.07',
+    '--lth-glow-strength': '0.13',
+    '--lth-speckle-opacity': '0.055',
   },
   technology: {
-    '--lth-glow-strength': '0.16',
-    '--lth-speckle-opacity': '0.06',
+    '--lth-glow-strength': '0.12',
+    '--lth-speckle-opacity': '0.05',
   },
 };
 
