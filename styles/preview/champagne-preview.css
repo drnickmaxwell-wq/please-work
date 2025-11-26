@@ -1,20 +1,20 @@
 @import '../tokens/smh-champagne-tokens.css';
 
 :root {
-  --cpv-page-ink: color-mix(in srgb, var(--smh-ink) 80%, var(--smh-white) 20%);
+  --cpv-page-ink: color-mix(in srgb, var(--smh-ink) 78%, var(--smh-white) 22%);
   --cpv-page-text-main: color-mix(in srgb, var(--smh-white) 97%, var(--smh-ink) 3%);
-  --cpv-page-text-soft: color-mix(in srgb, var(--smh-white) 88%, var(--smh-ink) 12%);
+  --cpv-page-text-soft: color-mix(in srgb, var(--smh-white) 90%, var(--smh-ink) 10%);
   --cpv-page-text: var(--cpv-page-text-main);
   --cpv-hero-gradient: var(--smh-gradient);
   --cpv-hero-wave: url('/brand/waves-bg-1920.webp');
   --cpv-hero-wave-opacity: 0.88;
   --cpv-hero-wave-parallax-x: 0;
   --cpv-hero-wave-parallax-y: 0;
-  --cpv-hero-card-bg: color-mix(in srgb, var(--smh-ink) 5%, var(--smh-white) 95%);
+  --cpv-hero-card-bg: color-mix(in srgb, var(--smh-ink) 4%, var(--smh-white) 96%);
   --cpv-hero-card-glow: radial-gradient(120% 120% at 50% 30%, color-mix(in srgb, var(--smh-white) 18%, transparent) 0%, transparent 56%);
   --cpv-hero-border: color-mix(in srgb, var(--smh-accent-gold-soft) 52%, transparent);
   --cpv-hero-shadow: 0 48px 148px color-mix(in srgb, var(--brand-ink) 30%, transparent);
-  --cpv-card-bg: color-mix(in srgb, var(--smh-ink) 82%, var(--smh-white) 18%);
+  --cpv-card-bg: color-mix(in srgb, var(--smh-ink) 76%, var(--smh-white) 24%);
   --cpv-card-gradient: var(--smh-gradient);
   --cpv-card-border: color-mix(in srgb, var(--smh-accent-gold-soft) 58%, var(--ink) 42%);
   --cpv-card-shadow: 0 22px 72px color-mix(in srgb, var(--ink) 22%, transparent);
@@ -139,12 +139,13 @@
   pointer-events: none;
   overflow: hidden;
   z-index: 1;
-  display: none;
+  display: block;
 }
 
 .cpv-wavefx__layer {
   position: absolute;
   inset: 0;
+  pointer-events: none;
 }
 
 .cpv-wavefx__layer video {
@@ -154,23 +155,27 @@
 }
 
 .cpv-wavefx__wave-caustics {
-  opacity: 0.16;
+  opacity: 0.1;
   mix-blend-mode: screen;
+  z-index: 2;
 }
 
 .cpv-wavefx__glass-shimmer {
   opacity: 0.12;
   mix-blend-mode: screen;
+  z-index: 4;
 }
 
 .cpv-wavefx__particles-drift {
-  opacity: 0.08;
+  opacity: 0.06;
   mix-blend-mode: screen;
+  z-index: 6;
 }
 
 .cpv-wavefx__gold-dust {
-  opacity: 0.04;
+  opacity: 0.08;
   mix-blend-mode: screen;
+  z-index: 7;
 }
 
 @keyframes cpv-hero-wave-drift {
@@ -189,16 +194,30 @@
 }
 
 .cpv-wavefx__wave-mask {
-  background-image: none;
-  opacity: 0;
+  z-index: 3;
+  background-image: url('/assets/champagne/waves/wave-bg.webp'),
+    url('/assets/champagne/waves/wave-mask-desktop.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  mix-blend-mode: overlay;
+  opacity: 0.4;
+}
+
+@media (max-width: 768px) {
+  .cpv-wavefx__wave-mask {
+    background-image: url('/assets/champagne/waves/wave-bg.webp'),
+      url('/assets/champagne/waves/wave-mask-mobile.webp');
+  }
 }
 
 .cpv-wavefx__particles-static {
   background-image: url('/assets/champagne/particles/home-hero-particles.webp');
-  background-size: 720px 720px;
+  background-size: 1024px 1024px;
   background-repeat: repeat;
   mix-blend-mode: screen;
-  opacity: 0.11;
+  opacity: 0.08;
+  z-index: 5;
 }
 
 .cpv-wavefx__grain {
@@ -206,6 +225,7 @@
   background-size: 512px 512px;
   mix-blend-mode: overlay;
   opacity: 0.07;
+  z-index: 8;
 }
 
 @media (prefers-reduced-motion: no-preference) {
