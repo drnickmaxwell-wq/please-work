@@ -1,9 +1,9 @@
 @import '../tokens/smh-champagne-tokens.css';
 
 :root {
-  --cpv-page-ink: color-mix(in srgb, var(--smh-ink) 80%, var(--smh-white) 20%);
-  --cpv-page-text-main: color-mix(in srgb, var(--smh-white) 98%, var(--smh-ink) 2%);
-  --cpv-page-text-soft: color-mix(in srgb, var(--smh-white) 90%, var(--smh-ink) 10%);
+  --cpv-page-ink: color-mix(in srgb, var(--smh-white) 96%, transparent);
+  --cpv-page-text-main: var(--smh-text);
+  --cpv-page-text-soft: color-mix(in srgb, var(--smh-text) 78%, transparent);
   --cpv-page-text: var(--cpv-page-text-main);
   --cpv-hero-gradient: var(--smh-gradient);
   --cpv-hero-wave: image-set(
@@ -13,16 +13,16 @@
   --cpv-hero-wave-opacity: 0.22;
   --cpv-hero-wave-parallax-x: 0;
   --cpv-hero-wave-parallax-y: 0;
-  --cpv-hero-card-bg: color-mix(in oklab, var(--smh-white) 84%, transparent);
+  --cpv-hero-card-bg: color-mix(in srgb, var(--smh-white) 96%, transparent);
   --cpv-hero-border: var(--smh-accent-gold);
-  --cpv-hero-shadow: 0 12px 32px color-mix(in oklab, var(--smh-ink) 10%, transparent);
-  --cpv-card-bg: color-mix(in srgb, var(--smh-ink) 46%, var(--smh-white) 54%);
+  --cpv-hero-shadow: 0 18px 42px color-mix(in srgb, var(--smh-ink) 12%, transparent);
+  --cpv-card-bg: color-mix(in srgb, var(--smh-white) 96%, transparent);
   --cpv-card-gradient: var(--smh-gradient);
-  --cpv-card-border: color-mix(in srgb, var(--smh-accent-gold-soft) 58%, var(--ink) 42%);
-  --cpv-card-shadow: 0 22px 72px color-mix(in srgb, var(--ink) 22%, transparent);
-  --cpv-chip-bg: color-mix(in srgb, var(--ink) 88%, transparent);
-  --cpv-chip-border: color-mix(in srgb, var(--smh-accent-gold-soft) 22%, transparent);
-  --cpv-chip-text: color-mix(in srgb, var(--smh-white) 92%, transparent);
+  --cpv-card-border: color-mix(in srgb, var(--smh-accent-gold-soft) 58%, var(--smh-ink) 42%);
+  --cpv-card-shadow: 0 18px 52px color-mix(in srgb, var(--smh-ink) 16%, transparent);
+  --cpv-chip-bg: color-mix(in srgb, var(--smh-ink) 26%, transparent);
+  --cpv-chip-border: color-mix(in srgb, var(--smh-accent-gold-soft) 32%, transparent);
+  --cpv-chip-text: var(--smh-text);
   --cpv-link-underline: color-mix(in srgb, var(--brand-magenta) 64%, var(--smh-accent-gold-soft));
   --cpv-gold-keyline: color-mix(in srgb, var(--smh-accent-gold-soft) 22%, transparent);
   --lth-speckle-base: color-mix(in srgb, var(--smh-accent-gold-soft) 52%, var(--brand-magenta));
@@ -68,7 +68,7 @@
   background-size: var(--smh-surface-bg-size, 165% 165%);
   background-position: var(--smh-surface-bg-position, 18% 38%);
   background-repeat: no-repeat;
-  opacity: 0.92;
+  opacity: 1;
   background-repeat: no-repeat;
 }
 
@@ -78,7 +78,7 @@
   inset: 0;
   background-image: var(--cpv-hero-wave);
   background-size: cover;
-  background-position: center right;
+  background-position: center;
   background-repeat: no-repeat;
   opacity: var(--cpv-hero-wave-opacity);
   mix-blend-mode: screen;
