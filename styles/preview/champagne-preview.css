@@ -1,20 +1,22 @@
 @import '../tokens/smh-champagne-tokens.css';
 
 :root {
-  --cpv-page-ink: color-mix(in srgb, var(--smh-ink) 78%, var(--smh-white) 22%);
-  --cpv-page-text-main: color-mix(in srgb, var(--smh-white) 97%, var(--smh-ink) 3%);
+  --cpv-page-ink: color-mix(in srgb, var(--smh-ink) 80%, var(--smh-white) 20%);
+  --cpv-page-text-main: color-mix(in srgb, var(--smh-white) 98%, var(--smh-ink) 2%);
   --cpv-page-text-soft: color-mix(in srgb, var(--smh-white) 90%, var(--smh-ink) 10%);
   --cpv-page-text: var(--cpv-page-text-main);
   --cpv-hero-gradient: var(--smh-gradient);
-  --cpv-hero-wave: url('/brand/waves-bg-1920.webp');
-  --cpv-hero-wave-opacity: 0.88;
+  --cpv-hero-wave: image-set(
+    url('/assets/champagne/waves/waves-bg-1920.webp') 1x,
+    url('/assets/champagne/waves/waves-bg-2560.webp') 2x
+  );
+  --cpv-hero-wave-opacity: 0.22;
   --cpv-hero-wave-parallax-x: 0;
   --cpv-hero-wave-parallax-y: 0;
-  --cpv-hero-card-bg: color-mix(in srgb, var(--smh-ink) 4%, var(--smh-white) 96%);
-  --cpv-hero-card-glow: radial-gradient(120% 120% at 50% 30%, color-mix(in srgb, var(--smh-white) 18%, transparent) 0%, transparent 56%);
-  --cpv-hero-border: color-mix(in srgb, var(--smh-accent-gold-soft) 52%, transparent);
-  --cpv-hero-shadow: 0 48px 148px color-mix(in srgb, var(--brand-ink) 30%, transparent);
-  --cpv-card-bg: color-mix(in srgb, var(--smh-ink) 76%, var(--smh-white) 24%);
+  --cpv-hero-card-bg: color-mix(in oklab, var(--smh-white) 84%, transparent);
+  --cpv-hero-border: var(--smh-accent-gold);
+  --cpv-hero-shadow: 0 12px 32px color-mix(in oklab, var(--smh-ink) 10%, transparent);
+  --cpv-card-bg: color-mix(in srgb, var(--smh-ink) 46%, var(--smh-white) 54%);
   --cpv-card-gradient: var(--smh-gradient);
   --cpv-card-border: color-mix(in srgb, var(--smh-accent-gold-soft) 58%, var(--ink) 42%);
   --cpv-card-shadow: 0 22px 72px color-mix(in srgb, var(--ink) 22%, transparent);
@@ -63,8 +65,10 @@
   position: absolute;
   inset: 0;
   background-image: var(--cpv-hero-gradient);
-  background-size: cover;
-  background-position: center right;
+  background-size: var(--smh-surface-bg-size, 165% 165%);
+  background-position: var(--smh-surface-bg-position, 18% 38%);
+  background-repeat: no-repeat;
+  opacity: 0.92;
   background-repeat: no-repeat;
 }
 
@@ -77,7 +81,11 @@
   background-position: center right;
   background-repeat: no-repeat;
   opacity: var(--cpv-hero-wave-opacity);
-  mix-blend-mode: soft-light;
+  mix-blend-mode: screen;
+  mask-image: url('/assets/champagne/waves/wave-mask-desktop.webp');
+  mask-size: cover;
+  mask-repeat: no-repeat;
+  mask-position: center;
   transform: translate3d(var(--cpv-hero-wave-parallax-x), var(--cpv-hero-wave-parallax-y), 0);
 }
 
@@ -200,8 +208,8 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  mix-blend-mode: overlay;
-  opacity: 0.4;
+  mix-blend-mode: screen;
+  opacity: 0.28;
 }
 
 @media (max-width: 768px) {
@@ -230,7 +238,7 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .champagne-hero-surface::after {
-    animation: cpv-hero-wave-drift 26s ease-in-out infinite alternate;
+    animation: cpv-hero-wave-drift 18s ease-in-out infinite alternate;
   }
 }
 
@@ -249,21 +257,11 @@
 
   .cpv-glass {
     position: relative;
-    border-radius: clamp(24px, 5vw, 32px);
-    background-color: color-mix(
-      in srgb,
-      var(--cpv-hero-card-bg) calc(100% - var(--cpv-lighting-tint-strength)),
-      var(--cpv-lighting-tint) var(--cpv-lighting-tint-strength)
-    );
-    background-image: var(--cpv-hero-card-glow);
-    background-blend-mode: screen;
-    backdrop-filter: blur(24px);
-    border: 1px solid transparent;
-    border-image: var(--cpv-hero-gradient) 1;
-    box-shadow:
-      0 34px 96px color-mix(in srgb, var(--brand-ink) 26%, transparent),
-      inset 0 1px 0 color-mix(in srgb, var(--smh-white) 12%, transparent),
-      inset 0 0 0 1px color-mix(in srgb, var(--smh-accent-gold-soft) 18%, transparent);
+    border-radius: clamp(20px, 4.5vw, 26px);
+    background-color: var(--cpv-hero-card-bg);
+    backdrop-filter: saturate(1.05) blur(12px);
+    border: 1px solid var(--cpv-hero-border);
+    box-shadow: var(--cpv-hero-shadow);
   }
 
 .cpv-hero__card {
