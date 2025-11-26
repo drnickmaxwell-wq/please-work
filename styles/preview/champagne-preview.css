@@ -1,24 +1,24 @@
 @import '../tokens/smh-champagne-tokens.css';
 
 :root {
-  --cpv-page-ink: color-mix(in srgb, var(--smh-ink) 92%, var(--smh-white) 8%);
-  --cpv-page-text-main: color-mix(in srgb, var(--smh-white) 96%, var(--smh-ink) 4%);
-  --cpv-page-text-soft: color-mix(in srgb, var(--smh-white) 82%, var(--smh-ink) 18%);
+  --cpv-page-ink: color-mix(in srgb, var(--smh-ink) 80%, var(--smh-white) 20%);
+  --cpv-page-text-main: color-mix(in srgb, var(--smh-white) 97%, var(--smh-ink) 3%);
+  --cpv-page-text-soft: color-mix(in srgb, var(--smh-white) 88%, var(--smh-ink) 12%);
   --cpv-page-text: var(--cpv-page-text-main);
-  --cpv-hero-gradient: linear-gradient(135deg, var(--brand-magenta) 0%, var(--brand-teal) 60%, var(--brand-gold) 100%);
+  --cpv-hero-gradient: var(--smh-gradient);
   --cpv-hero-wave: url('/brand/waves-bg-1920.webp');
   --cpv-hero-wave-opacity: 0.88;
   --cpv-hero-wave-parallax-x: 0;
   --cpv-hero-wave-parallax-y: 0;
-  --cpv-hero-card-bg: color-mix(in srgb, var(--smh-white) 92%, var(--smh-ink) 8%);
+  --cpv-hero-card-bg: color-mix(in srgb, var(--smh-ink) 5%, var(--smh-white) 95%);
   --cpv-hero-card-glow: radial-gradient(120% 120% at 50% 30%, color-mix(in srgb, var(--smh-white) 18%, transparent) 0%, transparent 56%);
   --cpv-hero-border: color-mix(in srgb, var(--smh-accent-gold-soft) 52%, transparent);
   --cpv-hero-shadow: 0 48px 148px color-mix(in srgb, var(--brand-ink) 30%, transparent);
-  --cpv-card-bg: color-mix(in srgb, var(--smh-ink) 86%, var(--smh-white) 14%);
-  --cpv-card-gradient: linear-gradient(135deg, var(--brand-magenta) 0%, var(--brand-teal) 60%, var(--brand-gold) 100%);
+  --cpv-card-bg: color-mix(in srgb, var(--smh-ink) 82%, var(--smh-white) 18%);
+  --cpv-card-gradient: var(--smh-gradient);
   --cpv-card-border: color-mix(in srgb, var(--smh-accent-gold-soft) 58%, var(--ink) 42%);
-  --cpv-card-shadow: 0 22px 72px color-mix(in srgb, var(--ink) 28%, transparent);
-  --cpv-chip-bg: color-mix(in srgb, var(--ink) 94%, transparent);
+  --cpv-card-shadow: 0 22px 72px color-mix(in srgb, var(--ink) 22%, transparent);
+  --cpv-chip-bg: color-mix(in srgb, var(--ink) 88%, transparent);
   --cpv-chip-border: color-mix(in srgb, var(--smh-accent-gold-soft) 22%, transparent);
   --cpv-chip-text: color-mix(in srgb, var(--smh-white) 92%, transparent);
   --cpv-link-underline: color-mix(in srgb, var(--brand-magenta) 64%, var(--smh-accent-gold-soft));
