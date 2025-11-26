@@ -1,17 +1,20 @@
 @import '../tokens/smh-champagne-tokens.css';
 
 :root {
-  --cpv-page-ink: color-mix(in srgb, var(--brand-ink) 8%, var(--brand-white) 92%);
-  --cpv-page-text: color-mix(in srgb, var(--brand-ink) 78%, var(--brand-white) 22%);
-  --cpv-page-text-soft: color-mix(in srgb, var(--brand-ink) 58%, var(--brand-white) 42%);
+  --cpv-page-ink: color-mix(in srgb, var(--smh-ink) 92%, var(--smh-white) 8%);
+  --cpv-page-text-main: color-mix(in srgb, var(--smh-white) 96%, var(--smh-ink) 4%);
+  --cpv-page-text-soft: color-mix(in srgb, var(--smh-white) 82%, var(--smh-ink) 18%);
+  --cpv-page-text: var(--cpv-page-text-main);
   --cpv-hero-gradient: linear-gradient(135deg, var(--brand-magenta) 0%, var(--brand-teal) 60%, var(--brand-gold) 100%);
   --cpv-hero-wave: url('/brand/waves-bg-1920.webp');
-  --cpv-hero-wave-opacity: 0.84;
-  --cpv-hero-card-bg: color-mix(in srgb, var(--brand-ink) 12%, var(--smh-white) 88%);
+  --cpv-hero-wave-opacity: 0.88;
+  --cpv-hero-wave-parallax-x: 0;
+  --cpv-hero-wave-parallax-y: 0;
+  --cpv-hero-card-bg: color-mix(in srgb, var(--smh-white) 92%, var(--smh-ink) 8%);
   --cpv-hero-card-glow: radial-gradient(120% 120% at 50% 30%, color-mix(in srgb, var(--smh-white) 18%, transparent) 0%, transparent 56%);
   --cpv-hero-border: color-mix(in srgb, var(--smh-accent-gold-soft) 52%, transparent);
-  --cpv-hero-shadow: 0 42px 132px color-mix(in srgb, var(--brand-ink) 26%, transparent);
-  --cpv-card-bg: color-mix(in srgb, var(--brand-ink) 10%, var(--smh-white) 90%);
+  --cpv-hero-shadow: 0 48px 148px color-mix(in srgb, var(--brand-ink) 30%, transparent);
+  --cpv-card-bg: color-mix(in srgb, var(--smh-ink) 86%, var(--smh-white) 14%);
   --cpv-card-gradient: linear-gradient(135deg, var(--brand-magenta) 0%, var(--brand-teal) 60%, var(--brand-gold) 100%);
   --cpv-card-border: color-mix(in srgb, var(--smh-accent-gold-soft) 58%, var(--ink) 42%);
   --cpv-card-shadow: 0 22px 72px color-mix(in srgb, var(--ink) 28%, transparent);
@@ -75,6 +78,7 @@
   background-repeat: no-repeat;
   opacity: var(--cpv-hero-wave-opacity);
   mix-blend-mode: soft-light;
+  transform: translate3d(var(--cpv-hero-wave-parallax-x), var(--cpv-hero-wave-parallax-y), 0);
 }
 
 .lth-hero {
@@ -169,6 +173,21 @@
   mix-blend-mode: screen;
 }
 
+@keyframes cpv-hero-wave-drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  50% {
+    transform: translate3d(6px, -4px, 0);
+    opacity: 0.95;
+  }
+  100% {
+    transform: translate3d(-6px, 5px, 0);
+    opacity: 1;
+  }
+}
+
 .cpv-wavefx__wave-mask {
   background-image: none;
   opacity: 0;
@@ -187,6 +206,12 @@
   background-size: 512px 512px;
   mix-blend-mode: overlay;
   opacity: 0.07;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .champagne-hero-surface::after {
+    animation: cpv-hero-wave-drift 26s ease-in-out infinite alternate;
+  }
 }
 
 
@@ -223,7 +248,7 @@
 
 .cpv-hero__card {
   padding: clamp(2.5rem, 5vw, 3.75rem);
-  color: color-mix(in srgb, var(--smh-white) 88%, var(--brand-ink) 12%);
+  color: var(--cpv-page-text);
 }
 
 .cpv-hero__kicker {
@@ -244,7 +269,7 @@
   font-size: clamp(2.6rem, 6vw, 3.9rem);
   line-height: 1.1;
   margin: 0;
-  color: color-mix(in srgb, var(--smh-white) 92%, var(--brand-ink) 8%);
+  color: var(--cpv-page-text);
   text-shadow: 0 8px 24px color-mix(in srgb, var(--ink) 55%, transparent);
   position: relative;
   padding-bottom: 1.1rem;
@@ -264,7 +289,7 @@
   font-family: var(--font-lora, 'Lora', serif);
   font-size: clamp(1.05rem, 2vw, 1.18rem);
   line-height: 1.8;
-  color: color-mix(in srgb, var(--smh-white) 82%, var(--brand-ink) 18%);
+  color: var(--cpv-page-text-soft);
   max-width: 54ch;
 }
 
