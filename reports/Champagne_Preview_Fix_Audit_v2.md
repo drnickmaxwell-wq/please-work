@@ -6,11 +6,11 @@
 
 ## Hero Before/After
 - **Before:** Preview heroes layered extra ink/multiply overlays that muted the canonical gradient and softened the wave texture.
-- **After:** Heroes now rely solely on the canonical gradient (`linear-gradient(135deg, var(--brand-magenta) 0%, var(--brand-teal) 60%, var(--brand-gold) 100%)`) with a clearer wave on top and brighter glass content cards mixed from ink and white tokens for a closer match to the home hero.
+- **After:** Heroes now rely solely on the canonical gradient (`linear-gradient(135deg, var(--brand-magenta) 0%, var(--brand-teal) 60%, var(--brand-gold) 100%)`) with the wave layer lifted to ~0.82 opacity and no ink overlays, while the glass card uses a soft white and gold mix plus a stronger float shadow to mirror the home hero.
 
 ## Card Surfaces Before/After
 - **Before:** Large preview cards and tiles used full-gradient fills with heavy teal/magenta presence, competing with the hero brightness.
-- **After:** Cards sit on softened ink-and-white glass mixes with subdued edge shading and gradient borders as accents, keeping interiors lighter than the frame and reserving full gradient power for the hero.
+- **After:** Cards shift to smoked-glass interiors built from soft white mixes (no full-card gradients) with only 1–2px canonical gradient borders; tiles and FAQs stay lighter than their parent panels without teal/magenta flooding.
 
 ## Canonical + Guard Compliance
 - All gradients that reference Champagne canon use the exact string above.
