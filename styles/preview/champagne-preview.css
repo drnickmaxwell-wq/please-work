@@ -1,20 +1,20 @@
 @import '../tokens/smh-champagne-tokens.css';
 
 :root {
-  --cpv-page-ink: color-mix(in srgb, var(--brand-ink) 6%, var(--brand-white) 94%);
-  --cpv-page-text: color-mix(in srgb, var(--brand-ink) 82%, var(--brand-white) 18%);
-  --cpv-page-text-soft: color-mix(in srgb, var(--brand-ink) 64%, var(--brand-white) 36%);
+  --cpv-page-ink: color-mix(in srgb, var(--brand-ink) 8%, var(--brand-white) 92%);
+  --cpv-page-text: color-mix(in srgb, var(--brand-ink) 78%, var(--brand-white) 22%);
+  --cpv-page-text-soft: color-mix(in srgb, var(--brand-ink) 58%, var(--brand-white) 42%);
   --cpv-hero-gradient: linear-gradient(135deg, var(--brand-magenta) 0%, var(--brand-teal) 60%, var(--brand-gold) 100%);
   --cpv-hero-wave: url('/brand/waves-bg-1920.webp');
-  --cpv-hero-wave-opacity: 0.82;
-  --cpv-hero-card-bg: color-mix(in srgb, var(--brand-ink) 18%, var(--smh-white) 82%);
+  --cpv-hero-wave-opacity: 0.84;
+  --cpv-hero-card-bg: color-mix(in srgb, var(--brand-ink) 12%, var(--smh-white) 88%);
   --cpv-hero-card-glow: radial-gradient(120% 120% at 50% 30%, color-mix(in srgb, var(--smh-white) 18%, transparent) 0%, transparent 56%);
   --cpv-hero-border: color-mix(in srgb, var(--smh-accent-gold-soft) 52%, transparent);
   --cpv-hero-shadow: 0 42px 132px color-mix(in srgb, var(--brand-ink) 26%, transparent);
-  --cpv-card-bg: color-mix(in srgb, var(--brand-ink) 14%, var(--smh-white) 86%);
+  --cpv-card-bg: color-mix(in srgb, var(--brand-ink) 10%, var(--smh-white) 90%);
   --cpv-card-gradient: linear-gradient(135deg, var(--brand-magenta) 0%, var(--brand-teal) 60%, var(--brand-gold) 100%);
   --cpv-card-border: color-mix(in srgb, var(--smh-accent-gold-soft) 58%, var(--ink) 42%);
-  --cpv-card-shadow: 0 26px 88px color-mix(in srgb, var(--ink) 34%, transparent);
+  --cpv-card-shadow: 0 22px 72px color-mix(in srgb, var(--ink) 28%, transparent);
   --cpv-chip-bg: color-mix(in srgb, var(--ink) 94%, transparent);
   --cpv-chip-border: color-mix(in srgb, var(--smh-accent-gold-soft) 22%, transparent);
   --cpv-chip-text: color-mix(in srgb, var(--smh-white) 92%, transparent);
@@ -552,7 +552,7 @@
 .cpv-slot {
   border-radius: 18px;
   border: 1px dashed color-mix(in srgb, var(--cpv-page-text) 28%, transparent);
-  background: color-mix(in srgb, var(--cpv-card-bg) 82%, transparent);
+  background: color-mix(in srgb, var(--cpv-card-bg) 88%, transparent);
   padding: clamp(1.75rem, 3vw, 2.5rem);
   text-align: center;
   font-size: 0.95rem;
@@ -576,19 +576,19 @@
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
-.cpv-subcard {
-  border-radius: 18px;
-  border: 1px solid transparent;
-  border-image: var(--cpv-card-gradient) 1;
-  background: color-mix(in srgb, var(--smh-white) 88%, var(--brand-ink) 12%);
-  padding: clamp(1.6rem, 3vw, 2rem);
-  display: grid;
-  gap: 0.9rem;
-  box-shadow:
-    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 8%, transparent),
-    0 18px 42px color-mix(in srgb, var(--ink) 36%, transparent);
-  backdrop-filter: blur(24px);
-}
+  .cpv-subcard {
+    border-radius: 18px;
+    border: 1px solid transparent;
+    border-image: var(--cpv-card-gradient) 1;
+    background: var(--cpv-card-bg);
+    padding: clamp(1.6rem, 3vw, 2rem);
+    display: grid;
+    gap: 0.9rem;
+    box-shadow:
+      inset 0 1px 0 color-mix(in srgb, var(--smh-white) 10%, transparent),
+      0 18px 42px color-mix(in srgb, var(--ink) 32%, transparent);
+    backdrop-filter: blur(24px);
+  }
 
 .cpv-subcard__title {
   margin: 0;
@@ -631,16 +631,16 @@
   gap: clamp(1.2rem, 2.2vw, 1.8rem);
 }
 
-.cpv-faq__item {
-  border-radius: 16px;
-  border: 1px solid transparent;
-  border-image: var(--cpv-card-gradient) 1;
-  background: color-mix(in srgb, var(--smh-white) 88%, var(--brand-ink) 12%);
-  padding: clamp(1.5rem, 3vw, 1.9rem);
-  display: grid;
-  gap: 0.6rem;
-  backdrop-filter: blur(24px);
-}
+  .cpv-faq__item {
+    border-radius: 16px;
+    border: 1px solid transparent;
+    border-image: var(--cpv-card-gradient) 1;
+    background: var(--cpv-card-bg);
+    padding: clamp(1.5rem, 3vw, 1.9rem);
+    display: grid;
+    gap: 0.6rem;
+    backdrop-filter: blur(24px);
+  }
 
 .cpv-faq__question {
   margin: 0;
@@ -656,19 +656,19 @@
   color: var(--cpv-page-text-soft);
 }
 
-.cpv-linkcard {
-  display: grid;
-  gap: 0.6rem;
-  padding: clamp(1.4rem, 3vw, 1.9rem);
-  border-radius: 18px;
-  border: 1px solid transparent;
-  border-image: var(--cpv-card-gradient) 1;
-  background: color-mix(in srgb, var(--smh-white) 90%, var(--brand-ink) 10%);
-  text-decoration: none;
-  color: inherit;
-  transition: transform 0.4s cubic-bezier(0.645, 0.045, 0.355, 1), box-shadow 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
-  backdrop-filter: blur(24px);
-}
+  .cpv-linkcard {
+    display: grid;
+    gap: 0.6rem;
+    padding: clamp(1.4rem, 3vw, 1.9rem);
+    border-radius: 18px;
+    border: 1px solid transparent;
+    border-image: var(--cpv-card-gradient) 1;
+    background: var(--cpv-card-bg);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.4s cubic-bezier(0.645, 0.045, 0.355, 1), box-shadow 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+    backdrop-filter: blur(24px);
+  }
 
 .cpv-linkcard:hover {
   transform: translateY(-2px) scale(1.01);
