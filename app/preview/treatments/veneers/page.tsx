@@ -36,7 +36,7 @@ const candidacy = [
 
 export default function VeneersPreviewPage() {
   return (
-    <div className="cpv-page">
+    <div className="cpv-page" data-treatment="veneers">
       <LuxeTreatmentHero
         variant="veneers"
         eyebrow="Treatments preview"

@@ -69,7 +69,7 @@ const technologyFaq = [
 
 export default function TechnologyPreviewPage() {
   return (
-    <div className="cpv-page">
+    <div className="cpv-page" data-treatment="technology">
       <LuxeTreatmentHero
         variant="technology"
         eyebrow="Treatments preview"

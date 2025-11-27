@@ -36,7 +36,7 @@ const candidacy = [
 
 export default function WhiteningPreviewPage() {
   return (
-    <div className="cpv-page">
+    <div className="cpv-page" data-treatment="whitening">
       <LuxeTreatmentHero
         variant="whitening"
         eyebrow="Treatments preview"

@@ -39,7 +39,7 @@ const candidacyPoints = [
 
 export default function SparkAlignersPreviewPage() {
   return (
-    <div className="cpv-page">
+    <div className="cpv-page" data-treatment="orthodontics">
       <LuxeTreatmentHero
         variant="technology"
         eyebrow="Treatments preview"
