@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function CosmeticPreviewPage() {
   return (
-    <div className="cpv-page">
+    <div className="cpv-page" data-treatment="cosmetic">
       <LuxeTreatmentHero
         variant="general"
         eyebrow="Treatments preview"

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function OrthodonticsPreviewPage() {
   return (
-    <div className="cpv-page">
+    <div className="cpv-page" data-treatment="orthodontics">
       <LuxeTreatmentHero
         variant="technology"
         eyebrow="Treatments preview"

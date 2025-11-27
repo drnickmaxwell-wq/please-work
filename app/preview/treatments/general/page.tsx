@@ -36,7 +36,7 @@ const guestExperience = [
 
 export default function GeneralDentistryPreviewPage() {
   return (
-    <div className="cpv-page">
+    <div className="cpv-page" data-treatment="general">
       <LuxeTreatmentHero
         variant="general"
         eyebrow="Treatments preview"

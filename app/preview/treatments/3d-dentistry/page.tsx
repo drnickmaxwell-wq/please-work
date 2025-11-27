@@ -61,7 +61,7 @@ const procedures = [
 
 export default function ThreeDDentistryPreviewPage() {
   return (
-    <div className="cpv-page">
+    <div className="cpv-page" data-treatment="technology">
       <LuxeTreatmentHero
         variant="technology"
         eyebrow="Treatments preview"

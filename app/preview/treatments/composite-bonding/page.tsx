@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function CompositeBondingPreviewPage() {
   return (
-    <div className="cpv-page">
+    <div className="cpv-page" data-treatment="composite">
       <LuxeTreatmentHero
         variant="veneers"
         eyebrow="Treatments preview"
