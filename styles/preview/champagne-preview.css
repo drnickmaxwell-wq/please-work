@@ -178,11 +178,11 @@
 .cpv-page {
   position: relative;
   min-height: 100vh;
-  background:
-    radial-gradient(140% 120% at 18% 0%, color-mix(in srgb, var(--brand-magenta) calc(6% + var(--mood-warm-strength) * 0.35), transparent) 0%, transparent 62%),
-    radial-gradient(160% 120% at 84% 12%, color-mix(in srgb, var(--brand-teal) calc(6% + var(--mood-teal-strength) * 0.35), transparent) 0%, transparent 72%),
-    radial-gradient(140% 120% at 50% 100%, color-mix(in srgb, var(--brand-gold) calc(6% + var(--mood-gold-sheen) * 12%), transparent) 12%, transparent 72%),
-    linear-gradient(180deg, color-mix(in srgb, var(--smh-white) 78%, var(--cpv-page-ink) 22%) 0%, color-mix(in srgb, var(--smh-white) 82%, var(--cpv-page-ink) 18%) 100%);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--smh-white) 90%, var(--cpv-page-ink) 10%) 0%,
+    color-mix(in srgb, var(--smh-white) 92%, var(--cpv-page-ink) 8%) 100%
+  );
   color: var(--cpv-page-text);
   padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 7vw, 4rem) clamp(4rem, 8vw, 6.75rem);
   display: flex;
@@ -193,29 +193,7 @@
 
 .cpv-page::before,
 .cpv-page::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  border-radius: clamp(24px, 4vw, 36px);
-  z-index: 0;
-}
-
-.cpv-page::before {
-  background:
-    radial-gradient(120% 90% at 50% -10%, color-mix(in srgb, var(--smh-ink) calc(var(--mood-vignette) * 0.4), transparent) 0%, transparent 74%),
-    radial-gradient(120% 80% at 50% 110%, color-mix(in srgb, var(--smh-ink) calc(var(--mood-vignette) * 0.5), transparent) 0%, transparent 82%);
-  mix-blend-mode: multiply;
-  opacity: 0.06;
-}
-
-.cpv-page::after {
-  background:
-    radial-gradient(120% 70% at 36% 10%, color-mix(in srgb, var(--brand-magenta) calc(5% + var(--mood-warm-strength) * 0.35), transparent) 0%, transparent 70%),
-    radial-gradient(130% 72% at 68% 16%, color-mix(in srgb, var(--brand-teal) calc(5.5% + var(--mood-teal-strength) * 0.35), transparent) 0%, transparent 68%),
-    radial-gradient(110% 70% at 50% 50%, color-mix(in srgb, var(--smh-accent-gold-soft) calc(7% + var(--mood-gold-sheen) * 0.35), transparent) 0%, transparent 72%);
-  filter: saturate(1.04);
-  opacity: 0.1;
+  display: none;
 }
 
 .cpv-hero {
@@ -432,17 +410,17 @@
   justify-content: center;
 }
 
-  .cpv-glass {
-    position: relative;
-    border-radius: clamp(20px, 4.5vw, 26px);
-    background: linear-gradient(135deg, color-mix(in srgb, var(--cpv-hero-card-bg) 98%, transparent) 0%, color-mix(in srgb, var(--smh-white) 92%, transparent) 100%);
-    backdrop-filter: saturate(1.15) blur(14px);
-    border: 1px solid var(--cpv-hero-border);
-    box-shadow:
-      var(--cpv-hero-shadow),
-      0 10px 28px color-mix(in srgb, var(--smh-ink) 10%, transparent),
-      inset 0 1px 0 color-mix(in srgb, var(--smh-white) 18%, transparent);
-  }
+.cpv-glass {
+  position: relative;
+  border-radius: clamp(20px, 4.5vw, 26px);
+  background: color-mix(in srgb, var(--smh-white) 96%, var(--smh-accent-gold-soft) 4%);
+  backdrop-filter: saturate(1.08) blur(12px);
+  border: 1px solid color-mix(in srgb, var(--smh-accent-gold-soft) 40%, transparent);
+  box-shadow:
+    0 20px 64px color-mix(in srgb, var(--smh-ink) 18%, transparent),
+    0 10px 28px color-mix(in srgb, var(--smh-ink) 12%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 24%, transparent);
+}
 
 .cpv-hero__card {
   padding: clamp(2.5rem, 5vw, 3.75rem);
@@ -978,4 +956,30 @@
 
 .cpv-breadcrumb__divider {
   color: color-mix(in srgb, var(--cpv-page-text-soft) 70%, transparent);
+}
+.preview-hero {
+  position: relative;
+}
+
+.preview-hero > .champagne-hero {
+  min-height: 70vh;
+}
+
+.preview-hero .hero-content {
+  display: none;
+}
+
+.preview-hero__content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(3rem, 5vw, 4.5rem);
+  z-index: 10;
+}
+
+.preview-hero__content .container {
+  width: min(1020px, 100%);
+  position: relative;
 }

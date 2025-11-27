@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import '@/styles/preview/champagne-preview.css';
 
-import LuxeTreatmentHero from '@/components/treatments/LuxeTreatmentHero';
+import PreviewHero from '@/components/preview/PreviewHero';
 import { KeyList, Section } from '@/components/preview/PreviewBlocks';
 import { previewRobots } from '@/lib/seo/preview/previewRobots';
 
@@ -62,8 +62,8 @@ const procedures = [
 export default function ThreeDDentistryPreviewPage() {
   return (
     <div className="cpv-page" data-treatment="technology">
-      <LuxeTreatmentHero
-        variant="technology"
+      <PreviewHero
+        treatment="technology"
         eyebrow="Treatments preview"
         title="3D digital dentistry"
         description="Contactless scanning, AI-guided planning, and on-site 3D printing come together under the Balanced Dusk hero so you can iterate freely before the production launch."

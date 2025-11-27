@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 import '@/styles/preview/champagne-preview.css';
 import Link from 'next/link';
 
-import LuxeTreatmentHero from '@/components/treatments/LuxeTreatmentHero';
+import PreviewHero from '@/components/preview/PreviewHero';
 import { KeyList, Section } from '@/components/preview/PreviewBlocks';
 import { previewRobots } from '@/lib/seo/preview/previewRobots';
 
@@ -37,8 +37,8 @@ const candidacy = [
 export default function WhiteningPreviewPage() {
   return (
     <div className="cpv-page" data-treatment="whitening">
-      <LuxeTreatmentHero
-        variant="whitening"
+      <PreviewHero
+        treatment="whitening"
         eyebrow="Treatments preview"
         title="Teeth whitening in Shoreham-by-Sea"
         description="Luminous dusk-to-teal gradients echo the Champagne home hero so you can stress-test copy, component swaps, and tracking without touching production."

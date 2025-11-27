@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 import '@/styles/preview/champagne-preview.css';
 import Link from 'next/link';
 
-import LuxeTreatmentHero from '@/components/treatments/LuxeTreatmentHero';
+import PreviewHero from '@/components/preview/PreviewHero';
 import { KeyList, Section } from '@/components/preview/PreviewBlocks';
 import { previewRobots } from '@/lib/seo/preview/previewRobots';
 
@@ -37,8 +37,8 @@ const guestExperience = [
 export default function GeneralDentistryPreviewPage() {
   return (
     <div className="cpv-page" data-treatment="general">
-      <LuxeTreatmentHero
-        variant="general"
+      <PreviewHero
+        treatment="general"
         eyebrow="Treatments preview"
         title="General dentistry in Shoreham-by-Sea"
         description="A calm Manus dusk gradient gives you space to finesse general dentistry copy, sequencing, and schema while maintaining Champagne hero continuity."

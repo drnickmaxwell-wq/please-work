@@ -6,7 +6,7 @@ import type { Metadata } from 'next';
 import '@/styles/preview/champagne-preview.css';
 import Link from 'next/link';
 
-import LuxeTreatmentHero from '@/components/treatments/LuxeTreatmentHero';
+import PreviewHero from '@/components/preview/PreviewHero';
 import { KeyList, Section } from '@/components/preview/PreviewBlocks';
 import ThreeDViewerSlot from '@/components/preview/treatments/ThreeDViewerSlot';
 import { previewRobots } from '@/lib/seo/preview/previewRobots';
@@ -91,8 +91,8 @@ const candidateChecklist = [
 export default function DentalImplantsPreviewPage() {
   return (
     <div className="cpv-page" data-treatment="implants">
-      <LuxeTreatmentHero
-        variant="implants"
+      <PreviewHero
+        treatment="implants"
         eyebrow="Treatments preview"
         title="Dental implants in Shoreham-by-Sea"
         description="Restore missing teeth with titanium precision, 3D planning, and calm guest experiences—all staged within the Balanced Dusk Champagne hero before production launch."

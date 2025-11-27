@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 import '@/styles/preview/champagne-preview.css';
 
-import LuxeTreatmentHero from '@/components/treatments/LuxeTreatmentHero';
+import PreviewHero from '@/components/preview/PreviewHero';
 import { Section } from '@/components/preview/PreviewBlocks';
 import { previewRobots } from '@/lib/seo/preview/previewRobots';
 
@@ -13,8 +13,8 @@ export const metadata: Metadata = {
 export default function OrthodonticsPreviewPage() {
   return (
     <div className="cpv-page" data-treatment="orthodontics">
-      <LuxeTreatmentHero
-        variant="technology"
+      <PreviewHero
+        treatment="orthodontics"
         eyebrow="Treatments preview"
         title="Orthodontics preview"
         description="Draft copy for aligner journeys, fixed appliance refinements, and retention planning lives here. Iterate inside the Balanced Dusk hero while production routes stay untouched."
