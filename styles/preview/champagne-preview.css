@@ -1,7 +1,7 @@
 @import '../tokens/smh-champagne-tokens.css';
 
 :root {
-  --cpv-page-ink: color-mix(in srgb, var(--smh-ink) 42%, var(--smh-white));
+  --cpv-page-ink: color-mix(in srgb, var(--smh-ink) 30%, var(--smh-white));
   --cpv-page-text-main: var(--smh-text);
   --cpv-page-text-soft: color-mix(in srgb, var(--smh-text) 78%, transparent);
   --cpv-page-text: var(--cpv-page-text-main);
@@ -13,10 +13,10 @@
   --cpv-hero-wave-opacity: 0.34;
   --cpv-hero-wave-parallax-x: 0;
   --cpv-hero-wave-parallax-y: 0;
-  --cpv-hero-card-bg: color-mix(in srgb, var(--smh-ink) 22%, var(--smh-white) 88%);
+  --cpv-hero-card-bg: color-mix(in srgb, var(--smh-ink) 16%, var(--smh-white) 92%);
   --cpv-hero-border: color-mix(in srgb, var(--brand-gold) 78%, transparent);
-  --cpv-hero-shadow: 0 24px 72px color-mix(in srgb, var(--smh-ink) 26%, transparent);
-  --cpv-card-bg: color-mix(in srgb, var(--smh-ink) 22%, var(--smh-white) 90%);
+  --cpv-hero-shadow: 0 24px 72px color-mix(in srgb, var(--smh-ink) 22%, transparent);
+  --cpv-card-bg: color-mix(in srgb, var(--smh-ink) 14%, var(--smh-white) 94%);
   --cpv-card-gradient: var(--smh-gradient),
     linear-gradient(
       140deg,
@@ -25,8 +25,8 @@
       color-mix(in srgb, var(--brand-gold) 52%, transparent) 100%
     );
   --cpv-card-border: color-mix(in srgb, var(--smh-accent-gold-soft) 58%, var(--smh-ink) 42%);
-  --cpv-card-shadow-ambient: 0 28px 70px color-mix(in srgb, var(--smh-ink) 26%, transparent);
-  --cpv-card-shadow-float: 0 14px 38px color-mix(in srgb, var(--smh-ink) 36%, transparent 52%);
+  --cpv-card-shadow-ambient: 0 28px 70px color-mix(in srgb, var(--smh-ink) 20%, transparent);
+  --cpv-card-shadow-float: 0 14px 38px color-mix(in srgb, var(--smh-ink) 30%, transparent 60%);
   --cpv-chip-bg: color-mix(in srgb, var(--smh-ink) 30%, transparent);
   --cpv-chip-border: color-mix(in srgb, var(--smh-accent-gold-soft) 48%, transparent);
   --cpv-chip-text: var(--smh-white);
@@ -41,21 +41,21 @@
   --mood-warm-lift: 0;
   --mood-teal-lift: 0;
   --mood-gold-sheen: 0;
-  --mood-bg-depth: 0.34;
+  --mood-bg-depth: 0.26;
   --mood-motion-intensity: 0.54;
 
   --mood-warm-strength: calc(var(--mood-warm-lift) * 45%);
   --mood-teal-strength: calc(var(--mood-teal-lift) * 45%);
   --mood-gold-strength: calc(12% + var(--mood-gold-sheen) * 28%);
-  --mood-surface-depth: calc(86% - (var(--mood-bg-depth) * 28%));
-  --mood-surface-shadow: calc(18% + var(--mood-bg-depth) * 26%);
-  --mood-ink-depth: calc(28% + (var(--mood-bg-depth) * 42%));
-  --mood-glow-strength: calc(16% + var(--mood-bg-depth) * 26%);
-  --mood-vignette: calc(36% + var(--mood-bg-depth) * 22%);
+  --mood-surface-depth: calc(92% - (var(--mood-bg-depth) * 22%));
+  --mood-surface-shadow: calc(14% + var(--mood-bg-depth) * 18%);
+  --mood-ink-depth: calc(22% + (var(--mood-bg-depth) * 30%));
+  --mood-glow-strength: calc(12% + var(--mood-bg-depth) * 18%);
+  --mood-vignette: calc(28% + var(--mood-bg-depth) * 18%);
 
   --cpv-page-ink: color-mix(in srgb, var(--smh-ink) var(--mood-ink-depth), var(--smh-white));
-  --cpv-page-text-main: color-mix(in srgb, var(--smh-white) 10%, var(--smh-text) calc(86% + var(--mood-bg-depth) * 8%));
-  --cpv-page-text-soft: color-mix(in srgb, var(--smh-white) 4%, var(--smh-text) calc(76% + var(--mood-bg-depth) * 8%));
+  --cpv-page-text-main: color-mix(in srgb, var(--smh-white) 6%, var(--smh-text) calc(88% + var(--mood-bg-depth) * 6%));
+  --cpv-page-text-soft: color-mix(in srgb, var(--smh-white) 4%, var(--smh-text) calc(78% + var(--mood-bg-depth) * 6%));
   --cpv-page-text: var(--cpv-page-text-main);
   --cpv-hero-wave-opacity: calc(0.22 + var(--mood-motion-intensity) * 0.26);
   --cpv-hero-wave-parallax-x: calc((var(--mood-motion-intensity) - 0.5) * 12px);
@@ -63,11 +63,12 @@
   --cpv-wave-drift-x: calc(10px + var(--mood-motion-intensity) * 16px);
   --cpv-wave-drift-y: calc(-8px - var(--mood-motion-intensity) * 16px);
   --cpv-wave-drift-duration: calc(18s - var(--mood-motion-intensity) * 6s);
-  --cpv-hero-card-bg: color-mix(in srgb, var(--smh-ink) 24%, var(--smh-white) var(--mood-surface-depth));
+  --cpv-hero-card-bg: color-mix(in srgb, var(--smh-ink) 16%, var(--smh-white) var(--mood-surface-depth));
   --cpv-hero-border: color-mix(in srgb, var(--brand-gold) calc(56% + var(--mood-gold-strength)), var(--smh-ink));
-  --cpv-card-bg: color-mix(in srgb, var(--smh-ink) 22%, var(--smh-white) var(--mood-surface-depth));
+  --cpv-card-bg: color-mix(in srgb, var(--smh-ink) 14%, var(--smh-white) var(--mood-surface-depth));
   --cpv-card-shadow-ambient: 0 28px 70px color-mix(in srgb, var(--smh-ink) var(--mood-surface-shadow), transparent);
-  --cpv-card-shadow-float: 0 14px 38px color-mix(in srgb, var(--brand-teal) calc(12% + var(--mood-teal-lift) * 18%), var(--smh-ink) 12%);
+  --cpv-card-shadow-float: 0 14px 38px
+      color-mix(in srgb, var(--brand-teal) calc(10% + var(--mood-teal-lift) * 18%), var(--smh-ink) 10%);
 
   --cpv-grad-stop1: color-mix(in srgb, var(--brand-magenta) calc(60% + var(--mood-warm-strength)), var(--smh-white));
   --cpv-grad-stop2: color-mix(in srgb, var(--brand-teal) calc(58% + var(--mood-teal-strength)), var(--smh-white));
@@ -92,7 +93,7 @@
     color-mix(in srgb, var(--brand-magenta) calc(24% + var(--mood-warm-strength)), transparent) 48%,
     color-mix(in srgb, var(--brand-teal) calc(26% + var(--mood-teal-strength)), var(--smh-accent-gold-soft))
   );
-  --cpv-chip-bg: color-mix(in srgb, var(--smh-ink) calc(26% + var(--mood-bg-depth) * 16%), transparent);
+  --cpv-chip-bg: color-mix(in srgb, var(--smh-ink) calc(18% + var(--mood-bg-depth) * 12%), transparent);
   --cpv-chip-border: color-mix(in srgb, var(--brand-teal) calc(22% + var(--mood-teal-lift) * 40%), transparent);
   --cpv-link-underline: color-mix(
     in srgb,
@@ -105,19 +106,19 @@
     color-mix(in srgb, var(--brand-magenta) 30%, var(--brand-teal)) 60%,
     var(--smh-accent-gold-soft)
   );
-  --cpv-lighting-tint-strength: calc((var(--mood-warm-lift) + var(--mood-teal-lift)) * 10% + var(--mood-gold-sheen) * 6%);
+  --cpv-lighting-tint-strength: calc((var(--mood-warm-lift) + var(--mood-teal-lift)) * 8% + var(--mood-gold-sheen) * 5%);
 
-  --champagne-grain-alpha: calc(0.06 + var(--mood-motion-intensity) * 0.09);
-  --champagne-particles-opacity-d: calc(0.06 + var(--mood-motion-intensity) * 0.12);
+  --champagne-grain-alpha: calc(0.05 + var(--mood-motion-intensity) * 0.06);
+  --champagne-particles-opacity-d: calc(0.05 + var(--mood-motion-intensity) * 0.1);
   --champagne-particles-opacity-m: var(--champagne-particles-opacity-d);
-  --champagne-sheen-alpha: calc(0.18 + var(--mood-gold-sheen) * 0.3);
+  --champagne-sheen-alpha: calc(0.18 + var(--mood-gold-sheen) * 0.26);
 }
 
 .cpv-page[data-treatment='composite'] {
   --mood-warm-lift: 0.48;
   --mood-teal-lift: 0.26;
   --mood-gold-sheen: 0.28;
-  --mood-bg-depth: 0.34;
+  --mood-bg-depth: 0.28;
   --mood-motion-intensity: 0.6;
 }
 
@@ -125,7 +126,7 @@
   --mood-warm-lift: 0.16;
   --mood-teal-lift: 0.5;
   --mood-gold-sheen: 0.18;
-  --mood-bg-depth: 0.42;
+  --mood-bg-depth: 0.34;
   --mood-motion-intensity: 0.74;
 }
 
@@ -133,7 +134,7 @@
   --mood-warm-lift: 0.54;
   --mood-teal-lift: 0.18;
   --mood-gold-sheen: 0.42;
-  --mood-bg-depth: 0.32;
+  --mood-bg-depth: 0.27;
   --mood-motion-intensity: 0.58;
 }
 
@@ -141,7 +142,7 @@
   --mood-warm-lift: 0.52;
   --mood-teal-lift: 0.22;
   --mood-gold-sheen: 0.32;
-  --mood-bg-depth: 0.33;
+  --mood-bg-depth: 0.28;
   --mood-motion-intensity: 0.6;
 }
 
@@ -149,7 +150,7 @@
   --mood-warm-lift: 0.18;
   --mood-teal-lift: 0.52;
   --mood-gold-sheen: 0.18;
-  --mood-bg-depth: 0.35;
+  --mood-bg-depth: 0.3;
   --mood-motion-intensity: 0.68;
 }
 
@@ -157,7 +158,7 @@
   --mood-warm-lift: 0.32;
   --mood-teal-lift: 0.32;
   --mood-gold-sheen: 0.42;
-  --mood-bg-depth: 0.3;
+  --mood-bg-depth: 0.26;
   --mood-motion-intensity: 0.6;
 }
 
@@ -165,7 +166,7 @@
   --mood-warm-lift: 0.24;
   --mood-teal-lift: 0.24;
   --mood-gold-sheen: 0.16;
-  --mood-bg-depth: 0.31;
+  --mood-bg-depth: 0.25;
   --mood-motion-intensity: 0.5;
 }
 
@@ -173,7 +174,7 @@
   --mood-warm-lift: 0.14;
   --mood-teal-lift: 0.6;
   --mood-gold-sheen: 0.2;
-  --mood-bg-depth: 0.4;
+  --mood-bg-depth: 0.32;
   --mood-motion-intensity: 0.78;
 }
 
@@ -181,7 +182,7 @@
   --mood-warm-lift: 0.18;
   --mood-teal-lift: 0.3;
   --mood-gold-sheen: 0.12;
-  --mood-bg-depth: 0.38;
+  --mood-bg-depth: 0.3;
   --mood-motion-intensity: 0.24;
 }
 
@@ -191,7 +192,7 @@
   background: radial-gradient(140% 120% at 18% 0%, color-mix(in srgb, var(--brand-magenta) calc(12% + var(--mood-warm-strength)), transparent) 0%, transparent 62%),
     radial-gradient(160% 120% at 84% 12%, color-mix(in srgb, var(--brand-teal) calc(14% + var(--mood-teal-strength)), transparent) 0%, transparent 70%),
     radial-gradient(140% 120% at 50% 100%, color-mix(in srgb, var(--brand-gold) calc(10% + var(--mood-gold-sheen) * 32%), transparent) 12%, transparent 72%),
-    linear-gradient(180deg, color-mix(in srgb, var(--cpv-page-ink) 70%, var(--smh-ink)) 0%, color-mix(in srgb, var(--cpv-page-ink) 90%, var(--smh-ink)) 100%);
+    linear-gradient(180deg, color-mix(in srgb, var(--cpv-page-ink) 48%, var(--smh-white) 18%) 0%, color-mix(in srgb, var(--cpv-page-ink) 64%, var(--smh-white) 22%) 100%);
   color: var(--cpv-page-text);
   padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 7vw, 4rem) clamp(4rem, 8vw, 6.75rem);
   display: flex;
@@ -215,7 +216,7 @@
     radial-gradient(120% 90% at 50% -10%, color-mix(in srgb, var(--smh-ink) var(--mood-vignette), transparent) 0%, transparent 72%),
     radial-gradient(120% 80% at 50% 110%, color-mix(in srgb, var(--smh-ink) calc(var(--mood-vignette) + 10%), transparent) 0%, transparent 80%);
   mix-blend-mode: multiply;
-  opacity: 0.72;
+  opacity: 0.46;
 }
 
 .cpv-page::after {
@@ -224,7 +225,7 @@
     radial-gradient(130% 72% at 68% 16%, color-mix(in srgb, var(--brand-teal) calc(12% + var(--mood-teal-strength) * 0.9), transparent) 0%, transparent 68%),
     radial-gradient(110% 70% at 50% 50%, color-mix(in srgb, var(--smh-accent-gold-soft) calc(12% + var(--mood-gold-sheen) * 0.8), transparent) 0%, transparent 72%);
   filter: saturate(1.08);
-  opacity: 0.7;
+  opacity: 0.52;
 }
 
 .cpv-hero {
@@ -255,7 +256,7 @@
   background-repeat: no-repeat;
   opacity: 1;
   background-repeat: no-repeat;
-  filter: saturate(1.1) contrast(1.08);
+  filter: saturate(1.16) contrast(1.1);
 }
 
 .champagne-hero-surface::after {
@@ -444,8 +445,8 @@
   .cpv-glass {
     position: relative;
     border-radius: clamp(20px, 4.5vw, 26px);
-    background: linear-gradient(135deg, color-mix(in srgb, var(--cpv-hero-card-bg) 94%, transparent) 0%, color-mix(in srgb, var(--smh-ink) 12%, transparent) 100%);
-    backdrop-filter: saturate(1.2) blur(14px);
+    background: linear-gradient(135deg, color-mix(in srgb, var(--cpv-hero-card-bg) 96%, transparent) 0%, color-mix(in srgb, var(--smh-ink) 10%, transparent) 100%);
+    backdrop-filter: saturate(1.24) blur(14px);
     border: 1px solid var(--cpv-hero-border);
     box-shadow: var(--cpv-hero-shadow), inset 0 1px 0 color-mix(in srgb, var(--smh-white) 10%, transparent);
   }
@@ -592,7 +593,7 @@
 }
 
 .cpv-btn-outline {
-  background: color-mix(in srgb, transparent 82%, var(--cpv-card-bg));
+  background: color-mix(in srgb, transparent 74%, var(--cpv-card-bg));
   color: var(--cpv-page-text);
   border-color: color-mix(in srgb, var(--brand-teal) 36%, transparent);
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--brand-teal) 22%, transparent);
@@ -616,7 +617,7 @@
 .cpv-card {
   position: relative;
   border-radius: clamp(22px, 4vw, 28px);
-  background: linear-gradient(140deg, color-mix(in srgb, var(--cpv-card-bg) 92%, transparent) 0%, color-mix(in srgb, var(--smh-ink) 18%, transparent) 100%);
+  background: linear-gradient(140deg, color-mix(in srgb, var(--cpv-card-bg) 96%, transparent) 0%, color-mix(in srgb, var(--smh-ink) 12%, transparent) 100%);
   border: 1px solid transparent;
   border-image: var(--cpv-card-gradient) 1;
   backdrop-filter: saturate(1.18) blur(20px);
@@ -639,15 +640,16 @@
 }
 
 .cpv-hero::before {
-  background: linear-gradient(180deg, color-mix(in srgb, var(--smh-ink) 16%, transparent) 0%, transparent 18%), linear-gradient(0deg, color-mix(in srgb, var(--smh-ink) 18%, transparent) 0%, transparent 26%);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--smh-ink) 12%, transparent) 0%, transparent 18%),
+    linear-gradient(0deg, color-mix(in srgb, var(--smh-ink) 12%, transparent) 0%, transparent 28%);
   mix-blend-mode: multiply;
-  opacity: 0.9;
+  opacity: 0.52;
 }
 
 .cpv-hero::after {
   background: radial-gradient(120% 80% at 50% 40%, color-mix(in srgb, var(--cpv-lighting-tint) 22%, transparent) 0%, transparent 74%);
   mix-blend-mode: screen;
-  opacity: calc(0.4 + var(--cpv-lighting-tint-strength));
+  opacity: calc(0.32 + var(--cpv-lighting-tint-strength));
 }
 
 .cpv-card[data-tone='bright'] {
@@ -884,11 +886,11 @@
   gap: clamp(1.2rem, 2.2vw, 1.8rem);
 }
 
-.cpv-faq__item {
+  .cpv-faq__item {
     border-radius: 16px;
     border: 1px solid transparent;
     border-image: var(--cpv-card-gradient) 1;
-    background: linear-gradient(140deg, color-mix(in srgb, var(--cpv-card-bg) 92%, transparent) 0%, color-mix(in srgb, var(--smh-ink) 16%, transparent) 100%);
+    background: linear-gradient(140deg, color-mix(in srgb, var(--cpv-card-bg) 96%, transparent) 0%, color-mix(in srgb, var(--smh-ink) 12%, transparent) 100%);
     padding: clamp(1.5rem, 3vw, 1.9rem);
     display: grid;
     gap: 0.6rem;
@@ -913,14 +915,14 @@
   color: var(--cpv-page-text-soft);
 }
 
-.cpv-linkcard {
+  .cpv-linkcard {
     display: grid;
     gap: 0.6rem;
     padding: clamp(1.4rem, 3vw, 1.9rem);
     border-radius: 18px;
     border: 1px solid transparent;
     border-image: var(--cpv-card-gradient) 1;
-    background: linear-gradient(140deg, color-mix(in srgb, var(--cpv-card-bg) 92%, transparent) 0%, color-mix(in srgb, var(--smh-ink) 16%, transparent) 100%);
+    background: linear-gradient(140deg, color-mix(in srgb, var(--cpv-card-bg) 96%, transparent) 0%, color-mix(in srgb, var(--smh-ink) 12%, transparent) 100%);
     text-decoration: none;
     color: inherit;
     transition: transform 0.4s cubic-bezier(0.645, 0.045, 0.355, 1), box-shadow 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
