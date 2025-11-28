@@ -8,7 +8,7 @@
   --tp-muted: color-mix(in oklab, var(--smh-ink) 72%, transparent);
   --tp-heading: color-mix(in oklab, var(--smh-ink) 96%, transparent);
   --tp-body: color-mix(in oklab, var(--smh-ink) 84%, transparent);
-  --tp-glow: 0 32px 90px color-mix(in srgb, var(--smh-ink) 18%, transparent);
+  --tp-glow: 0 26px 72px color-mix(in srgb, var(--smh-ink) 14%, transparent);
   --tp-chip-bg: color-mix(in oklab, var(--smh-white) 90%, transparent);
   --tp-chip-alert: color-mix(in oklab, var(--brand-magenta) 28%, transparent);
   --tp-chip-muted: color-mix(in oklab, var(--smh-ink) 20%, transparent);
@@ -18,13 +18,13 @@
 .tp-main {
   min-height: 100vh;
   background:
-    radial-gradient(140% 140% at 48% -6%, color-mix(in srgb, var(--brand-magenta) 16%, transparent) 0%, transparent 52%),
-    radial-gradient(140% 140% at 52% 8%, color-mix(in srgb, var(--brand-teal) 16%, transparent) 0%, transparent 50%),
+    radial-gradient(140% 140% at 48% -6%, color-mix(in srgb, var(--brand-magenta) 10%, transparent) 0%, transparent 46%),
+    radial-gradient(140% 140% at 52% 8%, color-mix(in srgb, var(--brand-teal) 10%, transparent) 0%, transparent 44%),
     linear-gradient(
       180deg,
-      color-mix(in srgb, var(--smh-paper-soft) 90%, var(--smh-ink) 10%) 0%,
-      color-mix(in srgb, var(--smh-paper) 86%, var(--smh-ink) 14%) 42%,
-      color-mix(in srgb, var(--smh-paper-strong) 80%, var(--smh-ink) 20%) 100%
+      color-mix(in srgb, var(--smh-paper-soft) 98%, var(--smh-ink) 2%) 0%,
+      color-mix(in srgb, var(--smh-paper) 96%, var(--smh-ink) 4%) 42%,
+      color-mix(in srgb, var(--smh-paper-strong) 94%, var(--smh-ink) 6%) 100%
     );
   color: var(--tp-body);
   padding: clamp(4rem, 8vw, 6rem) 1.5rem 5rem;
@@ -142,12 +142,12 @@
   padding: clamp(2.75rem, 6vw, 3.75rem);
   border: 1px solid var(--tp-border);
   background:
-    radial-gradient(140% 140% at 82% 6%, color-mix(in srgb, var(--brand-teal) 24%, transparent) 0%, transparent 55%),
-    radial-gradient(140% 140% at 18% 86%, color-mix(in srgb, var(--brand-magenta) 18%, transparent) 0%, transparent 60%),
-    linear-gradient(150deg, color-mix(in srgb, var(--smh-white) 92%, var(--smh-paper) 8%) 0%, color-mix(in srgb, var(--smh-white) 88%, var(--smh-paper-strong) 12%) 100%);
+    radial-gradient(140% 140% at 82% 6%, color-mix(in srgb, var(--brand-teal) 12%, transparent) 0%, transparent 52%),
+    radial-gradient(140% 140% at 18% 86%, color-mix(in srgb, var(--brand-magenta) 12%, transparent) 0%, transparent 58%),
+    linear-gradient(150deg, color-mix(in srgb, var(--smh-white) 96%, var(--smh-paper) 4%) 0%, color-mix(in srgb, var(--smh-white) 92%, var(--smh-paper-strong) 8%) 100%);
   box-shadow:
     var(--tp-glow),
-    0 18px 42px color-mix(in srgb, var(--brand-teal) 26%, transparent 62%);
+    0 12px 34px color-mix(in srgb, var(--brand-teal) 22%, transparent 68%);
   overflow: hidden;
 }
 
@@ -159,8 +159,8 @@
 }
 
 .tp-hero__veil {
-  background: linear-gradient(140deg, transparent 0%, color-mix(in oklab, var(--brand-teal) 32%, transparent) 100%);
-  opacity: 0.55;
+  background: linear-gradient(140deg, transparent 0%, color-mix(in oklab, var(--brand-teal) 18%, transparent) 100%);
+  opacity: 0.28;
 }
 
 .tp-hero__grain {
@@ -172,7 +172,7 @@
       transparent 3px
     );
   mix-blend-mode: soft-light;
-  opacity: 0.4;
+  opacity: 0.2;
 }
 
 .tp-hero__content {
