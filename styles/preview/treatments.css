@@ -1,24 +1,31 @@
 @import '../tokens/smh-champagne-tokens.css';
 
 :root {
-  --tp-surface: color-mix(in oklab, var(--smh-white) 92%, transparent);
-  --tp-surface-strong: color-mix(in oklab, var(--smh-white) 86%, transparent);
-  --tp-border: color-mix(in oklab, var(--brand-gold-keyline) 55%, transparent);
-  --tp-border-soft: color-mix(in oklab, var(--brand-gold-keyline) 32%, transparent);
-  --tp-muted: color-mix(in oklab, var(--smh-ink) 70%, transparent);
+  --tp-surface: color-mix(in oklab, var(--smh-paper) 92%, transparent);
+  --tp-surface-strong: color-mix(in oklab, var(--smh-paper-soft) 88%, transparent);
+  --tp-border: color-mix(in oklab, var(--brand-gold-keyline) 65%, transparent);
+  --tp-border-soft: color-mix(in oklab, var(--brand-gold-keyline) 38%, transparent);
+  --tp-muted: color-mix(in oklab, var(--smh-ink) 72%, transparent);
   --tp-heading: color-mix(in oklab, var(--smh-ink) 96%, transparent);
-  --tp-body: color-mix(in oklab, var(--smh-ink) 82%, transparent);
-  --tp-glow: 0 30px 80px color-mix(in srgb, var(--smh-ink) 15%, transparent);
-  --tp-chip-bg: color-mix(in oklab, var(--smh-white) 88%, transparent);
-  --tp-chip-alert: color-mix(in oklab, var(--brand-magenta) 26%, transparent);
-  --tp-chip-muted: color-mix(in oklab, var(--smh-ink) 18%, transparent);
-  --tp-grain: color-mix(in srgb, var(--smh-ink) 12%, transparent);
+  --tp-body: color-mix(in oklab, var(--smh-ink) 84%, transparent);
+  --tp-glow: 0 26px 72px color-mix(in srgb, var(--smh-ink) 14%, transparent);
+  --tp-chip-bg: color-mix(in oklab, var(--smh-white) 90%, transparent);
+  --tp-chip-alert: color-mix(in oklab, var(--brand-magenta) 28%, transparent);
+  --tp-chip-muted: color-mix(in oklab, var(--smh-ink) 20%, transparent);
+  --tp-grain: color-mix(in srgb, var(--smh-ink) 14%, transparent);
 }
 
 .tp-main {
   min-height: 100vh;
-  background: linear-gradient(180deg, color-mix(in oklab, var(--brand-teal) 14%, transparent) 0%, transparent 22%),
-    var(--smh-gradient);
+  background:
+    radial-gradient(140% 140% at 48% -6%, color-mix(in srgb, var(--brand-magenta) 10%, transparent) 0%, transparent 46%),
+    radial-gradient(140% 140% at 52% 8%, color-mix(in srgb, var(--brand-teal) 10%, transparent) 0%, transparent 44%),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--smh-paper-soft) 98%, var(--smh-ink) 2%) 0%,
+      color-mix(in srgb, var(--smh-paper) 96%, var(--smh-ink) 4%) 42%,
+      color-mix(in srgb, var(--smh-paper-strong) 94%, var(--smh-ink) 6%) 100%
+    );
   color: var(--tp-body);
   padding: clamp(4rem, 8vw, 6rem) 1.5rem 5rem;
 }
@@ -67,8 +74,14 @@
   position: relative;
   border-radius: 32px;
   border: 1px solid var(--tp-border);
-  background: var(--tp-surface);
-  box-shadow: var(--tp-glow);
+  background:
+    linear-gradient(150deg, color-mix(in oklab, var(--tp-surface) 96%, transparent) 0%, color-mix(in oklab, var(--tp-surface-strong) 92%, transparent) 100%),
+    radial-gradient(140% 140% at 16% 10%, color-mix(in srgb, var(--brand-magenta) 10%, transparent) 0%, transparent 42%),
+    radial-gradient(140% 140% at 84% 12%, color-mix(in srgb, var(--brand-teal) 10%, transparent) 0%, transparent 42%),
+    color-mix(in oklab, var(--tp-surface) 92%, transparent);
+  box-shadow:
+    var(--tp-glow),
+    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 20%, transparent);
   overflow: hidden;
   padding: clamp(2rem, 4vw, 2.75rem);
   display: grid;
@@ -129,10 +142,12 @@
   padding: clamp(2.75rem, 6vw, 3.75rem);
   border: 1px solid var(--tp-border);
   background:
-    radial-gradient(circle at top right, color-mix(in oklab, var(--brand-teal) 28%, transparent) 0%, transparent 62%),
-    radial-gradient(circle at bottom left, color-mix(in oklab, var(--brand-magenta) 18%, transparent) 0%, transparent 60%),
-    color-mix(in oklab, var(--smh-white) 88%, transparent);
-  box-shadow: var(--tp-glow);
+    radial-gradient(140% 140% at 82% 6%, color-mix(in srgb, var(--brand-teal) 12%, transparent) 0%, transparent 52%),
+    radial-gradient(140% 140% at 18% 86%, color-mix(in srgb, var(--brand-magenta) 12%, transparent) 0%, transparent 58%),
+    linear-gradient(150deg, color-mix(in srgb, var(--smh-white) 96%, var(--smh-paper) 4%) 0%, color-mix(in srgb, var(--smh-white) 92%, var(--smh-paper-strong) 8%) 100%);
+  box-shadow:
+    var(--tp-glow),
+    0 12px 34px color-mix(in srgb, var(--brand-teal) 22%, transparent 68%);
   overflow: hidden;
 }
 
@@ -144,8 +159,8 @@
 }
 
 .tp-hero__veil {
-  background: linear-gradient(140deg, transparent 0%, color-mix(in oklab, var(--brand-teal) 32%, transparent) 100%);
-  opacity: 0.45;
+  background: linear-gradient(140deg, transparent 0%, color-mix(in oklab, var(--brand-teal) 18%, transparent) 100%);
+  opacity: 0.28;
 }
 
 .tp-hero__grain {
@@ -157,7 +172,7 @@
       transparent 3px
     );
   mix-blend-mode: soft-light;
-  opacity: 0.4;
+  opacity: 0.2;
 }
 
 .tp-hero__content {
