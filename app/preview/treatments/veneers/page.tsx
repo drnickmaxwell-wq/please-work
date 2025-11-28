@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 import '@/styles/preview/champagne-preview.css';
 import Link from 'next/link';
 
-import LuxeTreatmentHero from '@/components/treatments/LuxeTreatmentHero';
+import PreviewHero from '@/components/preview/PreviewHero';
 import { KeyList, Section } from '@/components/preview/PreviewBlocks';
 import { previewRobots } from '@/lib/seo/preview/previewRobots';
 
@@ -37,8 +37,8 @@ const candidacy = [
 export default function VeneersPreviewPage() {
   return (
     <div className="cpv-page" data-treatment="veneers">
-      <LuxeTreatmentHero
-        variant="veneers"
+      <PreviewHero
+        treatment="veneers"
         eyebrow="Treatments preview"
         title="Porcelain veneers in Shoreham-by-Sea"
         description="Soft dusk gradients, Champagne shimmer, and balanced glass cards give you a safe playground to refine veneer copy, schema, and interactive elements before production."

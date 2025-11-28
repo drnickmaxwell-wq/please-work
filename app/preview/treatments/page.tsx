@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import '@/styles/preview/champagne-preview.css';
 
-import LuxeTreatmentHero from '@/components/treatments/LuxeTreatmentHero';
+import PreviewHero from '@/components/preview/PreviewHero';
 import { Section } from '@/components/preview/PreviewBlocks';
 import { previewRobots } from '@/lib/seo/preview/previewRobots';
 
@@ -36,8 +36,8 @@ export default function TreatmentsPreviewIndex() {
 
   return (
     <div className="cpv-page" data-treatment="general">
-      <LuxeTreatmentHero
-        variant="general"
+      <PreviewHero
+        treatment="general"
         eyebrow="Treatments preview"
         title="Treatment previews"
         description="Explore Champagne-themed staging areas for each treatment while production routes remain untouched. Use these links to review copy, layout, and token usage before launch."

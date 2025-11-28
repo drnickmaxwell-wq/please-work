@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import '@/styles/preview/champagne-preview.css';
 
-import LuxeTreatmentHero from '@/components/treatments/LuxeTreatmentHero';
+import PreviewHero from '@/components/preview/PreviewHero';
 import { Section } from '@/components/preview/PreviewBlocks';
 import { previewRobots } from '@/lib/seo/preview/previewRobots';
 
@@ -70,8 +70,8 @@ const technologyFaq = [
 export default function TechnologyPreviewPage() {
   return (
     <div className="cpv-page" data-treatment="technology">
-      <LuxeTreatmentHero
-        variant="technology"
+      <PreviewHero
+        treatment="technology"
         eyebrow="Treatments preview"
         title="Precision technology, calmer appointments"
         description="Guided implants, 3D printing, and laser refinements live inside the same dusk-to-teal Champagne hero system used on the home page—perfect for previewing interactive modules and copy."

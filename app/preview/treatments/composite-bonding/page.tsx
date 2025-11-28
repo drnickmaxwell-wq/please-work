@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 
 import '@/styles/preview/champagne-preview.css';
 
-import LuxeTreatmentHero from '@/components/treatments/LuxeTreatmentHero';
+import PreviewHero from '@/components/preview/PreviewHero';
 import { previewRobots } from '@/lib/seo/preview/previewRobots';
 
 import CompositeBondingFaqSection from './_sections/CompositeBondingFaqSection';
@@ -21,8 +21,8 @@ export const metadata: Metadata = {
 export default function CompositeBondingPreviewPage() {
   return (
     <div className="cpv-page" data-treatment="composite">
-      <LuxeTreatmentHero
-        variant="veneers"
+      <PreviewHero
+        treatment="composite"
         eyebrow="Treatments preview"
         title="Composite bonding artistry"
         description="Guided artistry layered over a calm Champagne hero. Assemble copy, imagery, and schema experiments here while the live treatments route remains unchanged."

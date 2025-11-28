@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 import '@/styles/preview/champagne-preview.css';
 import Link from 'next/link';
 
-import LuxeTreatmentHero from '@/components/treatments/LuxeTreatmentHero';
+import PreviewHero from '@/components/preview/PreviewHero';
 import { KeyList, Section } from '@/components/preview/PreviewBlocks';
 import ThreeDViewerSlot from '@/components/preview/treatments/ThreeDViewerSlot';
 import { previewRobots } from '@/lib/seo/preview/previewRobots';
@@ -40,8 +40,8 @@ const candidacyPoints = [
 export default function SparkAlignersPreviewPage() {
   return (
     <div className="cpv-page" data-treatment="orthodontics">
-      <LuxeTreatmentHero
-        variant="technology"
+      <PreviewHero
+        treatment="orthodontics"
         eyebrow="Treatments preview"
         title="Spark Aligners in Shoreham-by-Sea"
         description="Preview the digital-first Spark experience inside a Manus-balanced dusk hero. Swap in live copy, metrics, and viewer integrations without disturbing the production route."
