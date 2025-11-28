@@ -103,13 +103,13 @@ export async function loadPreviewSchemaStatuses(): Promise<PreviewSchemaStatus[]
   try {
     // load packs safely at runtime (server), catch all failures
     const routesMapMod = await import('@/reports/schema/routes-map.json').then((m) => m.default).catch(() => ({}));
-    const schemaPackMod = await import('@/reports/schema/Treatments_Schema_Pack_v2.json')
+    const schemaPackMod = await import('@/config/seo/schema/Treatments_Schema_Pack_v2.json')
       .then((m) => m.default)
       .catch(async () =>
         // fallback to v3 if present
-        await import('@/reports/schema/Treatments_Schema_Pack_v3.json').then((m) => m.default).catch(() => ({})),
+        await import('@/config/seo/schema/Treatments_Schema_Pack_v3.json').then((m) => m.default).catch(() => ({})),
       );
-    const breadcrumbsMod = await import('@/reports/schema/Treatments_Breadcrumbs.json')
+    const breadcrumbsMod = await import('@/config/seo/schema/Treatments_Breadcrumbs.json')
       .then((m) => m.default)
       .catch(() => ({}));
 
@@ -237,10 +237,10 @@ export async function loadTreatmentPreviewContent(slug: string): Promise<Treatme
     const routesMap = await import('@/reports/schema/routes-map.json')
       .then((m) => (isJsonObject(m.default) ? (m.default as SafeRoutesMap) : ({} as SafeRoutesMap)))
       .catch(() => ({} as SafeRoutesMap));
-    const schemaPack = await import('@/reports/schema/Treatments_Schema_Pack_v3.json')
+    const schemaPack = await import('@/config/seo/schema/Treatments_Schema_Pack_v3.json')
       .then((m) => ((isJsonObject(m.default) ? (m.default as SchemaPack) : { routes: {} }) as SchemaPack))
       .catch(() => ({ routes: {} } as SchemaPack));
-    const breadcrumbPack = await import('@/reports/schema/Treatments_Breadcrumbs.json')
+    const breadcrumbPack = await import('@/config/seo/schema/Treatments_Breadcrumbs.json')
       .then((m) => (isJsonObject(m.default) ? (m.default as BreadcrumbPack) : ({ breadcrumbs: {} } as BreadcrumbPack)))
       .catch(() => ({ breadcrumbs: {} } as BreadcrumbPack));
 

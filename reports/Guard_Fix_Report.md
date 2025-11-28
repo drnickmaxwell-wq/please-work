@@ -7,7 +7,7 @@
 
 ## Updated references
 - `app/preview/treatments/composite-bonding/page.tsx` now renders each section from the preview namespace.
-- `reports/Manus_Section_Catalog.json` paths now target `/app/preview/**` with `stage: "preview"` for every composite bonding entry.
+- `config/champagne/Manus_Section_Catalog.json` paths now target `/app/preview/**` with `stage: "preview"` for every composite bonding entry.
 - `reports/Scaffold_Report.md` documents the relocation and promotion plan, and `/app/preview/treatments/composite-bonding/README.md` outlines the release handoff.
 
 ## Guard status

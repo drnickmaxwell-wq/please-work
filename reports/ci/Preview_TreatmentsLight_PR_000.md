@@ -2,7 +2,7 @@
 
 ## Summary
 - Restored `public/brand/manifest.json` to the mainline snapshot and left other sacred brand assets untouched.
-- Updated the `/preview/treatments-light/` page to source schema data from `/reports/routes-map.json` and `/reports/seo/Treatments_Schema_Pack.json`.
+- Updated the `/preview/treatments-light/` page to source schema data from `/reports/routes-map.json` and `/config/seo/Treatments_Schema_Pack.json`.
 - Added a direct copy of the routes map under `/reports/routes-map.json` for preview consumption without touching production routes.
 
 ## File inventory
