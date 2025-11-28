@@ -51,17 +51,14 @@ export default function ChampagneHero() {
       <div className="hero-film-grain" />
       <div className="hero-content">
         <div className="hero-content-wrapper">
-          <h1 id="home-hero-title">Your Luxury Smile Awaits</h1>
-          <p>
-            Private dental care with calm precision, comfort-first technology, and
-            a signature Manus AI finish.
-          </p>
+          <h1 id="home-hero-title">Luxury Coastal Dentistry in Shoreham-by-Sea</h1>
+          <p>Calm, technology-led private care with gentle clinicians and tailored smile design.</p>
           <div className="hero-cta-group">
             <a href="/contact" className="hero-cta-primary">
               Book a consultation
             </a>
-            <a href="/treatments" className="hero-cta-secondary">
-              Explore treatments
+            <a href="/ai-smile-quiz" className="hero-cta-secondary">
+              Take the AI Smile Quiz
             </a>
           </div>
         </div>
