@@ -1,4 +1,4 @@
-import breadcrumbsPack from '@/reports/schema/Treatments_Breadcrumbs.json';
+import breadcrumbsPack from '@/config/seo/schema/Treatments_Breadcrumbs.json';
 import type { PreviewBreadcrumbItem } from '@/lib/seo/preview/safe-loader';
 
 const breadcrumbEntries =

@@ -1,6 +1,6 @@
 # SEO Schema Index
 
-This index mirrors the structured data plan captured in [`schema-map.json`](./schema-map.json). Each route lists the schema.org types that should be hydrated from the MDX content pack along with where they should be injected and the key properties to populate.
+This index mirrors the structured data plan captured in [`schema-map.json`](../../config/seo/schema-map.json). Each route lists the schema.org types that should be hydrated from the MDX content pack along with where they should be injected and the key properties to populate.
 
 ## `/`
 - **Organization**

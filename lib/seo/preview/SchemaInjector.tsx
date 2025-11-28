@@ -45,11 +45,11 @@ const routesMapModule = await import('@/reports/schema/routes-map.json')
   .then((mod) => mod.default)
   .catch(() => ({}));
 
-const schemaPackModule = await import('@/reports/schema/Treatments_Schema_Pack_v3.json')
+const schemaPackModule = await import('@/config/seo/schema/Treatments_Schema_Pack_v3.json')
   .then((mod) => mod.default)
   .catch(() => ({}));
 
-const breadcrumbsPackModule = await import('@/reports/schema/Treatments_Breadcrumbs.json')
+const breadcrumbsPackModule = await import('@/config/seo/schema/Treatments_Breadcrumbs.json')
   .then((mod) => mod.default)
   .catch(() => ({}));
 

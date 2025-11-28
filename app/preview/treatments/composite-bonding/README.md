@@ -6,4 +6,4 @@ This directory contains the composite bonding treatment sections while they are 
 - **Guard expectations:** Keep tokens aligned with `/docs/Brand_Canon_Packet/smh-champagne-tokens.css` and avoid raw hex values. Preview-only guards must remain green before any promotion.
 - **Showcase page:** `/app/preview/treatments/composite-bonding/page.tsx` renders each section with a preview banner and noindex metadata for reviewers.
 
-After release, update `reports/Manus_Section_Catalog.json` to mark the stage as `live` and adjust component paths.
+After release, update `config/champagne/Manus_Section_Catalog.json` to mark the stage as `live` and adjust component paths.
