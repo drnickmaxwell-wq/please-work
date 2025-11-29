@@ -15,11 +15,24 @@
 - Clinic tour uses a placeholder; replace `practiceTourVideoSrc` with the final practice tour asset when available.
 - Existing lint issues remain outside homepage scope (e.g., legacy require() imports, unused vars). See lint output below.
 
+## Hybrid Canvas Fix Notes
+- `home-champagne.css` applied a full-page champagne gradient and forced white typography through `.champagne-preview` selectors targeting `main`, `section`, `div`, and `article`, which allowed the dusk bands to bleed across the entire layout and flatten the glass cards.
+- Without a dedicated preview wrapper, the background overlays sat directly on `body/main`, creating rainbow bands down the viewport and erasing section spacing intended for glass rails.
+- Introduced a `.preview-home-canvas` root with zone wrappers to contain the gradients, re-center the clinic tour glass card, and keep treatment/story/FAQ rails separated from production styling.
+
+## Time-of-Day Ready Variables
+- Defined `--smh-home-zone1-default`, `--smh-home-zone2-default`, and `--smh-home-zone3-default` alongside `--home-zone1-bg`, `--home-zone2-bg`, and `--home-zone3-bg` on `.preview-home-canvas` so a future controller can swap canvases without touching markup.
+
+## Before vs After
+- Before: rainbow gradients ran full-width with flattened glass cards and buttons inheriting washed-out text.
+- After: light → dusk → light canvas zones frame the hero, treatments/tech/stories, and local proof/FAQ with restored glass spacing and legible CTAs.
+
 ## Test outcomes
-- `pnpm lint` — fails due to pre-existing repo warnings/errors outside homepage changes (require() imports, unused vars, img warnings). See terminal chunk `dd945e` for full list.
-- `pnpm test` — passed (brand manifest test).
-- `pnpm brand:guard` — passed after removing rogue hex fallbacks.
+- `pnpm test` — passed (brand manifest + preview smoke).
+- `pnpm brand:guard` — passed.
 - `node scripts/guard-rogue-hex.mjs` — passed.
+- `node scripts/guard-preview-only.mjs` — blocked (repository has no `origin/main`, so merge-base lookup fails in container).
+- `node scripts/guard-manifest-sync.mjs` — passed.
 
 ## Crash Fix Summary
 - Root cause: `MicroFaq` passed a `data` prop to `FAQJsonLd`, but `FAQJsonLd` expects an `items` array and immediately maps over it, causing a client-side exception on `/preview/home`.

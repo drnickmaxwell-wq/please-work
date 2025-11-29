@@ -58,8 +58,11 @@ export default function MostRequestedTreatments() {
                 </div>
                 <p className={`text-base leading-relaxed ${styles.mutedText}`}>{treatment.description}</p>
               </div>
-              <span className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--brand-magenta)] transition group-hover:translate-x-1">
-                View {treatment.name.toLowerCase()} <span aria-hidden>→</span>
+              <span className="inline-flex items-center">
+                <span className={`${styles.pillCtaGhost} inline-flex items-center gap-2 text-sm font-semibold`}>
+                  View {treatment.name.toLowerCase()}
+                  <span aria-hidden>→</span>
+                </span>
               </span>
             </a>
           ))}

@@ -1,47 +1,140 @@
-.champagne-preview {
+.preview-home-canvas {
   position: relative;
   isolation: isolate;
   min-height: 100vh;
-  background:
-    radial-gradient(circle at 20% 0%, color-mix(in oklab, var(--brand-magenta) 14%, transparent), transparent 38%),
-    radial-gradient(circle at 80% 4%, color-mix(in oklab, var(--brand-teal) 16%, transparent), transparent 46%),
-    linear-gradient(180deg, color-mix(in oklab, var(--champagne-ink) 92%, var(--smh-bg) 8%), var(--champagne-ink));
-  color: var(--smh-white);
+  --smh-home-zone1-default: radial-gradient(
+      120% 140% at 20% 0%,
+      color-mix(in oklab, var(--brand-magenta) 12%, transparent) 0%,
+      transparent 36%
+    ),
+    radial-gradient(
+      120% 140% at 80% 6%,
+      color-mix(in oklab, var(--brand-teal) 14%, transparent) 0%,
+      transparent 40%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--smh-paper-soft) 86%, var(--champagne-ink) 14%) 0%,
+      color-mix(in oklab, var(--smh-paper) 82%, var(--champagne-ink) 18%) 100%
+    );
+  --smh-home-zone2-default: linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--champagne-ink) 86%, var(--smh-bg) 14%) 0%,
+      color-mix(in oklab, var(--champagne-ink) 92%, var(--ink) 8%) 36%,
+      color-mix(in oklab, var(--ink) 80%, var(--champagne-ink) 20%) 100%
+    );
+  --smh-home-zone3-default: radial-gradient(
+      160% 140% at 18% 18%,
+      color-mix(in oklab, var(--brand-teal) 10%, transparent) 0%,
+      transparent 36%
+    ),
+    radial-gradient(
+      160% 140% at 82% 14%,
+      color-mix(in oklab, var(--brand-gold) 12%, transparent) 0%,
+      transparent 40%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--smh-paper) 90%, var(--champagne-ink) 10%) 0%,
+      color-mix(in oklab, var(--smh-paper-strong) 86%, var(--champagne-ink) 14%) 100%
+    );
+  --home-zone1-bg: var(--smh-home-zone1-default);
+  --home-zone2-bg: var(--smh-home-zone2-default);
+  --home-zone3-bg: var(--smh-home-zone3-default);
+  background: var(--home-zone1-bg);
+  color: var(--smh-ink);
 }
 
-.champagne-preview::after {
+.preview-home-canvas::after {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 50% 86%, color-mix(in oklab, var(--brand-teal) 10%, transparent), transparent 48%),
+    radial-gradient(circle at 52% 84%, color-mix(in oklab, var(--brand-teal) 10%, transparent), transparent 48%),
     linear-gradient(135deg, var(--brand-magenta) 0%, var(--brand-teal) 60%, var(--brand-gold) 100%);
   mix-blend-mode: screen;
   opacity: 0.08;
   z-index: 0;
 }
 
-.champagne-preview main,
-.champagne-preview section,
-.champagne-preview div,
-.champagne-preview article {
+.preview-home-main {
+  position: relative;
+  z-index: 1;
+}
+
+.preview-home-zone {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(1.5rem, 2vw + 1rem, 2.75rem) 0;
+}
+
+.preview-home-zone-1 {
+  background: var(--home-zone1-bg);
+}
+
+.preview-home-zone-1::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 2%, color-mix(in oklab, var(--brand-magenta) 12%, transparent), transparent 58%);
+  opacity: 0.08;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.preview-home-zone-2 {
+  background: var(--home-zone2-bg);
+  box-shadow: inset 0 1px 0 color-mix(in oklab, var(--smh-white) 10%, transparent);
+}
+
+.preview-home-zone-2::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 120% at 18% 16%, color-mix(in oklab, var(--brand-magenta) 10%, transparent) 0%, transparent 48%),
+    radial-gradient(120% 120% at 82% 12%, color-mix(in oklab, var(--brand-teal) 12%, transparent) 0%, transparent 52%);
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.preview-home-zone-3 {
+  background: var(--home-zone3-bg);
+  box-shadow: inset 0 1px 0 color-mix(in oklab, var(--smh-white) 14%, transparent);
+}
+
+.preview-home-zone-3::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(140% 140% at 50% 0%, color-mix(in oklab, var(--brand-gold) 8%, transparent), transparent 64%);
+  opacity: 0.14;
+  pointer-events: none;
+}
+
+.preview-home-canvas main,
+.preview-home-canvas section,
+.preview-home-canvas div,
+.preview-home-canvas article {
   font-family: var(--font-sans, "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
 }
 
-.champagne-preview h2,
-.champagne-preview h3,
-.champagne-preview h4 {
+.preview-home-canvas h2,
+.preview-home-canvas h3,
+.preview-home-canvas h4 {
   font-family: var(--font-display, 'Playfair Display', serif);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .champagne-preview {
-    background:
-      linear-gradient(180deg, color-mix(in oklab, var(--champagne-ink) 92%, var(--smh-bg) 8%), var(--champagne-ink));
+  .preview-home-canvas {
+    background: var(--home-zone1-bg);
   }
 
-  .champagne-preview::after {
+  .preview-home-canvas::after,
+  .preview-home-zone-1::before,
+  .preview-home-zone-2::before,
+  .preview-home-zone-3::before {
     display: none;
   }
 }
