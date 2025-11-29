@@ -17,6 +17,7 @@ import {
   getPreviewTreatmentConfig,
   type PreviewTreatmentConfig,
 } from "@/lib/treatments/previewTreatmentConfig";
+import "@/components/preview/preview-layout.css";
 import layoutStyles from "@/components/preview/sections/treatments/preview-treatments.module.css";
 import "@/components/preview/preview-typography.css";
 import "@/styles/preview/treatments-preview.css";

@@ -26,7 +26,7 @@ const steps: WorkflowStep[] = [
 
 export default function PreviewWorkflow() {
   return (
-    <section className={styles.workflowSection} aria-labelledby="workflow-heading">
+    <section className={`${styles.workflowSection} cpv-card cpv-card--soft`} aria-labelledby="workflow-heading">
       <div className={styles.sectionHeading}>
         <p className="text-eyebrow">Our digital workflow</p>
         <div className="space-y-3">
@@ -41,7 +41,7 @@ export default function PreviewWorkflow() {
 
       <div className={styles.workflowGrid} id="workflow">
         {steps.map((step) => (
-          <div key={step.title} className={styles.workflowCard}>
+          <div key={step.title} className={`${styles.workflowCard} cpv-card cpv-card--soft`}>
             <span className={styles.workflowIcon} aria-hidden>
               {step.icon}
             </span>

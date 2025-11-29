@@ -18,8 +18,8 @@
   font-family: var(--font-inter, "Inter", sans-serif);
   font-size: clamp(1.05rem, 0.6vw + 1rem, 1.25rem);
   line-height: 1.68;
-  font-weight: 500;
-  color: color-mix(in srgb, currentColor 88%, transparent);
+  font-weight: 600;
+  color: var(--cpv-page-text-soft, color-mix(in srgb, currentColor 88%, transparent));
 }
 
 :global(.text-eyebrow) {
@@ -28,7 +28,7 @@
   text-transform: uppercase;
   letter-spacing: 0.2em;
   font-weight: 700;
-  color: color-mix(in srgb, currentColor 76%, transparent);
+  color: var(--cpv-page-text-soft, color-mix(in srgb, currentColor 76%, transparent));
 }
 
 :global(.text-body) {
@@ -36,5 +36,5 @@
   font-size: 1rem;
   line-height: 1.75;
   font-weight: 500;
-  color: color-mix(in srgb, currentColor 92%, transparent);
+  color: var(--cpv-page-text, color-mix(in srgb, currentColor 92%, transparent));
 }
