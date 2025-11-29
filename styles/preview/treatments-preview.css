@@ -35,11 +35,11 @@
   gap: 0.65rem;
   padding: 1.4rem 1.25rem;
   border-radius: 18px;
-  background: var(--cpv-card-surface-soft);
-  border: 1px solid var(--cpv-card-border);
+  background: color-mix(in srgb, var(--cpv-card-surface-soft) 82%, var(--smh-ink-soft) 18%);
+  border: 1px solid color-mix(in srgb, var(--cpv-gold-keyline) 78%, transparent 14%);
   box-shadow:
     var(--cpv-card-shadow-ambient),
-    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 16%, transparent);
+    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 10%, transparent);
   text-decoration: none;
   color: inherit;
   transition: transform 180ms ease, box-shadow 180ms ease;
@@ -48,9 +48,9 @@
 .treatment-rail__card:hover {
   transform: translateY(-2px);
   box-shadow:
-    0 20px 40px color-mix(in srgb, var(--smh-ink) 14%, transparent),
-    0 14px 30px color-mix(in srgb, var(--brand-magenta) 24%, transparent 70%);
-  border-color: color-mix(in srgb, var(--cpv-gold-keyline) 92%, transparent 6%);
+    0 20px 40px color-mix(in srgb, var(--smh-ink) 18%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 12%, transparent);
+  border-color: color-mix(in srgb, var(--cpv-gold-keyline) 86%, transparent 12%);
 }
 
 .treatment-rail__tone,
@@ -58,14 +58,14 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: radial-gradient(140% 120% at 26% 8%, color-mix(in srgb, var(--brand-gold) 16%, transparent) 0%, transparent 60%);
-  opacity: 0.18;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--brand-magenta) 12%, transparent), transparent 60%);
+  opacity: 0.16;
   pointer-events: none;
 }
 
 .treatment-rail__tone[data-tone="cool"],
 .treatment-deck__tone[data-tone="cool"] {
-  background: radial-gradient(140% 120% at 50% 0%, color-mix(in srgb, var(--brand-teal) 24%, transparent) 0%, transparent 62%);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--brand-teal) 14%, transparent), transparent 60%);
 }
 
 .treatment-rail__body {
@@ -106,10 +106,10 @@
   padding: 1.6rem;
   border-radius: 18px;
   border: 1px solid var(--cpv-card-border);
-  background: var(--cpv-card-surface);
+  background: color-mix(in srgb, var(--cpv-card-surface) 82%, var(--smh-ink-soft) 18%);
   box-shadow:
     var(--cpv-card-shadow-ambient),
-    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 16%, transparent);
+    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 12%, transparent);
   display: grid;
   gap: 0.7rem;
 }
@@ -154,10 +154,10 @@
   border: 1px solid color-mix(in srgb, var(--smh-accent-gold-soft) 24%, transparent);
   border-radius: 18px;
   padding: 1.4rem 1.2rem 1.2rem;
-  background: var(--cpv-card-surface-soft);
+  background: color-mix(in srgb, var(--cpv-card-surface-soft) 82%, var(--smh-ink-soft) 18%);
   box-shadow:
     var(--cpv-card-shadow-ambient),
-    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 14%, transparent);
+    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 10%, transparent);
   display: grid;
   gap: 0.6rem;
 }
@@ -168,10 +168,10 @@
   border-radius: 999px;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, color-mix(in srgb, var(--brand-magenta) 36%, transparent), color-mix(in srgb, var(--brand-teal) 30%, transparent));
+  background: linear-gradient(135deg, color-mix(in srgb, var(--brand-magenta) 26%, transparent), color-mix(in srgb, var(--brand-teal) 24%, transparent));
   color: var(--smh-white);
   font-weight: 700;
-  box-shadow: 0 10px 24px color-mix(in srgb, var(--smh-ink) 20%, transparent);
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--smh-ink) 22%, transparent);
 }
 
 .howto-grid__copy h3 {
@@ -188,9 +188,13 @@
 .finance-band {
   display: grid;
   gap: 1.2rem;
-  background:
-    linear-gradient(145deg, color-mix(in srgb, var(--brand-magenta) 14%, transparent) 0%, transparent 60%),
-    var(--cpv-card-surface-bright);
+  background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--brand-magenta) 34%, transparent) 0%,
+      color-mix(in srgb, var(--brand-teal) 30%, transparent) 60%,
+      color-mix(in srgb, var(--brand-gold) 20%, transparent) 96%
+    ),
+    color-mix(in srgb, var(--cpv-card-surface-bright) 80%, var(--smh-ink-soft) 20%);
   border-radius: 18px;
   padding: 1.5rem;
   border: 1px solid color-mix(in srgb, var(--cpv-gold-keyline) 86%, transparent 10%);
@@ -200,7 +204,7 @@
   justify-self: start;
   padding: 0.35rem 0.8rem;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--brand-teal) 22%, transparent);
+  background: color-mix(in srgb, var(--brand-teal) 24%, var(--smh-ink) 76%);
   color: var(--cpv-page-text);
   font-weight: 600;
 }
@@ -248,8 +252,8 @@
   width: 0.65rem;
   height: 0.65rem;
   border-radius: 999px;
-  background: linear-gradient(135deg, color-mix(in srgb, var(--brand-gold) 64%, transparent), color-mix(in srgb, var(--brand-teal) 28%, transparent));
-  box-shadow: 0 6px 14px color-mix(in srgb, var(--smh-ink) 16%, transparent);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--brand-magenta) 22%, transparent), color-mix(in srgb, var(--brand-teal) 20%, transparent), color-mix(in srgb, var(--brand-gold) 16%, transparent));
+  box-shadow: 0 6px 14px color-mix(in srgb, var(--smh-ink) 18%, transparent);
 }
 
 .finance-band__ctas {
