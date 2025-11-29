@@ -6,7 +6,7 @@ export type ChampagneNavItem = {
 export const champagnePreviewNav: ChampagneNavItem[] = [
   { label: "Home", href: "/preview/home" },
   { label: "Treatments", href: "/preview/treatments" },
-  { label: "Technology", href: "/preview/treatments/technology" },
+  { label: "Technology", href: "/preview/technology" },
   { label: "Patient stories", href: "/patient-stories" },
   { label: "Patient portal", href: "/portal" },
   { label: "Fees & finance", href: "/finance" },
