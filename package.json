@@ -12,7 +12,7 @@
     "build": "next build",
     "start": "next start",
     "format": "prettier --write public/brand/manifest.json lib/brand/manifest.ts app/brand.ts components/sections/HeroLuxury.tsx tests/brand-manifest.spec.ts",
-    "test": "tsx --test tests/brand-manifest.spec.ts",
+    "test": "node --test --import tsx --import ./tests/register-css-loader.js tests/brand-manifest.spec.ts tests/preview/homepage.test.tsx",
     "brand:guard": "node scripts/brand-guard.cjs",
     "brand:canon": "node scripts/generate-champagne-canon.mjs",
     "brand:compare": "node scripts/compare-manus-to-champagne.mjs",
