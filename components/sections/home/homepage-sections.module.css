@@ -1,9 +1,33 @@
+.sectionShell {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(3.5rem, 4vw + 1rem, 5rem) 0;
+}
+
+.sectionInner {
+  position: relative;
+  z-index: 1;
+}
+
+.inkTone {
+  background:
+    radial-gradient(circle at 18% 10%, color-mix(in oklab, var(--brand-magenta) 16%, transparent), transparent 45%),
+    radial-gradient(circle at 85% 12%, color-mix(in oklab, var(--brand-teal) 18%, transparent), transparent 52%),
+    linear-gradient(180deg, color-mix(in oklab, var(--champagne-ink) 90%, var(--smh-bg) 10%), var(--champagne-ink));
+  color: var(--smh-white);
+}
+
+.paperTone {
+  background: color-mix(in oklab, var(--smh-bg) 92%, var(--champagne-ink) 8%);
+  color: color-mix(in oklab, var(--ink) 92%, var(--champagne-ink) 8%);
+}
+
 .sectionSurface {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background: radial-gradient(circle at 20% 20%, color-mix(in oklab, var(--smh-white) 8%, transparent), transparent 38%),
-    color-mix(in oklab, var(--smh-bg) 86%, transparent);
+  background: color-mix(in oklab, var(--champagne-ink) 82%, var(--smh-bg) 18%);
   color: color-mix(in oklab, var(--smh-white) 94%, var(--ink));
 }
 
@@ -11,8 +35,8 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, var(--brand-magenta) 0%, var(--brand-teal) 65%, var(--brand-gold) 100%);
-  opacity: 0.12;
+  background: linear-gradient(135deg, var(--brand-magenta) 0%, var(--brand-teal) 60%, var(--brand-gold) 100%);
+  opacity: 0.14;
   pointer-events: none;
 }
 
@@ -24,17 +48,35 @@
   background-size: cover, cover;
   background-repeat: no-repeat, repeat;
   mix-blend-mode: soft-light;
-  opacity: 0.22;
+  opacity: 0.18;
   pointer-events: none;
 }
 
 .glassCard {
   position: relative;
-  background: color-mix(in oklab, var(--smh-white) 14%, transparent);
-  border: 1px solid color-mix(in oklab, var(--champagne-keyline-gold) 38%, transparent);
-  box-shadow: 0 24px 68px color-mix(in oklab, var(--ink) 22%, transparent);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: color-mix(in oklab, var(--smh-white) 12%, transparent);
+  border: 1px solid color-mix(in oklab, var(--champagne-keyline-gold) 40%, transparent);
+  box-shadow:
+    0 18px 44px color-mix(in oklab, var(--ink) 18%, transparent),
+    0 1px 0 color-mix(in oklab, var(--smh-white) 24%, transparent) inset;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.glassCard::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--brand-magenta) 0%, var(--brand-teal) 60%, var(--brand-gold) 100%);
+  opacity: 0.22;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.glassCard > :not(.waveOverlay):not(.grainOverlay) {
+  position: relative;
+  z-index: 1;
 }
 
 .waveOverlay {
@@ -43,7 +85,7 @@
   background-image: url('/brand/waves/wave-mask.svg');
   background-size: cover;
   background-repeat: no-repeat;
-  opacity: 0.18;
+  opacity: 0.14;
   mix-blend-mode: screen;
   pointer-events: none;
 }
@@ -54,7 +96,7 @@
   background-image: url('/brand/textures/film-grain-2560x1440.webp');
   background-size: cover;
   mix-blend-mode: soft-light;
-  opacity: 0.28;
+  opacity: 0.26;
   pointer-events: none;
 }
 
@@ -62,19 +104,112 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.4rem 0.9rem;
+  padding: 0.45rem 1rem;
   border-radius: 999px;
   border: 1px solid var(--champagne-keyline-gold);
-  background: color-mix(in oklab, var(--smh-white) 12%, transparent);
-  color: color-mix(in oklab, var(--ink) 80%, var(--smh-white));
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  background:
+    linear-gradient(135deg, color-mix(in oklab, var(--smh-white) 16%, transparent), transparent),
+    color-mix(in oklab, var(--smh-white) 10%, transparent);
+  color: color-mix(in oklab, var(--ink) 82%, var(--smh-white));
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .mutedText {
-  color: color-mix(in oklab, var(--smh-white) 70%, var(--ink));
+  color: color-mix(in oklab, var(--smh-white) 75%, var(--ink));
 }
 
 .keyline {
-  border: 1px solid color-mix(in oklab, var(--champagne-keyline-gold) 32%, transparent);
+  border: 1px solid color-mix(in oklab, var(--champagne-keyline-gold) 34%, transparent);
+}
+
+.displayHeading {
+  font-family: var(--font-display, 'Playfair Display', serif);
+  letter-spacing: -0.01em;
+}
+
+.interactiveGlow {
+  transition: transform 260ms ease, box-shadow 260ms ease, border-color 200ms ease;
+}
+
+.interactiveGlow:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 26px 70px color-mix(in oklab, var(--ink) 24%, transparent),
+    0 0 0 1px color-mix(in oklab, var(--champagne-keyline-gold) 65%, transparent) inset;
+}
+
+.interactiveGlow:focus-visible {
+  outline: 2px solid color-mix(in oklab, var(--champagne-keyline-gold) 70%, transparent);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interactiveGlow,
+  .interactiveGlow:hover {
+    transform: none;
+    transition: border-color 200ms ease;
+  }
+}
+
+.haloBorder {
+  position: relative;
+  border-radius: 24px;
+  background: linear-gradient(135deg, var(--brand-magenta) 0%, var(--brand-teal) 60%, var(--brand-gold) 100%);
+  padding: 1px;
+}
+
+.haloContent {
+  border-radius: inherit;
+  background: color-mix(in oklab, var(--champagne-ink) 82%, var(--smh-bg) 18%);
+}
+
+.pillCtaPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-radius: 999px;
+  padding: 0.65rem 1.35rem;
+  background: linear-gradient(135deg, var(--brand-magenta) 0%, var(--brand-teal) 60%, var(--brand-gold) 100%);
+  color: color-mix(in oklab, var(--ink) 92%, var(--smh-white));
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  box-shadow: 0 18px 38px color-mix(in oklab, var(--ink) 24%, transparent);
+}
+
+.pillCtaPrimary:hover {
+  filter: brightness(1.05);
+}
+
+.pillCtaPrimary:focus-visible {
+  outline: 2px solid color-mix(in oklab, var(--champagne-keyline-gold) 70%, transparent);
+  outline-offset: 3px;
+}
+
+.pillCtaGhost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  border-radius: 999px;
+  padding: 0.6rem 1.2rem;
+  border: 1px solid color-mix(in oklab, var(--champagne-keyline-gold) 38%, transparent);
+  background: color-mix(in oklab, var(--smh-white) 8%, transparent);
+  color: color-mix(in oklab, var(--ink) 70%, var(--smh-white));
+  font-weight: 700;
+}
+
+.pillCtaGhost:hover {
+  border-color: color-mix(in oklab, var(--champagne-keyline-gold) 68%, transparent);
+  color: var(--smh-white);
+}
+
+.pillCtaGhost:focus-visible {
+  outline: 2px solid color-mix(in oklab, var(--champagne-keyline-gold) 70%, transparent);
+  outline-offset: 3px;
+}
+
+.dividerLine {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--smh-white) 30%, transparent), transparent);
 }
