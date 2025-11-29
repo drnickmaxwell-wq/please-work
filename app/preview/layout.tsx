@@ -1,6 +1,8 @@
-import type { ReactNode } from 'react';
-import '@/styles/preview/dusk.css';
+import type { ReactNode } from "react";
+
+import PreviewShell from "@/components/preview/layout/PreviewShell";
+import "@/styles/preview/dusk.css";
 
 export default function PreviewLayout({ children }: { children: ReactNode }) {
-  return <div data-theme="preview-dusk">{children}</div>;
+  return <PreviewShell>{children}</PreviewShell>;
 }
