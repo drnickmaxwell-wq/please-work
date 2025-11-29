@@ -5,7 +5,7 @@ import styles from "./champagne-preview-footer.module.css";
 const mainLinks = [
   { label: "Home", href: "/preview/home" },
   { label: "Treatments", href: "/preview/treatments" },
-  { label: "Technology", href: "/preview/treatments/technology" },
+  { label: "Technology", href: "/preview/technology" },
   { label: "Contact", href: "/contact" },
 ];
 
