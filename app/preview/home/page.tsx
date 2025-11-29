@@ -12,6 +12,7 @@ import PortalTeaser from "@/components/sections/home/PortalTeaser";
 import TechnologyHighlight from "@/components/sections/home/TechnologyHighlight";
 import JsonLd from "@/components/seo/json-ld";
 import { SMH_BUSINESS_DATA } from "@/lib/seo/advanced-seo";
+import "@/styles/preview/home-champagne.css";
 
 export const metadata: Metadata = {
   title: "Luxury Coastal Dentistry in Shoreham-by-Sea | St Mary's House Dental",
@@ -111,17 +112,19 @@ const websiteSchema = {
 
 export default function HomePreviewPage() {
   return (
-    <main className="space-y-0 bg-[var(--champagne-ink)] text-white">
-      <ChampagneHero />
-      <ClinicTourSection />
-      <MostRequestedTreatments />
-      <TechnologyHighlight />
-      <PatientStoriesTeaser />
-      <AiSmileQuizTeaser />
-      <PortalTeaser />
-      <LocalProof />
-      <MicroFaq faqs={faqs} />
-      <JsonLd data={[organizationSchema, localBusinessSchema, websiteSchema]} />
-    </main>
+    <div className="champagne-preview">
+      <main className="text-white">
+        <ChampagneHero />
+        <ClinicTourSection />
+        <MostRequestedTreatments />
+        <TechnologyHighlight />
+        <PatientStoriesTeaser />
+        <AiSmileQuizTeaser />
+        <PortalTeaser />
+        <LocalProof />
+        <MicroFaq faqs={faqs} />
+        <JsonLd data={[organizationSchema, localBusinessSchema, websiteSchema]} />
+      </main>
+    </div>
   );
 }

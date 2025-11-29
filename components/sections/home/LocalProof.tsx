@@ -1,19 +1,20 @@
 import styles from "./homepage-sections.module.css";
+import SectionShell from "./SectionShell";
 
 export default function LocalProof() {
   return (
-    <section className={`${styles.sectionSurface} px-4 py-16 text-white lg:py-20`} aria-labelledby="local-proof-title">
-      <div className="relative z-10 mx-auto grid max-w-6xl gap-8 md:grid-cols-2 md:items-center">
-        <div className="space-y-3">
+    <SectionShell className={styles.sectionSurface} ariaLabelledby="local-proof-title">
+      <div className="relative z-10 grid gap-10 md:grid-cols-2 md:items-center">
+        <div className="space-y-4">
           <span className={styles.chip}>Shoreham-by-Sea</span>
-          <h2 id="local-proof-title" className="text-3xl font-semibold leading-tight md:text-4xl">
+          <h2 id="local-proof-title" className={`${styles.displayHeading} text-3xl font-semibold leading-tight md:text-4xl`}>
             Trusted coastal clinic
           </h2>
           <p className={`text-lg leading-relaxed ${styles.mutedText}`}>
             Moments from the riverfront, we welcome guests from Shoreham-by-Sea, Brighton, Hove, and the wider West Sussex coast.
             Easy parking, calm interiors, and clinicians who specialise in supporting nervous patients.
           </p>
-          <div className={`${styles.glassCard} mt-4 inline-flex items-center gap-3 rounded-2xl px-4 py-3 text-white`}>
+          <div className={`${styles.glassCard} ${styles.interactiveGlow} mt-4 inline-flex items-center gap-3 rounded-2xl px-4 py-3 text-white`}>
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/15 text-lg font-semibold text-[var(--brand-gold)]">
               4.9★
             </div>
@@ -23,10 +24,10 @@ export default function LocalProof() {
             </div>
           </div>
         </div>
-        <div className={`${styles.glassCard} relative overflow-hidden rounded-3xl p-4`}>
+        <div className={`${styles.glassCard} ${styles.interactiveGlow} relative overflow-hidden rounded-3xl p-5`}>
           <div className={styles.waveOverlay} aria-hidden />
           <div className={styles.grainOverlay} aria-hidden />
-          <div className="relative z-10 space-y-3">
+          <div className="relative z-10 space-y-4">
             <div className="flex items-center justify-between">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white/70">Find us</p>
               <span className="rounded-full border border-white/20 px-3 py-1 text-xs text-white/75">BN43 5ZA</span>
@@ -46,6 +47,6 @@ export default function LocalProof() {
           </div>
         </div>
       </div>
-    </section>
+    </SectionShell>
   );
 }

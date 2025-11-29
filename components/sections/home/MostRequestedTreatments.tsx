@@ -1,4 +1,5 @@
 import styles from "./homepage-sections.module.css";
+import SectionShell from "./SectionShell";
 
 const treatments = [
   {
@@ -29,11 +30,11 @@ const treatments = [
 
 export default function MostRequestedTreatments() {
   return (
-    <section className="bg-[var(--smh-bg)] px-4 py-16 text-[var(--ink)] lg:py-20" aria-labelledby="treatments-title">
-      <div className="mx-auto flex max-w-6xl flex-col gap-8">
+    <SectionShell tone="paper" ariaLabelledby="treatments-title">
+      <div className="flex flex-col gap-10">
         <div className="space-y-3">
           <span className={styles.chip}>Most requested treatments</span>
-          <h2 id="treatments-title" className="text-3xl font-semibold leading-tight md:text-4xl">
+          <h2 id="treatments-title" className={`${styles.displayHeading} text-3xl font-semibold leading-tight md:text-4xl`}>
             Crafted smiles, guided by Champagne precision
           </h2>
           <p className={`max-w-3xl text-lg leading-relaxed ${styles.mutedText}`}>
@@ -41,16 +42,16 @@ export default function MostRequestedTreatments() {
             previews, finance-friendly options, and a calm, coastal setting minutes from the beach.
           </p>
         </div>
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
           {treatments.map((treatment) => (
             <a
               key={treatment.name}
               href={treatment.href}
-              className={`${styles.glassCard} group relative flex h-full flex-col justify-between gap-4 rounded-3xl p-6 transition hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(0,0,0,0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--brand-gold)]`}
+              className={`${styles.glassCard} ${styles.interactiveGlow} group relative flex h-full flex-col justify-between gap-4 rounded-3xl p-6`}
             >
-              <div className="space-y-3">
+              <div className="space-y-4">
                 <div className="flex items-center justify-between gap-2">
-                  <h3 className="text-2xl font-semibold text-[var(--ink)]">{treatment.name}</h3>
+                  <h3 className={`${styles.displayHeading} text-xl font-semibold text-[var(--ink)]`}>{treatment.name}</h3>
                   <span className="rounded-full border border-[var(--champagne-keyline-gold)] bg-white/40 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--ink)]">
                     {treatment.highlight}
                   </span>
@@ -64,6 +65,6 @@ export default function MostRequestedTreatments() {
           ))}
         </div>
       </div>
-    </section>
+    </SectionShell>
   );
 }
