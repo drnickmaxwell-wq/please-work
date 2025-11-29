@@ -112,17 +112,23 @@ const websiteSchema = {
 
 export default function HomePreviewPage() {
   return (
-    <div className="champagne-preview">
-      <main className="text-white">
-        <ChampagneHero />
-        <ClinicTourSection />
-        <MostRequestedTreatments />
-        <TechnologyHighlight />
-        <PatientStoriesTeaser />
-        <AiSmileQuizTeaser />
-        <PortalTeaser />
-        <LocalProof />
-        <MicroFaq faqs={faqs} />
+    <div className="preview-home-canvas">
+      <main className="preview-home-main">
+        <section className="preview-home-zone preview-home-zone-1">
+          <ChampagneHero />
+          <ClinicTourSection />
+        </section>
+        <section className="preview-home-zone preview-home-zone-2">
+          <MostRequestedTreatments />
+          <TechnologyHighlight />
+          <PatientStoriesTeaser />
+          <AiSmileQuizTeaser />
+          <PortalTeaser />
+        </section>
+        <section className="preview-home-zone preview-home-zone-3">
+          <LocalProof />
+          <MicroFaq faqs={faqs} />
+        </section>
         <JsonLd data={[organizationSchema, localBusinessSchema, websiteSchema]} />
       </main>
     </div>
