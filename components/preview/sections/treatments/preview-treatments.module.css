@@ -1,0 +1,134 @@
+.previewCanvas :global(.cpv-main) {
+  gap: clamp(4.75rem, 7vw, 7.25rem);
+}
+
+.previewCanvas :global(.cpv-card) {
+  box-shadow:
+    var(--cpv-card-shadow-ambient),
+    var(--cpv-card-shadow-float),
+    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 22%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--smh-accent-gold-soft) 22%, transparent);
+}
+
+.previewCanvas :global(.cpv-card__inner--stack),
+.previewCanvas :global(.cpv-card__inner--finance) {
+  padding: clamp(2.5rem, 4vw, 3.7rem);
+  gap: clamp(1.65rem, 2.4vw, 2.75rem);
+}
+
+.previewCanvas :global(.cpv-card__header) {
+  gap: clamp(0.75rem, 1vw, 1rem);
+  padding-bottom: clamp(0.75rem, 1.2vw, 1.2rem);
+  margin-bottom: clamp(0.9rem, 1.4vw, 1.35rem);
+  border-bottom: 1px solid color-mix(in srgb, var(--cpv-gold-keyline) 64%, transparent);
+}
+
+.previewCanvas :global(.cpv-card__heading) {
+  gap: clamp(0.4rem, 0.8vw, 0.75rem);
+}
+
+.previewCanvas :global(.cpv-card__lead) {
+  margin: 0;
+  max-width: 860px;
+}
+
+.previewCanvas :global(.cpv-card__eyebrow) {
+  margin: 0;
+}
+
+.previewCanvas :global(.treatment-rail) {
+  gap: clamp(1rem, 1.5vw, 1.5rem);
+  padding: clamp(0.6rem, 1vw, 1rem);
+}
+
+.previewCanvas :global(.treatment-rail__card) {
+  min-height: 220px;
+}
+
+.previewCanvas :global(.treatment-deck) {
+  gap: clamp(1rem, 1.4vw, 1.4rem);
+}
+
+.previewCanvas :global(.treatment-deck__card) {
+  gap: clamp(0.7rem, 1vw, 1rem);
+}
+
+.previewCanvas :global(.howto-grid) {
+  gap: clamp(0.9rem, 1.4vw, 1.35rem);
+}
+
+.previewCanvas :global(.howto-grid__item) {
+  gap: clamp(0.65rem, 1vw, 0.9rem);
+  padding: clamp(1.2rem, 1vw + 1rem, 1.6rem);
+  grid-template-columns: auto 1fr;
+  align-items: flex-start;
+}
+
+.previewCanvas :global(.howto-grid__copy h3) {
+  margin-bottom: 0.2rem;
+}
+
+.previewCanvas :global(.howto-grid__copy) {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.previewCanvas :global(.finance-band) {
+  gap: clamp(1.2rem, 1.6vw, 1.8rem);
+  padding: clamp(1.35rem, 2vw, 1.9rem);
+}
+
+.previewCanvas :global(.finance-band__tiers) {
+  gap: clamp(0.75rem, 1vw, 1rem);
+}
+
+.previewCanvas :global(.finance-band__list) {
+  gap: clamp(0.65rem, 1vw, 0.9rem);
+}
+
+.previewCanvas :global(.finance-band__ctas) {
+  gap: clamp(0.85rem, 1vw, 1.1rem);
+}
+
+.previewCanvas :global(.tech-grid) {
+  gap: clamp(0.9rem, 1.3vw, 1.2rem);
+}
+
+.previewCanvas :global(.stories-grid) {
+  gap: clamp(0.9rem, 1.3vw, 1.2rem);
+}
+
+.previewCanvas :global(.stories-grid__card) {
+  gap: clamp(0.55rem, 0.8vw, 0.85rem);
+  padding: clamp(1.2rem, 1vw + 1rem, 1.5rem);
+}
+
+.previewCanvas :global(.faq-rail) {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: clamp(0.8rem, 1vw, 1.1rem);
+}
+
+.previewCanvas :global(.faq-rail__item) {
+  padding: clamp(1rem, 1vw + 0.75rem, 1.35rem);
+}
+
+.previewCanvas :global(.faq-rail__item summary) {
+  margin-bottom: 0.2rem;
+}
+
+.previewCanvas :global(.faq-rail__item p) {
+  margin-top: 0.4rem;
+}
+
+.previewCanvas :global(.cpv-btn-solid) {
+  box-shadow: 0 20px 44px color-mix(in srgb, var(--brand-magenta) 32%, transparent 70%);
+}
+
+.previewCanvas :global(.cpv-btn-outline) {
+  background: color-mix(in srgb, transparent 70%, var(--cpv-card-bg));
+  color: var(--cpv-page-text);
+  border-color: color-mix(in srgb, var(--brand-teal) 42%, transparent);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--brand-teal) 26%, transparent),
+    0 14px 32px color-mix(in srgb, var(--smh-ink) 18%, transparent);
+}

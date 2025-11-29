@@ -20,7 +20,7 @@ export default function ClinicTourSection() {
 
   return (
     <SectionShell className={styles.sectionSurface} ariaLabelledby="clinic-tour-title">
-      <div className="relative z-10 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+      <div className="relative z-10 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
         <div className={`${styles.glassCard} relative overflow-hidden rounded-[30px] border-white/15 shadow-2xl`}>
           <div className="absolute inset-0 bg-black/30" aria-hidden />
           <div className={styles.waveOverlay} aria-hidden />
@@ -41,22 +41,22 @@ export default function ClinicTourSection() {
           )}
         </div>
         <div className="lg:pl-8">
-          <div className="space-y-4">
-            <span className={styles.chip}>Calm coastal setting</span>
-            <h2 id="clinic-tour-title" className={`${styles.displayHeading} text-3xl font-semibold leading-tight md:text-4xl`}>
+          <div className={`${styles.sectionHeader} space-y-3`}>
+            <span className={`${styles.chip} text-eyebrow`}>Calm coastal setting</span>
+            <h2 id="clinic-tour-title" className={`${styles.displayHeading} text-display-sm`}>
               Step inside our coastal clinic
             </h2>
-            <p className={`text-lg leading-relaxed ${styles.mutedText}`}>
+            <p className={`text-lead text-body ${styles.mutedText}`}>
               Wander through light-filled surgeries, ocean-inspired lounges, and serene tech suites designed for quiet focus.
               Discover how our 3D scanners, CBCT imaging, and gentle sedation options keep visits comfortable.
             </p>
           </div>
-          <div className="mt-7 flex flex-wrap items-center gap-3">
-            <a href="/technology" className={styles.pillCtaPrimary}>
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <a href="/technology" className={`${styles.pillCtaPrimary} text-eyebrow`}>
               See our technology
               <span aria-hidden>→</span>
             </a>
-            <a href="/about" className={styles.pillCtaGhost}>
+            <a href="/about" className={`${styles.pillCtaGhost} text-eyebrow`}>
               Meet the team
             </a>
           </div>
@@ -75,12 +75,12 @@ function PracticeTourPlaceholder() {
         </svg>
       </div>
       <div className="space-y-2">
-        <p className="text-xl font-semibold text-white">Clinic tour video coming soon</p>
-        <p className="text-sm text-white/75">
+        <p className="text-display-sm text-white">Clinic tour video coming soon</p>
+        <p className="text-body text-white/80">
           We&apos;re preparing a guided walkthrough of our Shoreham-by-Sea practice. Placeholder reserved for the final video asset.
         </p>
       </div>
-      <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-sm font-semibold text-white">
+      <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-eyebrow text-white">
         <span className="h-2 w-2 rounded-full bg-[var(--brand-gold)]" aria-hidden />
         Motion preview protected
       </span>

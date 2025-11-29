@@ -12,12 +12,12 @@ export default function TreatmentHowItWorksPreview({ steps }: TreatmentHowItWork
     <section className="cpv-card" aria-labelledby="treatments-how-heading">
       <div className="cpv-card__inner cpv-card__inner--stack">
         <div className="cpv-card__header">
-          <p className="cpv-card__eyebrow">Workflow</p>
+          <p className="cpv-card__eyebrow text-eyebrow">Workflow</p>
           <div className="cpv-card__heading">
-            <h2 className="cpv-card__title" id="treatments-how-heading">
+            <h2 className="cpv-card__title text-display-sm" id="treatments-how-heading">
               How treatments flow
             </h2>
-            <p className="cpv-card__lead">
+            <p className="cpv-card__lead text-lead text-body">
               Four calm checkpoints aligned with the schema map and zero-click plan — clear, bookable, and easy to scan.
             </p>
           </div>
@@ -29,8 +29,8 @@ export default function TreatmentHowItWorksPreview({ steps }: TreatmentHowItWork
                 {index + 1}
               </div>
               <div className="howto-grid__copy">
-                <h3>{step.title}</h3>
-                <p>{step.summary}</p>
+                <h3 className="text-lead font-semibold">{step.title}</h3>
+                <p className="text-body">{step.summary}</p>
               </div>
             </li>
           ))}

@@ -11,6 +11,8 @@ import TreatmentHowItWorksPreview, {
 import TreatmentMicroFaq, { type TreatmentFaq } from "@/components/preview/sections/treatments/TreatmentMicroFaq";
 import TreatmentTechHighlight from "@/components/preview/sections/treatments/TreatmentTechHighlight";
 import TreatmentHubPreviewSchema from "@/components/preview/seo/TreatmentHubPreviewSchema";
+import "@/components/preview/preview-typography.css";
+import layoutStyles from "@/components/preview/sections/treatments/preview-treatments.module.css";
 import { previewRobots } from "@/lib/seo/preview/previewRobots";
 import "@/styles/preview/treatments-preview.css";
 
@@ -150,7 +152,7 @@ const faqs: TreatmentFaq[] = [
 
 export default function TreatmentsPreview() {
   return (
-    <div className="cpv-page" data-treatment="general">
+    <div className={`cpv-page ${layoutStyles.previewCanvas}`} data-treatment="general">
       <PreviewTreatmentsHero
         primaryCta={{ label: "Take the AI Smile Quiz", href: "/ai-smile-quiz" }}
         secondaryCta={{ label: "Book a consultation", href: "/contact" }}

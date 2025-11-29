@@ -43,12 +43,12 @@ export default function PreviewHero({
               <div className="cpv-glass cpv-hero__card">
                 <div className="flex flex-col gap-6">
                   {eyebrow || kicker ? (
-                    <span className="cpv-hero__kicker">{eyebrow ?? kicker}</span>
+                    <span className="cpv-hero__kicker text-eyebrow">{eyebrow ?? kicker}</span>
                   ) : null}
                   <div className="space-y-4">
-                    <h1 className="cpv-hero__title">{title}</h1>
+                    <h1 className="cpv-hero__title text-display-xl">{title}</h1>
                     {descriptionContent ? (
-                      <div className="cpv-hero__body text-lg leading-relaxed">
+                      <div className="cpv-hero__body text-lead text-body">
                         {descriptionContent}
                       </div>
                     ) : null}
@@ -56,12 +56,12 @@ export default function PreviewHero({
                   {primaryCta || secondaryCta ? (
                     <div className="cpv-cta-row">
                       {primaryCta ? (
-                        <Link className="cpv-btn cpv-btn-solid" href={primaryCta.href}>
+                        <Link className="cpv-btn cpv-btn-solid text-eyebrow" href={primaryCta.href}>
                           {primaryCta.label}
                         </Link>
                       ) : null}
                       {secondaryCta ? (
-                        <Link className="cpv-btn cpv-btn-outline" href={secondaryCta.href}>
+                        <Link className="cpv-btn cpv-btn-outline text-eyebrow" href={secondaryCta.href}>
                           {secondaryCta.label}
                         </Link>
                       ) : null}
