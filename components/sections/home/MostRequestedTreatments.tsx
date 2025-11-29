@@ -32,12 +32,12 @@ export default function MostRequestedTreatments() {
   return (
     <SectionShell tone="paper" ariaLabelledby="treatments-title">
       <div className="flex flex-col gap-10">
-        <div className="space-y-3">
-          <span className={styles.chip}>Most requested treatments</span>
-          <h2 id="treatments-title" className={`${styles.displayHeading} text-3xl font-semibold leading-tight md:text-4xl`}>
+        <div className={styles.sectionHeader}>
+          <span className={`${styles.chip} text-eyebrow`}>Most requested treatments</span>
+          <h2 id="treatments-title" className={`${styles.displayHeading} text-display-sm`}>
             Crafted smiles, guided by Champagne precision
           </h2>
-          <p className={`max-w-3xl text-lg leading-relaxed ${styles.mutedText}`}>
+          <p className={`${styles.sectionLead} text-lead text-body ${styles.mutedText}`}>
             Explore our signature cosmetic, restorative, and orthodontic treatments. Each plan is personalised with digital
             previews, finance-friendly options, and a calm, coastal setting minutes from the beach.
           </p>
@@ -47,19 +47,21 @@ export default function MostRequestedTreatments() {
             <a
               key={treatment.name}
               href={treatment.href}
-              className={`${styles.glassCard} ${styles.interactiveGlow} group relative flex h-full flex-col justify-between gap-4 rounded-3xl p-6`}
+              className={`${styles.glassCard} ${styles.interactiveGlow} group relative flex h-full flex-col justify-between gap-5 rounded-3xl p-6 lg:p-7`}
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between gap-2">
-                  <h3 className={`${styles.displayHeading} text-xl font-semibold text-[var(--ink)]`}>{treatment.name}</h3>
+                  <h3 className={`${styles.displayHeading} text-lead font-semibold text-[var(--ink)]`}>
+                    {treatment.name}
+                  </h3>
                   <span className="rounded-full border border-[var(--champagne-keyline-gold)] bg-white/40 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--ink)]">
                     {treatment.highlight}
                   </span>
                 </div>
-                <p className={`text-base leading-relaxed ${styles.mutedText}`}>{treatment.description}</p>
+                <p className={`text-body ${styles.mutedText}`}>{treatment.description}</p>
               </div>
               <span className="inline-flex items-center">
-                <span className={`${styles.pillCtaGhost} inline-flex items-center gap-2 text-sm font-semibold`}>
+                <span className={`${styles.pillCtaGhost} inline-flex items-center gap-2 text-eyebrow`}>
                   View {treatment.name.toLowerCase()}
                   <span aria-hidden>→</span>
                 </span>

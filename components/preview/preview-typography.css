@@ -1,0 +1,40 @@
+:global(.text-display-xl) {
+  font-family: var(--font-display, "Playfair Display", serif);
+  font-size: clamp(2.6rem, 2.6vw + 1.6rem, 3.65rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+:global(.text-display-sm) {
+  font-family: var(--font-display, "Playfair Display", serif);
+  font-size: clamp(1.85rem, 1.6vw + 1.1rem, 2.45rem);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  font-weight: 600;
+}
+
+:global(.text-lead) {
+  font-family: var(--font-inter, "Inter", sans-serif);
+  font-size: clamp(1.05rem, 0.6vw + 1rem, 1.25rem);
+  line-height: 1.68;
+  font-weight: 500;
+  color: color-mix(in srgb, currentColor 88%, transparent);
+}
+
+:global(.text-eyebrow) {
+  font-family: var(--font-inter, "Inter", sans-serif);
+  font-size: clamp(0.8rem, 0.6vw + 0.7rem, 0.95rem);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  color: color-mix(in srgb, currentColor 76%, transparent);
+}
+
+:global(.text-body) {
+  font-family: var(--font-inter, "Inter", sans-serif);
+  font-size: 1rem;
+  line-height: 1.75;
+  font-weight: 500;
+  color: color-mix(in srgb, currentColor 92%, transparent);
+}

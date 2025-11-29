@@ -20,12 +20,12 @@ export default function TreatmentTechHighlight() {
     <section className="cpv-card" aria-labelledby="treatments-tech-heading">
       <div className="cpv-card__inner cpv-card__inner--stack">
         <div className="cpv-card__header">
-          <p className="cpv-card__eyebrow">Technology</p>
+          <p className="cpv-card__eyebrow text-eyebrow">Technology</p>
           <div className="cpv-card__heading">
-            <h2 className="cpv-card__title" id="treatments-tech-heading">
+            <h2 className="cpv-card__title text-display-sm" id="treatments-tech-heading">
               Tech woven into every pathway
             </h2>
-            <p className="cpv-card__lead">
+            <p className="cpv-card__lead text-lead text-body">
               Mirrors the schema map technology targets — CBCT, 3D printing, intraoral scanning — without breaking the preview shell.
             </p>
           </div>
@@ -33,13 +33,13 @@ export default function TreatmentTechHighlight() {
         <div className="tech-grid">
           {highlights.map((item) => (
             <article key={item.title} className="tech-grid__item">
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
+              <h3 className="text-lead font-semibold">{item.title}</h3>
+              <p className="text-body">{item.body}</p>
             </article>
           ))}
         </div>
         <div className="tech-grid__cta">
-          <Link className="cpv-btn cpv-btn-outline" href="/technology">
+          <Link className="cpv-btn cpv-btn-outline text-eyebrow" href="/technology">
             Explore digital dentistry
           </Link>
         </div>

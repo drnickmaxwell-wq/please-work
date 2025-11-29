@@ -11,12 +11,12 @@ export default function TreatmentFinancePreview() {
     <section className="cpv-card cpv-card--bright" aria-labelledby="treatments-finance-heading">
       <div className="cpv-card__inner cpv-card__inner--finance">
         <div className="cpv-card__header">
-          <p className="cpv-card__eyebrow">Pricing & finance</p>
+          <p className="cpv-card__eyebrow text-eyebrow">Pricing & finance</p>
           <div className="cpv-card__heading">
-            <h2 className="cpv-card__title" id="treatments-finance-heading">
+            <h2 className="cpv-card__title text-display-sm" id="treatments-finance-heading">
               Transparent bands, calm finance
             </h2>
-            <p className="cpv-card__lead">
+            <p className="cpv-card__lead text-lead text-body">
               Aligns to the treatments SEO plan: give quick ranges, invite a soft search, and signpost support before booking.
             </p>
           </div>
@@ -25,31 +25,31 @@ export default function TreatmentFinancePreview() {
           <div className="finance-band__chip">Preview-only copy</div>
           <div className="finance-band__tiers">
             <div>
-              <p className="finance-band__label">Cosmetic refresh</p>
-              <p className="finance-band__value">from £300 - £1,200</p>
-              <p className="finance-band__note">Whitening & bonding refinements</p>
+              <p className="finance-band__label text-eyebrow">Cosmetic refresh</p>
+              <p className="finance-band__value text-display-sm">from £300 - £1,200</p>
+              <p className="finance-band__note text-body">Whitening & bonding refinements</p>
             </div>
             <div>
-              <p className="finance-band__label">Smile makeover</p>
-              <p className="finance-band__value">£3,500 - £9,800</p>
-              <p className="finance-band__note">Porcelain veneers & alignment</p>
+              <p className="finance-band__label text-eyebrow">Smile makeover</p>
+              <p className="finance-band__value text-display-sm">£3,500 - £9,800</p>
+              <p className="finance-band__note text-body">Porcelain veneers & alignment</p>
             </div>
             <div>
-              <p className="finance-band__label">Implant stability</p>
-              <p className="finance-band__value">£2,200 - £14,000</p>
-              <p className="finance-band__note">Single-tooth to full-arch care</p>
+              <p className="finance-band__label text-eyebrow">Implant stability</p>
+              <p className="finance-band__value text-display-sm">£2,200 - £14,000</p>
+              <p className="finance-band__note text-body">Single-tooth to full-arch care</p>
             </div>
           </div>
-          <ul className="finance-band__list">
+          <ul className="finance-band__list text-body">
             {financePoints.map((point) => (
               <li key={point}>{point}</li>
             ))}
           </ul>
           <div className="finance-band__ctas">
-            <Link className="cpv-btn cpv-btn-solid" href="/finance">
+            <Link className="cpv-btn cpv-btn-solid text-eyebrow" href="/finance">
               Explore finance options
             </Link>
-            <Link className="cpv-btn cpv-btn-outline" href="/contact">
+            <Link className="cpv-btn cpv-btn-outline text-eyebrow" href="/contact">
               Ask about pricing
             </Link>
           </div>

@@ -21,16 +21,16 @@ export default function PatientStoriesTeaser() {
     <SectionShell tone="paper" ariaLabelledby="stories-title">
       <div className="flex flex-col gap-10">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div className="space-y-3">
-            <span className={styles.chip}>Patient stories</span>
-            <h2 id="stories-title" className={`${styles.displayHeading} text-3xl font-semibold leading-tight md:text-4xl`}>
+          <div className={styles.sectionHeader}>
+            <span className={`${styles.chip} text-eyebrow`}>Patient stories</span>
+            <h2 id="stories-title" className={`${styles.displayHeading} text-display-sm`}>
               Real journeys, calmly supported
             </h2>
-            <p className={`max-w-2xl text-lg leading-relaxed ${styles.mutedText}`}>
+            <p className={`max-w-2xl text-lead text-body ${styles.mutedText}`}>
               Discover concise before-and-after highlights and honest reflections from guests who chose our Shoreham-by-Sea team.
             </p>
           </div>
-          <a href="/patient-stories" className={styles.pillCtaGhost}>
+          <a href="/patient-stories" className={`${styles.pillCtaGhost} text-eyebrow`}>
             View all stories
           </a>
         </div>
@@ -44,10 +44,12 @@ export default function PatientStoriesTeaser() {
               <div className={styles.grainOverlay} aria-hidden />
               <div className="h-24 rounded-xl bg-[var(--smh-bg)]/60" aria-hidden />
               <div className="space-y-2">
-                <h3 className={`${styles.displayHeading} relative z-10 text-xl font-semibold text-[var(--ink)]`}>{story.name}</h3>
-                <p className={`relative z-10 text-base leading-relaxed ${styles.mutedText}`}>{story.summary}</p>
+                <h3 className={`${styles.displayHeading} relative z-10 text-lead font-semibold text-[var(--ink)]`}>
+                  {story.name}
+                </h3>
+                <p className={`relative z-10 text-body ${styles.mutedText}`}>{story.summary}</p>
               </div>
-              <span className="relative z-10 inline-flex items-center gap-2 text-sm font-semibold text-[var(--brand-magenta)]">
+              <span className="relative z-10 inline-flex items-center gap-2 text-eyebrow text-[var(--brand-magenta)]">
                 Read the story <span aria-hidden>→</span>
               </span>
             </article>
