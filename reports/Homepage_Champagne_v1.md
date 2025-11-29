@@ -20,3 +20,9 @@
 - `pnpm test` — passed (brand manifest test).
 - `pnpm brand:guard` — passed after removing rogue hex fallbacks.
 - `node scripts/guard-rogue-hex.mjs` — passed.
+
+## Crash Fix Summary
+- Root cause: `MicroFaq` passed a `data` prop to `FAQJsonLd`, but `FAQJsonLd` expects an `items` array and immediately maps over it, causing a client-side exception on `/preview/home`.
+- Files touched: `components/sections/home/MicroFaq.tsx`, `tests/preview/homepage.test.tsx`, `package.json`, `reports/Homepage_Champagne_Debug.md` (diagnostic notes).
+- Fallbacks: none required; wiring corrected to hand the FAQ list directly to the JSON-LD helper.
+- Status: `/preview/home` now renders without client-side exceptions on this branch.

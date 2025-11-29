@@ -11,16 +11,6 @@ type MicroFaqProps = {
 };
 
 export default function MicroFaq({ faqs }: MicroFaqProps) {
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: { "@type": "Answer", text: faq.answer },
-    })),
-  };
-
   return (
     <section className="bg-[var(--smh-bg)] px-4 py-16 text-[var(--ink)] lg:py-20" aria-labelledby="micro-faq-title">
       <div className="mx-auto flex max-w-6xl flex-col gap-6">
@@ -51,7 +41,7 @@ export default function MicroFaq({ faqs }: MicroFaqProps) {
           ))}
         </div>
       </div>
-      <FAQJsonLd data={faqSchema} />
+      <FAQJsonLd items={faqs} />
     </section>
   );
 }
