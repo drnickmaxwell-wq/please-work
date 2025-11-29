@@ -46,7 +46,7 @@ export default function PreviewEquipmentGallery() {
 
       <div className={styles.equipmentGrid}>
         {equipment.map((item) => (
-          <div key={item.name} className={styles.equipmentTile}>
+          <div key={item.name} className={`${styles.equipmentTile} cpv-card`}>
             <span className={styles.equipmentBadge} aria-hidden>
               {item.marker}
             </span>

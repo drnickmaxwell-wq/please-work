@@ -11,6 +11,7 @@ import TreatmentHowItWorksPreview, {
 import TreatmentMicroFaq, { type TreatmentFaq } from "@/components/preview/sections/treatments/TreatmentMicroFaq";
 import TreatmentTechHighlight from "@/components/preview/sections/treatments/TreatmentTechHighlight";
 import TreatmentHubPreviewSchema from "@/components/preview/seo/TreatmentHubPreviewSchema";
+import "@/components/preview/preview-layout.css";
 import "@/components/preview/preview-typography.css";
 import layoutStyles from "@/components/preview/sections/treatments/preview-treatments.module.css";
 import { previewRobots } from "@/lib/seo/preview/previewRobots";

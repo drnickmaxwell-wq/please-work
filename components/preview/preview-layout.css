@@ -1,0 +1,92 @@
+:global(.cpv-section) {
+  position: relative;
+  padding: clamp(2.6rem, 4vw, 3.4rem) clamp(1.4rem, 3vw, 2.4rem);
+  border-radius: clamp(22px, 3.6vw, 28px);
+  background: color-mix(in srgb, var(--cpv-shell-bg, var(--cpv-card-bg)) 76%, transparent);
+  border: 1px solid color-mix(in srgb, var(--cpv-gold-keyline, var(--brand-gold)) 45%, transparent 40%);
+  box-shadow:
+    0 24px 60px color-mix(in srgb, var(--smh-ink) 18%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 12%, transparent);
+}
+
+:global(.cpv-card) {
+  position: relative;
+  margin: 0;
+  border-radius: clamp(18px, 3vw, 24px);
+  background:
+    radial-gradient(140% 140% at 18% 10%, color-mix(in srgb, var(--brand-magenta) 10%, transparent) 0%, transparent 55%),
+    radial-gradient(140% 140% at 82% 8%, color-mix(in srgb, var(--brand-teal) 10%, transparent) 0%, transparent 55%),
+    color-mix(in srgb, var(--cpv-card-bg) 78%, var(--smh-white) 22%);
+  border: 1px solid color-mix(in srgb, var(--cpv-gold-keyline) 88%, transparent 18%);
+  color: var(--cpv-page-text, var(--smh-white));
+  box-shadow:
+    0 24px 60px color-mix(in srgb, var(--smh-ink) 18%, transparent),
+    0 8px 20px color-mix(in srgb, var(--brand-magenta) 12%, transparent 70%),
+    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 16%, transparent);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+:global(.cpv-card--soft) {
+  background:
+    radial-gradient(120% 120% at 16% 10%, color-mix(in srgb, var(--brand-teal) 8%, transparent) 0%, transparent 60%),
+    color-mix(in srgb, var(--cpv-card-bg) 70%, var(--smh-white) 30%);
+  border-color: color-mix(in srgb, var(--cpv-gold-keyline) 76%, transparent 26%);
+  box-shadow:
+    0 18px 44px color-mix(in srgb, var(--smh-ink) 16%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 12%, transparent);
+}
+
+:global(.cpv-card--bright) {
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--brand-magenta) 16%, transparent) 0%, color-mix(in srgb, var(--brand-teal) 16%, transparent) 100%),
+    color-mix(in srgb, var(--cpv-card-bg) 68%, var(--smh-white) 32%);
+  border-color: color-mix(in srgb, var(--cpv-gold-keyline) 86%, transparent 8%);
+  box-shadow:
+    0 24px 60px color-mix(in srgb, var(--brand-magenta) 18%, transparent 60%),
+    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 18%, transparent);
+}
+
+:global(.cpv-card__inner) {
+  display: grid;
+  gap: clamp(1.4rem, 1.8vw, 2rem);
+  padding: clamp(1.6rem, 2.6vw, 2.8rem);
+  color: inherit;
+}
+
+:global(.cpv-card__inner--stack),
+:global(.cpv-card__inner--finance) {
+  padding: clamp(2.25rem, 3.4vw, 3.4rem);
+  gap: clamp(1.8rem, 2.6vw, 2.8rem);
+}
+
+:global(.cpv-card__header) {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.75rem, 1vw, 1rem);
+  padding-bottom: clamp(1rem, 1.3vw, 1.35rem);
+  margin-bottom: clamp(1.1rem, 1.6vw, 1.6rem);
+  border-bottom: 1px solid color-mix(in srgb, var(--cpv-gold-keyline) 70%, transparent 16%);
+}
+
+:global(.cpv-card__heading) {
+  display: grid;
+  gap: clamp(0.55rem, 0.9vw, 0.9rem);
+  max-width: 900px;
+}
+
+:global(.cpv-card__lead) {
+  margin: 0;
+  max-width: 920px;
+  color: var(--cpv-page-text-soft, color-mix(in srgb, currentColor 82%, transparent));
+}
+
+:global(.cpv-card__eyebrow) {
+  margin: 0;
+  color: var(--cpv-page-text-soft, color-mix(in srgb, currentColor 70%, transparent));
+}
+
+:global(.cpv-shell-dim) {
+  background: color-mix(in srgb, var(--cpv-shell-bg, var(--cpv-card-bg)) 60%, transparent);
+  border: 1px solid color-mix(in srgb, var(--cpv-gold-keyline) 60%, transparent 32%);
+}

@@ -10,6 +10,7 @@ import MostRequestedTreatments from "@/components/sections/home/MostRequestedTre
 import PatientStoriesTeaser from "@/components/sections/home/PatientStoriesTeaser";
 import PortalTeaser from "@/components/sections/home/PortalTeaser";
 import TechnologyHighlight from "@/components/sections/home/TechnologyHighlight";
+import "@/components/preview/preview-layout.css";
 import "@/components/preview/preview-typography.css";
 import JsonLd from "@/components/seo/json-ld";
 import { SMH_BUSINESS_DATA } from "@/lib/seo/advanced-seo";

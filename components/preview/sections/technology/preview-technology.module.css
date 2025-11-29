@@ -12,6 +12,12 @@
   --cpv-page-text: color-mix(in srgb, var(--smh-white) 88%, var(--smh-ink) 12%);
   --cpv-page-text-soft: color-mix(in srgb, var(--smh-white) 74%, var(--smh-ink) 26%);
   --cpv-gold-keyline: color-mix(in srgb, var(--smh-accent-gold-soft) 42%, var(--smh-white) 12%);
+  --cpv-card-surface: color-mix(in srgb, var(--cpv-card-bg) 78%, var(--smh-white) 22%);
+  --cpv-card-surface-soft: color-mix(in srgb, var(--cpv-card-bg) 70%, var(--smh-white) 30%);
+  --cpv-card-surface-bright: color-mix(in srgb, var(--cpv-card-bg) 64%, var(--smh-white) 36%);
+  --cpv-card-border: color-mix(in srgb, var(--cpv-gold-keyline) 84%, transparent 16%);
+  --cpv-card-shadow-ambient: 0 24px 60px color-mix(in srgb, var(--smh-ink) 18%, transparent);
+  --cpv-shell-bg: color-mix(in srgb, var(--cpv-card-bg) 62%, transparent);
   color: var(--cpv-page-text);
 }
 
@@ -31,13 +37,6 @@
   gap: clamp(1.6rem, 2vw, 2.2rem);
   padding: clamp(2.4rem, 4vw, 3.2rem);
   border-radius: clamp(24px, 4vw, 30px);
-  background:
-    linear-gradient(180deg, color-mix(in srgb, var(--cpv-card-bg) 92%, transparent) 0%, color-mix(in srgb, var(--smh-white) 88%, var(--smh-paper) 12%) 100%),
-    radial-gradient(120% 160% at 20% 0%, color-mix(in srgb, var(--brand-gold) 12%, transparent) 0%, transparent 60%);
-  border: 1px solid color-mix(in srgb, var(--cpv-gold-keyline) 80%, transparent 6%);
-  box-shadow:
-    var(--cpv-card-shadow-ambient),
-    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 18%, transparent);
 }
 
 .workflowGrid {
@@ -51,13 +50,11 @@
   gap: 0.65rem;
   padding: clamp(1.35rem, 1vw + 1rem, 1.65rem);
   border-radius: 18px;
-  background:
-    linear-gradient(160deg, color-mix(in srgb, var(--cpv-card-bg) 94%, transparent) 0%, color-mix(in srgb, var(--smh-white) 10%, transparent) 100%),
-    radial-gradient(90% 90% at 12% 8%, color-mix(in srgb, var(--brand-teal) 14%, transparent) 0%, transparent 60%);
-  border: 1px solid color-mix(in srgb, var(--cpv-gold-keyline) 78%, transparent 6%);
+  background: var(--cpv-card-surface-soft);
+  border: 1px solid var(--cpv-card-border);
   box-shadow:
-    0 16px 36px color-mix(in srgb, var(--smh-ink) 14%, transparent),
-    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 16%, transparent);
+    var(--cpv-card-shadow-ambient),
+    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 14%, transparent);
 }
 
 .workflowIcon {
@@ -92,16 +89,14 @@
   gap: 0.65rem;
   padding: clamp(1.4rem, 1vw + 1.2rem, 1.9rem);
   border-radius: 18px;
-  background: linear-gradient(
-    135deg,
-    color-mix(in srgb, var(--brand-magenta) 44%, transparent) 0%,
-    color-mix(in srgb, var(--brand-teal) 46%, transparent) 100%
-  );
-  border: 1px solid color-mix(in srgb, var(--smh-accent-gold-soft) 36%, transparent);
+  background:
+    radial-gradient(120% 140% at 16% 8%, color-mix(in srgb, var(--brand-teal) 12%, transparent) 0%, transparent 58%),
+    var(--cpv-card-surface);
+  border: 1px solid var(--cpv-card-border);
   box-shadow:
-    0 20px 40px color-mix(in srgb, var(--smh-ink) 22%, transparent),
-    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 18%, transparent);
-  color: color-mix(in srgb, var(--smh-white) 94%, var(--smh-ink) 6%);
+    var(--cpv-card-shadow-ambient),
+    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 16%, transparent);
+  color: var(--cpv-page-text);
   overflow: hidden;
 }
 
@@ -110,10 +105,10 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(120% 120% at 18% 12%, color-mix(in srgb, var(--brand-gold) 8%, transparent) 0%, transparent 60%),
-    linear-gradient(180deg, color-mix(in srgb, var(--smh-white) 8%, transparent) 0%, transparent 100%);
+    radial-gradient(120% 120% at 18% 12%, color-mix(in srgb, var(--brand-gold) 10%, transparent) 0%, transparent 60%),
+    linear-gradient(180deg, color-mix(in srgb, var(--smh-white) 12%, transparent) 0%, transparent 100%);
   mix-blend-mode: screen;
-  opacity: 0.32;
+  opacity: 0.28;
 }
 
 .equipmentBadge {
@@ -135,6 +130,7 @@
   gap: 0.35rem;
   position: relative;
   z-index: 1;
+  color: var(--cpv-page-text);
 }
 
 .ai3dSection {
