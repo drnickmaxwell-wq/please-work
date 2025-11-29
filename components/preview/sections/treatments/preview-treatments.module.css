@@ -1,18 +1,21 @@
 .previewCanvas :global(.cpv-page) {
   background:
-    radial-gradient(140% 120% at 50% 118%, color-mix(in srgb, var(--smh-paper-strong) 10%, transparent) 0%, transparent 62%),
+    radial-gradient(140% 120% at 50% 118%, color-mix(in srgb, var(--smh-paper-strong) 12%, transparent) 0%, transparent 64%),
     linear-gradient(
       180deg,
       color-mix(in srgb, var(--smh-paper-soft) 98%, var(--cpv-page-ink) 2%) 0%,
       color-mix(in srgb, var(--smh-paper) 96%, var(--cpv-page-ink) 4%) 48%,
       color-mix(in srgb, var(--smh-paper-strong) 94%, var(--cpv-page-ink) 6%) 100%
     );
+  --cpv-page-text: color-mix(in srgb, var(--smh-white) 88%, var(--smh-ink) 12%);
+  --cpv-page-text-soft: color-mix(in srgb, var(--smh-white) 74%, var(--smh-ink) 26%);
+  --cpv-gold-keyline: color-mix(in srgb, var(--smh-accent-gold-soft) 42%, var(--smh-white) 12%);
   color: var(--cpv-page-text);
 }
 
 .previewCanvas :global(.cpv-main) {
   width: min(1180px, 100%);
-  gap: clamp(4.6rem, 6.4vw, 6.6rem);
+  gap: clamp(4.8rem, 6vw, 6.8rem);
 }
 
 .previewCanvas :global(.cpv-breadcrumbs) {
@@ -23,18 +26,18 @@
   background:
     linear-gradient(
       142deg,
-      color-mix(in srgb, var(--cpv-card-bg) 98%, var(--smh-paper-soft) 2%) 0%,
-      color-mix(in srgb, var(--smh-white) 96%, var(--smh-paper) 4%) 54%,
-      color-mix(in srgb, var(--smh-white) 90%, var(--smh-paper-strong) 10%) 100%
+      color-mix(in srgb, var(--cpv-card-bg) 98%, var(--smh-paper-soft) 6%) 0%,
+      color-mix(in srgb, var(--smh-white) 96%, var(--smh-paper) 6%) 54%,
+      color-mix(in srgb, var(--smh-white) 90%, var(--smh-paper-strong) 12%) 100%
     ),
-    radial-gradient(128% 148% at 16% 12%, color-mix(in srgb, var(--brand-magenta) 8%, transparent) 0%, transparent 42%),
-    radial-gradient(128% 148% at 84% 8%, color-mix(in srgb, var(--brand-teal) 8%, transparent) 0%, transparent 42%);
-  border-color: color-mix(in srgb, var(--cpv-gold-keyline) 76%, var(--smh-white) 12%);
+    radial-gradient(128% 148% at 16% 12%, color-mix(in srgb, var(--brand-magenta) 12%, transparent) 0%, transparent 48%),
+    radial-gradient(128% 148% at 84% 8%, color-mix(in srgb, var(--brand-teal) 12%, transparent) 0%, transparent 48%);
+  border-color: color-mix(in srgb, var(--cpv-gold-keyline) 80%, transparent 6%);
   box-shadow:
     var(--cpv-card-shadow-ambient),
-    0 18px 44px color-mix(in srgb, var(--brand-magenta) 18%, transparent 74%),
-    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 22%, transparent),
-    inset 0 0 0 1px color-mix(in srgb, var(--smh-accent-gold-soft) 22%, transparent);
+    0 18px 44px color-mix(in srgb, var(--brand-magenta) 22%, transparent 70%),
+    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 30%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--smh-accent-gold-soft) 28%, transparent);
 }
 
 .previewCanvas :global(.cpv-card__inner--stack),
@@ -47,7 +50,7 @@
   gap: clamp(0.85rem, 1.2vw, 1.1rem);
   padding-bottom: clamp(1rem, 1.3vw, 1.35rem);
   margin-bottom: clamp(1.1rem, 1.6vw, 1.6rem);
-  border-bottom: 1px solid color-mix(in srgb, var(--cpv-gold-keyline) 70%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--cpv-gold-keyline) 76%, transparent 6%);
 }
 
 .previewCanvas :global(.cpv-card__heading) {
@@ -70,11 +73,14 @@
 
 .previewCanvas :global(.treatment-rail__card) {
   min-height: 220px;
-  background: color-mix(in srgb, var(--cpv-card-bg) 98%, var(--smh-paper) 6%);
-  border-color: color-mix(in srgb, var(--cpv-gold-keyline) 70%, transparent);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--cpv-card-bg) 96%, transparent) 0%, color-mix(in srgb, var(--smh-white) 12%, transparent) 100%),
+    radial-gradient(90% 90% at 12% 8%, color-mix(in srgb, var(--brand-gold) 18%, transparent) 0%, transparent 60%);
+  border-color: color-mix(in srgb, var(--cpv-gold-keyline) 78%, transparent 4%);
   box-shadow:
-    0 18px 36px color-mix(in srgb, var(--smh-ink) 14%, transparent),
-    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 14%, transparent);
+    0 18px 36px color-mix(in srgb, var(--smh-ink) 18%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 18%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--brand-teal) 12%, transparent);
 }
 
 .previewCanvas :global(.treatment-deck) {
@@ -83,8 +89,10 @@
 
 .previewCanvas :global(.treatment-deck__card) {
   gap: clamp(0.7rem, 1vw, 1rem);
-  background: color-mix(in srgb, var(--cpv-card-bg) 98%, var(--smh-paper) 6%);
-  border-color: color-mix(in srgb, var(--cpv-gold-keyline) 72%, transparent);
+  background:
+    linear-gradient(160deg, color-mix(in srgb, var(--cpv-card-bg) 98%, var(--smh-paper) 6%) 0%, color-mix(in srgb, var(--smh-white) 14%, transparent) 100%),
+    radial-gradient(88% 92% at 18% 10%, color-mix(in srgb, var(--brand-magenta) 12%, transparent) 0%, transparent 54%);
+  border-color: color-mix(in srgb, var(--cpv-gold-keyline) 80%, transparent 4%);
 }
 
 .previewCanvas :global(.howto-grid) {
@@ -96,8 +104,10 @@
   padding: clamp(1.35rem, 1vw + 1rem, 1.7rem);
   grid-template-columns: auto 1fr;
   align-items: flex-start;
-  background: color-mix(in srgb, var(--cpv-card-bg) 98%, var(--smh-paper) 6%);
-  border-color: color-mix(in srgb, var(--cpv-gold-keyline) 70%, transparent);
+  background:
+    linear-gradient(170deg, color-mix(in srgb, var(--cpv-card-bg) 96%, var(--smh-paper) 8%) 0%, color-mix(in srgb, var(--smh-white) 12%, transparent) 100%),
+    radial-gradient(120% 120% at 18% 12%, color-mix(in srgb, var(--brand-teal) 10%, transparent) 0%, transparent 62%);
+  border-color: color-mix(in srgb, var(--cpv-gold-keyline) 78%, transparent 8%);
 }
 
 .previewCanvas :global(.howto-grid__copy h3) {
@@ -112,12 +122,14 @@
 .previewCanvas :global(.finance-band) {
   gap: clamp(1.25rem, 1.6vw, 1.85rem);
   padding: clamp(1.5rem, 2vw, 2.1rem);
-  background: linear-gradient(
+  background:
+    linear-gradient(
       150deg,
-      color-mix(in srgb, var(--brand-magenta) 12%, transparent) 0%,
-      transparent 64%
+      color-mix(in srgb, var(--brand-magenta) 18%, transparent) 0%,
+      color-mix(in srgb, var(--brand-teal) 14%, transparent) 46%,
+      transparent 78%
     ),
-    color-mix(in srgb, var(--cpv-card-bg) 98%, var(--smh-paper) 6%);
+    color-mix(in srgb, var(--cpv-card-bg) 98%, var(--smh-paper) 8%);
 }
 
 .previewCanvas :global(.finance-band__tiers) {
@@ -143,8 +155,10 @@
 .previewCanvas :global(.stories-grid__card) {
   gap: clamp(0.55rem, 0.8vw, 0.85rem);
   padding: clamp(1.2rem, 1vw + 1rem, 1.5rem);
-  background: color-mix(in srgb, var(--cpv-card-bg) 98%, var(--smh-paper) 6%);
-  border-color: color-mix(in srgb, var(--cpv-gold-keyline) 70%, transparent);
+  background:
+    linear-gradient(178deg, color-mix(in srgb, var(--cpv-card-bg) 96%, var(--smh-paper) 10%) 0%, color-mix(in srgb, var(--smh-white) 10%, transparent) 100%),
+    radial-gradient(80% 92% at 16% 14%, color-mix(in srgb, var(--brand-gold) 14%, transparent) 0%, transparent 54%);
+  border-color: color-mix(in srgb, var(--cpv-gold-keyline) 78%, transparent 4%);
 }
 
 .previewCanvas :global(.faq-rail) {
@@ -154,8 +168,10 @@
 
 .previewCanvas :global(.faq-rail__item) {
   padding: clamp(1.05rem, 1vw + 0.85rem, 1.45rem);
-  background: color-mix(in srgb, var(--cpv-card-bg) 98%, var(--smh-paper) 6%);
-  border-color: color-mix(in srgb, var(--cpv-gold-keyline) 68%, transparent);
+  background:
+    linear-gradient(165deg, color-mix(in srgb, var(--cpv-card-bg) 96%, var(--smh-paper) 10%) 0%, color-mix(in srgb, var(--smh-white) 10%, transparent) 100%),
+    radial-gradient(88% 92% at 18% 12%, color-mix(in srgb, var(--brand-teal) 12%, transparent) 0%, transparent 54%);
+  border-color: color-mix(in srgb, var(--cpv-gold-keyline) 78%, transparent 6%);
 }
 
 .previewCanvas :global(.faq-rail__item summary) {
@@ -175,10 +191,34 @@
 }
 
 .previewCanvas :global(.cpv-btn-outline) {
-  background: color-mix(in srgb, var(--smh-paper) 78%, transparent);
-  color: var(--cpv-page-text);
-  border-color: color-mix(in srgb, var(--cpv-gold-keyline) 70%, transparent);
+  background: color-mix(in srgb, var(--smh-paper) 84%, transparent);
+  color: color-mix(in srgb, var(--smh-white) 92%, var(--smh-ink) 8%);
+  border-color: color-mix(in srgb, var(--cpv-gold-keyline) 78%, transparent 6%);
   box-shadow:
-    inset 0 0 0 1px color-mix(in srgb, var(--brand-teal) 26%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--brand-teal) 28%, transparent),
     0 14px 32px color-mix(in srgb, var(--smh-ink) 16%, transparent);
+}
+
+.previewCanvas :global(.cpv-slot--viewer) {
+  border: 1px solid color-mix(in srgb, var(--cpv-gold-keyline) 78%, transparent 4%);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 18%, transparent),
+    0 16px 38px color-mix(in srgb, var(--smh-ink) 16%, transparent);
+}
+
+.previewCanvas :global(.cpv-slot__inner) {
+  color: color-mix(in srgb, var(--smh-white) 90%, var(--smh-ink) 10%);
+  text-align: center;
+}
+
+.previewCanvas :global(.cpv-card--bright) {
+  background:
+    linear-gradient(168deg, color-mix(in srgb, var(--brand-magenta) 18%, transparent) 0%, transparent 40%),
+    linear-gradient(12deg, color-mix(in srgb, var(--brand-teal) 12%, transparent) 0%, transparent 48%),
+    color-mix(in srgb, var(--cpv-card-bg) 98%, var(--smh-paper) 10%);
+  border-color: color-mix(in srgb, var(--cpv-gold-keyline) 82%, transparent 6%);
+  box-shadow:
+    var(--cpv-card-shadow-ambient),
+    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 24%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--smh-accent-gold-soft) 26%, transparent);
 }
