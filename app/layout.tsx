@@ -104,6 +104,8 @@ export default function RootLayout({
   const isChampagnePreview =
     resolvedPath.startsWith("/champagne-preview") ||
     resolvedPath.startsWith("/champagne/hero");
+  const isPreviewRoute = resolvedPath.startsWith("/preview");
+  const usePreviewShell = isChampagnePreview || isPreviewRoute;
 
   return (
     <html lang="en-GB" style={rootFontStyle} className="font-sans">
@@ -178,7 +180,7 @@ export default function RootLayout({
           Skip to main content
         </a>
 
-        {isChampagnePreview ? (
+        {usePreviewShell ? (
           <div
             id="main-content"
             className="min-h-screen bg-[var(--smh-bg)] text-[var(--smh-text)]"
