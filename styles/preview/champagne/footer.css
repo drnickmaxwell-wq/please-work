@@ -2,19 +2,19 @@
   .footer-champagne {
     position: relative;
     overflow: hidden;
-    border-top: 1px solid color-mix(in oklab, var(--brand-gold) 30%, rgba(0, 0, 0, 0.75));
+    border-top: 1px solid color-mix(in srgb, var(--brand-gold) 40%, var(--smh-ink) 60%);
     background: linear-gradient(
       180deg,
-      color-mix(in oklab, var(--brand-magenta) 22%, #050505 78%) 0%,
-      color-mix(in oklab, var(--brand-teal) 24%, #050505 76%) 55%,
-      color-mix(in oklab, var(--brand-gold) 28%, #050505 72%) 100%
+      color-mix(in srgb, var(--brand-magenta) 24%, var(--smh-ink) 76%) 0%,
+      color-mix(in srgb, var(--brand-teal) 24%, var(--smh-ink) 76%) 55%,
+      color-mix(in srgb, var(--brand-gold) 26%, var(--smh-ink-soft) 74%) 100%
     );
-    color: rgba(255, 242, 222, 0.92);
+    color: var(--cpv-page-text, var(--smh-white));
     isolation: isolate;
     padding: 2.25rem 1.75rem;
     gap: 1.75rem;
     border-radius: 20px 20px 0 0;
-    box-shadow: 0 -30px 60px rgba(0, 0, 0, 0.45);
+    box-shadow: 0 -30px 60px color-mix(in srgb, var(--smh-ink) 32%, transparent);
   }
 
   .footer-champagne::before {
@@ -34,7 +34,7 @@
     text-transform: uppercase;
     letter-spacing: 0.14em;
     font-size: 0.9rem;
-    color: rgba(255, 237, 209, 0.82);
+    color: color-mix(in srgb, var(--cpv-page-text, var(--smh-white)) 78%, transparent);
   }
 
   .footer-preview-cards {
@@ -52,13 +52,13 @@
     padding: 1.25rem 1.5rem;
     display: grid;
     gap: 0.5rem;
-    color: rgba(255, 249, 236, 0.88);
+    color: var(--cpv-page-text, var(--smh-white));
   }
 
   .footer-preview-card p {
     margin: 0;
     font-size: 0.95rem;
     line-height: 1.5;
-    color: rgba(255, 244, 229, 0.78);
+    color: color-mix(in srgb, var(--cpv-page-text, var(--smh-white)) 70%, transparent);
   }
 }
