@@ -9,6 +9,7 @@ import PreviewHero from '@/components/preview/PreviewHero';
 import { KeyList, Section } from '@/components/preview/PreviewBlocks';
 import ThreeDViewerSlot from '@/components/preview/treatments/ThreeDViewerSlot';
 import { previewRobots } from '@/lib/seo/preview/previewRobots';
+import layoutStyles from '@/components/preview/sections/treatments/preview-treatments.module.css';
 
 export const metadata: Metadata = {
   robots: previewRobots,
@@ -39,7 +40,7 @@ const candidacyPoints = [
 
 export default function SparkAlignersPreviewPage() {
   return (
-    <div className="cpv-page" data-treatment="orthodontics">
+    <div className={`cpv-page ${layoutStyles.previewCanvas}`} data-treatment="orthodontics">
       <PreviewHero
         treatment="orthodontics"
         eyebrow="Treatments preview"
