@@ -1,35 +1,18 @@
-import type { Metadata } from 'next';
+export const dynamic = "force-static";
+export const revalidate = 0;
 
-import '@/styles/preview/champagne-preview.css';
+import type { Metadata } from "next";
 
-import PreviewHero from '@/components/preview/PreviewHero';
-import { Section } from '@/components/preview/PreviewBlocks';
-import { previewRobots } from '@/lib/seo/preview/previewRobots';
+import { TreatmentPreviewPage, buildTreatmentPreviewMetadata } from "@/components/preview/sections/treatments/TreatmentPreviewPage";
+import { previewRobots } from "@/lib/seo/preview/previewRobots";
+
+const slug = "cosmetic";
 
 export const metadata: Metadata = {
+  ...buildTreatmentPreviewMetadata(slug),
   robots: previewRobots,
 };
 
 export default function CosmeticPreviewPage() {
-  return (
-    <div className="cpv-page" data-treatment="cosmetic">
-      <PreviewHero
-        treatment="cosmetic"
-        eyebrow="Treatments preview"
-        title="Cosmetic dentistry preview"
-        description="Scaffold copy, photography, and schema ideas for the cosmetic launch inside the Champagne Balanced Dusk hero. Production routes remain untouched while you iterate."
-      />
-
-      <main className="cpv-main" role="main">
-        <Section
-          title="Working canvas"
-          description={<p>Swap this placeholder for your cosmetic dentistry modules once approvals land.</p>}
-        >
-          <p className="cpv-note">
-            Use this space for moodboarding layouts, tone explorations, and CTA strategies before moving anything into the live site.
-          </p>
-        </Section>
-      </main>
-    </div>
-  );
+  return <TreatmentPreviewPage slug={slug} />;
 }

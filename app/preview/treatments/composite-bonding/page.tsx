@@ -1,40 +1,18 @@
-// Preview-only clone. No hard hexes. Do not edit production pages.
-import type { Metadata } from 'next';
+export const dynamic = "force-static";
+export const revalidate = 0;
 
-import '@/styles/preview/champagne-preview.css';
+import type { Metadata } from "next";
 
-import PreviewHero from '@/components/preview/PreviewHero';
-import { previewRobots } from '@/lib/seo/preview/previewRobots';
+import { TreatmentPreviewPage, buildTreatmentPreviewMetadata } from "@/components/preview/sections/treatments/TreatmentPreviewPage";
+import { previewRobots } from "@/lib/seo/preview/previewRobots";
 
-import CompositeBondingFaqSection from './_sections/CompositeBondingFaqSection';
-import CompositeBondingHeroSection from './_sections/CompositeBondingHeroSection';
-import CompositeBondingHighlightsSection from './_sections/CompositeBondingHighlightsSection';
-import CompositeBondingPlanSessionSection from './_sections/CompositeBondingPlanSessionSection';
-import CompositeBondingResultsSection from './_sections/CompositeBondingResultsSection';
+const slug = "composite-bonding";
 
 export const metadata: Metadata = {
-  title: 'Composite bonding stage preview',
-  description: 'Preview-only showcase for composite bonding sections before promotion to the live treatments route.',
+  ...buildTreatmentPreviewMetadata(slug),
   robots: previewRobots,
 };
 
 export default function CompositeBondingPreviewPage() {
-  return (
-    <div className="cpv-page" data-treatment="composite">
-      <PreviewHero
-        treatment="composite"
-        eyebrow="Treatments preview"
-        title="Composite bonding artistry"
-        description="Guided artistry layered over a calm Champagne hero. Assemble copy, imagery, and schema experiments here while the live treatments route remains unchanged."
-      />
-
-      <main className="cpv-main" role="main">
-        <CompositeBondingHeroSection />
-        <CompositeBondingHighlightsSection />
-        <CompositeBondingResultsSection />
-        <CompositeBondingFaqSection />
-        <CompositeBondingPlanSessionSection />
-      </main>
-    </div>
-  );
+  return <TreatmentPreviewPage slug={slug} />;
 }
