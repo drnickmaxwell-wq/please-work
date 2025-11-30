@@ -14,9 +14,9 @@
   align-items: center;
   gap: 0.5rem;
   border-radius: 999px;
-  background: rgba(12, 24, 32, 0.35);
-  border: 1px solid rgba(249, 232, 195, 0.45);
-  box-shadow: 0 18px 36px rgba(6, 18, 32, 0.22);
+  background: color-mix(in srgb, var(--cp-glass-surface) 76%, transparent 24%);
+  border: 1px solid var(--cp-glass-border);
+  box-shadow: var(--cp-glass-shadow);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -30,31 +30,31 @@
 }
 
 .link {
-  color: rgba(255, 255, 255, 0.86);
+  color: var(--cp-text-medium);
   text-decoration: none;
-  text-shadow: 0 12px 28px rgba(6, 18, 32, 0.25);
+  text-shadow: 0 12px 28px color-mix(in srgb, var(--cp-surface) 40%, transparent);
   transition: color 180ms cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
 .link:hover,
 .link:focus-visible {
-  color: #ffffff;
+  color: var(--cp-text-high);
 }
 
 .link:focus-visible {
-  outline: 1px solid rgba(249, 232, 195, 0.6);
+  outline: 1px solid var(--cp-cta-ring);
   outline-offset: 3px;
   border-radius: 0.5rem;
 }
 
 .current {
-  color: #ffffff;
+  color: var(--cp-text-high);
   font-weight: 600;
 }
 
 .separator {
-  color: rgba(249, 232, 195, 0.6);
-  text-shadow: 0 8px 22px rgba(6, 18, 32, 0.25);
+  color: color-mix(in srgb, var(--cp-cta-ring) 72%, transparent);
+  text-shadow: 0 8px 22px color-mix(in srgb, var(--cp-surface) 36%, transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {

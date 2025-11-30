@@ -6,6 +6,7 @@ import { headers } from "next/headers";
 import PerformanceOptimizedLayout from '@/components/layout/performance-optimized-layout';
 import StickyHeader from '@/components/layout/sticky-header';
 import Footer from '@/components/layout/footer';
+import { resolveChampagneTheme } from '@/lib/champagne/theme';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL ?? 'https://www.stmaryshousedental.co.uk';
 
@@ -101,6 +102,7 @@ export default function RootLayout({
     headersList.get("x-invoke-path") ??
     headersList.get("next-url") ??
     "";
+  const champagneTheme = resolveChampagneTheme(resolvedPath);
   const isChampagnePreview =
     resolvedPath.startsWith("/champagne-preview") ||
     resolvedPath.startsWith("/champagne/hero");
@@ -108,7 +110,7 @@ export default function RootLayout({
   const usePreviewShell = isChampagnePreview || isPreviewRoute;
 
   return (
-    <html lang="en-GB" style={rootFontStyle} className="font-sans">
+    <html lang="en-GB" style={rootFontStyle} className="font-sans" data-theme={champagneTheme}>
       <head>
         {/* PWA Manifest */}
         <link rel="manifest" href="/manifest.json" />

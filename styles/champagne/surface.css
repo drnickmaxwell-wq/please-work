@@ -13,7 +13,7 @@
 /* Layer order: gradient → wave mask → particles → grain → glass → content */
 .champagne-surface,
 .champagne-surface-lux {
-  background-image: var(--smh-gradient);
+  background-image: var(--cp-hero-gradient);
   position: relative;
   isolation: isolate;
 }
@@ -38,7 +38,7 @@
   background-repeat: no-repeat, repeat;
   background-size: cover, cover;
   mix-blend-mode: soft-light;
-  opacity: 0.14;
+  opacity: var(--cp-grain-opacity);
   pointer-events: none;
 }
 

@@ -1,0 +1,13 @@
+.cp-card-surface {
+  background: color-mix(in srgb, var(--cp-card-surface) 88%, transparent 12%);
+  border: 1px solid var(--cp-card-border);
+  box-shadow: var(--cp-card-shadow);
+  border-radius: var(--radius-md);
+  color: var(--cp-text-high);
+}
+
+.cp-card-surface--glass {
+  background: color-mix(in srgb, var(--cp-glass-surface) 76%, transparent 24%);
+  border: 1px solid var(--cp-glass-border);
+  box-shadow: var(--cp-glass-shadow);
+}

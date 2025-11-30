@@ -2,22 +2,22 @@
 @import './gradients.css';
 @import './layers.css';
 @import './glass.css';
+@import './cards.css';
 @import './typography.css';
 @import './spacing.css';
 @import './time-of-day.css';
 
 :root {
-  --bg-ink: var(--brand-ink);
-  color: var(--text-high);
-  background: var(--bg-ink);
+  color: var(--cp-text-high);
+  background: var(--cp-surface);
 }
 
 body,
 .champagne-page {
-  background: var(--bg-ink);
-  color: var(--text-high);
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--cp-surface);
+  color: var(--cp-text-high);
+  font-family: var(--cp-font-sans);
   min-height: 100vh;
 }
 
-a { color: inherit; }
+a { color: var(--cp-text-high); }

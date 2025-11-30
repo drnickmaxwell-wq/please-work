@@ -7,13 +7,13 @@
   font-size: 1.4rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  color: var(--brand-white);
+  color: var(--cp-text-high);
 }
 
 .item {
   border-radius: var(--radius-md);
-  background: color-mix(in srgb, var(--bg-ink) 70%, transparent 30%);
-  border: 1px solid color-mix(in srgb, var(--brand-soft-gold) 26%, transparent);
+  background: color-mix(in srgb, var(--cp-card-surface) 88%, transparent 12%);
+  border: 1px solid var(--cp-card-border);
 }
 
 .button {
@@ -27,21 +27,21 @@
   gap: 0.75rem;
   align-items: center;
   font-weight: 600;
-  color: var(--brand-white);
+  color: var(--cp-text-high);
 }
 
 .button:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--brand-teal) 50%, var(--brand-white) 50%);
+  outline: 2px solid var(--cp-cta-ring);
   outline-offset: 2px;
 }
 
 .answer {
   padding: 0 1.25rem 1rem;
-  color: color-mix(in srgb, var(--brand-white) 82%, var(--bg-ink) 18%);
+  color: var(--cp-text-medium);
   line-height: 1.6;
 }
 
 .icon {
   font-size: 1.25rem;
-  color: var(--brand-soft-gold);
+  color: var(--cp-text-high);
 }

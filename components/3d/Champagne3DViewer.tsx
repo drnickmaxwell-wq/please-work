@@ -18,19 +18,7 @@ export function Champagne3DViewer({
         <p className={`${styles['cp-card__body']} text-body`}>{description}</p>
       </div>
       <div className={styles['cp-card__media']} role="presentation" aria-label="3D viewer placeholder">
-        <div
-          style={{
-            display: 'grid',
-            placeItems: 'center',
-            height: '100%',
-            color: 'color-mix(in srgb, var(--brand-white) 75%, var(--bg-ink) 25%)',
-            textAlign: 'center',
-            padding: '0.75rem',
-            fontWeight: 600,
-          }}
-        >
-          {placeholderText}
-        </div>
+        <div className={styles['cp-card__placeholder']}>{placeholderText}</div>
       </div>
     </div>
   );

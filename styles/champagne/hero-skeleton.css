@@ -2,8 +2,8 @@
   position: relative;
   overflow: hidden;
   padding: 4rem 1.25rem;
-  color: var(--brand-white);
-  background: var(--bg-ink);
+  color: var(--cp-text-high);
+  background: var(--cp-surface);
   isolation: isolate;
 }
 
@@ -13,11 +13,11 @@
   display: grid;
   gap: 2rem;
   grid-template-columns: 1fr;
-  background: color-mix(in srgb, var(--bg-ink) 70%, transparent 30%);
+  background: color-mix(in srgb, var(--cp-card-surface) 86%, transparent 14%);
   border-radius: var(--radius-lg);
   padding: 2.5rem;
-  border: 1px solid color-mix(in srgb, var(--brand-soft-gold) 28%, transparent);
-  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--cp-card-border);
+  box-shadow: var(--cp-card-shadow);
 }
 
 .hero-content {
@@ -32,7 +32,7 @@
   font-size: 0.95rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--brand-white) 76%, var(--bg-ink) 24%);
+  color: var(--cp-text-low);
 }
 
 .hero-title {
@@ -43,7 +43,7 @@
 
 .hero-subtitle {
   font-size: 1.05rem;
-  color: color-mix(in srgb, var(--brand-white) 82%, var(--bg-ink) 18%);
+  color: var(--cp-text-medium);
   line-height: 1.6;
 }
 
@@ -58,10 +58,10 @@
   align-self: flex-start;
   padding: 0.35rem 0.75rem;
   border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--brand-soft-gold) 26%, transparent);
-  background: color-mix(in srgb, var(--bg-ink) 68%, transparent 32%);
+  border: 1px solid var(--cp-card-border);
+  background: color-mix(in srgb, var(--cp-surface) 72%, transparent 28%);
   font-weight: 600;
-  color: color-mix(in srgb, var(--brand-white) 82%, var(--bg-ink) 18%);
+  color: var(--cp-text-medium);
 }
 
 .hero-layers,
@@ -75,11 +75,21 @@
   z-index: 0;
 }
 
-.hero-layer.wave {
-  background: color-mix(in srgb, var(--bg-ink) 80%, transparent 20%);
+.hero-layer.gradient {
+  background: var(--cp-hero-gradient);
 }
-.hero-layer.particles { opacity: var(--particles-opacity, 0.06); }
-.hero-layer.grain { mix-blend-mode: soft-light; opacity: var(--grain-opacity, 0.06); }
+
+.hero-layer.wave {
+  background: color-mix(in srgb, var(--cp-surface) 46%, transparent 54%);
+}
+
+.hero-layer.particles { opacity: var(--cp-particles-opacity, 0.12); }
+.hero-layer.grain { mix-blend-mode: soft-light; opacity: var(--cp-grain-opacity, 0.08); }
+.hero-layer.glass {
+  background: radial-gradient(circle at 18% 12%, color-mix(in srgb, var(--cp-glass-surface) 45%, transparent) 0%, transparent 62%);
+  mix-blend-mode: screen;
+  opacity: 0.32;
+}
 
 @media (min-width: 900px) {
   .hero-shell {

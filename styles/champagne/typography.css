@@ -1,31 +1,33 @@
 .text-hero {
-  font-family: 'Playfair Display';
+  font-family: var(--cp-font-serif);
   font-size: clamp(2.6rem, 4vw, 4rem);
   font-weight: 600;
+  color: var(--cp-text-high);
 }
 
 .text-title {
-  font-family: 'Playfair Display';
+  font-family: var(--cp-font-serif);
   font-size: 2rem;
   font-weight: 600;
+  color: var(--cp-text-high);
 }
 
 .text-lead {
-  font-family: Inter;
+  font-family: var(--cp-font-sans);
   font-size: 1.05rem;
-  opacity: 0.95;
+  color: var(--cp-text-medium);
 }
 
 .text-body {
-  font-family: Inter;
+  font-family: var(--cp-font-sans);
   font-size: 0.98rem;
-  opacity: 0.95;
+  color: var(--cp-text-medium);
 }
 
 .text-eyebrow {
-  font-family: Inter;
+  font-family: var(--cp-font-sans);
   font-size: 0.8rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  opacity: 0.75;
+  color: var(--cp-text-low);
 }

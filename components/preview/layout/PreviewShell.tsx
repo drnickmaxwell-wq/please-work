@@ -4,9 +4,15 @@ import ChampagnePreviewFooter from "@/components/preview/layout/ChampagnePreview
 import ChampagnePreviewHeader from "@/components/preview/layout/ChampagnePreviewHeader";
 import styles from "./preview-shell.module.css";
 
-export default function PreviewShell({ children }: { children: ReactNode }) {
+export default function PreviewShell({
+  children,
+  theme = "light",
+}: {
+  children: ReactNode;
+  theme?: "light" | "dark" | "dusk";
+}) {
   return (
-    <div className={`${styles.cpvShell} text-[var(--smh-white)]`} data-theme="preview-dusk">
+    <div className={styles.cpvShell} data-theme={theme}>
       <div className={styles.cpvBackdrop} aria-hidden />
       <div className={styles.cpvParticles} aria-hidden />
       <div className={`${styles.cpvInner} flex min-h-screen flex-col`}>

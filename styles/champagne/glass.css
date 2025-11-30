@@ -1,19 +1,23 @@
 .glass-soft {
   backdrop-filter: blur(22px);
-  background: var(--surface-glass);
-  border: 1px solid color-mix(in srgb, var(--brand-soft-gold) 40%, transparent);
-  box-shadow: var(--shadow-soft);
+  -webkit-backdrop-filter: blur(22px);
+  background: color-mix(in srgb, var(--cp-glass-surface) 70%, transparent 30%);
+  border: 1px solid var(--cp-glass-border);
+  box-shadow: var(--cp-glass-shadow);
   border-radius: var(--radius-lg);
+  color: var(--cp-text-high);
 }
 
 .glass-card {
   backdrop-filter: blur(18px);
-  background: var(--surface-glass-deep);
-  border: 1px solid color-mix(in srgb, var(--smh-white) 10%, transparent);
+  -webkit-backdrop-filter: blur(18px);
+  background: color-mix(in srgb, var(--cp-card-surface) 86%, transparent 14%);
+  border: 1px solid var(--cp-card-border);
   border-radius: var(--radius-md);
+  box-shadow: var(--cp-card-shadow);
 }
 
 .glass-soft,
 .glass-card {
-  color: var(--text-high);
+  color: var(--cp-text-high);
 }

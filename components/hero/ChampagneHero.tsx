@@ -27,8 +27,8 @@ export function ChampagneHero({
   secondaryCta,
   badge,
   showWave = true,
-  showParticles = false,
-  showGrain = false,
+  showParticles = true,
+  showGrain = true,
   aside,
 }: ChampagneHeroProps) {
   return (
@@ -38,6 +38,7 @@ export function ChampagneHero({
         {showWave ? <div className={`hero-layer wave ${layers.wave}`} /> : null}
         {showParticles ? <div className={`hero-layer particles ${layers.particles}`} /> : null}
         {showGrain ? <div className={`hero-layer grain ${layers.grain}`} /> : null}
+        <div className="hero-layer glass" />
       </div>
       <div className="hero-shell glass-soft">
         <div className="hero-content">

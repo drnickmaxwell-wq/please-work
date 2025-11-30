@@ -1,15 +1,21 @@
 .layer-wave {
-  mask-image: url('/assets/manus/waves/wave-mask-desktop.png');
+  mask-image: var(--wave-mask);
+  -webkit-mask-image: var(--wave-mask);
   mask-size: cover;
+  -webkit-mask-size: cover;
+  background: color-mix(in srgb, var(--cp-surface) 42%, transparent);
+  mix-blend-mode: screen;
+  opacity: var(--cp-wave-opacity);
 }
 
 .layer-particles {
-  background-image: url('/assets/manus/particles/home-hero-particles.webp');
-  opacity: var(--particles-opacity);
+  background-image: url('/assets/champagne/particles/home-hero-particles.webp');
+  opacity: var(--cp-particles-opacity);
+  mix-blend-mode: screen;
 }
 
 .layer-grain {
-  background-image: url('/assets/manus/textures/home-hero-film-grain.webp');
-  opacity: var(--grain-opacity);
+  background-image: url('/assets/champagne/textures/home-hero-film-grain.webp');
+  opacity: var(--cp-grain-opacity);
   mix-blend-mode: soft-light;
 }

@@ -1,36 +1,43 @@
-[data-theme="preview-dusk"] {
+[data-theme="dusk"],
+[data-theme="dark"] {
   min-height: 100vh;
   width: 100%;
-  background-color: var(--smh-ink);
-  color: var(--smh-text);
+  background-color: var(--cp-surface);
+  color: var(--cp-text-high);
   color-scheme: dark;
 }
 
-[data-theme="preview-dusk"] a {
+[data-theme="dusk"] a,
+[data-theme="dark"] a {
   color: inherit;
 }
 
-[data-theme="preview-dusk"] .sticky-header {
+[data-theme="dusk"] .sticky-header,
+[data-theme="dark"] .sticky-header {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   background: transparent;
   transition: background 200ms ease, border-color 200ms ease;
 }
 
-[data-theme="preview-dusk"] .header.scrolled,
-[data-theme="preview-dusk"] .sticky-header[data-scrolled="true"] {
-  background: color-mix(in oklab, var(--smh-ink) 72%, transparent);
+[data-theme="dusk"] .header.scrolled,
+[data-theme="dark"] .header.scrolled,
+[data-theme="dusk"] .sticky-header[data-scrolled="true"],
+[data-theme="dark"] .sticky-header[data-scrolled="true"] {
+  background: color-mix(in oklab, var(--cp-glass-surface) 62%, transparent);
 }
 
-[data-theme="preview-dusk"] .glass-pane {
-  background: var(--champagne-glass-bg);
+[data-theme="dusk"] .glass-pane,
+[data-theme="dark"] .glass-pane {
+  background: color-mix(in srgb, var(--cp-glass-surface) 82%, transparent 18%);
   backdrop-filter: blur(12px);
-  border: 1px solid var(--champagne-keyline-gold);
+  border: 1px solid var(--cp-glass-border);
   border-radius: 18px;
-  box-shadow: var(--champagne-pane);
+  box-shadow: var(--cp-glass-shadow);
 }
 
-[data-theme="preview-dusk"] .wave {
+[data-theme="dusk"] .wave,
+[data-theme="dark"] .wave {
   position: absolute;
   inset: 0;
   pointer-events: none;

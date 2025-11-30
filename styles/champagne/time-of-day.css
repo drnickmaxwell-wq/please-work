@@ -1,11 +1,11 @@
 :root[data-theme='dawn'] {
-  --bg-ink: color-mix(in srgb, var(--brand-teal) 15%, white);
+  --cp-surface: var(--cp-canvas-light);
 }
 
 :root[data-theme='dusk'] {
-  --bg-ink: var(--ink-100);
+  --cp-surface: var(--cp-canvas-dusk);
 }
 
-:root[data-theme='night'] {
-  --bg-ink: rgb(0 0 0);
+:root[data-theme='dark'] {
+  --cp-surface: var(--cp-canvas-dark);
 }
