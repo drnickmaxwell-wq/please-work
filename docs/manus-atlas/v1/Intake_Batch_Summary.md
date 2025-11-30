@@ -1,22 +1,47 @@
-# Intake Batch Summary  
-Champagne Ecosystem — St Mary’s House Dental  
-Author: Manus Importer AI  
-Version: Atlas v1
-
----
-
-## Purpose
-
-This summary provides an overview of all intake batches processed during the creation of the Manus Design Atlas v1. It outlines the total number of sections, components, and assets received, notes on data quality, and actions taken to prepare the Atlas.
+# Intake Batch Summary
+Champagne Ecosystem — Manus Importer AI
 
 ## Overview
+This summary describes the complete set of Manus and Champagne assets ingested
+for the Atlas v1:
+- Composite Bonding family (raw → polished → restored)
+- Home page family (hero, tech strip, sections, footer)
+- Technology page family
+- Global effects (waves, particles, grain, glass)
+- Verification and polish phases (1A, 1B, 1E)
 
-- A total of 67 sections and 142 components were processed across multiple batches.
-- Assets were organised into archetypes (heroes, body layouts, CTA blocks, FAQs, testimonials) and mapped to their respective pages.
-- Duplicate files and outdated variants were identified and archived.
-- Only Champagne-ready assets were retained for integration.
-- Raw and deprecated assets were flagged for archival.
+## Totals
+- Assets (images/webp/png): 100+ unique items.
+- Manus ZIP families: excellentMANUS, EXTRAMANUS, AI24 homepage/treatment/tech,
+  composite-bonding phase zip series, hero generator, pixel-perfecting packs.
+- Major page templates: Home, Composite Bonding, Technology.
 
-## Notes
+## Key Families
+- Composite Bonding: the most complete and most Champagne-correct page in the set.
+- Home: strong hero and technology strip; mid-page sections need consolidation.
+- Technology: visually promising but under-specified; needs a cohesive rebuild.
 
-This summary serves as a high-level record of the intake process. For detailed analysis and recommendations, refer to the Manus Design Audit Report and the Integration Roadmap.
+## Classification Summary
+- CHAMPAGNE_READY:
+  - Restored heroes
+  - Polished composite body and CTA
+  - AI tool cards
+  - FAQ Phase 1E
+  - Technology strip
+  - Wave/particle/grain/glass master layers
+
+- NEEDS_CHAMPAGNE_RE-SKIN:
+  - Technology hero + cards
+  - Home team/testimonials sections
+  - Non-restored AI/dashboard UIs
+
+- OFF_BRAND / DEPRECATED:
+  - Raw Manus heroes
+  - Old FAQ and CTA variants
+  - Any layout using incorrect gradients or typefaces.
+
+## Use
+This summary is intended as a quick “top sheet” for Director AI and Codex before
+they dive into the JSON catalogs and full Atlas document.
+
+End of Intake Batch Summary.
