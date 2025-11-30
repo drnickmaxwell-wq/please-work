@@ -97,15 +97,17 @@ function HowItWorksTabs({
   steps,
   label,
   groupId,
+  className,
 }: {
   steps: HowToStep[];
   label: string;
   groupId: string;
+  className?: string;
 }) {
   const safeGroup = groupId.replace(/[^a-z0-9-]/gi, "-");
 
   return (
-    <section aria-labelledby="how-it-works" className={styles.section}>
+    <section aria-labelledby="how-it-works" className={className ?? styles.section}>
       <div className={styles.sectionHeader}>
         <span className={styles.eyebrow}>How it works</span>
         <h2 id="how-it-works" className={styles.sectionTitle}>
@@ -144,9 +146,9 @@ function HowItWorksTabs({
   );
 }
 
-function FinanceBand({ planGroup }: { planGroup?: string }) {
+function FinanceBand({ planGroup, className }: { planGroup?: string; className?: string }) {
   return (
-    <section className={styles.section} aria-labelledby="finance-heading">
+    <section className={className ?? styles.section} aria-labelledby="finance-heading">
       <div className={`${styles.glass} ${styles.financeCard}`}>
         <div className={styles.sectionHeader}>
           <span className={styles.eyebrow}>Investment</span>
@@ -169,9 +171,9 @@ function FinanceBand({ planGroup }: { planGroup?: string }) {
   );
 }
 
-function GalleryPlaceholder() {
+function GalleryPlaceholder({ className }: { className?: string }) {
   return (
-    <section className={styles.section} aria-labelledby="gallery-heading">
+    <section className={className ?? styles.section} aria-labelledby="gallery-heading">
       <div className={styles.sectionHeader}>
         <span className={styles.eyebrow}>Gallery</span>
         <h2 id="gallery-heading" className={styles.sectionTitle}>
@@ -197,9 +199,9 @@ function GalleryPlaceholder() {
   );
 }
 
-function BenefitsGrid({ items, category }: { items: string[]; category?: string }) {
+function BenefitsGrid({ items, category, className }: { items: string[]; category?: string; className?: string }) {
   return (
-    <section className={styles.section} aria-labelledby="benefits-heading">
+    <section className={className ?? styles.section} aria-labelledby="benefits-heading">
       <div className={styles.sectionHeader}>
         <span className={styles.eyebrow}>{category ?? "Treatment"}</span>
         <h2 id="benefits-heading" className={styles.sectionTitle}>
@@ -221,9 +223,9 @@ function BenefitsGrid({ items, category }: { items: string[]; category?: string 
   );
 }
 
-function FaqStrip({ items, missing }: { items: FaqEntry[]; missing: boolean }) {
+function FaqStrip({ items, missing, className }: { items: FaqEntry[]; missing: boolean; className?: string }) {
   return (
-    <section className={styles.section} aria-labelledby="faq-heading">
+    <section className={className ?? styles.section} aria-labelledby="faq-heading">
       <div className={styles.sectionHeader}>
         <span className={styles.eyebrow}>FAQ</span>
         <h2 id="faq-heading" className={styles.sectionTitle}>
@@ -251,9 +253,9 @@ function FaqStrip({ items, missing }: { items: FaqEntry[]; missing: boolean }) {
   );
 }
 
-function CtaBand({ title }: { title: string }) {
+function CtaBand({ title, className }: { title: string; className?: string }) {
   return (
-    <section className={styles.section} aria-labelledby="cta-heading">
+    <section className={className ?? styles.section} aria-labelledby="cta-heading">
       <div className={`${styles.glass} ${styles.ctaBand}`}>
         <div>
           <p className={styles.eyebrow}>Next steps</p>
@@ -277,6 +279,7 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
   const schemaSlug = resolveSchemaSlug(slug, schemaKey);
   const previewContent = await loadTreatmentPreviewContent(schemaSlug);
   const showHud = shouldShowHud(searchParams?.hud);
+  const isImplants = config.slug === "implants";
 
   const benefits = coerceBenefits(config, benefitBullets);
   const steps = coerceSteps(
@@ -293,7 +296,7 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
     "Champagne treatment canvas using preview schema loaders and Manus-aligned sections.";
 
   return (
-    <div className={`cpv-page ${styles.canvas}`} data-treatment={config.slug}>
+    <div className={`cpv-page ${styles.canvas} ${isImplants ? styles.implantsCanvas : ""}`} data-treatment={config.slug}>
       {showHud ? (
         <DevHud
           className="tl-hud"
@@ -325,10 +328,10 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
         <p className={styles.heroCopy}>{heroDescription}</p>
       </ChampagnePreviewHero>
 
-      <main className={styles.main} role="main">
-        <BenefitsGrid category={category} items={benefits} />
+      <main className={`${styles.main} ${isImplants ? styles.implantsMain : ""}`} role="main">
+        <BenefitsGrid category={category} items={benefits} className={isImplants ? styles.implantSection : undefined} />
 
-        <section className={styles.section} aria-labelledby="howto-block">
+        <section className={`${styles.section} ${isImplants ? styles.implantSection : ""}`} aria-labelledby="howto-block">
           <div className={styles.sectionHeader}>
             <span className={styles.eyebrow}>Workflow</span>
             <h2 id="howto-block" className={styles.sectionTitle}>
@@ -339,9 +342,14 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
             </p>
           </div>
           <div className={styles.howtoGrid}>
-            <HowItWorksTabs groupId={config.slug} label={`${treatmentName ?? config.displayName} steps`} steps={steps} />
+            <HowItWorksTabs
+              className={isImplants ? styles.implantCard : styles.section}
+              groupId={config.slug}
+              label={`${treatmentName ?? config.displayName} steps`}
+              steps={steps}
+            />
             {has3DViewer ? (
-              <div className={styles.viewerShell}>
+              <div className={`${styles.viewerShell} ${isImplants ? styles.implantCard : ""}`}>
                 <Champagne3DViewer
                   title={`${treatmentName ?? config.displayName} 3D viewer`}
                   description="Reserved Champagne glass surface for the 3D model."
@@ -353,11 +361,11 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
           </div>
         </section>
 
-        <FinanceBand planGroup={financePlanGroup} />
+        <FinanceBand className={isImplants ? styles.implantSection : undefined} planGroup={financePlanGroup} />
 
-        {galleryEnabled ? <GalleryPlaceholder /> : null}
+        {galleryEnabled ? <GalleryPlaceholder className={isImplants ? styles.implantSection : undefined} /> : null}
 
-        <section className={styles.section} aria-labelledby="stories-heading">
+        <section className={`${styles.section} ${isImplants ? styles.implantSection : ""}`} aria-labelledby="stories-heading">
           <div className={styles.sectionHeader}>
             <span className={styles.eyebrow}>Testimonials</span>
             <h2 id="stories-heading" className={styles.sectionTitle}>
@@ -370,9 +378,13 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
           </div>
         </section>
 
-        <FaqStrip items={faqItems} missing={previewContent.missing.faq} />
+        <FaqStrip
+          className={isImplants ? styles.implantSection : undefined}
+          items={faqItems}
+          missing={previewContent.missing.faq}
+        />
 
-        <CtaBand title={treatmentName ?? config.displayName} />
+        <CtaBand className={isImplants ? `${styles.implantSection} ${styles.ctaSurface}` : undefined} title={treatmentName ?? config.displayName} />
       </main>
 
       <TreatmentPreviewSchema config={config} />
