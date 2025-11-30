@@ -3,8 +3,9 @@ export const revalidate = 0;
 
 import type { Metadata } from "next";
 
-import { TreatmentPreviewPage, buildTreatmentPreviewMetadata } from "@/components/preview/sections/treatments/TreatmentPreviewPage";
+import ChampagneTreatmentTemplate from "@/components/preview/treatments/ChampagneTreatmentTemplate";
 import { previewRobots } from "@/lib/seo/preview/previewRobots";
+import { buildPreviewMetadata as buildTreatmentPreviewMetadata } from "@/lib/treatments/previewTreatmentConfig";
 
 const slug = "technology";
 
@@ -13,6 +14,21 @@ export const metadata: Metadata = {
   robots: previewRobots,
 };
 
-export default function TechnologyPreviewPage() {
-  return <TreatmentPreviewPage slug={slug} />;
+type PreviewPageProps = {
+  searchParams?: Record<string, string | string[] | undefined>;
+};
+
+export default function TechnologyPreviewPage({ searchParams }: PreviewPageProps) {
+  return (
+    <ChampagneTreatmentTemplate
+      slug={slug}
+      schemaKey="technology"
+      treatmentName="Technology"
+      category="Technology"
+      has3DViewer
+      financePlanGroup="technology"
+      faqKey="technology"
+      searchParams={searchParams}
+    />
+  );
 }

@@ -3,8 +3,9 @@ export const revalidate = 0;
 
 import type { Metadata } from "next";
 
-import { TreatmentPreviewPage, buildTreatmentPreviewMetadata } from "@/components/preview/sections/treatments/TreatmentPreviewPage";
+import ChampagneTreatmentTemplate from "@/components/preview/treatments/ChampagneTreatmentTemplate";
 import { previewRobots } from "@/lib/seo/preview/previewRobots";
+import { buildPreviewMetadata as buildTreatmentPreviewMetadata } from "@/lib/treatments/previewTreatmentConfig";
 
 const slug = "3d-dentistry";
 
@@ -13,6 +14,21 @@ export const metadata: Metadata = {
   robots: previewRobots,
 };
 
-export default function ThreeDDentistryPreviewPage() {
-  return <TreatmentPreviewPage slug={slug} />;
+type PreviewPageProps = {
+  searchParams?: Record<string, string | string[] | undefined>;
+};
+
+export default function ThreeDDentistryPreviewPage({ searchParams }: PreviewPageProps) {
+  return (
+    <ChampagneTreatmentTemplate
+      slug={slug}
+      schemaKey="3d-dentistry"
+      treatmentName="3D dentistry"
+      category="Technology"
+      has3DViewer
+      financePlanGroup="3d-dentistry"
+      faqKey="3d-dentistry"
+      searchParams={searchParams}
+    />
+  );
 }

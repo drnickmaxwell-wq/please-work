@@ -1,0 +1,270 @@
+.canvas {
+  position: relative;
+  isolation: isolate;
+  background: radial-gradient(circle at 20% 20%, color-mix(in srgb, var(--brand-gold) 16%, transparent), transparent 36%),
+    radial-gradient(circle at 80% 0%, color-mix(in srgb, var(--bg-ink) 16%, transparent), transparent 42%),
+    linear-gradient(135deg, color-mix(in srgb, var(--bg-ink) 82%, var(--brand-white) 18%), color-mix(in srgb, var(--bg-ink) 94%, transparent));
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 4vw, 3.5rem);
+  padding: clamp(2.25rem, 4vw, 4rem) clamp(1.5rem, 4vw, 3rem) clamp(3rem, 5vw, 4.5rem);
+}
+
+.section {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: clamp(1.5rem, 2vw, 2.25rem);
+}
+
+.sectionHeader {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--brand-gold) 76%, var(--brand-white) 24%);
+}
+
+.sectionTitle {
+  font-size: clamp(1.8rem, 2vw + 1rem, 2.6rem);
+  line-height: 1.1;
+  color: var(--brand-white);
+}
+
+.sectionLead {
+  color: color-mix(in srgb, var(--brand-white) 80%, var(--bg-ink) 20%);
+  line-height: 1.6;
+  max-width: 840px;
+}
+
+.glass {
+  background: color-mix(in srgb, var(--cpv-card-bg, var(--smh-paper)) 76%, var(--bg-ink) 24%);
+  border: 1px solid color-mix(in srgb, var(--cpv-gold-keyline, var(--smh-accent-gold-soft)) 70%, transparent);
+  box-shadow:
+    0 24px 40px color-mix(in srgb, var(--bg-ink) 16%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--brand-white) 24%, transparent);
+  border-radius: 18px;
+  padding: clamp(1.25rem, 2vw, 1.75rem);
+}
+
+.heroCopy {
+  color: color-mix(in srgb, var(--brand-white) 88%, var(--bg-ink) 12%);
+  line-height: 1.6;
+}
+
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.benefitCard {
+  display: grid;
+  gap: 0.75rem;
+  color: var(--brand-white);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--cpv-chip-bg, var(--bg-ink)) 36%, transparent);
+  border: 1px solid color-mix(in srgb, var(--brand-gold) 70%, transparent);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.howtoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: clamp(1.25rem, 2vw, 1.75rem);
+  align-items: start;
+}
+
+.tabGrid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.tabList {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.tabItem {
+  position: relative;
+  border: 1px solid color-mix(in srgb, var(--cpv-gold-keyline, var(--brand-gold)) 68%, transparent);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--cpv-card-bg, var(--brand-white)) 70%, var(--bg-ink) 30%);
+  overflow: hidden;
+}
+
+.tabInput {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.tabLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+  color: var(--brand-white);
+  font-weight: 700;
+}
+
+.tabIndex {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--brand-gold) 40%, var(--bg-ink) 60%);
+  color: var(--bg-ink);
+  font-weight: 800;
+}
+
+.tabPanel {
+  display: none;
+  padding: 0 1rem 1rem;
+  color: color-mix(in srgb, var(--brand-white) 90%, var(--bg-ink) 10%);
+  line-height: 1.55;
+}
+
+.tabPanel h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.1rem;
+  color: var(--brand-white);
+}
+
+.tabInput:checked + .tabLabel {
+  background: color-mix(in srgb, var(--brand-gold) 18%, transparent);
+  color: var(--bg-ink);
+}
+
+.tabInput:checked + .tabLabel + .tabPanel {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.viewerShell {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.financeCard {
+  display: grid;
+  gap: 1rem;
+}
+
+.financeGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.financePill {
+  padding: 0.65rem 0.9rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--brand-white) 12%, transparent);
+  color: var(--brand-white);
+  border: 1px solid color-mix(in srgb, var(--brand-gold) 68%, transparent);
+  font-weight: 600;
+}
+
+.financeTodo {
+  color: color-mix(in srgb, var(--brand-gold) 80%, var(--brand-white) 20%);
+  font-weight: 700;
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.galleryCard {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.galleryMedia {
+  background: color-mix(in srgb, var(--bg-ink) 70%, transparent);
+  border-radius: 12px;
+  height: 180px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  border: 1px dashed color-mix(in srgb, var(--brand-gold) 65%, transparent);
+}
+
+.galleryBadge {
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--brand-white) 16%, transparent);
+  color: var(--brand-white);
+  font-weight: 700;
+}
+
+.galleryCopy {
+  display: grid;
+  gap: 0.35rem;
+  color: color-mix(in srgb, var(--brand-white) 86%, var(--bg-ink) 14%);
+}
+
+.galleryTitle {
+  font-weight: 700;
+  color: var(--brand-white);
+}
+
+.galleryBody,
+.galleryFootnote {
+  line-height: 1.5;
+}
+
+.faqGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.75rem;
+}
+
+.faqCard {
+  display: grid;
+  gap: 0.35rem;
+  color: color-mix(in srgb, var(--brand-white) 88%, var(--bg-ink) 12%);
+}
+
+.placeholder {
+  opacity: 0.85;
+}
+
+.todo {
+  color: color-mix(in srgb, var(--brand-gold) 78%, var(--brand-white) 22%);
+  font-weight: 700;
+}
+
+.ctaBand {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  align-items: center;
+}
+
+.testimonialShell {
+  background: color-mix(in srgb, var(--bg-ink) 36%, transparent);
+  border-radius: 18px;
+  padding: 1rem;
+  border: 1px solid color-mix(in srgb, var(--brand-gold) 62%, transparent);
+}

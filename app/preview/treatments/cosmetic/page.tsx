@@ -3,8 +3,9 @@ export const revalidate = 0;
 
 import type { Metadata } from "next";
 
-import { TreatmentPreviewPage, buildTreatmentPreviewMetadata } from "@/components/preview/sections/treatments/TreatmentPreviewPage";
+import ChampagneTreatmentTemplate from "@/components/preview/treatments/ChampagneTreatmentTemplate";
 import { previewRobots } from "@/lib/seo/preview/previewRobots";
+import { buildPreviewMetadata as buildTreatmentPreviewMetadata } from "@/lib/treatments/previewTreatmentConfig";
 
 const slug = "cosmetic";
 
@@ -13,6 +14,20 @@ export const metadata: Metadata = {
   robots: previewRobots,
 };
 
-export default function CosmeticPreviewPage() {
-  return <TreatmentPreviewPage slug={slug} />;
+type PreviewPageProps = {
+  searchParams?: Record<string, string | string[] | undefined>;
+};
+
+export default function CosmeticPreviewPage({ searchParams }: PreviewPageProps) {
+  return (
+    <ChampagneTreatmentTemplate
+      slug={slug}
+      schemaKey="cosmetic"
+      treatmentName="Cosmetic dentistry"
+      category="Cosmetic"
+      financePlanGroup="cosmetic"
+      faqKey="cosmetic"
+      searchParams={searchParams}
+    />
+  );
 }

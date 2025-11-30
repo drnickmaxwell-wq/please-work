@@ -3,8 +3,9 @@ export const revalidate = 0;
 
 import type { Metadata } from "next";
 
-import { TreatmentPreviewPage, buildTreatmentPreviewMetadata } from "@/components/preview/sections/treatments/TreatmentPreviewPage";
+import ChampagneTreatmentTemplate from "@/components/preview/treatments/ChampagneTreatmentTemplate";
 import { previewRobots } from "@/lib/seo/preview/previewRobots";
+import { buildPreviewMetadata as buildTreatmentPreviewMetadata } from "@/lib/treatments/previewTreatmentConfig";
 
 const slug = "veneers";
 
@@ -13,6 +14,22 @@ export const metadata: Metadata = {
   robots: previewRobots,
 };
 
-export default function VeneersPreviewPage() {
-  return <TreatmentPreviewPage slug={slug} />;
+type PreviewPageProps = {
+  searchParams?: Record<string, string | string[] | undefined>;
+};
+
+export default function VeneersPreviewPage({ searchParams }: PreviewPageProps) {
+  return (
+    <ChampagneTreatmentTemplate
+      slug={slug}
+      schemaKey="veneers-process"
+      treatmentName="Veneers"
+      category="Cosmetic"
+      has3DViewer
+      financePlanGroup="veneers"
+      galleryEnabled
+      faqKey="veneers"
+      searchParams={searchParams}
+    />
+  );
 }
