@@ -1,0 +1,372 @@
+{
+  "pages": {
+    "/": {
+      "priority": "V1",
+      "components": [
+        "HOME_HERO_CHAMPAGNE_V1",
+        "HOME_TECH_STRIP_V1",
+        "HOME_TREATMENT_GRID_A",
+        "HOME_TESTIMONIALS_A",
+        "HOME_FAQ_V1",
+        "FOOTER_CHAMPAGNE_LIGHT_DARK_DUO"
+      ],
+      "atlasCoverage": "partial",
+      "missing": [
+        "ai_concierge_band",
+        "treatment_grid_reskin",
+        "testimonials_reskin"
+      ]
+    },
+    "/treatments": {
+      "priority": "V1",
+      "components": [
+        "TREATMENT_HERO_HUB",
+        "VALUE_GRID",
+        "TREATMENT_CARD_GRID",
+        "THREED_VIEWER_PREVIEW",
+        "FINANCE_BAND",
+        "FAQ_RAIL_CB_PHASE1E",
+        "CTA_SECTION"
+      ],
+      "atlasCoverage": "partial",
+      "missing": [
+        "treatment_grid_reskin",
+        "finance_band_polish"
+      ]
+    },
+    "/treatments/veneers": {
+      "priority": "V1",
+      "components": [
+        "CB_HERO_FINAL",
+        "BENEFIT_GRID_VENEERS",
+        "HOWTO_VENEERS_PROCESS",
+        "THREED_VIEWER_VENEERS",
+        "FINANCE_MODULE_VENEERS",
+        "GALLERY_VENEERS",
+        "CB_FAQ_PHASE1E",
+        "CTA_SECTION"
+      ],
+      "atlasCoverage": "partial",
+      "missing": [
+        "gallery_assets",
+        "finance_plan_mapping"
+      ]
+    },
+    "/treatments/implants": {
+      "priority": "V1",
+      "components": [
+        "CB_HERO_FINAL",
+        "BENEFIT_GRID_IMPLANTS",
+        "HOWTO_IMPLANT_PROCESS",
+        "THREED_VIEWER_IMPLANT",
+        "FINANCE_MODULE_IMPLANTS",
+        "GALLERY_IMPLANTS",
+        "CB_FAQ_PHASE1E",
+        "CTA_SECTION"
+      ],
+      "atlasCoverage": "partial",
+      "missing": [
+        "implant_glb_asset",
+        "finance_plan_mapping"
+      ]
+    },
+    "/treatments/orthodontics/spark-aligners": {
+      "priority": "V1",
+      "components": [
+        "CB_HERO_FINAL",
+        "BENEFIT_GRID_ALIGNERS",
+        "HOWTO_ALIGNER_PROCESS",
+        "THREED_VIEWER_ALIGNERS",
+        "FINANCE_MODULE_ALIGNERS",
+        "GALLERY_ALIGNERS",
+        "CB_FAQ_PHASE1E",
+        "CTA_SECTION"
+      ],
+      "atlasCoverage": "partial",
+      "missing": [
+        "aligner_howto_schema_sync",
+        "gallery_assets"
+      ]
+    },
+    "/treatments/general": {
+      "priority": "V1",
+      "components": [
+        "CB_HERO_FINAL",
+        "BENEFIT_GRID_GENERAL",
+        "HOWTO_GENERAL",
+        "GALLERY_GENERAL",
+        "FINANCE_MODULE_GENERAL",
+        "CB_FAQ_PHASE1E",
+        "CTA_SECTION"
+      ],
+      "atlasCoverage": "low",
+      "missing": [
+        "benefits_copy",
+        "finance_plan_mapping"
+      ]
+    },
+    "/treatments/cosmetic": {
+      "priority": "V1",
+      "components": [
+        "CB_HERO_FINAL",
+        "BENEFIT_GRID_COSMETIC",
+        "HOWTO_COSMETIC",
+        "GALLERY_COSMETIC",
+        "FINANCE_MODULE_COSMETIC",
+        "CB_FAQ_PHASE1E",
+        "CTA_SECTION"
+      ],
+      "atlasCoverage": "low",
+      "missing": [
+        "benefits_copy",
+        "gallery_assets"
+      ]
+    },
+    "/treatments/orthodontics": {
+      "priority": "V1",
+      "components": [
+        "CB_HERO_FINAL",
+        "BENEFIT_GRID_ORTHO",
+        "HOWTO_ORTHO",
+        "GALLERY_ORTHO",
+        "FINANCE_MODULE_ORTHO",
+        "CB_FAQ_PHASE1E",
+        "CTA_SECTION"
+      ],
+      "atlasCoverage": "low",
+      "missing": [
+        "benefits_copy",
+        "gallery_assets"
+      ]
+    },
+    "/treatments/3d-dentistry": {
+      "priority": "V1",
+      "components": [
+        "CB_HERO_FINAL",
+        "TECH_GRID_3D",
+        "HOWTO_3D",
+        "THREED_VIEWER_PREVIEW",
+        "FINANCE_MODULE_3D",
+        "CB_FAQ_PHASE1E",
+        "CTA_SECTION"
+      ],
+      "atlasCoverage": "low",
+      "missing": [
+        "tech_cards",
+        "howto_schema"
+      ]
+    },
+    "/treatments/technology": {
+      "priority": "V1",
+      "components": [
+        "CB_HERO_FINAL",
+        "TECH_GRID",
+        "THREED_VIEWER_PREVIEW",
+        "FAQ_RAIL_CB_PHASE1E",
+        "CTA_SECTION"
+      ],
+      "atlasCoverage": "low",
+      "missing": [
+        "tech_cards",
+        "schema_map"
+      ]
+    },
+    "/treatments/whitening": {
+      "priority": "V1",
+      "components": [
+        "CB_HERO_FINAL",
+        "BENEFIT_GRID_WHITENING",
+        "HOWTO_WHITENING",
+        "FINANCE_MODULE_WHITENING",
+        "CB_FAQ_PHASE1E",
+        "CTA_SECTION"
+      ],
+      "atlasCoverage": "low",
+      "missing": [
+        "benefits_copy",
+        "finance_plan_mapping"
+      ]
+    },
+    "/treatments/dental-implants": {
+      "priority": "V1",
+      "components": [
+        "CB_HERO_FINAL",
+        "BENEFIT_GRID_IMPLANTS",
+        "HOWTO_IMPLANT_PROCESS",
+        "FINANCE_MODULE_IMPLANTS",
+        "CB_FAQ_PHASE1E",
+        "CTA_SECTION"
+      ],
+      "atlasCoverage": "low",
+      "missing": [
+        "benefits_copy",
+        "schema_pack_binding"
+      ]
+    },
+    "/team": {
+      "priority": "V1",
+      "components": [
+        "TEAM_HERO_BRIEF",
+        "TEAM_GRID",
+        "VALUES_BAND",
+        "CLINIC_TOUR",
+        "CTA_SECTION",
+        "HOME_FAQ_V1"
+      ],
+      "atlasCoverage": "partial",
+      "missing": [
+        "team_hero_brief",
+        "author_schema"
+      ]
+    },
+    "/anxiety-dentistry": {
+      "priority": "V1",
+      "components": [
+        "SERVICE_HERO_CALM",
+        "BENEFIT_GRID_COMFORT",
+        "HOWTO_SEDATION",
+        "CLINICIAN_REASSURE",
+        "CB_FAQ_PHASE1E",
+        "CTA_SECTION"
+      ],
+      "atlasCoverage": "low",
+      "missing": [
+        "comfort_copy",
+        "schema_mapping"
+      ]
+    },
+    "/video-consultation": {
+      "priority": "V1",
+      "components": [
+        "SERVICE_HERO_VIRTUAL",
+        "HOWTO_VIDEO_CONSULT",
+        "TECH_REQUIREMENTS",
+        "CB_FAQ_PHASE1E",
+        "CTA_SECTION"
+      ],
+      "atlasCoverage": "low",
+      "missing": [
+        "howto_schema",
+        "compliance_copy"
+      ]
+    },
+    "/emergency-dentist": {
+      "priority": "V1",
+      "components": [
+        "SERVICE_HERO_EMERGENCY",
+        "SYMPTOM_GRID",
+        "RESPONSE_TIME_STRIP",
+        "PRICING_NOTE",
+        "LOCATION_MAP",
+        "CB_FAQ_PHASE1E",
+        "CTA_SECTION"
+      ],
+      "atlasCoverage": "low",
+      "missing": [
+        "map_embed",
+        "speakable_markup"
+      ]
+    },
+    "/blog": {
+      "priority": "V1.5",
+      "components": [
+        "BLOG_HERO_BRIEF",
+        "CATEGORY_FILTER",
+        "POST_GRID",
+        "AUTHOR_BOX",
+        "NEWSLETTER_CTA"
+      ],
+      "atlasCoverage": "low",
+      "missing": [
+        "blog_hero_brief",
+        "author_schema",
+        "breadcrumbs"
+      ]
+    },
+    "/stories": {
+      "priority": "V1.5",
+      "components": [
+        "STORIES_HERO_BRIEF",
+        "FILTERABLE_STORY_GRID",
+        "CASE_CARDS",
+        "TREATMENT_LINK_RAIL",
+        "CTA_SECTION"
+      ],
+      "atlasCoverage": "low",
+      "missing": [
+        "story_metadata",
+        "schema_map"
+      ]
+    },
+    "/patient-stories": {
+      "priority": "V1.5",
+      "components": [
+        "STORIES_HERO_BRIEF",
+        "FILTERABLE_STORY_GRID",
+        "CASE_CARDS",
+        "TREATMENT_LINK_RAIL",
+        "CTA_SECTION"
+      ],
+      "atlasCoverage": "low",
+      "missing": [
+        "story_metadata",
+        "schema_map"
+      ]
+    },
+    "/patient-education": {
+      "priority": "V1.5",
+      "components": [
+        "EDUCATION_HERO_BRIEF",
+        "INTERACTIVE_MODULES",
+        "CB_FAQ_PHASE1E",
+        "RELATED_TREATMENTS",
+        "CTA_SECTION"
+      ],
+      "atlasCoverage": "low",
+      "missing": [
+        "howto_schema",
+        "reskin"
+      ]
+    },
+    "/team/dr-sarah-mitchell": {
+      "priority": "V1.5",
+      "components": [
+        "CLINICIAN_HERO_BRIEF",
+        "QUALIFICATIONS",
+        "TREATMENT_FOCUS_LIST",
+        "TESTIMONIALS",
+        "CTA_SECTION",
+        "CB_FAQ_PHASE1E"
+      ],
+      "atlasCoverage": "low",
+      "missing": [
+        "author_schema",
+        "cta_band"
+      ]
+    },
+    "/ai-smile-quiz": {
+      "priority": "V2",
+      "components": [
+        "QUIZ_HERO_AI",
+        "CONSENT_STEP",
+        "QUIZ_FLOW",
+        "RESULTS_RECOMMENDATIONS",
+        "CB_FAQ_PHASE1E",
+        "CTA_SECTION"
+      ],
+      "atlasCoverage": "low",
+      "missing": [
+        "ai_ui_polish",
+        "schema_pack"
+      ]
+    },
+    "/champagne/hero": {
+      "priority": "V1",
+      "components": [
+        "HOME_HERO_CHAMPAGNE_V1"
+      ],
+      "atlasCoverage": "high",
+      "missing": []
+    }
+  }
+}
