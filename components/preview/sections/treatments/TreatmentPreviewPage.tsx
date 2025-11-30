@@ -12,6 +12,7 @@ import TreatmentHowItWorksPreview, {
 import TreatmentMicroFaq from "@/components/preview/sections/treatments/TreatmentMicroFaq";
 import TreatmentTechHighlight from "@/components/preview/sections/treatments/TreatmentTechHighlight";
 import TreatmentPreviewSchema from "@/components/preview/seo/TreatmentPreviewSchema";
+import { ChampagneLayout } from "@/components/layout/ChampagneLayout";
 import {
   buildPreviewMetadata,
   getPreviewTreatmentConfig,
@@ -205,42 +206,44 @@ export function TreatmentPreviewPage({ slug }: { slug: string }) {
   const heroDescription = buildHeroDescription(config);
 
   return (
-    <div className={`cpv-page ${layoutStyles.previewCanvas}`} data-treatment={config.slug}>
-      <PreviewHero
-        treatment={config.slug}
-        eyebrow="Treatments preview"
-        title={`${config.displayName} in Shoreham-by-Sea`}
-        description={heroDescription}
-        primaryCta={{ label: "Book a consultation", href: "/contact" }}
-        secondaryCta={{ label: "View all treatments", href: "/treatments" }}
-        devAccessory={
-          <Link className="cpv-btn cpv-btn-outline text-eyebrow" href="/preview/treatments">
-            Back to preview hub
-          </Link>
-        }
-      />
-
-      <PreviewBreadcrumbs breadcrumbs={config.breadcrumbs} fallbackLabel={config.displayName} />
-
-      <main className="cpv-main" role="main">
-        <TreatmentBenefitsRail
-          slug={config.slug}
-          benefits={ensureBenefits(config)}
-          intro="Borrowed directly from answer-first copy blocks to surface who benefits most."
+    <ChampagneLayout>
+      <div className={`cpv-page champagne-page ${layoutStyles.previewCanvas}`} data-treatment={config.slug}>
+        <PreviewHero
+          treatment={config.slug}
+          eyebrow="Treatments preview"
+          title={`${config.displayName} in Shoreham-by-Sea`}
+          description={heroDescription}
+          primaryCta={{ label: "Book a consultation", href: "/contact" }}
+          secondaryCta={{ label: "View all treatments", href: "/treatments" }}
+          devAccessory={
+            <Link className="cpv-btn cpv-btn-outline text-eyebrow" href="/preview/treatments">
+              Back to preview hub
+            </Link>
+          }
         />
-        <Treatment3DViewerSlot
-          slug={config.slug}
-          treatmentName={config.displayName}
-          description="Placeholder shell for the upcoming WebGL 3D preview. Keeps Champagne glass styling and respects reduced motion."
-        />
-        <TreatmentHowItWorksPreview steps={ensureHowTo(config)} />
-        <TreatmentFinancePreview />
-        <TreatmentTechHighlight />
-        <StoriesTeaser stories={stories} />
-        <TreatmentMicroFaq faqs={ensureFaqs(config)} />
-      </main>
 
-      <TreatmentPreviewSchema config={config} />
-    </div>
+        <PreviewBreadcrumbs breadcrumbs={config.breadcrumbs} fallbackLabel={config.displayName} />
+
+        <main className="cpv-main champagne-shell" role="main">
+          <TreatmentBenefitsRail
+            slug={config.slug}
+            benefits={ensureBenefits(config)}
+            intro="Borrowed directly from answer-first copy blocks to surface who benefits most."
+          />
+          <Treatment3DViewerSlot
+            slug={config.slug}
+            treatmentName={config.displayName}
+            description="Placeholder shell for the upcoming WebGL 3D preview. Keeps Champagne glass styling and respects reduced motion."
+          />
+          <TreatmentHowItWorksPreview steps={ensureHowTo(config)} />
+          <TreatmentFinancePreview />
+          <TreatmentTechHighlight />
+          <StoriesTeaser stories={stories} />
+          <TreatmentMicroFaq faqs={ensureFaqs(config)} />
+        </main>
+
+        <TreatmentPreviewSchema config={config} />
+      </div>
+    </ChampagneLayout>
   );
 }

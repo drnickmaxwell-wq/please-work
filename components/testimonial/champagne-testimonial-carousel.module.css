@@ -1,6 +1,11 @@
 .carousel {
   display: grid;
-  gap: 1rem;
+  gap: 1.25rem;
+  background: color-mix(in srgb, var(--champagne-card-surface) 94%, transparent);
+  border-radius: var(--radius-lg);
+  border: 1px solid color-mix(in srgb, var(--champagne-gold-keyline) 60%, transparent);
+  padding: 1.5rem;
+  box-shadow: 0 16px 40px color-mix(in srgb, var(--smh-ink) 18%, transparent);
 }
 
 .nav {
@@ -8,6 +13,8 @@
   justify-content: space-between;
   align-items: center;
   gap: 0.75rem;
+  border-top: 1px solid color-mix(in srgb, var(--champagne-gold-keyline) 40%, transparent);
+  padding-top: 0.75rem;
 }
 
 .controls {
@@ -16,19 +23,20 @@
 }
 
 .button {
-  border: 1px solid color-mix(in srgb, var(--brand-soft-gold) 26%, transparent);
-  background: color-mix(in srgb, var(--bg-ink) 70%, transparent 30%);
+  border: 1px solid color-mix(in srgb, var(--champagne-gold-keyline) 60%, transparent);
+  background: color-mix(in srgb, var(--champagne-chip-bg) 80%, transparent);
   padding: 0.5rem 0.85rem;
   border-radius: 0.75rem;
   font-weight: 700;
-  color: var(--brand-white);
+  color: var(--champagne-text-high);
+  backdrop-filter: blur(8px);
 }
 
 .button:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--brand-teal) 60%, var(--brand-white) 40%);
+  outline: 2px solid color-mix(in srgb, var(--brand-gold-keyline) 60%, var(--brand-teal) 24%);
   outline-offset: 2px;
 }
 
 .meta {
-  color: color-mix(in srgb, var(--brand-white) 78%, var(--bg-ink) 22%);
+  color: var(--champagne-text-soft);
 }

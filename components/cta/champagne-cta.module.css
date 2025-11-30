@@ -2,13 +2,14 @@
   display: inline-flex;
   gap: 0.75rem;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .button {
   border-radius: 999px;
   padding: 0.65rem 1.25rem;
   font-weight: 700;
-  border: 1px solid color-mix(in srgb, var(--brand-soft-gold) 60%, transparent);
+  border: 1px solid color-mix(in srgb, var(--champagne-gold-keyline) 60%, transparent);
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
   text-decoration: none;
   display: inline-flex;
@@ -17,23 +18,25 @@
 }
 
 .buttonPrimary {
-  background: linear-gradient(135deg, var(--brand-magenta), var(--brand-teal) 60%, var(--brand-soft-gold));
-  color: var(--brand-white);
-  box-shadow: 0 10px 20px color-mix(in srgb, var(--brand-magenta) 20%, transparent 80%);
+  background: var(--champagne-cta-primary-bg);
+  color: var(--champagne-text-high);
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--smh-ink) 24%, transparent);
+  border-color: color-mix(in srgb, var(--brand-gold-keyline) 80%, transparent);
 }
 
 .buttonSecondary {
-  background: color-mix(in srgb, var(--bg-ink) 55%, transparent 45%);
-  color: color-mix(in srgb, var(--brand-white) 82%, var(--bg-ink) 18%);
+  background: var(--champagne-cta-secondary-bg);
+  color: var(--champagne-text-high);
+  backdrop-filter: blur(10px);
 }
 
 .button:focus-visible,
 .button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 24px color-mix(in srgb, var(--brand-ink) 28%, transparent 72%);
+  box-shadow: 0 12px 26px color-mix(in srgb, var(--smh-ink) 28%, transparent);
 }
 
 .button:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--brand-teal) 60%, var(--brand-white) 40%);
+  outline: 2px solid color-mix(in srgb, var(--brand-gold-keyline) 60%, var(--brand-magenta) 16%);
   outline-offset: 2px;
 }

@@ -27,8 +27,8 @@ export function ChampagneHero({
   secondaryCta,
   badge,
   showWave = true,
-  showParticles = false,
-  showGrain = false,
+  showParticles = true,
+  showGrain = true,
   aside,
 }: ChampagneHeroProps) {
   return (

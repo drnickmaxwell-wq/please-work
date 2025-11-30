@@ -2,8 +2,8 @@
   position: relative;
   overflow: hidden;
   padding: 4rem 1.25rem;
-  color: var(--brand-white);
-  background: var(--bg-ink);
+  color: var(--champagne-text-high);
+  background: var(--champagne-canvas-ink);
   isolation: isolate;
 }
 
@@ -13,11 +13,12 @@
   display: grid;
   gap: 2rem;
   grid-template-columns: 1fr;
-  background: color-mix(in srgb, var(--bg-ink) 70%, transparent 30%);
+  background: color-mix(in srgb, var(--champagne-canvas-elevated) 82%, transparent);
   border-radius: var(--radius-lg);
   padding: 2.5rem;
-  border: 1px solid color-mix(in srgb, var(--brand-soft-gold) 28%, transparent);
-  box-shadow: var(--shadow-soft);
+  border: 1px solid color-mix(in srgb, var(--champagne-gold-keyline) 50%, transparent);
+  box-shadow: var(--shadow-strong);
+  backdrop-filter: blur(18px);
 }
 
 .hero-content {
@@ -32,18 +33,19 @@
   font-size: 0.95rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--brand-white) 76%, var(--bg-ink) 24%);
+  color: var(--champagne-text-soft);
 }
 
 .hero-title {
   font-size: clamp(2rem, 4vw, 3.6rem);
   font-weight: 700;
   line-height: 1.15;
+  font-family: 'Playfair Display', serif;
 }
 
 .hero-subtitle {
   font-size: 1.05rem;
-  color: color-mix(in srgb, var(--brand-white) 82%, var(--bg-ink) 18%);
+  color: var(--champagne-text-med);
   line-height: 1.6;
 }
 
@@ -58,10 +60,10 @@
   align-self: flex-start;
   padding: 0.35rem 0.75rem;
   border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--brand-soft-gold) 26%, transparent);
-  background: color-mix(in srgb, var(--bg-ink) 68%, transparent 32%);
+  border: 1px solid color-mix(in srgb, var(--champagne-gold-keyline) 54%, transparent);
+  background: color-mix(in srgb, var(--champagne-chip-bg) 70%, transparent);
   font-weight: 600;
-  color: color-mix(in srgb, var(--brand-white) 82%, var(--bg-ink) 18%);
+  color: var(--champagne-text-med);
 }
 
 .hero-layers,
@@ -75,11 +77,38 @@
   z-index: 0;
 }
 
-.hero-layer.wave {
-  background: color-mix(in srgb, var(--bg-ink) 80%, transparent 20%);
+.hero-layer.gradient {
+  background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--brand-magenta) 14%, var(--champagne-canvas-ink)) 0%,
+      color-mix(in srgb, var(--brand-teal) 18%, var(--champagne-canvas-ink)) 56%,
+      color-mix(in srgb, var(--brand-gold) 16%, var(--champagne-canvas-ink)) 100%
+    );
 }
-.hero-layer.particles { opacity: var(--particles-opacity, 0.06); }
-.hero-layer.grain { mix-blend-mode: soft-light; opacity: var(--grain-opacity, 0.06); }
+
+.hero-layer.wave {
+  background-image: image-set(
+    url('/assets/manus/waves/waves-bg-768.webp') 1x,
+    url('/assets/manus/waves/waves-bg-1600.webp') 2x
+  );
+  background-size: cover;
+  background-position: center;
+  opacity: 0.18;
+  mix-blend-mode: screen;
+}
+
+.hero-layer.particles {
+  background-image: url('/assets/manus/particles/home-hero-particles.webp');
+  background-size: cover;
+  opacity: var(--particles-opacity, 0.06);
+}
+
+.hero-layer.grain {
+  background-image: url('/assets/manus/textures/home-hero-film-grain.webp');
+  background-size: cover;
+  mix-blend-mode: soft-light;
+  opacity: var(--grain-opacity, 0.06);
+}
 
 @media (min-width: 900px) {
   .hero-shell {

@@ -8,9 +8,9 @@ export interface ChampagneLayoutProps {
 
 export function ChampagneLayout({ children }: ChampagneLayoutProps) {
   return (
-    <div className="champagne-layout">
+    <div className="champagne-layout champagne-page">
       <ChampagneHeader />
-      <main>{children}</main>
+      <main className="champagne-shell">{children}</main>
       <ChampagneFooter />
     </div>
   );

@@ -7,13 +7,14 @@
   font-size: 1.4rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  color: var(--brand-white);
+  color: var(--champagne-text-high);
 }
 
 .item {
   border-radius: var(--radius-md);
-  background: color-mix(in srgb, var(--bg-ink) 70%, transparent 30%);
-  border: 1px solid color-mix(in srgb, var(--brand-soft-gold) 26%, transparent);
+  background: color-mix(in srgb, var(--champagne-card-surface) 90%, transparent);
+  border: 1px solid color-mix(in srgb, var(--champagne-gold-keyline) 54%, transparent);
+  box-shadow: 0 12px 32px color-mix(in srgb, var(--smh-ink) 18%, transparent);
 }
 
 .button {
@@ -27,21 +28,21 @@
   gap: 0.75rem;
   align-items: center;
   font-weight: 600;
-  color: var(--brand-white);
+  color: var(--champagne-text-high);
 }
 
 .button:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--brand-teal) 50%, var(--brand-white) 50%);
+  outline: 2px solid color-mix(in srgb, var(--brand-gold-keyline) 60%, var(--brand-teal) 24%);
   outline-offset: 2px;
 }
 
 .answer {
   padding: 0 1.25rem 1rem;
-  color: color-mix(in srgb, var(--brand-white) 82%, var(--bg-ink) 18%);
+  color: var(--champagne-text-med);
   line-height: 1.6;
 }
 
 .icon {
   font-size: 1.25rem;
-  color: var(--brand-soft-gold);
+  color: color-mix(in srgb, var(--brand-gold-keyline) 80%, var(--smh-ink) 20%);
 }

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import React from "react";
 
+import { ChampagneLayout } from "@/components/layout/ChampagneLayout";
+import { ChampagneHero } from "@/components/hero/ChampagneHero";
 import AiSmileQuizTeaser from "@/components/sections/home/AiSmileQuizTeaser";
-import ChampagneHero from "@/components/home/ChampagneHero";
 import ClinicTourSection from "@/components/sections/home/ClinicTourSection";
 import LocalProof from "@/components/sections/home/LocalProof";
 import MicroFaq, { type Faq } from "@/components/sections/home/MicroFaq";
@@ -114,25 +115,34 @@ const websiteSchema = {
 
 export default function HomePreviewPage() {
   return (
-    <div className="preview-home-canvas">
-      <main className="preview-home-main">
-        <section className="preview-home-zone preview-home-zone-1">
-          <ChampagneHero />
-          <ClinicTourSection />
-        </section>
-        <section className="preview-home-zone preview-home-zone-2">
-          <MostRequestedTreatments />
-          <TechnologyHighlight />
-          <PatientStoriesTeaser />
-          <AiSmileQuizTeaser />
-          <PortalTeaser />
-        </section>
-        <section className="preview-home-zone preview-home-zone-3">
-          <LocalProof />
-          <MicroFaq faqs={faqs} />
-        </section>
-        <JsonLd data={[organizationSchema, localBusinessSchema, websiteSchema]} />
-      </main>
-    </div>
+    <ChampagneLayout>
+      <div className="preview-home-canvas champagne-page">
+        <main className="preview-home-main champagne-shell">
+          <section className="preview-home-zone preview-home-zone-1">
+            <ChampagneHero
+              eyebrow="Calm coastal dentistry"
+              title="Champagne preview home"
+              subtitle="Layered gradients, glass shells, and Manus-ready components wrapped in the dusk ink canvas."
+              badge="Preview"
+              primaryCta={{ label: "Book a consultation", href: "/contact" }}
+              secondaryCta={{ label: "Explore treatments", href: "/preview/treatments" }}
+            />
+            <ClinicTourSection />
+          </section>
+          <section className="preview-home-zone preview-home-zone-2">
+            <MostRequestedTreatments />
+            <TechnologyHighlight />
+            <PatientStoriesTeaser />
+            <AiSmileQuizTeaser />
+            <PortalTeaser />
+          </section>
+          <section className="preview-home-zone preview-home-zone-3">
+            <LocalProof />
+            <MicroFaq faqs={faqs} />
+          </section>
+          <JsonLd data={[organizationSchema, localBusinessSchema, websiteSchema]} />
+        </main>
+      </div>
+    </ChampagneLayout>
   );
 }

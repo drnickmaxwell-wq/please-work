@@ -7,17 +7,41 @@
 @import './time-of-day.css';
 
 :root {
-  --bg-ink: var(--brand-ink);
-  color: var(--text-high);
+  --champagne-canvas-ink: color-mix(in srgb, var(--smh-ink) 92%, var(--smh-white) 8%);
+  --champagne-canvas-elevated: color-mix(in srgb, var(--champagne-canvas-ink) 90%, var(--smh-white) 10%);
+  --champagne-text-high: color-mix(in srgb, var(--smh-white) 94%, var(--champagne-canvas-ink) 6%);
+  --champagne-text-med: color-mix(in srgb, var(--smh-white) 82%, var(--champagne-canvas-ink) 18%);
+  --champagne-text-soft: color-mix(in srgb, var(--smh-white) 70%, var(--champagne-canvas-ink) 30%);
+
+  --champagne-card-surface: color-mix(in srgb, var(--champagne-canvas-elevated) 82%, transparent);
+  --champagne-card-border: color-mix(in srgb, var(--brand-gold-keyline) 60%, var(--smh-ink) 40%);
+  --champagne-glass-strong: color-mix(in srgb, var(--smh-ink) 78%, transparent);
+  --champagne-glass-soft: color-mix(in srgb, var(--smh-ink) 68%, transparent);
+  --champagne-gold-keyline: color-mix(in srgb, var(--brand-gold-keyline) 78%, transparent);
+  --champagne-cta-primary-bg: var(--smh-gradient);
+  --champagne-cta-secondary-bg: color-mix(in srgb, var(--champagne-canvas-ink) 70%, transparent);
+  --champagne-chip-bg: color-mix(in srgb, var(--smh-ink) 22%, transparent);
+  --champagne-header-surface: color-mix(in srgb, var(--champagne-canvas-ink) 80%, transparent 20%);
+  --champagne-footer-surface: color-mix(in srgb, var(--champagne-canvas-ink) 92%, transparent 8%);
+
+  --bg-ink: var(--champagne-canvas-ink);
+  color: var(--champagne-text-high);
   background: var(--bg-ink);
 }
 
 body,
 .champagne-page {
-  background: var(--bg-ink);
-  color: var(--text-high);
+  background: var(--champagne-canvas-ink);
+  color: var(--champagne-text-high);
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   min-height: 100vh;
+}
+
+.champagne-shell {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 2vw, 2rem) 1.25rem 3rem;
 }
 
 a { color: inherit; }

@@ -69,44 +69,43 @@ const faqs = [
 export default function SkeletonPage() {
   return (
     <ChampagneLayout>
-      <div className="champagne-page">
-        <ChampagneHero
-          eyebrow="Champagne ecosystem"
-          title="Structural skeleton for SMH Dental"
-          subtitle="Reusable shells for hero, cards, CTAs, FAQ, testimonials, AI tools, and 3D viewer."
-          badge="Preview-only"
-          primaryCta={{ label: 'Primary action', href: '#' }}
-          secondaryCta={{ label: 'Secondary', href: '#' }}
-        />
+      <ChampagneHero
+        eyebrow="Champagne ecosystem"
+        title="Structural skeleton for SMH Dental"
+        subtitle="Reusable shells for hero, cards, CTAs, FAQ, testimonials, AI tools, and 3D viewer."
+        badge="Preview-only"
+        primaryCta={{ label: 'Primary action', href: '#' }}
+        secondaryCta={{ label: 'Secondary', href: '#' }}
+      />
 
-        <div className={`${styles.page} space-section`}>
-          <section className="space-block">
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Treatments</h2>
-              <span>Card grid skeleton</span>
-            </div>
-            <div className={cardStyles['cp-card__grid']}>
-              {treatments.map((treatment) => (
-                <TreatmentCard key={treatment.title} {...treatment} ctaLabel="Learn more" ctaHref="#" />
-              ))}
-            </div>
-          </section>
+      <div className={`${styles.page} space-section`}>
+        <section className="space-block">
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>Treatments</h2>
+            <span>Card grid skeleton</span>
+          </div>
+          <div className={cardStyles['cp-card__grid']}>
+            {treatments.map((treatment) => (
+              <TreatmentCard key={treatment.title} {...treatment} ctaLabel="Learn more" ctaHref="#" />
+            ))}
+          </div>
+        </section>
 
-          <section className="space-block">
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>AI tools trio</h2>
-              <span>Neutral shells</span>
-            </div>
-            <AIWidgetTrio />
-          </section>
+        <section className="space-block">
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>AI tools trio</h2>
+            <span>Neutral shells</span>
+          </div>
+          <AIWidgetTrio />
+        </section>
 
-          <section className="space-block">
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>3D viewer</h2>
-              <span>Placeholder shell</span>
-            </div>
-            <div className={styles.gridTwo}>
-              <Champagne3DViewer />
+        <section className="space-block">
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>3D viewer</h2>
+            <span>Placeholder shell</span>
+          </div>
+          <div className={styles.gridTwo}>
+            <Champagne3DViewer />
             <div className={`glass-card ${cardStyles['cp-card']}`}>
               <h3 className={cardStyles['cp-card__title']}>Treatment overview</h3>
               <p className={cardStyles['cp-card__body']}>
@@ -114,29 +113,28 @@ export default function SkeletonPage() {
                 or add additional cards alongside the viewer.
               </p>
             </div>
-            </div>
-          </section>
+          </div>
+        </section>
 
-          <section className="space-block">
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Testimonials</h2>
-              <span>Carousel skeleton</span>
-            </div>
-            <ChampagneTestimonialCarousel items={testimonials} />
-          </section>
+        <section className="space-block">
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>Testimonials</h2>
+            <span>Carousel skeleton</span>
+          </div>
+          <ChampagneTestimonialCarousel items={testimonials} />
+        </section>
 
-          <section className="space-block">
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Frequently asked</h2>
-              <span>Accordion skeleton</span>
-            </div>
-            <ChampagneFAQ items={faqs} />
-          </section>
+        <section className="space-block">
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>Frequently asked</h2>
+            <span>Accordion skeleton</span>
+          </div>
+          <ChampagneFAQ items={faqs} />
+        </section>
 
-          <section className="space-block">
-            <ChampagneCTA variant="pair" primaryLabel="Book a consult" primaryHref="#" secondaryLabel="Explore treatments" secondaryHref="#" />
-          </section>
-        </div>
+        <section className="space-block">
+          <ChampagneCTA variant="pair" primaryLabel="Book a consult" primaryHref="#" secondaryLabel="Explore treatments" secondaryHref="#" />
+        </section>
       </div>
     </ChampagneLayout>
   );

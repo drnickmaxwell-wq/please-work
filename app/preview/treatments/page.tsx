@@ -11,6 +11,7 @@ import TreatmentHowItWorksPreview, {
 import TreatmentMicroFaq, { type TreatmentFaq } from "@/components/preview/sections/treatments/TreatmentMicroFaq";
 import TreatmentTechHighlight from "@/components/preview/sections/treatments/TreatmentTechHighlight";
 import TreatmentHubPreviewSchema from "@/components/preview/seo/TreatmentHubPreviewSchema";
+import { ChampagneLayout } from "@/components/layout/ChampagneLayout";
 import "@/components/preview/preview-layout.css";
 import "@/components/preview/preview-typography.css";
 import layoutStyles from "@/components/preview/sections/treatments/preview-treatments.module.css";
@@ -153,29 +154,31 @@ const faqs: TreatmentFaq[] = [
 
 export default function TreatmentsPreview() {
   return (
-    <div className={`cpv-page ${layoutStyles.previewCanvas}`} data-treatment="general">
-      <PreviewTreatmentsHero
-        primaryCta={{ label: "Take the AI Smile Quiz", href: "/ai-smile-quiz" }}
-        secondaryCta={{ label: "Book a consultation", href: "/contact" }}
-      />
+    <ChampagneLayout>
+      <div className={`cpv-page champagne-page ${layoutStyles.previewCanvas}`} data-treatment="general">
+        <PreviewTreatmentsHero
+          primaryCta={{ label: "Take the AI Smile Quiz", href: "/ai-smile-quiz" }}
+          secondaryCta={{ label: "Book a consultation", href: "/contact" }}
+        />
 
-      <main className="cpv-main" role="main">
-        <ConcernRail items={concernCards} />
-        <TreatmentHowItWorksPreview steps={howToSteps} />
-        <TreatmentFinancePreview />
-        <TreatmentTechHighlight />
-        <StoriesTeaser stories={stories} />
-        <TreatmentMicroFaq faqs={faqs} />
-      </main>
-      <TreatmentHubPreviewSchema />
-      <div className="cpv-footer-note">
-        <p>
-          Preview canvas mirrors the Champagne homepage: dusk-to-ink palette, magenta/teal accents, and glass shells with reduced motion ready.
-        </p>
-        <Link href="/preview/home" className="cpv-footer-note__link">
-          Compare with home preview
-        </Link>
+        <main className="cpv-main champagne-shell" role="main">
+          <ConcernRail items={concernCards} />
+          <TreatmentHowItWorksPreview steps={howToSteps} />
+          <TreatmentFinancePreview />
+          <TreatmentTechHighlight />
+          <StoriesTeaser stories={stories} />
+          <TreatmentMicroFaq faqs={faqs} />
+        </main>
+        <TreatmentHubPreviewSchema />
+        <div className="cpv-footer-note champagne-shell">
+          <p>
+            Preview canvas mirrors the Champagne homepage: dusk-to-ink palette, magenta/teal accents, and glass shells with reduced motion ready.
+          </p>
+          <Link href="/preview/home" className="cpv-footer-note__link">
+            Compare with home preview
+          </Link>
+        </div>
       </div>
-    </div>
+    </ChampagneLayout>
   );
 }
