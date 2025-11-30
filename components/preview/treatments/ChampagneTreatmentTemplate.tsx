@@ -9,9 +9,6 @@ import {
   type PreviewTreatmentConfig,
   type PreviewFaq,
 } from "@/lib/treatments/previewTreatmentConfig";
-import ChampagneDuskDivider from "@/components/preview/lux/ChampagneDuskDivider";
-import GoldRefractCtaBar, { type GoldRefractCtaBarProps } from "@/components/preview/lux/GoldRefractCtaBar";
-import SilentHorizonDivider from "@/components/preview/lux/SilentHorizonDivider";
 
 import TreatmentPreviewSchema from "../seo/TreatmentPreviewSchema";
 import styles from "./champagne-treatment-template.module.css";
@@ -31,8 +28,6 @@ type TemplateProps = {
   galleryEnabled?: boolean;
   faqKey?: string;
   searchParams?: Record<string, string | string[] | undefined>;
-  luxDividerBeforeFaq?: "dusk" | "horizon" | null;
-  ctaBarProps?: GoldRefractCtaBarProps | null;
 };
 
 type HowToStep = { title: string; summary: string };
@@ -276,20 +271,7 @@ function CtaBand({ title }: { title: string }) {
 }
 
 export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
-  const {
-    slug,
-    schemaKey,
-    treatmentName,
-    category,
-    benefitBullets,
-    has3DViewer,
-    financePlanGroup,
-    galleryEnabled,
-    faqKey,
-    searchParams,
-    luxDividerBeforeFaq,
-    ctaBarProps,
-  } = props;
+  const { slug, schemaKey, treatmentName, category, benefitBullets, has3DViewer, financePlanGroup, galleryEnabled, faqKey, searchParams } = props;
 
   const config = getPreviewTreatmentConfig(slug);
   const schemaSlug = resolveSchemaSlug(slug, schemaKey);
@@ -388,12 +370,9 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
           </div>
         </section>
 
-        {luxDividerBeforeFaq === "dusk" ? <ChampagneDuskDivider /> : null}
-        {luxDividerBeforeFaq === "horizon" ? <SilentHorizonDivider /> : null}
-
         <FaqStrip items={faqItems} missing={previewContent.missing.faq} />
 
-        {ctaBarProps ? <GoldRefractCtaBar {...ctaBarProps} /> : <CtaBand title={treatmentName ?? config.displayName} />}
+        <CtaBand title={treatmentName ?? config.displayName} />
       </main>
 
       <TreatmentPreviewSchema config={config} />

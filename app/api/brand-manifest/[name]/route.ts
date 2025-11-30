@@ -42,8 +42,9 @@ export async function GET(_: Request, context: { params: { name?: string } }) {
       status: 200,
       headers: BASE_HEADERS,
     });
-  } catch (error: any) {
-    if (error?.code === "ENOENT") {
+  } catch (error: unknown) {
+    const nodeError = error as NodeJS.ErrnoException;
+    if (nodeError?.code === "ENOENT") {
       return jsonError(404, "not found");
     }
     if (error instanceof SyntaxError) {

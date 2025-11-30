@@ -18,10 +18,21 @@ const eslintConfig = [
       "out/**",
       "build/**",
       "next-env.d.ts",
+      "app/preview/**",
+      "legacy/**",
     ],
   },
   ...compat.config({
     overrides: [
+      {
+        files: ["brand-guard.cjs", "postcss.config.js"],
+        env: { node: true },
+        rules: {
+          "@typescript-eslint/no-var-requires": "off",
+          "@typescript-eslint/no-require-imports": "off",
+          "import/no-commonjs": "off",
+        },
+      },
       {
         files: ["scripts/**/*.cjs"],
         env: { node: true },
