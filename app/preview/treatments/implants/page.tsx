@@ -18,6 +18,16 @@ type PreviewPageProps = {
   searchParams?: Record<string, string | string[] | undefined>;
 };
 
+const implantsCta = {
+  title: "Implant pathway booking band",
+  body: "Showcase the lux CTA band with implant-ready copy, finance cues, and Champagne motion that respects PRM toggles.",
+  primaryLabel: "Plan my implant",
+  primaryHref: "/contact",
+  secondaryLabel: "Preview the treatment journey",
+  secondaryHref: "/preview/treatments/technology",
+  context: "treatment" as const,
+};
+
 export default function ImplantsPreviewPage({ searchParams }: PreviewPageProps) {
   return (
     <ChampagneTreatmentTemplate
@@ -29,6 +39,8 @@ export default function ImplantsPreviewPage({ searchParams }: PreviewPageProps) 
       financePlanGroup="implants"
       galleryEnabled
       faqKey="implants"
+      luxDividerBeforeFaq="horizon"
+      ctaBarProps={implantsCta}
       searchParams={searchParams}
     />
   );

@@ -43,6 +43,7 @@ This registry catalogs Champagne-native luxury components sourced from Director 
 - **Intended Use-Cases / Routes:** Conversion bars across `/`, `/treatments/*`, `/consultations`, `/preview/lux/*`.
 - **Complexity:** Medium
 - **Phase:** V1
+- **Implementation status:** Preview-only build exists under `components/preview/lux/GoldRefractCtaBar` and is wired into select `/preview/treatments/*` pages.
 
 ### Champagne Timeline (Treatment Journey Ribbon)
 - **ID:** `CHAMPAGNE_TREATMENT_TIMELINE`
@@ -59,6 +60,7 @@ This registry catalogs Champagne-native luxury components sourced from Director 
 - **Intended Use-Cases / Routes:** About, clinician highlights, `/team`, `/stories/*`, `/preview/lux/*`.
 - **Complexity:** Low
 - **Phase:** V1
+- **Implementation status:** Preview grid available at `components/preview/lux/FloatingSignatureCards` and demonstrated on `/preview/lux/team`.
 
 ### Champagne Dusk Divider
 - **ID:** `CHAMPAGNE_DUSK_DIVIDER`
@@ -67,6 +69,16 @@ This registry catalogs Champagne-native luxury components sourced from Director 
 - **Intended Use-Cases / Routes:** Long-form editorial pages, `/stories/*`, `/treatments/*`, `/preview/lux/*`.
 - **Complexity:** Low
 - **Phase:** V1
+- **Implementation status:** Implemented as a preview utility at `components/preview/lux/ChampagneDuskDivider` with supporting styles in `styles/champagne/lux/components.css`.
+
+### Silent Horizon Divider
+- **ID:** `SILENT_HORIZON_DIVIDER`
+- **Human Name:** Silent Horizon Divider
+- **Description:** Thin horizon line with soft fog particles and ultra-slow drift motion that respects PRM fallbacks.
+- **Intended Use-Cases / Routes:** Calm section breaks for `/stories/*`, `/treatments/*`, `/preview/lux/*`.
+- **Complexity:** Low
+- **Phase:** V1
+- **Implementation status:** Preview-only build at `components/preview/lux/SilentHorizonDivider`, currently showcased in `/preview/lux/patient-stories` and optional for treatment previews.
 
 ### Sculpted 3D Dental Artefacts
 - **ID:** `SCULPTED_3D_DENTAL_ARTEFACTS`

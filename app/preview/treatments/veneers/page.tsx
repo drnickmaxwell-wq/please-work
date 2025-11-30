@@ -18,6 +18,16 @@ type PreviewPageProps = {
   searchParams?: Record<string, string | string[] | undefined>;
 };
 
+const veneersCta = {
+  title: "Refined veneers consult",
+  body: "Preview how the Champagne treatment canvas supports veneers journey planning, finance, and smile mockups before launch.",
+  primaryLabel: "Book veneer consult",
+  primaryHref: "/contact",
+  secondaryLabel: "See veneer stories",
+  secondaryHref: "/preview/lux/patient-stories",
+  context: "treatment" as const,
+};
+
 export default function VeneersPreviewPage({ searchParams }: PreviewPageProps) {
   return (
     <ChampagneTreatmentTemplate
@@ -29,6 +39,8 @@ export default function VeneersPreviewPage({ searchParams }: PreviewPageProps) {
       financePlanGroup="veneers"
       galleryEnabled
       faqKey="veneers"
+      luxDividerBeforeFaq="dusk"
+      ctaBarProps={veneersCta}
       searchParams={searchParams}
     />
   );

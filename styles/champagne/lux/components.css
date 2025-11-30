@@ -1,0 +1,169 @@
+@import "../tokens.css";
+
+.lux-glass-card {
+  background: var(--surface-glass);
+  border: 1px solid color-mix(in srgb, var(--brand-soft-gold) 40%, transparent);
+  box-shadow:
+    0 18px 46px color-mix(in srgb, var(--brand-ink) 28%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--brand-white) 14%, transparent);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: var(--radius-lg, 24px);
+  color: var(--text-high);
+}
+
+.lux-glass-card--lift {
+  box-shadow:
+    0 20px 52px color-mix(in srgb, var(--brand-ink) 32%, transparent),
+    0 1px 0 color-mix(in srgb, var(--brand-soft-gold) 38%, transparent);
+}
+
+.lux-hover-bloom {
+  transition:
+    transform 240ms var(--motion-ease, cubic-bezier(0.4, 0, 0.2, 1)),
+    box-shadow 240ms var(--motion-ease, cubic-bezier(0.4, 0, 0.2, 1)),
+    border-color 240ms var(--motion-ease, cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+.lux-hover-bloom:hover,
+.lux-hover-bloom:focus-visible {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow:
+    0 24px 58px color-mix(in srgb, var(--brand-ink) 34%, transparent),
+    0 1px 0 color-mix(in srgb, var(--brand-soft-gold) 46%, transparent);
+  border-color: color-mix(in srgb, var(--brand-soft-gold) 68%, transparent);
+}
+
+.lux-divider {
+  width: min(1200px, 100%);
+  height: 3px;
+  margin: clamp(1.5rem, 2vw, 2.25rem) auto;
+  position: relative;
+  overflow: hidden;
+  border-radius: 999px;
+}
+
+.lux-divider--dusk {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--brand-magenta) 42%, transparent) 0%,
+    color-mix(in srgb, var(--brand-teal) 42%, transparent) 45%,
+    color-mix(in srgb, var(--brand-gold) 55%, transparent) 100%
+  );
+  box-shadow:
+    0 0 22px color-mix(in srgb, var(--brand-teal) 26%, transparent),
+    0 6px 18px color-mix(in srgb, var(--brand-ink) 22%, transparent);
+}
+
+.lux-divider--horizon {
+  background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--brand-white) 38%, transparent),
+      color-mix(in srgb, var(--brand-gold) 34%, transparent),
+      color-mix(in srgb, var(--brand-white) 32%, transparent)
+    ),
+    radial-gradient(circle at 10% 60%, color-mix(in srgb, var(--brand-gold) 18%, transparent) 0%, transparent 40%),
+    radial-gradient(circle at 90% 30%, color-mix(in srgb, var(--brand-magenta) 18%, transparent) 0%, transparent 38%);
+  opacity: 0.85;
+  filter: drop-shadow(0 0 12px color-mix(in srgb, var(--brand-ink) 26%, transparent));
+}
+
+.lux-horizon-fog {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--brand-white) 10%, transparent) 0%, transparent 70%);
+  mix-blend-mode: screen;
+  opacity: 0.5;
+  animation: lux-horizon-drift 36s ease-in-out infinite;
+}
+
+.lux-cta-bar {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+      120deg,
+      color-mix(in srgb, var(--bg-ink-soft) 76%, transparent) 0%,
+      color-mix(in srgb, var(--brand-white) 12%, transparent) 55%,
+      color-mix(in srgb, var(--brand-soft-gold) 20%, transparent) 100%
+    ),
+    color-mix(in srgb, var(--bg-ink) 80%, transparent);
+  border: 1px solid color-mix(in srgb, var(--champagne-keyline-gold) 80%, transparent);
+  box-shadow:
+    0 24px 52px color-mix(in srgb, var(--brand-ink) 32%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--brand-white) 18%, transparent);
+  border-radius: 18px;
+  color: var(--text-high);
+}
+
+.lux-cta-bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--brand-gold) 8%, transparent) 100%);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.lux-cta-bar-edge {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--smh-accent-gold) 30%, transparent), transparent);
+  opacity: 0.8;
+  mix-blend-mode: screen;
+}
+
+.lux-cta-bar-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    color-mix(in srgb, var(--champagne-keyline-gold) 40%, transparent) 45%,
+    transparent 70%
+  );
+  background-size: 220% 220%;
+  animation: lux-edge-shimmer 6s ease-in-out infinite;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+@keyframes lux-edge-shimmer {
+  0% {
+    transform: translateX(-10%);
+  }
+  50% {
+    transform: translateX(6%);
+  }
+  100% {
+    transform: translateX(-10%);
+  }
+}
+
+@keyframes lux-horizon-drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(4%, 2%, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lux-hover-bloom,
+  .lux-cta-bar,
+  .lux-horizon-fog {
+    transition: none;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .lux-cta-bar-shimmer,
+  .lux-horizon-fog {
+    display: none;
+  }
+}
