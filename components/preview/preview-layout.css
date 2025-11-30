@@ -2,49 +2,43 @@
   position: relative;
   padding: clamp(2.6rem, 4vw, 3.4rem) clamp(1.4rem, 3vw, 2.4rem);
   border-radius: clamp(22px, 3.6vw, 28px);
-  background: color-mix(in srgb, var(--cpv-shell-bg, var(--cpv-card-bg)) 76%, transparent);
-  border: 1px solid color-mix(in srgb, var(--cpv-gold-keyline, var(--brand-gold)) 45%, transparent 40%);
+  background: color-mix(in srgb, var(--cpv-shell-bg, var(--cpv-card-bg)) 68%, var(--smh-ink-soft) 32%);
+  border: 1px solid color-mix(in srgb, var(--cpv-gold-keyline, var(--brand-gold)) 42%, transparent 44%);
   box-shadow:
-    0 24px 60px color-mix(in srgb, var(--smh-ink) 18%, transparent),
-    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 12%, transparent);
+    0 20px 48px color-mix(in srgb, var(--smh-ink) 22%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 10%, transparent);
 }
 
 :global(.cpv-card) {
   position: relative;
   margin: 0;
   border-radius: clamp(18px, 3vw, 24px);
-  background:
-    radial-gradient(140% 140% at 18% 10%, color-mix(in srgb, var(--brand-magenta) 10%, transparent) 0%, transparent 55%),
-    radial-gradient(140% 140% at 82% 8%, color-mix(in srgb, var(--brand-teal) 10%, transparent) 0%, transparent 55%),
-    color-mix(in srgb, var(--cpv-card-bg) 78%, var(--smh-white) 22%);
-  border: 1px solid color-mix(in srgb, var(--cpv-gold-keyline) 88%, transparent 18%);
+  background: color-mix(in srgb, var(--cpv-card-bg) 72%, var(--smh-ink-soft) 28%);
+  border: 1px solid color-mix(in srgb, var(--cpv-gold-keyline) 82%, transparent 26%);
   color: var(--cpv-page-text, var(--smh-white));
   box-shadow:
-    0 24px 60px color-mix(in srgb, var(--smh-ink) 18%, transparent),
-    0 8px 20px color-mix(in srgb, var(--brand-magenta) 12%, transparent 70%),
-    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 16%, transparent);
+    0 22px 48px color-mix(in srgb, var(--smh-ink) 22%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 14%, transparent);
   backdrop-filter: blur(10px);
   overflow: hidden;
 }
 
 :global(.cpv-card--soft) {
-  background:
-    radial-gradient(120% 120% at 16% 10%, color-mix(in srgb, var(--brand-teal) 8%, transparent) 0%, transparent 60%),
-    color-mix(in srgb, var(--cpv-card-bg) 70%, var(--smh-white) 30%);
-  border-color: color-mix(in srgb, var(--cpv-gold-keyline) 76%, transparent 26%);
+  background: color-mix(in srgb, var(--cpv-card-bg) 70%, var(--smh-ink-soft) 30%);
+  border-color: color-mix(in srgb, var(--cpv-gold-keyline) 70%, transparent 30%);
   box-shadow:
-    0 18px 44px color-mix(in srgb, var(--smh-ink) 16%, transparent),
+    0 18px 44px color-mix(in srgb, var(--smh-ink) 18%, transparent),
     inset 0 1px 0 color-mix(in srgb, var(--smh-white) 12%, transparent);
 }
 
 :global(.cpv-card--bright) {
   background:
-    linear-gradient(135deg, color-mix(in srgb, var(--brand-magenta) 16%, transparent) 0%, color-mix(in srgb, var(--brand-teal) 16%, transparent) 100%),
-    color-mix(in srgb, var(--cpv-card-bg) 68%, var(--smh-white) 32%);
-  border-color: color-mix(in srgb, var(--cpv-gold-keyline) 86%, transparent 8%);
+    linear-gradient(135deg, color-mix(in srgb, var(--brand-magenta) 14%, transparent) 0%, color-mix(in srgb, var(--brand-teal) 14%, transparent) 80%),
+    color-mix(in srgb, var(--cpv-card-bg) 66%, var(--smh-ink-soft) 34%);
+  border-color: color-mix(in srgb, var(--cpv-gold-keyline) 78%, transparent 18%);
   box-shadow:
-    0 24px 60px color-mix(in srgb, var(--brand-magenta) 18%, transparent 60%),
-    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 18%, transparent);
+    0 22px 52px color-mix(in srgb, var(--smh-ink) 22%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 16%, transparent);
 }
 
 :global(.cpv-card__inner) {

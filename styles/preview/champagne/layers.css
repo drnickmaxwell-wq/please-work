@@ -1,19 +1,19 @@
 @layer preview-champagne.utilities {
   .lux-wave {
     background:
-      radial-gradient(1200px 600px at 70% 10%, color-mix(in oklab, var(--brand-teal) 22%, transparent), transparent 60%),
+      radial-gradient(1200px 600px at 70% 10%, color-mix(in srgb, var(--brand-teal) 18%, transparent), transparent 62%),
       linear-gradient(
         135deg,
-        color-mix(in oklab, var(--brand-magenta) 78%, #000 10%) 0%,
-        color-mix(in oklab, var(--brand-teal) 78%, #000 10%) 60%,
-        color-mix(in oklab, var(--brand-gold) 55%, #000 18%) 100%
+        color-mix(in srgb, var(--brand-magenta) 78%, var(--smh-ink) 22%) 0%,
+        color-mix(in srgb, var(--brand-teal) 78%, var(--smh-ink) 22%) 64%,
+        color-mix(in srgb, var(--brand-gold) 38%, var(--smh-ink-soft) 62%) 100%
       ),
       url('/waves/smh-wave-mask.svg');
     background-blend-mode: soft-light, overlay, normal;
     background-size: cover, cover, 1600px auto;
     background-position: center, center, 50% 30%;
     background-repeat: no-repeat, no-repeat, no-repeat;
-    filter: saturate(0.92) contrast(1.02);
+    filter: saturate(0.88) contrast(1.01);
   }
 
   .hero-layer-media {
@@ -94,20 +94,16 @@
     --cta-contrast-boost: 0%;
     --lux-glass-lightness: calc(28% + var(--cta-contrast-boost));
     background: color-mix(
-      in oklab,
-      rgba(16, 11, 9, 0.78) calc(72% - var(--cta-contrast-boost)),
-      var(--surface-0) var(--lux-glass-lightness)
+      in srgb,
+      var(--smh-ink-soft) calc(46% - var(--cta-contrast-boost)),
+      var(--cpv-card-bg, var(--surface-0)) var(--lux-glass-lightness)
     );
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-radius: 12px;
     box-shadow: var(--shadow-soft);
-    color: color-mix(
-      in oklab,
-      #0b0908 calc(74% - var(--cta-contrast-boost)),
-      var(--surface-0) calc(26% + var(--cta-contrast-boost))
-    );
-    border: 1px solid color-mix(in oklab, var(--brand-gold) 26%, transparent);
+    color: var(--cpv-page-text, color-mix(in srgb, var(--smh-white) 86%, var(--smh-ink) 14%));
+    border: 1px solid color-mix(in srgb, var(--cpv-gold-keyline, var(--brand-gold)) 70%, transparent 42%);
   }
 
   .lux-glass :where(p, h3, span) {
@@ -117,14 +113,14 @@
   @media (prefers-color-scheme: dark) {
     .lux-glass {
       background: color-mix(
-        in oklab,
-        #050405 calc(68% - var(--cta-contrast-boost)),
-        var(--surface-0) calc(32% + var(--cta-contrast-boost))
+        in srgb,
+        var(--smh-ink) calc(68% - var(--cta-contrast-boost)),
+        var(--cpv-card-bg, var(--surface-0)) calc(32% + var(--cta-contrast-boost))
       );
       color: color-mix(
-        in oklab,
-        #ffffff calc(88% + var(--cta-contrast-boost)),
-        rgba(16, 11, 9, 0.08) calc(12% - var(--cta-contrast-boost))
+        in srgb,
+        var(--smh-white) calc(88% + var(--cta-contrast-boost)),
+        color-mix(in srgb, var(--smh-ink) 16%, transparent) calc(12% - var(--cta-contrast-boost))
       );
       border-color: color-mix(in oklab, var(--brand-gold) 34%, transparent);
     }
