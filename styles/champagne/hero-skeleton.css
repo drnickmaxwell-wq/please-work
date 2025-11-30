@@ -2,8 +2,9 @@
   position: relative;
   overflow: hidden;
   padding: 4rem 1.25rem;
-  color: var(--ink);
-  background: color-mix(in oklab, var(--bg) 92%, transparent 8%);
+  color: var(--brand-white);
+  background: var(--bg-ink);
+  isolation: isolate;
 }
 
 .hero-shell {
@@ -12,6 +13,11 @@
   display: grid;
   gap: 2rem;
   grid-template-columns: 1fr;
+  background: color-mix(in srgb, var(--bg-ink) 70%, transparent 30%);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  border: 1px solid color-mix(in srgb, var(--brand-soft-gold) 28%, transparent);
+  box-shadow: var(--shadow-soft);
 }
 
 .hero-content {
@@ -26,18 +32,18 @@
   font-size: 0.95rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: color-mix(in oklab, var(--ink) 70%, var(--bg) 30%);
+  color: color-mix(in srgb, var(--brand-white) 76%, var(--bg-ink) 24%);
 }
 
 .hero-title {
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(2rem, 4vw, 3.6rem);
   font-weight: 700;
   line-height: 1.15;
 }
 
 .hero-subtitle {
   font-size: 1.05rem;
-  color: color-mix(in oklab, var(--ink) 78%, var(--bg) 22%);
+  color: color-mix(in srgb, var(--brand-white) 82%, var(--bg-ink) 18%);
   line-height: 1.6;
 }
 
@@ -52,10 +58,10 @@
   align-self: flex-start;
   padding: 0.35rem 0.75rem;
   border-radius: 999px;
-  border: 1px solid color-mix(in oklab, var(--ink) 10%, transparent 90%);
-  background: color-mix(in oklab, var(--bg) 94%, transparent 6%);
+  border: 1px solid color-mix(in srgb, var(--brand-soft-gold) 26%, transparent);
+  background: color-mix(in srgb, var(--bg-ink) 68%, transparent 32%);
   font-weight: 600;
-  color: color-mix(in oklab, var(--ink) 75%, var(--bg) 25%);
+  color: color-mix(in srgb, var(--brand-white) 82%, var(--bg-ink) 18%);
 }
 
 .hero-layers,
@@ -70,9 +76,11 @@
 }
 
 .hero-layer.gradient { background: transparent; }
-.hero-layer.wave { mask-image: none; }
-.hero-layer.particles { opacity: var(--champagne-particles-opacity-d, 0.06); }
-.hero-layer.grain { mix-blend-mode: soft-light; }
+.hero-layer.wave {
+  background: color-mix(in srgb, var(--bg-ink) 80%, transparent 20%);
+}
+.hero-layer.particles { opacity: var(--particles-opacity, 0.06); }
+.hero-layer.grain { mix-blend-mode: soft-light; opacity: var(--grain-opacity, 0.06); }
 
 @media (min-width: 900px) {
   .hero-shell {

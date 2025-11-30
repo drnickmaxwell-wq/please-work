@@ -2,9 +2,9 @@
   position: sticky;
   top: 0;
   z-index: 20;
-  backdrop-filter: blur(10px);
-  background: color-mix(in oklab, var(--bg) 92%, transparent 8%);
-  border-bottom: 1px solid color-mix(in oklab, var(--ink) 8%, transparent 92%);
+  backdrop-filter: blur(22px);
+  background: color-mix(in srgb, var(--bg-ink) 75%, transparent 25%);
+  border-bottom: 1px solid color-mix(in srgb, var(--brand-soft-gold) 26%, transparent);
 }
 
 .headerInner {
@@ -21,6 +21,7 @@
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  color: var(--brand-white);
 }
 
 .navList {
@@ -30,7 +31,7 @@
 }
 
 .navItem {
-  color: color-mix(in oklab, var(--ink) 78%, var(--bg) 22%);
+  color: color-mix(in srgb, var(--brand-white) 82%, var(--bg-ink) 18%);
   text-decoration: none;
   font-weight: 600;
   padding: 0.5rem 0.75rem;
@@ -40,25 +41,26 @@
 
 .navItem:hover,
 .navItem:focus-visible {
-  background: color-mix(in oklab, var(--ink) 8%, transparent 92%);
-  color: var(--ink);
+  background: color-mix(in srgb, var(--brand-ink) 22%, transparent 78%);
+  color: var(--brand-white);
   outline: none;
 }
 
 .mobileButton {
-  border: 1px solid color-mix(in oklab, var(--ink) 12%, transparent 88%);
-  background: color-mix(in oklab, var(--bg) 94%, transparent 6%);
+  border: 1px solid color-mix(in srgb, var(--brand-soft-gold) 26%, transparent);
+  background: color-mix(in srgb, var(--bg-ink) 70%, transparent 30%);
   padding: 0.5rem 0.75rem;
   border-radius: 0.75rem;
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
+  color: var(--brand-white);
 }
 
 .mobileNav {
   padding: 1rem 1.25rem 1.5rem;
-  border-top: 1px solid color-mix(in oklab, var(--ink) 8%, transparent 92%);
-  background: color-mix(in oklab, var(--bg) 96%, transparent 4%);
+  border-top: 1px solid color-mix(in srgb, var(--brand-soft-gold) 26%, transparent);
+  background: color-mix(in srgb, var(--bg-ink) 75%, transparent 25%);
 }
 
 .mobileNavList {
@@ -68,8 +70,8 @@
 }
 
 .footer {
-  border-top: 1px solid color-mix(in oklab, var(--ink) 10%, transparent 90%);
-  background: color-mix(in oklab, var(--bg) 94%, transparent 6%);
+  border-top: 1px solid color-mix(in srgb, var(--brand-soft-gold) 26%, transparent);
+  background: var(--bg-ink);
   margin-top: 3rem;
 }
 
@@ -85,6 +87,7 @@
 .footerHeading {
   font-weight: 700;
   margin-bottom: 0.75rem;
+  color: var(--brand-white);
 }
 
 .footerList {
@@ -94,19 +97,19 @@
 
 .footerLink,
 .footerMeta {
-  color: color-mix(in oklab, var(--ink) 75%, var(--bg) 25%);
+  color: color-mix(in srgb, var(--brand-white) 78%, var(--bg-ink) 22%);
   text-decoration: none;
   line-height: 1.6;
 }
 
 .footerLink:hover,
 .footerLink:focus-visible {
-  color: var(--ink);
+  color: var(--brand-soft-gold);
   outline: none;
 }
 
 .bottomBar {
-  border-top: 1px solid color-mix(in oklab, var(--ink) 8%, transparent 92%);
+  border-top: 1px solid color-mix(in srgb, var(--brand-soft-gold) 26%, transparent);
   padding: 1rem 1.25rem;
   max-width: 1200px;
   margin: 0 auto;
@@ -114,7 +117,7 @@
   justify-content: space-between;
   gap: 1rem;
   font-size: 0.95rem;
-  color: color-mix(in oklab, var(--ink) 70%, var(--bg) 30%);
+  color: color-mix(in srgb, var(--brand-white) 75%, var(--bg-ink) 25%);
 }
 
 @media (min-width: 900px) {

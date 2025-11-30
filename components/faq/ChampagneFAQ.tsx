@@ -31,22 +31,22 @@ export function ChampagneFAQ({ items, heading }: ChampagneFaqProps) {
   };
 
   return (
-    <div className={styles.faq}>
-      {heading ? <h2 className={styles.faqHeading}>{heading}</h2> : null}
+    <div className={`${styles.faq} space-section`}>
+      {heading ? <h2 className={`${styles.faqHeading} text-title`}>{heading}</h2> : null}
       {items.map((item, index) => {
         const domId = `${baseId}-${item.id || index}`;
         const isOpen = openIds.has(domId);
         return (
-          <div key={domId} className={styles.item}>
+          <div key={domId} className={`glass-card ${styles.item}`}>
             <button
               type="button"
-              className={styles.button}
+              className={`${styles.button} text-body`}
               aria-expanded={isOpen}
               aria-controls={`${domId}-panel`}
               id={`${domId}-button`}
               onClick={() => toggle(domId)}
             >
-              <span>{item.question}</span>
+              <span className="text-title">{item.question}</span>
               <span className={styles.icon} aria-hidden>
                 {isOpen ? '−' : '+'}
               </span>
@@ -56,7 +56,7 @@ export function ChampagneFAQ({ items, heading }: ChampagneFaqProps) {
                 id={`${domId}-panel`}
                 role="region"
                 aria-labelledby={`${domId}-button`}
-                className={styles.answer}
+                className={`${styles.answer} text-body`}
               >
                 {item.answer}
               </div>

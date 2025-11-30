@@ -13,15 +13,15 @@ export interface AIWidgetCardProps {
 
 export function AIWidgetCard({ title, description, tag, ctaLabel, ctaHref = '#', icon }: AIWidgetCardProps) {
   return (
-    <article className={`${styles['cp-card']} ${styles['cp-card--ai']}`}>
+    <article className={`glass-card ${styles['cp-card']} ${styles['cp-card--ai']}`}>
       <div className={styles['cp-card__footer']}>
         {icon}
-        <h3 className={styles['cp-card__title']}>{title}</h3>
+        <h3 className={`${styles['cp-card__title']} text-title`}>{title}</h3>
       </div>
-      {tag ? <span className={styles['cp-card__tag']}>{tag}</span> : null}
-      <p className={styles['cp-card__body']}>{description}</p>
+      {tag ? <span className={`${styles['cp-card__tag']} text-eyebrow`}>{tag}</span> : null}
+      <p className={`${styles['cp-card__body']} text-body`}>{description}</p>
       {ctaLabel ? (
-        <Link className={styles['cp-card__cta']} href={ctaHref}>
+        <Link className={`${styles['cp-card__cta']} text-body`} href={ctaHref}>
           {ctaLabel}
         </Link>
       ) : null}

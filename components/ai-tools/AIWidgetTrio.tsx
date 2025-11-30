@@ -5,7 +5,7 @@ import { TimePredictor } from './TimePredictor';
 
 export function AIWidgetTrio() {
   return (
-    <div className={styles['cp-card__grid']}>
+    <div className={`${styles['cp-card__grid']} space-block`}>
       <CostEstimator />
       <TimePredictor />
       <ARSmileTryOn />

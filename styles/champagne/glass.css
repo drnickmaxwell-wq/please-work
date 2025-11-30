@@ -1,15 +1,14 @@
-.champagne-glass{
-  position: relative;
-  background-color: transparent;
-  border: 1px solid var(--smh-accent-gold);
-  -webkit-backdrop-filter: blur(18px);
-  backdrop-filter: blur(18px);
-  box-shadow: 0 10px 40px rgba(0,0,0,.25);
-  border-radius: var(--radius-champagne, 18px);
-  z-index: var(--z-glass, 20);
+.glass-soft {
+  backdrop-filter: blur(22px);
+  background: color-mix(in srgb, var(--brand-ink) 10%, var(--brand-white) 90%);
+  border: 1px solid color-mix(in srgb, var(--brand-gold) 40%, transparent);
+  box-shadow: var(--shadow-soft);
+  border-radius: var(--radius-lg);
 }
 
-.champagne-glass::before,
-.champagne-glass::after{
-  content: none !important;
+.glass-card {
+  backdrop-filter: blur(18px);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
 }

@@ -1,0 +1,25 @@
+@import '../tokens/smh-champagne-tokens.css';
+
+:root {
+  --brand-soft-gold: var(--brand-gold-keyline);
+  --brand-ink: var(--ink);
+  --brand-white: var(--smh-white);
+
+  --ink-100: var(--ink);
+  --ink-80: color-mix(in srgb, var(--brand-ink) 80%, white);
+  --ink-60: color-mix(in srgb, var(--brand-ink) 60%, white);
+
+  --radius-lg: 24px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+
+  --shadow-soft: 0 8px 36px rgba(0, 0, 0, 0.16);
+
+  --particles-opacity: 0.08;
+  --grain-opacity: 0.06;
+  --glass-opacity: 0.18;
+
+  --bg-ink: var(--ink-100);
+  --ink: var(--brand-ink);
+  --bg: var(--brand-white);
+}
