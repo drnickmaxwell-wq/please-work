@@ -1,16 +1,16 @@
 # Preview Treatment Template Adoption Report
 
-This report tracks where the Champagne treatment template is now applied across preview routes and what content/schema gaps remain (from `config/champagne/page-architecture.json`).
+This report tracks where the Champagne treatment template is applied across preview routes and what content/schema gaps remain (from `config/champagne/page-architecture.json`).
 
-| Preview route | Template status | Outstanding items |
-| --- | --- | --- |
-| /preview/treatments/veneers | Uses `ChampagneTreatmentTemplate` | gallery_assets; finance_plan_mapping; final 3D asset hookup |
-| /preview/treatments/implants | Uses `ChampagneTreatmentTemplate` | implant_glb_asset; finance_plan_mapping; gallery assets once approved |
-| /preview/treatments/dental-implants | Uses `ChampagneTreatmentTemplate` | shares implant schema; finance_plan_mapping; schema_pack_binding for alias route |
-| /preview/treatments/whitening | Uses `ChampagneTreatmentTemplate` | benefits_copy uplift; finance_plan_mapping |
-| /preview/treatments/orthodontics | Uses `ChampagneTreatmentTemplate` | benefits_copy; gallery_assets; aligner_process schema verification |
-| /preview/treatments/orthodontics/spark-aligners | Uses `ChampagneTreatmentTemplate` | aligner_howto_schema_sync; gallery_assets; 3D viewer asset for aligners |
-| /preview/treatments/3d-dentistry | Uses `ChampagneTreatmentTemplate` | tech_cards; howto_schema; 3D viewer asset |
-| /preview/treatments/technology | Uses `ChampagneTreatmentTemplate` | tech_cards; schema_map; 3D viewer asset |
-| /preview/treatments/general | Uses `ChampagneTreatmentTemplate` | benefits_copy; finance_plan_mapping |
-| /preview/treatments/cosmetic | Uses `ChampagneTreatmentTemplate` | benefits_copy; gallery_assets |
+| preview_route | template_status | schema_status | content_todos |
+| --- | --- | --- | --- |
+| /preview/treatments/veneers | Uses `ChampagneTreatmentTemplate` | Bound to veneers schema pack (service, howto, faq) | gallery_assets, finance_plan_mapping, 3d_viewer_asset |
+| /preview/treatments/implants | Uses `ChampagneTreatmentTemplate` | Bound to implants schema pack (service, howto, faq) | implant_glb_asset, finance_plan_mapping, gallery_assets |
+| /preview/treatments/dental-implants | Uses `ChampagneTreatmentTemplate` | Alias to implants schema pack via implant-process | implant_glb_asset, finance_plan_mapping, gallery_assets |
+| /preview/treatments/whitening | Uses `ChampagneTreatmentTemplate` | TODO: schema_pack_binding | benefits_copy, finance_plan_mapping, gallery_assets |
+| /preview/treatments/orthodontics | Uses `ChampagneTreatmentTemplate` | Aligner schema pack via spark-aligners route | benefits_copy, gallery_assets, aligner_schema_verification |
+| /preview/treatments/orthodontics/spark-aligners | Uses `ChampagneTreatmentTemplate` | Bound to aligner schema pack (service, howto, faq) | aligner_howto_schema_sync, gallery_assets, 3d_viewer_asset |
+| /preview/treatments/3d-dentistry | Uses `ChampagneTreatmentTemplate` | TODO: schema_pack_binding | tech_cards, howto_schema, 3d_viewer_asset, finance_plan_mapping, gallery_assets |
+| /preview/treatments/technology | Uses `ChampagneTreatmentTemplate` | TODO: schema_pack_binding | tech_cards, schema_map, 3d_viewer_asset, finance_plan_mapping, gallery_assets |
+| /preview/treatments/general | Uses `ChampagneTreatmentTemplate` | TODO: schema_pack_binding | benefits_copy, finance_plan_mapping |
+| /preview/treatments/cosmetic | Uses `ChampagneTreatmentTemplate` | TODO: schema_pack_binding | benefits_copy, gallery_assets, finance_plan_mapping |
