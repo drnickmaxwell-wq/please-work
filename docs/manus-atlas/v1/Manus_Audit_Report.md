@@ -250,14 +250,34 @@ These will appear as `GAP_NEEDS_MANUS` briefs in your Design Atlas.
 
 # 6. Recommendations for Code Integration (High Priority)
 
-1. **Create canonical Champagne Hero component**  
-2. **Make Composite page the blueprint for all treatments**  
-3. **Standardise all cards using the polished composite card style**  
-4. **Consolidate CTA styles into a reusable module**  
-5. **Create a universal FAQ component (AA + schema)**  
-6. **Define Technology 3D viewer zones**  
-7. **Implement real gradient generation via tokens**  
-8. **Create a single testimonial component**  
+1. **Create canonical Champagne Hero component**
+2. **Make Composite page the blueprint for all treatments**
+3. **Standardise all cards using the polished composite card style**
+4. **Consolidate CTA styles into a reusable module**
+5. **Create a universal FAQ component (AA + schema)**
+6. **Define Technology 3D viewer zones**
+7. **Implement real gradient generation via tokens**
+8. **Create a single testimonial component**
+
+---
+
+# 6A. Structured Data Compliance Table
+
+Canon enforced: tokens-only, gradient law 135°, motion PRM, layer stack.
+
+| Route | Section | Status | Schema | Notes |
+|---|---|---|---|---|
+| / | hero | ready | Organization, LocalBusiness, WebSite, FAQPage, BreadcrumbList, AggregateRating | Compliant structure; ensure tokenised colours and AA contrast. |
+| / | value-trio | missing |  | Missing assets in packs; author or map from existing FX. |
+| / | patient-stories | missing | ItemList | Missing assets in packs; author or map from existing FX. |
+| / | priority-treatments | missing | Service | Missing assets in packs; author or map from existing FX. |
+| / | 3d-ar | ready | VideoObject | Compliant structure; ensure tokenised colours and AA contrast. |
+| / | ai-concierge | ready | SoftwareApplication | Compliant structure; ensure tokenised colours and AA contrast. |
+| / | teleconsult | missing | HowTo | Missing assets in packs; author or map from existing FX. |
+| / | finance | missing | Offer | Missing assets in packs; author or map from existing FX. |
+| / | faq | missing | FAQPage | Missing assets in packs; author or map from existing FX. |
+| / | local-proof | missing | LocalBusiness | Missing assets in packs; author or map from existing FX. |
+| / | footer | ready |  | Compliant structure; ensure tokenised colours and AA contrast. |
 
 ---
 
