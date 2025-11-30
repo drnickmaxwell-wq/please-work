@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 import { JsonLd, schema } from '@/lib/seo';
-import ImplantsPageContent from '../implants/page-content';
+import ImplantsPage from '@/components/treatments/ImplantsPage';
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL ?? 'https://www.stmaryshousedental.co.uk';
@@ -42,7 +42,7 @@ export default function DentalImplantsPage() {
     <>
       <JsonLd json={serviceJson} />
       <JsonLd json={faqJson} />
-      <ImplantsPageContent />
+      <ImplantsPage />
     </>
   );
 }
