@@ -1,0 +1,45 @@
+.faq {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.faqHeading {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.item {
+  border: 1px solid color-mix(in oklab, var(--ink) 10%, transparent 90%);
+  border-radius: 1rem;
+  background: color-mix(in oklab, var(--bg) 95%, transparent 5%);
+}
+
+.button {
+  width: 100%;
+  text-align: left;
+  padding: 1rem 1.25rem;
+  background: transparent;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: center;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.button:focus-visible {
+  outline: 2px solid color-mix(in oklab, var(--brand-teal) 50%, var(--bg) 50%);
+  outline-offset: 2px;
+}
+
+.answer {
+  padding: 0 1.25rem 1rem;
+  color: color-mix(in oklab, var(--ink) 78%, var(--bg) 22%);
+  line-height: 1.6;
+}
+
+.icon {
+  font-size: 1.25rem;
+}

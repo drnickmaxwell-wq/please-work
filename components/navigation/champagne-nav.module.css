@@ -1,0 +1,128 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  backdrop-filter: blur(10px);
+  background: color-mix(in oklab, var(--bg) 92%, transparent 8%);
+  border-bottom: 1px solid color-mix(in oklab, var(--ink) 8%, transparent 92%);
+}
+
+.headerInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.navList {
+  display: none;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navItem {
+  color: color-mix(in oklab, var(--ink) 78%, var(--bg) 22%);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  border-radius: 999px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.navItem:hover,
+.navItem:focus-visible {
+  background: color-mix(in oklab, var(--ink) 8%, transparent 92%);
+  color: var(--ink);
+  outline: none;
+}
+
+.mobileButton {
+  border: 1px solid color-mix(in oklab, var(--ink) 12%, transparent 88%);
+  background: color-mix(in oklab, var(--bg) 94%, transparent 6%);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.mobileNav {
+  padding: 1rem 1.25rem 1.5rem;
+  border-top: 1px solid color-mix(in oklab, var(--ink) 8%, transparent 92%);
+  background: color-mix(in oklab, var(--bg) 96%, transparent 4%);
+}
+
+.mobileNavList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer {
+  border-top: 1px solid color-mix(in oklab, var(--ink) 10%, transparent 90%);
+  background: color-mix(in oklab, var(--bg) 94%, transparent 6%);
+  margin-top: 3rem;
+}
+
+.footerInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.footerHeading {
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.footerList {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.footerLink,
+.footerMeta {
+  color: color-mix(in oklab, var(--ink) 75%, var(--bg) 25%);
+  text-decoration: none;
+  line-height: 1.6;
+}
+
+.footerLink:hover,
+.footerLink:focus-visible {
+  color: var(--ink);
+  outline: none;
+}
+
+.bottomBar {
+  border-top: 1px solid color-mix(in oklab, var(--ink) 8%, transparent 92%);
+  padding: 1rem 1.25rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.95rem;
+  color: color-mix(in oklab, var(--ink) 70%, var(--bg) 30%);
+}
+
+@media (min-width: 900px) {
+  .navList {
+    display: flex;
+  }
+
+  .mobileButton {
+    display: none;
+  }
+}
