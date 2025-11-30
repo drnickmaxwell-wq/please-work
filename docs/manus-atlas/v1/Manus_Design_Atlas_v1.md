@@ -1,5 +1,6 @@
-# Champagne Ecosystem  
-# Manus Design Atlas v1  
+# Manus Design Atlas v1
+
+## Champagne Ecosystem
 Author: Manus Importer AI  
 Date: 2025  
 Scope: All Manus-generated assets + Champagne Restored variants + Nicko-polish + multi-phase verification bundles
