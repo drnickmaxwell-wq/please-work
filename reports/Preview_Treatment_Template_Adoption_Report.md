@@ -14,3 +14,5 @@ This report tracks where the Champagne treatment template is applied across prev
 | /preview/treatments/technology | Uses `ChampagneTreatmentTemplate` | TODO: schema_pack_binding | tech_cards, schema_map, 3d_viewer_asset, finance_plan_mapping, gallery_assets |
 | /preview/treatments/general | Uses `ChampagneTreatmentTemplate` | TODO: schema_pack_binding | benefits_copy, finance_plan_mapping |
 | /preview/treatments/cosmetic | Uses `ChampagneTreatmentTemplate` | TODO: schema_pack_binding | benefits_copy, gallery_assets, finance_plan_mapping |
+
+_Note: This report is maintained as the single source of truth for preview treatment template + schema coverage._
