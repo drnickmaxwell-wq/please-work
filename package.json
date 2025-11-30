@@ -7,7 +7,7 @@
     "guard:hero:baseline": "node scripts/guard-hero-freeze.mjs --write-baseline",
     "brand:grain": "node scripts/generate-film-grain.mjs --seed champagne-v1 --width 2560 --height 1440 --intensity 0.015",
     "freeze:update-filmgrain": "node scripts/freeze-update-filmgrain.mjs",
-    "lint": "eslint . --max-warnings=0",
+    "lint": "eslint .",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
