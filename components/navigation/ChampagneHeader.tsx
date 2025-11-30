@@ -21,12 +21,12 @@ export function ChampagneHeader() {
   return (
     <header className={styles.header}>
       <div className={styles.headerInner}>
-        <Link href="/" className={styles.logo} aria-label="St Mary&apos;s House Dental home">
+        <Link href="/" className={`${styles.logo} text-eyebrow`} aria-label="St Mary&apos;s House Dental home">
           SMH Dental
         </Link>
         <nav aria-label="Primary" className={styles.navList}>
           {NAV_LINKS.map((link) => (
-            <Link key={link.href} className={styles.navItem} href={link.href}>
+            <Link key={link.href} className={`${styles.navItem} text-body`} href={link.href}>
               {link.label}
             </Link>
           ))}

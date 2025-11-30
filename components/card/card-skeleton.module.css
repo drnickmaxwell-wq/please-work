@@ -1,43 +1,47 @@
 .cp-card {
-  background: color-mix(in oklab, var(--bg) 88%, transparent 12%);
-  border: 1px solid color-mix(in oklab, var(--ink) 8%, transparent 92%);
-  border-radius: 1.25rem;
+  position: relative;
+  border-radius: var(--radius-md);
   padding: 1.5rem;
-  box-shadow: 0 10px 30px color-mix(in oklab, var(--ink) 6%, transparent 94%);
-  color: var(--ink);
+  color: inherit;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 .cp-card__eyebrow {
   font-size: 0.85rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: color-mix(in oklab, var(--ink) 68%, var(--bg) 32%);
+  color: color-mix(in srgb, var(--brand-white) 76%, var(--bg-ink) 24%);
 }
 
 .cp-card__title {
   font-size: 1.2rem;
   font-weight: 600;
   line-height: 1.5;
+  font-family: 'Playfair Display', serif;
 }
 
 .cp-card__body {
-  color: color-mix(in oklab, var(--ink) 80%, var(--bg) 20%);
+  color: color-mix(in srgb, var(--brand-white) 90%, var(--bg-ink) 10%);
   line-height: 1.6;
+  font-family: Inter, sans-serif;
 }
 
 .cp-card__cta {
   margin-top: auto;
-  font-weight: 600;
-  color: var(--brand-magenta);
+  font-weight: 700;
+  color: var(--brand-soft-gold);
   text-decoration: none;
+  letter-spacing: 0.01em;
 }
 
 .cp-card__meta {
   font-size: 0.95rem;
-  color: color-mix(in oklab, var(--ink) 70%, var(--bg) 30%);
+  color: color-mix(in srgb, var(--brand-white) 85%, var(--bg-ink) 15%);
 }
 
 .cp-card__grid {
@@ -70,7 +74,7 @@
   height: 48px;
   border-radius: 50%;
   object-fit: cover;
-  background: color-mix(in oklab, var(--ink) 12%, transparent 88%);
+  background: color-mix(in srgb, var(--brand-white) 20%, transparent 80%);
 }
 
 .cp-card__rating {
@@ -81,7 +85,7 @@
 
 .cp-card__role {
   font-size: 0.95rem;
-  color: color-mix(in oklab, var(--ink) 65%, var(--bg) 35%);
+  color: color-mix(in srgb, var(--brand-white) 88%, var(--bg-ink) 12%);
 }
 
 .cp-card__tag {
@@ -89,16 +93,17 @@
   align-items: center;
   padding: 0.35rem 0.65rem;
   border-radius: 999px;
-  border: 1px solid color-mix(in oklab, var(--ink) 12%, transparent 88%);
-  background: color-mix(in oklab, var(--bg) 90%, transparent 10%);
+  border: 1px solid color-mix(in srgb, var(--brand-soft-gold) 45%, transparent);
+  background: color-mix(in srgb, var(--bg-ink) 60%, transparent 40%);
   font-size: 0.9rem;
+  color: color-mix(in srgb, var(--brand-white) 82%, var(--bg-ink) 18%);
 }
 
 .cp-card__media {
   width: 100%;
   height: 140px;
-  border-radius: 1rem;
-  background: color-mix(in oklab, var(--ink) 12%, transparent 88%);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--brand-ink) 20%, transparent 80%);
 }
 
 .cp-card__stacked {

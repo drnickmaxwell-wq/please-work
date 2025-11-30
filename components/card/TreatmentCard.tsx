@@ -13,15 +13,15 @@ export interface TreatmentCardProps {
 
 export function TreatmentCard({ eyebrow, title, description, ctaLabel, ctaHref = '#', icon }: TreatmentCardProps) {
   return (
-    <article className={`${styles['cp-card']} ${styles['cp-card--treatment']}`}>
-      {eyebrow ? <span className={styles['cp-card__eyebrow']}>{eyebrow}</span> : null}
+    <article className={`glass-card ${styles['cp-card']} ${styles['cp-card--treatment']}`}>
+      {eyebrow ? <span className={`${styles['cp-card__eyebrow']} text-eyebrow`}>{eyebrow}</span> : null}
       <div className={styles['cp-card__footer']}>
         {icon}
-        <h3 className={styles['cp-card__title']}>{title}</h3>
+        <h3 className={`${styles['cp-card__title']} text-title`}>{title}</h3>
       </div>
-      <p className={styles['cp-card__body']}>{description}</p>
+      <p className={`${styles['cp-card__body']} text-body`}>{description}</p>
       {ctaLabel ? (
-        <Link className={styles['cp-card__cta']} href={ctaHref}>
+        <Link className={`${styles['cp-card__cta']} text-body`} href={ctaHref}>
           {ctaLabel}
         </Link>
       ) : null}

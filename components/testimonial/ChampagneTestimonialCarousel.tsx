@@ -20,7 +20,7 @@ export function ChampagneTestimonialCarousel({ items, heading }: ChampagneTestim
 
   return (
     <div className={styles.carousel}>
-      {heading ? <h2>{heading}</h2> : null}
+      {heading ? <h2 className="text-title">{heading}</h2> : null}
       <ChampagneTestimonial {...active} />
       <div className={styles.nav}>
         <span className={styles.meta}>
