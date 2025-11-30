@@ -20,3 +20,6 @@
 - No production routes under `/app/treatments/**` were modified.
 - No sacred heroes or hero assets were touched.
 - All targeted preview treatment routes continue to share `ChampagneTreatmentTemplate` for layout consistency.
+
+## Report tidy
+- Duplicate adoption table removed; the 4-column schema/content version is now canonical.
