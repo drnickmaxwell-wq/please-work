@@ -1,9 +1,10 @@
 .page {
   display: grid;
-  gap: 2.5rem;
-  padding: 2rem 1.25rem 3rem;
+  gap: 3rem;
+  padding: 3rem 1.5rem 4rem;
   max-width: 1200px;
   margin: 0 auto;
+  color: var(--brand-white);
 }
 
 .sectionHeader {
@@ -16,6 +17,10 @@
 .sectionTitle {
   font-size: 1.6rem;
   font-weight: 700;
+}
+
+.sectionHeader span {
+  color: color-mix(in srgb, var(--brand-white) 78%, var(--bg-ink) 22%);
 }
 
 .gridTwo {

@@ -41,7 +41,7 @@ const FAQ_ITEMS = [
 
 export default function ChampagneSkinPreview() {
   return (
-    <main>
+    <main className="champagne-page">
       <ChampagneHero
         eyebrow="Preview"
         title="Champagne Skin Engine"
@@ -50,13 +50,21 @@ export default function ChampagneSkinPreview() {
         showGrain
       />
 
-      <AIWidgetTrio />
+      <div className="space-section">
+        <AIWidgetTrio />
+      </div>
 
-      <Champagne3DViewer title="3D Viewer Demo" />
+      <div className="space-section">
+        <Champagne3DViewer title="3D Viewer Demo" />
+      </div>
 
-      <ChampagneTestimonialCarousel items={TESTIMONIALS} heading="Voices" />
+      <div className="space-section">
+        <ChampagneTestimonialCarousel items={TESTIMONIALS} heading="Voices" />
+      </div>
 
-      <ChampagneFAQ items={FAQ_ITEMS} heading="Champagne system" />
+      <div className="space-section">
+        <ChampagneFAQ items={FAQ_ITEMS} heading="Champagne system" />
+      </div>
 
       <div className="space-section">
         <ChampagneCTA variant="pair" primaryLabel="Book" secondaryLabel="Contact" />

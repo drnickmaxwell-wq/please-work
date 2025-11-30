@@ -12,14 +12,14 @@
 
 .text-lead {
   font-family: Inter;
-  font-size: 1.25rem;
-  opacity: 0.8;
+  font-size: 1.05rem;
+  opacity: 0.95;
 }
 
 .text-body {
   font-family: Inter;
-  font-size: 1rem;
-  opacity: 0.9;
+  font-size: 0.98rem;
+  opacity: 0.95;
 }
 
 .text-eyebrow {

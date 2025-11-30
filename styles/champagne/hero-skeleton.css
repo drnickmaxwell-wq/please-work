@@ -75,7 +75,6 @@
   z-index: 0;
 }
 
-.hero-layer.gradient { background: transparent; }
 .hero-layer.wave {
   background: color-mix(in srgb, var(--bg-ink) 80%, transparent 20%);
 }

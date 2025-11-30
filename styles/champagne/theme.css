@@ -7,13 +7,15 @@
 @import './time-of-day.css';
 
 :root {
-  color: var(--ink);
+  --bg-ink: var(--brand-ink);
+  color: var(--smh-page-text, #FFFFFF);
   background: var(--bg-ink);
 }
 
-body {
+body,
+.champagne-page {
   background: var(--bg-ink);
-  color: var(--ink);
+  color: var(--smh-page-text, #FFFFFF);
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   min-height: 100vh;
 }

@@ -1,14 +1,19 @@
 .glass-soft {
   backdrop-filter: blur(22px);
-  background: color-mix(in srgb, var(--brand-ink) 10%, var(--brand-white) 90%);
-  border: 1px solid color-mix(in srgb, var(--brand-gold) 40%, transparent);
+  background: rgba(12, 16, 24, 0.85);
+  border: 1px solid color-mix(in srgb, var(--brand-soft-gold) 40%, transparent);
   box-shadow: var(--shadow-soft);
   border-radius: var(--radius-lg);
 }
 
 .glass-card {
   backdrop-filter: blur(18px);
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(18, 22, 32, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);
+}
+
+.glass-soft,
+.glass-card {
+  color: #FFFFFF;
 }
