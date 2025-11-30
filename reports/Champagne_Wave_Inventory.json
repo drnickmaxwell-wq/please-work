@@ -1,0 +1,7 @@
+{
+  "waves": [
+    {"file": "public/brand/waves/header-wave-mask.svg", "kind": "hero", "notes": "Soft blurred multi-crest wave mask with fade gradients for headers."},
+    {"file": "public/brand/waves/wave-dots.svg", "kind": "divider", "notes": "Dotted field tile with radial falloff suitable for subtle wave texture."},
+    {"file": "public/brand/waves/wave-field.svg", "kind": "divider", "notes": "Layered wave arcs drawn as strokes for ambient backgrounds."}
+  ]
+}

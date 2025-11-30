@@ -1,0 +1,20 @@
+# Implants Treatment Template Context
+
+## Props used for implants preview
+- The implants preview page wires the template with `slug="implants"`, `schemaKey="implant-process"`, `treatmentName="Dental implants"`, `category="Implants"`, `has3DViewer`, `financePlanGroup="implants"`, `galleryEnabled`, `faqKey="implants"`, and forwards `searchParams`.【F:app/preview/treatments/implants/page.tsx†L21-L33】
+- The template itself accepts `slug`, optional `schemaKey`, optional `treatmentName`, optional `category`, optional `benefitBullets`, optional `has3DViewer`, optional `financePlanGroup`, optional `galleryEnabled`, optional `faqKey`, and optional `searchParams` for HUD toggles.【F:components/preview/treatments/ChampagneTreatmentTemplate.tsx†L20-L31】【F:components/preview/treatments/ChampagneTreatmentTemplate.tsx†L275-L283】
+
+## Layout flow
+1. **Hero** – `ChampagnePreviewHero` renders the header with kicker, Shoreham-by-Sea title, paired CTAs, and descriptive copy built from preview content fallbacks; implants add `styles.implantsCanvas` when applicable.【F:components/preview/treatments/ChampagneTreatmentTemplate.tsx†L298-L333】
+2. **Benefits** – `BenefitsGrid` lists schema-derived or override bullets under a category label, using glass cards and implant spacing when the slug matches implants.【F:components/preview/treatments/ChampagneTreatmentTemplate.tsx†L284-L292】【F:components/preview/treatments/ChampagneTreatmentTemplate.tsx†L331-L334】
+3. **Journey / How it works** – A workflow section with tabbed `HowItWorksTabs` steps sourced from HowTo content; optionally shows a `Champagne3DViewer` pane when `has3DViewer` is true, with TODO messaging for the model asset.【F:components/preview/treatments/ChampagneTreatmentTemplate.tsx†L334-L362】
+4. **Finance** – `FinanceBand` presents placeholder finance pills and plan group text keyed to `financePlanGroup`.【F:components/preview/treatments/ChampagneTreatmentTemplate.tsx†L149-L172】【F:components/preview/treatments/ChampagneTreatmentTemplate.tsx†L364-L364】
+5. **Gallery** – When `galleryEnabled` is true, `GalleryPlaceholder` renders three glass cards marked as placeholders for future assets.【F:components/preview/treatments/ChampagneTreatmentTemplate.tsx†L174-L200】【F:components/preview/treatments/ChampagneTreatmentTemplate.tsx†L366-L366】
+6. **Testimonials** – A testimonials strip uses `ChampagneTestimonialCarousel` with sample quotes and the treatment name in the heading.【F:components/preview/treatments/ChampagneTreatmentTemplate.tsx†L368-L379】
+7. **FAQ** – `FaqStrip` lists FAQ entries or placeholders and notes missing schema packs via a TODO line; it respects the passed `faqKey`/schema content.【F:components/preview/treatments/ChampagneTreatmentTemplate.tsx†L226-L253】【F:components/preview/treatments/ChampagneTreatmentTemplate.tsx†L381-L385】
+8. **CTA** – `CtaBand` closes the flow with a glass CTA band inviting booking, themed for the treatment title and optional implant styling.【F:components/preview/treatments/ChampagneTreatmentTemplate.tsx†L256-L272】【F:components/preview/treatments/ChampagneTreatmentTemplate.tsx†L387-L388】
+9. **Schema** – The page ends by rendering `TreatmentPreviewSchema` with the loaded config for structured data preview.【F:components/preview/treatments/ChampagneTreatmentTemplate.tsx†L389-L391】
+
+## Styles and skins referenced
+- The template relies on `champagne-treatment-template.module.css` plus shared preview styles `preview-layout.css`, `preview-typography.css`, and `treatments-preview.css` for layout, typography, and surface treatments; implants add `styles.implantsCanvas`, `styles.implantsMain`, and `styles.implantSection` modifiers to align the Champagne skin for that route.【F:components/preview/treatments/ChampagneTreatmentTemplate.tsx†L13-L18】【F:components/preview/treatments/ChampagneTreatmentTemplate.tsx†L298-L388】
+- HUD support (`DevHud`) is controlled via `searchParams?.hud`, showing schema/route diagnostics when enabled without altering the hero surface.【F:components/preview/treatments/ChampagneTreatmentTemplate.tsx†L4-L5】【F:components/preview/treatments/ChampagneTreatmentTemplate.tsx†L300-L313】
