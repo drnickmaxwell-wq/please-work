@@ -1,0 +1,165 @@
+.sectionShell {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: clamp(1.8rem, 2.4vw, 2.6rem);
+}
+
+.sectionHeader {
+  display: grid;
+  gap: 0.6rem;
+  max-width: 840px;
+}
+
+.lead {
+  color: var(--cpv-page-text-soft, color-mix(in srgb, currentColor 80%, transparent));
+}
+
+.stripRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  background: color-mix(in srgb, var(--cpv-card-bg, var(--smh-ink-soft)) 70%, transparent 30%);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.cardGrid {
+  display: grid;
+  gap: clamp(1rem, 1.6vw, 1.6rem);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.card {
+  display: grid;
+  gap: 0.6rem;
+  padding: clamp(1.2rem, 1.8vw, 1.6rem);
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  background: color-mix(in srgb, var(--cpv-card-bg, var(--smh-ink-soft)) 72%, transparent 28%);
+}
+
+.cardTitle {
+  margin: 0;
+}
+
+.inlineLink {
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 70%, transparent);
+}
+
+.twoColumn {
+  display: grid;
+  gap: clamp(1rem, 2vw, 1.6rem);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  align-items: flex-start;
+}
+
+.list {
+  display: grid;
+  gap: 0.65rem;
+  padding-left: 1.1rem;
+  margin: 0;
+}
+
+.tileGrid {
+  display: grid;
+  gap: clamp(0.9rem, 1.2vw, 1.2rem);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.tile {
+  display: grid;
+  gap: 0.4rem;
+  padding: clamp(1rem, 1.2vw + 0.6rem, 1.3rem);
+  border-radius: 14px;
+  border: 1px dashed color-mix(in srgb, currentColor 20%, transparent);
+  background: color-mix(in srgb, var(--cpv-card-bg, var(--smh-ink-soft)) 68%, transparent 32%);
+}
+
+.tileLabel {
+  font-size: 0.95rem;
+  color: var(--cpv-page-text-soft, color-mix(in srgb, currentColor 76%, transparent));
+}
+
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.stepGrid {
+  display: grid;
+  gap: clamp(0.8rem, 1.2vw, 1.2rem);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.stepCard {
+  padding: clamp(0.9rem, 1.2vw, 1.15rem);
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, currentColor 16%, transparent);
+  background: color-mix(in srgb, var(--cpv-card-bg, var(--smh-ink-soft)) 70%, transparent 30%);
+  display: grid;
+  gap: 0.3rem;
+}
+
+.profileChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.profileChip {
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  background: color-mix(in srgb, var(--cpv-card-bg, var(--smh-ink-soft)) 70%, transparent 30%);
+  display: grid;
+  gap: 0.1rem;
+}
+
+.mutedText {
+  color: var(--cpv-page-text-soft, color-mix(in srgb, currentColor 72%, transparent));
+  font-size: 0.95rem;
+}
+
+.tightStack {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.sectionNote {
+  color: var(--cpv-page-text-soft, color-mix(in srgb, currentColor 70%, transparent));
+  font-size: 0.95rem;
+}
+
+.linkRail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.galleryTag {
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cpv-page-text-soft, color-mix(in srgb, currentColor 72%, transparent));
+}

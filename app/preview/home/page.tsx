@@ -1,15 +1,20 @@
 import type { Metadata } from "next";
 import React from "react";
 
-import AiSmileQuizTeaser from "@/components/sections/home/AiSmileQuizTeaser";
 import ChampagneHero from "@/components/home/ChampagneHero";
-import ClinicTourSection from "@/components/sections/home/ClinicTourSection";
-import LocalProof from "@/components/sections/home/LocalProof";
-import MicroFaq, { type Faq } from "@/components/sections/home/MicroFaq";
-import MostRequestedTreatments from "@/components/sections/home/MostRequestedTreatments";
-import PatientStoriesTeaser from "@/components/sections/home/PatientStoriesTeaser";
-import PortalTeaser from "@/components/sections/home/PortalTeaser";
-import TechnologyHighlight from "@/components/sections/home/TechnologyHighlight";
+import ChampagnePreviewFooter from "@/components/preview/layout/ChampagnePreviewFooter";
+import HomeComfortBlock from "@/components/preview/home/HomeComfortBlock";
+import HomeFAQ from "@/components/preview/home/HomeFAQ";
+import HomeFeaturedTreatments from "@/components/preview/home/HomeFeaturedTreatments";
+import HomeFinalCTA from "@/components/preview/home/HomeFinalCTA";
+import HomeImplantsSpotlight from "@/components/preview/home/HomeImplantsSpotlight";
+import HomePatientJourneyStrip from "@/components/preview/home/HomePatientJourneyStrip";
+import HomeSmileGalleryStrip from "@/components/preview/home/HomeSmileGalleryStrip";
+import HomeTeamTeaser from "@/components/preview/home/HomeTeamTeaser";
+import HomeTechStrip from "@/components/preview/home/HomeTechStrip";
+import HomeTestimonials from "@/components/preview/home/HomeTestimonials";
+import HomeTrustStrip from "@/components/preview/home/HomeTrustStrip";
+import HomeValueTrio from "@/components/preview/home/HomeValueTrio";
 import "@/components/preview/preview-layout.css";
 import "@/components/preview/preview-typography.css";
 import JsonLd from "@/components/seo/json-ld";
@@ -24,25 +29,6 @@ export const metadata: Metadata = {
     canonical: "/preview/home",
   },
 };
-
-const faqs: Faq[] = [
-  {
-    question: "How do I book a consultation?",
-    answer: "Choose a time online or call 01273 453109; we confirm with a calm pre-visit checklist and optional AI photo review.",
-  },
-  {
-    question: "Do you help nervous patients?",
-    answer: "Yes — quiet rooms, gentle clinicians, and sedation options are available for both routine and advanced treatments.",
-  },
-  {
-    question: "Which treatments are most popular?",
-    answer: "Porcelain veneers, 3D-guided dental implants, Spark aligners, and sensitivity-safe whitening lead our Shoreham list.",
-  },
-  {
-    question: "Where is the clinic located?",
-    answer: "You’ll find us at 1 St Mary’s House, Shoreham-by-Sea, BN43 5ZA with nearby parking and easy coastal access.",
-  },
-];
 
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -116,20 +102,26 @@ export default function HomePreviewPage() {
   return (
     <div className="preview-home-canvas">
       <main className="preview-home-main">
+        {/* Preview-only Champagne homepage scaffold. Visual polish and Manus-led assets will slot in later. */}
         <section className="preview-home-zone preview-home-zone-1">
           <ChampagneHero />
-          <ClinicTourSection />
         </section>
         <section className="preview-home-zone preview-home-zone-2">
-          <MostRequestedTreatments />
-          <TechnologyHighlight />
-          <PatientStoriesTeaser />
-          <AiSmileQuizTeaser />
-          <PortalTeaser />
+          <HomeTrustStrip />
+          <HomeValueTrio />
+          <HomeFeaturedTreatments />
+          <HomeImplantsSpotlight />
+          <HomeTechStrip />
+          <HomeSmileGalleryStrip />
+          <HomeTestimonials />
+          <HomeComfortBlock />
+          <HomeTeamTeaser />
+          <HomePatientJourneyStrip />
         </section>
         <section className="preview-home-zone preview-home-zone-3">
-          <LocalProof />
-          <MicroFaq faqs={faqs} />
+          <HomeFAQ />
+          <HomeFinalCTA />
+          <ChampagnePreviewFooter />
         </section>
         <JsonLd data={[organizationSchema, localBusinessSchema, websiteSchema]} />
       </main>
