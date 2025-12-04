@@ -1,6 +1,5 @@
-import Link from "next/link";
-
 import styles from "./home-preview.module.css";
+import PreviewChampagneCTA from "../shared/PreviewChampagneCTA";
 
 export default function HomeHeroCTABand() {
   return (
@@ -10,12 +9,10 @@ export default function HomeHeroCTABand() {
           <div className={`cpv-card__inner cpv-card__inner--stack ${styles.sectionStack} ${styles.heroBandCard}`}>
             <p className={`${styles.smallLabel} text-eyebrow`}>Start your visit</p>
             <div className={styles.ctaRow}>
-              <Link href="/contact" className={styles.ctaPrimaryRegal}>
-                Book a consultation
-              </Link>
-              <Link href="/treatments" className={styles.ctaSecondaryGlass}>
+              <PreviewChampagneCTA href="/contact">Book a consultation</PreviewChampagneCTA>
+              <PreviewChampagneCTA href="/treatments" variant="secondary">
                 Explore treatments
-              </Link>
+              </PreviewChampagneCTA>
             </div>
           </div>
         </div>

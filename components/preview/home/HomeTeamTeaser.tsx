@@ -1,6 +1,5 @@
-import Link from "next/link";
-
 import styles from "./home-preview.module.css";
+import PreviewChampagneCTA from "../shared/PreviewChampagneCTA";
 
 const teamMembers = [
   { name: "Dr Alex Raut", title: "Clinical lead & implant dentist" },
@@ -33,9 +32,9 @@ export default function HomeTeamTeaser() {
               ))}
             </div>
             <div className={styles.ctaRow}>
-              <Link href="/team" className={styles.ctaSecondaryGlass}>
+              <PreviewChampagneCTA href="/team" variant="secondary">
                 Meet the team
-              </Link>
+              </PreviewChampagneCTA>
             </div>
           </div>
         </div>

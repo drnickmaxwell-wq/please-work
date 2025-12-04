@@ -1,6 +1,7 @@
 "use client";
 
-import styles from "./home-preview.module.css";
+import PreviewChampagneCTA from "../shared/PreviewChampagneCTA";
+import ctaStyles from "../shared/preview-cta.module.css";
 
 export default function HomeHero() {
   const reduceMotion =
@@ -57,12 +58,16 @@ export default function HomeHero() {
             a signature Manus AI finish.
           </p>
           <div className="hero-cta-group">
-            <a href="/contact" className={styles.ctaPrimaryRegal}>
+            <PreviewChampagneCTA href="/contact" className={ctaStyles.primaryHero}>
               Book a consultation
-            </a>
-            <a href="/treatments" className={styles.ctaSecondaryGlass}>
+            </PreviewChampagneCTA>
+            <PreviewChampagneCTA
+              href="/treatments"
+              variant="secondary"
+              className={ctaStyles.secondaryHero}
+            >
               Explore treatments
-            </a>
+            </PreviewChampagneCTA>
           </div>
         </div>
       </div>

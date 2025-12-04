@@ -1,6 +1,5 @@
-import Link from "next/link";
-
 import styles from "./home-preview.module.css";
+import PreviewChampagneCTA from "../shared/PreviewChampagneCTA";
 
 const implantBullets = [
   "3D diagnostics, guided placement, and on-site printing",
@@ -32,12 +31,10 @@ export default function HomeImplantsSpotlight() {
               ))}
             </ul>
             <div className={styles.ctaRow}>
-              <Link href="/treatments/dental-implants" className={styles.ctaPrimaryRegal}>
-                Dental implants
-              </Link>
-              <Link href="/video-consultation" className={styles.ctaSecondaryGlass}>
+              <PreviewChampagneCTA href="/treatments/dental-implants">Dental implants</PreviewChampagneCTA>
+              <PreviewChampagneCTA href="/video-consultation" variant="secondary">
                 Book implant consultation
-              </Link>
+              </PreviewChampagneCTA>
             </div>
           </div>
         </div>

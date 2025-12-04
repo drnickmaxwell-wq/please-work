@@ -1,6 +1,5 @@
-import Link from "next/link";
-
 import styles from "./home-preview.module.css";
+import PreviewChampagneCTA from "../shared/PreviewChampagneCTA";
 
 const comfortPoints = [
   "Gentle, unhurried appointments",
@@ -32,9 +31,9 @@ export default function HomeComfortBlock() {
               ))}
             </ul>
             <div className={styles.ctaRow}>
-              <Link href="/anxiety-dentistry" className={styles.ctaSecondaryGlass}>
+              <PreviewChampagneCTA href="/anxiety-dentistry" variant="secondary">
                 Learn about anxiety dentistry
-              </Link>
+              </PreviewChampagneCTA>
             </div>
           </div>
         </div>

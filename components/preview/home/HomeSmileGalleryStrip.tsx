@@ -1,6 +1,5 @@
-import Link from "next/link";
-
 import styles from "./home-preview.module.css";
+import PreviewChampagneCTA from "../shared/PreviewChampagneCTA";
 
 const galleryTiles = [
   { title: "Veneers & Whitening", label: "Before / After" },
@@ -36,9 +35,9 @@ export default function HomeSmileGalleryStrip() {
               ))}
             </div>
             <div className={styles.ctaRow}>
-              <Link href="/smile-gallery" className={styles.ctaSecondaryGlass}>
+              <PreviewChampagneCTA href="/smile-gallery" variant="secondary">
                 View smile gallery
-              </Link>
+              </PreviewChampagneCTA>
             </div>
           </div>
         </div>

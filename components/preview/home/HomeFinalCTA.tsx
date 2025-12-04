@@ -1,6 +1,5 @@
-import Link from "next/link";
-
 import styles from "./home-preview.module.css";
+import PreviewChampagneCTA from "../shared/PreviewChampagneCTA";
 
 export default function HomeFinalCTA() {
   return (
@@ -18,12 +17,10 @@ export default function HomeFinalCTA() {
               </p>
             </div>
             <div className={styles.ctaRow}>
-              <Link href="/contact" className={styles.ctaPrimaryRegal}>
-                Book a consultation
-              </Link>
-              <Link href="/video-consultation" className={styles.ctaSecondaryGlass}>
+              <PreviewChampagneCTA href="/contact">Book a consultation</PreviewChampagneCTA>
+              <PreviewChampagneCTA href="/video-consultation" variant="secondary">
                 Request a video consultation
-              </Link>
+              </PreviewChampagneCTA>
             </div>
           </div>
         </div>

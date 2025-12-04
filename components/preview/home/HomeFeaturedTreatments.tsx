@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import PreviewChampagneCTA from "../shared/PreviewChampagneCTA";
 import styles from "./home-preview.module.css";
 
 type TreatmentCard = {
@@ -59,12 +60,10 @@ export default function HomeFeaturedTreatments() {
               ))}
             </div>
             <div className={styles.ctaRow}>
-              <Link href="/contact" className={styles.ctaPrimaryRegal}>
-                Book a consultation
-              </Link>
-              <Link href="/treatments" className={styles.ctaSecondaryGlass}>
+              <PreviewChampagneCTA href="/contact">Book a consultation</PreviewChampagneCTA>
+              <PreviewChampagneCTA href="/treatments" variant="secondary">
                 View all treatments
-              </Link>
+              </PreviewChampagneCTA>
             </div>
           </div>
         </div>
