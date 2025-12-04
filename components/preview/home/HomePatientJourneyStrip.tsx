@@ -9,27 +9,29 @@ const journeySteps = [
 
 export default function HomePatientJourneyStrip() {
   return (
-    <section className={styles.sectionShell} aria-labelledby="journey-heading">
-      <div className="cpv-card cpv-card--soft">
-        <div className="cpv-card__inner cpv-card__inner--stack">
-          <div className={styles.sectionHeader}>
-            <p className="text-eyebrow">Patient journey</p>
-            <h2 className="text-display-sm" id="journey-heading">
-              Your journey with us
-            </h2>
-            <p className={`${styles.lead} text-body`}>
-              A simple, linear path that can later connect to a dedicated journey route once visuals are ready.
-            </p>
+    <section className={styles.section} aria-labelledby="journey-heading">
+      <div className={`${styles.sectionShell} ${styles.sectionAtmosphereMid}`}>
+        <div className={`cpv-card cpv-card--soft ${styles.sectionPanel}`}>
+          <div className={`cpv-card__inner cpv-card__inner--stack ${styles.sectionStack}`}>
+            <div className={styles.sectionHeader}>
+              <p className={`${styles.smallLabel} text-eyebrow`}>Patient journey</p>
+              <h2 className={styles.sectionTitle} id="journey-heading">
+                Your journey with us
+              </h2>
+              <p className={`${styles.lead} ${styles.bodyText}`}>
+                A simple, linear path that can later connect to a dedicated journey route once visuals are ready.
+              </p>
+            </div>
+            <div className={styles.stepGrid}>
+              {journeySteps.map((step) => (
+                <article key={step.title} className={styles.stepCard}>
+                  <h3 className={`${styles.subhead} ${styles.cardTitle}`}>{step.title}</h3>
+                  <p className={styles.bodyText}>{step.detail}</p>
+                </article>
+              ))}
+            </div>
+            <p className={styles.sectionNote}>Placeholder link to future patient journey hub.</p>
           </div>
-          <div className={styles.stepGrid}>
-            {journeySteps.map((step) => (
-              <article key={step.title} className={styles.stepCard}>
-                <h3 className={`text-lead ${styles.cardTitle}`}>{step.title}</h3>
-                <p className="text-body">{step.detail}</p>
-              </article>
-            ))}
-          </div>
-          <p className={styles.sectionNote}>Placeholder link to future patient journey hub.</p>
         </div>
       </div>
     </section>

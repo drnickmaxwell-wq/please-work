@@ -1,5 +1,6 @@
 "use client";
 
+import PreviewChampagneCTA from "../shared/PreviewChampagneCTA";
 import styles from "./home-preview.module.css";
 
 export default function HomeHero() {
@@ -50,19 +51,25 @@ export default function HomeHero() {
       <div className="hero-particles-static" />
       <div className="hero-film-grain" />
       <div className="hero-content">
-        <div className="hero-content-wrapper">
+        <div className={`hero-content-wrapper ${styles.heroContent}`}>
           <h1 id="home-hero-title">Your Luxury Smile Awaits</h1>
           <p>
             Private dental care with calm precision, comfort-first technology, and
             a signature Manus AI finish.
           </p>
-          <div className="hero-cta-group">
-            <a href="/contact" className={styles.ctaPrimaryInk}>
-              Book a consultation
-            </a>
-            <a href="/treatments" className={styles.ctaSecondaryGlass}>
-              Explore treatments
-            </a>
+          <div className={styles.heroCtaPlate}>
+            <div className={styles.heroCtaRow}>
+              <PreviewChampagneCTA href="/book" className={styles.heroCtaPrimary}>
+                Book a consultation
+              </PreviewChampagneCTA>
+              <PreviewChampagneCTA
+                href="/treatments"
+                variant="secondary"
+                className={styles.heroCtaSecondary}
+              >
+                Explore treatments
+              </PreviewChampagneCTA>
+            </div>
           </div>
         </div>
       </div>
