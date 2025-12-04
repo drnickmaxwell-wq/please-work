@@ -30,12 +30,17 @@ type TemplateProps = {
   primaryCtaHref?: string;
   secondaryCtaLabel?: string;
   secondaryCtaHref?: string;
+  closingPrimaryCtaLabel?: string;
+  closingPrimaryCtaHref?: string;
+  closingSecondaryCtaLabel?: string;
+  closingSecondaryCtaHref?: string;
   howItWorksLabel?: string;
   howItWorksSteps?: HowToStep[];
   has3DViewer?: boolean;
   financePlanGroup?: string;
   galleryEnabled?: boolean;
   faqKey?: string;
+  faqItems?: FaqEntry[];
   searchParams?: Record<string, string | string[] | undefined>;
 };
 
@@ -262,7 +267,21 @@ function FaqStrip({ items, missing, className }: { items: FaqEntry[]; missing: b
   );
 }
 
-function CtaBand({ title, className }: { title: string; className?: string }) {
+function CtaBand({
+  title,
+  className,
+  primaryCtaLabel,
+  primaryCtaHref,
+  secondaryCtaLabel,
+  secondaryCtaHref,
+}: {
+  title: string;
+  className?: string;
+  primaryCtaLabel?: string;
+  primaryCtaHref?: string;
+  secondaryCtaLabel?: string;
+  secondaryCtaHref?: string;
+}) {
   return (
     <section className={className ?? styles.section} aria-labelledby="cta-heading">
       <div className={`${styles.glass} ${styles.ctaBand}`}>
@@ -277,11 +296,15 @@ function CtaBand({ title, className }: { title: string; className?: string }) {
         </div>
         <div className={previewCtaStyles.heroCTAGroup}>
           {/** Shared preview CTA styles to keep the closing band aligned with the hero */}
-          <PreviewChampagneCTA className={previewCtaStyles.inline} href="/contact">
-            Book a consultation
+          <PreviewChampagneCTA className={previewCtaStyles.inline} href={primaryCtaHref ?? "/contact"}>
+            {primaryCtaLabel ?? "Book a consultation"}
           </PreviewChampagneCTA>
-          <PreviewChampagneCTA className={previewCtaStyles.inline} href="/treatments" variant="secondary">
-            View all treatments
+          <PreviewChampagneCTA
+            className={previewCtaStyles.inline}
+            href={secondaryCtaHref ?? "/treatments"}
+            variant="secondary"
+          >
+            {secondaryCtaLabel ?? "View all treatments"}
           </PreviewChampagneCTA>
         </div>
       </div>
@@ -302,12 +325,17 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
     primaryCtaHref,
     secondaryCtaLabel,
     secondaryCtaHref,
+    closingPrimaryCtaLabel,
+    closingPrimaryCtaHref,
+    closingSecondaryCtaLabel,
+    closingSecondaryCtaHref,
     howItWorksLabel,
     howItWorksSteps,
     has3DViewer,
     financePlanGroup,
     galleryEnabled,
     faqKey,
+    faqItems,
     searchParams,
   } = props;
 
@@ -323,7 +351,7 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
     summary: step.text ?? "Awaiting HowTo.step text",
   }));
   const steps = coerceSteps(config, howItWorksSteps ?? derivedSteps);
-  const faqItems = coerceFaq(previewContent.faq, config.faqItems);
+  const faqEntries = coerceFaq(faqItems ?? previewContent.faq, config.faqItems);
   const heroDescription =
     heroCopy ??
     config.shortDescription ??
@@ -427,11 +455,18 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
 
         <FaqStrip
           className={isImplants ? styles.implantSection : undefined}
-          items={faqItems}
+          items={faqEntries}
           missing={previewContent.missing.faq}
         />
 
-        <CtaBand className={isImplants ? `${styles.implantSection} ${styles.ctaSurface}` : undefined} title={treatmentName ?? config.displayName} />
+        <CtaBand
+          className={isImplants ? `${styles.implantSection} ${styles.ctaSurface}` : undefined}
+          title={treatmentName ?? config.displayName}
+          primaryCtaLabel={closingPrimaryCtaLabel}
+          primaryCtaHref={closingPrimaryCtaHref}
+          secondaryCtaLabel={closingSecondaryCtaLabel}
+          secondaryCtaHref={closingSecondaryCtaHref}
+        />
       </main>
 
       <TreatmentPreviewSchema config={config} />

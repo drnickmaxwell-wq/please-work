@@ -9,19 +9,43 @@ import { buildPreviewMetadata as buildTreatmentPreviewMetadata } from "@/lib/tre
 
 const slug = "whitening";
 
-// Placeholder copy for Director review before launch.
+// DRAFT COPY: Whitening benefits for Director review.
 const whiteningBenefits = [
-  "Sensitivity-aware protocols with dentist-led gel calibration.",
+  "Sensitivity-aware whitening protocols tailored to your teeth.",
   "Shade planning that pairs whitening with future bonding or veneers.",
-  "Comfort-first sessions with desensitising serums between applications.",
-  "Aftercare mapped to maintain brightness without harsh rebounds.",
+  "Dentist-led care with documented before/after shades.",
+  "Refresher review to help maintain brightness over time.",
 ];
 
+// DRAFT COPY: Whitening journey steps for Director review.
 const whiteningSteps = [
-  { title: "Consult & shade map", summary: "Set your target shade, capture scans, and align whitening with any upcoming cosmetic work." },
-  { title: "Gentle activation", summary: "Apply low-heat whitening cycles with sensitivity checkpoints built into the protocol." },
-  { title: "Calm recovery", summary: "Soothe with fluoride serums and polish edges so enamel feels smooth post-whitening." },
-  { title: "Plan the finish", summary: "Review shade stability, schedule top-ups, and align bonding or aligners to the new baseline." },
+  {
+    title: "Consult & shade map",
+    summary: "We capture photos and shade records, and plan your ideal result.",
+  },
+  { title: "Gentle activation", summary: "In-surgery whitening with sensitivity management built-in." },
+  { title: "Calm recovery", summary: "Aftercare advice and products to keep teeth comfortable." },
+  { title: "Plan the finish", summary: "Review your results and plan any future top-ups or refinements." },
+];
+
+// DRAFT COPY: Whitening FAQs for Director review.
+const whiteningFaq = [
+  {
+    question: "Will whitening make my teeth sensitive?",
+    answer: "We use sensitivity-aware gels and can adjust the protocol or add serums if you feel any zing during treatment.",
+  },
+  {
+    question: "How long do whitening results last?",
+    answer: "Results typically hold for months with good care. We map your shade and advise when quick top-ups are helpful.",
+  },
+  {
+    question: "Is whitening safe for my enamel?",
+    answer: "Dentist-prescribed whitening keeps gels within safe limits and avoids overheating so enamel stays protected.",
+  },
+  {
+    question: "Can I still have whitening if I have fillings or crowns?",
+    answer: "Yes. We check any existing work, explain how it will respond, and plan refinements or replacements if needed.",
+  },
 ];
 
 export const metadata: Metadata = {
@@ -46,11 +70,16 @@ export default function WhiteningPreviewPage({ searchParams }: PreviewPageProps)
       primaryCtaHref="/book"
       secondaryCtaLabel="Explore treatment options"
       secondaryCtaHref="/preview/home"
+      closingPrimaryCtaLabel="Book a whitening consultation"
+      closingPrimaryCtaHref="/book"
+      closingSecondaryCtaLabel="View all treatments"
+      closingSecondaryCtaHref="/preview/treatments"
       benefitBullets={whiteningBenefits}
       howItWorksLabel="Your whitening journey"
       howItWorksSteps={whiteningSteps}
       financePlanGroup="whitening"
       faqKey="whitening"
+      faqItems={whiteningFaq}
       searchParams={searchParams}
     />
   );
