@@ -4,6 +4,7 @@ export const revalidate = 0;
 import type { Metadata } from "next";
 
 import ChampagneTreatmentTemplate from "@/components/preview/treatments/ChampagneTreatmentTemplate";
+import { whitening_hero } from "@/lib/champagne/hero-presets";
 import { previewRobots } from "@/lib/seo/preview/previewRobots";
 import { buildPreviewMetadata as buildTreatmentPreviewMetadata } from "@/lib/treatments/previewTreatmentConfig";
 
@@ -99,8 +100,7 @@ export default function WhiteningPreviewPage({ searchParams }: PreviewPageProps)
       faqKey="whitening"
       faqItems={whiteningFaq}
       searchParams={searchParams}
-      heroVariant="luminous"
-      heroFrameVariant="whitening"
+      heroSchema={whitening_hero}
     />
   );
 }

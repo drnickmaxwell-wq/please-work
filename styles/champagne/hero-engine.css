@@ -1,0 +1,216 @@
+@import "./tokens.css";
+@import "./cta-system-v2.css";
+
+.hero-engine-shell {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: var(--radius-lg);
+  padding: var(--hero-space-y) var(--hero-space-x);
+  background: var(--hero-surface, transparent);
+  color: var(--hero-foreground, color-mix(in srgb, var(--brand-white) 92%, var(--bg-ink) 8%));
+}
+
+.hero-gradient-base {
+  --hero-space-y: clamp(2.6rem, 5vw, 4rem);
+  --hero-space-x: clamp(1.8rem, 4vw, 3.4rem);
+  --hero-surface: linear-gradient(
+      140deg,
+      color-mix(in srgb, var(--hero-glow, var(--brand-gold)) 16%, transparent) 0%,
+      transparent 46%
+    ),
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--hero-start, var(--bg-ink)) 82%, transparent) 0%,
+      color-mix(in srgb, var(--hero-end, var(--bg-ink)) 94%, transparent) 100%
+    );
+  box-shadow:
+    0 1.625rem 4rem color-mix(in srgb, var(--bg-ink) 22%, transparent),
+    inset 0 0.0625rem 0 color-mix(in srgb, var(--brand-white) 12%, transparent);
+}
+
+.hero-tonal-dusk {
+  --hero-start: var(--bg-ink);
+  --hero-end: color-mix(in srgb, var(--bg-ink) 92%, var(--brand-white) 8%);
+  --hero-glow: var(--brand-gold);
+  --hero-foreground: color-mix(in srgb, var(--brand-white) 92%, var(--bg-ink) 8%);
+}
+
+.hero-tonal-ink {
+  --hero-start: color-mix(in srgb, var(--bg-ink) 88%, var(--brand-white) 12%);
+  --hero-end: color-mix(in srgb, var(--bg-ink) 96%, transparent);
+  --hero-glow: var(--champagne-keyline-gold);
+  --hero-foreground: color-mix(in srgb, var(--brand-white) 90%, var(--bg-ink) 10%);
+}
+
+.hero-tonal-dawn {
+  --hero-start: color-mix(in srgb, var(--brand-magenta) 18%, var(--bg) 82%);
+  --hero-end: color-mix(in srgb, var(--brand-gold) 12%, var(--bg) 88%);
+  --hero-glow: color-mix(in srgb, var(--brand-gold) 28%, transparent);
+  --hero-foreground: color-mix(in srgb, var(--ink) 22%, var(--brand-white) 78%);
+}
+
+.hero-tonal-noir {
+  --hero-start: color-mix(in srgb, var(--bg-ink) 92%, transparent);
+  --hero-end: color-mix(in srgb, var(--bg-ink) 98%, transparent);
+  --hero-glow: color-mix(in srgb, var(--brand-gold) 18%, transparent);
+  --hero-foreground: color-mix(in srgb, var(--brand-white) 88%, var(--bg-ink) 12%);
+}
+
+.hero-tonal-whitening {
+  --hero-start: color-mix(in srgb, var(--brand-teal) 16%, var(--bg) 84%);
+  --hero-end: color-mix(in srgb, var(--bg-ink) 82%, var(--brand-white) 18%);
+  --hero-glow: color-mix(in srgb, var(--brand-gold) 18%, transparent);
+  --hero-foreground: color-mix(in srgb, var(--ink) 24%, var(--brand-white) 76%);
+}
+
+.hero-tonal-teal-lux {
+  --hero-start: color-mix(in srgb, var(--brand-teal) 22%, var(--bg-ink) 78%);
+  --hero-end: color-mix(in srgb, var(--brand-teal) 28%, var(--bg-ink) 72%);
+  --hero-glow: color-mix(in srgb, var(--brand-gold) 18%, transparent);
+  --hero-foreground: color-mix(in srgb, var(--brand-white) 88%, var(--bg-ink) 12%);
+}
+
+.hero-intensity-soft {
+  --hero-surface: linear-gradient(
+      140deg,
+      color-mix(in srgb, var(--hero-glow, var(--brand-gold)) 12%, transparent) 0%,
+      transparent 48%
+    ),
+    linear-gradient(
+      150deg,
+      color-mix(in srgb, var(--hero-start, var(--bg-ink)) 76%, transparent) 0%,
+      color-mix(in srgb, var(--hero-end, var(--bg-ink)) 88%, transparent) 100%
+    );
+}
+
+.hero-intensity-lux {
+  --hero-surface: linear-gradient(
+      125deg,
+      color-mix(in srgb, var(--hero-glow, var(--brand-gold)) 18%, transparent) 0%,
+      transparent 52%
+    ),
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--hero-start, var(--bg-ink)) 88%, transparent) 0%,
+      color-mix(in srgb, var(--hero-end, var(--bg-ink)) 96%, transparent) 100%
+    );
+}
+
+.hero-engine__inner {
+  position: relative;
+  display: grid;
+  gap: clamp(1.8rem, 3vw, 2.6rem);
+  max-width: min(100%, 72rem);
+  margin: 0 auto;
+  z-index: 2;
+}
+
+.hero-engine__content {
+  display: grid;
+  gap: clamp(1.4rem, 2vw, 2rem);
+  max-width: min(100%, 48rem);
+}
+
+.hero-layout-center .hero-engine__content {
+  justify-items: center;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-layout-left .hero-engine__content {
+  justify-items: start;
+}
+
+.hero-engine__eyebrow {
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--hero-foreground) 78%, transparent);
+}
+
+.hero-engine__headline {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.1;
+  color: var(--hero-foreground);
+}
+
+.hero-engine__subcopy {
+  margin: 0;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--hero-foreground) 86%, transparent);
+}
+
+.hero-wave-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-size: cover;
+  mix-blend-mode: var(--hero-wave-blend, soft-light);
+  opacity: var(--hero-wave-opacity, 0.2);
+}
+
+.hero-shimmer-layer {
+  position: absolute;
+  inset: 6% 6% auto 0;
+  height: 72%;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  opacity: var(--hero-shimmer-opacity, 0.16);
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 0.875rem 2rem color-mix(in srgb, var(--bg-ink) 18%, transparent));
+}
+
+.hero-shimmer-density-med {
+  --hero-shimmer-opacity: 0.18;
+}
+
+.hero-shimmer-density-low {
+  --hero-shimmer-opacity: 0.12;
+}
+
+.hero-shimmer-density-high {
+  --hero-shimmer-opacity: 0.24;
+}
+
+.hero-cta-plate {
+  display: inline-flex;
+  padding: clamp(0.9rem, 1.4vw, 1.2rem);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--surface-glass) 72%, transparent);
+  outline: 0.0625rem solid color-mix(in srgb, var(--champagne-keyline-gold) 78%, transparent 22%);
+  box-shadow:
+    0 1.125rem 2.625rem color-mix(in srgb, var(--bg-ink) 22%, transparent),
+    inset 0 0.0625rem 0 color-mix(in srgb, var(--brand-white) 16%, transparent);
+}
+
+.hero-cta-row {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.9rem, 1.8vw, 1.4rem);
+}
+
+@media (max-width: 48rem) {
+  .hero-engine-shell {
+    padding: clamp(2rem, 6vw, 2.8rem) clamp(1.25rem, 4vw, 2rem);
+  }
+
+  .hero-engine__inner {
+    gap: clamp(1.4rem, 3vw, 1.8rem);
+  }
+
+  .hero-engine__content {
+    gap: clamp(1.1rem, 2vw, 1.6rem);
+  }
+
+  .hero-cta-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
