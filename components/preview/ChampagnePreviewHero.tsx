@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 
+import ChampagneHeroSurface from '@/components/champagne/ChampagneHeroSurface';
 import WaveFXPreview from '@/components/preview/fx/WaveFXPreview';
 
 export type ChampagnePreviewHeroProps = {
@@ -7,12 +8,15 @@ export type ChampagnePreviewHeroProps = {
   kicker?: string;
   ctas?: ReactNode;
   children?: ReactNode;
+  variant?: 'default' | 'luminous';
 };
 
-const ChampagnePreviewHero = ({ title, kicker, ctas, children }: ChampagnePreviewHeroProps) => {
+const ChampagnePreviewHero = ({ title, kicker, ctas, children, variant = 'default' }: ChampagnePreviewHeroProps) => {
+  const surface = variant === 'luminous' ? <ChampagneHeroSurface /> : <WaveFXPreview />;
+
   return (
     <section className="cpv-hero">
-      <WaveFXPreview />
+      {surface}
       <div className="container">
         <div className="cpv-hero__inner">
           <div className="cpv-hero__content">

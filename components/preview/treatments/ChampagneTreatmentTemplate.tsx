@@ -42,6 +42,7 @@ type TemplateProps = {
   faqKey?: string;
   faqItems?: FaqEntry[];
   searchParams?: Record<string, string | string[] | undefined>;
+  heroVariant?: 'default' | 'luminous';
 };
 
 type HowToStep = { title: string; summary: string };
@@ -337,6 +338,7 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
     faqKey,
     faqItems,
     searchParams,
+    heroVariant,
   } = props;
 
   const config = getPreviewTreatmentConfig(slug);
@@ -387,6 +389,7 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
       <ChampagnePreviewHero
         kicker={category ? `${category} treatment` : "Champagne preview"}
         title={heroHeading}
+        variant={heroVariant}
         ctas={
           <div className={previewCtaStyles.heroCTAGroup}>
             {/** Regal Glass–Gold CTA pair shared with /preview/home */}
