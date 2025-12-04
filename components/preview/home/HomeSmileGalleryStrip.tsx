@@ -1,4 +1,4 @@
-import ChampagneCTA from "@/components/champagne/ChampagneCTA";
+import ChampagneCta from "@/components/champagne/ChampagneCta";
 
 import styles from "./home-preview.module.css";
 
@@ -35,9 +35,7 @@ export default function HomeSmileGalleryStrip() {
             ))}
           </div>
           <div className={styles.ctaRow}>
-            <ChampagneCTA href="/smile-gallery" variant="secondary">
-              View smile gallery
-            </ChampagneCTA>
+            <ChampagneCta href="/smile-gallery" label="View smile gallery" variant="secondarySection" />
           </div>
         </div>
       </div>
