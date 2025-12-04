@@ -1,78 +1,31 @@
 "use client";
 
+import { ChampagneHeroFrame } from "@/components/preview/champagne/ChampagneHeroFrame";
+
 import PreviewChampagneCTA from "../shared/PreviewChampagneCTA";
 import styles from "./home-preview.module.css";
 
 export default function HomeHero() {
-  const reduceMotion =
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
   return (
-    <section className="champagne-hero" aria-labelledby="home-hero-title">
-      <div className="hero-gradient-base" />
-      {!reduceMotion && (
-        <>
-          <div className="hero-wave-caustics">
-            <video autoPlay loop muted playsInline preload="auto">
-              <source
-                src="/assets/champagne/motion/wave-caustics.webm"
-                type="video/webm"
-              />
-            </video>
-          </div>
-          <div className="hero-glass-shimmer">
-            <video autoPlay loop muted playsInline preload="auto">
-              <source
-                src="/assets/champagne/motion/glass-shimmer.webm"
-                type="video/webm"
-              />
-            </video>
-          </div>
-          <div className="hero-particles-drift">
-            <video autoPlay loop muted playsInline preload="auto">
-              <source
-                src="/assets/champagne/motion/particles-drift.webm"
-                type="video/webm"
-              />
-            </video>
-          </div>
-          <div className="hero-gold-dust-drift">
-            <video autoPlay loop muted playsInline preload="auto">
-              <source
-                src="/assets/champagne/particles/gold-dust-drift.webm"
-                type="video/webm"
-              />
-            </video>
-          </div>
-        </>
-      )}
-      <div className="hero-wave-mask" />
-      <div className="hero-particles-static" />
-      <div className="hero-film-grain" />
-      <div className="hero-content">
-        <div className={`hero-content-wrapper ${styles.heroContent}`}>
-          <h1 id="home-hero-title">Your Luxury Smile Awaits</h1>
-          <p>
-            Private dental care with calm precision, comfort-first technology, and
-            a signature Manus AI finish.
-          </p>
-          <div className={styles.heroCtaPlate}>
-            <div className={styles.heroCtaRow}>
-              <PreviewChampagneCTA href="/book" className={styles.heroCtaPrimary}>
-                Book a consultation
-              </PreviewChampagneCTA>
-              <PreviewChampagneCTA
-                href="/treatments"
-                variant="secondary"
-                className={styles.heroCtaSecondary}
-              >
-                Explore treatments
-              </PreviewChampagneCTA>
-            </div>
-          </div>
+    <ChampagneHeroFrame variant="home" titleId="home-hero-title" contentClassName={styles.heroContent}>
+      <h1 id="home-hero-title">Your Luxury Smile Awaits</h1>
+      <p>
+        Private dental care with calm precision, comfort-first technology, and a signature Manus AI finish.
+      </p>
+      <div className={styles.heroCtaPlate}>
+        <div className={styles.heroCtaRow}>
+          <PreviewChampagneCTA href="/book" className={styles.heroCtaPrimary}>
+            Book a consultation
+          </PreviewChampagneCTA>
+          <PreviewChampagneCTA
+            href="/treatments"
+            variant="secondary"
+            className={styles.heroCtaSecondary}
+          >
+            Explore treatments
+          </PreviewChampagneCTA>
         </div>
       </div>
-    </section>
+    </ChampagneHeroFrame>
   );
 }

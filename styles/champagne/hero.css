@@ -35,6 +35,20 @@
   padding-top: 96px;
   min-height: 70vh;
   overflow: hidden;
+  --champagne-hero-gradient: var(--smh-gradient, var(--gradient-champagne));
+  --champagne-hero-wave-mask-desktop: url('/assets/champagne/waves/wave-mask-desktop.webp');
+  --champagne-hero-wave-mask-mobile: url('/assets/champagne/waves/wave-mask-mobile.webp');
+  --champagne-hero-particles-static: url('/assets/champagne/particles/home-hero-particles.webp');
+  --champagne-hero-film-grain: url('/assets/champagne/textures/home-hero-film-grain.webp');
+  --champagne-hero-brightness: 1;
+  --champagne-hero-contrast: 1;
+  --champagne-hero-vignette: 1;
+  --champagne-hero-caustics-opacity: 0.1;
+  --champagne-hero-glass-opacity: 0.12;
+  --champagne-hero-particles-drift-opacity: 0.06;
+  --champagne-hero-dust-opacity: 0.08;
+  --champagne-hero-static-particles-opacity: 0.08;
+  --champagne-hero-grain-opacity: 0.07;
 }
 
 @media (max-width: 768px) {
@@ -48,8 +62,23 @@
 .hero-gradient-base {
   position: absolute;
   inset: 0;
-  background: var(--gradient-champagne);
+  background: var(--champagne-hero-gradient);
   z-index: 1;
+  filter: brightness(var(--champagne-hero-brightness)) contrast(var(--champagne-hero-contrast));
+}
+
+.hero-gradient-base::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    120% 80% at 50% 6%,
+    transparent 0%,
+    color-mix(in srgb, var(--ink) 44%, transparent) 86%
+  );
+  opacity: calc(0.12 * var(--champagne-hero-vignette));
+  mix-blend-mode: multiply;
+  pointer-events: none;
 }
 
 /* Layer 2: Wave Caustics Motion (z-index: 2) */
@@ -57,7 +86,7 @@
   position: absolute;
   inset: 0;
   z-index: 2;
-  opacity: 0.10;
+  opacity: var(--champagne-hero-caustics-opacity);
   mix-blend-mode: screen;
   will-change: transform;
   pointer-events: none;
@@ -74,7 +103,7 @@
   position: absolute;
   inset: 0;
   z-index: 3;
-  background-image: url('/assets/champagne/waves/wave-mask-desktop.webp');
+  background-image: var(--champagne-hero-wave-mask-desktop);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -85,7 +114,7 @@
 
 @media (max-width: 768px) {
   .hero-wave-mask {
-    background-image: url('/assets/champagne/waves/wave-mask-mobile.webp');
+    background-image: var(--champagne-hero-wave-mask-mobile);
   }
 }
 
@@ -94,7 +123,7 @@
   position: absolute;
   inset: 0;
   z-index: 4;
-  opacity: 0.12;
+  opacity: var(--champagne-hero-glass-opacity);
   mix-blend-mode: screen;
   will-change: transform;
   pointer-events: none;
@@ -111,10 +140,10 @@
   position: absolute;
   inset: 0;
   z-index: 5;
-  background-image: url('/assets/champagne/particles/home-hero-particles.webp');
+  background-image: var(--champagne-hero-particles-static);
   background-size: 1024px 1024px;
   background-repeat: repeat;
-  opacity: 0.08;
+  opacity: var(--champagne-hero-static-particles-opacity);
   mix-blend-mode: screen;
   will-change: transform;
   pointer-events: none;
@@ -125,7 +154,7 @@
   position: absolute;
   inset: 0;
   z-index: 6;
-  opacity: 0.06;
+  opacity: var(--champagne-hero-particles-drift-opacity);
   mix-blend-mode: screen;
   will-change: transform;
   pointer-events: none;
@@ -142,7 +171,7 @@
   position: absolute;
   inset: 0;
   z-index: 7;
-  opacity: 0.08;
+  opacity: var(--champagne-hero-dust-opacity);
   mix-blend-mode: screen;
   will-change: transform;
   pointer-events: none;
@@ -159,10 +188,10 @@
   position: absolute;
   inset: 0;
   z-index: 8;
-  background-image: url('/assets/champagne/textures/home-hero-film-grain.webp');
+  background-image: var(--champagne-hero-film-grain);
   background-size: 512px 512px;
   background-repeat: repeat;
-  opacity: 0.07;
+  opacity: var(--champagne-hero-grain-opacity);
   mix-blend-mode: overlay;
   pointer-events: none;
 }
