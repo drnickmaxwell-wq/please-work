@@ -58,13 +58,25 @@
 }
 
 .primaryHero {
-  padding: 1.05rem 2.6rem;
-  box-shadow: 0 18px 50px color-mix(in srgb, var(--ink) 34%, transparent);
+  padding-inline: var(--cta-hero-padding-inline, var(--page-padding));
+  padding-block: var(--cta-hero-padding-block, calc(var(--page-padding) * 0.5));
+  border: 1px solid var(--champagne-keyline-gold);
+  box-shadow: var(--shadow-cta-hero-primary, 0 18px 50px color-mix(in srgb, var(--ink) 34%, transparent));
 }
 
 .secondaryHero {
-  padding: 1.05rem 2.6rem;
+  padding-inline: var(--cta-hero-padding-inline, var(--page-padding));
+  padding-block: var(--cta-hero-padding-block, calc(var(--page-padding) * 0.5));
+  border: 1px solid var(--champagne-keyline-gold);
+  background: transparent;
   color: color-mix(in srgb, var(--smh-white) 88%, var(--ink) 12%);
+}
+
+.heroCTAGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-cta-gap, calc(var(--page-padding) * 0.8));
+  margin-top: var(--space-cta-hero-top, calc(var(--page-padding) * 0.5));
 }
 
 .inline {

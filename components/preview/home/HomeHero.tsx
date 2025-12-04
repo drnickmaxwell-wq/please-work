@@ -57,8 +57,8 @@ export default function HomeHero() {
             Private dental care with calm precision, comfort-first technology, and
             a signature Manus AI finish.
           </p>
-          <div className="hero-cta-group">
-            <PreviewChampagneCTA href="/contact" className={ctaStyles.primaryHero}>
+          <div className={ctaStyles.heroCTAGroup}>
+            <PreviewChampagneCTA href="/book" className={ctaStyles.primaryHero}>
               Book a consultation
             </PreviewChampagneCTA>
             <PreviewChampagneCTA
