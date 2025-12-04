@@ -1,10 +1,26 @@
-:global(.smh-section) {
-  padding-top: 144px;
-  padding-bottom: 144px;
+
+.section,
+.sectionTight,
+.sectionHero {
   max-width: var(--page-max-width);
   margin: 0 auto;
   padding-left: var(--page-padding);
   padding-right: var(--page-padding);
+}
+
+.section {
+  padding-top: 144px;
+  padding-bottom: 144px;
+}
+
+.sectionTight {
+  padding-top: 96px;
+  padding-bottom: 96px;
+}
+
+.sectionHero {
+  padding-top: 192px;
+  padding-bottom: 192px;
 }
 
 .sectionShell {
