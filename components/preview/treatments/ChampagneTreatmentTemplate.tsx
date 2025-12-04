@@ -395,6 +395,7 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
   const previewContent = await loadTreatmentPreviewContent(schemaSlug);
   const showHud = shouldShowHud(searchParams?.hud);
   const isImplants = config.slug === "implants";
+  const isWhitening = config.slug === "whitening";
 
   const heroVisualDescriptionText =
     heroVisualDescription ??
@@ -522,7 +523,7 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
 
   return (
     <div
-      className={`cpv-page ${styles.canvas} ${styles.treatmentPage} ${isImplants ? styles.implantsCanvas : ""}`}
+      className={`cpv-page ${styles.canvas} ${styles.treatmentPage} ${isImplants ? styles.implantsCanvas : ""} ${isWhitening ? styles.whiteningCanvas : ""}`}
       data-treatment={config.slug}
     >
       {showHud ? (

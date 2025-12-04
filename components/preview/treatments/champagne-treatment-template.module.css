@@ -36,6 +36,18 @@
   --cpv-gold-keyline: color-mix(in srgb, var(--brand-gold) 78%, transparent 12%);
 }
 
+.whiteningCanvas {
+  background:
+    radial-gradient(circle at 16% 18%, color-mix(in srgb, var(--brand-gold) 14%, transparent), transparent 40%),
+    radial-gradient(circle at 86% 12%, color-mix(in srgb, var(--brand-teal) 12%, transparent), transparent 42%),
+    linear-gradient(180deg, color-mix(in srgb, var(--bg-ink) 92%, var(--brand-white) 8%), color-mix(in srgb, var(--bg-ink) 88%, transparent));
+  --cpv-page-ink: color-mix(in srgb, var(--bg-ink) 96%, var(--brand-white) 4%);
+  --cpv-page-text: color-mix(in srgb, var(--brand-white) 94%, var(--bg-ink) 6%);
+  --cpv-page-text-soft: color-mix(in srgb, var(--brand-white) 78%, var(--bg-ink) 22%);
+  --cpv-card-bg: color-mix(in srgb, var(--bg-ink) 82%, var(--brand-white) 18%);
+  --cpv-gold-keyline: color-mix(in srgb, var(--brand-gold) 72%, transparent 22%);
+}
+
 .main {
   display: flex;
   flex-direction: column;
