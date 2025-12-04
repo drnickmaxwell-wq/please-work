@@ -1,0 +1,60 @@
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: clamp(0.8rem, 1vw + 0.6rem, 1rem) clamp(1.35rem, 2vw, 1.8rem);
+  border-radius: var(--radius-pill, 999px);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+  will-change: transform;
+}
+
+.primary {
+  background: var(--smh-ink);
+  color: var(--smh-white);
+  border-color: color-mix(in srgb, var(--smh-accent-gold) 70%, transparent 30%);
+  box-shadow:
+    0 18px 42px color-mix(in srgb, var(--smh-ink) 24%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 18%, transparent);
+}
+
+.secondary {
+  background: color-mix(in srgb, var(--smh-ink) 38%, transparent);
+  color: var(--smh-white);
+  border-color: color-mix(in srgb, var(--smh-accent-gold-soft, var(--smh-accent-gold)) 68%, transparent 32%);
+  box-shadow:
+    0 14px 32px color-mix(in srgb, var(--smh-ink) 20%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 14%, transparent);
+  backdrop-filter: blur(14px);
+}
+
+.cta:hover,
+.cta:focus-visible {
+  transform: scale(1.02);
+  box-shadow:
+    0 20px 46px color-mix(in srgb, var(--smh-ink) 26%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 20%, transparent);
+  outline: none;
+}
+
+.secondary:hover,
+.secondary:focus-visible {
+  background: color-mix(in srgb, var(--smh-ink) 32%, transparent);
+  box-shadow:
+    0 18px 44px color-mix(in srgb, var(--smh-ink) 22%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--smh-white) 18%, transparent);
+}
+
+.cta:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--smh-accent-gold-soft, var(--smh-accent-gold)) 80%, transparent);
+  outline-offset: 2px;
+}
