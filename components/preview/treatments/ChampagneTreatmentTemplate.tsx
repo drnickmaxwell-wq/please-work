@@ -19,8 +19,6 @@ import homeHeroStyles from "@/components/preview/home/home-preview.module.css";
 import "@/components/preview/preview-layout.css";
 import "@/components/preview/preview-typography.css";
 import "@/styles/preview/treatments-preview.css";
-import "@/styles/champagne/tonal-pack.css";
-import "@/styles/champagne/cta-system-v2.css";
 
 type TemplateProps = {
   slug: string;
@@ -328,14 +326,14 @@ function CtaBand({
           {/** Shared preview CTA styles to keep the closing band aligned with the hero */}
           <PreviewChampagneCTA
             ariaLabel={primaryAria}
-            className={`${previewCtaStyles.inline} cta-primary-ink-light`}
+            className={previewCtaStyles.inline}
             href={primaryCtaHref ?? "/contact"}
           >
             {primaryCtaLabel ?? "Book a consultation"}
           </PreviewChampagneCTA>
           <PreviewChampagneCTA
             ariaLabel={secondaryAria}
-            className={`${previewCtaStyles.inline} cta-secondary-glass-gold`}
+            className={previewCtaStyles.inline}
             href={secondaryCtaHref ?? "/treatments"}
             variant="secondary"
           >
@@ -427,18 +425,18 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
         {heroHeading}
       </h1>
       <p className={styles.heroCopy}>{heroDescription}</p>
-      <div className={`${homeHeroStyles.heroCtaPlate} cta-plate-glass-dusk`}>
+      <div className={homeHeroStyles.heroCtaPlate}>
         <div className={homeHeroStyles.heroCtaRow}>
           <PreviewChampagneCTA
             ariaLabel={heroPrimaryAria}
-            className={`${previewCtaStyles.primaryHero} ${homeHeroStyles.heroCtaPrimary} cta-primary-ink-light`}
+            className={`${previewCtaStyles.primaryHero} ${homeHeroStyles.heroCtaPrimary}`}
             href={heroPrimaryHref}
           >
             {heroPrimaryLabel}
           </PreviewChampagneCTA>
           <PreviewChampagneCTA
             ariaLabel={heroSecondaryAria}
-            className={`${previewCtaStyles.secondaryHero} ${homeHeroStyles.heroCtaSecondary} cta-secondary-glass-gold`}
+            className={`${previewCtaStyles.secondaryHero} ${homeHeroStyles.heroCtaSecondary}`}
             href={heroSecondaryHref}
             variant="secondary"
           >
@@ -470,14 +468,11 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
       ctas={
         <div className={previewCtaStyles.heroCTAGroup}>
           {/** Regal Glass–Gold CTA pair shared with /preview/home */}
-          <PreviewChampagneCTA
-            className={`${previewCtaStyles.primaryHero} cta-primary-ink-light`}
-            href={heroPrimaryHref}
-          >
+          <PreviewChampagneCTA className={previewCtaStyles.primaryHero} href={heroPrimaryHref}>
             {heroPrimaryLabel}
           </PreviewChampagneCTA>
           <PreviewChampagneCTA
-            className={`${previewCtaStyles.secondaryHero} cta-secondary-glass-gold`}
+            className={previewCtaStyles.secondaryHero}
             href={heroSecondaryHref}
             variant="secondary"
           >
@@ -519,7 +514,7 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
         <BenefitsGrid
           category={category}
           items={benefitsList}
-          className={`${isImplants ? styles.implantSection : styles.section} tonal-dusk`}
+          className={isImplants ? styles.implantSection : undefined}
         />
 
         <section className={`${styles.section} ${isImplants ? styles.implantSection : ""}`} aria-labelledby="howto-block">
@@ -553,7 +548,7 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
         </section>
 
         <FinanceBand
-          className={`${isImplants ? styles.implantSection : styles.section} tonal-ink`}
+          className={isImplants ? styles.implantSection : undefined}
           config={financeConfig}
           planGroup={financeConfig?.planGroup ?? financePlanGroup}
         />
@@ -580,9 +575,7 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
         />
 
         <CtaBand
-          className={`${
-            isImplants ? `${styles.implantSection} ${styles.ctaSurface}` : styles.section
-          } tonal-dusk-to-ink`}
+          className={isImplants ? `${styles.implantSection} ${styles.ctaSurface}` : undefined}
           title={treatmentName ?? config.displayName}
           primaryCtaLabel={closingPrimaryCtaLabel}
           primaryCtaHref={closingPrimaryCtaHref}
