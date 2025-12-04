@@ -51,7 +51,7 @@ export default function HomeHero() {
       <div className="hero-particles-static" />
       <div className="hero-film-grain" />
       <div className="hero-content">
-        <div className="hero-content-wrapper">
+        <div className={`hero-content-wrapper ${styles.heroContent}`}>
           <h1 id="home-hero-title">Your Luxury Smile Awaits</h1>
           <p>
             Private dental care with calm precision, comfort-first technology, and
