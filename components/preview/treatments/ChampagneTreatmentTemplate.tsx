@@ -1,5 +1,6 @@
 import { Champagne3DViewer } from "@/components/3d/Champagne3DViewer";
 import ChampagnePreviewHero from "@/components/preview/ChampagnePreviewHero";
+import { ChampagneHeroFrame, type ChampagneHeroVariant } from "@/components/preview/champagne/ChampagneHeroFrame";
 import PreviewChampagneCTA from "@/components/preview/shared/PreviewChampagneCTA";
 import { DevHud, shouldShowHud } from "@/components/preview/Hud";
 import { ChampagneTestimonialCarousel } from "@/components/testimonial/ChampagneTestimonialCarousel";
@@ -13,6 +14,7 @@ import {
 import TreatmentPreviewSchema from "../seo/TreatmentPreviewSchema";
 import styles from "./champagne-treatment-template.module.css";
 import previewCtaStyles from "@/components/preview/shared/preview-cta.module.css";
+import homeHeroStyles from "@/components/preview/home/home-preview.module.css";
 
 import "@/components/preview/preview-layout.css";
 import "@/components/preview/preview-typography.css";
@@ -43,6 +45,7 @@ type TemplateProps = {
   faqItems?: FaqEntry[];
   searchParams?: Record<string, string | string[] | undefined>;
   heroVariant?: 'default' | 'luminous';
+  heroFrameVariant?: ChampagneHeroVariant;
 };
 
 type HowToStep = { title: string; summary: string };
@@ -339,6 +342,7 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
     faqItems,
     searchParams,
     heroVariant,
+    heroFrameVariant,
   } = props;
 
   const config = getPreviewTreatmentConfig(slug);
@@ -365,6 +369,65 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
   const heroSecondaryLabel = secondaryCtaLabel ?? "View all treatments";
   const heroSecondaryHref = secondaryCtaHref ?? "/treatments";
   const howItWorksLabelText = howItWorksLabel ?? `${treatmentName ?? config.displayName} steps`;
+  const heroTitleId = `${config.slug}-hero-title`;
+  const heroKicker = category ? `${category} treatment` : "Champagne preview";
+
+  const heroContent = (
+    <>
+      <span className={styles.eyebrow}>{heroKicker}</span>
+      <h1 id={heroTitleId} className={styles.sectionTitle}>
+        {heroHeading}
+      </h1>
+      <p className={styles.heroCopy}>{heroDescription}</p>
+      <div className={homeHeroStyles.heroCtaPlate}>
+        <div className={homeHeroStyles.heroCtaRow}>
+          <PreviewChampagneCTA className={`${previewCtaStyles.primaryHero} ${homeHeroStyles.heroCtaPrimary}`} href={heroPrimaryHref}>
+            {heroPrimaryLabel}
+          </PreviewChampagneCTA>
+          <PreviewChampagneCTA
+            className={`${previewCtaStyles.secondaryHero} ${homeHeroStyles.heroCtaSecondary}`}
+            href={heroSecondaryHref}
+            variant="secondary"
+          >
+            {heroSecondaryLabel}
+          </PreviewChampagneCTA>
+        </div>
+      </div>
+    </>
+  );
+
+  const heroSurface = heroFrameVariant ? (
+    <ChampagneHeroFrame
+      contentClassName={homeHeroStyles.heroContent}
+      titleId={heroTitleId}
+      variant={heroFrameVariant}
+    >
+      {heroContent}
+    </ChampagneHeroFrame>
+  ) : (
+    <ChampagnePreviewHero
+      kicker={heroKicker}
+      title={heroHeading}
+      variant={heroVariant}
+      ctas={
+        <div className={previewCtaStyles.heroCTAGroup}>
+          {/** Regal Glass–Gold CTA pair shared with /preview/home */}
+          <PreviewChampagneCTA className={previewCtaStyles.primaryHero} href={heroPrimaryHref}>
+            {heroPrimaryLabel}
+          </PreviewChampagneCTA>
+          <PreviewChampagneCTA
+            className={previewCtaStyles.secondaryHero}
+            href={heroSecondaryHref}
+            variant="secondary"
+          >
+            {heroSecondaryLabel}
+          </PreviewChampagneCTA>
+        </div>
+      }
+    >
+      <p className={styles.heroCopy}>{heroDescription}</p>
+    </ChampagnePreviewHero>
+  );
 
   return (
     <div
@@ -386,28 +449,7 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
         />
       ) : null}
 
-      <ChampagnePreviewHero
-        kicker={category ? `${category} treatment` : "Champagne preview"}
-        title={heroHeading}
-        variant={heroVariant}
-        ctas={
-          <div className={previewCtaStyles.heroCTAGroup}>
-            {/** Regal Glass–Gold CTA pair shared with /preview/home */}
-            <PreviewChampagneCTA className={previewCtaStyles.primaryHero} href={heroPrimaryHref}>
-              {heroPrimaryLabel}
-            </PreviewChampagneCTA>
-            <PreviewChampagneCTA
-              className={previewCtaStyles.secondaryHero}
-              href={heroSecondaryHref}
-              variant="secondary"
-            >
-              {heroSecondaryLabel}
-            </PreviewChampagneCTA>
-          </div>
-        }
-      >
-        <p className={styles.heroCopy}>{heroDescription}</p>
-      </ChampagnePreviewHero>
+      {heroSurface}
 
       <main className={`${styles.main} ${isImplants ? styles.implantsMain : ""}`} role="main">
         <BenefitsGrid category={category} items={benefits} className={isImplants ? styles.implantSection : undefined} />
