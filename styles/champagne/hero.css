@@ -2,26 +2,36 @@
 /* Includes static + motion layers with prefers-reduced-motion support */
 
 :root {
-  /* Brand Colors */
-  --brand-magenta: #C2185B;
-  --brand-turquoise: #2CBFAE;
-  --brand-turquoise-alt: #40C4B4;
-  --brand-gold: #D4AF37;
-  --paper: #FFFFFF;
-  --ink: #0E1420;
-  
+  /* Brand Colors (fallbacks derive from tokens) */
+  --brand-magenta: var(--smh-primary-magenta, #c2185b);
+  --brand-turquoise: var(--smh-primary-teal, #40c4b4);
+  --brand-turquoise-alt: var(--brand-teal, var(--smh-primary-teal, #40c4b4));
+  --brand-gold: var(--smh-accent-gold, #d4af37);
+  --paper: var(--smh-white, #ffffff);
+  --ink: var(--smh-ink, #0e1420);
+
   /* Gradients */
-  --gradient-champagne: linear-gradient(135deg, #C2185B 0%, #40C4B4 60%, #D4AF37 100%);
-  --gradient-cta: linear-gradient(135deg, #C2185B 0%, #2CBFAE 55%, #D4AF37 100%);
-  
+  --gradient-champagne: linear-gradient(
+    135deg,
+    var(--brand-magenta) 0%,
+    var(--brand-turquoise) 60%,
+    var(--brand-gold) 100%
+  );
+  --gradient-cta: linear-gradient(
+    135deg,
+    var(--brand-magenta) 0%,
+    var(--brand-turquoise-alt) 55%,
+    var(--brand-gold) 100%
+  );
+
   /* Typography */
-  --font-display: 'Playfair Display', serif;
-  --font-body: 'Inter', sans-serif;
-  
+  --font-display: "Playfair Display", serif;
+  --font-body: "Inter", sans-serif;
+
   /* Radii */
   --radius-pill: 999px;
   --radius-lg: 18px;
-  
+
   /* Shadows */
   --shadow-glow: 0 0 1px rgba(255, 255, 255, 0.6), 0 10px 40px rgba(194, 24, 91, 0.25);
   --shadow-gold-glow: 0 0 12px rgba(212, 175, 55, 0.4), 0 0 24px rgba(212, 175, 55, 0.2);
@@ -48,16 +58,31 @@
 .hero-gradient-base {
   position: absolute;
   inset: 0;
-  background: var(--gradient-champagne);
+  background: var(--champagne-hero-gradient, var(--smh-gradient, var(--gradient-champagne)));
+  filter: brightness(var(--champagne-hero-brightness, 1)) contrast(var(--champagne-hero-contrast, 1));
   z-index: 1;
+}
+
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: radial-gradient(
+    circle at 50% 18%,
+    color-mix(in srgb, var(--smh-ink, #0e1420) 18%, transparent) 0%,
+    transparent 60%
+  );
+  mix-blend-mode: multiply;
+  opacity: calc(0.18 * var(--champagne-hero-vignette-strength, 1));
+  pointer-events: none;
 }
 
 /* Layer 2: Wave Caustics Motion (z-index: 2) */
 .hero-wave-caustics {
   position: absolute;
   inset: 0;
-  z-index: 2;
-  opacity: 0.10;
+  z-index: 3;
+  opacity: var(--champagne-hero-caustics-alpha, 0.1);
   mix-blend-mode: screen;
   will-change: transform;
   pointer-events: none;
@@ -73,19 +98,27 @@
 .hero-wave-mask {
   position: absolute;
   inset: 0;
-  z-index: 3;
-  background-image: url('/assets/champagne/waves/wave-mask-desktop.webp');
+  z-index: 4;
+  background-image: var(
+      --champagne-hero-wave-bg,
+      url('/assets/champagne/waves/waves-bg-1920.webp')
+    ),
+    var(--champagne-hero-wave-desktop, url('/assets/champagne/waves/wave-mask-desktop.webp'));
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.4;
+  opacity: var(--champagne-hero-wave-mask-alpha, 0.4);
   mix-blend-mode: overlay;
   will-change: transform;
 }
 
 @media (max-width: 768px) {
   .hero-wave-mask {
-    background-image: url('/assets/champagne/waves/wave-mask-mobile.webp');
+    background-image: var(
+        --champagne-hero-wave-bg,
+        url('/assets/champagne/waves/waves-bg-768.webp')
+      ),
+      var(--champagne-hero-wave-mobile, url('/assets/champagne/waves/wave-mask-mobile.webp'));
   }
 }
 
@@ -93,8 +126,8 @@
 .hero-glass-shimmer {
   position: absolute;
   inset: 0;
-  z-index: 4;
-  opacity: 0.12;
+  z-index: 5;
+  opacity: var(--champagne-hero-shimmer-alpha, 0.12);
   mix-blend-mode: screen;
   will-change: transform;
   pointer-events: none;
@@ -110,11 +143,14 @@
 .hero-particles-static {
   position: absolute;
   inset: 0;
-  z-index: 5;
-  background-image: url('/assets/champagne/particles/home-hero-particles.webp');
+  z-index: 6;
+  background-image: var(
+    --champagne-hero-particles-static,
+    url('/assets/champagne/particles/home-hero-particles.webp')
+  );
   background-size: 1024px 1024px;
   background-repeat: repeat;
-  opacity: 0.08;
+  opacity: var(--champagne-hero-static-alpha, 0.08);
   mix-blend-mode: screen;
   will-change: transform;
   pointer-events: none;
@@ -124,8 +160,8 @@
 .hero-particles-drift {
   position: absolute;
   inset: 0;
-  z-index: 6;
-  opacity: 0.06;
+  z-index: 7;
+  opacity: var(--champagne-hero-drift-alpha, 0.06);
   mix-blend-mode: screen;
   will-change: transform;
   pointer-events: none;
@@ -141,8 +177,8 @@
 .hero-gold-dust-drift {
   position: absolute;
   inset: 0;
-  z-index: 7;
-  opacity: 0.08;
+  z-index: 8;
+  opacity: var(--champagne-hero-dust-alpha, 0.08);
   mix-blend-mode: screen;
   will-change: transform;
   pointer-events: none;
@@ -158,11 +194,14 @@
 .hero-film-grain {
   position: absolute;
   inset: 0;
-  z-index: 8;
-  background-image: url('/assets/champagne/textures/home-hero-film-grain.webp');
+  z-index: 9;
+  background-image: var(
+    --champagne-hero-grain-texture,
+    url('/assets/champagne/textures/home-hero-film-grain.webp')
+  );
   background-size: 512px 512px;
   background-repeat: repeat;
-  opacity: 0.07;
+  opacity: var(--champagne-hero-grain-alpha, 0.07);
   mix-blend-mode: overlay;
   pointer-events: none;
 }

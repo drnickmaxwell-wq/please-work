@@ -81,7 +81,7 @@ export default function WhiteningPreviewPage({ searchParams }: PreviewPageProps)
       faqKey="whitening"
       faqItems={whiteningFaq}
       searchParams={searchParams}
-      heroVariant="luminous"
+      heroVariant="whitening"
     />
   );
 }
