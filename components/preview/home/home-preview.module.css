@@ -183,10 +183,12 @@
 }
 
 .heroCtaPlate {
-  display: inline-flex;
-  align-items: center;
-  padding: clamp(1rem, 2vw, 1.25rem) clamp(1.75rem, 3.4vw, 2.6rem);
-  margin-top: clamp(1.6rem, 3.4vw, 2.6rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  align-items: stretch;
+  padding: clamp(1rem, 2vw, 1.35rem) clamp(1.75rem, 3.4vw, 2.8rem);
+  margin-top: clamp(1.6rem, 3.4vw, 2.8rem);
   border-radius: 999px;
   background: color-mix(
     in srgb,
@@ -197,14 +199,16 @@
   box-shadow: 0 26px 70px color-mix(in srgb, var(--ink) 34%, transparent);
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
+  width: min(100%, 960px);
 }
 
 .heroCtaRow {
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: flex-start;
   gap: var(--space-cta-gap, clamp(1rem, 2.3vw, 1.6rem));
-  max-width: min(680px, 100%);
+  width: 100%;
 }
 
 .heroCtaPrimary,

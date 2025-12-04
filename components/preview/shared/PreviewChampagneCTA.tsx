@@ -8,6 +8,7 @@ type PreviewChampagneCTAProps = {
   children: ReactNode;
   variant?: "primary" | "secondary";
   className?: string;
+  ariaLabel?: string;
 };
 
 export default function PreviewChampagneCTA({
@@ -15,6 +16,7 @@ export default function PreviewChampagneCTA({
   children,
   variant = "primary",
   className,
+  ariaLabel,
 }: PreviewChampagneCTAProps) {
   const variantClass = variant === "secondary" ? styles.secondary : styles.primary;
   const composedClassName = [styles.ctaBase, variantClass, className]
@@ -22,7 +24,7 @@ export default function PreviewChampagneCTA({
     .join(" ");
 
   return (
-    <Link href={href} className={composedClassName}>
+    <Link aria-label={ariaLabel} href={href} className={composedClassName}>
       {children}
     </Link>
   );

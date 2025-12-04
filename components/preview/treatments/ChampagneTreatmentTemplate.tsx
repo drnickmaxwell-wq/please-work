@@ -26,8 +26,14 @@ type TemplateProps = {
   treatmentName?: string;
   category?: string;
   benefitBullets?: string[];
+  benefits?: string[];
+  heroLabel?: string;
   heroTitle?: string;
+  heroSubtitle?: string;
   heroCopy?: string;
+  heroVisualDescription?: string;
+  heroCtaPrimaryLabel?: string;
+  heroCtaSecondaryLabel?: string;
   primaryCtaLabel?: string;
   primaryCtaHref?: string;
   secondaryCtaLabel?: string;
@@ -38,8 +44,10 @@ type TemplateProps = {
   closingSecondaryCtaHref?: string;
   howItWorksLabel?: string;
   howItWorksSteps?: HowToStep[];
+  journeySteps?: HowToStep[];
   has3DViewer?: boolean;
   financePlanGroup?: string;
+  financeConfig?: FinanceConfig;
   galleryEnabled?: boolean;
   faqKey?: string;
   faqItems?: FaqEntry[];
@@ -50,6 +58,13 @@ type TemplateProps = {
 
 type HowToStep = { title: string; summary: string };
 type FaqEntry = { question?: string; answer?: string };
+type FinanceConfig = {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  pills?: string[];
+  planGroup?: string;
+};
 
 const TESTIMONIALS = [
   {
@@ -164,25 +179,31 @@ function HowItWorksTabs({
   );
 }
 
-function FinanceBand({ planGroup, className }: { planGroup?: string; className?: string }) {
+function FinanceBand({ planGroup, className, config }: { planGroup?: string; className?: string; config?: FinanceConfig }) {
+  const eyebrow = config?.eyebrow ?? "Investment";
+  const heading = config?.title ?? "Transparent finance preview";
+  const copy =
+    config?.description ??
+    `Placeholder finance band keyed to ${planGroup ?? "pending-plan-group"}. Swap in live finance modules once plan mappings are approved.`;
+  const pills = config?.pills ?? ["0% APR examples", "Soft search ready", "Align with manifesto", "TODO: finance_plan_mapping"];
+
   return (
     <section className={className ?? styles.section} aria-labelledby="finance-heading">
       <div className={`${styles.glass} ${styles.financeCard}`}>
         <div className={styles.sectionHeader}>
-          <span className={styles.eyebrow}>Investment</span>
+          <span className={styles.eyebrow}>{eyebrow}</span>
           <h2 id="finance-heading" className={styles.sectionTitle}>
-            Transparent finance preview
+            {heading}
           </h2>
-          <p className={styles.sectionLead}>
-            Placeholder finance band keyed to <strong>{planGroup ?? "pending-plan-group"}</strong>. Swap in live finance modules
-            once plan mappings are approved.
-          </p>
+          <p className={styles.sectionLead}>{copy}</p>
         </div>
         <div className={styles.financeGrid}>
-          <div className={styles.financePill}>0% APR examples</div>
-          <div className={styles.financePill}>Soft search ready</div>
-          <div className={styles.financePill}>Align with manifesto</div>
-          <div className={styles.financeTodo}>TODO: finance_plan_mapping</div>
+          {pills.map((pill) => (
+            <div key={pill} className={styles.financePill}>
+              {pill}
+            </div>
+          ))}
+          {pills.length < 4 ? <div className={styles.financeTodo}>TODO: finance_plan_mapping</div> : null}
         </div>
       </div>
     </section>
@@ -286,6 +307,9 @@ function CtaBand({
   secondaryCtaLabel?: string;
   secondaryCtaHref?: string;
 }) {
+  const primaryAria = `${primaryCtaLabel ?? "Book a consultation"} for ${title}`;
+  const secondaryAria = `${secondaryCtaLabel ?? "View all treatments"} for ${title}`;
+
   return (
     <section className={className ?? styles.section} aria-labelledby="cta-heading">
       <div className={`${styles.glass} ${styles.ctaBand}`}>
@@ -300,10 +324,15 @@ function CtaBand({
         </div>
         <div className={previewCtaStyles.heroCTAGroup}>
           {/** Shared preview CTA styles to keep the closing band aligned with the hero */}
-          <PreviewChampagneCTA className={previewCtaStyles.inline} href={primaryCtaHref ?? "/contact"}>
+          <PreviewChampagneCTA
+            ariaLabel={primaryAria}
+            className={previewCtaStyles.inline}
+            href={primaryCtaHref ?? "/contact"}
+          >
             {primaryCtaLabel ?? "Book a consultation"}
           </PreviewChampagneCTA>
           <PreviewChampagneCTA
+            ariaLabel={secondaryAria}
             className={previewCtaStyles.inline}
             href={secondaryCtaHref ?? "/treatments"}
             variant="secondary"
@@ -323,8 +352,14 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
     treatmentName,
     category,
     benefitBullets,
+    benefits,
+    heroLabel,
     heroTitle,
+    heroSubtitle,
     heroCopy,
+    heroVisualDescription,
+    heroCtaPrimaryLabel,
+    heroCtaSecondaryLabel,
     primaryCtaLabel,
     primaryCtaHref,
     secondaryCtaLabel,
@@ -335,8 +370,10 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
     closingSecondaryCtaHref,
     howItWorksLabel,
     howItWorksSteps,
+    journeySteps,
     has3DViewer,
     financePlanGroup,
+    financeConfig,
     galleryEnabled,
     faqKey,
     faqItems,
@@ -351,40 +388,54 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
   const showHud = shouldShowHud(searchParams?.hud);
   const isImplants = config.slug === "implants";
 
-  const benefits = coerceBenefits(config, benefitBullets);
+  const heroVisualDescriptionText =
+    heroVisualDescription ??
+    `${treatmentName ?? config.displayName} hero art featuring Champagne glass arcs and soft gold wave caustics.`;
+  const heroVisualDescriptionId = `${config.slug}-hero-visual`;
+
+  const benefitsList = coerceBenefits(config, benefits ?? benefitBullets);
   const derivedSteps = (previewContent.howTo?.steps ?? []).map((step) => ({
     title: step.name ?? "Step", // fallback
     summary: step.text ?? "Awaiting HowTo.step text",
   }));
-  const steps = coerceSteps(config, howItWorksSteps ?? derivedSteps);
+  const steps = coerceSteps(config, journeySteps ?? howItWorksSteps ?? derivedSteps);
   const faqEntries = coerceFaq(faqItems ?? previewContent.faq, config.faqItems);
   const heroDescription =
     heroCopy ??
+    heroSubtitle ??
     config.shortDescription ??
     previewContent.service?.description ??
     "Champagne treatment canvas using preview schema loaders and Manus-aligned sections.";
   const heroHeading = heroTitle ?? `${treatmentName ?? config.displayName} in Shoreham-by-Sea`;
-  const heroPrimaryLabel = primaryCtaLabel ?? "Book a consultation";
+  const heroPrimaryLabel = heroCtaPrimaryLabel ?? primaryCtaLabel ?? "Book a consultation";
   const heroPrimaryHref = primaryCtaHref ?? "/contact";
-  const heroSecondaryLabel = secondaryCtaLabel ?? "View all treatments";
+  const heroSecondaryLabel = heroCtaSecondaryLabel ?? secondaryCtaLabel ?? "View all treatments";
   const heroSecondaryHref = secondaryCtaHref ?? "/treatments";
   const howItWorksLabelText = howItWorksLabel ?? `${treatmentName ?? config.displayName} steps`;
   const heroTitleId = `${config.slug}-hero-title`;
   const heroKicker = category ? `${category} treatment` : "Champagne preview";
+  const heroEyebrow = heroLabel ?? heroKicker;
+  const heroPrimaryAria = `${heroPrimaryLabel} for ${treatmentName ?? config.displayName}`;
+  const heroSecondaryAria = `${heroSecondaryLabel} for ${treatmentName ?? config.displayName}`;
 
   const heroContent = (
-    <>
-      <span className={styles.eyebrow}>{heroKicker}</span>
+    <div className={styles.heroStack}>
+      <p className={styles.heroLabel}>{heroEyebrow}</p>
       <h1 id={heroTitleId} className={styles.sectionTitle}>
         {heroHeading}
       </h1>
       <p className={styles.heroCopy}>{heroDescription}</p>
       <div className={homeHeroStyles.heroCtaPlate}>
         <div className={homeHeroStyles.heroCtaRow}>
-          <PreviewChampagneCTA className={`${previewCtaStyles.primaryHero} ${homeHeroStyles.heroCtaPrimary}`} href={heroPrimaryHref}>
+          <PreviewChampagneCTA
+            ariaLabel={heroPrimaryAria}
+            className={`${previewCtaStyles.primaryHero} ${homeHeroStyles.heroCtaPrimary}`}
+            href={heroPrimaryHref}
+          >
             {heroPrimaryLabel}
           </PreviewChampagneCTA>
           <PreviewChampagneCTA
+            ariaLabel={heroSecondaryAria}
             className={`${previewCtaStyles.secondaryHero} ${homeHeroStyles.heroCtaSecondary}`}
             href={heroSecondaryHref}
             variant="secondary"
@@ -393,19 +444,24 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
           </PreviewChampagneCTA>
         </div>
       </div>
-    </>
+    </div>
   );
 
   const heroSurface = heroFrameVariant ? (
     <ChampagneHeroFrame
+      describedById={heroVisualDescriptionId}
       contentClassName={homeHeroStyles.heroContent}
       titleId={heroTitleId}
       variant={heroFrameVariant}
     >
       {heroContent}
+      <p className={styles.srOnly} id={heroVisualDescriptionId}>
+        {heroVisualDescriptionText}
+      </p>
     </ChampagneHeroFrame>
   ) : (
     <ChampagnePreviewHero
+      describedById={heroVisualDescriptionId}
       kicker={heroKicker}
       title={heroHeading}
       variant={heroVariant}
@@ -426,6 +482,9 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
       }
     >
       <p className={styles.heroCopy}>{heroDescription}</p>
+      <p className={styles.srOnly} id={heroVisualDescriptionId}>
+        {heroVisualDescriptionText}
+      </p>
     </ChampagnePreviewHero>
   );
 
@@ -452,7 +511,11 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
       {heroSurface}
 
       <main className={`${styles.main} ${isImplants ? styles.implantsMain : ""}`} role="main">
-        <BenefitsGrid category={category} items={benefits} className={isImplants ? styles.implantSection : undefined} />
+        <BenefitsGrid
+          category={category}
+          items={benefitsList}
+          className={isImplants ? styles.implantSection : undefined}
+        />
 
         <section className={`${styles.section} ${isImplants ? styles.implantSection : ""}`} aria-labelledby="howto-block">
           <div className={styles.sectionHeader}>
@@ -484,7 +547,11 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
           </div>
         </section>
 
-        <FinanceBand className={isImplants ? styles.implantSection : undefined} planGroup={financePlanGroup} />
+        <FinanceBand
+          className={isImplants ? styles.implantSection : undefined}
+          config={financeConfig}
+          planGroup={financeConfig?.planGroup ?? financePlanGroup}
+        />
 
         {galleryEnabled ? <GalleryPlaceholder className={isImplants ? styles.implantSection : undefined} /> : null}
 
