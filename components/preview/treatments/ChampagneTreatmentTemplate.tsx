@@ -462,33 +462,35 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
       </p>
     </ChampagneHeroFrame>
   ) : (
-    <ChampagnePreviewHero
-      describedById={heroVisualDescriptionId}
-      kicker={heroKicker}
-      title={heroHeading}
-      variant={heroVariant}
-      ctas={
-        <div className={previewCtaStyles.heroCTAGroup}>
-          {/** Regal Glass–Gold CTA pair shared with /preview/home */}
-          <PreviewChampagneCTA
-            className={`${previewCtaStyles.primaryHero} cta-primary-ink-light`}
-            href={heroPrimaryHref}
-          >
-            {heroPrimaryLabel}
-          </PreviewChampagneCTA>
-          <PreviewChampagneCTA
-            className={`${previewCtaStyles.secondaryHero} cta-secondary-glass-gold`}
-            href={heroSecondaryHref}
-            variant="secondary"
-          >
-            {heroSecondaryLabel}
-          </PreviewChampagneCTA>
-        </div>
-      }
-    >
-      <p className={styles.heroCopy}>{heroDescription}</p>
-      <p className={styles.srOnly} id={heroVisualDescriptionId}>
-        {heroVisualDescriptionText}
+      <ChampagnePreviewHero
+        describedById={heroVisualDescriptionId}
+        kicker={heroKicker}
+        title={heroHeading}
+        variant={heroVariant}
+        ctas={
+          <div className={`${homeHeroStyles.heroCtaPlate} cta-plate-glass-dusk`}>
+            <div className={`${previewCtaStyles.heroCTAGroup} ${homeHeroStyles.heroCtaRow}`}>
+              {/** Regal Glass–Gold CTA pair shared with /preview/home */}
+              <PreviewChampagneCTA
+                className={`${previewCtaStyles.primaryHero} cta-primary-ink-light`}
+                href={heroPrimaryHref}
+              >
+                {heroPrimaryLabel}
+              </PreviewChampagneCTA>
+              <PreviewChampagneCTA
+                className={`${previewCtaStyles.secondaryHero} cta-secondary-glass-gold`}
+                href={heroSecondaryHref}
+                variant="secondary"
+              >
+                {heroSecondaryLabel}
+              </PreviewChampagneCTA>
+            </div>
+          </div>
+        }
+      >
+        <p className={styles.heroCopy}>{heroDescription}</p>
+        <p className={styles.srOnly} id={heroVisualDescriptionId}>
+          {heroVisualDescriptionText}
       </p>
     </ChampagnePreviewHero>
   );
