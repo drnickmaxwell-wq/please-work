@@ -192,13 +192,15 @@
   border-radius: 999px;
   background: color-mix(
     in srgb,
-    var(--champagne-glass-bg) 78%,
-    color-mix(in srgb, var(--ink) 26%, transparent) 22%
+    var(--champagne-glass-bg) 62%,
+    color-mix(in srgb, var(--ink) 22%, transparent) 38%
   );
-  border: 1.5px solid color-mix(in srgb, var(--champagne-keyline-gold) 78%, transparent);
-  box-shadow: 0 26px 70px color-mix(in srgb, var(--ink) 34%, transparent);
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
+  border: 1.5px solid color-mix(in srgb, var(--champagne-keyline-gold) 72%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--champagne-keyline-gold) 8%, transparent),
+    0 26px 70px color-mix(in srgb, var(--ink) 20%, transparent);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   width: min(100%, 960px);
 }
 
