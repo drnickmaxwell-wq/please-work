@@ -1,6 +1,6 @@
-import { ChampagneCTA } from "@/components/cta/ChampagneCTA";
 import { Champagne3DViewer } from "@/components/3d/Champagne3DViewer";
 import ChampagnePreviewHero from "@/components/preview/ChampagnePreviewHero";
+import PreviewChampagneCTA from "@/components/preview/shared/PreviewChampagneCTA";
 import { DevHud, shouldShowHud } from "@/components/preview/Hud";
 import { ChampagneTestimonialCarousel } from "@/components/testimonial/ChampagneTestimonialCarousel";
 import { loadTreatmentPreviewContent } from "@/lib/seo/preview/safe-loader";
@@ -12,6 +12,7 @@ import {
 
 import TreatmentPreviewSchema from "../seo/TreatmentPreviewSchema";
 import styles from "./champagne-treatment-template.module.css";
+import previewCtaStyles from "@/components/preview/shared/preview-cta.module.css";
 
 import "@/components/preview/preview-layout.css";
 import "@/components/preview/preview-typography.css";
@@ -23,6 +24,14 @@ type TemplateProps = {
   treatmentName?: string;
   category?: string;
   benefitBullets?: string[];
+  heroTitle?: string;
+  heroCopy?: string;
+  primaryCtaLabel?: string;
+  primaryCtaHref?: string;
+  secondaryCtaLabel?: string;
+  secondaryCtaHref?: string;
+  howItWorksLabel?: string;
+  howItWorksSteps?: HowToStep[];
   has3DViewer?: boolean;
   financePlanGroup?: string;
   galleryEnabled?: boolean;
@@ -266,14 +275,41 @@ function CtaBand({ title, className }: { title: string; className?: string }) {
             Champagne CTA skeleton. Swap links/text once routing is approved for production.
           </p>
         </div>
-        <ChampagneCTA primaryHref="/contact" primaryLabel="Book a consultation" secondaryHref="/treatments" secondaryLabel="View all treatments" />
+        <div className={previewCtaStyles.heroCTAGroup}>
+          {/** Shared preview CTA styles to keep the closing band aligned with the hero */}
+          <PreviewChampagneCTA className={previewCtaStyles.inline} href="/contact">
+            Book a consultation
+          </PreviewChampagneCTA>
+          <PreviewChampagneCTA className={previewCtaStyles.inline} href="/treatments" variant="secondary">
+            View all treatments
+          </PreviewChampagneCTA>
+        </div>
       </div>
     </section>
   );
 }
 
 export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
-  const { slug, schemaKey, treatmentName, category, benefitBullets, has3DViewer, financePlanGroup, galleryEnabled, faqKey, searchParams } = props;
+  const {
+    slug,
+    schemaKey,
+    treatmentName,
+    category,
+    benefitBullets,
+    heroTitle,
+    heroCopy,
+    primaryCtaLabel,
+    primaryCtaHref,
+    secondaryCtaLabel,
+    secondaryCtaHref,
+    howItWorksLabel,
+    howItWorksSteps,
+    has3DViewer,
+    financePlanGroup,
+    galleryEnabled,
+    faqKey,
+    searchParams,
+  } = props;
 
   const config = getPreviewTreatmentConfig(slug);
   const schemaSlug = resolveSchemaSlug(slug, schemaKey);
@@ -282,18 +318,23 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
   const isImplants = config.slug === "implants";
 
   const benefits = coerceBenefits(config, benefitBullets);
-  const steps = coerceSteps(
-    config,
-    (previewContent.howTo?.steps ?? []).map((step) => ({
-      title: step.name ?? "Step", // fallback
-      summary: step.text ?? "Awaiting HowTo.step text",
-    })),
-  );
+  const derivedSteps = (previewContent.howTo?.steps ?? []).map((step) => ({
+    title: step.name ?? "Step", // fallback
+    summary: step.text ?? "Awaiting HowTo.step text",
+  }));
+  const steps = coerceSteps(config, howItWorksSteps ?? derivedSteps);
   const faqItems = coerceFaq(previewContent.faq, config.faqItems);
   const heroDescription =
+    heroCopy ??
     config.shortDescription ??
     previewContent.service?.description ??
     "Champagne treatment canvas using preview schema loaders and Manus-aligned sections.";
+  const heroHeading = heroTitle ?? `${treatmentName ?? config.displayName} in Shoreham-by-Sea`;
+  const heroPrimaryLabel = primaryCtaLabel ?? "Book a consultation";
+  const heroPrimaryHref = primaryCtaHref ?? "/contact";
+  const heroSecondaryLabel = secondaryCtaLabel ?? "View all treatments";
+  const heroSecondaryHref = secondaryCtaHref ?? "/treatments";
+  const howItWorksLabelText = howItWorksLabel ?? `${treatmentName ?? config.displayName} steps`;
 
   return (
     <div className={`cpv-page ${styles.canvas} ${isImplants ? styles.implantsCanvas : ""}`} data-treatment={config.slug}>
@@ -314,15 +355,21 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
 
       <ChampagnePreviewHero
         kicker={category ? `${category} treatment` : "Champagne preview"}
-        title={`${treatmentName ?? config.displayName} in Shoreham-by-Sea`}
+        title={heroHeading}
         ctas={
-          <ChampagneCTA
-            variant="pair"
-            primaryLabel="Book a consultation"
-            primaryHref="/contact"
-            secondaryLabel="View all treatments"
-            secondaryHref="/treatments"
-          />
+          <div className={previewCtaStyles.heroCTAGroup}>
+            {/** Regal Glass–Gold CTA pair shared with /preview/home */}
+            <PreviewChampagneCTA className={previewCtaStyles.primaryHero} href={heroPrimaryHref}>
+              {heroPrimaryLabel}
+            </PreviewChampagneCTA>
+            <PreviewChampagneCTA
+              className={previewCtaStyles.secondaryHero}
+              href={heroSecondaryHref}
+              variant="secondary"
+            >
+              {heroSecondaryLabel}
+            </PreviewChampagneCTA>
+          </div>
         }
       >
         <p className={styles.heroCopy}>{heroDescription}</p>
@@ -345,7 +392,7 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
             <HowItWorksTabs
               className={isImplants ? styles.implantCard : styles.section}
               groupId={config.slug}
-              label={`${treatmentName ?? config.displayName} steps`}
+              label={howItWorksLabelText}
               steps={steps}
             />
             {has3DViewer ? (

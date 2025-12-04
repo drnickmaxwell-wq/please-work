@@ -11,6 +11,11 @@ type TreatmentCard = {
 
 const treatmentCards: TreatmentCard[] = [
   {
+    title: "Luminous Whitening",
+    description: "Sensitivity-safe brightening with dentist-led planning and calm recovery.",
+    href: "/preview/treatments/whitening",
+  },
+  {
     title: "Composite Bonding",
     description: "Featherlight edge refinements and chip repairs with a camera-ready polish.",
     href: "/treatments/cosmetic",
