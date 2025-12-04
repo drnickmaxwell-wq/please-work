@@ -57,7 +57,7 @@ export default function HomeHero() {
             a signature Manus AI finish.
           </p>
           <div className="hero-cta-group">
-            <a href="/contact" className={styles.ctaPrimaryInk}>
+            <a href="/contact" className={styles.ctaPrimaryRegal}>
               Book a consultation
             </a>
             <a href="/treatments" className={styles.ctaSecondaryGlass}>

@@ -1,4 +1,4 @@
-import ChampagneCta from "@/components/champagne/ChampagneCta";
+import Link from "next/link";
 
 import styles from "./home-preview.module.css";
 
@@ -18,12 +18,12 @@ export default function HomeFinalCTA() {
               </p>
             </div>
             <div className={styles.ctaRow}>
-              <ChampagneCta href="/contact" label="Book a consultation" variant="primarySection" />
-              <ChampagneCta
-                href="/video-consultation"
-                label="Request a video consultation"
-                variant="secondarySection"
-              />
+              <Link href="/contact" className={styles.ctaPrimaryRegal}>
+                Book a consultation
+              </Link>
+              <Link href="/video-consultation" className={styles.ctaSecondaryGlass}>
+                Request a video consultation
+              </Link>
             </div>
           </div>
         </div>

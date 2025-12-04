@@ -1,4 +1,4 @@
-import ChampagneCta from "@/components/champagne/ChampagneCta";
+import Link from "next/link";
 
 import styles from "./home-preview.module.css";
 
@@ -10,12 +10,12 @@ export default function HomeHeroCTABand() {
           <div className={`cpv-card__inner cpv-card__inner--stack ${styles.sectionStack} ${styles.heroBandCard}`}>
             <p className={`${styles.smallLabel} text-eyebrow`}>Start your visit</p>
             <div className={styles.ctaRow}>
-              <ChampagneCta href="/contact" label="Book a consultation" variant="primaryHero" />
-              <ChampagneCta
-                href="/treatments"
-                label="Explore treatments"
-                variant="secondaryHero"
-              />
+              <Link href="/contact" className={styles.ctaPrimaryRegal}>
+                Book a consultation
+              </Link>
+              <Link href="/treatments" className={styles.ctaSecondaryGlass}>
+                Explore treatments
+              </Link>
             </div>
           </div>
         </div>

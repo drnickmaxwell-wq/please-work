@@ -46,79 +46,70 @@
   overflow: hidden;
 }
 
-/* CTA System 2 — Regal Glass-Gold (Hero, hex-free) */
+/* CTA System 3 — Regal Glass-Gold (hex-free, token based) */
 
-.ctaPrimaryInk {
+.ctaPrimaryRegal,
+.ctaSecondaryGlass,
+.ctaPrimaryInline {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.9rem 2.4rem;
+  gap: 0.6rem;
+  padding: 0.95rem 2.35rem;
   border-radius: 999px;
-  border: 2px solid var(--champagne-keyline-gold);
-  background: var(--ink);
-  color: var(--surface-on-ink);
-  font-weight: 600;
+  border: 1.5px solid var(--cta-border-gold);
+  font-weight: 700;
   letter-spacing: 0.02em;
   text-decoration: none;
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.02),
-    0 12px 30px rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  line-height: 1.1;
   transition:
     background 160ms ease-out,
-    box-shadow 160ms ease-out,
-    transform 160ms ease-out;
+    box-shadow 180ms ease-out,
+    transform 160ms ease-out,
+    border-color 160ms ease-out,
+    color 160ms ease-out;
+  box-shadow: 0 14px 38px color-mix(in srgb, var(--ink) 24%, transparent);
 }
 
-.ctaPrimaryInk:hover {
-  background: var(--ink-strong);
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.05),
-    0 16px 40px rgba(0, 0, 0, 0.45);
+.ctaPrimaryRegal {
+  background: var(--cta-primary-bg-ink);
+  color: var(--surface-on-ink);
+}
+
+.ctaPrimaryRegal:hover {
+  background: color-mix(in srgb, var(--cta-primary-bg-ink) 90%, transparent);
+  border-color: color-mix(in srgb, var(--cta-border-gold) 90%, transparent);
   transform: translateY(-1px);
+  box-shadow: 0 18px 44px color-mix(in srgb, var(--ink) 30%, transparent);
 }
 
-.ctaPrimaryInk:focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.9);
+.ctaPrimaryRegal:focus-visible {
+  outline: 2px solid var(--cta-border-gold);
   outline-offset: 3px;
 }
 
-/* Secondary — glass pill with gold outline */
-
 .ctaSecondaryGlass {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.9rem 2.4rem;
-  border-radius: 999px;
-  border: 2px solid var(--champagne-keyline-gold);
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--ink);
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  text-decoration: none;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.22);
-  transition:
-    background 160ms ease-out,
-    color 160ms ease-out,
-    box-shadow 160ms ease-out,
-    transform 160ms ease-out,
-    border-color 160ms ease-out;
+  background: color-mix(in srgb, var(--cta-primary-bg-ink) 12%, transparent);
+  color: color-mix(in srgb, var(--surface-on-ink) 92%, var(--ink) 8%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .ctaSecondaryGlass:hover {
-  background: rgba(0, 190, 190, 0.12);
-  border-color: var(--champagne-keyline-gold);
-  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.32);
+  background: color-mix(in srgb, var(--cta-primary-bg-ink) 18%, transparent);
+  border-color: color-mix(in srgb, var(--cta-border-gold) 90%, transparent);
   transform: translateY(-1px);
+  box-shadow: 0 16px 42px color-mix(in srgb, var(--ink) 26%, transparent);
 }
 
 .ctaSecondaryGlass:focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.9);
+  outline: 2px solid var(--cta-border-gold);
   outline-offset: 3px;
+}
+
+.ctaPrimaryInline {
+  padding: 0.9rem 1.85rem;
+  box-shadow: 0 12px 32px color-mix(in srgb, var(--ink) 22%, transparent);
 }
 
 .heroCtaOverride :global(.hero-cta-primary) {

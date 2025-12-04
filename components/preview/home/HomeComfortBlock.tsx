@@ -1,4 +1,4 @@
-import ChampagneCta from "@/components/champagne/ChampagneCta";
+import Link from "next/link";
 
 import styles from "./home-preview.module.css";
 
@@ -32,11 +32,9 @@ export default function HomeComfortBlock() {
               ))}
             </ul>
             <div className={styles.ctaRow}>
-              <ChampagneCta
-                href="/anxiety-dentistry"
-                label="Learn about anxiety dentistry"
-                variant="secondarySection"
-              />
+              <Link href="/anxiety-dentistry" className={styles.ctaSecondaryGlass}>
+                Learn about anxiety dentistry
+              </Link>
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import ChampagneCta from "@/components/champagne/ChampagneCta";
+import Link from "next/link";
 
 import styles from "./home-preview.module.css";
 
@@ -33,7 +33,9 @@ export default function HomeTeamTeaser() {
               ))}
             </div>
             <div className={styles.ctaRow}>
-              <ChampagneCta href="/team" label="Meet the team" variant="secondarySection" />
+              <Link href="/team" className={styles.ctaSecondaryGlass}>
+                Meet the team
+              </Link>
             </div>
           </div>
         </div>
