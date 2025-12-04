@@ -102,8 +102,5 @@ export default function WhiteningPreviewPage({ searchParams }: PreviewPageProps)
       heroVariant="luminous"
       heroFrameVariant="whitening"
     />
-    <script type="application/ld+json" suppressHydrationWarning>
-      {JSON.stringify(whiteningServiceSchema)}
-    </script>
   );
 }
