@@ -1,7 +1,7 @@
 "use client";
 
 import PreviewChampagneCTA from "../shared/PreviewChampagneCTA";
-import ctaStyles from "../shared/preview-cta.module.css";
+import styles from "./home-preview.module.css";
 
 export default function HomeHero() {
   const reduceMotion =
@@ -57,14 +57,14 @@ export default function HomeHero() {
             Private dental care with calm precision, comfort-first technology, and
             a signature Manus AI finish.
           </p>
-          <div className={ctaStyles.heroCTAGroup}>
-            <PreviewChampagneCTA href="/book" className={ctaStyles.primaryHero}>
+          <div className={styles.heroCtaRow}>
+            <PreviewChampagneCTA href="/book" className={styles.heroCtaPrimary}>
               Book a consultation
             </PreviewChampagneCTA>
             <PreviewChampagneCTA
               href="/treatments"
               variant="secondary"
-              className={ctaStyles.secondaryHero}
+              className={styles.heroCtaSecondary}
             >
               Explore treatments
             </PreviewChampagneCTA>

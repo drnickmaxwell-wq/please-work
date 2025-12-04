@@ -175,6 +175,89 @@
   color: var(--ink-soft);
 }
 
+.heroCtaRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-cta-gap, clamp(1.25rem, 2.6vw, 2.1rem));
+  margin-top: clamp(2.4rem, 4vw, 3.8rem);
+  max-width: min(640px, 100%);
+}
+
+.heroCtaPrimary,
+.heroCtaSecondary {
+  min-width: clamp(210px, 30vw, 280px);
+  justify-content: center;
+}
+
+.heroCtaPrimary {
+  padding-inline: var(--cta-hero-padding-inline, clamp(1.5rem, 3vw, 2.3rem));
+  padding-block: var(--cta-hero-padding-block, clamp(0.95rem, 2.4vw, 1.25rem));
+  border: 2px solid var(--champagne-keyline-gold);
+  background: var(--cta-primary-bg-ink, var(--ink));
+  color: var(--cta-text-on-ink, var(--smh-white));
+  box-shadow: var(
+      --shadow-cta-hero-primary,
+      0 18px 50px color-mix(in srgb, var(--ink) 34%, transparent)
+    );
+}
+
+.heroCtaPrimary:hover {
+  background: color-mix(in srgb, var(--cta-primary-bg-ink, var(--ink)) 92%, transparent);
+  border-color: color-mix(
+    in srgb,
+    var(--champagne-keyline-gold) 92%,
+    transparent
+  );
+  transform: translateY(-1px);
+  box-shadow: 0 20px 56px color-mix(in srgb, var(--ink) 36%, transparent);
+}
+
+.heroCtaPrimary:focus-visible {
+  outline: 2px solid var(--champagne-keyline-gold);
+  outline-offset: 3px;
+}
+
+.heroCtaSecondary {
+  padding-inline: var(--cta-hero-padding-inline, clamp(1.5rem, 3vw, 2.3rem));
+  padding-block: var(--cta-hero-padding-block, clamp(0.95rem, 2.4vw, 1.25rem));
+  border: 1.5px solid var(--champagne-keyline-gold);
+  background: color-mix(in srgb, var(--champagne-glass-bg) 60%, transparent);
+  color: color-mix(in srgb, var(--smh-white) 88%, var(--ink) 12%);
+  box-shadow: 0 16px 44px color-mix(in srgb, var(--ink) 24%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.heroCtaSecondary:hover {
+  background: color-mix(in srgb, var(--brand-teal) 18%, transparent);
+  border-color: color-mix(
+    in srgb,
+    var(--champagne-keyline-gold) 92%,
+    transparent
+  );
+  transform: translateY(-1px);
+  box-shadow: 0 18px 48px color-mix(in srgb, var(--ink) 28%, transparent);
+}
+
+.heroCtaSecondary:focus-visible {
+  outline: 2px solid var(--champagne-keyline-gold);
+  outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  .heroCtaRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-cta-gap, 1.1rem);
+  }
+
+  .heroCtaPrimary,
+  .heroCtaSecondary {
+    width: 100%;
+  }
+}
+
 .ctaRow {
   display: flex;
   flex-wrap: wrap;
