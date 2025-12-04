@@ -1,4 +1,4 @@
-import ChampagneCTA from "@/components/champagne/ChampagneCTA";
+import ChampagneCta from "@/components/champagne/ChampagneCta";
 
 import styles from "./home-preview.module.css";
 
@@ -31,10 +31,16 @@ export default function HomeImplantsSpotlight() {
             ))}
           </ul>
           <div className={styles.ctaRow}>
-            <ChampagneCTA href="/treatments/dental-implants">Dental implants</ChampagneCTA>
-            <ChampagneCTA href="/video-consultation" variant="secondary">
-              Book implant consultation
-            </ChampagneCTA>
+            <ChampagneCta
+              href="/treatments/dental-implants"
+              label="Dental implants"
+              variant="primaryClinical"
+            />
+            <ChampagneCta
+              href="/video-consultation"
+              label="Book implant consultation"
+              variant="secondarySection"
+            />
           </div>
         </div>
       </div>

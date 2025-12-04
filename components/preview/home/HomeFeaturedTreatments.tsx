@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import ChampagneCTA from "@/components/champagne/ChampagneCTA";
+import ChampagneCta from "@/components/champagne/ChampagneCta";
 
 import styles from "./home-preview.module.css";
 
@@ -60,10 +60,8 @@ export default function HomeFeaturedTreatments() {
             ))}
           </div>
           <div className={styles.ctaRow}>
-            <ChampagneCTA href="/contact">Book a consultation</ChampagneCTA>
-            <ChampagneCTA href="/treatments" variant="secondary">
-              View all treatments
-            </ChampagneCTA>
+            <ChampagneCta href="/contact" label="Book a consultation" variant="primarySection" />
+            <ChampagneCta href="/treatments" label="View all treatments" variant="secondarySection" />
           </div>
         </div>
       </div>
