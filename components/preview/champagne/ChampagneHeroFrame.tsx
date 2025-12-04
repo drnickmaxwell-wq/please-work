@@ -115,6 +115,7 @@ type ChampagneHeroFrameProps = {
   children: ReactNode;
   className?: string;
   contentClassName?: string;
+  describedById?: string;
 };
 
 const FILM_GRAIN_TEXTURE = "/assets/champagne/textures/home-hero-film-grain.webp";
@@ -125,6 +126,7 @@ export function ChampagneHeroFrame({
   children,
   className,
   contentClassName,
+  describedById,
 }: ChampagneHeroFrameProps) {
   const prefersReducedMotion = usePrefersReducedMotion();
   const config = HERO_VARIANTS[variant] ?? HERO_VARIANTS.home;
@@ -156,7 +158,7 @@ export function ChampagneHeroFrame({
   const contentClass = ["hero-content-wrapper", contentClassName].filter(Boolean).join(" ");
 
   return (
-    <section className={rootClass} aria-labelledby={titleId} style={styleVars}>
+    <section className={rootClass} aria-describedby={describedById} aria-labelledby={titleId} style={styleVars}>
       <div className="hero-gradient-base" />
       {!prefersReducedMotion && (
         <>

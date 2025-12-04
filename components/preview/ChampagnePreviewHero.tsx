@@ -9,13 +9,14 @@ export type ChampagnePreviewHeroProps = {
   ctas?: ReactNode;
   children?: ReactNode;
   variant?: 'default' | 'luminous';
+  describedById?: string;
 };
 
-const ChampagnePreviewHero = ({ title, kicker, ctas, children, variant = 'default' }: ChampagnePreviewHeroProps) => {
+const ChampagnePreviewHero = ({ title, kicker, ctas, children, variant = 'default', describedById }: ChampagnePreviewHeroProps) => {
   const surface = variant === 'luminous' ? <ChampagneHeroSurface /> : <WaveFXPreview />;
 
   return (
-    <section className="cpv-hero">
+    <section className="cpv-hero" aria-describedby={describedById}>
       {surface}
       <div className="container">
         <div className="cpv-hero__inner">

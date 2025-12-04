@@ -48,6 +48,22 @@ const whiteningFaq = [
   },
 ];
 
+export const whiteningFaqEntities = whiteningFaq.map((item) => ({
+  questionName: item.question,
+  acceptedAnswerText: item.answer,
+}));
+
+const whiteningServiceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Teeth whitening in Shoreham-by-Sea",
+  description: "Preview-only schema stub for SMH Dental's cosmetic teeth whitening pathway with Luminous Whitening visuals.",
+  provider: {
+    "@type": "Organization",
+    name: "SMH Dental",
+  },
+};
+
 export const metadata: Metadata = {
   ...buildTreatmentPreviewMetadata(slug),
   robots: previewRobots,
@@ -64,19 +80,21 @@ export default function WhiteningPreviewPage({ searchParams }: PreviewPageProps)
       schemaKey="whitening-process"
       treatmentName="Teeth whitening"
       category="Cosmetic"
+      heroLabel="Cosmetic treatment"
       heroTitle="Luminous Whitening"
-      heroCopy="Professional whitening with Champagne-level attention to detail."
-      primaryCtaLabel="Book whitening"
-      primaryCtaHref="/book"
-      secondaryCtaLabel="Explore treatment options"
-      secondaryCtaHref="/preview/home"
-      closingPrimaryCtaLabel="Book a whitening consultation"
-      closingPrimaryCtaHref="/book"
+      heroSubtitle="Professional whitening with Champagne-level attention to detail."
+      heroVisualDescription="Luminous whitening hero surface with regal glass arcs, soft gold motion, and Shoreham sea-inspired light."
+      heroCtaPrimaryLabel="Book whitening"
+      primaryCtaHref="/contact"
+      heroCtaSecondaryLabel="Explore treatment options"
+      secondaryCtaHref="/treatments"
+      closingPrimaryCtaLabel="Book Teeth whitening"
+      closingPrimaryCtaHref="/contact"
       closingSecondaryCtaLabel="View all treatments"
-      closingSecondaryCtaHref="/preview/treatments"
-      benefitBullets={whiteningBenefits}
+      closingSecondaryCtaHref="/treatments"
+      benefits={whiteningBenefits}
       howItWorksLabel="Your whitening journey"
-      howItWorksSteps={whiteningSteps}
+      journeySteps={whiteningSteps}
       financePlanGroup="whitening"
       faqKey="whitening"
       faqItems={whiteningFaq}
