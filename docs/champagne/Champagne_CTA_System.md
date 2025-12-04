@@ -41,6 +41,7 @@ The shared Regal Glass–Gold CTAs are wired into the following preview sections
 - Patient journey strip
 - FAQ
 - Final CTA band
+- `/preview/treatments/whitening` (Whitening treatment hero + CTAs)
 
 ## Implementation notes
 
