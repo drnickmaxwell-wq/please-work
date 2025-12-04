@@ -6,17 +6,9 @@
   gap: clamp(1.9rem, 2.6vw, 3rem);
 }
 
-:global(:root) {
-  /* CTA System 2 Tokens (Regal Glass-Gold) */
-  --cta-primary-bg-ink: var(--ink);
-  --cta-primary-border-gold: var(--smh-gold-softKeyline);
-  --cta-secondary-border-gold: var(--smh-gold-softKeyline);
-  --cta-secondary-hover-teal: rgb(var(--smh-teal-500) / 0.08);
-}
-
 .ctaPrimaryInk {
-  background: var(--cta-primary-bg-ink);
-  border: 1.5px solid var(--cta-primary-border-gold);
+  background: var(--ink);
+  border: 1.5px solid var(--smh-gold-softKeyline);
   color: white;
   border-radius: 9999px;
   padding: 0.75rem 1.75rem;
@@ -25,7 +17,7 @@
 .ctaSecondaryGlass {
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(8px);
-  border: 1.5px solid var(--cta-secondary-border-gold);
+  border: 1.5px solid var(--smh-gold-softKeyline);
   color: white;
   border-radius: 9999px;
   padding: 0.75rem 1.75rem;
@@ -33,12 +25,12 @@
 }
 
 .ctaSecondaryGlass:hover {
-  background: var(--cta-secondary-hover-teal);
+  background: rgb(var(--smh-teal-500) / 0.08);
 }
 
 .heroCtaOverride :global(.hero-cta-primary) {
-  background: var(--cta-primary-bg-ink);
-  border: 1.5px solid var(--cta-primary-border-gold);
+  background: var(--ink);
+  border: 1.5px solid var(--smh-gold-softKeyline);
   color: white;
   border-radius: 9999px;
   padding: 0.75rem 1.75rem;
@@ -53,7 +45,7 @@
 .heroCtaOverride :global(.hero-cta-secondary) {
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(8px);
-  border: 1.5px solid var(--cta-secondary-border-gold);
+  border: 1.5px solid var(--smh-gold-softKeyline);
   color: white;
   border-radius: 9999px;
   padding: 0.75rem 1.75rem;
@@ -62,7 +54,7 @@
 }
 
 .heroCtaOverride :global(.hero-cta-secondary:hover) {
-  background: var(--cta-secondary-hover-teal);
+  background: rgb(var(--smh-teal-500) / 0.08);
 }
 
 .sectionHeader {
