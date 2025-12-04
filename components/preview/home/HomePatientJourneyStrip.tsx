@@ -1,10 +1,10 @@
 import styles from "./home-preview.module.css";
 
 const journeySteps = [
-  { title: "Listen & Scan", detail: "Consultation with photos and digital scans to map goals." },
-  { title: "Plan in 3D", detail: "Mock-ups, guides, and aligner simulations built before treatment." },
-  { title: "Comfort-first treatment", detail: "Gentle appointments with sedation options and clear timing." },
-  { title: "Long-term care", detail: "Reviews, retainers, and hygiene coaching to protect results." },
+  { title: "Listen & understand", detail: "Consultation with photos and digital scans to map goals." },
+  { title: "Scan & plan", detail: "3D mock-ups and simulations built before treatment starts." },
+  { title: "Treat with care", detail: "Gentle appointments, sedation if needed, and clear timing." },
+  { title: "Support for the long term", detail: "Reviews, retainers, and hygiene coaching to protect results." },
 ];
 
 export default function HomePatientJourneyStrip() {
@@ -15,7 +15,7 @@ export default function HomePatientJourneyStrip() {
           <div className={styles.sectionHeader}>
             <p className="text-eyebrow">Patient journey</p>
             <h2 className="text-display-sm" id="journey-heading">
-              Your Journey, Step by Step
+              Your journey with us
             </h2>
             <p className={`${styles.lead} text-body`}>
               A simple, linear path that can later connect to a dedicated journey route once visuals are ready.

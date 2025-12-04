@@ -1,4 +1,4 @@
-import Link from "next/link";
+import ChampagneCTA from "@/components/champagne/ChampagneCTA";
 
 import styles from "./home-preview.module.css";
 
@@ -10,19 +10,17 @@ export default function HomeFinalCTA() {
           <div className={styles.sectionHeader}>
             <p className="text-eyebrow">Next step</p>
             <h2 className="text-display-sm" id="final-cta-heading">
-              Ready to talk about your smile?
+              Ready to start your Champagne journey?
             </h2>
             <p className={`${styles.lead} text-body`}>
               Choose a visit type that suits you. No pressure, just clear options.
             </p>
           </div>
           <div className={styles.ctaRow}>
-            <Link className="cpv-btn cpv-btn-solid text-eyebrow" href="/contact">
-              Book a consultation
-            </Link>
-            <Link className="cpv-btn cpv-btn-ghost text-eyebrow" href="/video-consultation">
+            <ChampagneCTA href="/contact">Book a consultation</ChampagneCTA>
+            <ChampagneCTA href="/video-consultation" variant="secondary">
               Request a video consultation
-            </Link>
+            </ChampagneCTA>
           </div>
         </div>
       </div>

@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import styles from "./home-preview.module.css";
 
 const testimonials = [
@@ -18,6 +16,11 @@ const testimonials = [
     name: "J. M.",
     tag: "Clear aligners",
   },
+  {
+    quote: "Felt genuinely cared for. Everything was explained simply with no pressure to rush decisions.",
+    name: "L. B.",
+    tag: "General dentistry",
+  },
 ];
 
 export default function HomeTestimonials() {
@@ -28,7 +31,7 @@ export default function HomeTestimonials() {
           <div className={styles.sectionHeader}>
             <p className="text-eyebrow">Patient stories</p>
             <h2 className="text-display-sm" id="testimonials-heading">
-              What Our Patients Say
+              What our patients say
             </h2>
             <p className={`${styles.lead} text-body`}>
               Snapshot quotes mirroring the HOME_TESTIMONIALS pattern. Full stories and video proof can replace these once the
@@ -45,11 +48,6 @@ export default function HomeTestimonials() {
                 </div>
               </article>
             ))}
-          </div>
-          <div className={styles.ctaRow}>
-            <Link className="cpv-btn cpv-btn-ghost text-eyebrow" href="/patient-stories">
-              View patient stories
-            </Link>
           </div>
         </div>
       </div>

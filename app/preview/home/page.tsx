@@ -3,6 +3,7 @@ import React from "react";
 
 import ChampagneHero from "@/components/home/ChampagneHero";
 import ChampagnePreviewFooter from "@/components/preview/layout/ChampagnePreviewFooter";
+import HomeHeroCTABand from "@/components/preview/home/HomeHeroCTABand";
 import HomeComfortBlock from "@/components/preview/home/HomeComfortBlock";
 import HomeFAQ from "@/components/preview/home/HomeFAQ";
 import HomeFeaturedTreatments from "@/components/preview/home/HomeFeaturedTreatments";
@@ -105,6 +106,7 @@ export default function HomePreviewPage() {
         {/* Preview-only Champagne homepage scaffold. Visual polish and Manus-led assets will slot in later. */}
         <section className="preview-home-zone preview-home-zone-1">
           <ChampagneHero />
+          <HomeHeroCTABand />
         </section>
         <section className="preview-home-zone preview-home-zone-2">
           <HomeTrustStrip />

@@ -1,11 +1,11 @@
-import Link from "next/link";
+import ChampagneCTA from "@/components/champagne/ChampagneCTA";
 
 import styles from "./home-preview.module.css";
 
 const implantBullets = [
-  "CBCT imaging and guided placement for precision",
-  "Same-day and fixed-teeth options planned in 3D",
-  "Restorations blended to your natural shade and profile",
+  "3D diagnostics, guided placement, and on-site printing",
+  "Single-tooth, bridge, and full-arch solutions planned clearly",
+  "Finance-friendly pathways with transparent milestones",
 ];
 
 export default function HomeImplantsSpotlight() {
@@ -16,11 +16,11 @@ export default function HomeImplantsSpotlight() {
           <div className={styles.sectionHeader}>
             <p className="text-eyebrow">Implant focus</p>
             <h2 className="text-display-sm" id="implants-spotlight-heading">
-              Dental Implants at SMH Dental
+              Dental implants that feel like your own teeth
             </h2>
             <p className={`${styles.lead} text-body`}>
-              High-value implant care for single teeth and full-arch cases, with digital planning that keeps the pathway clear
-              and calm from consultation to final restoration.
+              High-value implant care for single teeth and full arches, with clear 3D planning, calm appointments, and
+              restorative finishes that blend naturally.
             </p>
           </div>
           <ul className={styles.list}>
@@ -31,12 +31,10 @@ export default function HomeImplantsSpotlight() {
             ))}
           </ul>
           <div className={styles.ctaRow}>
-            <Link className="cpv-btn cpv-btn-solid text-eyebrow" href="/treatments/dental-implants">
-              Dental implants
-            </Link>
-            <Link className="cpv-btn cpv-btn-ghost text-eyebrow" href="/video-consultation">
+            <ChampagneCTA href="/treatments/dental-implants">Dental implants</ChampagneCTA>
+            <ChampagneCTA href="/video-consultation" variant="secondary">
               Book implant consultation
-            </Link>
+            </ChampagneCTA>
           </div>
         </div>
       </div>

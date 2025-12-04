@@ -1,15 +1,22 @@
 import styles from "./home-preview.module.css";
 
-const digitalFeatures = [
-  "CBCT imaging for precise diagnostics",
-  "Intraoral scanning for comfort and accuracy",
-  "3D printing for guides, retainers, and splints",
-];
-
-const aiFeatures = [
-  "AI smile previews aligned to treatment plans",
-  "AI-powered treatment finder for quick triage",
-  "Video consultations with structured intake",
+const techTiles = [
+  {
+    title: "CBCT imaging",
+    detail: "3D diagnostic views that keep implant and surgical plans precise.",
+  },
+  {
+    title: "Digital scanning",
+    detail: "Comfortable, impression-free records that feed into smile design.",
+  },
+  {
+    title: "Aligner planning",
+    detail: "Simulations and staging that show how teeth will move before you start.",
+  },
+  {
+    title: "3D workflows",
+    detail: "Guides, retainers, and splints produced with accuracy and fewer visits.",
+  },
 ];
 
 export default function HomeTechStrip() {
@@ -20,34 +27,20 @@ export default function HomeTechStrip() {
           <div className={styles.sectionHeader}>
             <p className="text-eyebrow">Technology</p>
             <h2 className="text-display-sm" id="tech-strip-heading">
-              Advanced Technology & AI
+              Advanced technology for precise, comfortable care
             </h2>
             <p className={`${styles.lead} text-body`}>
-              Digital planning and AI tools keep appointments efficient and predictable. Patients see their options clearly an
-              d can preview outcomes before committing.
+              Digital planning keeps appointments efficient and predictable. Patients see their options clearly and can preview
+              outcomes before committing.
             </p>
           </div>
-          <div className={styles.twoColumn}>
-            <div className={styles.tightStack}>
-              <p className="text-eyebrow">Digital dentistry</p>
-              <ul className={styles.list}>
-                {digitalFeatures.map((item) => (
-                  <li key={item} className="text-body">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className={styles.tightStack}>
-              <p className="text-eyebrow">AI tools</p>
-              <ul className={styles.list}>
-                {aiFeatures.map((item) => (
-                  <li key={item} className="text-body">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className={styles.tileGrid}>
+            {techTiles.map((tile) => (
+              <article key={tile.title} className={styles.tile}>
+                <p className={styles.galleryTag}>{tile.title}</p>
+                <p className="text-body">{tile.detail}</p>
+              </article>
+            ))}
           </div>
         </div>
       </div>

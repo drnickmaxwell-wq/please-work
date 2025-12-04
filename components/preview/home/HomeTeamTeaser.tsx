@@ -1,10 +1,11 @@
-import Link from "next/link";
+import ChampagneCTA from "@/components/champagne/ChampagneCTA";
 
 import styles from "./home-preview.module.css";
 
 const teamMembers = [
-  { name: "Dr Alex Raut", title: "Clinical Lead & Implants" },
-  { name: "Dr Shilpa Raut", title: "Cosmetic & Restorative" },
+  { name: "Dr Alex Raut", title: "Clinical lead & implant dentist" },
+  { name: "Dr Shilpa Raut", title: "Cosmetic & restorative dentist" },
+  { name: "Louise Smith", title: "Treatment coordinator" },
 ];
 
 export default function HomeTeamTeaser() {
@@ -15,7 +16,7 @@ export default function HomeTeamTeaser() {
           <div className={styles.sectionHeader}>
             <p className="text-eyebrow">Clinical team</p>
             <h2 className="text-display-sm" id="team-teaser-heading">
-              Your Clinical Team
+              Meet the team behind your smile
             </h2>
             <p className={`${styles.lead} text-body`}>
               Experienced clinicians leading cosmetic, implant, and restorative pathways with a calm, patient-first approach.
@@ -30,9 +31,9 @@ export default function HomeTeamTeaser() {
             ))}
           </div>
           <div className={styles.ctaRow}>
-            <Link className="cpv-btn cpv-btn-ghost text-eyebrow" href="/team">
+            <ChampagneCTA href="/team" variant="secondary">
               Meet the team
-            </Link>
+            </ChampagneCTA>
           </div>
         </div>
       </div>

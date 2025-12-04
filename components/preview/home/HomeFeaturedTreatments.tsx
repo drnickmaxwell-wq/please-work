@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import ChampagneCTA from "@/components/champagne/ChampagneCTA";
+
 import styles from "./home-preview.module.css";
 
 type TreatmentCard = {
@@ -25,19 +27,9 @@ const treatmentCards: TreatmentCard[] = [
     href: "/treatments/dental-implants",
   },
   {
-    title: "Teeth Whitening",
-    description: "Sensitivity-aware brightening with supervised at-home and in-clinic finishing.",
-    href: "/treatments/whitening",
-  },
-  {
     title: "Clear Aligners",
-    description: "Spark-style clear aligner journeys with regular reviews and retention built in.",
+    description: "Aligner planning supported by 3D simulations and retention built in from day one.",
     href: "/treatments/orthodontics",
-  },
-  {
-    title: "General Dentistry",
-    description: "Preventive check-ups, restorative care, and hygiene support that protect long-term health.",
-    href: "/treatments/general",
   },
 ];
 
@@ -49,11 +41,11 @@ export default function HomeFeaturedTreatments() {
           <div className={styles.sectionHeader}>
             <p className="text-eyebrow">Clinical highlights</p>
             <h2 className="text-display-sm" id="featured-treatments-heading">
-              Featured Treatments
+              Focused on smiles, not just teeth
             </h2>
             <p className={`${styles.lead} text-body`}>
-              A preview of the key pathways guests request most often. Each card links to the current treatment previews while
-              production pages remain protected.
+              A preview of the key pathways guests request most often. Each card links to the preview routes while production
+              pages remain protected.
             </p>
           </div>
           <div className={styles.cardGrid}>
@@ -66,6 +58,12 @@ export default function HomeFeaturedTreatments() {
                 </Link>
               </article>
             ))}
+          </div>
+          <div className={styles.ctaRow}>
+            <ChampagneCTA href="/contact">Book a consultation</ChampagneCTA>
+            <ChampagneCTA href="/treatments" variant="secondary">
+              View all treatments
+            </ChampagneCTA>
           </div>
         </div>
       </div>
