@@ -5,33 +5,34 @@
   gap: 0.6rem;
   padding: 0.95rem 2.35rem;
   border-radius: 999px;
-  border: 1.75px solid var(--cta-border-gold, var(--champagne-keyline-gold));
+  border: 2px solid var(--cta-border-gold, var(--champagne-keyline-gold));
   font-weight: 700;
   letter-spacing: 0.02em;
   text-decoration: none;
   line-height: 1.1;
+  min-height: 48px;
   transition:
     background 160ms ease-out,
     box-shadow 180ms ease-out,
     transform 160ms ease-out,
     border-color 160ms ease-out,
     color 160ms ease-out;
-  box-shadow: 0 14px 40px color-mix(in srgb, var(--ink) 24%, transparent);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 16px 46px color-mix(in srgb, var(--ink) 28%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 .primary {
   background: var(--cta-primary-bg-ink, var(--ink));
   color: var(--cta-text-on-ink, var(--smh-white));
-  box-shadow: 0 18px 48px color-mix(in srgb, var(--ink) 30%, transparent);
+  box-shadow: 0 20px 54px color-mix(in srgb, var(--ink) 32%, transparent);
 }
 
 .primary:hover {
   background: color-mix(in srgb, var(--cta-primary-bg-ink, var(--ink)) 92%, transparent);
   border-color: color-mix(in srgb, var(--cta-border-gold, var(--champagne-keyline-gold)) 92%, transparent);
   transform: translateY(-1px);
-  box-shadow: 0 22px 54px color-mix(in srgb, var(--ink) 32%, transparent);
+  box-shadow: 0 24px 58px color-mix(in srgb, var(--ink) 34%, transparent);
 }
 
 .primary:focus-visible {
@@ -40,16 +41,16 @@
 }
 
 .secondary {
-  background: color-mix(in srgb, var(--champagne-glass-bg) 76%, var(--ink) 6%);
-  color: color-mix(in srgb, var(--smh-white) 90%, var(--ink) 10%);
-  box-shadow: 0 16px 42px color-mix(in srgb, var(--ink) 22%, transparent);
+  background: color-mix(in srgb, var(--champagne-glass-bg) 82%, var(--ink) 12%);
+  color: var(--smh-white);
+  box-shadow: 0 18px 50px color-mix(in srgb, var(--ink) 26%, transparent);
 }
 
 .secondary:hover {
   background: color-mix(in srgb, var(--brand-teal) 14%, transparent);
   border-color: color-mix(in srgb, var(--cta-border-gold, var(--champagne-keyline-gold)) 90%, transparent);
   transform: translateY(-1px);
-  box-shadow: 0 18px 48px color-mix(in srgb, var(--ink) 26%, transparent);
+  box-shadow: 0 20px 52px color-mix(in srgb, var(--ink) 28%, transparent);
 }
 
 .secondary:focus-visible {
@@ -63,21 +64,22 @@
   border: 2px solid var(--cta-border-gold, var(--champagne-keyline-gold));
   background: var(--cta-primary-bg-ink, var(--ink));
   color: var(--cta-text-on-ink, var(--smh-white));
-  box-shadow: var(--shadow-cta-hero-primary, 0 20px 56px color-mix(in srgb, var(--ink) 34%, transparent));
+  box-shadow: var(--shadow-cta-hero-primary, 0 24px 64px color-mix(in srgb, var(--ink) 36%, transparent));
 }
 
 .secondaryHero {
   padding-inline: var(--cta-hero-padding-inline, clamp(1.5rem, 3vw, 2.25rem));
   padding-block: var(--cta-hero-padding-block, clamp(0.9rem, 2.5vw, 1.2rem));
-  border: 1.75px solid var(--cta-border-gold, var(--champagne-keyline-gold));
-  background: color-mix(in srgb, var(--champagne-glass-bg) 70%, var(--ink) 6%);
-  color: color-mix(in srgb, var(--smh-white) 90%, var(--ink) 10%);
-  box-shadow: 0 18px 48px color-mix(in srgb, var(--ink) 24%, transparent);
+  border: 2px solid var(--cta-border-gold, var(--champagne-keyline-gold));
+  background: color-mix(in srgb, var(--champagne-glass-bg) 82%, var(--ink) 12%);
+  color: var(--smh-white);
+  box-shadow: 0 20px 54px color-mix(in srgb, var(--ink) 28%, transparent);
 }
 
 .secondaryHero:hover {
   background: color-mix(in srgb, var(--brand-teal) 18%, transparent);
   border-color: color-mix(in srgb, var(--cta-border-gold, var(--champagne-keyline-gold)) 92%, transparent);
+  transform: translateY(-1px);
 }
 
 .heroCTAGroup {

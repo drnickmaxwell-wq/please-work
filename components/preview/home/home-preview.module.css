@@ -190,13 +190,13 @@
   border-radius: 999px;
   background: color-mix(
     in srgb,
-    var(--champagne-glass-bg) 62%,
-    color-mix(in srgb, var(--ink) 16%, transparent) 38%
+    var(--champagne-glass-bg) 78%,
+    color-mix(in srgb, var(--ink) 26%, transparent) 22%
   );
-  border: 1.25px solid color-mix(in srgb, var(--champagne-keyline-gold) 70%, transparent);
-  box-shadow: 0 22px 60px color-mix(in srgb, var(--ink) 28%, transparent);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  border: 1.5px solid color-mix(in srgb, var(--champagne-keyline-gold) 78%, transparent);
+  box-shadow: 0 26px 70px color-mix(in srgb, var(--ink) 34%, transparent);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
 }
 
 .heroCtaRow {
@@ -212,6 +212,7 @@
   min-width: clamp(210px, 30vw, 280px);
   justify-content: center;
   text-align: center;
+  min-height: 48px;
 }
 
 .heroCtaPrimary {
@@ -220,14 +221,14 @@
   border: 2px solid var(--champagne-keyline-gold);
   background: var(--ink);
   color: var(--smh-white);
-  box-shadow: var(--shadow-cta-hero-primary, 0 20px 56px color-mix(in srgb, var(--ink) 34%, transparent));
+  box-shadow: var(--shadow-cta-hero-primary, 0 24px 64px color-mix(in srgb, var(--ink) 36%, transparent));
 }
 
 .heroCtaPrimary:hover {
   background: color-mix(in srgb, var(--ink) 92%, transparent);
   border-color: color-mix(in srgb, var(--champagne-keyline-gold) 92%, transparent);
   transform: translateY(-1px);
-  box-shadow: 0 20px 56px color-mix(in srgb, var(--ink) 34%, transparent);
+  box-shadow: 0 26px 70px color-mix(in srgb, var(--ink) 38%, transparent);
 }
 
 .heroCtaPrimary:focus-visible {
@@ -238,19 +239,19 @@
 .heroCtaSecondary {
   padding-inline: var(--cta-hero-padding-inline, clamp(1.45rem, 2.9vw, 2.25rem));
   padding-block: var(--cta-hero-padding-block, clamp(0.95rem, 2.4vw, 1.2rem));
-  border: 1.75px solid var(--champagne-keyline-gold);
-  background: color-mix(in srgb, var(--champagne-glass-bg) 70%, var(--ink) 8%);
-  color: color-mix(in srgb, var(--smh-white) 90%, var(--ink) 10%);
-  box-shadow: 0 18px 48px color-mix(in srgb, var(--ink) 26%, transparent);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  border: 2px solid var(--champagne-keyline-gold);
+  background: color-mix(in srgb, var(--champagne-glass-bg) 84%, var(--ink) 14%);
+  color: var(--smh-white);
+  box-shadow: 0 22px 60px color-mix(in srgb, var(--ink) 30%, transparent);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 }
 
 .heroCtaSecondary:hover {
-  background: color-mix(in srgb, var(--brand-teal) 16%, transparent);
-  border-color: color-mix(in srgb, var(--champagne-keyline-gold) 92%, transparent);
+  background: color-mix(in srgb, var(--brand-teal) 18%, transparent);
+  border-color: color-mix(in srgb, var(--champagne-keyline-gold) 94%, transparent);
   transform: translateY(-1px);
-  box-shadow: 0 20px 52px color-mix(in srgb, var(--ink) 28%, transparent);
+  box-shadow: 0 24px 64px color-mix(in srgb, var(--ink) 34%, transparent);
 }
 
 .heroCtaSecondary:focus-visible {
