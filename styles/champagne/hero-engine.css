@@ -1,0 +1,181 @@
+@import "./tokens.css";
+@import "./tonal-pack.css";
+@import "./cta-system-v2.css";
+
+.hero-gradient-base {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(2.4rem, 4vw, 3.6rem);
+  border-radius: clamp(1.6rem, 3vw, 2.4rem);
+  background:
+    radial-gradient(140% 120% at 12% 8%, color-mix(in srgb, var(--brand-gold) 14%, transparent), transparent 52%),
+    linear-gradient(165deg, color-mix(in srgb, var(--bg-ink) 78%, transparent) 0%, color-mix(in srgb, var(--bg-ink) 92%, transparent) 100%);
+  color: color-mix(in srgb, var(--brand-white) 94%, var(--bg-ink) 6%);
+  outline: 0.08rem solid color-mix(in srgb, var(--champagne-keyline-gold) 84%, transparent 14%);
+  box-shadow:
+    0 1.6rem 4rem color-mix(in srgb, var(--bg-ink) 20%, transparent),
+    inset 0 0.08rem 0 color-mix(in srgb, var(--brand-white) 10%, transparent);
+}
+
+.hero-gradient-base .hero-frame__content {
+  position: relative;
+  display: grid;
+  gap: clamp(1.4rem, 2vw, 2rem);
+  max-width: 84rem;
+  z-index: 1;
+}
+
+.hero-layout-left .hero-frame__content {
+  align-items: flex-start;
+}
+
+.hero-layout-center .hero-frame__content {
+  text-align: center;
+  justify-items: center;
+}
+
+.hero-headline {
+  margin: 0;
+  font-size: clamp(2.2rem, 3vw, 3rem);
+  line-height: 1.12;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.35rem 0.9rem;
+  margin: 0;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, currentColor 70%, transparent);
+  background: color-mix(in srgb, var(--champagne-glass-bg) 70%, transparent);
+  border: 0.08rem solid color-mix(in srgb, var(--champagne-keyline-gold) 76%, transparent 22%);
+  border-radius: 999rem;
+}
+
+.hero-subcopy {
+  margin: 0;
+  max-width: 60rem;
+  color: color-mix(in srgb, currentColor 82%, transparent);
+  font-size: clamp(1.05rem, 1.3vw, 1.2rem);
+  line-height: 1.48;
+}
+
+.hero-tonal-dusk {
+  background:
+    radial-gradient(130% 120% at 16% 12%, color-mix(in srgb, var(--brand-gold) 14%, transparent), transparent 58%),
+    linear-gradient(155deg, color-mix(in srgb, var(--bg-ink) 78%, transparent) 0%, color-mix(in srgb, var(--bg-ink) 94%, transparent) 100%);
+}
+
+.hero-tonal-ink {
+  background:
+    linear-gradient(150deg, color-mix(in srgb, var(--bg-ink) 86%, transparent) 0%, color-mix(in srgb, var(--bg-ink) 96%, transparent) 100%);
+}
+
+.hero-tonal-dawn {
+  background:
+    radial-gradient(140% 120% at 18% 10%, color-mix(in srgb, var(--brand-gold) 12%, transparent), transparent 54%),
+    linear-gradient(165deg, color-mix(in srgb, var(--brand-teal) 32%, transparent) 0%, color-mix(in srgb, var(--brand-magenta) 14%, transparent) 80%);
+}
+
+.hero-tonal-noir {
+  background:
+    radial-gradient(120% 120% at 18% 12%, color-mix(in srgb, var(--brand-gold) 10%, transparent), transparent 58%),
+    linear-gradient(160deg, color-mix(in srgb, var(--bg-ink) 90%, transparent) 0%, color-mix(in srgb, var(--bg-ink) 98%, transparent) 100%);
+}
+
+.hero-tonal-teal-lux {
+  background:
+    radial-gradient(140% 110% at 14% 10%, color-mix(in srgb, var(--brand-gold) 14%, transparent), transparent 56%),
+    linear-gradient(150deg, color-mix(in srgb, var(--brand-teal) 36%, transparent) 0%, color-mix(in srgb, var(--bg-ink) 88%, transparent) 100%);
+}
+
+.hero-tonal-whitening {
+  background:
+    radial-gradient(150% 120% at 16% 12%, color-mix(in srgb, var(--brand-gold) 12%, transparent), transparent 54%),
+    linear-gradient(170deg, color-mix(in srgb, var(--brand-teal) 18%, transparent) 0%, color-mix(in srgb, var(--brand-white) 90%, var(--bg-ink) 10%) 100%);
+  color: color-mix(in srgb, var(--bg-ink) 16%, var(--brand-ink) 84%);
+}
+
+.hero-intensity-soft {
+  box-shadow: 0 1.2rem 3.2rem color-mix(in srgb, var(--bg-ink) 14%, transparent);
+}
+
+.hero-intensity-lux {
+  box-shadow:
+    0 2rem 4.4rem color-mix(in srgb, var(--bg-ink) 26%, transparent),
+    inset 0 0.1rem 0 color-mix(in srgb, var(--brand-white) 12%, transparent);
+  outline-color: color-mix(in srgb, var(--champagne-keyline-gold) 90%, transparent 8%);
+}
+
+.hero-wave-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  mix-blend-mode: soft-light;
+  opacity: 0.24;
+  pointer-events: none;
+}
+
+.hero-wave-layer svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hero-shimmer-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: var(--hero-shimmer-opacity, 0.22);
+  background: radial-gradient(120% 120% at 12% 10%, color-mix(in srgb, var(--brand-gold) 8%, transparent), transparent 52%);
+  background-repeat: repeat;
+  background-size: cover;
+}
+
+.hero-shimmer-layer video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: inherit;
+  filter: saturate(1.1);
+}
+
+.hero-cta-plate {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.9rem 1.1rem;
+  border-radius: clamp(1rem, 2vw, 1.4rem);
+  background: color-mix(in srgb, var(--champagne-glass-bg) 78%, transparent);
+  border: 0.08rem solid color-mix(in srgb, var(--champagne-keyline-gold) 82%, transparent 12%);
+  box-shadow:
+    0 0 0 0.08rem color-mix(in srgb, var(--champagne-keyline-gold) 12%, transparent),
+    0 1.4rem 3.4rem color-mix(in srgb, var(--bg-ink) 22%, transparent);
+  backdrop-filter: blur(1.1rem);
+  -webkit-backdrop-filter: blur(1.1rem);
+}
+
+.hero-cta-plate .cta-primary-ink-light,
+.hero-cta-plate .cta-secondary-glass-gold {
+  text-decoration: none;
+}
+
+.hero-cta-plate[data-surface="light"] {
+  color: color-mix(in srgb, var(--bg-ink) 28%, var(--brand-ink) 72%);
+  background: color-mix(in srgb, var(--brand-white) 78%, var(--champagne-glass-bg) 22%);
+  border-color: color-mix(in srgb, var(--champagne-keyline-gold) 86%, transparent 10%);
+}
+
+.hero-wave-layer[data-blend="overlay"] {
+  mix-blend-mode: overlay;
+}
+
+.hero-shimmer-layer[data-density="low"] { --hero-shimmer-opacity: 0.14; }
+.hero-shimmer-layer[data-density="med"] { --hero-shimmer-opacity: 0.22; }
+.hero-shimmer-layer[data-density="high"] { --hero-shimmer-opacity: 0.3; }

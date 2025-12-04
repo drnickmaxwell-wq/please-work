@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import ChampagneTreatmentTemplate from "@/components/preview/treatments/ChampagneTreatmentTemplate";
 import { previewRobots } from "@/lib/seo/preview/previewRobots";
 import { buildPreviewMetadata as buildTreatmentPreviewMetadata } from "@/lib/treatments/previewTreatmentConfig";
+import { whitening_hero } from "@/lib/champagne/hero-presets";
 
 const slug = "whitening";
 
@@ -101,6 +102,7 @@ export default function WhiteningPreviewPage({ searchParams }: PreviewPageProps)
       searchParams={searchParams}
       heroVariant="luminous"
       heroFrameVariant="whitening"
+      heroSchema={whitening_hero}
     />
   );
 }
