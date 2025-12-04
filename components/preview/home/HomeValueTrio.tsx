@@ -4,22 +4,22 @@ import styles from "./home-preview.module.css";
 
 const valueCards = [
   {
-    title: "Art & Architecture",
-    body: "Veneers, composite bonding, and bespoke smile design shaped to your face, lips, and the natural Shoreham light.",
-    href: "/treatments/cosmetic",
-    linkLabel: "Explore cosmetic dentistry",
+    title: "Champagne Atmosphere",
+    body: "Warm lighting, calm playlists, and hospitality touches that keep each appointment feeling like a boutique visit.",
+    href: "/about",
+    linkLabel: "See the space",
   },
   {
-    title: "Implants & 3D Dentistry",
-    body: "Guided implant planning, CBCT imaging, and on-site printing to keep treatment precise and efficient.",
-    href: "/treatments/dental-implants",
-    linkLabel: "See implant pathways",
+    title: "Digital-First Dentistry",
+    body: "3D scans, CBCT diagnostics, and AI previews so you can see options clearly and track progress with confidence.",
+    href: "/technology",
+    linkLabel: "Explore our technology",
   },
   {
-    title: "Calm, Private Care",
-    body: "Anxiety-aware appointments, sedation options, and a quiet setting for guests who prefer unhurried dentistry.",
+    title: "Gentle, Unhurried Care",
+    body: "Longer appointment times, sedation pathways, and clinicians who pause often so nervous guests stay comfortable.",
     href: "/anxiety-dentistry",
-    linkLabel: "Learn about calm visits",
+    linkLabel: "Support for nervous patients",
   },
 ];
 
@@ -31,11 +31,11 @@ export default function HomeValueTrio() {
           <div className={styles.sectionHeader}>
             <p className="text-eyebrow">Value pillars</p>
             <h2 className="text-display-sm" id="champagne-experience-heading">
-              The Champagne Experience
+              What makes St Mary’s House different
             </h2>
             <p className={`${styles.lead} text-body`}>
-              A calm, design-led pathway for cosmetic, implant, and aligner guests. Each visit is planned with technology that
-              makes appointments efficient and with hospitality that keeps the atmosphere gentle.
+              A calm, design-led pathway for cosmetic, implant, and aligner guests. Technology, hospitality, and clinical
+              governance combine to create a premium but reassuring visit.
             </p>
           </div>
           <div className={styles.cardGrid}>
