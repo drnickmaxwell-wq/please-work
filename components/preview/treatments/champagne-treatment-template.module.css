@@ -6,7 +6,7 @@
     linear-gradient(135deg, color-mix(in srgb, var(--bg-ink) 82%, var(--brand-white) 18%), color-mix(in srgb, var(--bg-ink) 94%, transparent));
 }
 
-:global(.cpv-page[data-treatment]) {
+.treatmentPage :global(.cpv-page[data-treatment]) {
   --cta-font-size: 1.02rem;
   --cta-padding-block: 1.05rem;
   --cta-padding-inline: 2.55rem;

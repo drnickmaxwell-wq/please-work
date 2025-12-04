@@ -365,7 +365,10 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
   const howItWorksLabelText = howItWorksLabel ?? `${treatmentName ?? config.displayName} steps`;
 
   return (
-    <div className={`cpv-page ${styles.canvas} ${isImplants ? styles.implantsCanvas : ""}`} data-treatment={config.slug}>
+    <div
+      className={`cpv-page ${styles.canvas} ${styles.treatmentPage} ${isImplants ? styles.implantsCanvas : ""}`}
+      data-treatment={config.slug}
+    >
       {showHud ? (
         <DevHud
           className="tl-hud"
