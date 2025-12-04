@@ -6,6 +6,25 @@
     linear-gradient(135deg, color-mix(in srgb, var(--bg-ink) 82%, var(--brand-white) 18%), color-mix(in srgb, var(--bg-ink) 94%, transparent));
 }
 
+.treatmentPage :global(.cpv-page[data-treatment]) {
+  --cta-font-size: 1.02rem;
+  --cta-padding-block: 1.05rem;
+  --cta-padding-inline: 2.55rem;
+  --cta-inline-font-size: 1.02rem;
+  --cta-inline-padding-block: 0.95rem;
+  --cta-inline-padding-inline: 2.05rem;
+  --cta-hero-font-size: 1.08rem;
+  --cta-hero-padding-inline: clamp(1.65rem, 3.4vw, 2.6rem);
+  --cta-hero-padding-block: clamp(1rem, 3vw, 1.3rem);
+  --cta-primary-hover-bg: color-mix(in srgb, var(--cta-primary-bg-ink, var(--ink)) 94%, transparent);
+  --cta-primary-hover-border: color-mix(in srgb, var(--cta-border-gold, var(--champagne-keyline-gold)) 96%, transparent);
+  --cta-primary-hover-shadow: 0 26px 68px color-mix(in srgb, var(--ink) 38%, transparent);
+  --cta-secondary-hover-bg: color-mix(in srgb, var(--brand-teal) 18%, transparent);
+  --cta-secondary-hover-border: color-mix(in srgb, var(--cta-border-gold, var(--champagne-keyline-gold)) 94%, transparent);
+  --cta-secondary-hover-shadow: 0 22px 56px color-mix(in srgb, var(--ink) 30%, transparent);
+  --cta-hover-lift: -2px;
+}
+
 .implantsCanvas {
   background:
     radial-gradient(circle at 12% 18%, color-mix(in srgb, var(--brand-teal) 14%, transparent), transparent 38%),
