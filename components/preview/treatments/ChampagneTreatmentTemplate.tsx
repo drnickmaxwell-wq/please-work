@@ -523,7 +523,7 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
 
   return (
     <div
-      className={`cpv-page ${styles.canvas} ${styles.treatmentPage} ${isImplants ? styles.implantsCanvas : ""} ${isWhitening ? styles.whiteningCanvas : ""}`}
+      className={`cpv-page ${styles.canvas} ${styles.treatmentPage} ${isImplants ? styles.implantsCanvas : ""}`}
       data-treatment={config.slug}
     >
       {showHud ? (
@@ -541,7 +541,9 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
         />
       ) : null}
 
-      {heroSurface}
+      <div className={`${styles.heroBand} ${isWhitening ? styles.whiteningHeroShell : ""}`}>
+        {heroSurface}
+      </div>
 
       <main className={`${styles.main} ${isImplants ? styles.implantsMain : ""}`} role="main">
         <BenefitsGrid

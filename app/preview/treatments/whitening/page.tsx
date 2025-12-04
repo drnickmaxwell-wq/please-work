@@ -100,7 +100,7 @@ export default function WhiteningPreviewPage({ searchParams }: PreviewPageProps)
       faqKey="whitening"
       faqItems={whiteningFaq}
       searchParams={searchParams}
-      // Uses the Champagne Hero Engine with the whitening preset while keeping the rest of the page on the standard dark backdrop
+      // The hero runs on the Champagne Hero Engine whitening preset; body sections stay on the standard dark preview backdrop.
       heroSchema={whitening_hero}
     />
   );

@@ -9,12 +9,12 @@ export const whitening_hero: HeroSchema = {
   subcopy: "Professional whitening with Champagne-level attention to detail.",
   waves: {
     mask: "wave-02",
-    opacity: 0.32,
-    blendMode: "soft-light",
+    opacity: 0.38,
+    blendMode: "overlay",
   },
   shimmer: {
     enabled: true,
-    density: "med",
+    density: "high",
   },
   cta: {
     primary: "cta-primary-ink-light",

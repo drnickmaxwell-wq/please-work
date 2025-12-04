@@ -10,13 +10,13 @@
   background: var(--hero-surface, transparent);
   color: var(--hero-foreground, color-mix(in srgb, var(--brand-white) 92%, var(--bg-ink) 8%));
   width: 100%;
-  min-height: clamp(18rem, 42vw, 32rem);
+  min-height: clamp(32rem, 52vw, 40rem);
   display: grid;
   align-items: center;
 }
 
 .hero-gradient-base {
-  --hero-space-y: clamp(3rem, 6vw, 4.8rem);
+  --hero-space-y: clamp(4.2rem, 7vw, 6rem);
   --hero-space-x: clamp(1.8rem, 4vw, 3.4rem);
   --hero-surface: linear-gradient(
       140deg,
@@ -62,10 +62,10 @@
 }
 
 .hero-tonal-whitening {
-  --hero-start: color-mix(in srgb, var(--brand-teal) 16%, var(--bg) 84%);
-  --hero-end: color-mix(in srgb, var(--bg-ink) 82%, var(--brand-white) 18%);
-  --hero-glow: color-mix(in srgb, var(--brand-gold) 18%, transparent);
-  --hero-foreground: color-mix(in srgb, var(--ink) 24%, var(--brand-white) 76%);
+  --hero-start: color-mix(in srgb, var(--brand-magenta) 24%, var(--bg) 76%);
+  --hero-end: color-mix(in srgb, var(--brand-teal) 28%, var(--bg-ink) 72%);
+  --hero-glow: color-mix(in srgb, var(--brand-gold) 22%, transparent);
+  --hero-foreground: color-mix(in srgb, var(--brand-white) 88%, var(--ink) 12%);
 }
 
 .hero-tonal-teal-lux {
@@ -154,6 +154,7 @@
   pointer-events: none;
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
   mix-blend-mode: var(--hero-wave-blend, soft-light);
   opacity: var(--hero-wave-opacity, 0.2);
 }
@@ -187,11 +188,12 @@
   display: inline-flex;
   padding: clamp(0.9rem, 1.4vw, 1.2rem);
   border-radius: var(--radius-md);
-  background: color-mix(in srgb, var(--surface-glass) 72%, transparent);
-  outline: 0.0625rem solid color-mix(in srgb, var(--champagne-keyline-gold) 78%, transparent 22%);
+  background: color-mix(in srgb, var(--bg-ink) 24%, var(--surface-glass) 76%);
+  outline: 0.0625rem solid color-mix(in srgb, var(--champagne-keyline-gold) 86%, transparent 18%);
   box-shadow:
     0 1.125rem 2.625rem color-mix(in srgb, var(--bg-ink) 22%, transparent),
     inset 0 0.0625rem 0 color-mix(in srgb, var(--brand-white) 16%, transparent);
+  backdrop-filter: blur(12px);
 }
 
 .hero-cta-row {
