@@ -35,19 +35,23 @@ const faqs: Faq[] = [
 
 export default function HomeFAQ() {
   return (
-    <section className={styles.sectionShell} aria-labelledby="home-faq-heading">
-      <div className="cpv-card">
-        <div className="cpv-card__inner cpv-card__inner--stack">
-          <div className={styles.sectionHeader}>
-            <p className="text-eyebrow">FAQs</p>
-            <h2 className="text-display-sm" id="home-faq-heading">
-              Questions we’re often asked
-            </h2>
-            <p className={`${styles.lead} text-body`}>
-              Preview-only FAQ rail mirroring HOME_FAQ_V1. Structured schema and dynamic data will be slotted in later.
-            </p>
+    <section aria-labelledby="home-faq-heading">
+      <div className="smh-section">
+        <div className={`${styles.sectionShell} ${styles.sectionAtmosphereMid}`}>
+          <div className={`cpv-card ${styles.sectionPanel}`}>
+            <div className={`cpv-card__inner cpv-card__inner--stack ${styles.sectionStack}`}>
+              <div className={styles.sectionHeader}>
+                <p className={`${styles.smallLabel} text-eyebrow`}>FAQs</p>
+                <h2 className={styles.sectionTitle} id="home-faq-heading">
+                  Questions we’re often asked
+                </h2>
+                <p className={`${styles.lead} ${styles.bodyText}`}>
+                  Preview-only FAQ rail mirroring HOME_FAQ_V1. Structured schema and dynamic data will be slotted in later.
+                </p>
+              </div>
+              <MicroFaq faqs={faqs} />
+            </div>
           </div>
-          <MicroFaq faqs={faqs} />
         </div>
       </div>
     </section>

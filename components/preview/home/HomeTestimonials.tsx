@@ -25,29 +25,33 @@ const testimonials = [
 
 export default function HomeTestimonials() {
   return (
-    <section className={styles.sectionShell} aria-labelledby="testimonials-heading">
-      <div className="cpv-card">
-        <div className="cpv-card__inner cpv-card__inner--stack">
-          <div className={styles.sectionHeader}>
-            <p className="text-eyebrow">Patient stories</p>
-            <h2 className="text-display-sm" id="testimonials-heading">
-              What our patients say
-            </h2>
-            <p className={`${styles.lead} text-body`}>
-              Snapshot quotes mirroring the HOME_TESTIMONIALS pattern. Full stories and video proof can replace these once the
-              production gallery is ready.
-            </p>
-          </div>
-          <div className={styles.cardGrid}>
-            {testimonials.map((item) => (
-              <article key={item.quote} className={styles.card}>
-                <p className="text-body">“{item.quote}”</p>
-                <div className={styles.tightStack}>
-                  <p className="text-eyebrow">{item.tag}</p>
-                  <p className="text-body">{item.name}</p>
-                </div>
-              </article>
-            ))}
+    <section aria-labelledby="testimonials-heading">
+      <div className="smh-section">
+        <div className={`${styles.sectionShell} ${styles.sectionAtmosphereMid}`}>
+          <div className={`cpv-card ${styles.sectionPanel}`}>
+            <div className={`cpv-card__inner cpv-card__inner--stack ${styles.sectionStack}`}>
+              <div className={styles.sectionHeader}>
+                <p className={`${styles.smallLabel} text-eyebrow`}>Patient stories</p>
+                <h2 className={styles.sectionTitle} id="testimonials-heading">
+                  What our patients say
+                </h2>
+                <p className={`${styles.lead} ${styles.bodyText}`}>
+                  Snapshot quotes mirroring the HOME_TESTIMONIALS pattern. Full stories and video proof can replace these once
+                  the production gallery is ready.
+                </p>
+              </div>
+              <div className={styles.cardGrid}>
+                {testimonials.map((item) => (
+                  <article key={item.quote} className={styles.card}>
+                    <p className={styles.bodyText}>“{item.quote}”</p>
+                    <div className={styles.tightStack}>
+                      <p className={`${styles.smallLabel} text-eyebrow`}>{item.tag}</p>
+                      <p className={styles.bodyText}>{item.name}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>

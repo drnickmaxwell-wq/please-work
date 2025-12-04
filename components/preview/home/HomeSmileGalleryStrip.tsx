@@ -11,31 +11,35 @@ const galleryTiles = [
 
 export default function HomeSmileGalleryStrip() {
   return (
-    <section className={styles.sectionShell} aria-labelledby="smile-gallery-heading">
-      <div className="cpv-card">
-        <div className="cpv-card__inner cpv-card__inner--stack">
-          <div className={styles.sectionHeader}>
-            <p className="text-eyebrow">Smile gallery</p>
-            <h2 className="text-display-sm" id="smile-gallery-heading">
-              Real smiles, real patients
-            </h2>
-            <p className={`${styles.lead} text-body`}>
-              Placeholder tiles for future before-and-after photography. Each tile keeps space for captions and treatment tags
-              once real cases are available.
-            </p>
-          </div>
-          <div className={styles.tileGrid}>
-            {galleryTiles.map((tile) => (
-              <article key={tile.title} className={styles.tile}>
-                <div className={styles.galleryThumb} aria-hidden />
-                <p className={styles.galleryTag}>{tile.label}</p>
-                <h3 className={`text-lead ${styles.cardTitle}`}>{tile.title}</h3>
-                <p className="text-body">Future slot for paired imagery and patient-safe descriptors.</p>
-              </article>
-            ))}
-          </div>
-          <div className={styles.ctaRow}>
-            <ChampagneCta href="/smile-gallery" label="View smile gallery" variant="secondarySection" />
+    <section aria-labelledby="smile-gallery-heading">
+      <div className="smh-section">
+        <div className={`${styles.sectionShell} ${styles.sectionAtmosphereMid}`}>
+          <div className={`cpv-card ${styles.sectionPanel}`}>
+            <div className={`cpv-card__inner cpv-card__inner--stack ${styles.sectionStack}`}>
+              <div className={styles.sectionHeader}>
+                <p className={`${styles.smallLabel} text-eyebrow`}>Smile gallery</p>
+                <h2 className={styles.sectionTitle} id="smile-gallery-heading">
+                  Real smiles, real patients
+                </h2>
+                <p className={`${styles.lead} ${styles.bodyText}`}>
+                  Placeholder tiles for future before-and-after photography. Each tile keeps space for captions and treatment
+                  tags once real cases are available.
+                </p>
+              </div>
+              <div className={styles.tileGrid}>
+                {galleryTiles.map((tile) => (
+                  <article key={tile.title} className={styles.tile}>
+                    <div className={styles.galleryThumb} aria-hidden />
+                    <p className={styles.galleryTag}>{tile.label}</p>
+                    <h3 className={`${styles.subhead} ${styles.cardTitle}`}>{tile.title}</h3>
+                    <p className={styles.bodyText}>Future slot for paired imagery and patient-safe descriptors.</p>
+                  </article>
+                ))}
+              </div>
+              <div className={styles.ctaRow}>
+                <ChampagneCta href="/smile-gallery" label="View smile gallery" variant="secondarySection" />
+              </div>
+            </div>
           </div>
         </div>
       </div>

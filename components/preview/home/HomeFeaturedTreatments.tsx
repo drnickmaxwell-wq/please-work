@@ -35,33 +35,37 @@ const treatmentCards: TreatmentCard[] = [
 
 export default function HomeFeaturedTreatments() {
   return (
-    <section className={styles.sectionShell} aria-labelledby="featured-treatments-heading">
-      <div className="cpv-card">
-        <div className="cpv-card__inner cpv-card__inner--stack">
-          <div className={styles.sectionHeader}>
-            <p className="text-eyebrow">Clinical highlights</p>
-            <h2 className="text-display-sm" id="featured-treatments-heading">
-              Focused on smiles, not just teeth
-            </h2>
-            <p className={`${styles.lead} text-body`}>
-              A preview of the key pathways guests request most often. Each card links to the preview routes while production
-              pages remain protected.
-            </p>
-          </div>
-          <div className={styles.cardGrid}>
-            {treatmentCards.map((card) => (
-              <article key={card.title} className={styles.card}>
-                <h3 className={`text-lead ${styles.cardTitle}`}>{card.title}</h3>
-                <p className="text-body">{card.description}</p>
-                <Link className={`${styles.inlineLink} text-body`} href={card.href}>
-                  View treatment →
-                </Link>
-              </article>
-            ))}
-          </div>
-          <div className={styles.ctaRow}>
-            <ChampagneCta href="/contact" label="Book a consultation" variant="primarySection" />
-            <ChampagneCta href="/treatments" label="View all treatments" variant="secondarySection" />
+    <section aria-labelledby="featured-treatments-heading">
+      <div className="smh-section">
+        <div className={`${styles.sectionShell} ${styles.sectionAtmosphereMid}`}>
+          <div className={`cpv-card ${styles.sectionPanel}`}>
+            <div className={`cpv-card__inner cpv-card__inner--stack ${styles.sectionStack}`}>
+              <div className={styles.sectionHeader}>
+                <p className={`${styles.smallLabel} text-eyebrow`}>Clinical highlights</p>
+                <h2 className={styles.sectionTitle} id="featured-treatments-heading">
+                  Focused on smiles, not just teeth
+                </h2>
+                <p className={`${styles.lead} ${styles.bodyText}`}>
+                  A preview of the key pathways guests request most often. Each card links to the preview routes while
+                  production pages remain protected.
+                </p>
+              </div>
+              <div className={styles.cardGrid}>
+                {treatmentCards.map((card) => (
+                  <article key={card.title} className={styles.card}>
+                    <h3 className={`${styles.subhead} ${styles.cardTitle}`}>{card.title}</h3>
+                    <p className={styles.bodyText}>{card.description}</p>
+                    <Link className={`${styles.inlineLink} ${styles.bodyText}`} href={card.href}>
+                      View treatment →
+                    </Link>
+                  </article>
+                ))}
+              </div>
+              <div className={styles.ctaRow}>
+                <ChampagneCta href="/contact" label="Book a consultation" variant="primarySection" />
+                <ChampagneCta href="/treatments" label="View all treatments" variant="secondarySection" />
+              </div>
+            </div>
           </div>
         </div>
       </div>

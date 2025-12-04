@@ -1,9 +1,33 @@
-.sectionShell {
-  width: min(1180px, 100%);
-  padding: 0 clamp(1rem, 1.6vw, 1.4rem);
+:global(.smh-section) {
+  padding-top: 144px;
+  padding-bottom: 144px;
+  max-width: var(--page-max-width);
   margin: 0 auto;
+  padding-left: var(--page-padding);
+  padding-right: var(--page-padding);
+}
+
+.sectionShell {
+  position: relative;
+  isolation: isolate;
   display: grid;
-  gap: clamp(1.9rem, 2.6vw, 3rem);
+  gap: 104px;
+  width: 100%;
+}
+
+.sectionStack {
+  display: grid;
+  gap: 72px;
+}
+
+.sectionPanel {
+  position: relative;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(8px);
+  overflow: hidden;
 }
 
 /* CTA System 2 — Regal Glass-Gold (Hero, hex-free) */
@@ -112,66 +136,99 @@
 
 .sectionHeader {
   display: grid;
-  gap: 0.6rem;
+  gap: 1rem;
   max-width: 840px;
 }
 
+.sectionTitle {
+  font-family: var(--font-playfair-display);
+  font-weight: 600;
+  font-size: clamp(42px, 4vw, 48px);
+  line-height: 1.1;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.subhead {
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.bodyText {
+  font-family: var(--font-inter);
+  font-size: 18px;
+  line-height: 1.7;
+  letter-spacing: 0.3px;
+  color: var(--ink-soft);
+}
+
 .lead {
-  color: var(--cpv-page-text-soft, color-mix(in srgb, currentColor 80%, transparent));
+  color: var(--ink-soft);
 }
 
 .stripRow {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.75rem;
+  gap: 2rem;
 }
 
 .chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .chip {
   display: inline-flex;
   align-items: center;
-  padding: 0.4rem 0.85rem;
+  padding: 0.6rem 1rem;
   border-radius: 999px;
-  border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
-  background: color-mix(in srgb, var(--cpv-card-bg, var(--smh-ink-soft)) 70%, transparent 30%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.16);
   font-weight: 600;
   font-size: 0.95rem;
+  color: var(--ink);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
 }
 
 .cardGrid {
   display: grid;
-  gap: clamp(1rem, 1.6vw, 1.6rem);
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  align-items: stretch;
 }
 
 .card {
   display: grid;
-  gap: 0.6rem;
-  padding: clamp(1.2rem, 1.8vw, 1.7rem);
+  gap: 0.85rem;
+  padding: 1.5rem;
   border-radius: 16px;
-  border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
-  background: color-mix(in srgb, var(--cpv-card-bg, var(--smh-ink-soft)) 72%, transparent 28%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
 }
 
 .cardTitle {
   margin: 0;
+  color: var(--ink);
 }
 
 .inlineLink {
   font-weight: 600;
   text-decoration: underline;
   text-decoration-color: color-mix(in srgb, currentColor 70%, transparent);
+  color: var(--ink);
 }
 
 .twoColumn {
   display: grid;
-  gap: clamp(1rem, 2vw, 1.6rem);
+  gap: 32px;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   align-items: flex-start;
 }
@@ -181,67 +238,74 @@
   gap: 0.65rem;
   padding-left: 1.1rem;
   margin: 0;
+  color: var(--ink);
 }
 
 .tileGrid {
   display: grid;
-  gap: clamp(0.9rem, 1.2vw, 1.2rem);
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
 .tile {
   display: grid;
-  gap: 0.4rem;
-  padding: clamp(1rem, 1.2vw + 0.6rem, 1.3rem);
-  border-radius: 14px;
-  border: 1px dashed color-mix(in srgb, currentColor 20%, transparent);
-  background: color-mix(in srgb, var(--cpv-card-bg, var(--smh-ink-soft)) 68%, transparent 32%);
+  gap: 0.6rem;
+  padding: 1.25rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
 }
 
 .tileLabel {
   font-size: 0.95rem;
-  color: var(--cpv-page-text-soft, color-mix(in srgb, currentColor 76%, transparent));
+  color: var(--ink-soft);
 }
 
 .ctaRow {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 32px;
   align-items: center;
 }
 
 .stepGrid {
   display: grid;
-  gap: clamp(0.8rem, 1.2vw, 1.2rem);
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
 .stepCard {
-  padding: clamp(0.9rem, 1.2vw, 1.15rem);
-  border-radius: 14px;
-  border: 1px solid color-mix(in srgb, currentColor 16%, transparent);
-  background: color-mix(in srgb, var(--cpv-card-bg, var(--smh-ink-soft)) 70%, transparent 30%);
+  padding: 1.2rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.16);
   display: grid;
-  gap: 0.3rem;
+  gap: 0.5rem;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
 }
 
 .profileChips {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.55rem;
+  gap: 0.75rem;
 }
 
 .profileChip {
-  padding: 0.55rem 0.9rem;
+  padding: 0.75rem 1.1rem;
   border-radius: 999px;
-  border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
-  background: color-mix(in srgb, var(--cpv-card-bg, var(--smh-ink-soft)) 70%, transparent 30%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.16);
   display: grid;
-  gap: 0.1rem;
+  gap: 0.2rem;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
 }
 
 .mutedText {
-  color: var(--cpv-page-text-soft, color-mix(in srgb, currentColor 72%, transparent));
+  color: var(--ink-soft);
   font-size: 0.95rem;
 }
 
@@ -250,8 +314,10 @@
 }
 
 .heroBandCard {
-  border: 1px solid color-mix(in srgb, currentColor 12%, transparent);
-  background: color-mix(in srgb, var(--smh-ink-soft) 65%, transparent 35%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
 }
 
 .badgeRow {
@@ -274,6 +340,14 @@
 
 .badgeIcon {
   font-size: 0.9rem;
+}
+
+.smallLabel {
+  font-family: var(--font-inter);
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--ink) 98%, transparent);
 }
 
 .galleryThumb {
@@ -309,7 +383,7 @@
 }
 
 .sectionNote {
-  color: var(--cpv-page-text-soft, color-mix(in srgb, currentColor 70%, transparent));
+  color: var(--ink-soft);
   font-size: 0.95rem;
 }
 
@@ -324,5 +398,37 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--cpv-page-text-soft, color-mix(in srgb, currentColor 72%, transparent));
+  color: var(--ink-soft);
+}
+
+.sectionAtmosphereTop::before,
+.sectionAtmosphereMid::before,
+.sectionAtmosphereBase::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: linear-gradient(
+    135deg,
+    var(--gradient-magenta, var(--gradient-champagne)) 0%,
+    transparent 100%
+  );
+  opacity: 0.03;
+  z-index: -1;
+}
+
+.sectionAtmosphereMid::before {
+  background: linear-gradient(
+    135deg,
+    var(--gradient-teal, var(--gradient-champagne)) 0%,
+    transparent 100%
+  );
+}
+
+.sectionAtmosphereBase::before {
+  background: linear-gradient(
+    135deg,
+    var(--gradient-gold, var(--gradient-champagne)) 0%,
+    transparent 100%
+  );
 }
