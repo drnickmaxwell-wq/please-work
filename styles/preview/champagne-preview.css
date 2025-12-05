@@ -120,6 +120,14 @@
   --mood-motion-intensity: 0.6;
 }
 
+.cpv-page[data-treatment='whitening'] {
+  --mood-warm-lift: 0.48;
+  --mood-teal-lift: 0.26;
+  --mood-gold-sheen: 0.28;
+  --mood-bg-depth: 0.18;
+  --mood-motion-intensity: 0.6;
+}
+
 .cpv-page[data-treatment='implants'] {
   --mood-warm-lift: 0.16;
   --mood-teal-lift: 0.5;

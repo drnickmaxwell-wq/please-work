@@ -27,7 +27,8 @@ export const metadata: Metadata = {
 
 export default function WhiteningPreviewPage() {
   return (
-    // Whitening preview reuses the composite-bonding treatment layout: same dark Champagne canvas and section geometry, hero via whitening preset.
+    // Whitening preview: clones composite-bonding layout, dark Champagne canvas.
+    // Uses ChampagneHeroEngine with "whitening" preset, no Tonal Pack applied.
     <div className={`cpv-page ${styles.page}`} data-treatment="whitening">
       <WhiteningHero />
 
