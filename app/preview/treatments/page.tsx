@@ -11,11 +11,8 @@ import TreatmentHowItWorksPreview, {
 import TreatmentMicroFaq, { type TreatmentFaq } from "@/components/preview/sections/treatments/TreatmentMicroFaq";
 import TreatmentTechHighlight from "@/components/preview/sections/treatments/TreatmentTechHighlight";
 import TreatmentHubPreviewSchema from "@/components/preview/seo/TreatmentHubPreviewSchema";
-import "@/components/preview/preview-layout.css";
-import "@/components/preview/preview-typography.css";
 import layoutStyles from "@/components/preview/sections/treatments/preview-treatments.module.css";
 import { previewRobots } from "@/lib/seo/preview/previewRobots";
-import "@/styles/preview/treatments-preview.css";
 
 export const metadata: Metadata = {
   title: "Dental Treatments Preview | Champagne Canvas",
@@ -153,10 +150,7 @@ const faqs: TreatmentFaq[] = [
 
 export default function TreatmentsPreview() {
   return (
-    <div
-      className={`cpv-page cpv-page--treatment-hub ${layoutStyles.previewCanvas}`}
-      data-treatment="general"
-    >
+    <div className={layoutStyles.previewCanvas}>
       <PreviewTreatmentsHero
         primaryCta={{ label: "Take the AI Smile Quiz", href: "/ai-smile-quiz" }}
         secondaryCta={{ label: "Book a consultation", href: "/contact" }}

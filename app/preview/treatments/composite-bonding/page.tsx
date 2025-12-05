@@ -6,9 +6,6 @@ import type { Metadata } from "next";
 import { buildTreatmentPreviewMetadata } from "@/components/preview/sections/treatments/TreatmentPreviewPage";
 import { previewRobots } from "@/lib/seo/preview/previewRobots";
 
-import "@/styles/preview/champagne-preview.css";
-import "@/components/preview/preview-typography.css";
-
 import { CompositeBondingAiTools } from "@/components/preview/treatments/composite-bonding/CompositeBondingAiTools";
 import { CompositeBondingCTA } from "@/components/preview/treatments/composite-bonding/CompositeBondingCTA";
 import { CompositeBondingClinicianInsight } from "@/components/preview/treatments/composite-bonding/CompositeBondingClinicianInsight";
@@ -27,10 +24,7 @@ export const metadata: Metadata = {
 
 export default function CompositeBondingPreviewPage() {
   return (
-    <div
-      className={`cpv-page cpv-page--treatment-dark ${styles.page}`}
-      data-treatment="composite"
-    >
+    <div className={styles.page}>
       <CompositeBondingHero />
 
       <main className={styles.main} role="main">
