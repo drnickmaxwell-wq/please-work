@@ -1,0 +1,158 @@
+.cpv-v2-shell {
+  --cpv-v2-text-main: color-mix(in srgb, var(--smh-white) 92%, var(--smh-ink) 8%);
+  --cpv-v2-text-soft: color-mix(in srgb, var(--smh-white) 76%, var(--smh-ink) 24%);
+  --cpv-v2-shell-max: min(1200px, 96vw);
+  min-height: 100vh;
+  color: var(--cpv-v2-text-main);
+  background:
+    radial-gradient(circle at 12% 18%, color-mix(in srgb, var(--smh-magenta) 32%, transparent) 0%, transparent 40%),
+    radial-gradient(circle at 84% 12%, color-mix(in srgb, var(--smh-teal) 30%, transparent) 0%, transparent 38%),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--smh-ink) 94%, transparent) 0%,
+      color-mix(in srgb, var(--smh-ink-soft) 86%, transparent) 55%,
+      color-mix(in srgb, var(--smh-ink) 96%, transparent) 100%
+    );
+  padding: clamp(3rem, 5vw, 4rem) clamp(1.5rem, 6vw, 3rem) clamp(4rem, 8vw, 6rem);
+}
+
+.cpv-v2-shell--champagne-dark {
+  --cpv-page-text: var(--cpv-v2-text-main);
+  --cpv-page-text-soft: var(--cpv-v2-text-soft);
+  --cpv-card-bg: color-mix(in srgb, var(--smh-ink) 82%, var(--smh-white) 18%);
+  --cpv-gold-keyline: color-mix(in srgb, var(--smh-accent-gold-soft) 60%, transparent 6%);
+  background-color: color-mix(in srgb, var(--smh-ink) 96%, transparent 4%);
+}
+
+.cpv-v2-treatments {
+  margin: 0 auto;
+  max-width: var(--cpv-v2-shell-max);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 4vw, 3.5rem);
+}
+
+.cpv-v2-treatment-page {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 4vw, 3.5rem);
+}
+
+.cpv-v2-treatment-hub {
+  display: grid;
+  gap: clamp(2rem, 3vw, 2.75rem);
+}
+
+.cpv-v2-treatment-hub__header {
+  display: grid;
+  gap: clamp(0.75rem, 1.5vw, 1rem);
+  max-width: 780px;
+}
+
+.cpv-v2-treatment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(1.25rem, 2vw, 1.75rem);
+}
+
+.cpv-v2-treatment-card {
+  text-decoration: none;
+  color: inherit;
+  transition: transform 180ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.cpv-v2-treatment-card:hover {
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--cpv-gold-keyline) 86%, transparent 8%);
+  box-shadow: 0 28px 68px color-mix(in srgb, var(--smh-ink) 36%, transparent 14%);
+}
+
+.cpv-v2-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--cpv-v2-text-main);
+  font-weight: 600;
+}
+
+.cpv-v2-kicker {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  color: var(--cpv-v2-text-soft);
+  margin: 0;
+}
+
+.cpv-v2-lede {
+  margin: 0;
+  color: var(--cpv-v2-text-soft);
+  max-width: 720px;
+}
+
+.cpv-v2-section {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.cpv-v2-list {
+  display: grid;
+  gap: 0.5rem;
+  padding-left: 1.2rem;
+  margin: 0;
+  color: var(--cpv-v2-text-main);
+}
+
+.cpv-v2-list li {
+  line-height: 1.6;
+}
+
+.cpv-v2-body-copy {
+  margin: 0;
+  color: var(--cpv-v2-text-soft);
+  max-width: 760px;
+}
+
+.cpv-v2-cta-band {
+  display: flex;
+  padding: clamp(1.75rem, 3vw, 2.4rem) clamp(1.5rem, 3vw, 2.4rem);
+}
+
+.cpv-v2-cta-content {
+  width: 100%;
+  display: grid;
+  gap: clamp(1rem, 2vw, 1.4rem);
+}
+
+.cpv-v2-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.cpv-v2-cta-row a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 1.35rem;
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+@media (max-width: 640px) {
+  .cpv-v2-shell {
+    padding: 2.4rem 1.25rem 3rem;
+  }
+
+  .cpv-v2-cta-band {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .cpv-v2-cta-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cpv-v2-cta-row a {
+    justify-content: center;
+  }
+}
