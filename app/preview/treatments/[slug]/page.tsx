@@ -109,7 +109,7 @@ export default async function TreatmentPreviewPage({ params, searchParams }: Tre
   ];
 
   return (
-    <main className="tp-main">
+    <main className="cpv-main" role="main">
       {showHud ? <DevHud className="tl-hud" stats={hudStats} title="Treatment detail HUD" /> : null}
       <div className="tp-shell">
         <BreadcrumbBar items={previewData.breadcrumbs} route={previewData.route} />
@@ -124,7 +124,11 @@ export default async function TreatmentPreviewPage({ params, searchParams }: Tre
           <BenefitsCapsules benefits={benefits} />
           <Viewer3DSlot posterSrc="/brand/posters/placeholder.webp" />
         </div>
-        <HowToRail missing={previewData.missing.howTo} steps={previewData.howTo?.steps ?? []} title={previewData.howTo?.name} />
+        <HowToRail
+          missing={previewData.missing.howTo}
+          steps={previewData.howTo?.steps ?? []}
+          title={previewData.howTo?.name}
+        />
         <FaqAccordion items={previewData.faq} missing={previewData.missing.faq} />
       </div>
     </main>

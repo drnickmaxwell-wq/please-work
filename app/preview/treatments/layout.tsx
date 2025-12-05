@@ -1,5 +1,3 @@
-import React from "react";
-
 import "@/styles/preview/champagne-preview.css";
 import "@/components/preview/preview-layout.css";
 import "@/components/preview/preview-typography.css";
