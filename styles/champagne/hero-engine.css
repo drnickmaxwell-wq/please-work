@@ -33,6 +33,23 @@
     inset 0 0.0625rem 0 color-mix(in srgb, var(--brand-white) 12%, transparent);
 }
 
+.hero-frame.hero-tone--dawn {
+  background: radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--bg-ink-soft) 42%, transparent) 0, transparent 55%),
+    radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--bg-ink-soft) 42%, transparent) 0, transparent 55%),
+    var(--smh-gradient);
+}
+
+.hero-frame.hero-tone--day {
+  background: var(--smh-gradient);
+}
+
+.hero-frame.hero-tone--dusk,
+.hero-frame.hero-tone--night {
+  background: radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--bg-ink) 46%, transparent) 0, transparent 55%),
+    radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--bg-ink) 46%, transparent) 0, transparent 55%),
+    var(--smh-gradient);
+}
+
 .hero-tonal-dusk {
   --hero-start: var(--bg-ink);
   --hero-end: color-mix(in srgb, var(--bg-ink) 92%, var(--brand-white) 8%);
@@ -159,6 +176,16 @@
   opacity: var(--hero-wave-opacity, 0.2);
 }
 
+.hero-tone-waves--on-light.hero-wave-layer,
+.hero-tone-waves--on-light .hero-wave-layer {
+  opacity: 0.75;
+}
+
+.hero-tone-waves--on-dark.hero-wave-layer,
+.hero-tone-waves--on-dark .hero-wave-layer {
+  opacity: 0.9;
+}
+
 .hero-shimmer-layer {
   position: absolute;
   inset: 6% 6% auto 0;
@@ -170,6 +197,11 @@
   opacity: var(--hero-shimmer-opacity, 0.16);
   mix-blend-mode: screen;
   filter: drop-shadow(0 0.875rem 2rem color-mix(in srgb, var(--bg-ink) 18%, transparent));
+}
+
+.hero-tone-shimmer--rich.hero-shimmer-layer,
+.hero-tone-shimmer--rich .hero-shimmer-layer {
+  opacity: 1;
 }
 
 .hero-shimmer-density-med {
@@ -194,6 +226,17 @@
     0 1.45rem 3rem color-mix(in srgb, var(--bg-ink) 26%, transparent),
     inset 0 0.0625rem 0 color-mix(in srgb, var(--brand-white) 18%, transparent);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.hero-cta-plate.cta-tone--ink-on-light {
+  background: color-mix(in srgb, var(--champagne-glass-bg) 76%, var(--bg) 24%);
+  color: color-mix(in srgb, var(--smh-ink) 92%, transparent);
+}
+
+.hero-cta-plate.cta-tone--ink-on-dark {
+  background: color-mix(in srgb, var(--champagne-glass-bg) 68%, var(--bg-ink) 18%);
+  color: var(--smh-white);
 }
 
 .hero-cta-row {

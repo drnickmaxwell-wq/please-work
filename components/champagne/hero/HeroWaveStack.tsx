@@ -2,6 +2,7 @@ import type { HeroSchema, HeroWaveMask } from "@/lib/champagne/hero-schema";
 
 type HeroWaveStackProps = {
   waves: HeroSchema["waves"];
+  className?: string;
 };
 
 const waveMaskMap: Record<HeroWaveMask, string> = {
@@ -10,14 +11,14 @@ const waveMaskMap: Record<HeroWaveMask, string> = {
   "wave-03": "/brand/waves/wave-dots.svg",
 };
 
-export function HeroWaveStack({ waves }: HeroWaveStackProps) {
+export function HeroWaveStack({ waves, className }: HeroWaveStackProps) {
   const mask = waveMaskMap[waves.mask];
   const blendMode = waves.blendMode ?? "soft-light";
 
   return (
     <div
       aria-hidden
-      className="hero-wave-layer"
+      className={className ? `${className} hero-wave-layer` : "hero-wave-layer"}
       style={{
         backgroundImage: `url(${mask})`,
         opacity: waves.opacity,

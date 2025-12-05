@@ -3,11 +3,14 @@ import type { HeroSchema } from "@/lib/champagne/hero-schema";
 
 type HeroCTABarProps = {
   cta: HeroSchema["cta"];
+  toneVariant?: "ink-on-light" | "ink-on-dark";
 };
 
-export function HeroCTABar({ cta }: HeroCTABarProps) {
+export function HeroCTABar({ cta, toneVariant = "ink-on-light" }: HeroCTABarProps) {
+  const toneClass = toneVariant === "ink-on-dark" ? "cta-tone--ink-on-dark" : "cta-tone--ink-on-light";
+
   return (
-    <div className="hero-cta-plate cta-plate-glass-dusk">
+    <div className={`hero-cta-plate cta-plate-glass-dusk ${toneClass}`}>
       <div className="hero-cta-row">
         {cta.primaryLabel ? (
           <PreviewChampagneCTA
