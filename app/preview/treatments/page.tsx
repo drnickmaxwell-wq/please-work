@@ -19,8 +19,8 @@ import "@/styles/preview/treatments-preview.css";
 
 export const metadata: Metadata = {
   title: "Dental Treatments Preview | Champagne Canvas",
-  description:
-    "Preview the Champagne-styled treatments hub with calm hero, concern rail, how-to steps, pricing bands, tech highlight, and FAQs aligned to schema.",
+    description:
+      "Preview the Champagne-styled treatments hub with calm hero, concern rail, how-to steps, pricing bands, tech highlight, and FAQs aligned to schema.",
   robots: previewRobots,
 };
 
@@ -154,7 +154,7 @@ const faqs: TreatmentFaq[] = [
 export default function TreatmentsPreview() {
   return (
     <div
-      className={`cpv-page cpv-page--treatment-hub ${layoutStyles.previewCanvas}`}
+      className={`cpv-page cpv-page--hub-dark ${layoutStyles.previewCanvas}`}
       data-treatment="general"
     >
       <PreviewTreatmentsHero

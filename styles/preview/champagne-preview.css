@@ -224,7 +224,7 @@
   background: transparent;
 }
 
-.cpv-page--treatment-hub {
+.cpv-page--hub-dark {
   --cpv-page-text: color-mix(in srgb, var(--smh-white) 88%, var(--smh-ink) 12%);
   --cpv-page-text-soft: color-mix(in srgb, var(--smh-white) 72%, var(--smh-ink) 28%);
   background:
