@@ -17,7 +17,8 @@
 
 .tp-main {
   min-height: 100vh;
-  background: transparent;
+  /* Canvas handled by preview-treatments-canvas; legacy backdrop disabled */
+  background: none;
   color: var(--tp-body);
   padding: clamp(4rem, 8vw, 6rem) 1.5rem 5rem;
 }

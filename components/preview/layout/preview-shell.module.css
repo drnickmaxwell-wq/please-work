@@ -1,12 +1,7 @@
 .cpvShell {
   position: relative;
   min-height: 100vh;
-  background: linear-gradient(
-    135deg,
-    color-mix(in srgb, var(--smh-ink) 94%, transparent) 0%,
-    color-mix(in srgb, var(--brand-teal) 20%, var(--smh-ink)) 40%,
-    color-mix(in srgb, var(--brand-magenta) 18%, var(--smh-ink)) 100%
-  );
+  background: none;
   color: var(--smh-text);
 }
 
@@ -30,25 +25,11 @@
 }
 
 .cpvBackdrop {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(120% 140% at 20% 10%, color-mix(in srgb, var(--brand-teal) 18%, transparent) 0%, transparent 55%),
-    radial-gradient(120% 120% at 80% 0%, color-mix(in srgb, var(--brand-magenta) 16%, transparent) 0%, transparent 60%);
-  opacity: 0.6;
-  filter: saturate(1.05);
-  pointer-events: none;
+  display: none;
 }
 
 .cpvParticles {
-  position: absolute;
-  inset: 0;
-  background-image: url('/assets/manus/particles/home-hero-particles.webp');
-  background-size: cover;
-  background-position: center;
-  opacity: var(--champagne-particles-opacity-d);
-  mix-blend-mode: soft-light;
-  pointer-events: none;
+  display: none;
 }
 
 .cpvInner {

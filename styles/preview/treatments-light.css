@@ -13,8 +13,8 @@
 }
 
 .tl-main {
-  background: radial-gradient(circle at top right, color-mix(in oklab, var(--brand-teal) 18%, transparent) 0%, transparent 55%),
-    var(--smh-gradient);
+  /* Canvas handled by preview-treatments-canvas; legacy backdrop disabled */
+  background: none;
   color: var(--tl-body);
   min-height: 100vh;
 }
