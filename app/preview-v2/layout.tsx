@@ -1,4 +1,4 @@
-import "@/styles/preview/champagne-preview.css";
+import "@/components/preview/preview-layout.css";
 import "@/styles/preview/preview-v2-treatments.css";
 
 export default function PreviewV2Layout({
