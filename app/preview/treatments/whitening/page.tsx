@@ -6,9 +6,6 @@ import type { Metadata } from "next";
 import { buildTreatmentPreviewMetadata } from "@/components/preview/sections/treatments/TreatmentPreviewPage";
 import { previewRobots } from "@/lib/seo/preview/previewRobots";
 
-import "@/styles/preview/champagne-preview.css";
-import "@/components/preview/preview-typography.css";
-
 import { WhiteningAiTools } from "@/components/preview/treatments/whitening/WhiteningAiTools";
 import { WhiteningCTA } from "@/components/preview/treatments/whitening/WhiteningCTA";
 import { WhiteningClinicianInsight } from "@/components/preview/treatments/whitening/WhiteningClinicianInsight";
