@@ -3,7 +3,7 @@
   isolation: isolate;
 }
 
-.treatmentPage :global(.cpv-page[data-treatment]) {
+:global(.cpv-page[data-treatment]) {
   --cta-font-size: 1.02rem;
   --cta-padding-block: 1.05rem;
   --cta-padding-inline: 2.55rem;
@@ -23,10 +23,6 @@
 }
 
 .implantsCanvas {
-  background:
-    radial-gradient(circle at 12% 18%, color-mix(in srgb, var(--brand-teal) 14%, transparent), transparent 38%),
-    radial-gradient(circle at 86% 12%, color-mix(in srgb, var(--brand-magenta) 14%, transparent), transparent 42%),
-    linear-gradient(180deg, color-mix(in srgb, var(--bg-ink) 90%, var(--brand-white) 10%), color-mix(in srgb, var(--bg-ink) 86%, var(--smh-ink-soft) 14%));
   --cpv-page-text: color-mix(in srgb, var(--brand-white) 94%, var(--bg-ink) 6%);
   --cpv-page-text-soft: color-mix(in srgb, var(--brand-white) 78%, var(--bg-ink) 22%);
   --cpv-card-bg: color-mix(in srgb, var(--bg-ink) 82%, var(--brand-white) 18%);
