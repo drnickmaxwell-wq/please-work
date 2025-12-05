@@ -10,6 +10,16 @@
   color: var(--smh-text);
 }
 
+.cpvShell:has(.cpv-page--treatments) {
+  background: transparent;
+  color: inherit;
+}
+
+.cpvShell:has(.cpv-page--treatments) .cpvBackdrop,
+.cpvShell:has(.cpv-page--treatments) .cpvParticles {
+  display: none;
+}
+
 .cpvShell::before {
   content: "";
   position: absolute;
