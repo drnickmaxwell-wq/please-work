@@ -3,6 +3,7 @@ import type { HeroSchema } from "@/lib/champagne/hero-schema";
 type HeroShimmerProps = {
   shimmer: HeroSchema["shimmer"];
   tone: HeroSchema["tone"];
+  className?: string;
 };
 
 const shimmerMap: Record<HeroSchema["tone"], string> = {
@@ -14,7 +15,7 @@ const shimmerMap: Record<HeroSchema["tone"], string> = {
   custom: "/particles/particles-gold.webp",
 };
 
-export function HeroShimmer({ shimmer, tone }: HeroShimmerProps) {
+export function HeroShimmer({ shimmer, tone, className }: HeroShimmerProps) {
   if (!shimmer.enabled) return null;
 
   const texture = shimmerMap[tone] ?? shimmerMap.dusk;
@@ -27,7 +28,7 @@ export function HeroShimmer({ shimmer, tone }: HeroShimmerProps) {
   return (
     <div
       aria-hidden
-      className={`hero-shimmer-layer ${densityClass}`}
+      className={`hero-shimmer-layer ${densityClass} ${className ?? ""}`.trim()}
       style={{ backgroundImage: `url(${texture})` }}
     />
   );

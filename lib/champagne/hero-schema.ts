@@ -12,6 +12,21 @@ export type HeroTone =
   | "ortho_dusk"
   | string;
 
+export type HeroTimeOfDay = "dawn" | "day" | "dusk" | "night";
+export type HeroMood =
+  | "whitening_calm"
+  | "bonding_sculpted"
+  | "implants_confident"
+  | "veneers_polished"
+  | "ortho_precise";
+
+export interface HeroToneProfile {
+  timeOfDay: HeroTimeOfDay;
+  mood: HeroMood;
+  depth?: "soft" | "standard" | "deep";
+  contrast?: "low" | "standard" | "high";
+}
+
 export type HeroIntensity = "soft" | "standard" | "lux" | "medium" | "bold";
 export type HeroWaveMask = "wave-01" | "wave-02" | "wave-03";
 export type HeroWaveBlend = "soft-light" | "overlay";
@@ -23,6 +38,7 @@ export interface HeroSchema {
   id?: string;
   treatmentSlug?: string;
   tone: HeroTone;
+  toneProfile: HeroToneProfile;
   intensity: HeroIntensity;
   headline: string;
   subheadline?: string;
@@ -71,6 +87,12 @@ const defaultSchema: HeroSchema = {
   id: "hero-default",
   treatmentSlug: "default",
   tone: "dusk",
+  toneProfile: {
+    timeOfDay: "day",
+    mood: "whitening_calm",
+    depth: "standard",
+    contrast: "standard",
+  },
   intensity: "standard",
   waves: {
     mask: "wave-01",
@@ -115,6 +137,14 @@ const intensitySet: Set<HeroIntensity> = new Set(["soft", "standard", "lux", "me
 const waveMaskSet: Set<HeroWaveMask> = new Set(["wave-01", "wave-02", "wave-03"]);
 const shimmerDensitySet: Set<HeroShimmerDensity> = new Set(["low", "med", "high"]);
 const waveStrengthSet: Set<HeroWaveStrength> = new Set(["soft", "medium", "strong"]);
+const timeOfDaySet: Set<HeroTimeOfDay> = new Set(["dawn", "day", "dusk", "night"]);
+const moodSet: Set<HeroMood> = new Set([
+  "whitening_calm",
+  "bonding_sculpted",
+  "implants_confident",
+  "veneers_polished",
+  "ortho_precise",
+]);
 
 function clampOpacity(value?: number) {
   if (typeof value !== "number" || Number.isNaN(value)) return defaultSchema.waves.opacity;
@@ -130,6 +160,17 @@ export function validateHeroSchema(schema: Partial<HeroSchema>): HeroSchema {
   const intensity = intensitySet.has(schema.intensity as HeroIntensity)
     ? (schema.intensity as HeroIntensity)
     : defaultSchema.intensity;
+  const toneProfileInput = schema.toneProfile ?? defaultSchema.toneProfile;
+  const toneProfile: HeroToneProfile = {
+    timeOfDay: timeOfDaySet.has(toneProfileInput.timeOfDay as HeroTimeOfDay)
+      ? (toneProfileInput.timeOfDay as HeroTimeOfDay)
+      : defaultSchema.toneProfile.timeOfDay,
+    mood: moodSet.has(toneProfileInput.mood as HeroMood)
+      ? (toneProfileInput.mood as HeroMood)
+      : defaultSchema.toneProfile.mood,
+    depth: toneProfileInput.depth ?? defaultSchema.toneProfile.depth,
+    contrast: toneProfileInput.contrast ?? defaultSchema.toneProfile.contrast,
+  };
   const resolvedWaveMask = (schema.waveSet ?? schema.waves?.mask) as HeroWaveMask;
   const waveMask = waveMaskSet.has(resolvedWaveMask) ? resolvedWaveMask : defaultSchema.waves.mask;
   const blendMode = schema.waves?.blendMode === "overlay" ? "overlay" : defaultSchema.waves.blendMode;
@@ -164,6 +205,7 @@ export function validateHeroSchema(schema: Partial<HeroSchema>): HeroSchema {
     id,
     treatmentSlug,
     tone,
+    toneProfile,
     intensity,
     layout,
     layoutVariant,
