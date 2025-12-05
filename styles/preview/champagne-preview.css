@@ -153,23 +153,11 @@
 }
 
 .cpv-page[data-treatment='whitening'] {
-  --mood-warm-lift: 0.32;
-  --mood-teal-lift: 0.32;
-  --mood-gold-sheen: 0.42;
+  --mood-warm-lift: 0.48;
+  --mood-teal-lift: 0.26;
+  --mood-gold-sheen: 0.28;
   --mood-bg-depth: 0.18;
   --mood-motion-intensity: 0.6;
-  --cpv-hero-gradient: linear-gradient(
-    135deg,
-    color-mix(in srgb, var(--brand-magenta) 78%, var(--smh-white) 22%) 0%,
-    color-mix(in srgb, var(--brand-teal) 76%, var(--smh-white) 24%) 56%,
-    color-mix(in srgb, var(--brand-gold) 74%, var(--smh-white) 26%) 100%
-  );
-  --cpv-caustics-alpha: 0.08;
-  --cpv-shimmer-alpha: 0.04;
-  --cpv-wave-mask-alpha: 0.1;
-  --cpv-static-particles-alpha: 0.07;
-  --cpv-drift-particles-alpha: 0.06;
-  --cpv-grain-alpha: 0.06;
 }
 
 .cpv-page[data-treatment='general'] {

@@ -10,6 +10,8 @@ import { whitening_hero } from "@/lib/champagne/hero-presets";
 import { previewRobots } from "@/lib/seo/preview/previewRobots";
 import { buildPreviewMetadata as buildTreatmentPreviewMetadata } from "@/lib/treatments/previewTreatmentConfig";
 
+import "@/styles/preview/champagne-preview.css";
+import "@/components/preview/preview-typography.css";
 import styles from "@/components/preview/treatments/composite-bonding/composite-bonding-preview.module.css";
 
 const slug = "whitening";
@@ -73,8 +75,7 @@ type PreviewPageProps = {
 
 export default function WhiteningPreviewPage({ searchParams }: PreviewPageProps) {
   return (
-    // Whitening preview: shares dark treatment canvas and layout with composite-bonding.
-    // Hero is provided by Champagne Hero Engine (whitening preset).
+    // Whitening preview shares the composite-bonding canvas and layout; hero comes from the Champagne Hero Engine preset.
     <div className={`cpv-page ${styles.page}`} data-treatment="whitening">
       <HeroEngine allowNonPreview={Boolean(searchParams?.preview)} schema={whitening_hero} />
 
