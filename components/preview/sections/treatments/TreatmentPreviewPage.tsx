@@ -205,7 +205,10 @@ export function TreatmentPreviewPage({ slug }: { slug: string }) {
   const heroDescription = buildHeroDescription(config);
 
   return (
-    <div className={`cpv-page ${layoutStyles.previewCanvas}`} data-treatment={config.slug}>
+    <div
+      className={`cpv-page cpv-page--champagne-dark cpv-page--treatments ${layoutStyles.previewCanvas}`}
+      data-treatment={config.slug}
+    >
       <PreviewHero
         treatment={config.slug}
         eyebrow="Treatments preview"
