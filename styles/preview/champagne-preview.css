@@ -179,17 +179,12 @@
 .cpv-page {
   position: relative;
   min-height: 100vh;
-  background:
-    radial-gradient(150% 140% at 48% -18%, color-mix(in srgb, var(--brand-magenta) 10%, transparent) 0%, transparent 42%),
-    radial-gradient(150% 140% at 52% -6%, color-mix(in srgb, var(--brand-teal) 10%, transparent) 0%, transparent 40%),
-    radial-gradient(180% 170% at 50% 112%, color-mix(in srgb, var(--smh-paper-strong) 10%, transparent) 0%, transparent 62%),
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--smh-paper-soft) 97%, var(--cpv-page-ink) 3%) 0%,
-      color-mix(in srgb, var(--smh-paper) 95%, var(--cpv-page-ink) 5%) 45%,
-      color-mix(in srgb, var(--smh-paper-strong) 93%, var(--cpv-page-ink) 7%) 100%
-    );
-  color: var(--cpv-page-text);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--cpv-page-ink) 88%, var(--smh-paper) 12%) 0%,
+    color-mix(in srgb, var(--cpv-page-ink) 92%, var(--smh-paper-strong) 8%) 100%
+  );
+  color: color-mix(in srgb, var(--cpv-page-text) 94%, var(--cpv-page-text-soft) 6%);
   padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 7vw, 4rem) clamp(4rem, 8vw, 6.75rem);
   display: flex;
   flex-direction: column;

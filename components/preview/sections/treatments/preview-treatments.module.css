@@ -1,23 +1,3 @@
-.previewCanvas :global(.cpv-page.cpv-page--treatment-hub) {
-  background: linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--smh-ink) 92%, var(--brand-magenta) 8%) 0%,
-      color-mix(in srgb, var(--smh-ink-soft) 90%, var(--brand-teal) 10%) 55%,
-      color-mix(in srgb, var(--smh-ink) 94%, transparent) 100%
-    ),
-    radial-gradient(140% 120% at 50% 118%, color-mix(in srgb, var(--smh-ink-soft) 18%, transparent) 0%, transparent 64%);
-  --cpv-page-text: color-mix(in srgb, var(--smh-white) 90%, var(--smh-ink) 10%);
-  --cpv-page-text-soft: color-mix(in srgb, var(--smh-white) 74%, var(--smh-ink) 26%);
-  --cpv-gold-keyline: color-mix(in srgb, var(--smh-accent-gold-soft) 46%, var(--smh-white) 10%);
-  --cpv-card-surface: color-mix(in srgb, var(--cpv-card-bg) 74%, var(--smh-ink-soft) 26%);
-  --cpv-card-surface-soft: color-mix(in srgb, var(--cpv-card-bg) 70%, var(--smh-ink-soft) 30%);
-  --cpv-card-surface-bright: color-mix(in srgb, var(--cpv-card-bg) 66%, var(--smh-ink-soft) 34%);
-  --cpv-card-border: color-mix(in srgb, var(--cpv-gold-keyline) 82%, transparent 18%);
-  --cpv-card-shadow-ambient: 0 22px 50px color-mix(in srgb, var(--smh-ink) 24%, transparent);
-  --cpv-shell-bg: color-mix(in srgb, var(--cpv-card-bg) 62%, var(--smh-ink-soft) 38%);
-  color: var(--cpv-page-text);
-}
-
 .previewCanvas :global(.cpv-main) {
   width: min(1180px, 100%);
   gap: clamp(4.8rem, 6vw, 6.8rem);
