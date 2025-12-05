@@ -36,7 +36,7 @@ export function HeroFrame({ schema, children }: HeroFrameProps) {
       data-hero-time={schema.toneProfile.timeOfDay}
       data-hero-mood={schema.toneProfile.mood}
     >
-      <HeroWaveStack waves={schema.waves} className={tone.waveToneClass} />
+      <HeroWaveStack waves={schema.waves} strength={schema.waveStrength} className={tone.waveToneClass} />
       <HeroShimmer shimmer={schema.shimmer} tone={schema.tone} className={tone.shimmerToneClass} />
 
       <div className={`hero-engine__inner ${layoutClass}`}>
