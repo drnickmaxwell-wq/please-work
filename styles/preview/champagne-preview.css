@@ -197,6 +197,21 @@
   overflow: hidden;
 }
 
+.cpv-page--treatment-dark {
+  --cpv-page-text-main: color-mix(in srgb, var(--smh-white) 94%, var(--smh-ink) 6%);
+  --cpv-page-text-soft: color-mix(in srgb, var(--smh-white) 78%, var(--smh-ink) 22%);
+  --cpv-page-text: var(--cpv-page-text-main);
+  background:
+    radial-gradient(150% 140% at 50% -10%, color-mix(in srgb, var(--brand-magenta) 16%, transparent) 0%, transparent 52%),
+    radial-gradient(150% 160% at 50% 110%, color-mix(in srgb, var(--brand-teal) 14%, transparent) 0%, transparent 62%),
+    linear-gradient(180deg, color-mix(in srgb, var(--smh-ink) 94%, transparent) 0%, color-mix(in srgb, var(--smh-ink) 98%, transparent) 100%);
+  color: var(--smh-white);
+}
+
+.cpv-page--treatment-dark .cpv-shell {
+  background: transparent;
+}
+
 .cpv-page::before,
 .cpv-page::after {
   content: '';
