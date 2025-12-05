@@ -142,10 +142,6 @@
   filter: saturate(1.03);
 }
 
-.champagne-preview-skin[data-section='whitening'] {
-  filter: hue-rotate(-2deg) saturate(1.04);
-}
-
 @media (prefers-reduced-motion: reduce) {
   .champagne-preview-skin {
     background-attachment: scroll;

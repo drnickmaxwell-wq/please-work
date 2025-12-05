@@ -4,12 +4,14 @@ import { ChampagneHeroFrame, type ChampagneHeroVariant } from "@/components/prev
 import PreviewChampagneCTA from "@/components/preview/shared/PreviewChampagneCTA";
 import { DevHud, shouldShowHud } from "@/components/preview/Hud";
 import { ChampagneTestimonialCarousel } from "@/components/testimonial/ChampagneTestimonialCarousel";
+import { HeroEngine } from "@/components/champagne/hero/HeroEngine";
 import { loadTreatmentPreviewContent } from "@/lib/seo/preview/safe-loader";
 import {
   getPreviewTreatmentConfig,
   type PreviewTreatmentConfig,
   type PreviewFaq,
 } from "@/lib/treatments/previewTreatmentConfig";
+import type { HeroSchema } from "@/lib/champagne/hero-schema";
 
 import TreatmentPreviewSchema from "../seo/TreatmentPreviewSchema";
 import styles from "./champagne-treatment-template.module.css";
@@ -56,6 +58,8 @@ type TemplateProps = {
   searchParams?: Record<string, string | string[] | undefined>;
   heroVariant?: 'default' | 'luminous';
   heroFrameVariant?: ChampagneHeroVariant;
+  heroSchema?: Partial<HeroSchema>;
+  heroAllowNonPreview?: boolean;
 };
 
 type HowToStep = { title: string; summary: string };
@@ -382,6 +386,8 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
     searchParams,
     heroVariant,
     heroFrameVariant,
+    heroSchema,
+    heroAllowNonPreview,
   } = props;
 
   const config = getPreviewTreatmentConfig(slug);
@@ -389,6 +395,7 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
   const previewContent = await loadTreatmentPreviewContent(schemaSlug);
   const showHud = shouldShowHud(searchParams?.hud);
   const isImplants = config.slug === "implants";
+  const isWhitening = config.slug === "whitening";
 
   const heroVisualDescriptionText =
     heroVisualDescription ??
@@ -420,6 +427,23 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
   const heroPrimaryAria = `${heroPrimaryLabel} for ${treatmentName ?? config.displayName}`;
   const heroSecondaryAria = `${heroSecondaryLabel} for ${treatmentName ?? config.displayName}`;
 
+  const heroEngineSchema = heroSchema
+    ? {
+        eyebrow: heroSchema.eyebrow ?? heroEyebrow,
+        headline: heroSchema.headline ?? heroHeading,
+        subcopy: heroSchema.subcopy ?? heroDescription,
+        cta: {
+          primary: heroSchema.cta?.primary ?? "cta-primary-ink-light",
+          secondary: heroSchema.cta?.secondary ?? "cta-secondary-glass-gold",
+          primaryLabel: heroSchema.cta?.primaryLabel ?? heroPrimaryLabel,
+          secondaryLabel: heroSchema.cta?.secondaryLabel ?? heroSecondaryLabel,
+          primaryHref: heroSchema.cta?.primaryHref ?? heroPrimaryHref,
+          secondaryHref: heroSchema.cta?.secondaryHref ?? heroSecondaryHref,
+        },
+        ...heroSchema,
+      }
+    : undefined;
+
   const heroContent = (
     <div className={styles.heroStack}>
       <p className={styles.heroLabel}>{heroEyebrow}</p>
@@ -449,7 +473,9 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
     </div>
   );
 
-  const heroSurface = heroFrameVariant ? (
+  const heroSurface = heroEngineSchema ? (
+    <HeroEngine allowNonPreview={heroAllowNonPreview} schema={heroEngineSchema} />
+  ) : heroFrameVariant ? (
     <ChampagneHeroFrame
       describedById={heroVisualDescriptionId}
       contentClassName={homeHeroStyles.heroContent}
@@ -468,21 +494,23 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
       title={heroHeading}
       variant={heroVariant}
       ctas={
-        <div className={previewCtaStyles.heroCTAGroup}>
-          {/** Regal Glass–Gold CTA pair shared with /preview/home */}
-          <PreviewChampagneCTA
-            className={`${previewCtaStyles.primaryHero} cta-primary-ink-light`}
-            href={heroPrimaryHref}
-          >
-            {heroPrimaryLabel}
-          </PreviewChampagneCTA>
-          <PreviewChampagneCTA
-            className={`${previewCtaStyles.secondaryHero} cta-secondary-glass-gold`}
-            href={heroSecondaryHref}
-            variant="secondary"
-          >
-            {heroSecondaryLabel}
-          </PreviewChampagneCTA>
+        <div className={`${homeHeroStyles.heroCtaPlate} cta-plate-glass-dusk`}>
+          <div className={`${previewCtaStyles.heroCTAGroup} ${homeHeroStyles.heroCtaRow}`}>
+            {/** Regal Glass–Gold CTA pair shared with /preview/home */}
+            <PreviewChampagneCTA
+              className={`${previewCtaStyles.primaryHero} cta-primary-ink-light`}
+              href={heroPrimaryHref}
+            >
+              {heroPrimaryLabel}
+            </PreviewChampagneCTA>
+            <PreviewChampagneCTA
+              className={`${previewCtaStyles.secondaryHero} cta-secondary-glass-gold`}
+              href={heroSecondaryHref}
+              variant="secondary"
+            >
+              {heroSecondaryLabel}
+            </PreviewChampagneCTA>
+          </div>
         </div>
       }
     >
@@ -495,7 +523,7 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
 
   return (
     <div
-      className={`cpv-page ${styles.canvas} ${styles.treatmentPage} ${isImplants ? styles.implantsCanvas : ""}`}
+      className={`cpv-page ${styles.pageFrame} ${styles.treatmentPage} ${isImplants ? styles.implantsCanvas : ""}`}
       data-treatment={config.slug}
     >
       {showHud ? (
@@ -513,7 +541,9 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
         />
       ) : null}
 
-      {heroSurface}
+      <div className={`${styles.heroBand} ${isWhitening ? styles.whiteningHeroShell : ""}`}>
+        {heroSurface}
+      </div>
 
       <main className={`${styles.main} ${isImplants ? styles.implantsMain : ""}`} role="main">
         <BenefitsGrid
