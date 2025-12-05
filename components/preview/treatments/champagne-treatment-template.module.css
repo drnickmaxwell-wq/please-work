@@ -1,9 +1,6 @@
-.canvas {
+.pageFrame {
   position: relative;
   isolation: isolate;
-  background: radial-gradient(circle at 20% 20%, color-mix(in srgb, var(--brand-gold) 16%, transparent), transparent 36%),
-    radial-gradient(circle at 80% 0%, color-mix(in srgb, var(--bg-ink) 16%, transparent), transparent 42%),
-    linear-gradient(135deg, color-mix(in srgb, var(--bg-ink) 82%, var(--brand-white) 18%), color-mix(in srgb, var(--bg-ink) 94%, transparent));
 }
 
 .treatmentPage :global(.cpv-page[data-treatment]) {

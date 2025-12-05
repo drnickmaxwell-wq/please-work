@@ -523,7 +523,7 @@ export default async function ChampagneTreatmentTemplate(props: TemplateProps) {
 
   return (
     <div
-      className={`cpv-page ${styles.canvas} ${styles.treatmentPage} ${isImplants ? styles.implantsCanvas : ""}`}
+      className={`cpv-page ${styles.pageFrame} ${styles.treatmentPage} ${isImplants ? styles.implantsCanvas : ""}`}
       data-treatment={config.slug}
     >
       {showHud ? (

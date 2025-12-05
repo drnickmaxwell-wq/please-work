@@ -1,5 +1,6 @@
 import type { HeroSchema } from "./hero-schema";
 
+// Whitening hero preset: wave-forward banner variant for treatment page hero.
 export const whitening_hero: HeroSchema = {
   tone: "whitening",
   intensity: "lux",
@@ -9,7 +10,7 @@ export const whitening_hero: HeroSchema = {
   subcopy: "Professional whitening with Champagne-level attention to detail.",
   waves: {
     mask: "wave-02",
-    opacity: 0.38,
+    opacity: 0.44,
     blendMode: "overlay",
   },
   shimmer: {

@@ -76,6 +76,7 @@ type PreviewPageProps = {
 
 export default function WhiteningPreviewPage({ searchParams }: PreviewPageProps) {
   return (
+    // Whitening: uses the Champagne Hero Engine whitening preset for the hero while the body stays on the shared dark canvas.
     <ChampagneTreatmentTemplate
       slug={slug}
       schemaKey="whitening-process"
