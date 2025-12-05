@@ -1,7 +1,6 @@
 import React from "react";
 
 import "@/styles/preview/champagne-preview.css";
-import "@/components/preview/preview-layout.css";
 import "@/components/preview/preview-typography.css";
 import "@/styles/preview/treatments-preview.css";
 
@@ -19,7 +18,7 @@ function resolveTreatmentSlug(slug?: string | string[]): string {
   }
 }
 
-export default function TreatmentsPreviewLayout({
+export default function PreviewTreatmentsLayout({
   children,
   params,
 }: {
