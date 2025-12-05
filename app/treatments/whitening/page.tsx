@@ -1,7 +1,15 @@
 import type { Metadata } from 'next';
 
+import { HeroEngine } from '@/components/champagne/hero/HeroEngine';
 import { JsonLd, schema } from '@/lib/seo';
-import WhiteningPageContent from './page-content';
+import { whitening_hero } from '@/lib/champagne/hero-presets';
+import { WhiteningAiTools } from '@/components/preview/treatments/whitening/WhiteningAiTools';
+import { WhiteningCTA } from '@/components/preview/treatments/whitening/WhiteningCTA';
+import { WhiteningClinicianInsight } from '@/components/preview/treatments/whitening/WhiteningClinicianInsight';
+import { WhiteningFaq } from '@/components/preview/treatments/whitening/WhiteningFaq';
+import { WhiteningOverview } from '@/components/preview/treatments/whitening/WhiteningOverview';
+import { WhiteningStories } from '@/components/preview/treatments/whitening/WhiteningStories';
+import styles from '@/components/preview/treatments/whitening/whitening-preview.module.css';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL ?? 'https://www.stmaryshousedental.co.uk';
 const canonicalBase = siteUrl.endsWith('/') ? siteUrl.slice(0, -1) : siteUrl;
@@ -41,7 +49,21 @@ export default function WhiteningPage() {
     <>
       <JsonLd json={serviceJson} />
       <JsonLd json={faqJson} />
-      <WhiteningPageContent />
+
+      <div className={styles.page}>
+        <div className={styles.heroBand}>
+          <HeroEngine schema={whitening_hero} allowNonPreview />
+        </div>
+
+        <main className={styles.main} role="main">
+          <WhiteningOverview />
+          <WhiteningAiTools />
+          <WhiteningClinicianInsight />
+          <WhiteningStories />
+          <WhiteningFaq />
+          <WhiteningCTA />
+        </main>
+      </div>
     </>
   );
 }
