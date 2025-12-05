@@ -10,9 +10,19 @@
   color: var(--smh-text);
 }
 
+.cpvShell[data-preview-scope='treatments'] {
+  background: transparent;
+  color: inherit;
+}
+
 .cpvShell:has(.cpv-page--treatments) {
   background: transparent;
   color: inherit;
+}
+
+.cpvShell[data-preview-scope='treatments'] .cpvBackdrop,
+.cpvShell[data-preview-scope='treatments'] .cpvParticles {
+  display: none;
 }
 
 .cpvShell:has(.cpv-page--treatments) .cpvBackdrop,

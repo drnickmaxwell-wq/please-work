@@ -1,12 +1,22 @@
+"use client";
+
 import type { ReactNode } from "react";
+import { usePathname } from "next/navigation";
 
 import ChampagnePreviewFooter from "@/components/preview/layout/ChampagnePreviewFooter";
 import ChampagnePreviewHeader from "@/components/preview/layout/ChampagnePreviewHeader";
 import styles from "./preview-shell.module.css";
 
 export default function PreviewShell({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
+  const previewScope = pathname?.startsWith("/preview/treatments") ? "treatments" : undefined;
+
   return (
-    <div className={`${styles.cpvShell} text-[var(--smh-white)]`} data-theme="preview-dusk">
+    <div
+      className={`${styles.cpvShell} text-[var(--smh-white)]`}
+      data-preview-scope={previewScope}
+      data-theme="preview-dusk"
+    >
       <div className={styles.cpvBackdrop} aria-hidden />
       <div className={styles.cpvParticles} aria-hidden />
       <div className={`${styles.cpvInner} flex min-h-screen flex-col`}>
