@@ -16,6 +16,9 @@
   padding: var(--hero-space-y) var(--hero-space-x);
   background: var(--hero-surface, transparent);
   color: var(--hero-foreground, color-mix(in srgb, var(--brand-white) 92%, var(--bg-ink) 8%));
+  --hero-cta-bg: color-mix(in srgb, var(--bg-ink) 32%, var(--surface-glass) 68%);
+  --hero-cta-foreground: var(--smh-white);
+  --hero-cta-outline: color-mix(in srgb, var(--champagne-keyline-gold) 88%, transparent 12%);
   width: 100%;
   min-height: clamp(34rem, 56vw, 40rem);
   display: grid;
@@ -41,9 +44,25 @@
 }
 
 .hero-engine-shell.hero-frame.hero-tone--dawn {
-  background: radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--bg-ink-soft) 42%, transparent) 0, transparent 55%),
-    radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--bg-ink-soft) 42%, transparent) 0, transparent 55%),
-    var(--smh-gradient);
+  --hero-start: color-mix(in srgb, var(--brand-magenta) 22%, var(--bg-ink-soft) 78%);
+  --hero-end: color-mix(in srgb, var(--brand-teal) 18%, var(--bg-ink-soft) 82%);
+  --hero-glow: color-mix(in srgb, var(--brand-gold) 28%, transparent);
+  --hero-foreground: color-mix(in srgb, var(--brand-white) 90%, var(--bg-ink) 10%);
+  --hero-wave-opacity: 0.3;
+  --hero-wave-blend: screen;
+  --hero-shimmer-opacity: 0.14;
+  --hero-cta-bg: color-mix(in srgb, var(--surface-glass) 76%, var(--bg) 24%);
+  --hero-cta-foreground: color-mix(in srgb, var(--smh-ink) 88%, transparent);
+  --hero-cta-outline: color-mix(in srgb, var(--champagne-keyline-gold) 78%, transparent 8%);
+  background:
+    radial-gradient(120% 110% at 12% 10%, color-mix(in srgb, var(--brand-magenta) 18%, transparent) 0, transparent 48%),
+    radial-gradient(120% 110% at 88% 90%, color-mix(in srgb, var(--brand-teal) 16%, transparent) 0, transparent 48%),
+    linear-gradient(
+      140deg,
+      color-mix(in srgb, var(--bg-ink-soft) 76%, var(--brand-magenta) 18%) 0%,
+      color-mix(in srgb, var(--bg-ink-soft) 82%, var(--brand-gold) 12%) 38%,
+      color-mix(in srgb, var(--bg-ink-soft) 84%, var(--brand-teal) 16%) 100%
+    );
 }
 
 .hero-engine-shell.hero-frame.hero-tone--day {
@@ -52,16 +71,32 @@
 
 .hero-engine-shell.hero-frame.hero-tone--dusk,
 .hero-engine-shell.hero-frame.hero-tone--night {
-  background: radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--bg-ink) 46%, transparent) 0, transparent 55%),
-    radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--bg-ink) 46%, transparent) 0, transparent 55%),
-    var(--smh-gradient);
+  --hero-start: color-mix(in srgb, var(--bg-ink) 92%, var(--brand-magenta) 16%);
+  --hero-end: color-mix(in srgb, var(--bg-ink) 94%, var(--brand-teal) 14%);
+  --hero-glow: color-mix(in srgb, var(--brand-gold) 32%, transparent);
+  --hero-foreground: color-mix(in srgb, var(--brand-white) 90%, var(--bg-ink) 10%);
+  --hero-wave-opacity: 0.36;
+  --hero-wave-blend: soft-light;
+  --hero-shimmer-opacity: 0.2;
+  --hero-cta-bg: color-mix(in srgb, var(--surface-glass-deep) 70%, var(--bg-ink) 24%);
+  --hero-cta-foreground: var(--smh-white);
+  --hero-cta-outline: color-mix(in srgb, var(--champagne-keyline-gold) 88%, transparent 6%);
+  background:
+    radial-gradient(120% 110% at 0% 0%, color-mix(in srgb, var(--bg-ink) 52%, var(--brand-magenta) 12%) 0, transparent 55%),
+    radial-gradient(120% 110% at 100% 100%, color-mix(in srgb, var(--bg-ink) 52%, var(--brand-teal) 12%) 0, transparent 55%),
+    linear-gradient(
+      140deg,
+      color-mix(in srgb, var(--bg-ink) 94%, var(--brand-magenta) 12%) 0%,
+      color-mix(in srgb, var(--bg-ink) 96%, var(--brand-teal) 10%) 64%,
+      color-mix(in srgb, var(--bg-ink) 96%, var(--smh-accent-gold-soft) 10%) 100%
+    );
 }
 
 .hero-tonal-dusk {
-  --hero-start: var(--bg-ink);
-  --hero-end: color-mix(in srgb, var(--bg-ink) 92%, var(--brand-white) 8%);
-  --hero-glow: var(--brand-gold);
-  --hero-foreground: color-mix(in srgb, var(--brand-white) 92%, var(--bg-ink) 8%);
+  --hero-start: color-mix(in srgb, var(--bg-ink) 92%, var(--brand-magenta) 12%);
+  --hero-end: color-mix(in srgb, var(--bg-ink) 94%, var(--brand-teal) 12%);
+  --hero-glow: color-mix(in srgb, var(--brand-gold) 28%, transparent);
+  --hero-foreground: color-mix(in srgb, var(--brand-white) 90%, var(--bg-ink) 10%);
 }
 
 .hero-tonal-ink {
@@ -86,10 +121,10 @@
 }
 
 .hero-tonal-whitening {
-  --hero-start: color-mix(in srgb, var(--brand-magenta) 32%, var(--bg) 68%);
-  --hero-end: color-mix(in srgb, var(--brand-teal) 36%, var(--bg-ink) 64%);
+  --hero-start: color-mix(in srgb, var(--brand-magenta) 22%, var(--bg) 78%);
+  --hero-end: color-mix(in srgb, var(--brand-teal) 20%, var(--bg-ink-soft) 80%);
   --hero-glow: color-mix(in srgb, var(--brand-gold) 26%, transparent);
-  --hero-foreground: color-mix(in srgb, var(--brand-white) 88%, var(--ink) 12%);
+  --hero-foreground: color-mix(in srgb, var(--brand-white) 90%, var(--ink) 10%);
 }
 
 .hero-tonal-teal-lux {
@@ -227,13 +262,14 @@
   display: inline-flex;
   padding: clamp(0.9rem, 1.4vw, 1.2rem);
   border-radius: var(--radius-md);
-  background: color-mix(in srgb, var(--bg-ink) 32%, var(--surface-glass) 68%);
-  outline: 0.0625rem solid color-mix(in srgb, var(--champagne-keyline-gold) 88%, transparent 12%);
+  background: var(--hero-cta-bg);
+  outline: 0.0625rem solid var(--hero-cta-outline);
   box-shadow:
     0 1.45rem 3rem color-mix(in srgb, var(--bg-ink) 26%, transparent),
     inset 0 0.0625rem 0 color-mix(in srgb, var(--brand-white) 18%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  color: var(--hero-cta-foreground);
 }
 
 .hero-cta-plate.cta-tone--ink-on-light {
