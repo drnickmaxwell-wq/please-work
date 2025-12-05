@@ -6,7 +6,7 @@
 - `components/preview/layout/preview-shell.module.css` — `.cpvShell` applies a full-shell gradient background and text color; `.cpvBackdrop` layers additional radial gradients behind the shell.
 - `styles/preview/champagne/page.css` — `.preview-champagne-frame` paints a full-page radial + linear gradient backdrop and on-dark text color.
 - `styles/preview/treatments-light.css` — `.tl-main` paints a light radial + gradient background with on-light text and a `min-height: 100vh` wrapper for the treatments-light preview route.
-- `styles/preview/treatments.css` — `.tp-main` sets a light, paper-like layered gradient background with on-light text and full-height padding for tonal-pack pages.
+- `styles/preview/treatments.css` — `.tp-main` now inherits a transparent canvas and on-dark text tokens while keeping local section styling for the schema preview route.
 - `components/preview/treatments/champagne-treatment-template.module.css` — `.implantsCanvas` assigns a multi-stop radial/linear gradient background plus on-dark text/color variable overrides scoped to the treatment template wrapper.
 
 ## Hero-Level Rules

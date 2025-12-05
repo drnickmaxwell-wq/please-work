@@ -15,8 +15,12 @@ This scan enumerates every background or text-colour rule that could influence p
 - `.cpv-btn-solid` / `.cpv-btn-outline` – button backgrounds and colour; **SECTION-SCOPED**.
 
 ## styles/preview/treatments-light.css
-- `.tl-main` – radial gradient plus `var(--smh-gradient)` background for light treatments surface; **CANVAS-SCOPED**.
+- `.tl-main` – radial gradient plus `var(--smh-gradient)` background for light treatments surface; **CANVAS-SCOPED** (used outside the treatments subtree).
 - `.tl-header`, `.tl-section`, `.tl-chip`, `.tl-layer--*` – multiple light-surface backgrounds and colour rules; **SECTION-SCOPED**.
+
+## styles/preview/treatments.css
+- `.tp-main` – transparent canvas that inherits the shared dark Champagne background with on-dark text tokens; **CANVAS-SCOPED**.
+- `.tp-shell`, `.tp-section`, `.tp-hero`, `.tp-chip` etc. – schema preview card, hero, and chip surfaces scoped to local sections; **SECTION-SCOPED**.
 
 ## components/preview/preview-layout.css
 - `:global(.cpv-section)` – background mix, border, and shadow; **SECTION-SCOPED**.
