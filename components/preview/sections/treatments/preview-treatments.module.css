@@ -1,4 +1,4 @@
-.previewCanvas :global(.cpv-page) {
+.previewCanvas :global(.cpv-page.cpv-page--treatment-hub) {
   background: linear-gradient(
       180deg,
       color-mix(in srgb, var(--smh-ink) 92%, var(--brand-magenta) 8%) 0%,
