@@ -3,7 +3,7 @@
   isolation: isolate;
 }
 
-.treatmentPage :global(.cpv-page[data-treatment]) {
+.treatmentPage {
   --cta-font-size: 1.02rem;
   --cta-padding-block: 1.05rem;
   --cta-padding-inline: 2.55rem;

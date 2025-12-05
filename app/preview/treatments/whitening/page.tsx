@@ -29,7 +29,7 @@ export default function WhiteningPreviewPage() {
   // Whitening preview: hard-cloned from composite-bonding layout.
   // Dark Champagne canvas only, no Tonal Pack or light mode applied.
   return (
-    <div className={`cpv-page cpv-page--treatment-dark ${styles.page}`} data-treatment="whitening">
+    <div className={styles.page} data-treatment="whitening">
       <WhiteningHero />
 
       <main className={styles.main} role="main">
