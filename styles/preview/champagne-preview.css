@@ -179,12 +179,8 @@
 .cpv-page {
   position: relative;
   min-height: 100vh;
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--cpv-page-ink) 88%, var(--smh-paper) 12%) 0%,
-    color-mix(in srgb, var(--cpv-page-ink) 92%, var(--smh-paper-strong) 8%) 100%
-  );
-  color: color-mix(in srgb, var(--cpv-page-text) 94%, var(--cpv-page-text-soft) 6%);
+  background: transparent;
+  color: color-mix(in srgb, var(--cpv-page-text, var(--smh-white)) 94%, var(--cpv-page-text-soft, var(--smh-ink)) 6%);
   padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 7vw, 4rem) clamp(4rem, 8vw, 6.75rem);
   display: flex;
   flex-direction: column;
@@ -192,7 +188,9 @@
   overflow: hidden;
 }
 
-.cpv-page--treatment-dark {
+.cpv-page--champagne-dark,
+.cpv-page--treatment-dark,
+.cpv-page--treatment-hub {
   --cpv-page-ink: color-mix(in srgb, var(--smh-ink) 94%, transparent);
   --cpv-page-text-main: color-mix(in srgb, var(--smh-white) 94%, var(--smh-ink) 6%);
   --cpv-page-text-soft: color-mix(in srgb, var(--smh-white) 78%, var(--smh-ink) 22%);
@@ -204,37 +202,19 @@
   --cpv-chip-border: color-mix(in srgb, var(--smh-accent-gold-soft) 70%, transparent);
   --cpv-link-underline: color-mix(in srgb, var(--brand-magenta) 68%, var(--brand-teal) 32%);
   background:
+    radial-gradient(140% 120% at 22% 16%, color-mix(in srgb, var(--brand-magenta) 12%, transparent) 0%, transparent 52%),
+    radial-gradient(140% 120% at 78% 10%, color-mix(in srgb, var(--brand-teal) 12%, transparent) 0%, transparent 54%),
     linear-gradient(
       135deg,
-      color-mix(in srgb, var(--smh-ink) 92%, transparent) 0%,
-      color-mix(in srgb, var(--smh-ink) 88%, var(--brand-magenta) 14%) 44%,
-      color-mix(in srgb, var(--smh-ink) 88%, var(--brand-teal) 12%) 100%
-    ),
-    radial-gradient(150% 140% at 50% -12%, color-mix(in srgb, var(--brand-magenta) 18%, transparent) 0%, transparent 56%),
-    radial-gradient(150% 160% at 52% 118%, color-mix(in srgb, var(--brand-teal) 16%, transparent) 0%, transparent 64%);
+      color-mix(in srgb, var(--smh-ink) 96%, transparent) 0%,
+      color-mix(in srgb, var(--smh-ink) 92%, var(--brand-magenta) 10%) 44%,
+      color-mix(in srgb, var(--smh-ink-soft) 86%, var(--brand-teal) 8%) 100%
+    );
   color: var(--cpv-page-text);
 }
 
-.cpv-page--treatment-dark .cpv-shell {
-  background: transparent;
-}
-
-.cpv-page--treatment-hub {
-  --cpv-page-text: color-mix(in srgb, var(--smh-white) 88%, var(--smh-ink) 12%);
-  --cpv-page-text-soft: color-mix(in srgb, var(--smh-white) 72%, var(--smh-ink) 28%);
-  background:
-    radial-gradient(140% 120% at 22% 14%, color-mix(in srgb, var(--brand-magenta) 12%, transparent) 0%, transparent 48%),
-    radial-gradient(140% 120% at 78% 10%, color-mix(in srgb, var(--brand-teal) 12%, transparent) 0%, transparent 50%),
-    linear-gradient(
-      135deg,
-      color-mix(in srgb, var(--smh-ink-soft) 82%, var(--brand-gold) 8%) 0%,
-      color-mix(in srgb, var(--smh-ink) 88%, transparent) 64%,
-      color-mix(in srgb, var(--smh-ink) 92%, transparent) 100%
-    );
-}
-
-.cpv-page::before,
-.cpv-page::after {
+:is(.cpv-page--champagne-dark, .cpv-page--treatment-dark, .cpv-page--treatment-hub)::before,
+:is(.cpv-page--champagne-dark, .cpv-page--treatment-dark, .cpv-page--treatment-hub)::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -243,7 +223,7 @@
   z-index: 0;
 }
 
-.cpv-page::before {
+:is(.cpv-page--champagne-dark, .cpv-page--treatment-dark, .cpv-page--treatment-hub)::before {
   background:
     radial-gradient(150% 130% at 50% -6%, color-mix(in srgb, var(--smh-accent-gold-soft) 18%, transparent) 0%, transparent 60%),
     radial-gradient(140% 140% at 18% 12%, color-mix(in srgb, var(--brand-magenta) 9%, transparent) 0%, transparent 48%),
@@ -253,7 +233,7 @@
   opacity: 0.16;
 }
 
-.cpv-page::after {
+:is(.cpv-page--champagne-dark, .cpv-page--treatment-dark, .cpv-page--treatment-hub)::after {
   background:
     radial-gradient(130% 120% at 50% 18%, color-mix(in srgb, var(--smh-ink) 8%, transparent) 0%, transparent 58%),
     radial-gradient(120% 120% at 50% 108%, color-mix(in srgb, var(--smh-ink) 10%, transparent) 0%, transparent 70%);
