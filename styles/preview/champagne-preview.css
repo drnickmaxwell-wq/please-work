@@ -211,21 +211,6 @@
   color: var(--cpv-page-text);
 }
 
-.cpv-page.cpv-page--champagne-dark.cpv-page--treatments {
-  background-color: color-mix(in srgb, var(--smh-ink) 96%, transparent);
-  background-image:
-    radial-gradient(140% 120% at 22% 16%, color-mix(in srgb, var(--brand-magenta) 12%, transparent) 0%, transparent 52%),
-    radial-gradient(140% 120% at 78% 10%, color-mix(in srgb, var(--brand-teal) 12%, transparent) 0%, transparent 54%),
-    linear-gradient(
-      135deg,
-      color-mix(in srgb, var(--smh-ink) 96%, transparent) 0%,
-      color-mix(in srgb, var(--smh-ink) 92%, var(--brand-magenta) 10%) 44%,
-      color-mix(in srgb, var(--smh-ink-soft) 86%, var(--brand-teal) 8%) 100%
-    );
-  color: var(--cpv-page-text);
-  min-height: 100vh;
-}
-
 .cpv-page--champagne-dark::before,
 .cpv-page--champagne-dark::after {
   content: '';
@@ -458,6 +443,42 @@
   .champagne-hero-surface::after {
     animation: cpv-hero-wave-drift var(--cpv-wave-drift-duration, 18s) ease-in-out infinite alternate;
   }
+}
+
+/*
+ * Treatments preview canvas lock
+ *
+ * This selector stack intentionally exceeds other cpv-page rules (including any data-theme
+ * variants) to ensure the treatments canvas always paints a dark Champagne surface,
+ * independent of preview shells or time-of-day experiments.
+ */
+[data-preview-scope="treatments"].cpv-page.cpv-page--champagne-dark.cpv-page--treatments,
+[data-preview-scope="treatments"] .cpv-page.cpv-page--champagne-dark.cpv-page--treatments,
+.cpv-page.cpv-page--champagne-dark.cpv-page--treatments[data-treatments-canvas="champagne-dark"] {
+  --cpv-page-text: color-mix(in srgb, var(--smh-white) 94%, var(--smh-ink) 6%);
+  --cpv-page-text-soft: color-mix(in srgb, var(--smh-white) 78%, var(--smh-ink) 22%);
+  --cpv-link-underline: color-mix(in srgb, var(--brand-magenta) 68%, var(--brand-teal) 32%);
+  --cpv-card-bg: color-mix(in srgb, var(--smh-ink) 82%, var(--smh-white) 18%);
+  --cpv-card-border: color-mix(in srgb, var(--smh-accent-gold-soft) 62%, var(--smh-ink) 38%);
+  --cpv-card-shadow-ambient: 0 26px 64px color-mix(in srgb, var(--smh-ink) 34%, transparent 18%);
+  --cpv-chip-bg: color-mix(in srgb, var(--smh-ink) 54%, transparent);
+  --cpv-chip-border: color-mix(in srgb, var(--smh-accent-gold-soft) 70%, transparent);
+  background-color: color-mix(in srgb, var(--smh-ink) 96%, transparent);
+  background-image:
+    radial-gradient(140% 120% at 22% 16%, color-mix(in srgb, var(--brand-magenta) 12%, transparent) 0%, transparent 52%),
+    radial-gradient(140% 120% at 78% 10%, color-mix(in srgb, var(--brand-teal) 12%, transparent) 0%, transparent 54%),
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--smh-ink) 96%, transparent) 0%,
+      color-mix(in srgb, var(--smh-ink) 92%, var(--brand-magenta) 10%) 44%,
+      color-mix(in srgb, var(--smh-ink-soft) 86%, var(--brand-teal) 8%) 100%
+    );
+  color: var(--cpv-page-text);
+  min-height: 100vh;
+}
+
+[data-preview-scope="treatments"] .cpv-page.cpv-page--champagne-dark.cpv-page--treatments a {
+  color: var(--cpv-page-text);
 }
 
 
