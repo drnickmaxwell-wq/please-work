@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { execSync } from "node:child_process";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { dirname, extname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import micromatch from "micromatch";
@@ -13,6 +13,10 @@ const allowConfig = JSON.parse(readFileSync(allowConfigPath, "utf8"));
 const allowGlobs = allowConfig.allow ?? [];
 const allowExtensions = new Set(allowConfig.allowExtensions ?? []);
 const warnOnlyExtensions = new Set(allowConfig.warnOnlyExtensions ?? []);
+const enforcedFiles = [
+  "app/preview/layout.tsx",
+  "app/preview/treatments/layout.tsx",
+].filter((file) => existsSync(resolve(process.cwd(), file)));
 
 const targetBase = process.env.GITHUB_BASE_REF || "main";
 const base = (() => {
@@ -46,11 +50,12 @@ const filesOutput = execSync(
   .trim();
 
 const files = filesOutput ? filesOutput.split("\n").filter(Boolean) : [];
+const fileSet = new Set([...files, ...enforcedFiles]);
 const ignorePrefixes = ["reports/"];
 const hexRegex = /#[0-9a-fA-F]{3,8}\b/;
 
 let failed = false;
-for (const file of files) {
+for (const file of fileSet) {
   if (ignorePrefixes.some((prefix) => file.startsWith(prefix))) {
     console.log(`ALLOW generated artifact: ${file}`);
     continue;
@@ -61,7 +66,9 @@ for (const file of files) {
     continue;
   }
 
-  const diff = execSync(`git diff ${base} HEAD -- ${file}`).toString();
+  const diff = files.includes(file)
+    ? execSync(`git diff ${base} HEAD -- ${file}`).toString()
+    : readFileSync(file, "utf8");
   const hasHex = hexRegex.test(diff);
   if (!hasHex) {
     continue;
