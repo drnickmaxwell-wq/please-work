@@ -14,7 +14,7 @@ test("/preview/home renders without crashing", async () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (globalThis as any).React = React;
 
-  const { default: HomePreviewPage } = await import("../../app/preview/home/page");
+  const { default: HomePreviewPage } = await import("../../app/preview/(with-shell)/home/page");
   const html = renderToString(<HomePreviewPage />);
   assert.ok(
     html.includes("Luxury Coastal Dentistry") || html.length > 0,
