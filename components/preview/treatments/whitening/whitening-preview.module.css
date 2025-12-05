@@ -1,6 +1,9 @@
 .page {
   position: relative;
   isolation: isolate;
+  --cpv-panel-surface: color-mix(in srgb, var(--cpv-card-bg, var(--smh-ink)) 74%, var(--smh-white) 26%);
+  --cpv-panel-surface-strong: color-mix(in srgb, var(--cpv-card-bg, var(--smh-ink)) 78%, var(--smh-white) 22%);
+  --cpv-panel-border: color-mix(in srgb, var(--cpv-card-border, var(--smh-accent-gold-soft)) 82%, transparent 8%);
 }
 
 .heroBand {
@@ -114,7 +117,7 @@
 
 .tabButton {
   border: 1px solid color-mix(in srgb, var(--cpv-gold-keyline, var(--smh-accent-gold-soft)) 78%, transparent);
-  background: color-mix(in srgb, var(--cpv-card-bg, var(--smh-white)) 76%, var(--smh-ink) 24%);
+  background: color-mix(in srgb, var(--cpv-panel-surface) 86%, var(--smh-ink) 14%);
   color: var(--smh-white);
   padding: 0.65rem 1rem;
   border-radius: 999px;
@@ -139,8 +142,8 @@
 .tabPanel {
   border-radius: 1.2rem;
   padding: clamp(1.2rem, 1vw + 1rem, 1.8rem);
-  background: color-mix(in srgb, var(--cpv-card-bg, var(--smh-white)) 80%, var(--smh-ink) 20%);
-  border: 1px solid color-mix(in srgb, var(--cpv-gold-keyline, var(--smh-accent-gold-soft)) 78%, transparent 10%);
+  background: var(--cpv-panel-surface);
+  border: 1px solid var(--cpv-panel-border);
   box-shadow:
     0 22px 56px color-mix(in srgb, var(--smh-ink) 22%, transparent),
     inset 0 1px 0 color-mix(in srgb, var(--smh-white) 16%, transparent);
@@ -155,9 +158,9 @@
 }
 
 .aiCardGrid {
-  background: color-mix(in srgb, var(--cpv-card-bg, var(--smh-white)) 74%, var(--smh-ink-soft) 26%);
+  background: var(--cpv-panel-surface-strong);
   border-radius: 1.4rem;
-  border: 1px solid color-mix(in srgb, var(--cpv-gold-keyline, var(--smh-accent-gold-soft)) 72%, transparent 10%);
+  border: 1px solid var(--cpv-panel-border);
   padding: clamp(1.4rem, 2vw, 2rem);
   box-shadow:
     0 24px 60px color-mix(in srgb, var(--smh-ink) 22%, transparent),
@@ -165,10 +168,10 @@
 }
 
 .clinicianCard {
-  background: color-mix(in srgb, var(--cpv-card-bg, var(--smh-white)) 76%, var(--smh-ink-soft) 24%);
+  background: var(--cpv-panel-surface-strong);
   border-radius: 1.4rem;
   padding: clamp(1.8rem, 2.6vw, 2.6rem);
-  border: 1px solid color-mix(in srgb, var(--cpv-gold-keyline, var(--smh-accent-gold-soft)) 76%, transparent 8%);
+  border: 1px solid var(--cpv-panel-border);
   box-shadow:
     0 26px 68px color-mix(in srgb, var(--smh-ink) 22%, transparent),
     inset 0 1px 0 color-mix(in srgb, var(--smh-white) 14%, transparent);
@@ -197,10 +200,10 @@
 }
 
 .storiesShell {
-  background: color-mix(in srgb, var(--cpv-card-bg, var(--smh-white)) 72%, var(--smh-ink-soft) 28%);
+  background: var(--cpv-panel-surface);
   border-radius: 1.4rem;
   padding: clamp(1.6rem, 2vw, 2.2rem);
-  border: 1px solid color-mix(in srgb, var(--cpv-gold-keyline, var(--smh-accent-gold-soft)) 74%, transparent 10%);
+  border: 1px solid var(--cpv-panel-border);
   box-shadow:
     0 24px 62px color-mix(in srgb, var(--smh-ink) 22%, transparent),
     inset 0 1px 0 color-mix(in srgb, var(--smh-white) 12%, transparent);

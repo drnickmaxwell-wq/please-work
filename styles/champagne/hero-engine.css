@@ -1,6 +1,13 @@
 @import "./tokens.css";
 @import "./cta-system-v2.css";
 
+/*
+ * Preview regression note: the tone classes below previously coloured any element using
+ * `.hero-frame.hero-tone--*`, which meant the CMS-wired tone utility leaked onto the
+ * preview canvas wrapper and repainted the whole page when navigating back from a hero.
+ * Scoping tone backgrounds to the hero shell keeps the canvas controlled by cpv-page.
+ */
+
 .hero-engine-shell {
   position: relative;
   overflow: hidden;
@@ -33,18 +40,18 @@
     inset 0 0.0625rem 0 color-mix(in srgb, var(--brand-white) 12%, transparent);
 }
 
-.hero-frame.hero-tone--dawn {
+.hero-engine-shell.hero-frame.hero-tone--dawn {
   background: radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--bg-ink-soft) 42%, transparent) 0, transparent 55%),
     radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--bg-ink-soft) 42%, transparent) 0, transparent 55%),
     var(--smh-gradient);
 }
 
-.hero-frame.hero-tone--day {
+.hero-engine-shell.hero-frame.hero-tone--day {
   background: var(--smh-gradient);
 }
 
-.hero-frame.hero-tone--dusk,
-.hero-frame.hero-tone--night {
+.hero-engine-shell.hero-frame.hero-tone--dusk,
+.hero-engine-shell.hero-frame.hero-tone--night {
   background: radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--bg-ink) 46%, transparent) 0, transparent 55%),
     radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--bg-ink) 46%, transparent) 0, transparent 55%),
     var(--smh-gradient);
