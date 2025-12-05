@@ -65,10 +65,11 @@ export const composite_bonding_hero: HeroSchema = {
   intensity: "lux",
   layout: "left",
   layoutVariant: "left",
-  eyebrow: "Cosmetic treatment",
-  headline: "Composite Bonding",
+  eyebrow: "Composite bonding",
+  headline: "Refine your smile with precision composite bonding.",
   subheadline: "Precise refinements for edges, chips, and symmetry.",
-  subcopy: "Reshape and refine with colour-matched composites on Champagne glass gradients.",
+  subcopy:
+    "Sculpted resin layers close micro-gaps, rebalance edges, and restore lustre without compromising healthy enamel. Explore how our clinicians map, model, and polish every refinement.",
   waveSet: "wave-03",
   waveStrength: "medium",
   waves: {
@@ -86,18 +87,18 @@ export const composite_bonding_hero: HeroSchema = {
   cta: {
     primary: CTA_PRIMARY_CLASS,
     secondary: CTA_SECONDARY_CLASS,
-    primaryLabel: "Book composite bonding",
-    secondaryLabel: "View all treatments",
+    primaryLabel: "Book a consultation",
+    secondaryLabel: "AI smile preview",
     primaryHref: "/contact",
-    secondaryHref: "/treatments",
+    secondaryHref: "/ai-smile-quiz",
   },
   primaryCta: {
-    label: "Book composite bonding",
+    label: "Book a consultation",
     href: "/contact",
   },
   secondaryCta: {
-    label: "View all treatments",
-    href: "/treatments",
+    label: "AI smile preview",
+    href: "/ai-smile-quiz",
   },
 };
 
