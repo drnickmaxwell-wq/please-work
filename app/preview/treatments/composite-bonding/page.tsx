@@ -27,10 +27,7 @@ export const metadata: Metadata = {
 
 export default function CompositeBondingPreviewPage() {
   return (
-    <div
-      className={`cpv-page cpv-page--treatment-dark ${styles.page}`}
-      data-treatment="composite"
-    >
+    <div className={`cpv-page cpv-page--treatment ${styles.page}`} data-treatment="composite">
       <CompositeBondingHero />
 
       <main className={styles.main} role="main">

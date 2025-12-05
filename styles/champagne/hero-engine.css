@@ -9,12 +9,23 @@
  */
 
 .hero-engine-shell {
+  --hero-band-base: color-mix(in srgb, var(--bg-ink) 92%, transparent);
+  --hero-band-soft: color-mix(in srgb, var(--bg-ink-soft) 86%, transparent);
+  --hero-band-warm: color-mix(in srgb, var(--brand-magenta) 12%, transparent);
+  --hero-band-cool: color-mix(in srgb, var(--brand-teal) 12%, transparent);
+  --hero-wave-fill: color-mix(in srgb, var(--brand-teal) 22%, var(--bg-ink) 78%);
+  --hero-wave-highlight: color-mix(in srgb, var(--champagne-keyline-gold) 32%, transparent);
+  --hero-vignette: color-mix(in srgb, var(--bg-ink) 68%, transparent);
   position: relative;
   overflow: hidden;
   isolation: isolate;
   border-radius: var(--radius-lg);
   padding: var(--hero-space-y) var(--hero-space-x);
-  background: var(--hero-surface, transparent);
+  background:
+    radial-gradient(140% 120% at 18% 12%, var(--hero-band-warm) 0%, transparent 52%),
+    radial-gradient(140% 120% at 82% 10%, var(--hero-band-cool) 0%, transparent 52%),
+    linear-gradient(135deg, var(--hero-band-base) 0%, color-mix(in srgb, var(--hero-band-soft) 96%, transparent) 100%),
+    var(--hero-surface, transparent);
   color: var(--hero-foreground, color-mix(in srgb, var(--brand-white) 92%, var(--bg-ink) 8%));
   width: 100%;
   min-height: clamp(34rem, 56vw, 40rem);
@@ -57,11 +68,41 @@
     var(--smh-gradient);
 }
 
+.hero-engine-shell::before,
+.hero-engine-shell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 1;
+}
+
+.hero-engine-shell::before {
+  background:
+    radial-gradient(120% 90% at 50% 110%, color-mix(in srgb, var(--bg-ink) 14%, transparent) 0%, transparent 62%),
+    radial-gradient(140% 120% at 50% -12%, color-mix(in srgb, var(--champagne-keyline-gold) 12%, transparent) 0%, transparent 64%),
+    linear-gradient(180deg, var(--hero-vignette) 0%, transparent 48%);
+  mix-blend-mode: multiply;
+  opacity: 0.6;
+}
+
+.hero-engine-shell::after {
+  background:
+    radial-gradient(110% 90% at 50% 28%, color-mix(in srgb, var(--brand-white) 8%, transparent) 0%, transparent 56%),
+    radial-gradient(120% 90% at 18% 8%, color-mix(in srgb, var(--hero-band-warm) 42%, transparent) 0%, transparent 42%),
+    radial-gradient(120% 90% at 82% 10%, color-mix(in srgb, var(--hero-band-cool) 42%, transparent) 0%, transparent 42%);
+  mix-blend-mode: screen;
+  opacity: 0.35;
+}
+
 .hero-tonal-dusk {
   --hero-start: var(--bg-ink);
   --hero-end: color-mix(in srgb, var(--bg-ink) 92%, var(--brand-white) 8%);
   --hero-glow: var(--brand-gold);
   --hero-foreground: color-mix(in srgb, var(--brand-white) 92%, var(--bg-ink) 8%);
+  --hero-wave-fill: color-mix(in srgb, var(--brand-teal) 26%, var(--bg-ink) 74%);
+  --hero-wave-highlight: color-mix(in srgb, var(--champagne-keyline-gold) 28%, transparent);
 }
 
 .hero-tonal-ink {
@@ -69,6 +110,8 @@
   --hero-end: color-mix(in srgb, var(--bg-ink) 96%, transparent);
   --hero-glow: var(--champagne-keyline-gold);
   --hero-foreground: color-mix(in srgb, var(--brand-white) 90%, var(--bg-ink) 10%);
+  --hero-wave-fill: color-mix(in srgb, var(--bg-ink) 86%, var(--brand-white) 14%);
+  --hero-wave-highlight: color-mix(in srgb, var(--champagne-keyline-gold) 26%, transparent);
 }
 
 .hero-tonal-dawn {
@@ -76,6 +119,8 @@
   --hero-end: color-mix(in srgb, var(--brand-gold) 12%, var(--bg) 88%);
   --hero-glow: color-mix(in srgb, var(--brand-gold) 28%, transparent);
   --hero-foreground: color-mix(in srgb, var(--ink) 22%, var(--brand-white) 78%);
+  --hero-wave-fill: color-mix(in srgb, var(--brand-magenta) 32%, var(--bg-ink) 68%);
+  --hero-wave-highlight: color-mix(in srgb, var(--brand-gold) 32%, transparent);
 }
 
 .hero-tonal-noir {
@@ -83,6 +128,8 @@
   --hero-end: color-mix(in srgb, var(--bg-ink) 98%, transparent);
   --hero-glow: color-mix(in srgb, var(--brand-gold) 18%, transparent);
   --hero-foreground: color-mix(in srgb, var(--brand-white) 88%, var(--bg-ink) 12%);
+  --hero-wave-fill: color-mix(in srgb, var(--bg-ink) 90%, var(--brand-white) 10%);
+  --hero-wave-highlight: color-mix(in srgb, var(--champagne-keyline-gold) 24%, transparent);
 }
 
 .hero-tonal-whitening {
@@ -90,6 +137,8 @@
   --hero-end: color-mix(in srgb, var(--brand-teal) 36%, var(--bg-ink) 64%);
   --hero-glow: color-mix(in srgb, var(--brand-gold) 26%, transparent);
   --hero-foreground: color-mix(in srgb, var(--brand-white) 88%, var(--ink) 12%);
+  --hero-wave-fill: color-mix(in srgb, var(--brand-gold) 32%, var(--brand-magenta) 18%);
+  --hero-wave-highlight: color-mix(in srgb, var(--brand-teal) 26%, transparent);
 }
 
 .hero-tonal-teal-lux {
@@ -97,6 +146,8 @@
   --hero-end: color-mix(in srgb, var(--brand-teal) 28%, var(--bg-ink) 72%);
   --hero-glow: color-mix(in srgb, var(--brand-gold) 18%, transparent);
   --hero-foreground: color-mix(in srgb, var(--brand-white) 88%, var(--bg-ink) 12%);
+  --hero-wave-fill: color-mix(in srgb, var(--brand-teal) 34%, var(--bg-ink) 66%);
+  --hero-wave-highlight: color-mix(in srgb, var(--champagne-keyline-gold) 22%, transparent);
 }
 
 .hero-intensity-soft {
@@ -131,7 +182,7 @@
   gap: clamp(1.8rem, 3vw, 2.6rem);
   max-width: min(100%, 72rem);
   margin: 0 auto;
-  z-index: 2;
+  z-index: 3;
 }
 
 .hero-engine__content {
@@ -183,6 +234,14 @@
   opacity: var(--hero-wave-opacity, 0.2);
 }
 
+.hero-wave-stack {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
 .hero-tone-waves--on-light.hero-wave-layer,
 .hero-tone-waves--on-light .hero-wave-layer {
   opacity: 0.75;
@@ -204,6 +263,7 @@
   opacity: var(--hero-shimmer-opacity, 0.16);
   mix-blend-mode: screen;
   filter: drop-shadow(0 0.875rem 2rem color-mix(in srgb, var(--bg-ink) 18%, transparent));
+  z-index: 2;
 }
 
 .hero-tone-shimmer--rich.hero-shimmer-layer,
@@ -225,24 +285,31 @@
 
 .hero-cta-plate {
   display: inline-flex;
-  padding: clamp(0.9rem, 1.4vw, 1.2rem);
-  border-radius: var(--radius-md);
-  background: color-mix(in srgb, var(--bg-ink) 32%, var(--surface-glass) 68%);
-  outline: 0.0625rem solid color-mix(in srgb, var(--champagne-keyline-gold) 88%, transparent 12%);
+  padding: clamp(0.95rem, 1.4vw, 1.3rem) clamp(1.2rem, 2vw, 1.6rem);
+  border-radius: 999px;
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--brand-white) 10%, transparent) 0%, transparent 46%),
+    color-mix(in srgb, var(--surface-glass) 78%, var(--bg-ink) 22%);
+  outline: 0.0625rem solid color-mix(in srgb, var(--champagne-keyline-gold) 78%, transparent 10%);
   box-shadow:
-    0 1.45rem 3rem color-mix(in srgb, var(--bg-ink) 26%, transparent),
-    inset 0 0.0625rem 0 color-mix(in srgb, var(--brand-white) 18%, transparent);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+    0 1.45rem 3.2rem color-mix(in srgb, var(--bg-ink) 24%, transparent),
+    inset 0 0.0625rem 0 color-mix(in srgb, var(--brand-white) 18%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--bg-ink) 8%, transparent);
+  backdrop-filter: blur(14px) saturate(1.08);
+  -webkit-backdrop-filter: blur(14px) saturate(1.08);
 }
 
 .hero-cta-plate.cta-tone--ink-on-light {
-  background: color-mix(in srgb, var(--champagne-glass-bg) 76%, var(--bg) 24%);
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--brand-white) 10%, transparent) 0%, transparent 46%),
+    color-mix(in srgb, var(--champagne-glass-bg) 80%, var(--bg) 20%);
   color: color-mix(in srgb, var(--smh-ink) 92%, transparent);
 }
 
 .hero-cta-plate.cta-tone--ink-on-dark {
-  background: color-mix(in srgb, var(--champagne-glass-bg) 68%, var(--bg-ink) 18%);
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--brand-white) 8%, transparent) 0%, transparent 42%),
+    color-mix(in srgb, var(--champagne-glass-bg) 70%, var(--bg-ink) 20%);
   color: var(--smh-white);
 }
 
