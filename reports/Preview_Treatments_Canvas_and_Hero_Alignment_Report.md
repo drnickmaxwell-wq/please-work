@@ -2,12 +2,12 @@
 
 ## Layout structure
 - `app/preview/treatments/layout.tsx` wraps all treatment preview routes in a shared wrapper: `<div className="cpv-page cpv-page--champagne-dark" data-treatment={...}>`.
-- Treatment pages and the reusable template no longer attach their own `cpv-page` wrappers; the layout owns the canvas class stack, while template CTA tokens now attach via a global rule scoped to `.cpv-page[data-treatment]`.
+- Treatment pages and the reusable template no longer attach their own `cpv-page` wrappers; the layout owns the canvas class stack.
 - Shared preview CSS (champagne preview skin, preview layout/typography, treatments preview skin) is loaded once in the layout for the entire subtree.
 
 ## Canvas class stack
 - Canonical canvas classes: `cpv-page cpv-page--champagne-dark`.
-- Legacy modifiers (`cpv-page--treatment-dark`, `cpv-page--treatment-hub`) now alias to the same dark Champagne canvas in CSS, and individual pages do not apply canvas wrappers themselves.
+- Legacy canvas modifiers have been removed from the stylesheet so the dark Champagne canvas is defined in one place.
 
 ## Hero tone containment
 - Hero tone classes remain scoped to hero components only; no hero tone utilities are attached to `.cpv-page` or other page-level wrappers.
@@ -19,7 +19,7 @@
 
 ## Neutralised tonal/background overrides
 - Replaced prior canvas modifiers with the canonical `.cpv-page--champagne-dark` gradient and scoped canvas overlays to that class, preventing tonal packs from repainting the page.
-- Removed the template-level gradient on `.implantsCanvas` and relocated CTA token variables onto the shared canvas root to avoid page-wide repainting.
+- Removed the template-level gradient on `.implantsCanvas` and confined CTA/canvas variables to the shared layout instead of per-page global selectors.
 - Kept template and card backgrounds section-scoped so whitening/composite-specific skins no longer affect the global canvas.
 
 ALL /preview/treatments routes now share a stable dark Champagne canvas; hero tones are constrained to the hero band only, with no navigation-induced light canvas states.

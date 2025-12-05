@@ -1,7 +1,7 @@
 # Preview Treatments Canvas Leak Report
 
 ## Canvas-Level Rules
-- `styles/preview/champagne-preview.css` — `.cpv-page` sets base canvas padding and text color with `background: transparent`; `.cpv-page--champagne-dark`, `.cpv-page--treatment-dark`, `.cpv-page--treatment-hub` apply the dark Champagne gradient stack and text color overrides.
+- `styles/preview/champagne-preview.css` — `.cpv-page` keeps a transparent base; `.cpv-page--champagne-dark` is the sole canvas modifier applying the dark Champagne gradient stack and on-dark text variables.
 - `styles/preview/dusk.css` — `[data-theme="preview-dusk"]` defines `background-color: var(--smh-ink)` and dark text defaults for the preview shell.
 - `components/preview/layout/preview-shell.module.css` — `.cpvShell` applies a full-shell gradient background and text color; `.cpvBackdrop` layers additional radial gradients behind the shell.
 - `styles/preview/champagne/page.css` — `.preview-champagne-frame` paints a full-page radial + linear gradient backdrop and on-dark text color.

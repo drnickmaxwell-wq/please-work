@@ -4,7 +4,7 @@ This scan enumerates every background or text-colour rule that could influence p
 
 ## styles/preview/champagne-preview.css
 - `.cpv-page` – neutral base with transparent background, on-dark text mix; **CANVAS-SCOPED**.
-- `.cpv-page--champagne-dark` (aliases `--treatment-dark` / `--treatment-hub`) – sets dark Champagne gradient background, on-dark text, card/chip surfaces; **CANVAS-SCOPED**.
+- `.cpv-page--champagne-dark` – sets dark Champagne gradient background, on-dark text, card/chip surfaces; **CANVAS-SCOPED**.
 - `.cpv-page--champagne-dark::before/::after` – gradient overlays blending ink/magenta/teal for depth; **CANVAS-SCOPED**.
 - `.cpv-hero` plus `.champagne-hero-surface`/wave layers – hero container background-image and wave overlays; **HERO-SCOPED**.
 

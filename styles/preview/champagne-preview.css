@@ -188,9 +188,7 @@
   overflow: hidden;
 }
 
-.cpv-page--champagne-dark,
-.cpv-page--treatment-dark,
-.cpv-page--treatment-hub {
+.cpv-page--champagne-dark {
   --cpv-page-ink: color-mix(in srgb, var(--smh-ink) 94%, transparent);
   --cpv-page-text-main: color-mix(in srgb, var(--smh-white) 94%, var(--smh-ink) 6%);
   --cpv-page-text-soft: color-mix(in srgb, var(--smh-white) 78%, var(--smh-ink) 22%);
@@ -213,8 +211,8 @@
   color: var(--cpv-page-text);
 }
 
-:is(.cpv-page--champagne-dark, .cpv-page--treatment-dark, .cpv-page--treatment-hub)::before,
-:is(.cpv-page--champagne-dark, .cpv-page--treatment-dark, .cpv-page--treatment-hub)::after {
+.cpv-page--champagne-dark::before,
+.cpv-page--champagne-dark::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -223,7 +221,7 @@
   z-index: 0;
 }
 
-:is(.cpv-page--champagne-dark, .cpv-page--treatment-dark, .cpv-page--treatment-hub)::before {
+.cpv-page--champagne-dark::before {
   background:
     radial-gradient(150% 130% at 50% -6%, color-mix(in srgb, var(--smh-accent-gold-soft) 18%, transparent) 0%, transparent 60%),
     radial-gradient(140% 140% at 18% 12%, color-mix(in srgb, var(--brand-magenta) 9%, transparent) 0%, transparent 48%),
@@ -233,7 +231,7 @@
   opacity: 0.16;
 }
 
-:is(.cpv-page--champagne-dark, .cpv-page--treatment-dark, .cpv-page--treatment-hub)::after {
+.cpv-page--champagne-dark::after {
   background:
     radial-gradient(130% 120% at 50% 18%, color-mix(in srgb, var(--smh-ink) 8%, transparent) 0%, transparent 58%),
     radial-gradient(120% 120% at 50% 108%, color-mix(in srgb, var(--smh-ink) 10%, transparent) 0%, transparent 70%);
