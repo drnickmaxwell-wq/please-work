@@ -67,7 +67,7 @@ for (const file of fileSet) {
   }
 
   const diff = files.includes(file)
-    ? execSync(`git diff ${base} HEAD -- ${file}`).toString()
+    ? execSync(`git diff ${base} HEAD -- "${file}"`).toString()
     : readFileSync(file, "utf8");
   const hasHex = hexRegex.test(diff);
   if (!hasHex) {
