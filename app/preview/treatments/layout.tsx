@@ -29,7 +29,11 @@ export default function TreatmentsPreviewLayout({
   const dataTreatment = resolveTreatmentSlug(params?.slug);
 
   return (
-    <div className="cpv-page cpv-page--champagne-dark" data-treatment={dataTreatment}>
+    <div
+      className="cpv-page cpv-page--champagne-dark cpv-page--treatments"
+      data-treatment={dataTreatment}
+      data-preview-scope="treatments"
+    >
       {children}
     </div>
   );
