@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import clsx from "clsx";
 
 import PreviewTreatmentsHero from "@/components/preview/PreviewTreatmentsHero";
 import ConcernRail, { type ConcernCard } from "@/components/preview/sections/treatments/ConcernRail";
@@ -153,10 +154,7 @@ const faqs: TreatmentFaq[] = [
 
 export default function TreatmentsPreview() {
   return (
-    <div
-      className={`cpv-page cpv-page--treatment-hub ${layoutStyles.previewCanvas}`}
-      data-treatment="general"
-    >
+    <div className={clsx("cpv-page", "cpv-page--hub-dark", layoutStyles.previewCanvas)} data-treatment="general">
       <PreviewTreatmentsHero
         primaryCta={{ label: "Take the AI Smile Quiz", href: "/ai-smile-quiz" }}
         secondaryCta={{ label: "Book a consultation", href: "/contact" }}

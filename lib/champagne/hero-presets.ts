@@ -24,7 +24,7 @@ export const whitening_hero: HeroSchema = {
   waveStrength: "strong",
   waves: {
     mask: "wave-02",
-    opacity: 0.34,
+    opacity: 0.4,
     blendMode: "soft-light",
   },
   shimmer: {
@@ -74,7 +74,7 @@ export const composite_bonding_hero: HeroSchema = {
   waveStrength: "strong",
   waves: {
     mask: "wave-03",
-    opacity: 0.38,
+    opacity: 0.42,
     blendMode: "overlay",
   },
   shimmer: {

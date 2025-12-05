@@ -112,6 +112,14 @@
   --champagne-sheen-alpha: calc(var(--cpv-shimmer-alpha) + var(--mood-gold-sheen) * 0.08);
 }
 
+/*
+ * Preview canvas notes:
+ * - .cpv-page now only sets sizing/spacing; it previously carried the light paper gradient
+ *   that made hub/treatment previews flip to a pale wash on navigation.
+ * - .cpv-page--hub-dark and .cpv-page--treatment-dark provide the ink gradients for the hub
+ *   and individual treatment canvases respectively.
+ */
+
 .cpv-page[data-treatment='composite'] {
   --mood-warm-lift: 0.48;
   --mood-teal-lift: 0.26;
@@ -179,22 +187,20 @@
 .cpv-page {
   position: relative;
   min-height: 100vh;
-  background:
-    radial-gradient(150% 140% at 48% -18%, color-mix(in srgb, var(--brand-magenta) 10%, transparent) 0%, transparent 42%),
-    radial-gradient(150% 140% at 52% -6%, color-mix(in srgb, var(--brand-teal) 10%, transparent) 0%, transparent 40%),
-    radial-gradient(180% 170% at 50% 112%, color-mix(in srgb, var(--smh-paper-strong) 10%, transparent) 0%, transparent 62%),
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--smh-paper-soft) 97%, var(--cpv-page-ink) 3%) 0%,
-      color-mix(in srgb, var(--smh-paper) 95%, var(--cpv-page-ink) 5%) 45%,
-      color-mix(in srgb, var(--smh-paper-strong) 93%, var(--cpv-page-ink) 7%) 100%
-    );
   color: var(--cpv-page-text);
   padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 7vw, 4rem) clamp(4rem, 8vw, 6.75rem);
   display: flex;
   flex-direction: column;
   gap: clamp(4.5rem, 7.5vw, 7.25rem);
   overflow: hidden;
+}
+
+.cpv-page--hub-dark {
+  background:
+    radial-gradient(circle at 0 0, var(--smh-ink-soft) 0, transparent 55%),
+    radial-gradient(circle at 100% 100%, var(--smh-ink-deep) 0, transparent 55%),
+    linear-gradient(180deg, var(--smh-ink) 0%, var(--smh-ink-deeper) 100%);
+  color: var(--smh-ink-on-dark);
 }
 
 .cpv-page--treatment-dark {
@@ -209,15 +215,10 @@
   --cpv-chip-border: color-mix(in srgb, var(--smh-accent-gold-soft) 70%, transparent);
   --cpv-link-underline: color-mix(in srgb, var(--brand-magenta) 68%, var(--brand-teal) 32%);
   background:
-    linear-gradient(
-      135deg,
-      color-mix(in srgb, var(--smh-ink) 92%, transparent) 0%,
-      color-mix(in srgb, var(--smh-ink) 88%, var(--brand-magenta) 14%) 44%,
-      color-mix(in srgb, var(--smh-ink) 88%, var(--brand-teal) 12%) 100%
-    ),
-    radial-gradient(150% 140% at 50% -12%, color-mix(in srgb, var(--brand-magenta) 18%, transparent) 0%, transparent 56%),
-    radial-gradient(150% 160% at 52% 118%, color-mix(in srgb, var(--brand-teal) 16%, transparent) 0%, transparent 64%);
-  color: var(--cpv-page-text);
+    radial-gradient(circle at 0 50%, var(--smh-ink-soft) 0, transparent 55%),
+    radial-gradient(circle at 100% 0, var(--smh-ink-deep) 0, transparent 55%),
+    linear-gradient(180deg, var(--smh-ink-deeper) 0%, var(--smh-ink-xdeep) 100%);
+  color: var(--smh-ink-on-dark);
 }
 
 .cpv-page--treatment-dark .cpv-shell {
@@ -1109,3 +1110,7 @@
   width: min(1020px, 100%);
   position: relative;
 }
+
+/* Canvas audit: cpv-page is now neutral (no paper wash). Hub uses cpv-page--hub-dark ink
+ * gradient; individual treatments use cpv-page--treatment-dark to stay dark when
+ * navigating between hub and detail pages. */
