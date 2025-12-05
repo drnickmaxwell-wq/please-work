@@ -21,15 +21,15 @@ export const whitening_hero: HeroSchema = {
   subheadline: "Champagne-calibrated brightness for confident smiles.",
   subcopy: "Professional whitening with Champagne-level attention to detail.",
   waveSet: "wave-02",
-  waveStrength: "strong",
+  waveStrength: "medium",
   waves: {
     mask: "wave-02",
-    opacity: 0.44,
-    blendMode: "overlay",
+    opacity: 0.32,
+    blendMode: "soft-light",
   },
   shimmer: {
     enabled: true,
-    density: "high",
+    density: "med",
     style: "dust",
   },
   shimmerEnabled: true,
@@ -71,10 +71,10 @@ export const composite_bonding_hero: HeroSchema = {
   subcopy:
     "Sculpted resin layers close micro-gaps, rebalance edges, and restore lustre without compromising healthy enamel. Explore how our clinicians map, model, and polish every refinement.",
   waveSet: "wave-03",
-  waveStrength: "medium",
+  waveStrength: "strong",
   waves: {
     mask: "wave-03",
-    opacity: 0.3,
+    opacity: 0.42,
     blendMode: "overlay",
   },
   shimmer: {

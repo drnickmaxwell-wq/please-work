@@ -1,3 +1,4 @@
+:global(.cpv-page--treatment-hub).previewCanvas,
 .previewCanvas :global(.cpv-page) {
   background: linear-gradient(
       180deg,
