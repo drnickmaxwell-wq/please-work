@@ -5,6 +5,7 @@ import "@/styles/preview/dusk.css";
 import "@/styles/champagne/theme.css";
 import "@/styles/preview/champagne-preview.css";
 import "@/components/preview/preview-typography.css";
+import "@/styles/preview/treatments.css";
 import "@/styles/preview/treatments-preview.css";
 
 function resolveTreatmentSlug(slug?: string | string[]): string {
@@ -34,13 +35,17 @@ export default function PreviewTreatmentsLayout({
 
   return (
     <PreviewShell>
-      <div
-        className="cpv-page cpv-page--champagne-dark cpv-page--treatments"
+      <main
+        className="cpv-page cpv-page--champagne-dark cpv-page--treatments cpv-treatments-canvas-lock"
         data-treatment={dataTreatment}
         data-preview-scope="treatments"
+        style={{
+          backgroundColor: "var(--smh-ink)",
+          color: "var(--smh-white)",
+        }}
       >
         {children}
-      </div>
+      </main>
     </PreviewShell>
   );
 }

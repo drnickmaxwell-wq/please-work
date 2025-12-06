@@ -167,6 +167,14 @@
   opacity: 0.2;
 }
 
+/* Preview treatments: neutralise hero-tone background ONLY inside the preview treatments canvas */
+.cpv-treatments-canvas-lock .hero-frame.hero-tone--dawn,
+.cpv-treatments-canvas-lock .hero-frame.hero-tone--day,
+.cpv-treatments-canvas-lock .hero-frame.hero-tone--dusk,
+.cpv-treatments-canvas-lock .hero-frame.hero-tone--night {
+  background: transparent !important;
+}
+
 .tp-hero__content {
   position: relative;
   display: grid;
