@@ -1,0 +1,139 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "generatedBy": "Director AI",
+    "notes": "Maps preview routes to their intended production counterparts and readiness."
+  },
+
+  "pairs": [
+    {
+      "preview": "/preview/home",
+      "production": "/",
+      "status": "ready",
+      "notes": "Home hero + footer canonical; mid-body sections still reskinning but structure valid."
+    },
+    {
+      "preview": "/preview/treatments",
+      "production": "/treatments",
+      "status": "in-progress",
+      "notes": "Uses ChampagneTreatmentTemplate; finance/gallery/FAQ/3D slots still have TODOs."
+    },
+    {
+      "preview": "/preview/treatments/general",
+      "production": "/treatments/general",
+      "status": "in-progress",
+      "notes": "General hub stack valid; content + schema to be finalised."
+    },
+    {
+      "preview": "/preview/treatments/cosmetic",
+      "production": "/treatments/cosmetic",
+      "status": "in-progress",
+      "notes": "Hub hero + benefits structure ok; card skins to be standardised."
+    },
+    {
+      "preview": "/preview/treatments/orthodontics",
+      "production": "/treatments/orthodontics",
+      "status": "in-progress"
+    },
+    {
+      "preview": "/preview/treatments/3d-dentistry",
+      "production": "/treatments/3d-dentistry",
+      "status": "in-progress",
+      "notes": "3D slots particularly important for Sprintray USP."
+    },
+    {
+      "preview": "/preview/treatments/implants",
+      "production": "/treatments/implants",
+      "status": "in-progress"
+    },
+    {
+      "preview": "/preview/treatments/dental-implants",
+      "production": "/treatments/implants",
+      "status": "future",
+      "notes": "SEO alias; content may split into future dedicated /treatments/dental-implants route."
+    },
+    {
+      "preview": "/preview/treatments/whitening",
+      "production": "/treatments/cosmetic/teeth-whitening",
+      "status": "in-progress"
+    },
+    {
+      "preview": "/preview/treatments/veneers",
+      "production": "/treatments/cosmetic/veneers",
+      "status": "in-progress"
+    },
+    {
+      "preview": "/preview/treatments/composite-bonding",
+      "production": "/treatments/cosmetic/composite-bonding",
+      "status": "in-progress"
+    },
+    {
+      "preview": "/preview/treatments/orthodontics/spark-aligners",
+      "production": "/treatments/orthodontics/spark-aligners",
+      "status": "in-progress"
+    },
+    {
+      "preview": "/preview/treatments/technology",
+      "production": "/treatments/technology",
+      "status": "needs-reskin"
+    },
+    {
+      "preview": "/preview/technology",
+      "production": "/treatments/technology",
+      "status": "needs-reskin"
+    },
+    {
+      "preview": "/preview/lux/technology",
+      "production": "/treatments/technology",
+      "status": "needs-reskin",
+      "notes": "LUX variant; decorative reference rather than canonical."
+    },
+    {
+      "preview": "/preview/lux/team",
+      "production": "/team",
+      "status": "brief-needed"
+    },
+    {
+      "preview": "/preview/lux/patient-stories",
+      "production": "/patient-stories",
+      "status": "brief-needed"
+    },
+    {
+      "preview": "/preview/lux/smile-ai",
+      "production": "/ai-smile-quiz",
+      "status": "brief-needed"
+    },
+
+    {
+      "preview": "/preview-v2/treatments",
+      "production": "/treatments",
+      "status": "deprecated",
+      "notes": "Kept for archival reference; new work to use /preview/treatments stack."
+    },
+    {
+      "preview": "/preview-v2/treatments/whitening",
+      "production": "/treatments/cosmetic/teeth-whitening",
+      "status": "deprecated"
+    },
+    {
+      "preview": "/preview-v2/treatments/veneers",
+      "production": "/treatments/cosmetic/veneers",
+      "status": "deprecated"
+    },
+    {
+      "preview": "/preview-v2/treatments/implants",
+      "production": "/treatments/implants",
+      "status": "deprecated"
+    },
+    {
+      "preview": "/preview-v2/treatments/orthodontics",
+      "production": "/treatments/orthodontics",
+      "status": "deprecated"
+    },
+    {
+      "preview": "/preview-v2/treatments/composite-bonding",
+      "production": "/treatments/cosmetic/composite-bonding",
+      "status": "deprecated"
+    }
+  ]
+}
