@@ -6,6 +6,7 @@ import "@/styles/champagne/theme.css";
 import "@/styles/preview/champagne-preview.css";
 import "@/components/preview/preview-typography.css";
 import "@/styles/preview/treatments-preview.css";
+import "@/styles/preview/preview-treatments-canvas.css";
 
 function resolveTreatmentSlug(slug?: string | string[]): string {
   if (!slug) return "general";
@@ -35,7 +36,7 @@ export default function PreviewTreatmentsLayout({
   return (
     <PreviewShell>
       <div
-        className="cpv-page cpv-page--champagne-dark cpv-page--treatments"
+        className="cpv-page cpv-page--champagne-dark cpv-page--treatments cpv-treatments-canvas"
         data-treatment={dataTreatment}
         data-preview-scope="treatments"
       >

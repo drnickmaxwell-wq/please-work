@@ -1,0 +1,16 @@
+.cpv-page--champagne-dark {
+  background-color: var(--bg-ink);
+}
+
+.cpv-page--champagne-dark.cpv-treatments-canvas {
+  background-color: var(--bg-ink);
+  color: var(--smh-white);
+}
+
+.cpv-page--champagne-dark.cpv-treatments-canvas .hero-frame.hero-tone--dawn,
+.cpv-page--champagne-dark.cpv-treatments-canvas .hero-frame.hero-tone--day,
+.cpv-page--champagne-dark.cpv-treatments-canvas .hero-frame.hero-tone--dusk,
+.cpv-page--champagne-dark.cpv-treatments-canvas .hero-frame.hero-tone--night {
+  background: none !important;
+  background-color: transparent !important;
+}
