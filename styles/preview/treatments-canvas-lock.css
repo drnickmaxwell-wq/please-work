@@ -1,0 +1,8 @@
+.cpv-page.cpv-page--champagne-dark.cpv-page--treatments[data-preview-scope="treatments"] {
+  background-color: var(--smh-ink);
+  background-image:
+    radial-gradient(at 0% 0%, var(--smh-ink-soft) 0, transparent 55%),
+    radial-gradient(at 100% 100%, var(--smh-ink-soft) 0, transparent 55%),
+    var(--smh-gradient);
+  color: var(--smh-ink-on-dark-text);
+}

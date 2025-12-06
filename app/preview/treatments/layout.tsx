@@ -3,6 +3,7 @@ import React from "react";
 import "@/styles/preview/champagne-preview.css";
 import "@/components/preview/preview-typography.css";
 import "@/styles/preview/treatments-preview.css";
+import "@/styles/preview/treatments-canvas-lock.css"; // must stay last to lock treatments canvas
 
 function resolveTreatmentSlug(slug?: string | string[]): string {
   if (!slug) return "general";
