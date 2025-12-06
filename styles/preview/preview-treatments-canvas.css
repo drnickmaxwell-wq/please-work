@@ -1,7 +1,6 @@
 .cpv-page--champagne-dark[data-preview-scope="treatments"] {
-  --smh-preview-treatments-dark-bg: var(--bg-ink, #03040a);
-  background-color: var(--smh-preview-treatments-dark-bg) !important;
-  color: var(--smh-ink-on-dark, #f5f7ff);
+  background-color: var(--smh-preview-treatments-dark-bg, var(--bg-ink)) !important;
+  color: var(--smh-preview-treatments-ink-on-dark, var(--smh-white));
   color-scheme: dark;
   min-height: 100vh;
 }

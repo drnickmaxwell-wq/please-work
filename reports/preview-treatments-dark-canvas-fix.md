@@ -8,6 +8,7 @@
 - Scoped hero tone backgrounds to the hero’s internal surface layer via `--hero-surface` and a dedicated `::before` painter, removing direct background paints from `.hero-tone--*` wrappers.
 - Locked the treatments preview canvas to a dark surface with a preview-only stylesheet (`styles/preview/preview-treatments-canvas.css`) imported by `app/preview/treatments/layout.tsx`.
 - Documented the current tone application points and canvas ownership inside `components/preview/treatments/ChampagneTreatmentTemplate.tsx` for future debugging.
+- Replaced rogue hex fallbacks on the preview canvas with Champagne tokens (`--smh-preview-treatments-dark-bg`, `--smh-preview-treatments-ink-on-dark`) so guard-rogue-hex passes.
 
 ## How the fixes prevent the bug
 - Tone classes now only influence the hero’s internal paint layer, so even if a tone class lands on an unexpected element, it cannot recolour the page background.

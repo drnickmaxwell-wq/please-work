@@ -36,6 +36,10 @@
   --smh-gold: var(--brand-gold);
   --champagne-keyline-gold: var(--brand-gold-keyline);
 
+  /* Preview treatments dark canvas */
+  --smh-preview-treatments-dark-bg: var(--ink);
+  --smh-preview-treatments-ink-on-dark: var(--smh-white);
+
   /* Surface sizing */
   --smh-surface-bg-size: 165% 165%;
   --smh-surface-bg-position: 18% 38%;
