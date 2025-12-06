@@ -150,28 +150,30 @@ const faqs: TreatmentFaq[] = [
 
 export default function TreatmentsPreview() {
   return (
-    <div className={layoutStyles.previewCanvas}>
-      <PreviewTreatmentsHero
-        primaryCta={{ label: "Take the AI Smile Quiz", href: "/ai-smile-quiz" }}
-        secondaryCta={{ label: "Book a consultation", href: "/contact" }}
-      />
+    <div className="cpv-treatments-root" style={{ backgroundColor: "var(--smh-ink)", minHeight: "100vh" }}>
+      <div className={layoutStyles.previewCanvas}>
+        <PreviewTreatmentsHero
+          primaryCta={{ label: "Take the AI Smile Quiz", href: "/ai-smile-quiz" }}
+          secondaryCta={{ label: "Book a consultation", href: "/contact" }}
+        />
 
-      <main className="cpv-main" role="main">
-        <ConcernRail items={concernCards} />
-        <TreatmentHowItWorksPreview steps={howToSteps} />
-        <TreatmentFinancePreview />
-        <TreatmentTechHighlight />
-        <StoriesTeaser stories={stories} />
-        <TreatmentMicroFaq faqs={faqs} />
-      </main>
-      <TreatmentHubPreviewSchema />
-      <div className="cpv-footer-note">
-        <p>
-          Preview canvas mirrors the Champagne homepage: dusk-to-ink palette, magenta/teal accents, and glass shells with reduced motion ready.
-        </p>
-        <Link href="/preview/home" className="cpv-footer-note__link">
-          Compare with home preview
-        </Link>
+        <main className="cpv-main" role="main">
+          <ConcernRail items={concernCards} />
+          <TreatmentHowItWorksPreview steps={howToSteps} />
+          <TreatmentFinancePreview />
+          <TreatmentTechHighlight />
+          <StoriesTeaser stories={stories} />
+          <TreatmentMicroFaq faqs={faqs} />
+        </main>
+        <TreatmentHubPreviewSchema />
+        <div className="cpv-footer-note">
+          <p>
+            Preview canvas mirrors the Champagne homepage: dusk-to-ink palette, magenta/teal accents, and glass shells with reduced motion ready.
+          </p>
+          <Link href="/preview/home" className="cpv-footer-note__link">
+            Compare with home preview
+          </Link>
+        </div>
       </div>
     </div>
   );

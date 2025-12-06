@@ -109,24 +109,26 @@ export default async function TreatmentPreviewPage({ params, searchParams }: Tre
   ];
 
   return (
-    <main className="tp-main">
-      {showHud ? <DevHud className="tl-hud" stats={hudStats} title="Treatment detail HUD" /> : null}
-      <div className="tp-shell">
-        <BreadcrumbBar items={previewData.breadcrumbs} route={previewData.route} />
-        <PreviewHero
-          badges={heroBadges}
-          description={previewData.service?.description}
-          eyebrow={`Preview route · ${previewData.route ?? `/treatments/${slug}`}`}
-          missingCopy={!previewData.service?.description}
-          title={previewData.service?.name}
-        />
-        <div className="tp-grid-duo">
-          <BenefitsCapsules benefits={benefits} />
-          <Viewer3DSlot posterSrc="/brand/posters/placeholder.webp" />
+    <div className="cpv-treatments-root" style={{ backgroundColor: 'var(--smh-ink)', minHeight: '100vh' }}>
+      <main className="tp-main">
+        {showHud ? <DevHud className="tl-hud" stats={hudStats} title="Treatment detail HUD" /> : null}
+        <div className="tp-shell">
+          <BreadcrumbBar items={previewData.breadcrumbs} route={previewData.route} />
+          <PreviewHero
+            badges={heroBadges}
+            description={previewData.service?.description}
+            eyebrow={`Preview route · ${previewData.route ?? `/treatments/${slug}`}`}
+            missingCopy={!previewData.service?.description}
+            title={previewData.service?.name}
+          />
+          <div className="tp-grid-duo">
+            <BenefitsCapsules benefits={benefits} />
+            <Viewer3DSlot posterSrc="/brand/posters/placeholder.webp" />
+          </div>
+          <HowToRail missing={previewData.missing.howTo} steps={previewData.howTo?.steps ?? []} title={previewData.howTo?.name} />
+          <FaqAccordion items={previewData.faq} missing={previewData.missing.faq} />
         </div>
-        <HowToRail missing={previewData.missing.howTo} steps={previewData.howTo?.steps ?? []} title={previewData.howTo?.name} />
-        <FaqAccordion items={previewData.faq} missing={previewData.missing.faq} />
-      </div>
-    </main>
+      </main>
+    </div>
   );
 }
