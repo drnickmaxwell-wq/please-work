@@ -3,8 +3,9 @@
 }
 
 .cpv-page--champagne-dark.cpv-treatments-canvas {
-  background-color: var(--bg-ink);
+  background-color: var(--bg-ink) !important;
   color: var(--smh-white);
+  min-height: 100vh;
 }
 
 .cpv-page--champagne-dark.cpv-treatments-canvas .hero-frame.hero-tone--dawn,
