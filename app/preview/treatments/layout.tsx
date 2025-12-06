@@ -1,6 +1,7 @@
 import React from "react";
 
 import PreviewShell from "@/components/preview/layout/PreviewShell";
+import { PreviewTreatmentsCanvasGuard } from "@/components/preview/PreviewTreatmentsCanvasGuard";
 import "@/styles/preview/dusk.css";
 import "@/styles/champagne/theme.css";
 import "@/styles/preview/champagne-preview.css";
@@ -39,6 +40,7 @@ export default function PreviewTreatmentsLayout({
         data-treatment={dataTreatment}
         data-preview-scope="treatments"
       >
+        <PreviewTreatmentsCanvasGuard />
         {children}
       </div>
     </PreviewShell>
