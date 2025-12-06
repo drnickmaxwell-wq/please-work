@@ -1,0 +1,342 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "generatedBy": "Director AI",
+    "description": "High-level state machine for the Champagne AI Concierge.",
+    "dependsOn": [
+      "config/champagne/treatment-registry.json",
+      "config/champagne/cta-routing.json"
+    ]
+  },
+
+  "entryPoints": {
+    "direct": {
+      "route": "/ai/concierge",
+      "defaultState": "WELCOME"
+    },
+    "fromTreatmentPage": {
+      "state": "TREATMENT_CONTEXT",
+      "contextKeys": ["treatmentSlug"]
+    },
+    "fromFinanceHelper": {
+      "state": "FINANCE_TRIAGE",
+      "contextKeys": ["budgetBand", "treatmentTier"]
+    },
+    "fromSmileQuiz": {
+      "state": "QUIZ_RESULTS_HANDOFF",
+      "contextKeys": ["primaryRecommendationSlug", "secondaryRecommendations"]
+    }
+  },
+
+  "states": {
+    "WELCOME": {
+      "kind": "system",
+      "description": "Greets the user and identifies broad intent.",
+      "nextOn": {
+        "intent:cosmetic": "TRIAGE_SMILE_GOALS",
+        "intent:missingTooth": "TRIAGE_IMPLANTS",
+        "intent:looseDentures": "TRIAGE_FULL_ARCH_OR_DENTURES",
+        "intent:teethStraightening": "TRIAGE_ORTHO",
+        "intent:anxiety": "TRIAGE_ANXIETY",
+        "intent:emergency": "EMERGENCY_ADVICE_GATE",
+        "intent:generalCheckup": "ROUTE_TO_GENERAL",
+        "fallback": "CLARIFY_INTENT"
+      }
+    },
+
+    "CLARIFY_INTENT": {
+      "kind": "system",
+      "description": "Ask one or two short, non-clinical questions to clarify what they’re after before routing.",
+      "nextOn": {
+        "resolvedIntent": "WELCOME"
+      }
+    },
+
+    "TRIAGE_SMILE_GOALS": {
+      "kind": "triage",
+      "description": "Cosmetic/smile makeover triage.",
+      "routesToTreatmentGroups": ["cosmetic", "3dDentistry"],
+      "nextOn": {
+        "goal:whiter": "PATH_WHITENING",
+        "goal:chipsGaps": "PATH_BONDING_OR_VENEERS",
+        "goal:fullMakeover": "PATH_SMILE_MAKEOVER",
+        "goal:budgetConscious": "PATH_3D_PRINTED_VENEERS",
+        "fallback": "TREATMENT_CONTEXT"
+      }
+    },
+
+    "TRIAGE_IMPLANTS": {
+      "kind": "triage",
+      "routesToTreatmentGroups": ["implants", "3dDentistry"],
+      "nextOn": {
+        "missing:singleTooth": "PATH_SINGLE_TOOTH_IMPLANT",
+        "missing:multipleTeeth": "PATH_MULTIPLE_IMPLANTS",
+        "missing:fullArch": "PATH_FULL_ARCH_IMPLANTS",
+        "fallback": "PATH_IMPLANT_OVERVIEW"
+      }
+    },
+
+    "TRIAGE_FULL_ARCH_OR_DENTURES": {
+      "kind": "triage",
+      "routesToTreatmentGroups": ["implants", "3dDentistry"],
+      "nextOn": {
+        "prefers:fixed": "PATH_FULL_ARCH_IMPLANTS",
+        "prefers:removable": "PATH_3D_SAME_DAY_DENTURES",
+        "fallback": "PATH_IMPLANT_OVERVIEW"
+      }
+    },
+
+    "TRIAGE_ORTHO": {
+      "kind": "triage",
+      "routesToTreatmentGroups": ["orthodontics"],
+      "nextOn": {
+        "prefers:discreet": "PATH_CLEAR_ALIGNERS",
+        "prefers:fixed": "PATH_FIXED_BRACES",
+        "age:teen": "PATH_TEEN_ORTHO",
+        "fallback": "PATH_CLEAR_ALIGNERS"
+      }
+    },
+
+    "TRIAGE_ANXIETY": {
+      "kind": "triage",
+      "routesToTreatmentGroups": ["anxietyComfort", "technologyComfort"],
+      "nextOn": {
+        "trigger:needlePhobia": "PATH_WAND_AND_SEDATION",
+        "trigger:gagReflex": "PATH_SEDATION",
+        "trigger:generalAnxiety": "PATH_GENTLE_DENTISTRY",
+        "fallback": "PATH_GENTLE_DENTISTRY"
+      }
+    },
+
+    "EMERGENCY_ADVICE_GATE": {
+      "kind": "safety",
+      "description": "Short non-clinical safety gate: encourage phone call / 111; never give medical advice.",
+      "nextOn": {
+        "acknowledged": "END_WITH_EMERGENCY_CTA"
+      }
+    },
+
+    "ROUTE_TO_GENERAL": {
+      "kind": "router",
+      "description": "Route to general check-ups, hygiene, or basic restorative options.",
+      "nextOn": {
+        "basicCheckup": "END_WITH_GENERAL_CTA",
+        "existingIssue": "TREATMENT_CONTEXT"
+      }
+    },
+
+    "PATH_WHITENING": {
+      "kind": "pathway",
+      "treatments": ["professional-whitening"],
+      "ctaIntentPrimary": "bookInPerson",
+      "ctaIntentSecondary": "startSmileQuiz"
+    },
+
+    "PATH_BONDING_OR_VENEERS": {
+      "kind": "pathway",
+      "treatments": [
+        "composite-bonding",
+        "porcelain-veneers",
+        "3d-printed-veneers"
+      ],
+      "ctaIntentPrimary": "bookInPerson",
+      "ctaIntentSecondary": "applyFinance"
+    },
+
+    "PATH_SMILE_MAKEOVER": {
+      "kind": "pathway",
+      "treatments": [
+        "composite-bonding",
+        "porcelain-veneers",
+        "3d-printed-veneers",
+        "professional-whitening"
+      ],
+      "ctaIntentPrimary": "bookVideoConsult",
+      "ctaIntentSecondary": "applyFinance"
+    },
+
+    "PATH_3D_PRINTED_VENEERS": {
+      "kind": "pathway",
+      "treatments": ["3d-printed-veneers"],
+      "ctaIntentPrimary": "bookInPerson",
+      "ctaIntentSecondary": "applyFinance",
+      "notes": "USP emphasis: permanent but more affordable; 3D workflow with Sprintray."
+    },
+
+    "PATH_SINGLE_TOOTH_IMPLANT": {
+      "kind": "pathway",
+      "treatments": [
+        "single-tooth-implant",
+        "3d-printed-implant-restorations"
+      ],
+      "ctaIntentPrimary": "bookInPerson",
+      "ctaIntentSecondary": "applyFinance"
+    },
+
+    "PATH_MULTIPLE_IMPLANTS": {
+      "kind": "pathway",
+      "treatments": [
+        "multiple-implants",
+        "3d-printed-implant-restorations"
+      ],
+      "ctaIntentPrimary": "bookInPerson",
+      "ctaIntentSecondary": "applyFinance"
+    },
+
+    "PATH_FULL_ARCH_IMPLANTS": {
+      "kind": "pathway",
+      "treatments": [
+        "full-arch-implants",
+        "same-day-implants"
+      ],
+      "ctaIntentPrimary": "bookVideoConsult",
+      "ctaIntentSecondary": "applyFinance",
+      "requiresHumanReview": true
+    },
+
+    "PATH_3D_SAME_DAY_DENTURES": {
+      "kind": "pathway",
+      "treatments": ["3d-same-day-dentures"],
+      "ctaIntentPrimary": "bookInPerson",
+      "ctaIntentSecondary": "applyFinance"
+    },
+
+    "PATH_CLEAR_ALIGNERS": {
+      "kind": "pathway",
+      "treatments": ["spark-aligners"],
+      "ctaIntentPrimary": "bookInPerson",
+      "ctaIntentSecondary": "applyFinance"
+    },
+
+    "PATH_FIXED_BRACES": {
+      "kind": "pathway",
+      "treatments": ["fixed-braces"],
+      "ctaIntentPrimary": "bookInPerson",
+      "ctaIntentSecondary": "applyFinance"
+    },
+
+    "PATH_TEEN_ORTHO": {
+      "kind": "pathway",
+      "treatments": ["fixed-braces"],
+      "ctaIntentPrimary": "bookInPerson",
+      "ctaIntentSecondary": "applyFinance"
+    },
+
+    "PATH_WAND_AND_SEDATION": {
+      "kind": "pathway",
+      "treatments": [
+        "the-wand-painless-numbing",
+        "sedation"
+      ],
+      "ctaIntentPrimary": "bookInPerson",
+      "ctaIntentSecondary": "bookVideoConsult"
+    },
+
+    "PATH_SEDATION": {
+      "kind": "pathway",
+      "treatments": ["sedation"],
+      "ctaIntentPrimary": "bookInPerson",
+      "ctaIntentSecondary": "bookVideoConsult",
+      "requiresHumanReview": true
+    },
+
+    "PATH_GENTLE_DENTISTRY": {
+      "kind": "pathway",
+      "treatments": [
+        "sedation",
+        "the-wand-painless-numbing"
+      ],
+      "ctaIntentPrimary": "bookInPerson",
+      "ctaIntentSecondary": "startSmileQuiz"
+    },
+
+    "TREATMENT_CONTEXT": {
+      "kind": "contextual",
+      "description": "User is already on a treatment page; concierge acts as explainer + router to CTAs.",
+      "nextOn": {
+        "needsFinance": "FINANCE_TRIAGE",
+        "wantsAlternatives": "ALT_TREATMENT_SUGGESTIONS"
+      }
+    },
+
+    "FINANCE_TRIAGE": {
+      "kind": "triage",
+      "description": "Talk generally about finance options without giving regulated financial advice.",
+      "ctaIntentPrimary": "applyFinance",
+      "ctaIntentSecondary": "bookInPerson"
+    },
+
+    "ALT_TREATMENT_SUGGESTIONS": {
+      "kind": "router",
+      "description": "Offer 1–2 reasonable alternatives within scope (e.g. 3D printed veneers vs porcelain).",
+      "notes": "Never give promises or clinical guarantees."
+    },
+
+    "QUIZ_RESULTS_HANDOFF": {
+      "kind": "router",
+      "description": "Turn AI Smile Quiz result into conversational guidance.",
+      "nextOn": {
+        "acceptsPrimary": "END_WITH_BOOKING_CTA",
+        "wantsAlt": "ALT_TREATMENT_SUGGESTIONS"
+      }
+    },
+
+    "END_WITH_EMERGENCY_CTA": {
+      "kind": "terminal",
+      "description": "End state for emergency journeys using emergency CTA routing."
+    },
+
+    "END_WITH_GENERAL_CTA": {
+      "kind": "terminal",
+      "description": "End state for routine/general journeys using standard treatment CTAs."
+    },
+
+    "END_WITH_BOOKING_CTA": {
+      "kind": "terminal",
+      "description": "End state for elective pathways; booking + optional finance CTA shown."
+    }
+  },
+
+  "treatmentGroups": {
+    "cosmetic": [
+      "composite-bonding",
+      "porcelain-veneers",
+      "3d-printed-veneers",
+      "professional-whitening"
+    ],
+    "3dDentistry": [
+      "3d-printed-veneers",
+      "3d-restorative-dentistry",
+      "3d-same-day-dentures",
+      "3d-printed-implant-restorations"
+    ],
+    "implants": [
+      "single-tooth-implant",
+      "multiple-implants",
+      "full-arch-implants",
+      "same-day-implants",
+      "3d-printed-implant-restorations"
+    ],
+    "orthodontics": [
+      "spark-aligners",
+      "fixed-braces"
+    ],
+    "anxietyComfort": [
+      "sedation"
+    ],
+    "technologyComfort": [
+      "the-wand-painless-numbing"
+    ]
+  },
+
+  "safety": {
+    "neverGiveClinicalDiagnosis": true,
+    "neverOverrideDentistAdvice": true,
+    "alwaysEncourageProfessionalAssessment": true,
+    "requiresHumanReviewForTreatments": [
+      "full-arch-implants",
+      "same-day-implants",
+      "sedation"
+    ]
+  }
+}
