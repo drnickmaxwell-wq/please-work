@@ -34,7 +34,7 @@ export default function PreviewTreatmentsLayout({
   const dataTreatment = resolveTreatmentSlug(params?.slug);
 
   return (
-    <PreviewShell>
+    <PreviewShell scope="treatments">
       <PreviewTreatmentsToneGuard />
       <div
         className="cpv-page cpv-page--champagne-dark cpv-page--treatments"

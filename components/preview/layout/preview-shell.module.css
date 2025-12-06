@@ -10,6 +10,17 @@
   color: var(--smh-text);
 }
 
+.cpvShellTreatments {
+  background: transparent;
+}
+
+.cpvShellTreatments .cpvBackdrop,
+.cpvShellTreatments .cpvParticles {
+  display: none;
+}
+
+/* Primary: .cpvShellTreatments class from PreviewShell(scope='treatments').
+   Fallback: :has selectors for older markup or defensive behaviour. */
 .cpvShell:has(.cpv-page--treatments),
 .cpvShell:has([data-preview-scope="treatments"]) {
   background: transparent;

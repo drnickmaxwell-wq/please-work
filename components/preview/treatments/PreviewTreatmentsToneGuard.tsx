@@ -3,6 +3,9 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
+// NOTE: This guard deliberately avoids repainting <body>.
+// Canvas tone is now handled by CSS scoped to the treatments preview.
+
 const HERO_TONE_CLASSES = [
   "hero-tone--dawn",
   "hero-tone--day",
@@ -24,34 +27,18 @@ export function PreviewTreatmentsToneGuard() {
       return;
     }
 
-    const body = document.body;
-    const previousBackgroundColor = body.style.backgroundColor;
-    const previousBackgroundImage = body.style.backgroundImage;
-
-    body.style.backgroundColor = "var(--bg-ink)";
-    body.style.backgroundImage = "none";
-
     const roots = document.querySelectorAll(
-      ".cpv-page--treatments, .cpv-treatments-canvas"
+      ".cpv-page--treatments, .cpv-treatments-canvas, .hero-frame"
     );
 
     roots.forEach((root) => {
       stripToneClassesFrom(root);
-
-      if (root.classList.contains("hero-frame")) {
-        stripToneClassesFrom(root);
-      }
 
       const leakedFrames = root.querySelectorAll(".hero-frame");
       leakedFrames.forEach((frame) => {
         stripToneClassesFrom(frame);
       });
     });
-
-    return () => {
-      body.style.backgroundColor = previousBackgroundColor;
-      body.style.backgroundImage = previousBackgroundImage;
-    };
   }, [pathname]);
 
   return null;

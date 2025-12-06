@@ -4,9 +4,25 @@ import ChampagnePreviewFooter from "@/components/preview/layout/ChampagnePreview
 import ChampagnePreviewHeader from "@/components/preview/layout/ChampagnePreviewHeader";
 import styles from "./preview-shell.module.css";
 
-export default function PreviewShell({ children }: { children: ReactNode }) {
+type PreviewShellScope = "default" | "treatments";
+
+interface PreviewShellProps {
+  children: ReactNode;
+  scope?: PreviewShellScope;
+}
+
+export default function PreviewShell({
+  children,
+  scope = "default",
+}: PreviewShellProps) {
+  const scopeClass = scope === "treatments" ? styles.cpvShellTreatments : "";
+
   return (
-    <div className={`${styles.cpvShell} text-[var(--smh-white)]`} data-theme="preview-dusk">
+    <div
+      className={`${styles.cpvShell} ${scopeClass} text-[var(--smh-white)]`}
+      data-theme="preview-dusk"
+      data-preview-scope={scope}
+    >
       <div className={styles.cpvBackdrop} aria-hidden />
       <div className={styles.cpvParticles} aria-hidden />
       <div className={`${styles.cpvInner} flex min-h-screen flex-col`}>
