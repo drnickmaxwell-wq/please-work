@@ -20,6 +20,17 @@ export function PreviewTreatmentsToneGuard() {
   const pathname = usePathname();
 
   useEffect(() => {
+    if (!pathname?.startsWith("/preview/treatments")) {
+      return;
+    }
+
+    const body = document.body;
+    const previousBackgroundColor = body.style.backgroundColor;
+    const previousBackgroundImage = body.style.backgroundImage;
+
+    body.style.backgroundColor = "var(--bg-ink)";
+    body.style.backgroundImage = "none";
+
     const roots = document.querySelectorAll(
       ".cpv-page--treatments, .cpv-treatments-canvas"
     );
@@ -36,6 +47,11 @@ export function PreviewTreatmentsToneGuard() {
         stripToneClassesFrom(frame);
       });
     });
+
+    return () => {
+      body.style.backgroundColor = previousBackgroundColor;
+      body.style.backgroundImage = previousBackgroundImage;
+    };
   }, [pathname]);
 
   return null;
