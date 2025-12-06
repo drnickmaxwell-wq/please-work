@@ -1,0 +1,35 @@
+.plab-shell {
+  min-height: 100vh;
+  background-color: var(--bg-ink);
+  color: var(--smh-white);
+  color-scheme: dark;
+  position: relative;
+  overflow: hidden;
+}
+
+.plab-shell__backdrop {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 18%, color-mix(in srgb, var(--brand-magenta) 22%, transparent) 0, transparent 55%),
+    radial-gradient(circle at 82% 84%, color-mix(in srgb, var(--brand-teal) 20%, transparent) 0, transparent 62%);
+  opacity: 0.28;
+}
+
+.plab-shell__main {
+  position: relative;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .plab-shell__main {
+    padding: 3rem 1.25rem 4rem;
+  }
+}

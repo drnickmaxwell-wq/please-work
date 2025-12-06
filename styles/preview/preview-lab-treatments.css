@@ -1,0 +1,243 @@
+.plab-page {
+  background-color: var(--bg-ink);
+  color: var(--smh-white);
+}
+
+.plab-page--treatments {
+  min-height: 100vh;
+}
+
+.plab-main {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.plab-main--hub {
+  align-items: center;
+}
+
+.plab-card {
+  background-color: color-mix(in srgb, var(--bg-ink) 76%, transparent);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: 2rem;
+  border: 1px solid color-mix(in srgb, var(--brand-gold) 24%, transparent);
+}
+
+.plab-card--hub {
+  max-width: 720px;
+  width: 100%;
+}
+
+.plab-heading-xl {
+  font-family: var(--font-display, "Playfair Display", serif);
+  font-size: clamp(2rem, 2.4vw, 2.7rem);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+}
+
+.plab-heading-lg {
+  font-family: var(--font-display, "Playfair Display", serif);
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+  margin-bottom: 0.5rem;
+}
+
+.plab-heading-md {
+  font-family: var(--font-body, "Inter", system-ui, sans-serif);
+  font-size: 1.05rem;
+  margin-bottom: 0.35rem;
+}
+
+.plab-body {
+  font-family: var(--font-body, "Inter", system-ui, sans-serif);
+  font-size: 1rem;
+  color: color-mix(in srgb, var(--smh-white) 86%, transparent);
+  line-height: 1.6;
+}
+
+.plab-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.plab-list a {
+  color: color-mix(in srgb, var(--smh-white) 92%, transparent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.plab-list a:hover,
+.plab-list a:focus-visible {
+  text-decoration: underline;
+}
+
+.plab-hero {
+  background: linear-gradient(125deg, color-mix(in srgb, var(--smh-gradient-start, var(--brand-magenta)) 82%, transparent) 0%, color-mix(in srgb, var(--smh-gradient-end, var(--brand-teal)) 88%, transparent) 60%, color-mix(in srgb, var(--brand-gold) 90%, transparent) 100%);
+  color: var(--smh-white);
+  border-radius: var(--radius-lg);
+  padding: 3rem 2.5rem;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  overflow: hidden;
+}
+
+.plab-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 28% 30%, color-mix(in srgb, var(--smh-white) 16%, transparent) 0, transparent 38%);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.plab-hero__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--radius-sm);
+  background-color: color-mix(in srgb, var(--bg-ink) 58%, transparent);
+  border: 1px solid color-mix(in srgb, var(--brand-gold) 28%, transparent);
+  font-size: 0.85rem;
+  font-family: var(--font-body, "Inter", system-ui, sans-serif);
+}
+
+.plab-hero__title {
+  font-size: clamp(2.4rem, 3vw, 3rem);
+  margin: 1rem 0 0.75rem;
+  font-family: var(--font-display, "Playfair Display", serif);
+  letter-spacing: -0.02em;
+}
+
+.plab-hero__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.plab-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-pill, 999px);
+  background-color: color-mix(in srgb, var(--bg-ink) 65%, transparent);
+  border: 1px solid color-mix(in srgb, var(--smh-white) 24%, transparent);
+  color: color-mix(in srgb, var(--smh-white) 90%, transparent);
+  font-family: var(--font-body, "Inter", system-ui, sans-serif);
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: transform 160ms ease, border-color 160ms ease;
+}
+
+.plab-chip:hover,
+.plab-chip:focus-visible {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--brand-gold) 40%, transparent);
+}
+
+.plab-section {
+  background-color: color-mix(in srgb, var(--bg-ink) 82%, transparent);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 2rem;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid color-mix(in srgb, var(--brand-gold) 22%, transparent);
+}
+
+.plab-section__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.25rem;
+}
+
+.plab-highlight {
+  background-color: color-mix(in srgb, var(--bg-ink) 70%, transparent);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--smh-white) 18%, transparent);
+  box-shadow: var(--shadow-soft);
+}
+
+.plab-highlight__icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-sm);
+  background-color: color-mix(in srgb, var(--smh-white) 12%, transparent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+  color: color-mix(in srgb, var(--smh-white) 90%, transparent);
+  font-weight: 700;
+}
+
+.plab-highlight__text {
+  font-family: var(--font-body, "Inter", system-ui, sans-serif);
+  color: color-mix(in srgb, var(--smh-white) 90%, transparent);
+  line-height: 1.5;
+}
+
+.plab-faq {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.plab-faq__item {
+  background-color: color-mix(in srgb, var(--bg-ink) 70%, transparent);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--smh-white) 16%, transparent);
+}
+
+.plab-faq__question {
+  font-weight: 700;
+  margin: 0 0 0.35rem;
+  font-family: var(--font-body, "Inter", system-ui, sans-serif);
+  color: color-mix(in srgb, var(--smh-white) 94%, transparent);
+}
+
+.plab-faq__answer {
+  color: color-mix(in srgb, var(--smh-white) 84%, transparent);
+  font-family: var(--font-body, "Inter", system-ui, sans-serif);
+  line-height: 1.6;
+}
+
+.plab-quick-answers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.plab-quick-answers__chip {
+  padding: 0.65rem 0.95rem;
+  border-radius: var(--radius-pill, 999px);
+  background-color: color-mix(in srgb, var(--bg-ink) 62%, transparent);
+  border: 1px solid color-mix(in srgb, var(--brand-gold) 20%, transparent);
+  color: color-mix(in srgb, var(--smh-white) 88%, transparent);
+  font-family: var(--font-body, "Inter", system-ui, sans-serif);
+  font-size: 0.95rem;
+}
+
+.plab-footer {
+  margin-top: 2rem;
+  color: color-mix(in srgb, var(--smh-white) 68%, transparent);
+  font-size: 0.9rem;
+  text-align: center;
+  font-family: var(--font-body, "Inter", system-ui, sans-serif);
+}
+
+@media (max-width: 768px) {
+  .plab-hero,
+  .plab-section {
+    padding: 2rem 1.5rem;
+  }
+}
