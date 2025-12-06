@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0.0",
     "generatedBy": "Director AI",
-    "notes": "Canonical registry for Champagne marketing + treatment pages and key preview twins."
+    "notes": "Canonical registry for Champagne marketing + treatment pages and key preview twins. Preview-v2 routes are archived under /archive/preview-v2 and excluded from runtime."
   },
 
   "groups": {
@@ -48,13 +48,7 @@
       "/preview/treatments/composite-bonding",
       "/preview/treatments/technology",
       "/preview/treatments/dental-implants",
-      "/preview/treatments/[slug]",
-      "/preview-v2/treatments",
-      "/preview-v2/treatments/whitening",
-      "/preview-v2/treatments/veneers",
-      "/preview-v2/treatments/implants",
-      "/preview-v2/treatments/orthodontics",
-      "/preview-v2/treatments/composite-bonding"
+      "/preview/treatments/[slug]"
     ],
     "preview-core": [
       "/preview/home",
@@ -203,7 +197,7 @@
       "kind": "treatment-hub",
       "launchPhase": "v1",
       "layout": "TREATMENTS_LAYOUT",
-      "previewTwins": ["/preview/treatments", "/preview-v2/treatments"],
+      "previewTwins": ["/preview/treatments"],
       "heroKey": "TREATMENT_HUB_HERO",
       "template": "TREATMENT_HUB",
       "seoSchemaProfile": "treatments-hub"
@@ -233,7 +227,7 @@
       "kind": "treatment-hub",
       "launchPhase": "v1",
       "layout": "TREATMENTS_LAYOUT",
-      "previewTwins": ["/preview/treatments/orthodontics", "/preview-v2/treatments/orthodontics"],
+      "previewTwins": ["/preview/treatments/orthodontics"],
       "heroKey": "TREATMENT_HUB_HERO_ORTHO",
       "template": "TREATMENT_HUB",
       "seoSchemaProfile": "treatments-hub"
@@ -253,7 +247,7 @@
       "kind": "treatment-hub",
       "launchPhase": "v1",
       "layout": "TREATMENTS_LAYOUT",
-      "previewTwins": ["/preview/treatments/implants", "/preview/treatments/dental-implants", "/preview-v2/treatments/implants"],
+      "previewTwins": ["/preview/treatments/implants", "/preview/treatments/dental-implants"],
       "heroKey": "TREATMENT_HUB_HERO_IMPLANTS",
       "template": "TREATMENT_HUB",
       "seoSchemaProfile": "treatments-hub"
@@ -273,7 +267,7 @@
       "kind": "treatment-detail",
       "launchPhase": "v1",
       "layout": "TREATMENTS_LAYOUT",
-      "previewTwins": ["/preview/treatments/composite-bonding", "/preview-v2/treatments/composite-bonding"],
+      "previewTwins": ["/preview/treatments/composite-bonding"],
       "heroKey": "CB_HERO_FINAL",
       "template": "TREATMENT_DETAIL_CB_BLUEPRINT",
       "seoSchemaProfile": "treatment-composite-bonding"
@@ -283,7 +277,7 @@
       "kind": "treatment-detail",
       "launchPhase": "v1",
       "layout": "TREATMENTS_LAYOUT",
-      "previewTwins": ["/preview/treatments/veneers", "/preview-v2/treatments/veneers"],
+      "previewTwins": ["/preview/treatments/veneers"],
       "heroKey": "CB_HERO_FINAL",
       "template": "TREATMENT_DETAIL_CB_BLUEPRINT",
       "seoSchemaProfile": "treatment-veneers"
@@ -293,7 +287,7 @@
       "kind": "treatment-detail",
       "launchPhase": "v1",
       "layout": "TREATMENTS_LAYOUT",
-      "previewTwins": ["/preview/treatments/whitening", "/preview-v2/treatments/whitening"],
+      "previewTwins": ["/preview/treatments/whitening"],
       "heroKey": "CB_HERO_FINAL",
       "template": "TREATMENT_DETAIL_CB_BLUEPRINT",
       "seoSchemaProfile": "treatment-whitening"
@@ -333,7 +327,7 @@
       "kind": "treatment-detail",
       "launchPhase": "v1",
       "layout": "TREATMENTS_LAYOUT",
-      "previewTwins": ["/preview/treatments/implants", "/preview/treatments/dental-implants", "/preview-v2/treatments/implants"],
+      "previewTwins": ["/preview/treatments/implants", "/preview/treatments/dental-implants"],
       "heroKey": "CB_HERO_FINAL",
       "template": "TREATMENT_DETAIL_CB_BLUEPRINT",
       "seoSchemaProfile": "treatment-full-arch-implants"

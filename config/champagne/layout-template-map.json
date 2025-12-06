@@ -36,16 +36,6 @@
       "notes": "Canonical preview layout for ChampagneTreatmentTemplate-based pages."
     },
 
-    "PREVIEW_V2_LAYOUT": {
-      "file": "app/preview-v2/layout.tsx",
-      "usedFor": ["preview-v2"],
-      "notes": "Legacy V2 shell; marked as deprecated but kept for reference."
-    },
-
-    "PREVIEW_V2_TREATMENTS_LAYOUT": {
-      "file": "app/preview-v2/treatments/layout.tsx",
-      "usedFor": ["preview-v2-treatments"],
-      "notes": "Legacy V2 preview treatments; do not promote to production."
     }
   },
 
@@ -119,13 +109,6 @@
     "/preview/treatments/composite-bonding": "PREVIEW_TREATMENTS_LAYOUT",
     "/preview/treatments/technology": "PREVIEW_TREATMENTS_LAYOUT",
     "/preview/treatments/dental-implants": "PREVIEW_TREATMENTS_LAYOUT",
-    "/preview/treatments/[slug]": "PREVIEW_TREATMENTS_LAYOUT",
-
-    "/preview-v2/treatments": "PREVIEW_V2_TREATMENTS_LAYOUT",
-    "/preview-v2/treatments/whitening": "PREVIEW_V2_TREATMENTS_LAYOUT",
-    "/preview-v2/treatments/veneers": "PREVIEW_V2_TREATMENTS_LAYOUT",
-    "/preview-v2/treatments/implants": "PREVIEW_V2_TREATMENTS_LAYOUT",
-    "/preview-v2/treatments/orthodontics": "PREVIEW_V2_TREATMENTS_LAYOUT",
-    "/preview-v2/treatments/composite-bonding": "PREVIEW_V2_TREATMENTS_LAYOUT"
+    "/preview/treatments/[slug]": "PREVIEW_TREATMENTS_LAYOUT"
   }
 }

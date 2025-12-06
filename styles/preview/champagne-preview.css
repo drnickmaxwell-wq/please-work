@@ -214,6 +214,8 @@
     --cpv-page-text,
     color-mix(in srgb, var(--brand-white) 90%, var(--bg-ink) 10%)
   );
+  min-height: 100vh;
+  isolation: isolate;
 }
 
 .cpv-page.cpv-page--champagne-dark.cpv-page--treatments {

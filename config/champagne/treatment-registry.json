@@ -52,10 +52,7 @@
       "template": "TREATMENT_DETAIL_CB_BLUEPRINT",
       "heroId": "CB_HERO_FINAL",
       "hasPreview": true,
-      "previewRoutes": [
-        "/preview/treatments/composite-bonding",
-        "/preview-v2/treatments/composite-bonding"
-      ],
+      "previewRoutes": ["/preview/treatments/composite-bonding"],
       "aiConciergeFlows": ["smile-goals", "photo-upload", "finance-check"],
       "notes": "Use as prototype for all elective cosmetic treatments."
     },
@@ -68,10 +65,7 @@
       "template": "TREATMENT_DETAIL_CB_BLUEPRINT",
       "heroId": "CB_HERO_FINAL",
       "hasPreview": true,
-      "previewRoutes": [
-        "/preview/treatments/veneers",
-        "/preview-v2/treatments/veneers"
-      ],
+      "previewRoutes": ["/preview/treatments/veneers"],
       "aiConciergeFlows": ["smile-goals", "photo-upload", "veneers-vs-3d-printed"],
       "notes": "Primary competitor with 3D printed veneers – crosslinks heavily."
     },
@@ -97,10 +91,7 @@
       "template": "TREATMENT_DETAIL_CB_BLUEPRINT",
       "heroId": "CB_HERO_FINAL",
       "hasPreview": true,
-      "previewRoutes": [
-        "/preview/treatments/whitening",
-        "/preview-v2/treatments/whitening"
-      ],
+      "previewRoutes": ["/preview/treatments/whitening"],
       "aiConciergeFlows": ["whitening-only", "whitening-before-bonding"],
       "notes": "Include custom tray, top-up, and whitening-as-part-of-plan."
     },
@@ -138,11 +129,7 @@
       "template": "TREATMENT_DETAIL_CB_BLUEPRINT",
       "heroId": "CB_HERO_FINAL",
       "hasPreview": true,
-      "previewRoutes": [
-        "/preview/treatments/implants",
-        "/preview/treatments/dental-implants",
-        "/preview-v2/treatments/implants"
-      ],
+      "previewRoutes": ["/preview/treatments/implants", "/preview/treatments/dental-implants"],
       "aiConciergeFlows": ["missing-single-tooth", "implant-vs-bridge", "implant-finance"],
       "notes": "Highlight 3D-guided placement + 3D-printed restoration synergy."
     },

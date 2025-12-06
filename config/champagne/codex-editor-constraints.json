@@ -29,7 +29,7 @@
     "app/blog/**",
     "app/team/**",
     "app/preview/**",
-    "app/preview-v2/**",
+    "archive/preview-v2/**",
     "components/**",
     "styles/**",
     "config/champagne/*.json",

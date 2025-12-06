@@ -1,4 +1,7 @@
-import React from "react";
+"use client";
+
+import React, { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 import PreviewShell from "@/components/preview/layout/PreviewShell";
 import "@/styles/preview/dusk.css";
@@ -31,6 +34,19 @@ export default function PreviewTreatmentsLayout({
   params: { slug?: string | string[] };
 }) {
   const dataTreatment = resolveTreatmentSlug(params?.slug);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const canvas = document.querySelector<HTMLElement>("[data-preview-scope='treatments']");
+    if (!canvas) return;
+
+    canvas.classList.add("cpv-page", "cpv-page--champagne-dark", "cpv-page--treatments");
+
+    const heroToneClasses = Array.from(canvas.classList).filter((className) => className.startsWith("hero-tone--"));
+    heroToneClasses.forEach((className) => canvas.classList.remove(className));
+
+    canvas.style.backgroundColor = "var(--bg-ink)";
+  }, [pathname, dataTreatment]);
 
   return (
     <PreviewShell>

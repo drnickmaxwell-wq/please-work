@@ -5,10 +5,11 @@
  * Preview regression note: the tone classes below previously coloured any element using
  * `.hero-frame.hero-tone--*`, which meant the CMS-wired tone utility leaked onto the
  * preview canvas wrapper and repainted the whole page when navigating back from a hero.
- * Scoping tone backgrounds to the hero shell keeps the canvas controlled by cpv-page.
+ * Scoping tone backgrounds to the `.champagne-hero` shell keeps the canvas controlled
+ * by cpv-page.
  */
 
-.hero-engine-shell {
+.champagne-hero.hero-engine-shell {
   position: relative;
   overflow: hidden;
   isolation: isolate;
@@ -22,7 +23,7 @@
   align-items: center;
 }
 
-.hero-gradient-base {
+.champagne-hero.hero-gradient-base {
   --hero-space-y: clamp(4.2rem, 7vw, 6rem);
   --hero-space-x: clamp(1.8rem, 4vw, 3.4rem);
   --hero-surface: linear-gradient(
@@ -38,72 +39,66 @@
   box-shadow:
     0 1.625rem 4rem color-mix(in srgb, var(--bg-ink) 22%, transparent),
     inset 0 0.0625rem 0 color-mix(in srgb, var(--brand-white) 12%, transparent);
-}
-
-.hero-engine-shell.hero-frame.hero-tone--dawn {
+.champagne-hero.hero-engine-shell.hero-frame.hero-tone--dawn {
   background: radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--bg-ink-soft) 42%, transparent) 0, transparent 55%),
     radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--bg-ink-soft) 42%, transparent) 0, transparent 55%),
     var(--smh-gradient);
 }
 
-.hero-engine-shell.hero-frame.hero-tone--day {
+.champagne-hero.hero-engine-shell.hero-frame.hero-tone--day {
   background: var(--smh-gradient);
 }
 
-.hero-engine-shell.hero-frame.hero-tone--dusk,
-.hero-engine-shell.hero-frame.hero-tone--night {
+.champagne-hero.hero-engine-shell.hero-frame.hero-tone--dusk,
+.champagne-hero.hero-engine-shell.hero-frame.hero-tone--night {
   background: radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--bg-ink) 46%, transparent) 0, transparent 55%),
     radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--bg-ink) 46%, transparent) 0, transparent 55%),
     var(--smh-gradient);
 }
 
-.hero-frame:not(.hero-engine-shell) {
-  background: none;
-}
-
-.hero-tonal-dusk {
+.champagne-hero.hero-tonal-dusk {
   --hero-start: var(--bg-ink);
   --hero-end: color-mix(in srgb, var(--bg-ink) 92%, var(--brand-white) 8%);
   --hero-glow: var(--brand-gold);
   --hero-foreground: color-mix(in srgb, var(--brand-white) 92%, var(--bg-ink) 8%);
 }
 
-.hero-tonal-ink {
+.champagne-hero.hero-tonal-ink {
   --hero-start: color-mix(in srgb, var(--bg-ink) 88%, var(--brand-white) 12%);
   --hero-end: color-mix(in srgb, var(--bg-ink) 96%, transparent);
   --hero-glow: var(--champagne-keyline-gold);
   --hero-foreground: color-mix(in srgb, var(--brand-white) 90%, var(--bg-ink) 10%);
 }
 
-.hero-tonal-dawn {
+.champagne-hero.hero-tonal-dawn {
   --hero-start: color-mix(in srgb, var(--brand-magenta) 18%, var(--bg) 82%);
   --hero-end: color-mix(in srgb, var(--brand-gold) 12%, var(--bg) 88%);
   --hero-glow: color-mix(in srgb, var(--brand-gold) 28%, transparent);
   --hero-foreground: color-mix(in srgb, var(--ink) 22%, var(--brand-white) 78%);
 }
 
-.hero-tonal-noir {
+.champagne-hero.hero-tonal-noir {
   --hero-start: color-mix(in srgb, var(--bg-ink) 92%, transparent);
   --hero-end: color-mix(in srgb, var(--bg-ink) 98%, transparent);
   --hero-glow: color-mix(in srgb, var(--brand-gold) 18%, transparent);
   --hero-foreground: color-mix(in srgb, var(--brand-white) 88%, var(--bg-ink) 12%);
 }
 
-.hero-tonal-whitening {
+.champagne-hero.hero-tonal-whitening {
   --hero-start: color-mix(in srgb, var(--brand-magenta) 32%, var(--bg) 68%);
   --hero-end: color-mix(in srgb, var(--brand-teal) 36%, var(--bg-ink) 64%);
   --hero-glow: color-mix(in srgb, var(--brand-gold) 26%, transparent);
   --hero-foreground: color-mix(in srgb, var(--brand-white) 88%, var(--ink) 12%);
 }
 
-.hero-tonal-teal-lux {
+.champagne-hero.hero-tonal-teal-lux {
   --hero-start: color-mix(in srgb, var(--brand-teal) 22%, var(--bg-ink) 78%);
   --hero-end: color-mix(in srgb, var(--brand-teal) 28%, var(--bg-ink) 72%);
   --hero-glow: color-mix(in srgb, var(--brand-gold) 18%, transparent);
   --hero-foreground: color-mix(in srgb, var(--brand-white) 88%, var(--bg-ink) 12%);
 }
 
-.hero-intensity-soft {
+.champagne-hero.hero-intensity-soft {
   --hero-surface: linear-gradient(
       140deg,
       color-mix(in srgb, var(--hero-glow, var(--brand-gold)) 12%, transparent) 0%,
@@ -116,7 +111,7 @@
     );
 }
 
-.hero-intensity-lux {
+.champagne-hero.hero-intensity-lux {
   --hero-surface: linear-gradient(
       125deg,
       color-mix(in srgb, var(--hero-glow, var(--brand-gold)) 18%, transparent) 0%,
@@ -129,7 +124,7 @@
     );
 }
 
-.hero-engine__inner {
+.champagne-hero .hero-engine__inner {
   position: relative;
   display: grid;
   gap: clamp(1.8rem, 3vw, 2.6rem);
@@ -138,45 +133,45 @@
   z-index: 2;
 }
 
-.hero-engine__content {
+.champagne-hero .hero-engine__content {
   display: grid;
   gap: clamp(1.4rem, 2vw, 2rem);
   max-width: min(100%, 48rem);
 }
 
-.hero-layout-center .hero-engine__content {
+.champagne-hero .hero-layout-center .hero-engine__content {
   justify-items: center;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
 }
 
-.hero-layout-left .hero-engine__content {
+.champagne-hero .hero-layout-left .hero-engine__content {
   justify-items: start;
 }
 
-.hero-engine__eyebrow {
+.champagne-hero .hero-engine__eyebrow {
   font-size: 0.95rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--hero-foreground) 78%, transparent);
 }
 
-.hero-engine__headline {
+.champagne-hero .hero-engine__headline {
   margin: 0;
   font-size: clamp(2rem, 4vw, 3rem);
   line-height: 1.1;
   color: var(--hero-foreground);
 }
 
-.hero-engine__subcopy {
+.champagne-hero .hero-engine__subcopy {
   margin: 0;
   font-size: clamp(1.05rem, 2vw, 1.25rem);
   line-height: 1.6;
   color: color-mix(in srgb, var(--hero-foreground) 86%, transparent);
 }
 
-.hero-wave-layer {
+.champagne-hero .hero-wave-layer {
   position: absolute;
   inset: 0;
   pointer-events: none;
@@ -187,17 +182,17 @@
   opacity: var(--hero-wave-opacity, 0.2);
 }
 
-.hero-tone-waves--on-light.hero-wave-layer,
-.hero-tone-waves--on-light .hero-wave-layer {
+.champagne-hero .hero-tone-waves--on-light.hero-wave-layer,
+.champagne-hero .hero-tone-waves--on-light .hero-wave-layer {
   opacity: 0.75;
 }
 
-.hero-tone-waves--on-dark.hero-wave-layer,
-.hero-tone-waves--on-dark .hero-wave-layer {
+.champagne-hero .hero-tone-waves--on-dark.hero-wave-layer,
+.champagne-hero .hero-tone-waves--on-dark .hero-wave-layer {
   opacity: 0.9;
 }
 
-.hero-shimmer-layer {
+.champagne-hero .hero-shimmer-layer {
   position: absolute;
   inset: 6% 6% auto 0;
   height: 72%;
@@ -210,24 +205,24 @@
   filter: drop-shadow(0 0.875rem 2rem color-mix(in srgb, var(--bg-ink) 18%, transparent));
 }
 
-.hero-tone-shimmer--rich.hero-shimmer-layer,
-.hero-tone-shimmer--rich .hero-shimmer-layer {
+.champagne-hero .hero-tone-shimmer--rich.hero-shimmer-layer,
+.champagne-hero .hero-tone-shimmer--rich .hero-shimmer-layer {
   opacity: 1;
 }
 
-.hero-shimmer-density-med {
+.champagne-hero .hero-shimmer-density-med {
   --hero-shimmer-opacity: 0.18;
 }
 
-.hero-shimmer-density-low {
+.champagne-hero .hero-shimmer-density-low {
   --hero-shimmer-opacity: 0.12;
 }
 
-.hero-shimmer-density-high {
+.champagne-hero .hero-shimmer-density-high {
   --hero-shimmer-opacity: 0.24;
 }
 
-.hero-cta-plate {
+.champagne-hero .hero-cta-plate {
   display: inline-flex;
   padding: clamp(0.9rem, 1.4vw, 1.2rem);
   border-radius: var(--radius-md);
@@ -240,36 +235,36 @@
   -webkit-backdrop-filter: blur(12px);
 }
 
-.hero-cta-plate.cta-tone--ink-on-light {
+.champagne-hero .hero-cta-plate.cta-tone--ink-on-light {
   background: color-mix(in srgb, var(--champagne-glass-bg) 76%, var(--bg) 24%);
   color: color-mix(in srgb, var(--smh-ink) 92%, transparent);
 }
 
-.hero-cta-plate.cta-tone--ink-on-dark {
+.champagne-hero .hero-cta-plate.cta-tone--ink-on-dark {
   background: color-mix(in srgb, var(--champagne-glass-bg) 68%, var(--bg-ink) 18%);
   color: var(--smh-white);
 }
 
-.hero-cta-row {
+.champagne-hero .hero-cta-row {
   display: flex;
   align-items: center;
   gap: clamp(0.9rem, 1.8vw, 1.4rem);
 }
 
 @media (max-width: 48rem) {
-  .hero-engine-shell {
+  .champagne-hero.hero-engine-shell {
     padding: clamp(2rem, 6vw, 2.8rem) clamp(1.25rem, 4vw, 2rem);
   }
 
-  .hero-engine__inner {
+  .champagne-hero .hero-engine__inner {
     gap: clamp(1.4rem, 3vw, 1.8rem);
   }
 
-  .hero-engine__content {
+  .champagne-hero .hero-engine__content {
     gap: clamp(1.1rem, 2vw, 1.6rem);
   }
 
-  .hero-cta-row {
+  .champagne-hero .hero-cta-row {
     flex-direction: column;
     align-items: stretch;
   }

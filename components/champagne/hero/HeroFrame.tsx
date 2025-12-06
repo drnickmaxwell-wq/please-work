@@ -21,7 +21,7 @@ export function HeroFrame({ schema, children }: HeroFrameProps) {
   const layoutClass = schema.layout === "center" ? "hero-layout-center" : "hero-layout-left";
   const tone = getHeroToneClasses(schema);
   const sectionClassName = [
-    "hero-engine-shell hero-gradient-base hero-frame",
+    "champagne-hero hero-engine-shell hero-gradient-base hero-frame",
     toneClass,
     intensityClass,
     tone.wrapperToneClass,

@@ -102,38 +102,6 @@
       "preview": "/preview/lux/smile-ai",
       "production": "/ai-smile-quiz",
       "status": "brief-needed"
-    },
-
-    {
-      "preview": "/preview-v2/treatments",
-      "production": "/treatments",
-      "status": "deprecated",
-      "notes": "Kept for archival reference; new work to use /preview/treatments stack."
-    },
-    {
-      "preview": "/preview-v2/treatments/whitening",
-      "production": "/treatments/cosmetic/teeth-whitening",
-      "status": "deprecated"
-    },
-    {
-      "preview": "/preview-v2/treatments/veneers",
-      "production": "/treatments/cosmetic/veneers",
-      "status": "deprecated"
-    },
-    {
-      "preview": "/preview-v2/treatments/implants",
-      "production": "/treatments/implants",
-      "status": "deprecated"
-    },
-    {
-      "preview": "/preview-v2/treatments/orthodontics",
-      "production": "/treatments/orthodontics",
-      "status": "deprecated"
-    },
-    {
-      "preview": "/preview-v2/treatments/composite-bonding",
-      "production": "/treatments/cosmetic/composite-bonding",
-      "status": "deprecated"
     }
   ]
 }

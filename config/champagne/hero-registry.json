@@ -44,12 +44,7 @@
         "/preview/treatments/orthodontics",
         "/preview/treatments/orthodontics/spark-aligners",
         "/preview/treatments/3d-dentistry",
-        "/preview/treatments/cosmetic",
-        "/preview-v2/treatments/whitening",
-        "/preview-v2/treatments/veneers",
-        "/preview-v2/treatments/implants",
-        "/preview-v2/treatments/orthodontics",
-        "/preview-v2/treatments/composite-bonding"
+        "/preview/treatments/cosmetic"
       ],
       "layoutConstraints": {
         "allowARSlot": true,
