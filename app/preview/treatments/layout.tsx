@@ -46,6 +46,9 @@ export default function PreviewTreatmentsLayout({
     const heroToneClasses = Array.from(canvas.classList).filter((className) => className.startsWith("hero-tone--"));
     heroToneClasses.forEach((className) => canvas.classList.remove(className));
 
+    const bodyToneClasses = Array.from(document.body.classList).filter((className) => className.startsWith("hero-tone--"));
+    bodyToneClasses.forEach((className) => document.body.classList.remove(className));
+
     canvas.style.backgroundColor = "var(--bg-ink)";
   }, [pathname, dataTreatment]);
 
