@@ -39,6 +39,7 @@
   box-shadow:
     0 1.625rem 4rem color-mix(in srgb, var(--bg-ink) 22%, transparent),
     inset 0 0.0625rem 0 color-mix(in srgb, var(--brand-white) 12%, transparent);
+}
 .champagne-hero.hero-engine-shell.hero-frame.hero-tone--dawn {
   background: radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--bg-ink-soft) 42%, transparent) 0, transparent 55%),
     radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--bg-ink-soft) 42%, transparent) 0, transparent 55%),
