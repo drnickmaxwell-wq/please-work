@@ -1,6 +1,7 @@
 import React from "react";
 
 import PreviewShell from "@/components/preview/layout/PreviewShell";
+import { PreviewTreatmentsToneGuard } from "@/components/preview/treatments/PreviewTreatmentsToneGuard";
 import "@/styles/preview/dusk.css";
 import "@/styles/champagne/theme.css";
 import "@/styles/preview/champagne-preview.css";
@@ -34,6 +35,7 @@ export default function PreviewTreatmentsLayout({
 
   return (
     <PreviewShell>
+      <PreviewTreatmentsToneGuard />
       <div
         className="cpv-page cpv-page--champagne-dark cpv-page--treatments"
         data-treatment={dataTreatment}
