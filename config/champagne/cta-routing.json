@@ -1,0 +1,127 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "generatedBy": "Director AI",
+    "notes": "Maps routes and treatment tiers to CTA variants for hero and section endings."
+  },
+
+  "ctaVariants": {
+    "bookInPerson": {
+      "label": "Book an in-person consultation",
+      "href": "/contact#book",
+      "kind": "primary"
+    },
+    "bookVideoConsult": {
+      "label": "Book a video consultation",
+      "href": "/video-consultation",
+      "kind": "secondary"
+    },
+    "startSmileQuiz": {
+      "label": "Try the AI Smile Quiz",
+      "href": "/ai-smile-quiz",
+      "kind": "secondary"
+    },
+    "callEmergency": {
+      "label": "Call for urgent help",
+      "href": "tel:+44-xxxx-xxxxxx",
+      "kind": "primary"
+    },
+    "joinMembership": {
+      "label": "Explore membership plans",
+      "href": "/fees-finance#membership",
+      "kind": "secondary"
+    },
+    "applyFinance": {
+      "label": "Check finance options",
+      "href": "/fees-finance#finance",
+      "kind": "secondary"
+    }
+  },
+
+  "defaults": {
+    "hero": {
+      "primary": "bookInPerson",
+      "secondary": "startSmileQuiz"
+    },
+    "treatmentDetail": {
+      "primary": "bookInPerson",
+      "secondary": "applyFinance"
+    },
+    "emergency": {
+      "primary": "callEmergency",
+      "secondary": "bookInPerson"
+    },
+    "aiExperience": {
+      "primary": "startSmileQuiz",
+      "secondary": "bookInPerson"
+    }
+  },
+
+  "routeOverrides": {
+    "/": {
+      "hero": { "primary": "bookInPerson", "secondary": "startSmileQuiz" },
+      "endCTA": { "primary": "bookInPerson", "secondary": "joinMembership" }
+    },
+
+    "/emergency-dentist": {
+      "hero": { "primary": "callEmergency", "secondary": "bookInPerson" },
+      "endCTA": { "primary": "callEmergency", "secondary": "bookInPerson" }
+    },
+
+    "/video-consultation": {
+      "hero": { "primary": "bookVideoConsult", "secondary": "bookInPerson" },
+      "endCTA": { "primary": "bookVideoConsult", "secondary": "applyFinance" }
+    },
+
+    "/anxiety-dentistry": {
+      "hero": { "primary": "bookInPerson", "secondary": "bookVideoConsult" },
+      "endCTA": { "primary": "bookInPerson", "secondary": "startSmileQuiz" }
+    },
+
+    "/ai-smile-quiz": {
+      "hero": { "primary": "startSmileQuiz", "secondary": "bookInPerson" },
+      "endCTA": { "primary": "bookInPerson", "secondary": "applyFinance" }
+    },
+
+    "/treatments/cosmetic/composite-bonding": {
+      "hero": { "primary": "bookInPerson", "secondary": "startSmileQuiz" },
+      "endCTA": { "primary": "bookInPerson", "secondary": "applyFinance" }
+    },
+
+    "/treatments/cosmetic/veneers": {
+      "hero": { "primary": "bookInPerson", "secondary": "startSmileQuiz" },
+      "endCTA": { "primary": "bookInPerson", "secondary": "applyFinance" }
+    },
+
+    "/treatments/3d-dentistry/3d-printed-veneers": {
+      "hero": { "primary": "bookInPerson", "secondary": "startSmileQuiz" },
+      "endCTA": { "primary": "applyFinance", "secondary": "bookVideoConsult" },
+      "notes": "High-value + USP; finance + video consult emphasis."
+    },
+
+    "/treatments/implants/all-on-4-6-same-day": {
+      "hero": { "primary": "bookInPerson", "secondary": "bookVideoConsult" },
+      "endCTA": { "primary": "applyFinance", "secondary": "bookVideoConsult" }
+    },
+
+    "/treatments/orthodontics/spark-aligners": {
+      "hero": { "primary": "bookInPerson", "secondary": "startSmileQuiz" },
+      "endCTA": { "primary": "applyFinance", "secondary": "bookInPerson" }
+    },
+
+    "/treatments/general/check-ups": {
+      "hero": { "primary": "bookInPerson", "secondary": "joinMembership" },
+      "endCTA": { "primary": "joinMembership", "secondary": "bookInPerson" }
+    },
+
+    "/treatments/general/sedation": {
+      "hero": { "primary": "bookInPerson", "secondary": "bookVideoConsult" },
+      "endCTA": { "primary": "bookInPerson", "secondary": "startSmileQuiz" }
+    },
+
+    "/treatments/technology/the-wand-painless-numbing": {
+      "hero": { "primary": "bookInPerson", "secondary": "bookVideoConsult" },
+      "endCTA": { "primary": "bookInPerson", "secondary": "joinMembership" }
+    }
+  }
+}
