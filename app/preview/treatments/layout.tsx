@@ -38,6 +38,7 @@ export default function PreviewTreatmentsLayout({
         className="cpv-page cpv-page--champagne-dark cpv-page--treatments"
         data-treatment={dataTreatment}
         data-preview-scope="treatments"
+        style={{ backgroundColor: "var(--bg-ink)" }}
       >
         {children}
       </div>
