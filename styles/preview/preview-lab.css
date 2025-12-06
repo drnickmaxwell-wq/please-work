@@ -3,6 +3,19 @@
   background-color: var(--bg-ink);
   color: var(--smh-white);
   color-scheme: dark;
+  position: relative;
+  overflow: hidden;
+}
+
+.preview-lab-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 12%, color-mix(in srgb, var(--smh-gradient-soft, var(--brand-gold)) 18%, transparent) 0, transparent 45%),
+    radial-gradient(circle at 82% 78%, color-mix(in srgb, var(--smh-gradient-soft, var(--brand-teal)) 20%, transparent) 0, transparent 55%);
+  opacity: 0.24;
 }
 
 .preview-lab-shell {
@@ -21,13 +34,15 @@
   width: 100%;
   max-width: 1040px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 .preview-lab-hub__intro {
-  background-color: color-mix(in srgb, var(--smh-ink-glass-soft) 80%, transparent);
+  background-color: color-mix(in srgb, var(--smh-ink-glass-soft) 92%, transparent);
   border-radius: var(--radius-xl);
   padding: 2.25rem 2rem;
-  border: 1px solid color-mix(in srgb, var(--brand-gold) 26%, transparent);
+  border: 1px solid color-mix(in srgb, var(--brand-gold) 32%, transparent);
   box-shadow: var(--shadow-md-soft);
 }
 
@@ -41,7 +56,7 @@
 .preview-lab-body {
   font-family: var(--font-body, "Inter", system-ui, sans-serif);
   font-size: 1rem;
-  color: color-mix(in srgb, var(--smh-white) 86%, transparent);
+  color: color-mix(in srgb, var(--smh-white) 92%, transparent);
   line-height: 1.6;
 }
 
@@ -52,11 +67,11 @@
 }
 
 .preview-lab-card {
-  background-color: color-mix(in srgb, var(--bg-ink) 80%, transparent);
+  background-color: color-mix(in srgb, var(--bg-ink) 92%, transparent);
   border-radius: var(--radius-lg);
   padding: 1.5rem 1.4rem;
-  border: 1px solid color-mix(in srgb, var(--smh-white) 18%, transparent);
-  box-shadow: var(--shadow-soft);
+  border: 1px solid color-mix(in srgb, var(--smh-white) 24%, transparent);
+  box-shadow: var(--shadow-md-soft);
   display: grid;
   gap: 0.5rem;
 }
@@ -64,7 +79,7 @@
 .preview-lab-card__eyebrow {
   font-size: 0.9rem;
   letter-spacing: 0.01em;
-  color: color-mix(in srgb, var(--smh-white) 78%, transparent);
+  color: color-mix(in srgb, var(--smh-white) 88%, transparent);
   text-transform: uppercase;
   font-family: var(--font-body, "Inter", system-ui, sans-serif);
 }
@@ -80,7 +95,7 @@
   align-items: center;
   gap: 0.4rem;
   font-weight: 600;
-  color: color-mix(in srgb, var(--brand-gold) 82%, transparent);
+  color: color-mix(in srgb, var(--brand-gold) 88%, transparent);
   text-decoration: none;
 }
 
@@ -93,24 +108,32 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 .preview-lab-hero {
-  background: linear-gradient(135deg, color-mix(in srgb, var(--smh-gradient-start, var(--brand-magenta)) 80%, transparent) 0%, color-mix(in srgb, var(--smh-gradient-end, var(--brand-teal)) 82%, transparent) 100%);
+  background: linear-gradient(
+    140deg,
+    color-mix(in srgb, var(--bg-ink) 85%, transparent) 0%,
+    color-mix(in srgb, var(--smh-gradient) 35%, transparent) 100%
+  );
   border-radius: var(--radius-2xl);
   padding: 3rem 2.5rem;
   box-shadow: var(--shadow-xl-soft);
   position: relative;
   overflow: hidden;
-  border: 1px solid color-mix(in srgb, var(--brand-gold) 28%, transparent);
+  border: 1px solid color-mix(in srgb, var(--brand-gold) 34%, transparent);
 }
 
 .preview-lab-hero::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 28% 32%, color-mix(in srgb, var(--smh-white) 16%, transparent) 0, transparent 40%);
-  opacity: 0.6;
+  background: radial-gradient(circle at 28% 32%, color-mix(in srgb, var(--smh-white) 22%, transparent) 0, transparent 40%);
+  opacity: 0.48;
   pointer-events: none;
 }
 
@@ -120,8 +143,8 @@
   gap: 0.35rem;
   padding: 0.5rem 0.85rem;
   border-radius: var(--radius-md);
-  background-color: color-mix(in srgb, var(--bg-ink) 55%, transparent);
-  border: 1px solid color-mix(in srgb, var(--smh-white) 30%, transparent);
+  background-color: color-mix(in srgb, var(--bg-ink) 78%, transparent);
+  border: 1px solid color-mix(in srgb, var(--smh-white) 38%, transparent);
   font-size: 0.95rem;
   font-family: var(--font-body, "Inter", system-ui, sans-serif);
 }
@@ -135,16 +158,16 @@
 
 .preview-lab-hero p {
   font-family: var(--font-body, "Inter", system-ui, sans-serif);
-  color: color-mix(in srgb, var(--smh-white) 90%, transparent);
+  color: color-mix(in srgb, var(--smh-white) 94%, transparent);
   line-height: 1.6;
 }
 
 .preview-lab-section {
-  background-color: color-mix(in srgb, var(--smh-ink-glass-soft) 85%, transparent);
+  background-color: color-mix(in srgb, var(--smh-ink-glass-soft) 96%, transparent);
   border-radius: var(--radius-xl);
   padding: 2.4rem 2rem;
   box-shadow: var(--shadow-md-soft);
-  border: 1px solid color-mix(in srgb, var(--smh-white) 18%, transparent);
+  border: 1px solid color-mix(in srgb, var(--smh-white) 26%, transparent);
 }
 
 .preview-lab-section h2 {
@@ -155,7 +178,7 @@
 
 .preview-lab-section p {
   font-family: var(--font-body, "Inter", system-ui, sans-serif);
-  color: color-mix(in srgb, var(--smh-white) 88%, transparent);
+  color: color-mix(in srgb, var(--smh-white) 94%, transparent);
   line-height: 1.6;
 }
 
@@ -167,11 +190,11 @@
 }
 
 .preview-lab-panel {
-  background-color: color-mix(in srgb, var(--bg-ink) 72%, transparent);
+  background-color: color-mix(in srgb, var(--bg-ink) 88%, transparent);
   border-radius: var(--radius-lg);
   padding: 1.1rem 1rem;
-  border: 1px solid color-mix(in srgb, var(--smh-white) 16%, transparent);
-  box-shadow: var(--shadow-soft);
+  border: 1px solid color-mix(in srgb, var(--smh-white) 22%, transparent);
+  box-shadow: var(--shadow-md-soft);
 }
 
 .preview-lab-panel h3 {
@@ -197,18 +220,53 @@
   align-items: center;
   padding: 0.65rem 0.95rem;
   border-radius: var(--radius-pill, 999px);
-  background-color: color-mix(in srgb, var(--bg-ink) 60%, transparent);
-  border: 1px solid color-mix(in srgb, var(--smh-white) 20%, transparent);
-  color: color-mix(in srgb, var(--smh-white) 90%, transparent);
+  background-color: color-mix(in srgb, var(--bg-ink) 84%, transparent);
+  border: 1px solid color-mix(in srgb, var(--smh-white) 28%, transparent);
+  color: color-mix(in srgb, var(--smh-white) 94%, transparent);
   font-family: var(--font-body, "Inter", system-ui, sans-serif);
   font-size: 0.95rem;
 }
 
 .preview-lab-footer-note {
   text-align: center;
-  color: color-mix(in srgb, var(--smh-white) 70%, transparent);
+  color: color-mix(in srgb, var(--smh-white) 80%, transparent);
   font-size: 0.9rem;
   font-family: var(--font-body, "Inter", system-ui, sans-serif);
+}
+
+.preview-lab-section__list {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0.75rem 0 0;
+  padding-left: 1.1rem;
+  color: color-mix(in srgb, var(--smh-white) 92%, transparent);
+  line-height: 1.55;
+}
+
+.preview-lab-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.preview-lab-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.1rem;
+  border-radius: var(--radius-lg);
+  background-color: color-mix(in srgb, var(--smh-ink-glass-soft) 90%, transparent);
+  border: 1px solid color-mix(in srgb, var(--brand-gold) 42%, transparent);
+  color: color-mix(in srgb, var(--smh-white) 96%, transparent);
+  text-decoration: none;
+  font-weight: 600;
+  font-family: var(--font-body, "Inter", system-ui, sans-serif);
+}
+
+.preview-lab-action:focus-visible,
+.preview-lab-action:hover {
+  text-decoration: underline;
 }
 
 @media (max-width: 768px) {
