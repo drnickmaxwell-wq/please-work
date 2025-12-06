@@ -109,7 +109,7 @@ export default async function TreatmentPreviewPage({ params, searchParams }: Tre
   ];
 
   return (
-    <main className="tp-main">
+    <main className="tp-main cpv-treatments-canvas">
       {showHud ? <DevHud className="tl-hud" stats={hudStats} title="Treatment detail HUD" /> : null}
       <div className="tp-shell">
         <BreadcrumbBar items={previewData.breadcrumbs} route={previewData.route} />

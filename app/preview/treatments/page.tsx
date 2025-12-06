@@ -150,7 +150,7 @@ const faqs: TreatmentFaq[] = [
 
 export default function TreatmentsPreview() {
   return (
-    <div className={layoutStyles.previewCanvas}>
+    <div className={`${layoutStyles.previewCanvas} cpv-treatments-canvas`}>
       <PreviewTreatmentsHero
         primaryCta={{ label: "Take the AI Smile Quiz", href: "/ai-smile-quiz" }}
         secondaryCta={{ label: "Book a consultation", href: "/contact" }}

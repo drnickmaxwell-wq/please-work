@@ -17,9 +17,10 @@
 
 .tp-main {
   min-height: 100vh;
-  background: transparent;
+  background-color: var(--tp-surface-strong);
   color: var(--tp-body);
   padding: clamp(4rem, 8vw, 6rem) 1.5rem 5rem;
+  color-scheme: dark;
 }
 
 .tp-shell {
@@ -136,7 +137,11 @@
   background:
     radial-gradient(140% 140% at 82% 6%, color-mix(in srgb, var(--brand-teal) 12%, transparent) 0%, transparent 52%),
     radial-gradient(140% 140% at 18% 86%, color-mix(in srgb, var(--brand-magenta) 12%, transparent) 0%, transparent 58%),
-    linear-gradient(150deg, color-mix(in srgb, var(--smh-white) 96%, var(--smh-paper) 4%) 0%, color-mix(in srgb, var(--smh-white) 92%, var(--smh-paper-strong) 8%) 100%);
+    linear-gradient(
+      150deg,
+      color-mix(in srgb, var(--tp-surface-strong) 92%, transparent) 0%,
+      color-mix(in srgb, var(--tp-surface) 88%, transparent) 100%
+    );
   box-shadow:
     var(--tp-glow),
     0 12px 34px color-mix(in srgb, var(--brand-teal) 22%, transparent 68%);
