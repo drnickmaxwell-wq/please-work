@@ -10,13 +10,16 @@
   color: var(--smh-text);
 }
 
-.cpvShell:has(.cpv-page--treatments) {
+.cpvShell:has(.cpv-page--treatments),
+.cpvShell:has([data-preview-scope="treatments"]) {
   background: transparent;
   color: inherit;
 }
 
 .cpvShell:has(.cpv-page--treatments) .cpvBackdrop,
-.cpvShell:has(.cpv-page--treatments) .cpvParticles {
+.cpvShell:has(.cpv-page--treatments) .cpvParticles,
+.cpvShell:has([data-preview-scope="treatments"]) .cpvBackdrop,
+.cpvShell:has([data-preview-scope="treatments"]) .cpvParticles {
   display: none;
 }
 

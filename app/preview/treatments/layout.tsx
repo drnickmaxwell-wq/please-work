@@ -1,5 +1,8 @@
 import React from "react";
 
+import PreviewShell from "@/components/preview/layout/PreviewShell";
+import "@/styles/preview/dusk.css";
+import "@/styles/champagne/theme.css";
 import "@/styles/preview/champagne-preview.css";
 import "@/components/preview/preview-typography.css";
 import "@/styles/preview/treatments-preview.css";
@@ -28,12 +31,14 @@ export default function PreviewTreatmentsLayout({
   const dataTreatment = resolveTreatmentSlug(params?.slug);
 
   return (
-    <div
-      className="cpv-page cpv-page--champagne-dark cpv-page--treatments"
-      data-treatment={dataTreatment}
-      data-preview-scope="treatments"
-    >
-      {children}
-    </div>
+    <PreviewShell>
+      <div
+        className="cpv-page cpv-page--champagne-dark cpv-page--treatments"
+        data-treatment={dataTreatment}
+        data-preview-scope="treatments"
+      >
+        {children}
+      </div>
+    </PreviewShell>
   );
 }
