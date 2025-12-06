@@ -226,6 +226,20 @@
   min-height: 100vh;
 }
 
+:root[data-theme] .cpv-page.cpv-page--champagne-dark.cpv-page--treatments {
+  background-color: color-mix(in srgb, var(--smh-ink) 96%, transparent);
+  background-image:
+    radial-gradient(140% 120% at 22% 16%, color-mix(in srgb, var(--brand-magenta) 12%, transparent) 0%, transparent 52%),
+    radial-gradient(140% 120% at 78% 10%, color-mix(in srgb, var(--brand-teal) 12%, transparent) 0%, transparent 54%),
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--smh-ink) 96%, transparent) 0%,
+      color-mix(in srgb, var(--smh-ink) 92%, var(--brand-magenta) 10%) 44%,
+      color-mix(in srgb, var(--smh-ink-soft) 86%, var(--brand-teal) 8%) 100%
+    );
+  color: var(--cpv-page-text);
+}
+
 .cpv-page--champagne-dark::before,
 .cpv-page--champagne-dark::after {
   content: '';
