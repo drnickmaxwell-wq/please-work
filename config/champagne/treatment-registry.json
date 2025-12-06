@@ -1,0 +1,252 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "generatedBy": "Director AI",
+    "notes": "Canonical treatment inventory including 3D dentistry USP, sedation, and The Wand."
+  },
+
+  "tiers": {
+    "flagship": [
+      "composite-bonding",
+      "porcelain-veneers",
+      "3d-printed-veneers",
+      "professional-whitening",
+      "spark-aligners",
+      "fixed-braces",
+      "single-tooth-implant",
+      "full-arch-implants",
+      "3d-surgically-guided-implants",
+      "same-day-implants",
+      "3d-printed-implant-restorations"
+    ],
+    "secondary": [
+      "check-ups",
+      "tooth-coloured-fillings",
+      "crowns",
+      "bridges",
+      "dentures",
+      "root-canal-treatment",
+      "childrens-dentistry",
+      "3d-restorative-dentistry",
+      "3d-same-day-dentures",
+      "soft-tissue-laser",
+      "3d-scanning-and-printing",
+      "the-wand-painless-numbing",
+      "sedation",
+      "retainers"
+    ],
+    "tertiary": [
+      "implant-maintenance",
+      "occlusal-splints",
+      "inlays-onlays",
+      "injection-moulding-composite-bonding"
+    ]
+  },
+
+  "treatments": {
+    "composite-bonding": {
+      "name": "Composite bonding",
+      "hub": "/treatments/cosmetic",
+      "route": "/treatments/cosmetic/composite-bonding",
+      "tier": "flagship",
+      "template": "TREATMENT_DETAIL_CB_BLUEPRINT",
+      "heroId": "CB_HERO_FINAL",
+      "hasPreview": true,
+      "previewRoutes": [
+        "/preview/treatments/composite-bonding",
+        "/preview-v2/treatments/composite-bonding"
+      ],
+      "aiConciergeFlows": ["smile-goals", "photo-upload", "finance-check"],
+      "notes": "Use as prototype for all elective cosmetic treatments."
+    },
+
+    "porcelain-veneers": {
+      "name": "Porcelain veneers",
+      "hub": "/treatments/cosmetic",
+      "route": "/treatments/cosmetic/veneers",
+      "tier": "flagship",
+      "template": "TREATMENT_DETAIL_CB_BLUEPRINT",
+      "heroId": "CB_HERO_FINAL",
+      "hasPreview": true,
+      "previewRoutes": [
+        "/preview/treatments/veneers",
+        "/preview-v2/treatments/veneers"
+      ],
+      "aiConciergeFlows": ["smile-goals", "photo-upload", "veneers-vs-3d-printed"],
+      "notes": "Primary competitor with 3D printed veneers – crosslinks heavily."
+    },
+
+    "3d-printed-veneers": {
+      "name": "3D Printed Veneers",
+      "hub": "/treatments/3d-dentistry",
+      "route": "/treatments/3d-dentistry/3d-printed-veneers",
+      "tier": "flagship",
+      "template": "TREATMENT_DETAIL_CB_BLUEPRINT",
+      "heroId": "CB_HERO_FINAL",
+      "hasPreview": true,
+      "previewRoutes": ["/preview/treatments/3d-dentistry"],
+      "aiConciergeFlows": ["smile-goals", "budget-conscious", "veneers-vs-3d-printed"],
+      "notes": "USP: permanent but more affordable; emphasise Sprintray + digital workflow."
+    },
+
+    "professional-whitening": {
+      "name": "Professional Teeth Whitening",
+      "hub": "/treatments/cosmetic",
+      "route": "/treatments/cosmetic/teeth-whitening",
+      "tier": "flagship",
+      "template": "TREATMENT_DETAIL_CB_BLUEPRINT",
+      "heroId": "CB_HERO_FINAL",
+      "hasPreview": true,
+      "previewRoutes": [
+        "/preview/treatments/whitening",
+        "/preview-v2/treatments/whitening"
+      ],
+      "aiConciergeFlows": ["whitening-only", "whitening-before-bonding"],
+      "notes": "Include custom tray, top-up, and whitening-as-part-of-plan."
+    },
+
+    "spark-aligners": {
+      "name": "Spark Clear Aligners",
+      "hub": "/treatments/orthodontics",
+      "route": "/treatments/orthodontics/spark-aligners",
+      "tier": "flagship",
+      "template": "TREATMENT_DETAIL_CB_BLUEPRINT",
+      "heroId": "CB_HERO_FINAL",
+      "hasPreview": true,
+      "previewRoutes": ["/preview/treatments/orthodontics/spark-aligners"],
+      "aiConciergeFlows": ["straight-teeth", "aligners-vs-braces", "ortho-finance"],
+      "notes": "Brand-specific; emphasise 3D planning and digital scans."
+    },
+
+    "fixed-braces": {
+      "name": "Fixed Braces",
+      "hub": "/treatments/orthodontics",
+      "route": "/treatments/orthodontics/fixed-braces",
+      "tier": "flagship",
+      "template": "TREATMENT_DETAIL_CB_BLUEPRINT",
+      "heroId": "CB_HERO_FINAL",
+      "hasPreview": false,
+      "aiConciergeFlows": ["teen-ortho", "adult-fixed-braces", "ortho-finance"],
+      "notes": "Clarify teen vs adult options; crosslink to retainers and 3D planning."
+    },
+
+    "single-tooth-implant": {
+      "name": "Single-Tooth Dental Implant",
+      "hub": "/treatments/implants",
+      "route": "/treatments/implants/3d-surgically-guided-implants",
+      "tier": "flagship",
+      "template": "TREATMENT_DETAIL_CB_BLUEPRINT",
+      "heroId": "CB_HERO_FINAL",
+      "hasPreview": true,
+      "previewRoutes": [
+        "/preview/treatments/implants",
+        "/preview/treatments/dental-implants",
+        "/preview-v2/treatments/implants"
+      ],
+      "aiConciergeFlows": ["missing-single-tooth", "implant-vs-bridge", "implant-finance"],
+      "notes": "Highlight 3D-guided placement + 3D-printed restoration synergy."
+    },
+
+    "full-arch-implants": {
+      "name": "Full-Arch Implants (All-on-4/6 Same Day)",
+      "hub": "/treatments/implants",
+      "route": "/treatments/implants/all-on-4-6-same-day",
+      "tier": "flagship",
+      "template": "TREATMENT_DETAIL_CB_BLUEPRINT",
+      "heroId": "CB_HERO_FINAL",
+      "hasPreview": true,
+      "previewRoutes": [
+        "/preview/treatments/implants",
+        "/preview/treatments/dental-implants"
+      ],
+      "aiConciergeFlows": ["failing-teeth", "loose-dentures", "high-value-finance"],
+      "notes": "One of your biggest-value flows; align tightly with finance helper."
+    },
+
+    "3d-surgically-guided-implants": {
+      "name": "3D Surgically Guided Implants",
+      "hub": "/treatments/implants",
+      "route": "/treatments/implants/3d-surgically-guided-implants",
+      "tier": "flagship",
+      "template": "TREATMENT_DETAIL_CB_BLUEPRINT",
+      "heroId": "CB_HERO_FINAL",
+      "hasPreview": true,
+      "previewRoutes": ["/preview/treatments/implants"],
+      "aiConciergeFlows": ["missing-teeth", "tech-curious", "anxious-precision"],
+      "notes": "Strong overlap with /treatments/3d-dentistry hub."
+    },
+
+    "same-day-implants": {
+      "name": "Same-Day Implants",
+      "hub": "/treatments/implants",
+      "route": "/treatments/implants/same-day-implants",
+      "tier": "flagship",
+      "template": "TREATMENT_DETAIL_CB_BLUEPRINT",
+      "heroId": "CB_HERO_FINAL",
+      "hasPreview": false,
+      "aiConciergeFlows": ["fast-results", "same-day-eligibility", "high-value-finance"]
+    },
+
+    "3d-printed-implant-restorations": {
+      "name": "3D Printed Implant Restorations",
+      "hub": "/treatments/implants",
+      "route": "/treatments/implants/3d-printed-restorations",
+      "tier": "flagship",
+      "template": "TREATMENT_DETAIL_CB_BLUEPRINT",
+      "heroId": "CB_HERO_FINAL",
+      "hasPreview": false,
+      "aiConciergeFlows": ["tech-curious", "budget-conscious", "upgrade-existing-implants"],
+      "notes": "Call out newer 3D resins being strong enough for permanent use."
+    },
+
+    "3d-restorative-dentistry": {
+      "name": "3D Restorative Dentistry (Onlays, Crowns, Inlays)",
+      "hub": "/treatments/3d-dentistry",
+      "route": "/treatments/3d-dentistry/3d-restorative-dentistry",
+      "tier": "secondary",
+      "template": "TREATMENT_DETAIL_CB_BLUEPRINT",
+      "heroId": "CB_HERO_FINAL",
+      "hasPreview": true,
+      "previewRoutes": ["/preview/treatments/3d-dentistry"],
+      "aiConciergeFlows": ["broken-tooth", "old-crowns", "3d-vs-traditional-lab"]
+    },
+
+    "3d-same-day-dentures": {
+      "name": "3D Same-Day Dentures",
+      "hub": "/treatments/3d-dentistry",
+      "route": "/treatments/3d-dentistry/3d-same-day-dentures",
+      "tier": "secondary",
+      "template": "TREATMENT_DETAIL_CB_BLUEPRINT",
+      "heroId": "CB_HERO_FINAL",
+      "hasPreview": true,
+      "previewRoutes": ["/preview/treatments/3d-dentistry"],
+      "aiConciergeFlows": ["loose-dentures", "speed-priority", "budget-conscious"]
+    },
+
+    "sedation": {
+      "name": "Sedation Dentistry (IV & Oral)",
+      "hub": "/treatments/general",
+      "route": "/treatments/general/sedation",
+      "tier": "secondary",
+      "template": "TREATMENT_DETAIL_CB_BLUEPRINT",
+      "heroId": "SERVICE_HERO_ANXIETY_SOFT",
+      "hasPreview": false,
+      "aiConciergeFlows": ["nervous-patient", "gag-reflex", "complex-treatment-sedation"],
+      "notes": "Lock tightly to /anxiety-dentistry; promote Wand and gentle approach."
+    },
+
+    "the-wand-painless-numbing": {
+      "name": "The Wand® Painless Numbing",
+      "hub": "/treatments/technology",
+      "route": "/treatments/technology/the-wand-painless-numbing",
+      "tier": "secondary",
+      "template": "GENERIC_TECH_SERVICE",
+      "heroId": "TECH_HERO_BASE",
+      "hasPreview": false,
+      "aiConciergeFlows": ["needle-phobia", "kids-nervous", "anxious-patient-tech"],
+      "notes": "Key comfort USP; crosslink from all anxiety/sedation flows."
+    }
+
+    /* NOTE: other general treatments (check-ups, fillings, RCT, etc.) can be added by Codex in the same shape */
+  }
+}
