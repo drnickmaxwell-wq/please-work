@@ -229,6 +229,7 @@
     );
   color: var(--cpv-page-text);
   min-height: 100vh;
+  color-scheme: dark;
 }
 
 .cpv-page--champagne-dark::before,
