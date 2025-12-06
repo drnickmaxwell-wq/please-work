@@ -24,6 +24,16 @@ import "@/styles/preview/treatments-preview.css";
 import "@/styles/champagne/tonal-pack.css";
 import "@/styles/champagne/cta-system-v2.css";
 
+/*
+ * Preview treatments canvas diagnostic:
+ * - hero-tone--* classes are only applied inside the hero via getHeroToneClasses in HeroFrame, attaching to the hero section
+ *   (champagne-hero hero-engine-shell hero-gradient-base hero-frame ...).
+ * - The preview canvas background comes from cpv-page/cpv-page--champagne-dark styles in styles/preview/champagne-preview.css
+ *   and the shared wrapper in app/preview/treatments/layout.tsx (data-preview-scope="treatments").
+ * - Tone selectors live in styles/champagne/hero-engine.css and are scoped to the hero container; none target cpv-page, but
+ *   tone classes on wrappers can still override backgrounds if they ever escape the hero component.
+ */
+
 type TemplateProps = {
   slug: string;
   schemaKey?: string;

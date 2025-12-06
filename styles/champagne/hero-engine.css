@@ -15,12 +15,27 @@
   isolation: isolate;
   border-radius: var(--radius-lg);
   padding: var(--hero-space-y) var(--hero-space-x);
-  background: var(--hero-surface, transparent);
+  background: transparent;
   color: var(--hero-foreground, color-mix(in srgb, var(--brand-white) 92%, var(--bg-ink) 8%));
   width: 100%;
   min-height: clamp(34rem, 56vw, 40rem);
   display: grid;
   align-items: center;
+}
+
+.champagne-hero.hero-engine-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--hero-surface, transparent);
+  border-radius: inherit;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.champagne-hero.hero-engine-shell > * {
+  position: relative;
+  z-index: 1;
 }
 
 .champagne-hero.hero-gradient-base {
@@ -41,18 +56,18 @@
     inset 0 0.0625rem 0 color-mix(in srgb, var(--brand-white) 12%, transparent);
 }
 .champagne-hero.hero-engine-shell.hero-frame.hero-tone--dawn {
-  background: radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--bg-ink-soft) 42%, transparent) 0, transparent 55%),
+  --hero-surface: radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--bg-ink-soft) 42%, transparent) 0, transparent 55%),
     radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--bg-ink-soft) 42%, transparent) 0, transparent 55%),
     var(--smh-gradient);
 }
 
 .champagne-hero.hero-engine-shell.hero-frame.hero-tone--day {
-  background: var(--smh-gradient);
+  --hero-surface: var(--smh-gradient);
 }
 
 .champagne-hero.hero-engine-shell.hero-frame.hero-tone--dusk,
 .champagne-hero.hero-engine-shell.hero-frame.hero-tone--night {
-  background: radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--bg-ink) 46%, transparent) 0, transparent 55%),
+  --hero-surface: radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--bg-ink) 46%, transparent) 0, transparent 55%),
     radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--bg-ink) 46%, transparent) 0, transparent 55%),
     var(--smh-gradient);
 }
