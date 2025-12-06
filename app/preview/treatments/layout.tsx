@@ -36,7 +36,11 @@ export default function PreviewTreatmentsLayout({
   return (
     <PreviewShell>
       <div
-        className="cpv-page cpv-page--champagne-dark cpv-page--treatments"
+        className="cpv-page cpv-page--champagne-dark cpv-page--treatments cpv-treatments-canvas"
+        style={{
+          backgroundColor: "var(--bg-ink)",
+          color: "var(--smh-white)",
+        }}
         data-treatment={dataTreatment}
         data-preview-scope="treatments"
       >

@@ -1,22 +1,32 @@
 @import "../tokens/smh-champagne-tokens.css";
 
 /* Canonical dark canvas for preview treatments */
-.cpv-page--champagne-dark {
+.cpv-treatments-canvas {
   background-color: var(--bg-ink);
-  color: color-mix(in srgb, var(--smh-white) 94%, var(--bg-ink) 6%);
+  color: var(--smh-white);
+  min-height: 100vh;
   color-scheme: dark;
 }
 
-.cpv-page--champagne-dark .cpv-treatments-canvas {
-  background-color: color-mix(in srgb, var(--smh-ink) 92%, var(--smh-white) 8%);
-  color: var(--cpv-page-text, color-mix(in srgb, var(--smh-white) 92%, var(--smh-ink) 8%));
+.cpv-page--champagne-dark {
+  background-color: var(--bg-ink);
+  color: var(--smh-white);
+  color-scheme: dark;
+}
+
+.cpv-treatments-canvas.cpv-page,
+.cpv-treatments-canvas .cpv-page {
+  background: none !important;
+  background-color: var(--bg-ink) !important;
+  color: var(--smh-white);
 }
 
 /* Neutralise hero-tone backgrounds inside preview treatments only */
-.cpv-page--champagne-dark .hero-frame.hero-tone--day,
-.cpv-page--champagne-dark .hero-frame.hero-tone--dawn,
-.cpv-page--champagne-dark .hero-frame.hero-tone--dusk,
-.cpv-page--champagne-dark .hero-frame.hero-tone--night {
-  background-color: transparent;
-  background-image: none;
+.cpv-treatments-canvas .hero-frame.hero-tone--day,
+.cpv-treatments-canvas .hero-frame.hero-tone--dawn,
+.cpv-treatments-canvas .hero-frame.hero-tone--dusk,
+.cpv-treatments-canvas .hero-frame.hero-tone--night {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
 }
