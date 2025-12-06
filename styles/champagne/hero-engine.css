@@ -57,6 +57,10 @@
     var(--smh-gradient);
 }
 
+.hero-frame:not(.hero-engine-shell) {
+  background: none;
+}
+
 .hero-tonal-dusk {
   --hero-start: var(--bg-ink);
   --hero-end: color-mix(in srgb, var(--bg-ink) 92%, var(--brand-white) 8%);

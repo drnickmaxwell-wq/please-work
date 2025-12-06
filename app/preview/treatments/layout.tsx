@@ -21,6 +21,8 @@ function resolveTreatmentSlug(slug?: string | string[]): string {
   }
 }
 
+// Canonical preview layout for all /preview/treatments/** routes.
+// Always wrap treatments via PreviewShell + cpv-page; do not create alternate layouts.
 export default function PreviewTreatmentsLayout({
   children,
   params,

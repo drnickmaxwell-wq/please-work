@@ -199,6 +199,7 @@
   --cpv-chip-bg: color-mix(in srgb, var(--smh-ink) 54%, transparent);
   --cpv-chip-border: color-mix(in srgb, var(--smh-accent-gold-soft) 70%, transparent);
   --cpv-link-underline: color-mix(in srgb, var(--brand-magenta) 68%, var(--brand-teal) 32%);
+  background-color: var(--bg-ink);
   background:
     radial-gradient(140% 120% at 22% 16%, color-mix(in srgb, var(--brand-magenta) 12%, transparent) 0%, transparent 52%),
     radial-gradient(140% 120% at 78% 10%, color-mix(in srgb, var(--brand-teal) 12%, transparent) 0%, transparent 54%),
@@ -208,11 +209,15 @@
       color-mix(in srgb, var(--smh-ink) 92%, var(--brand-magenta) 10%) 44%,
       color-mix(in srgb, var(--smh-ink-soft) 86%, var(--brand-teal) 8%) 100%
   );
-  color: var(--cpv-page-text);
+  color-scheme: dark;
+  color: var(
+    --cpv-page-text,
+    color-mix(in srgb, var(--brand-white) 90%, var(--bg-ink) 10%)
+  );
 }
 
 .cpv-page.cpv-page--champagne-dark.cpv-page--treatments {
-  background-color: color-mix(in srgb, var(--smh-ink) 96%, transparent);
+  background-color: var(--bg-ink);
   background-image:
     radial-gradient(140% 120% at 22% 16%, color-mix(in srgb, var(--brand-magenta) 12%, transparent) 0%, transparent 52%),
     radial-gradient(140% 120% at 78% 10%, color-mix(in srgb, var(--brand-teal) 12%, transparent) 0%, transparent 54%),
