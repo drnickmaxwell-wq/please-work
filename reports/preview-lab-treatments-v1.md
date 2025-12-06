@@ -5,7 +5,7 @@ Create a fully isolated preview surface at `/preview-lab/**` for treatment templ
 
 ## Routes implemented
 - `/preview-lab/treatments`
-- `/preview-lab/treatments/composite-bonding`
+- `/preview-lab/composite-bonding`
 
 ## Notes
 - Lab shell and treatments pages live under `app/preview-lab/**` and do not touch the existing `/preview` stack or production `/treatments` routes.

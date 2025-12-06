@@ -1,14 +1,17 @@
-import { PreviewLabShell } from "@/components/preview-lab/PreviewLabShell";
+import "@/styles/preview/preview-lab.css";
+import type { ReactNode } from "react";
 
 export default function PreviewLabRootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <html lang="en">
       <body>
-        <PreviewLabShell>{children}</PreviewLabShell>
+        <div className="preview-lab-page">
+          <main className="preview-lab-shell">{children}</main>
+        </div>
       </body>
     </html>
   );
