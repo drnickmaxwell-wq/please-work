@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect } from "react";
-import { usePathname } from "next/navigation";
+import React from "react";
 
 import PreviewShell from "@/components/preview/layout/PreviewShell";
+import { PreviewToneScrubber } from "@/components/preview/treatments/PreviewToneScrubber";
 import "@/styles/preview/dusk.css";
 import "@/styles/champagne/theme.css";
 import "@/styles/preview/champagne-preview.css";
@@ -35,25 +35,10 @@ export default function PreviewTreatmentsLayout({
   params: { slug?: string | string[] };
 }) {
   const dataTreatment = resolveTreatmentSlug(params?.slug);
-  const pathname = usePathname();
-
-  useEffect(() => {
-    const canvas = document.querySelector<HTMLElement>("[data-preview-scope='treatments']");
-    if (!canvas) return;
-
-    canvas.classList.add("cpv-page", "cpv-page--champagne-dark", "cpv-page--treatments");
-
-    const heroToneClasses = Array.from(canvas.classList).filter((className) => className.startsWith("hero-tone--"));
-    heroToneClasses.forEach((className) => canvas.classList.remove(className));
-
-    const bodyToneClasses = Array.from(document.body.classList).filter((className) => className.startsWith("hero-tone--"));
-    bodyToneClasses.forEach((className) => document.body.classList.remove(className));
-
-    canvas.style.backgroundColor = "var(--bg-ink)";
-  }, [pathname, dataTreatment]);
 
   return (
     <PreviewShell>
+      <PreviewToneScrubber />
       <div
         className="cpv-page cpv-page--champagne-dark cpv-page--treatments"
         data-treatment={dataTreatment}
