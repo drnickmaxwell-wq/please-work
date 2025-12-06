@@ -1,0 +1,131 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "generatedBy": "Director AI",
+    "notes": "Semantic layout → file bindings for App Router."
+  },
+
+  "templates": {
+    "ROOT_MARKETING_LAYOUT": {
+      "file": "app/layout.tsx",
+      "usedFor": ["core", "ai-experience", "stories", "blog", "anxiety", "emergency"],
+      "notes": "Global shell; switches to preview shell for /preview and /champagne-preview."
+    },
+
+    "TREATMENTS_LAYOUT": {
+      "file": "app/treatments/layout.tsx",
+      "usedFor": ["treatment-hub", "treatment-detail"],
+      "notes": "Wraps treatment pages with breadcrumbs and legacy surface."
+    },
+
+    "PREVIEW_ROOT_LAYOUT": {
+      "file": "app/preview/layout.tsx",
+      "usedFor": ["preview-core"],
+      "notes": "Plain preview layout without shell."
+    },
+
+    "PREVIEW_WITH_SHELL_LAYOUT": {
+      "file": "app/preview/(with-shell)/layout.tsx",
+      "usedFor": ["preview-lab", "preview-lux"],
+      "notes": "Applies PreviewShell with Champagne preview styling."
+    },
+
+    "PREVIEW_TREATMENTS_LAYOUT": {
+      "file": "app/preview/treatments/layout.tsx",
+      "usedFor": ["preview-treatment"],
+      "notes": "Canonical preview layout for ChampagneTreatmentTemplate-based pages."
+    },
+
+    "PREVIEW_V2_LAYOUT": {
+      "file": "app/preview-v2/layout.tsx",
+      "usedFor": ["preview-v2"],
+      "notes": "Legacy V2 shell; marked as deprecated but kept for reference."
+    },
+
+    "PREVIEW_V2_TREATMENTS_LAYOUT": {
+      "file": "app/preview-v2/treatments/layout.tsx",
+      "usedFor": ["preview-v2-treatments"],
+      "notes": "Legacy V2 preview treatments; do not promote to production."
+    }
+  },
+
+  "routeBindings": {
+    "/": "ROOT_MARKETING_LAYOUT",
+    "/anxiety-dentistry": "ROOT_MARKETING_LAYOUT",
+    "/blog": "ROOT_MARKETING_LAYOUT",
+    "/video-consultation": "ROOT_MARKETING_LAYOUT",
+    "/patient-stories": "ROOT_MARKETING_LAYOUT",
+    "/patient-education": "ROOT_MARKETING_LAYOUT",
+    "/ai-smile-quiz": "ROOT_MARKETING_LAYOUT",
+    "/emergency-dentist": "ROOT_MARKETING_LAYOUT",
+    "/team": "ROOT_MARKETING_LAYOUT",
+    "/team/dr-sarah-mitchell": "ROOT_MARKETING_LAYOUT",
+
+    "/treatments": "TREATMENTS_LAYOUT",
+    "/treatments/general": "TREATMENTS_LAYOUT",
+    "/treatments/general/check-ups": "TREATMENTS_LAYOUT",
+    "/treatments/general/emergency-dentistry": "TREATMENTS_LAYOUT",
+    "/treatments/general/crowns-and-bridges": "TREATMENTS_LAYOUT",
+    "/treatments/general/childrens-dentistry": "TREATMENTS_LAYOUT",
+    "/treatments/general/extractions": "TREATMENTS_LAYOUT",
+    "/treatments/general/tooth-coloured-fillings": "TREATMENTS_LAYOUT",
+    "/treatments/general/sedation": "TREATMENTS_LAYOUT",
+    "/treatments/general/root-canal-treatment": "TREATMENTS_LAYOUT",
+
+    "/treatments/cosmetic": "TREATMENTS_LAYOUT",
+    "/treatments/cosmetic/veneers": "TREATMENTS_LAYOUT",
+    "/treatments/cosmetic/teeth-whitening": "TREATMENTS_LAYOUT",
+    "/treatments/cosmetic/composite-bonding": "TREATMENTS_LAYOUT",
+
+    "/treatments/3d-dentistry": "TREATMENTS_LAYOUT",
+    "/treatments/3d-dentistry/3d-printed-veneers": "TREATMENTS_LAYOUT",
+    "/treatments/3d-dentistry/3d-same-day-dentures": "TREATMENTS_LAYOUT",
+    "/treatments/3d-dentistry/3d-restorative-dentistry": "TREATMENTS_LAYOUT",
+    "/treatments/3d-dentistry/3d-implants-overview": "TREATMENTS_LAYOUT",
+
+    "/treatments/orthodontics": "TREATMENTS_LAYOUT",
+    "/treatments/orthodontics/spark-aligners": "TREATMENTS_LAYOUT",
+    "/treatments/orthodontics/fixed-braces": "TREATMENTS_LAYOUT",
+
+    "/treatments/implants": "TREATMENTS_LAYOUT",
+    "/treatments/implants/3d-surgically-guided-implants": "TREATMENTS_LAYOUT",
+    "/treatments/implants/same-day-implants": "TREATMENTS_LAYOUT",
+    "/treatments/implants/3d-printed-restorations": "TREATMENTS_LAYOUT",
+    "/treatments/implants/all-on-4-6-same-day": "TREATMENTS_LAYOUT",
+
+    "/treatments/technology": "TREATMENTS_LAYOUT",
+    "/treatments/technology/soft-tissue-laser": "TREATMENTS_LAYOUT",
+    "/treatments/technology/3d-scanning-and-printing": "TREATMENTS_LAYOUT",
+    "/treatments/technology/the-wand-painless-numbing": "TREATMENTS_LAYOUT",
+
+    "/preview/home": "PREVIEW_WITH_SHELL_LAYOUT",
+    "/preview/technology": "PREVIEW_WITH_SHELL_LAYOUT",
+    "/preview/lux": "PREVIEW_WITH_SHELL_LAYOUT",
+    "/preview/lux/team": "PREVIEW_WITH_SHELL_LAYOUT",
+    "/preview/lux/patient-stories": "PREVIEW_WITH_SHELL_LAYOUT",
+    "/preview/lux/technology": "PREVIEW_WITH_SHELL_LAYOUT",
+    "/preview/lux/gallery": "PREVIEW_WITH_SHELL_LAYOUT",
+    "/preview/lux/legal": "PREVIEW_WITH_SHELL_LAYOUT",
+
+    "/preview/treatments": "PREVIEW_TREATMENTS_LAYOUT",
+    "/preview/treatments/whitening": "PREVIEW_TREATMENTS_LAYOUT",
+    "/preview/treatments/veneers": "PREVIEW_TREATMENTS_LAYOUT",
+    "/preview/treatments/general": "PREVIEW_TREATMENTS_LAYOUT",
+    "/preview/treatments/implants": "PREVIEW_TREATMENTS_LAYOUT",
+    "/preview/treatments/orthodontics": "PREVIEW_TREATMENTS_LAYOUT",
+    "/preview/treatments/orthodontics/spark-aligners": "PREVIEW_TREATMENTS_LAYOUT",
+    "/preview/treatments/3d-dentistry": "PREVIEW_TREATMENTS_LAYOUT",
+    "/preview/treatments/cosmetic": "PREVIEW_TREATMENTS_LAYOUT",
+    "/preview/treatments/composite-bonding": "PREVIEW_TREATMENTS_LAYOUT",
+    "/preview/treatments/technology": "PREVIEW_TREATMENTS_LAYOUT",
+    "/preview/treatments/dental-implants": "PREVIEW_TREATMENTS_LAYOUT",
+    "/preview/treatments/[slug]": "PREVIEW_TREATMENTS_LAYOUT",
+
+    "/preview-v2/treatments": "PREVIEW_V2_TREATMENTS_LAYOUT",
+    "/preview-v2/treatments/whitening": "PREVIEW_V2_TREATMENTS_LAYOUT",
+    "/preview-v2/treatments/veneers": "PREVIEW_V2_TREATMENTS_LAYOUT",
+    "/preview-v2/treatments/implants": "PREVIEW_V2_TREATMENTS_LAYOUT",
+    "/preview-v2/treatments/orthodontics": "PREVIEW_V2_TREATMENTS_LAYOUT",
+    "/preview-v2/treatments/composite-bonding": "PREVIEW_V2_TREATMENTS_LAYOUT"
+  }
+}
