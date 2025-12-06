@@ -7,6 +7,7 @@ import "@/styles/preview/champagne-preview.css";
 import "@/components/preview/preview-typography.css";
 import "@/styles/preview/treatments-preview.css";
 import "@/styles/preview/preview-treatments-canvas.css";
+import { PreviewTreatmentsThemeGuard } from "@/components/preview/PreviewTreatmentsThemeGuard";
 
 function resolveTreatmentSlug(slug?: string | string[]): string {
   if (!slug) return "general";
@@ -41,6 +42,7 @@ export default function PreviewTreatmentsLayout({
         data-preview-scope="treatments"
         style={{ backgroundColor: "var(--bg-ink)" }}
       >
+        <PreviewTreatmentsThemeGuard />
         {children}
       </div>
     </PreviewShell>
