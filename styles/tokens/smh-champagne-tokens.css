@@ -25,6 +25,7 @@
 
   /* Legacy token aliases (kept for compatibility) */
   --smh-ink: var(--ink);
+  --smh-bg: var(--smh-ink);
   --smh-text: var(--text);
   --smh-primary-ink: var(--ink);
   --smh-white: #FFFFFF;

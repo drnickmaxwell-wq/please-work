@@ -1,5 +1,6 @@
 import "./globals.css";
 import "@/styles/legacy.css"; // TEMP shim — remove after treatments migrate
+import "@/styles/champagne/theme.css";
 import type { CSSProperties } from 'react';
 import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
