@@ -166,7 +166,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className="antialiased text-slate-900 overflow-x-hidden min-h-screen bg-[var(--smh-bg)]"
+        className="antialiased text-slate-900 overflow-x-hidden min-h-screen bg-[var(--smh-ink)]"
         style={{
           WebkitFontSmoothing: 'antialiased',
           MozOsxFontSmoothing: 'grayscale',
@@ -183,7 +183,7 @@ export default function RootLayout({
         {usePreviewShell ? (
           <div
             id="main-content"
-            className="min-h-screen bg-[var(--smh-bg)] text-[var(--smh-text)]"
+            className="min-h-screen bg-[var(--smh-ink)] text-[var(--smh-text)]"
           >
             {children}
           </div>
