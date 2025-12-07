@@ -1,0 +1,488 @@
+{
+  "/preview/technology": {
+    "file": "app/preview/(with-shell)/technology/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview/brand-lock": {
+    "file": "app/preview/(with-shell)/brand-lock/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview/home": {
+    "file": "app/preview/(with-shell)/home/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview/treatments-stubs": {
+    "file": "app/preview/(with-shell)/treatments-stubs/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview/footer-luxe": {
+    "file": "app/preview/(with-shell)/footer-luxe/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": true
+  },
+  "/preview/manus-audit": {
+    "file": "app/preview/(with-shell)/manus-audit/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview/lux": {
+    "file": "app/preview/(with-shell)/lux/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": true,
+    "rendersProductionFooter": true
+  },
+  "/preview/lux/gallery": {
+    "file": "app/preview/(with-shell)/lux/gallery/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": true,
+    "rendersProductionFooter": true
+  },
+  "/preview/lux/technology": {
+    "file": "app/preview/(with-shell)/lux/technology/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": true,
+    "rendersProductionFooter": true
+  },
+  "/preview/lux/smile-ai": {
+    "file": "app/preview/(with-shell)/lux/smile-ai/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": true,
+    "rendersProductionFooter": true
+  },
+  "/preview/lux/referrals": {
+    "file": "app/preview/(with-shell)/lux/referrals/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": true,
+    "rendersProductionFooter": true
+  },
+  "/preview/lux/team": {
+    "file": "app/preview/(with-shell)/lux/team/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": true,
+    "rendersProductionFooter": true
+  },
+  "/preview/lux/team/[slug]": {
+    "file": "app/preview/(with-shell)/lux/team/[slug]/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": true,
+    "rendersProductionFooter": true
+  },
+  "/preview/lux/legal": {
+    "file": "app/preview/(with-shell)/lux/legal/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": true,
+    "rendersProductionFooter": true
+  },
+  "/preview/lux/legal/privacy": {
+    "file": "app/preview/(with-shell)/lux/legal/privacy/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": true,
+    "rendersProductionFooter": true
+  },
+  "/preview/lux/legal/cookies": {
+    "file": "app/preview/(with-shell)/lux/legal/cookies/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": true,
+    "rendersProductionFooter": true
+  },
+  "/preview/lux/legal/terms": {
+    "file": "app/preview/(with-shell)/lux/legal/terms/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": true,
+    "rendersProductionFooter": true
+  },
+  "/preview/lux/locations/brighton": {
+    "file": "app/preview/(with-shell)/lux/locations/brighton/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": true,
+    "rendersProductionFooter": true
+  },
+  "/preview/lux/locations/shoreham-by-sea": {
+    "file": "app/preview/(with-shell)/lux/locations/shoreham-by-sea/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": true,
+    "rendersProductionFooter": true
+  },
+  "/preview/lux/locations/lancing": {
+    "file": "app/preview/(with-shell)/lux/locations/lancing/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": true,
+    "rendersProductionFooter": true
+  },
+  "/preview/lux/locations/steyning": {
+    "file": "app/preview/(with-shell)/lux/locations/steyning/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": true,
+    "rendersProductionFooter": true
+  },
+  "/preview/lux/locations/worthing": {
+    "file": "app/preview/(with-shell)/lux/locations/worthing/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": true,
+    "rendersProductionFooter": true
+  },
+  "/preview/lux/locations/hove": {
+    "file": "app/preview/(with-shell)/lux/locations/hove/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": true,
+    "rendersProductionFooter": true
+  },
+  "/preview/lux/patient-stories": {
+    "file": "app/preview/(with-shell)/lux/patient-stories/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": true,
+    "rendersProductionFooter": true
+  },
+  "/preview/treatments-light": {
+    "file": "app/preview/(with-shell)/treatments-light/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview/why-hero-grey": {
+    "file": "app/preview/(with-shell)/why-hero-grey/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview/hero-gilded": {
+    "file": "app/preview/(with-shell)/hero-gilded/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx", "app/preview/(with-shell)/hero-gilded/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview/chat": {
+    "file": "app/preview/(with-shell)/chat/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview/champagne-phase2": {
+    "file": "app/preview/(with-shell)/champagne-phase2/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview/skeleton": {
+    "file": "app/preview/(with-shell)/skeleton/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": true,
+    "rendersProductionFooter": true
+  },
+  "/preview/champagne-skin": {
+    "file": "app/preview/(with-shell)/champagne-skin/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview/brand-live": {
+    "file": "app/preview/(with-shell)/brand-live/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview/champagne": {
+    "file": "app/preview/(with-shell)/champagne/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview/manus-manifest": {
+    "file": "app/preview/(with-shell)/manus-manifest/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview/ai24-home": {
+    "file": "app/preview/(with-shell)/ai24-home/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/(with-shell)/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview/treatments": {
+    "file": "app/preview/treatments/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/treatments/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview/treatments/general": {
+    "file": "app/preview/treatments/general/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/treatments/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview/treatments/technology": {
+    "file": "app/preview/treatments/technology/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/treatments/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview/treatments/cosmetic": {
+    "file": "app/preview/treatments/cosmetic/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/treatments/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview/treatments/composite-bonding": {
+    "file": "app/preview/treatments/composite-bonding/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/treatments/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview/treatments/veneers": {
+    "file": "app/preview/treatments/veneers/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/treatments/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview/treatments/dental-implants": {
+    "file": "app/preview/treatments/dental-implants/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/treatments/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview/treatments/implants": {
+    "file": "app/preview/treatments/implants/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/treatments/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview/treatments/3d-dentistry": {
+    "file": "app/preview/treatments/3d-dentistry/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/treatments/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview/treatments/whitening": {
+    "file": "app/preview/treatments/whitening/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/treatments/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview/treatments/orthodontics": {
+    "file": "app/preview/treatments/orthodontics/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/treatments/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview/treatments/orthodontics/spark-aligners": {
+    "file": "app/preview/treatments/orthodontics/spark-aligners/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/treatments/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview/treatments/[slug]": {
+    "file": "app/preview/treatments/[slug]/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview/layout.tsx", "app/preview/treatments/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview-v2/treatments": {
+    "file": "app/preview-v2/treatments/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview-v2/layout.tsx", "app/preview-v2/treatments/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview-v2/treatments/composite-bonding": {
+    "file": "app/preview-v2/treatments/composite-bonding/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview-v2/layout.tsx", "app/preview-v2/treatments/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview-v2/treatments/veneers": {
+    "file": "app/preview-v2/treatments/veneers/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview-v2/layout.tsx", "app/preview-v2/treatments/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview-v2/treatments/implants": {
+    "file": "app/preview-v2/treatments/implants/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview-v2/layout.tsx", "app/preview-v2/treatments/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview-v2/treatments/whitening": {
+    "file": "app/preview-v2/treatments/whitening/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview-v2/layout.tsx", "app/preview-v2/treatments/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  },
+  "/preview-v2/treatments/orthodontics": {
+    "file": "app/preview-v2/treatments/orthodontics/page.tsx",
+    "layouts": ["app/layout.tsx", "app/preview-v2/layout.tsx", "app/preview-v2/treatments/layout.tsx"],
+    "usesPreviewShell": true,
+    "importsThemeCss": true,
+    "importsDuskCss": true,
+    "rendersProductionHeader": false,
+    "rendersProductionFooter": false
+  }
+}

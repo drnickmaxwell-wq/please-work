@@ -1,0 +1,134 @@
+{
+  "/preview/technology": {
+    "htmlBackground": "app/layout.tsx sets body to bg-[var(--smh-ink)] with dark text",
+    "bodyBackground": "PreviewShell applies data-theme=preview-dusk with dark canvas",
+    "shell": {
+      "component": "PreviewShell",
+      "class": "cpvShell",
+      "cssBackground": "Gradient ink/teal/magenta with particles unless treatments scope",
+      "dataTheme": "preview-dusk"
+    },
+    "pageWrappers": [],
+    "lightBackgroundUtilities": [],
+    "risks": ["inherits dark shell; no extra backgrounds"]
+  },
+  "/preview/lux/gallery": {
+    "htmlBackground": "Dark body from app/layout.tsx",
+    "bodyBackground": "PreviewShell dark gradient",
+    "shell": {
+      "component": "PreviewShell",
+      "class": "cpvShell",
+      "cssBackground": "Dark gradient with particles",
+      "dataTheme": "preview-dusk"
+    },
+    "pageWrappers": [
+      {"selector": "main", "class": "min-h-screen bg-white dark:bg-[var(--smh-midnight)]"}
+    ],
+    "lightBackgroundUtilities": [
+      {"file": "app/preview/(with-shell)/lux/gallery/page.tsx", "class": "bg-white / bg-white/60 cards"}
+    ],
+    "risks": ["Light bg-white main conflicts with dark shell, causing canvas flip", "cards and footer also light"]
+  },
+  "/preview/lux/patient-stories": {
+    "htmlBackground": "Dark body",
+    "bodyBackground": "PreviewShell dark",
+    "shell": {"component": "PreviewShell", "class": "cpvShell"},
+    "pageWrappers": [
+      {"selector": "main", "class": "min-h-screen bg-white dark:bg-[var(--smh-midnight)]"}
+    ],
+    "lightBackgroundUtilities": [
+      {"file": "app/preview/(with-shell)/lux/patient-stories/page.tsx", "class": "bg-white main + cards"}
+    ],
+    "risks": ["Main uses white canvas despite dark shell"]
+  },
+  "/preview/lux/legal/*": {
+    "htmlBackground": "Dark body",
+    "bodyBackground": "PreviewShell dark",
+    "shell": {"component": "PreviewShell", "class": "cpvShell"},
+    "pageWrappers": [
+      {"selector": "main", "class": "min-h-screen bg-white dark:bg-[var(--smh-midnight)]"}
+    ],
+    "lightBackgroundUtilities": [
+      {"file": "app/preview/(with-shell)/lux/legal/page.tsx", "class": "bg-white"}
+    ],
+    "risks": ["Legal pages paint white canvas inside dark shell"]
+  },
+  "/preview/lux/referrals": {
+    "htmlBackground": "Dark body",
+    "bodyBackground": "PreviewShell dark",
+    "shell": {"component": "PreviewShell", "class": "cpvShell"},
+    "pageWrappers": [
+      {"selector": "main", "class": "min-h-screen bg-white dark:bg-[var(--smh-midnight)]"}
+    ],
+    "lightBackgroundUtilities": [
+      {"file": "app/preview/(with-shell)/lux/referrals/page.tsx", "class": "bg-white form inputs"}
+    ],
+    "risks": ["White form canvas within dark shell"]
+  },
+  "/preview/lux/team": {
+    "htmlBackground": "Dark body",
+    "bodyBackground": "PreviewShell dark",
+    "shell": {"component": "PreviewShell", "class": "cpvShell"},
+    "pageWrappers": [
+      {"selector": "main", "class": "min-h-screen bg-white dark:bg-[var(--smh-midnight)]"}
+    ],
+    "lightBackgroundUtilities": [
+      {"file": "app/preview/(with-shell)/lux/team/page.tsx", "class": "bg-white cards"}
+    ],
+    "risks": ["White team grid against dark shell"]
+  },
+  "/preview/why-hero-grey": {
+    "htmlBackground": "Dark body",
+    "bodyBackground": "PreviewShell dark",
+    "shell": {"component": "PreviewShell", "class": "cpvShell"},
+    "pageWrappers": [],
+    "lightBackgroundUtilities": [
+      {"file": "app/preview/(with-shell)/why-hero-grey/page.tsx", "class": "bg-white/60 info panels"}
+    ],
+    "risks": ["Panels use translucent white over dark shell"]
+  },
+  "/preview/brand-live": {
+    "htmlBackground": "Dark body",
+    "bodyBackground": "PreviewShell dark",
+    "shell": {"component": "PreviewShell", "class": "cpvShell"},
+    "pageWrappers": [],
+    "lightBackgroundUtilities": [
+      {"file": "app/preview/(with-shell)/brand-live/page.tsx", "class": "bg-white/5 glass sections"}
+    ],
+    "risks": ["Light glass cards rely on shell contrast"]
+  },
+  "/preview/manus-manifest": {
+    "htmlBackground": "Dark body",
+    "bodyBackground": "PreviewShell dark",
+    "shell": {"component": "PreviewShell", "class": "cpvShell"},
+    "pageWrappers": [],
+    "lightBackgroundUtilities": [
+      {"file": "app/preview/(with-shell)/manus-manifest/page.tsx", "class": "bg-white/80 manifest lists"}
+    ],
+    "risks": ["White list blocks over dark shell"]
+  },
+  "/preview/treatments": {
+    "htmlBackground": "Dark body",
+    "bodyBackground": "PreviewShell dark; cpvShell disables backdrop when data-preview-scope=treatments",
+    "shell": {
+      "component": "PreviewShell",
+      "class": "cpvShell",
+      "cssBackground": "Transparent when treatments scope set"
+    },
+    "pageWrappers": [
+      {"selector": ".cpv-page.cpv-page--champagne-dark.cpv-page--treatments", "cssBackground": "inherits variables from champagne-preview.css"}
+    ],
+    "lightBackgroundUtilities": [],
+    "risks": ["Relies on css variables for background; shell backdrop disabled"]
+  },
+  "/preview-v2/treatments": {
+    "htmlBackground": "Dark body",
+    "bodyBackground": "PreviewShell dark with treatments scope",
+    "shell": {"component": "PreviewShell", "class": "cpvShell"},
+    "pageWrappers": [
+      {"selector": ".cpv-v2-shell.cpv-v2-shell--champagne-dark", "cssBackground": "radial + linear gradients from preview-v2-treatments.css"}
+    ],
+    "lightBackgroundUtilities": [],
+    "risks": ["Legacy canvas differs from current treatments shell"]
+  }
+}
