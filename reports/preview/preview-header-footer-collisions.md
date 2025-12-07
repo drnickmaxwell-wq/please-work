@@ -1,0 +1,33 @@
+# Preview header/footer collisions
+
+- `/preview/lux` (`app/preview/(with-shell)/lux/page.tsx`)
+  - PreviewShell renders `ChampagnePreviewHeader` + `ChampagnePreviewFooter`.
+  - Page renders `StickyHeader` and `FooterLuxe` within a white `main`, causing double headers/footers. Recommendation: rely on PreviewShell header/footer only.
+- `/preview/lux/gallery` (`app/preview/(with-shell)/lux/gallery/page.tsx`)
+  - PreviewShell provides champagne header/footer.
+  - Page injects `StickyHeader` (line 8) and `FooterLuxe` (line 21) over a white canvas, creating duplication. Recommendation: remove production header/footer from the preview page.
+- `/preview/lux/technology` (`app/preview/(with-shell)/lux/technology/page.tsx`)
+  - PreviewShell already wraps the page.
+  - Page renders `StickyHeader` and `FooterLuxe`, duplicating shell chrome. Recommendation: drop production header/footer for preview context.
+- `/preview/lux/patient-stories` (`app/preview/(with-shell)/lux/patient-stories/page.tsx`)
+  - PreviewShell header/footer present.
+  - Page renders `StickyHeader` and `FooterLuxe`. Recommendation: remove production chrome here.
+- `/preview/lux/referrals` (`app/preview/(with-shell)/lux/referrals/page.tsx`)
+  - PreviewShell header/footer present.
+  - Page renders `StickyHeader` and `FooterLuxe`. Recommendation: rely on shell instead.
+- `/preview/lux/legal` + `/privacy` + `/cookies` + `/terms` (`app/preview/(with-shell)/lux/legal/**/page.tsx`)
+  - PreviewShell header/footer present.
+  - Each page renders `StickyHeader` and `FooterLuxe`. Recommendation: remove production header/footer to avoid double chrome.
+- `/preview/lux/team` and `/preview/lux/team/[slug]` (`app/preview/(with-shell)/lux/team/page.tsx`, `app/preview/(with-shell)/lux/team/[slug]/page.tsx`)
+  - PreviewShell header/footer present.
+  - Pages render `StickyHeader` and `FooterLuxe`. Recommendation: drop production header/footer.
+- `/preview/lux/locations/*` (`app/preview/(with-shell)/lux/locations/*/page.tsx`)
+  - PreviewShell header/footer present.
+  - Location pages render `StickyHeader` and `FooterLuxe`. Recommendation: remove production chrome.
+- `/preview/lux/smile-ai` (`app/preview/(with-shell)/lux/smile-ai/page.tsx`)
+  - PreviewShell header/footer present.
+  - Page renders `StickyHeader` and `FooterLuxe`. Recommendation: remove production chrome.
+- `/preview/lux/footer-luxe`? (n/a) – dedicated `/preview/footer-luxe` page does not render production header, only the `FooterLuxe` component for testing; shell already has footer, so duplication occurs. Recommendation: keep shell footer only when testing.
+- `/preview/skeleton` (`app/preview/(with-shell)/skeleton/page.tsx`)
+  - PreviewShell header/footer present.
+  - Page wraps content in `ChampagneLayout`, which renders `ChampagneHeader` and `ChampagneFooter`. Recommendation: remove `ChampagneLayout` when using PreviewShell.
